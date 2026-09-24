@@ -161,7 +161,10 @@ def page(word_id, entries, web, cites) -> str:
     if e["g2p_ambiguities"]:
         owed.append(f"e/ɛ at positions {e['g2p_ambiguities']} — a dissection owed")
     if e["annotations"].get("optikon_zven"):
-        owed.append("o₀ conflict vs OPTIKON zven — preserved, standing, owed a decision")
+        a = re.sub(r"[\s/]+", "", e["source_form"] or "")
+        b = re.sub(r"[\s/]+", "", e["annotations"]["optikon_zven"])
+        if a != b:
+            owed.append("source_form conflict vs OPTIKON zven — preserved, standing, owed a decision")
     L.append("WHAT IT STILL OWES")
     L.append("  " + ("; ".join(owed) if owed else "nothing — every face measured or attributed"))
     return "\n".join(L)
