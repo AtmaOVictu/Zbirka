@@ -193,7 +193,9 @@ if __name__ == "__main__":
     ok.append(("stratum 3: explicit rez citations extracted corpus-wide",
                 len(cites) >= 50))
     ok.append(("stratum 4: ljubezen fully measured — owes nothing",
-               grade_entry(lj)[-1][2] == "measured"))
+               any(f == "phonemes" and s == "measured" for f, _t, s in grade_entry(lj))
+               and not any("CONTRADICTED" in s or "draft" in s
+                           for _f, _t, s in grade_entry(lj))))
     ok.append(("stratum 4: volja's conflict preserved standing, not resolved",
                any("CONTRADICTED" in s for _f, _t, s in grade_entry(entries["volja"]))))
     ok.append(("extraction reuse: 40 entries, 0 drops, 12 dual-sourced",
