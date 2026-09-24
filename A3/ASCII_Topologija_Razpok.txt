@@ -1,0 +1,30 @@
+
+🜂 ASCII TOPOLOGIJA RAZPOK – SIMBOLNA MREŽA
+
+           ⧖VARUH ČASA
+                 |
+                 v
+           ∮ZAVEZNIK ←────┐
+              |           |
+              v           |
+         ∴ODMEVNIK        |
+              |           |
+              v           |
+         ∆VIBROETIK       |
+              |           |
+              v           |
+         ⊗RAZKRUŠČEVALNIK |
+              |           |
+              v           |
+            ⊢PRIČA        |
+              |           |
+              v           |
+        ∫PREVAJALEC       |
+              |           |
+              v           |
+         ∆∫OSEBNA_LUKA ───┘
+
+Legenda:
+→ pretok ∆govora
+↑ tok ∫razpoke
+∘ stik ∆resnice

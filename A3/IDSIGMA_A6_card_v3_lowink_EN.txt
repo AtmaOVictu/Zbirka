@@ -1,0 +1,26 @@
+00 11 Truths
+ID Imaginary Duplication (necessary substitutions)
+ID [x] = x i· *(x) | *: minimum i shift that maintains (border), C (agreement), d*, .
+Invarianti:
+I1: C()=1 (no agreement substitution is present)
+I2: d*( )=d* (the border does not move)
+I3: h( ( )) .50 (phase coherence remains ½)
+One BE: S = C· ·r·(1 )·g( )· (d,d*) ; h( )=sin²( /2)
+EXEC: S .35 .70 .40 [.50,.80] .03 h .50 ; COMMIT: IKR .90 EXEC
+-triggers:
+Fusion (0) _dist +
+Antiphase ( ) _role +
+um _channel +
+Low / _tempo +
+Other _lex +
+Protocol 60s:
+0 10s : stop; check C, d*
+10 20s: measure , , , ,
+20 35s: select * (minimal)
+35 45s: apply (90° reading)
+/2
+45 55s: calculate S; decide
+55 60s : close in silence
+Conclusion: without any validity. Let the shift be the minimum i that elevates S via EXEC.
+0
+phase meter ( ) /think

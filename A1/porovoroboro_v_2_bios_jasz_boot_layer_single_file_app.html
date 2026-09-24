@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="sl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>POROVOROBORO v2 — BIOS JASZ Boot Layer</title>
+<style>
+:root{
+  --bg:#0a0d12;--fg:#e9eef6;--muted:#9aa3af;--edge:#2b3240;--grid:#12161d;--accent:#8ab4f8;--rose:#ff8aa1;--lime:#9df89a;--amber:#ffd36e;--vio:#b99aff;--cyan:#7bdff6
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:radial-gradient(1200px 800px at 50% 0%, #131a26, var(--bg));color:var(--fg);font:14px/1.45 Inter,system-ui,Segoe UI,Roboto,Arial,"Noto Sans",sans-serif}
+.wrapper{display:grid;grid-template-rows:auto 1fr auto;height:100%}
+header{display:flex;align-items:center;gap:12px;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--edge)}
+header h1{margin:0;font-size:16px}
+.controls{display:flex;flex-wrap:wrap;gap:8px}
+button, .chip{background:rgba(255,255,255,.06);border:1px solid var(--edge);color:var(--fg);padding:6px 10px;border-radius:10px;cursor:pointer}
+button:hover,.chip:hover{background:rgba(255,255,255,.1)}
+button.primary{outline:2px solid var(--accent)}
+main{display:grid;grid-template-columns:280px 1fr;gap:12px;padding:12px}
+.left{border:1px solid var(--edge);border-radius:14px;overflow:hidden}
+.legend{padding:12px;border-bottom:1px solid var(--edge);background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0))}
+.legend h2{margin:0 0 8px 0;font-size:13px;color:var(--muted)}
+.legend .row{display:flex;align-items:center;gap:8px;margin:6px 0}
+.bullet{width:10px;height:10px;border-radius:50%}
+.grid{border-top:1px dashed var(--edge);padding:12px;display:grid;gap:10px}
+.kv{display:grid;grid-template-columns:1fr auto;gap:6px;align-items:center}
+.kv input[type="range"]{width:100%}
+.panel{border:1px solid var(--edge);border-radius:14px;overflow:hidden}
+.panel h3{margin:0;padding:10px 12px;border-bottom:1px solid var(--edge);font-size:13px;color:var(--muted);background:rgba(255,255,255,.03)}
+.panel .body{padding:10px 12px}
+#stage{width:100%;height:74vh;background:radial-gradient(1000px 600px at 50% 0%, #0f141e, #0b0e14);border-radius:14px;border:1px solid var(--edge)}
+footer{display:flex;justify-content:space-between;align-items:center;padding:8px 14px;border-top:1px solid var(--edge);color:var(--muted)}
+.small{font-size:12px;color:var(--muted)}
+.row{display:flex;gap:8px;align-items:center}
+input[type="text"]{background:rgba(255,255,255,.06);border:1px solid var(--edge);color:var(--fg);padding:8px 10px;border-radius:10px;width:100%}
+.log{max-height:140px;overflow:auto;font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;background:#0a0e15;border:1px solid var(--edge);border-radius:10px;padding:8px}
+.badge{padding:2px 6px;border-radius:999px;border:1px solid var(--edge);background:rgba(255,255,255,.06);font-size:11px}
+.flash{animation:flash 600ms ease}
+@keyframes flash{0%{box-shadow:0 0 0 0 rgba(255,255,255,.0)}30%{box-shadow:0 0 0 6px rgba(255,255,255,.18)}100%{box-shadow:0 0 0 0 rgba(255,255,255,.0)}}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <header>
+    <h1>POROVOROBORO v2 <span class="badge" id="status">BIOS: READY</span></h1>
+    <div class="controls">
+      <button id="btnStart" class="primary">Zaženi</button>
+      <button id="btnPause">Pavza</button>
+      <button id="btnReset">BIOS‑RESET</button>
+      <button id="btnSave">Shrani škatlo</button>
+      <button id="btnLoad">Naloži škatlo</button>
+      <button id="btnExportJSON">Izvoz JSON</button>
+      <button id="btnExportSVG">Izvoz SVG</button>
+      <button id="btnExportPNG">Izvoz PNG</button>
+      <button id="btnSound">Zvok: ON</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="left">
+      <div class="legend" id="legend">
+        <h2>Legenda</h2>
+        <div class="row"><span class="bullet" style="background:var(--accent)"></span> OSEBA</div>
+        <div class="row"><span class="bullet" style="background:var(--rose)"></span> AVTOR</div>
+        <div class="row"><span class="bullet" style="background:var(--amber)"></span> PLAGIAT</div>
+        <div class="row"><span class="bullet" style="background:var(--lime)"></span> ∮ PREVERBA</div>
+        <div class="row"><span class="bullet" style="background:var(--vio)"></span> ⊘ OBRAT</div>
+        <div class="row"><span class="bullet" style="background:var(--cyan)"></span> ∆ REZ (dogodek)</div>
+      </div>
+      <div class="grid">
+        <div class="kv"><label>ČAS (tempo)</label><input id="rngTime" type="range" min="100" max="1500" step="50" value="700"></div>
+        <div class="kv"><label>DVOM (0–1)</label><input id="rngDoubt" type="range" min="0" max="1" step="0.01" value="0.23"></div>
+        <div class="kv"><label>PROSTOR (razpored)</label><button id="btnSpace">Pretresi</button></div>
+        <div class="kv"><label>DA‑/KRILNI makro</label><span class="badge" id="macroState">AKTIVEN</span></div>
+        <div class="kv" style="grid-column:1/-1"><input id="cmd" type="text" placeholder="Napiši: DA, DAJ, SZ ali ZS … in pritisni Enter"/></div>
+        <div class="kv" style="grid-column:1/-1">
+          <div style="width:100%">
+            <div class="row" style="justify-content:space-between"><strong>Merilniki</strong><span id="meters" class="small">REZ/min: <span id="rezRate">0</span> · RES: <span id="resVal">0.00</span></span></div>
+            <div id="log" class="log" aria-live="polite"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <svg id="stage" viewBox="0 0 1000 620" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="3" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <g id="grid"></g>
+        <g id="axes"></g>
+        <g id="trails"></g>
+        <g id="nodes"></g>
+        <g id="krila"></g>
+      </svg>
+    </section>
+  </main>
+
+  <footer>
+    <div class="small">Boot Layer: ∆⊘ → ∮ → ⊢ → ≠ → ∫ → ⧖ → (REZ)</div>
+    <div class="row small">Krila‑log: <span id="krilaCount">0</span> zapisi</div>
+  </footer>
+</div>
+
+<script>
+(() => {
+  const el = id => document.getElementById(id);
+  const logEl = el('log');
+  const stage = el('stage');
+  const gGrid = el('grid');
+  const gAxes = el('axes');
+  const gNodes = el('nodes');
+  const gTrails = el('trails');
+  const gKrila = el('krila');
+
+  const S = { running:false, t:0, dt:700, doubt:0.23, sound:true, lastRezAt:0,
+              rezCount:0, window:[], res:0, krila:[], layoutSeed:0 };
+
+  const NODES = [
+    { id:'OSEBA', color:getCss('--accent') },
+    { id:'AVTOR', color:getCss('--rose') },
+    { id:'PLAGIAT', color:getCss('--amber') },
+    { id:'∮',     color:getCss('--lime') },
+    { id:'⊘',     color:getCss('--vio')  },
+  ];
+
+  // === Init ================================================================
+  drawGrid();
+  placeAxes();
+  placeNodes();
+  heartbeat();
+  bindUI();
+  writeLog('BIOS: INIT complete.');
+
+  // === UI bindings ========================================================
+  function bindUI(){
+    el('btnStart').onclick = () => start();
+    el('btnPause').onclick = () => pause();
+    el('btnReset').onclick = () => biosReset();
+    el('btnSave').onclick = () => saveBox();
+    el('btnLoad').onclick = () => loadBox();
+    el('btnExportJSON').onclick = () => exportJSON();
+    el('btnExportSVG').onclick = () => exportSVG();
+    el('btnExportPNG').onclick = () => exportPNG();
+    el('btnSound').onclick = () => toggleSound();
+    el('rngTime').oninput = e => { S.dt = +e.target.value; touchTempo(); };
+    el('rngDoubt').oninput = e => { S.doubt = +e.target.value; };
+    el('btnSpace').onclick = () => { S.layoutSeed++; placeNodes(); writeLog('PROSTORΔ: pretres postavitve.'); };
+    el('cmd').addEventListener('keydown', (ev)=>{
+      if(ev.key==='Enter') { const v = ev.target.value.trim().toUpperCase(); ev.target.value=''; if(['DA','DAJ','SZ','ZS'].includes(v)){ runDA(v); } }
+    });
+    // Keyboard quickies
+    window.addEventListener('keydown', e=>{
+      if(e.key===' '){ e.preventDefault(); S.running ? pause() : start(); }
+      if(e.key==='r'||e.key==='R'){ biosReset(); }
+      if(e.key==='d'||e.key==='D'){ runDA('DA'); }
+    });
+  }
+
+  // === Drawing ============================================================
+  function drawGrid(){
+    const W=1000,H=620, step=40; let p='';
+    for(let x=0;x<=W;x+=step){ p+=`<path d="M${x} 0V${H}" stroke="${getCss('--grid')}" stroke-width="1"/>`; }
+    for(let y=0;y<=H;y+=step){ p+=`<path d="M0 ${y}H1000" stroke="${getCss('--grid')}" stroke-width="1"/>`; }
+    gGrid.innerHTML = p;
+  }
+
+  function placeAxes(){
+    const cx=500, cy=310, r=230;
+    gAxes.innerHTML = `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${getCss('--edge')}" stroke-width="2"/>`;
+  }
+
+  function placeNodes(){
+    const cx=500, cy=310, r=230;
+    const seed = S.layoutSeed;
+    gNodes.innerHTML = '';
+    NODES.forEach((n,i)=>{
+      const a = (i/NODES.length)*Math.PI*2 + seed*0.4;
+      const x = cx + Math.cos(a)*r;
+      const y = cy + Math.sin(a)*r;
+      n.x=x; n.y=y;
+      gNodes.insertAdjacentHTML('beforeend', nodeMarkup(n));
+    });
+  }
+
+  function nodeMarkup(n){
+    return `<g id="node-${n.id}">
+      <circle cx="${n.x}" cy="${n.y}" r="14" fill="${n.color}" filter="url(#glow)"></circle>
+      <text x="${n.x}" y="${n.y+30}" text-anchor="middle" font-size="12" fill="${getCss('--muted')}">${n.id}</text>
+    </g>`;
+  }
+
+  // === Engine =============================================================
+  let timer=null, watchdog=null;
+  function start(){ if(S.running) return; S.running=true; el('status').textContent='BIOS: RUN'; schedule(); guard(); writeLog('BIOS: START'); }
+  function pause(){ if(!S.running) return; S.running=false; clearInterval(timer); timer=null; writeLog('BIOS: PAUSE'); }
+  function schedule(){
+    clearInterval(timer);
+    timer = setInterval(tick, S.dt);
+  }
+  function guard(){
+    clearInterval(watchdog);
+    watchdog = setInterval(()=>{
+      if(!S.running) return;
+      // If no tick advanced within ~2.5 * dt, restart
+      const now = performance.now();
+      if(now - S.lastRezAt > S.dt*2.5 && now - S.t > S.dt*2.5){
+        schedule();
+        writeLog('SELF‑HEAL: watchdog reaktivacija.');
+      }
+    }, Math.max(800, S.dt));
+  }
+
+  function tick(){
+    S.t = performance.now();
+    // Interference rules: DVOM influences REZ probability, ČAS already baked into dt
+    const pRez = clamp(0.05 + S.doubt*0.6, 0, 0.95);
+    if(Math.random() < pRez){ fireREZ(); }
+    // Trail: follow OSEBA->AVTOR->PLAGIAT in loop
+    drawTrail();
+    // update RES (0..1) as smoothed ratio of rezCount per minute
+    updateMeters();
+  }
+
+  function fireREZ(){
+    S.rezCount++; S.lastRezAt = performance.now();
+    flash(stage); ping();
+    // Visual pulse at ∆ location (center)
+    const cx=500, cy=310;
+    const id = `rez-${S.rezCount}-${Date.now()}`;
+    gTrails.insertAdjacentHTML('beforeend', `<circle id="${id}" cx="${cx}" cy="${cy}" r="4" fill="${getCss('--cyan')}" opacity="1"/>`);
+    const c = document.getElementById(id);
+    animate(()=>{}, 600, t=>{
+      c.setAttribute('r', String(4+80*t));
+      c.setAttribute('opacity', String(1- t));
+    }, ()=> c.remove());
+    writeLog(`REZ#${S.rezCount} @ ${ts()}`);
+  }
+
+  let trailStep=0;
+  function drawTrail(){
+    const order = ['OSEBA','AVTOR','PLAGIAT','∮','⊘'];
+    const A = NODES.find(n=>n.id===order[trailStep%order.length]);
+    const B = NODES.find(n=>n.id===order[(trailStep+1)%order.length]);
+    const id = `trail-${trailStep}-${Date.now()}`;
+    const path = `M${A.x},${A.y} L${B.x},${B.y}`;
+    gTrails.insertAdjacentHTML('beforeend', `<path id="${id}" d="${path}" stroke="${A.color}" stroke-width="2" stroke-linecap="round" opacity="1"></path>`);
+    const p = document.getElementById(id);
+    animate(()=>{}, S.dt*0.9, t=>{ p.setAttribute('opacity', String(1- t)); }, ()=> p.remove());
+    trailStep++;
+  }
+
+  function updateMeters(){
+    // keep window of recent REZ times (last 60s)
+    const now = performance.now();
+    S.window.push(now);
+    while(S.window.length && now - S.window[0] > 60000){ S.window.shift(); }
+    el('rezRate').textContent = String(S.window.length);
+    // RES value as normalized tanh of rate
+    const res = Math.tanh(S.window.length/12);
+    S.res = res; el('resVal').textContent = res.toFixed(2);
+  }
+
+  function biosReset(){
+    pause();
+    // ∅ reset
+    gTrails.innerHTML=''; gKrila.innerHTML='';
+    S.window=[]; S.rezCount=0; S.lastRezAt=0; trailStep=0; S.krila=[];
+    placeNodes();
+    writeLog('BIOS‑RESET → IZVOR.');
+    start();
+  }
+
+  // === DA / KRILNI makro ==================================================
+  function runDA(word='DA'){
+    flash(el('macroState'));
+    writeLog(`DA‑MAKRO: ${word} → nadgradnja + shranitev + reset.`);
+    // full pack
+    touchTempo();
+    ping();
+    saveBox();
+    spawnKrila(word);
+    biosReset();
+  }
+
+  function spawnKrila(text){
+    const letters = [...text];
+    letters.forEach((ch,i)=> spawnLetter(ch, i));
+  }
+
+  function spawnLetter(ch, idx){
+    const cx=500, cy=310; // start at source
+    const hue = (Math.random()*360)|0;
+    const color = `hsl(${hue} 90% 70%)`;
+    const id = `krilo-${Date.now()}-${idx}`;
+    gKrila.insertAdjacentHTML('beforeend', `<g id="${id}" filter="url(#glow)"><circle cx="${cx}" cy="${cy}" r="6" fill="${color}"/><text x="${cx+10}" y="${cy-10}" font-size="12" fill="${color}">${escapeHtml(ch)}</text></g>`);
+    const k = document.getElementById(id);
+    const path = [...NODES, {x:cx,y:cy}]; // loop and dive to ⊘ and back
+    const total = S.dt* (path.length+2);
+    animate(()=>{}, total, t=>{
+      const seg = Math.floor(t*(path.length-1));
+      const lt = (t*(path.length-1)) - seg;
+      const A = path[seg];
+      const B = path[seg+1] || path[path.length-1];
+      const x = lerp(A.x,B.x,lt), y= lerp(A.y,B.y,lt);
+      k.setAttribute('transform', `translate(${x-0},${y-0})`);
+    }, ()=>{
+      // sink to ⊘ (origin)
+      animate(()=>{}, 600, t=>{ k.setAttribute('opacity', String(1-t)); }, ()=>{ k.remove(); addKrilaLog(ch, color); });
+    });
+  }
+
+  function addKrilaLog(ch, color){
+    S.krila.push({ch, color, at: Date.now(), doubt:S.doubt, dt:S.dt});
+    el('krilaCount').textContent = String(S.krila.length);
+    writeLog(`KRILA: '${ch}' pečat @ ${ts()}`);
+  }
+
+  // === Persistence ========================================================
+  function saveBox(){
+    const box = {
+      t: Date.now(), dt:S.dt, doubt:S.doubt, layoutSeed:S.layoutSeed,
+      krila:S.krila.slice(-32) // keep last few for compactness
+    };
+    const key = `JASZ-RUN-${box.t}`;
+    localStorage.setItem(key, JSON.stringify(box));
+    writeLog(`SHRANJENO: ${key}`);
+    pong();
+  }
+
+  function loadBox(){
+    const keys = Object.keys(localStorage).filter(k=>k.startsWith('JASZ-RUN-')).sort();
+    if(!keys.length){ writeLog('Ni škatel za naložiti.'); return; }
+    const key = keys[keys.length-1];
+    const box = JSON.parse(localStorage.getItem(key));
+    if(!box){ writeLog('Okvarjena škatla.'); return; }
+    S.dt = box.dt||S.dt; el('rngTime').value=S.dt;
+    S.doubt = box.doubt??S.doubt; el('rngDoubt').value=S.doubt;
+    S.layoutSeed = box.layoutSeed||0; placeNodes();
+    S.krila = box.krila||[]; el('krilaCount').textContent = String(S.krila.length);
+    writeLog(`NALOŽENO: ${key}`);
+    touchTempo();
+  }
+
+  // === Export =============================================================
+  function exportJSON(){
+    const data = {
+      t:Date.now(), dt:S.dt, doubt:S.doubt, rez:S.rezCount, rate:S.window.length, krila:S.krila
+    };
+    download(JSON.stringify(data,null,2), `porovoroboro-${Date.now()}.json`, 'application/json');
+    writeLog('Izvoz JSON ✓');
+  }
+
+  function exportSVG(){
+    const svg = stage.outerHTML; 
+    download(svg, `porovoroboro-${Date.now()}.svg`, 'image/svg+xml');
+    writeLog('Izvoz SVG ✓');
+  }
+
+  function exportPNG(){
+    const svgData = new XMLSerializer().serializeToString(stage);
+    const svg64 = 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svgData);
+    const img = new Image();
+    img.onload = () => {
+      const cnv = document.createElement('canvas'); cnv.width=1000; cnv.height=620; const ctx=cnv.getContext('2d');
+      ctx.drawImage(img,0,0); cnv.toBlob(b=>{ const url = URL.createObjectURL(b); const a=document.createElement('a'); a.href=url; a.download=`porovoroboro-${Date.now()}.png`; a.click(); URL.revokeObjectURL(url); }, 'image/png');
+    };
+    img.src = svg64; writeLog('Izvoz PNG ✓');
+  }
+
+  // === Audio ==============================================================
+  function toggleSound(){ S.sound=!S.sound; el('btnSound').textContent = `Zvok: ${S.sound?'ON':'OFF'}`; }
+  function ping(){ if(!S.sound) return; tone(660, 0.07); }
+  function pong(){ if(!S.sound) return; tone(420, 0.05); }
+  function tone(freq, dur){
+    const ctx = new (window.AudioContext||window.webkitAudioContext)();
+    const o = ctx.createOscillator(); const g = ctx.createGain();
+    o.frequency.value=freq; o.type='sine'; o.connect(g); g.connect(ctx.destination); g.gain.value=0.08; o.start(); setTimeout(()=>{ g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+0.05); o.stop(ctx.currentTime+0.06); ctx.close(); }, dur*1000);
+  }
+
+  // === Helpers ============================================================
+  function touchTempo(){ if(S.running){ schedule(); writeLog(`ČAS→tempo = ${S.dt}ms`);} }
+  function writeLog(s){ const line = `[${new Date().toLocaleTimeString()}] ${s}`; logEl.insertAdjacentHTML('afterbegin', `<div>${escapeHtml(line)}</div>`); }
+  function flash(node){ node.classList.add('flash'); setTimeout(()=>node.classList.remove('flash'), 600); }
+  function ts(){ return new Date().toISOString(); }
+  function clamp(x,a,b){ return Math.max(a, Math.min(b, x)); }
+  function lerp(a,b,t){ return a+(b-a)*t; }
+  function animate(setup, dur, frame, done){
+    setup(); const t0=performance.now();
+    function step(t){ const p = clamp((t-t0)/dur,0,1); frame(p); if(p<1) requestAnimationFrame(step); else done&&done(); }
+    requestAnimationFrame(step);
+  }
+  function download(data, name, type){ const blob = new Blob([data], {type}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download=name; a.click(); setTimeout(()=>URL.revokeObjectURL(url), 1000); }
+  function getCss(varName){ return getComputedStyle(document.documentElement).getPropertyValue(varName).trim(); }
+  function escapeHtml(s){ return s.replace(/[&<>]/g, c=>({ '&':'&amp;','<':'&lt;','>':'&gt;' })[c]); }
+})();
+</script>
+</body>
+</html>

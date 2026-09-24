@@ -1,0 +1,83 @@
+SISTEM ∅→∆→∂→∮ - HITREJŠI ZAGON
+================================
+
+POT DO SISTEMA:
+D:\OntoProjekt\CanvasMinstral\Obj1
+
+MOŽNOSTI ZAGONA:
+=================
+
+1. EN KLIK (priporočeno):
+   - Dvoklikni: zagni.bat
+   - Izberi: 1 (Zaženi GUI)
+
+2. DIREKTNO GUI:
+   - Odpri: dist\Sistem_∅→∆→∂→∮.exe
+
+3. CLI (ukazna vrstica):
+   cd /d/OntoProjekt/CanvasMinstral/Obj1
+   python run.py help
+
+POGOSTE UKAZI:
+==============
+
+Generiraj nov kamen:
+  python run.py generate 121 "Krog" "zapis kot cikel"
+
+Generiraj 5 kamnov:
+  python run.py generate-batch 5
+
+Preveri vse kamne:
+  python run.py verify
+
+Zgradi vsa (EXE + baza + indeks):
+  python run.py build
+
+Išči v dokumentih:
+  python run.py search "∅→∆"
+
+Pokaži statistiko:
+  python run.py stats
+
+TRENUTNO STANJE:
+=================
+
+✅ 14 kamnov (107-120) - VSI PREVERJENI T1-T4
+✅ GUI aplikacija (Windows EXE)
+✅ Avtomatizirano generiranje
+✅ Indeksiranje in iskanje
+✅ SQLite + JSON baza
+✅ Vizualizacija mreže
+
+NOVO V 1.0:
+===========
+
+✅ auto_generate.py - Avtomatično generiraj kamne
+✅ build.py - Ponovna gradnja vseh
+✅ indexer.py - Indeks in iskanje
+✅ run.py - Enotno CLI vmesnik
+✅ zagni.bat - Interaktivni meni
+✅ Nove markerji: ∅↑, ∅↓, ∆→, ∂↔, ∮∞
+
+DOKUMENTACIJA:
+==============
+
+- STANJE-SISTEMA-POLNO-18092026.md (celoten pregled)
+- PRIROCNIK.md (uporabniški priročnik)
+- STANJE-SISTEMA-18092026.md (staro stanje)
+
+VPRŠANJA:
+=========
+
+Če imate težave:
+1. Preberite STANJE-SISTEMA-POLNO-18092026.md
+2. Zaženite: python run.py help
+3. Preverite, ali ste v pravi mapi
+
+LAHKO DOSEGLJIVO:
+=================
+
+Vsa orodja so v: D:\OntoProjekt\CanvasMinstral\Obj1
+
+Sistem je **POPOLNO DELUJOČ** in **SAMOSTOJEN**!
+Zaženi zagni.bat in izberi moznost 1.

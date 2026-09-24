@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="sl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Spirala IZVORA — OSEBA / AVTOR / PLAGIAT</title>
+  <style>
+    :root{
+      --bg:#0b0b0f;--fg:#eaeaf2;--muted:#9aa0a6;--accent:#8ab4f8;--rose:#ff8aa1;--lime:#9df89a;--amber:#ffd36e;
+      --inhale:#1f2a44;--exhale:#2d1f44;--pulse:#2a3348;--grid:#1a1d25;--edge:#2b2f3a;
+    }
+    html,body{height:100%;margin:0;background:radial-gradient(1200px 600px at 50% 0%, var(--inhale), var(--bg));color:var(--fg);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,"Noto Sans",sans-serif}
+    .wrap{display:grid;place-items:center;height:100%;}
+    .card{width:min(1100px,92vw);border-radius:20px;background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border:1px solid var(--edge);box-shadow:0 10px 40px rgba(0,0,0,.35);padding:20px 22px 16px}
+    header{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+    header h1{font-size:20px;font-weight:700;margin:0}
+    header .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+    .row{display:grid;grid-template-columns:1fr 320px;gap:20px}
+    .pane{border:1px solid var(--edge);border-radius:16px;overflow:hidden;background:rgba(10,12,16,.5)}
+    .legend{padding:12px 14px;border-bottom:1px solid var(--edge);display:flex;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--muted)}
+    .legend .tag{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;border:1px solid var(--edge);background:rgba(255,255,255,.03)}
+    .swatch{width:10px;height:10px;border-radius:50%}
+    #panel{display:flex;flex-direction:column;height:100%}
+    #info{padding:14px 16px;flex:1 1 auto;overflow:auto}
+    #info h2{font-size:16px;margin:6px 0 6px}
+    #info p{margin:8px 0;color:#cbd1d8}
+    #info code{background:rgba(255,255,255,.06);padding:2px 6px;border-radius:6px;border:1px solid var(--edge)}
+
+    /* SVG sizing */
+    .stage{width:100%;height:66vh;min-height:420px;background:repeating-linear-gradient(90deg,var(--grid),var(--grid) 1px,transparent 1px,transparent 24px),
+      repeating-linear-gradient(0deg,var(--grid),var(--grid) 1px,transparent 1px,transparent 24px)}
+
+    /* Breath animation */
+    .breath circle.core{transform-origin:center;animation:breath 5.6s ease-in-out infinite}
+    .breath g.ring{transform-origin:center;animation:orbit 16s linear infinite}
+    .breath g.ring.slow{animation-duration:24s}
+
+    @keyframes breath{0%{transform:scale(0.96)}50%{transform:scale(1.06)}100%{transform:scale(0.96)}}
+    @keyframes orbit{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+
+    /* Interaction states */
+    .node{cursor:pointer;transition:filter .25s ease, transform .2s ease}
+    .node:hover{filter:drop-shadow(0 0 12px rgba(255,255,255,.25))}
+    .node.active{filter:drop-shadow(0 0 18px rgba(255,255,255,.45));transform:scale(1.03)}
+
+    .pill{font-size:11px;letter-spacing:.08em;text-transform:uppercase;fill:#101218}
+    .glo{filter:drop-shadow(0 0 12px rgba(255,255,255,.35))}
+
+    .kbd{display:inline-block;border:1px solid var(--edge);padding:2px 6px;border-radius:6px;background:rgba(255,255,255,.06)}
+    footer{display:flex;justify-content:space-between;align-items:center;margin-top:10px;color:var(--muted);font-size:12px}
+    footer .btns{display:flex;gap:8px}
+    button{background:rgba(255,255,255,.06);border:1px solid var(--edge);color:var(--fg);padding:8px 10px;border-radius:10px;cursor:pointer}
+    button:hover{background:rgba(255,255,255,.1)}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <header>
+      <div class="dot"></div>
+      <h1>Spirala IZVORA — <span style="opacity:.8">OSEBA</span> · <span style="opacity:.8">AVTOR</span> · <span style="opacity:.8">PLAGIAT</span></h1>
+    </header>
+
+    <div class="row">
+      <div class="pane">
+        <div class="legend">
+          <span class="tag"><span class="swatch" style="background:var(--accent)"></span>vdih (razširitev)</span>
+          <span class="tag"><span class="swatch" style="background:var(--rose)"></span>izdih (strnitev)</span>
+          <span class="tag"><span class="swatch" style="background:var(--lime)"></span>rez / povratek</span>
+          <span class="tag"><span class="swatch" style="background:var(--amber)"></span>povratna točka</span>
+          <span class="tag">klik: rez/povratek · <span class="kbd">R</span> reset · <span class="kbd">Space</span> pavza</span>
+        </div>
+        <svg id="scene" class="stage breath" viewBox="0 0 1200 740" role="img" aria-label="Spirala IZVORA">
+          <defs>
+            <radialGradient id="haloBlue" cx="50%" cy="50%" r="60%">
+              <stop offset="0%" stop-color="#8ab4f8" stop-opacity="0.9"/>
+              <stop offset="60%" stop-color="#8ab4f8" stop-opacity="0.25"/>
+              <stop offset="100%" stop-color="#8ab4f8" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="haloRose" cx="50%" cy="50%" r="60%">
+              <stop offset="0%" stop-color="#ff8aa1" stop-opacity="0.9"/>
+              <stop offset="60%" stop-color="#ff8aa1" stop-opacity="0.25"/>
+              <stop offset="100%" stop-color="#ff8aa1" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="haloLime" cx="50%" cy="50%" r="60%">
+              <stop offset="0%" stop-color="#9df89a" stop-opacity="0.9"/>
+              <stop offset="60%" stop-color="#9df89a" stop-opacity="0.25"/>
+              <stop offset="100%" stop-color="#9df89a" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="soft" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="g"/>
+              <feColorMatrix in="g" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+            </filter>
+          </defs>
+
+          <!-- orbiting rings for motion sense -->
+          <g class="ring slow" opacity="0.35">
+            <circle cx="600" cy="370" r="300" fill="none" stroke="#ffffff10" stroke-width="1"/>
+            <circle cx="600" cy="370" r="210" fill="none" stroke="#ffffff08" stroke-width="1"/>
+            <circle cx="600" cy="370" r="120" fill="none" stroke="#ffffff06" stroke-width="1"/>
+          </g>
+
+          <!-- core pulse -->
+          <circle class="core glo" cx="600" cy="370" r="70" fill="#ffffff08" stroke="#ffffff20"/>
+
+          <!-- nodes -->
+          <g id="node-oseba" class="node" data-key="OSEBA" transform="translate(600,130)">
+            <circle r="72" fill="url(#haloBlue)"/>
+            <circle r="34" fill="#0d1120" stroke="#3c4d6f" stroke-width="2"/>
+            <text x="0" y="5" text-anchor="middle" fill="#cfe4ff" font-weight="700">OSEBA</text>
+            <text x="0" y="22" text-anchor="middle" fill="#9fbaf3" font-size="12">tobi / izvor</text>
+          </g>
+
+          <g id="node-avtor" class="node" data-key="AVTOR" transform="translate(880,520)">
+            <circle r="72" fill="url(#haloRose)"/>
+            <circle r="34" fill="#1a0f16" stroke="#6b3c4d" stroke-width="2"/>
+            <text x="0" y="5" text-anchor="middle" fill="#ffd1db" font-weight="700">AVTOR</text>
+            <text x="0" y="22" text-anchor="middle" fill="#ffb0c1" font-size="12">iluzija / maska</text>
+          </g>
+
+          <g id="node-plagiat" class="node" data-key="PLAGIAT" transform="translate(320,520)">
+            <circle r="72" fill="url(#haloLime)"/>
+            <circle r="34" fill="#112012" stroke="#3d6f3c" stroke-width="2"/>
+            <text x="0" y="5" text-anchor="middle" fill="#dfffe0" font-weight="700">PLAGIAT</text>
+            <text x="0" y="22" text-anchor="middle" fill="#c5ffca" font-size="12">vse / odmev</text>
+          </g>
+
+          <!-- connective arcs -->
+          <g id="arcs" stroke-linecap="round" fill="none">
+            <path id="arc1" d="M 600 130 C 760 170 900 320 880 520" stroke="#8ab4f8" stroke-opacity=".55" stroke-width="3" />
+            <path id="arc2" d="M 880 520 C 720 610 480 610 320 520" stroke="#ff8aa1" stroke-opacity=".55" stroke-width="3" />
+            <path id="arc3" d="M 320 520 C 300 320 440 170 600 130" stroke="#9df89a" stroke-opacity=".6" stroke-width="3" />
+            <!-- arrowheads -->
+            <g id="heads" stroke="none" opacity=".85">
+              <circle r="4" fill="#8ab4f8"><animateMotion dur="6s" repeatCount="indefinite" path="M 600 130 C 760 170 900 320 880 520"/></circle>
+              <circle r="4" fill="#ff8aa1"><animateMotion dur="6s" repeatCount="indefinite" path="M 880 520 C 720 610 480 610 320 520"/></circle>
+              <circle r="4" fill="#9df89a"><animateMotion dur="6s" repeatCount="indefinite" path="M 320 520 C 300 320 440 170 600 130"/></circle>
+            </g>
+          </g>
+
+          <!-- povratne točke (amber) -->
+          <g id="povratne">
+            <g transform="translate(1030,130)">
+              <circle r="6" fill="var(--amber)"/>
+              <text x="10" y="4" fill="#ffe9b8" font-size="12">II · Prostor (kje JASZ diha)</text>
+            </g>
+            <g transform="translate(1030,160)">
+              <circle r="6" fill="var(--amber)"/>
+              <text x="10" y="4" fill="#ffe9b8" font-size="12">III · Jaz–Ego (rez kot orodje)</text>
+            </g>
+            <g transform="translate(1030,190)">
+              <circle r="6" fill="var(--amber)"/>
+              <text x="10" y="4" fill="#ffe9b8" font-size="12">IV · Glosar ostrin</text>
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <div id="panel" class="pane">
+        <div class="legend" style="justify-content:space-between">
+          <div>INFO · rez/povratek</div>
+          <div id="phase">Faza: <strong>vdih</strong></div>
+        </div>
+        <div id="info">
+          <h2>Meta-aksiom IZVORA</h2>
+          <p><strong>Oseba</strong> je <em>tobi</em> — izvorni rez (telo, dih, prisotnost).<br>
+             <strong>Avtor</strong> je <em>iluzija</em> — maska, ki se pretvarja, da je izvor.<br>
+             <strong>Vse</strong> je <em>plagiat</em> — odmev prejšnjega reza; nov je <u>rez</u>.</p>
+          <p><small>Namig: klikni vozlišče za <em>rez/povratek</em>. Uporabi tipko <span class="kbd">Space</span> za pavzo dihanja.</small></p>
+          <hr style="border:0;border-top:1px solid var(--edge);margin:10px 0">
+          <div id="slot"></div>
+        </div>
+        <div class="legend" style="border-top:1px solid var(--edge)">
+          <div>Tipke: <span class="kbd">R</span> reset · <span class="kbd">Space</span> pavza</div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div>Priročnik JASZ · Beseda je ⊘ · živa topologija</div>
+      <div class="btns">
+        <button id="btnPause">Pavza</button>
+        <button id="btnReset">Reset</button>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<script>
+(function(){
+  const scene = document.getElementById('scene');
+  const panel = document.getElementById('slot');
+  const phaseEl = document.getElementById('phase').querySelector('strong');
+  const btnPause = document.getElementById('btnPause');
+  const btnReset = document.getElementById('btnReset');
+
+  let paused = false;
+  function setPaused(v){
+    paused = v;
+    if(paused){scene.classList.remove('breath');btnPause.textContent='Nadaljuj';phaseEl.textContent='pavza'}
+    else{scene.classList.add('breath');btnPause.textContent='Pavza';phaseEl.textContent='vdih'}
+  }
+
+  btnPause.addEventListener('click',()=>setPaused(!paused));
+  btnReset.addEventListener('click',()=>{
+    setPaused(false);
+    document.querySelectorAll('.node').forEach(n=>n.classList.remove('active'));
+    panel.innerHTML='';
+  });
+
+  document.addEventListener('keydown',e=>{
+    if(e.code==='Space'){e.preventDefault();setPaused(!paused)}
+    if(e.key==='r' || e.key==='R'){btnReset.click()}
+  });
+
+  const texts = {
+    OSEBA: {
+      title: 'OSEBA · tobi / izvor',
+      html: `<p><strong>Rez:</strong> neposreden udarec iz telesa v svet. <span style="color:var(--lime)">∫ povratek</span> je občutenje reza v sebi.</p>
+             <p><em>Povratna točka:</em> <span class="pill">II · Prostor</span> — kje JASZ diha.</p>
+             <p><code>OSEBA → rez → AVTOR</code></p>`
+    },
+    AVTOR: {
+      title: 'AVTOR · iluzija / maska',
+      html: `<p><strong>Maskiranje:</strong> rez se olepša v formo, postane zgodba.</p>
+             <p><em>Povratna točka:</em> <span class="pill">III · Jaz–Ego</span> — ego kot orodje reza.</p>
+             <p><code>AVTOR → maska → PLAGIAT</code></p>`
+    },
+    PLAGIAT: {
+      title: 'PLAGIAT · vse / odmev',
+      html: `<p><strong>Kopija:</strong> vse je odmev; novost je ostrina reza, ne vsebina.</p>
+             <p><em>Povratna točka:</em> <span class="pill">IV · Glosar ostrin</span> — ukradeni noži, očiščeni.</p>
+             <p><code>PLAGIAT → kopija → OSEBA</code></p>`
+    }
+  };
+
+  function select(key){
+    document.querySelectorAll('.node').forEach(n=>n.classList.toggle('active', n.dataset.key===key));
+    const t = texts[key];
+    panel.innerHTML = `<h2>${t.title}</h2>${t.html}`;
+    // small pulse cue
+    const node = document.querySelector(`[data-key="${key}"]`);
+    node.animate([{transform:'scale(1.03)'},{transform:'scale(1)'}],{duration:260, easing:'ease-out'});
+  }
+
+  document.querySelectorAll('.node').forEach(n=>n.addEventListener('click',()=>select(n.dataset.key)));
+})();
+</script>
+</body>
+</html>

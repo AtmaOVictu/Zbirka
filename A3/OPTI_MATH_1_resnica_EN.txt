@@ -1,0 +1,2 @@
+Word	Symbolic Equation	Elements	Meaning	Function
+thing	R = (T - I) ⋅ C	{'R': 'thing', 'T': 'moment of detection (external appearance)', 'I': 'intention (inner self, prior image of the thing)', 'C': 'purity (factor without manipulation, faith, space)'}	The thing is the difference between the moment and the inner representation, multiplied by the purity of the spirit	differentiating principle between concept and appearance, bond between self and otherness, ontological corrector

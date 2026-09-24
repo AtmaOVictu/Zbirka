@@ -1,0 +1,21 @@
+// RES-L REPORT button — v3.3
+// Adds a 'REPORT' (EN) / 'POROČILO' (SL) button on page 1 that opens RESL_HOWTO_REPORT_A4.pdf (relative path).
+
+try {
+  var isSL = (this.getField('DATUM') || this.getField('ID_TRDITVE')) ? true : false;
+  var label = isSL ? "POROČILO" : "REPORT";
+  var tip   = isSL ? "Odpri HOW‑TO za knjiženje (booklet/binder)." : "Open HOW‑TO for booklet/binder.";
+  var r = this.getField("REPORT_BTN");
+  if (!r) {
+    // rectangle [left, bottom, right, top] in points; bottom-left origin
+    r = this.addField("REPORT_BTN", "button", 0, [450, 70, 540, 92]);
+    r.buttonPosition = position.captionOnly;
+    r.textSize = 11;
+    r.borderStyle = border.s; r.strokeColor = color.black; r.fillColor = color.ltGray;
+  }
+  r.userName = tip;
+  r.buttonSetCaption(label);
+  r.setAction("MouseUp", "try{ app.launchURL('RESL_HOWTO_REPORT_A4.pdf', true); }catch(e){ app.alert('Open HOW‑TO manually if blocked.'); }");
+} catch (e) {
+  app.alert("REPORT button init failed: " + e);
+}

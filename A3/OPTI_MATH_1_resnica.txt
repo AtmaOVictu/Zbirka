@@ -1,0 +1,2 @@
+Beseda	Simbolna enačba	Elementi	Pomen	Funkcija
+resnica	R = (T - I) ⋅ C	{'R': 'resnica', 'T': 'trenutek zaznave (zunanja pojavnost)', 'I': 'intenca (notranji jaz, predhodna slika resnice)', 'C': 'čistost (faktor brez manipulacije, vera, prostor)'}	Resnica je razlika med trenutkom in notranjo predstavo, pomnožena s čistostjo duha.	razlikovalno načelo med pojmom in pojavom, vez med jazom in drugostjo, ontološki korektor

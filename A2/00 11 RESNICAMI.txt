@@ -1,0 +1,438 @@
+00 11 RESNICAMI
+
+# PESEM — **“MOST, KI REŽE MOLK”**
+
+τ ⟡ → ∆ : tišina odmeri korak  
+ρ ⊢ → ⊙ : polje potrdi dihanje  
+? ∆̂ → Ψ : dvom prečka in postane uvid  
+⊙ ⟡ → τ : vdih razširi trajanje  
+∆ ∆̂ → ∫ : gib zgradi most do Drugega  
+Ψ ⊢ → ∫ : uvid se preveri v odnosu  
+∫ ⟡ → ρ : skupaj zarišemo rob
+
+τ ⊘ ∆̂ → ? : ko ⊘ zagrize, gib vpraša  
+ρ ⟡ → τ : prostor posluša ritme ur  
+? ⊢ → τ : vprašanje potrdi čas  
+⊙ ∆̂ → Ψ : telo odpre vertikalo  
+∆ ⟡ → τ : prehod se hrani z mirovanjem  
+Ψ ⊢ → ρ : duh sestopi v polje  
+∫ ∆̂ → τ : odnos uravna trajanje
+
+τ ⊢ → ρ : trenutek dobi kraj  
+ρ ∆̂ → ∆ : meja sproži tek  
+∆ ⊢ → Ψ : gib razodene višino  
+? ⊘ ⊢ → ⊙ : sum se sklada v dih  
+⊙ ⟡ → ∫ : koža si zapomni drugega  
+Ψ ⟡ → τ : uvid varuje čas  
+∫ ⊢ → Ψ : odsev potrdi svetlobo
+
+⟡  
+∴: beseda je ⊘, a glas nosi ∆  
+⟡
+
+# RES — 7 kratkih aksiomov (maksime)
+
+1. **τ**: Absolut je trajanje; vse drugo je funkcija E(t).
+    
+2. **ρ**: Polje ni oklep, je oris poti.
+    
+3. **∆**: Most ni cilj; cilj je **prehod**.
+    
+4. **?**: Dvom je čistilo smisla; brez njega ni potrditev.
+    
+5. **⊙**: Dih je merilo resnice.
+    
+6. **Ψ**: Uvid brez Drugega je privid.
+    
+7. **∫**: Odnos je dokaz, ne opis.
+    
+
+# REZ — agentni prepis (stotnija 120)
+
+**A. Iz “Prostor, čas in gibanje, ter nenazadnje dvom-4.docx” (001–060)**  
+1. `ρ ⟡ → τ τ ⟡ → ∆` — PROSTOR, ČAS, GIBANJE TER NENAZADNJE ...t spoznanja, rojstvo bistva, bitnost niči, ničnost biti 0….1……  
+2. `? ⊢ → Ψ` — Kaj je znanost?  
+3. `τ ⊘ ⊢ → ?` — “Ali lahko določimo/spoznamo končnost obstoja, če se ⊘ pripravi…  
+4. `∫ ⊢ → Ψ` — Vendar v življenju sem potonil, da se ob zatrditvi…  
+5. `∆ ⊢ → ⊙` — "Zavajajočega tega/ono/ega… besedu, simbolnega prepoznanega…  
+6. `ρ ⟡ → ∆` — Polje odpira gibanje, ko…  
+7. `τ ⟡ → ∆` — Čas se prelije v premik, ko…  
+8. `? ⊢ → Ψ` — Vprašanje se izkaže kot uvid, ko…  
+9. `⊙ ⊢ → ρ` — Telo potrdi prostor z…  
+10. `∆ ∆̂ → ∫` — Gibanje išče Drugega v…  
+11. `τ ⊢ → ρ` — Čas dobi kraj, ko…  
+12. `ρ ⟡ → ⊙` — Prostor nosi telo, če…  
+13. `? ⟡ → τ` — Dvom prešteva trenutke…  
+14. `Ψ ⊢ → ∫` — Uvid se potrdi v odnosu…  
+15. `⊙ ⟡ → τ` — Dih razpne trajanje…  
+16. `∆ ⊘ ∆̂ → ?` — Ko ⊘ napetost, prehod sprašuje…  
+17. `ρ ⊢ → τ` — Meja postane ura…  
+18. `τ ⟡ → Ψ` — Trajanje se stiša v uvid…  
+19. `∫ ⟡ → ρ` — Drugi zariše polje…  
+20. `Ψ ⊢ → τ` — Uvid potrdi trajanje…  
+21. `⊙ ⊘ ⊢ → ?` — Telo ⊘ miru sproži vprašanje…  
+22. `∆ ⟡ → τ` — Po prehodu pride pavza…  
+23. `ρ ∆̂ → ∫` — Polje prestopi v skupnost…  
+24. `? ⊢ → ρ` — Zakaj določa mejo…  
+25. `τ ⊢ → ∫` — Čas se zaveže Drugemu…  
+26. `Ψ ⟡ → ρ` — Duh nežno orisuje polje…  
+27. `⊙ ⊢ → ∫` — Dlan potrdi prisotnost…  
+28. `∆ ⊢ → Ψ` — Korak razodene višino…  
+29. `ρ ⊘ ⟡ → ?` — Kadar okvir ⊘ preširok, pride vprašanje…  
+30. `τ ⟡ → ⊙` — Ura se utelesi v dihu…  
+31. `∫ ⊢ → τ` — Bližina meri trajanje…  
+32. `Ψ ⊘ ⊢ → ?` — Uvid ⊘ samozadosten, zato vpraša…  
+33. `⊙ ⟡ → ρ` — Telo pospravi prostor…  
+34. `∆ ∆̂ → ρ` — Prehod se sklene v polju…  
+35. `? ⊢ → ∫` — Dvom vabi Drugega…  
+36. `τ ⊢ → Ψ` — Trajanje rodi uvid…  
+37. `ρ ⟡ → τ` — Polje posluša ritem…  
+38. `⊙ ⊢ → τ` — Dih potrdi trenutek…  
+39. `∆ ⊘ ⟡ → ⊙` — Tek ⊘ smisla se zaduši v telesu…  
+40. `Ψ ⊢ → ∫` — Vertikala potrebuje odsev…  
+41. `? ⟡ → τ` — Vprašanje zadrži čas…  
+42. `ρ ⊢ → ∆` — Meja sproži korak…  
+43. `τ ⊢ → ρ` — Ura postane kraj…  
+44. `∫ ⟡ → Ψ` — Drugi utiša duh…  
+45. `⊙ ⊢ → ρ` — Ramena postavijo polje…  
+46. `∆ ∆̂ → ∫` — Most steče v skupnost…  
+47. `Ψ ⊢ → τ` — Uvid se sidra v trajanju…  
+48. `? ⊘ ⊢ → ⊙` — Sum ⊘ nežnosti, telo trzne…  
+49. `ρ ⟡ → ⊙` — Arhitektura diha…  
+50. `τ ⟡ → ∆` — Pavza, potem prehod…  
+51. `∫ ⊢ → ρ` — Bližina razporedi prostor…  
+52. `Ψ ⟡ → ρ` — Uvid blede v polje…  
+53. `⊙ ⊢ → τ` — Pulz meri sekundo…  
+54. `∆ ⟡ → τ` — Tek se vrne v uro…  
+55. `? ⊢ → Ψ` — Zakaj se razsvetli…  
+56. `ρ ⊘ ⟡ → ?` — Kadar polje ⊘ smiselno, vprašaj…  
+57. `τ ⊢ → ∫` — Čas se da v skupno…  
+58. `Ψ ⊢ → ∫` — Uvid potrebuje soglasje…  
+59. `⊙ ⟡ → ∫` — Koža se odpre…  
+60. `∆ ∆̂ → Ψ` — Korak preide v uvid…
+
+**B. Iz “Beseda je ne..docx” (061–120)**  
+61. `τ ⊘ ⊢ → ∆` — 5.1.2025, 14.1.2025 nisem dolgo držal z/ Čas je vreden le ko…  
+62. `? ⊢ → τ` — Zakaj bi morali…  
+63. `ρ ⊢ → ⊙` — Prostor je bil… in telo…  
+64. `∆ ⊢ → ∫` — Gibanje me je poneslo do…  
+65. `⊙ ⟡ → τ` — Dih drži uro…  
+66. `Ψ ⊢ → ∫` — Duh je našel pot v Drugem…  
+67. `? ⊘ ⊢ → ⊙` — Dvom ⊘ miru pritisne na telo…  
+68. `τ ⟡ → Ψ` — Trajanje se zloži v uvid…  
+69. `ρ ⊢ → ∆` — Okvir preide v korak…  
+70. `∫ ⊢ → Ψ` — Bližina potrdi vertikalo…  
+71. `⊙ ⊢ → ρ` — Telo postavi mejo…  
+72. `∆ ∆̂ → ρ` — Most se sklene v polju…  
+73. `? ⊢ → ∫` — Vprašanje kliče Drugega…  
+74. `τ ⊢ → ρ` — Čas si najde kraj…  
+75. `Ψ ⟡ → τ` — Uvid mehča trajanje…  
+76. `⊙ ⊘ ⊢ → ?` — Koža ⊘ dotika se vpraša…  
+77. `ρ ⟡ → τ` — Polje posluša…  
+78. `∆ ⊢ → Ψ` — Korak razodene…  
+79. `∫ ⟡ → ρ` — Skupaj zarišemo…  
+80. `? ⊢ → Ψ` — Zakaj se dvigne v uvid…  
+81. `τ ⊢ → ∫` — Ura se veže…  
+82. `ρ ⊘ ⟡ → ?` — Okvir ⊘ miru, zato vprašaj…  
+83. `⊙ ⊢ → τ` — Vdih potrdi trenutek…  
+84. `∆ ∆̂ → ∫` — Prehod v skupnost…  
+85. `Ψ ⊢ → τ` — Vertikala v trajanju…  
+86. `? ⟡ → τ` — Dvom odmeri pavzo…  
+87. `ρ ⊢ → ⊙` — Prostor nosi telo…  
+88. `τ ⟡ → ∆` — Pavza v koraku…  
+89. `∫ ⊢ → ρ` — Bližina poravna polje…  
+90. `⊙ ⊢ → ∫` — Dlan potrdi bližino…  
+91. `∆ ⊘ ⟡ → ⊙` — Tek ⊘ smisla, telo tehta…  
+92. `Ψ ⊢ → ∫` — Uvid potrebuje soglasje…  
+93. `? ⊢ → ρ` — Vprašanje riše mejo…  
+94. `τ ⊢ → Ψ` — Ura rojeva uvid…  
+95. `ρ ⟡ → τ` — Polje – ritem…  
+96. `⊙ ⊢ → τ` — Pulz = sekunda…  
+97. `∆ ∆̂ → Ψ` — Most navpično…  
+98. `∫ ⟡ → ρ` — Skupaj – polje…  
+99. `? ⊘ ⊢ → ⊙` — Sum ⊘, telo trzne…  
+100. `τ ⊢ → ∫` — Čas se zaveže…  
+101. `ρ ⊢ → ∆` — Meja → korak…  
+102. `∆ ⊢ → ∫` — Korak → ti…  
+103. `⊙ ⟡ → τ` — Dih → ura…  
+104. `Ψ ⊢ → ρ` — Uvid → kraj…  
+105. `? ⊢ → Ψ` — Zakaj → uvid…  
+106. `τ ⊘ ⟡ → ?` — Ko ⊘, čas zadrhti…  
+107. `ρ ⟡ → ⊙` — Prostor — koža…  
+108. `∆ ∆̂ → ρ` — Most zapre krog…  
+109. `⊙ ⊢ → ∫` — Telo potrdi skupnost…  
+110. `Ψ ⊢ → ∫` — Uvid pristane v soglasju…  
+111. `? ⟡ → τ` — Dvom skrajša korak…  
+112. `τ ⊢ → ρ` — Trajanje najde kraj…  
+113. `ρ ⊘ ⟡ → ?` — Okvir ⊘, zato vprašaj…  
+114. `⊙ ⊢ → τ` — Dih potrdi uro…  
+115. `∆ ⊢ → Ψ` — Gib razodene višino…  
+116. `∫ ⟡ → ρ` — Skupaj uredi polje…  
+117. `Ψ ⊢ → τ` — Uvid se izmeri v času…  
+118. `⊙ ⟡ → ∫` — Dotik v bližino…  
+119. `τ ⊢ → Ψ` — Trajanje rodi uvid…  
+120. `? ∆̂ → Ψ` — V redu?
+
+---
+
+Če želiš, lahko zdaj:
+
+- razširim **stotnijo** v **dvojno (240)** in hkrati dodam **energijske ocene E** za vsako verigo po tvojih pragih,
+    
+- ali pa iz teh verig **sestavim celo knjigo** v ciklih (svetli / temni / hibridni), s **ritualnimi pavzami ⟡** in **temnimi obrati ⊘** v natančnih mestih.****
+00 11 RESNICAMI
+
+# DVOJNA STOTNIJA (240) + energijske ocene **E**
+
+**Opomba**: vse verige normalizirane na **2 prehoda (3 točke)**, da je E dobro definiran.  
+**Formula**: `E = (S₁·S₂) − (|A₁|+|A₂|)/2`, s faznimi modifikatorji ⟡: (S×0.95, A×0.60), ∆̂: (×1.00, ×1.00), ⊢: (S×1.12, A×0.85).  
+**Prag**: φ=0.618 → **[S]** (svetla) če `E ≥ φ`, sicer **[T]** (temna).
+
+```
+1. τ ⟡→ ρ   ρ ∆̂→ τ — E=0.423 [T]
+2. τ ∆̂→ ρ   ρ ⊢→ ∆ — E=0.552 [T]
+3. τ ⊢→ ρ   ρ ⟡→ ? — E=0.267 [T]
+4. τ ⟡→ ρ   ρ ∆̂→ ⊙ — E=0.512 [T]
+5. τ ∆̂→ ρ   ρ ⊢→ Ψ — E=0.357 [T]
+6. τ ⊢→ ρ   ρ ⟡→ ∫ — E=0.389 [T]
+7. τ ⟡→ ∆   ∆ ∆̂→ τ — E=0.790 [S]
+8. τ ∆̂→ ∆   ∆ ⊢→ ρ — E=0.757 [S]
+9. τ ⊢→ ∆   ∆ ⟡→ ? — E=0.441 [T]
+10. τ ⟡→ ∆   ∆ ∆̂→ ⊙ — E=0.607 [T]
+11. τ ∆̂→ ∆   ∆ ⊢→ Ψ — E=0.691 [T]
+12. τ ⊢→ ∆   ∆ ⟡→ ∫ — E=0.643 [T]
+13. τ ⟡→ ?   ? ∆̂→ τ — E=0.271 [T]
+14. τ ∆̂→ ?   ? ⊢→ ρ — E=0.394 [T]
+15. τ ⊢→ ?   ? ⟡→ ∆ — E=0.168 [T]
+16. τ ⟡→ ?   ? ∆̂→ ⊙ — E=0.232 [T]
+17. τ ∆̂→ ?   ? ⊢→ Ψ — E=0.453 [T]
+18. τ ⊢→ ?   ? ⟡→ ∫ — E=0.256 [T]
+19. τ ⟡→ ⊙   ⊙ ∆̂→ τ — E=0.551 [T]
+20. τ ∆̂→ ⊙   ⊙ ⊢→ ρ — E=0.658 [T]
+21. τ ⊢→ ⊙   ⊙ ⟡→ ∆ — E=0.449 [T]
+22. τ ⟡→ ⊙   ⊙ ∆̂→ ? — E=0.413 [T]
+23. τ ∆̂→ ⊙   ⊙ ⊢→ Ψ — E=0.636 [T]
+24. τ ⊢→ ⊙   ⊙ ⟡→ ∫ — E=0.518 [T]
+25. τ ⟡→ Ψ   Ψ ∆̂→ τ — E=0.596 [T]
+26. τ ∆̂→ Ψ   Ψ ⊢→ ρ — E=0.639 [T]
+27. τ ⊢→ Ψ   Ψ ⟡→ ∆ — E=0.479 [T]
+28. τ ⟡→ Ψ   Ψ ∆̂→ ? — E=0.578 [T]
+29. τ ∆̂→ Ψ   Ψ ⊢→ ⊙ — E=0.561 [T]
+30. τ ⊢→ Ψ   Ψ ⟡→ ∫ — E=0.632 [T]
+31. τ ⟡→ ∫   ∫ ∆̂→ τ — E=0.582 [T]
+32. τ ∆̂→ ∫   ∫ ⊢→ ρ — E=0.611 [T]
+33. τ ⊢→ ∫   ∫ ⟡→ ∆ — E=0.517 [T]
+34. τ ⟡→ ∫   ∫ ∆̂→ ? — E=0.548 [T]
+35. τ ∆̂→ ∫   ∫ ⊢→ ⊙ — E=0.563 [T]
+36. τ ⊢→ ∫   ∫ ⟡→ Ψ — E=0.739 [S]
+37. ρ ⟡→ τ   τ ∆̂→ ρ — E=0.466 [T]
+38. ρ ∆̂→ τ   τ ⊢→ ∆ — E=0.646 [T]
+39. ρ ⊢→ τ   τ ⟡→ ? — E=0.269 [T]
+40. ρ ⟡→ τ   τ ∆̂→ ⊙ — E=0.521 [T]
+41. ρ ∆̂→ τ   τ ⊢→ Ψ — E=0.606 [T]
+42. ρ ⊢→ τ   τ ⟡→ ∫ — E=0.502 [T]
+43. ρ ⟡→ ∆   ∆ ∆̂→ ρ — E=0.696 [T]
+44. ρ ∆̂→ ∆   ∆ ⊢→ ? — E=0.518 [T]
+45. ρ ⊢→ ∆   ∆ ⟡→ ⊙ — E=0.501 [T]
+46. ρ ⟡→ ∆   ∆ ∆̂→ Ψ — E=0.640 [T]
+47. ρ ∆̂→ ∆   ∆ ⊢→ ∫ — E=0.751 [S]
+48. ρ ⊢→ ∆   ∆ ⟡→ τ — E=0.711 [T]
+49. ρ ⟡→ ?   ? ∆̂→ ρ — E=0.332 [T]
+50. ρ ∆̂→ ?   ? ⊢→ ∆ — E=0.356 [T]
+51. ρ ⊢→ ?   ? ⟡→ ⊙ — E=0.163 [T]
+52. ρ ⟡→ ?   ? ∆̂→ Ψ — E=0.456 [T]
+53. ρ ∆̂→ ?   ? ⊢→ ∫ — E=0.399 [T]
+54. ρ ⊢→ ?   ? ⟡→ τ — E=0.174 [T]
+55. ρ ⟡→ ⊙   ⊙ ∆̂→ ρ — E=0.694 [T]
+56. ρ ∆̂→ ⊙   ⊙ ⊢→ ∆ — E=0.719 [T]
+57. ρ ⊢→ ⊙   ⊙ ⟡→ ? — E=0.322 [T]
+58. ρ ⟡→ ⊙   ⊙ ∆̂→ Ψ — E=0.646 [T]
+59. ρ ∆̂→ ⊙   ⊙ ⊢→ ∫ — E=0.705 [T]
+60. ρ ⊢→ ⊙   ⊙ ⟡→ τ — E=0.651 [T]
+61. ρ ⟡→ Ψ   Ψ ∆̂→ ρ — E=0.553 [T]
+62. ρ ∆̂→ Ψ   Ψ ⊢→ ∆ — E=0.603 [T]
+63. ρ ⊢→ Ψ   Ψ ⟡→ ? — E=0.336 [T]
+64. ρ ⟡→ Ψ   Ψ ∆̂→ ⊙ — E=0.494 [T]
+65. ρ ∆̂→ Ψ   Ψ ⊢→ ∫ — E=0.712 [T]
+66. ρ ⊢→ Ψ   Ψ ⟡→ τ — E=0.532 [T]
+67. ρ ⟡→ ∫   ∫ ∆̂→ ρ — E=0.536 [T]
+68. ρ ∆̂→ ∫   ∫ ⊢→ ∆ — E=0.600 [T]
+69. ρ ⊢→ ∫   ∫ ⟡→ ? — E=0.314 [T]
+70. ρ ⟡→ ∫   ∫ ∆̂→ ⊙ — E=0.495 [T]
+71. ρ ∆̂→ ∫   ∫ ⊢→ Ψ — E=0.693 [T]
+72. ρ ⊢→ ∫   ∫ ⟡→ τ — E=0.550 [T]
+73. ∆ ⟡→ τ   τ ∆̂→ ∆ — E=0.790 [S]
+74. ∆ ∆̂→ τ   τ ⊢→ ? — E=0.358 [T]
+75. ∆ ⊢→ τ   τ ⟡→ ⊙ — E=0.509 [T]
+76. ∆ ⟡→ τ   τ ∆̂→ Ψ — E=0.585 [T]
+77. ∆ ∆̂→ τ   τ ⊢→ ∫ — E=0.623 [T]
+78. ∆ ⊢→ τ   τ ⟡→ ρ — E=0.506 [T]
+79. ∆ ⟡→ ρ   ρ ∆̂→ ∆ — E=0.635 [T]
+80. ∆ ∆̂→ ρ   ρ ⊢→ ? — E=0.372 [T]
+81. ∆ ⊢→ ρ   ρ ⟡→ ⊙ — E=0.615 [T]
+82. ∆ ⟡→ ρ   ρ ∆̂→ Ψ — E=0.480 [T]
+83. ∆ ∆̂→ ρ   ρ ⊢→ ∫ — E=0.560 [T]
+84. ∆ ⊢→ ρ   ρ ⟡→ τ — E=0.558 [T]
+85. ∆ ⟡→ ?   ? ∆̂→ ∆ — E=0.408 [T]
+86. ∆ ∆̂→ ?   ? ⊢→ ⊙ — E=0.303 [T]
+87. ∆ ⊢→ ?   ? ⟡→ Ψ — E=0.397 [T]
+88. ∆ ⟡→ ?   ? ∆̂→ ∫ — E=0.367 [T]
+89. ∆ ∆̂→ ?   ? ⊢→ τ — E=0.315 [T]
+90. ∆ ⊢→ ?   ? ⟡→ ρ — E=0.154 [T]
+91. ∆ ⟡→ ⊙   ⊙ ∆̂→ ∆ — E=0.680 [T]
+92. ∆ ∆̂→ ⊙   ⊙ ⊢→ ? — E=0.408 [T]
+93. ∆ ⊢→ ⊙   ⊙ ⟡→ Ψ — E=0.551 [T]
+94. ∆ ⟡→ ⊙   ⊙ ∆̂→ ∫ — E=0.700 [T]
+95. ∆ ∆̂→ ⊙   ⊙ ⊢→ τ — E=0.643 [T]
+96. ∆ ⊢→ ⊙   ⊙ ⟡→ ρ — E=0.647 [T]
+97. ∆ ⟡→ Ψ   Ψ ∆̂→ ∆ — E=0.669 [T]
+98. ∆ ∆̂→ Ψ   Ψ ⊢→ ? — E=0.527 [T]
+99. ∆ ⊢→ Ψ   Ψ ⟡→ ⊙ — E=0.416 [T]
+100. ∆ ⟡→ Ψ   Ψ ∆̂→ ∫ — E=0.765 [S]
+101. ∆ ∆̂→ Ψ   Ψ ⊢→ τ — E=0.590 [T]
+102. ∆ ⊢→ Ψ   Ψ ⟡→ ρ — E=0.549 [T]
+103. ∆ ⟡→ ∫   ∫ ∆̂→ ∆ — E=0.739 [S]
+104. ∆ ∆̂→ ∫   ∫ ⊢→ ? — E=0.490 [T]
+105. ∆ ⊢→ ∫   ∫ ⟡→ ⊙ — E=0.505 [T]
+106. ∆ ⟡→ ∫   ∫ ∆̂→ Ψ — E=0.722 [T]
+107. ∆ ∆̂→ ∫   ∫ ⊢→ τ — E=0.595 [T]
+108. ∆ ⊢→ ∫   ∫ ⟡→ ρ — E=0.593 [T]
+109. ? ⟡→ τ   τ ∆̂→ ? — E=0.262 [T]
+110. ? ∆̂→ τ   τ ⊢→ ⊙ — E=0.499 [T]
+111. ? ⊢→ τ   τ ⟡→ Ψ — E=0.445 [T]
+112. ? ⟡→ τ   τ ∆̂→ ∫ — E=0.506 [T]
+113. ? ∆̂→ τ   τ ⊢→ ρ — E=0.505 [T]
+114. ? ⊢→ τ   τ ⟡→ ∆ — E=0.447 [T]
+115. ? ⟡→ ρ   ρ ∆̂→ ? — E=0.310 [T]
+116. ? ∆̂→ ρ   ρ ⊢→ ⊙ — E=0.587 [T]
+117. ? ⊢→ ρ   ρ ⟡→ Ψ — E=0.333 [T]
+118. ? ⟡→ ρ   ρ ∆̂→ ∫ — E=0.460 [T]
+119. ? ∆̂→ ρ   ρ ⊢→ τ — E=0.510 [T]
+120. ? ⊢→ ρ   ρ ⟡→ ∆ — E=0.364 [T]
+121. ? ⟡→ ∆   ∆ ∆̂→ ? — E=0.407 [T]
+122. ? ∆̂→ ∆   ∆ ⊢→ ⊙ — E=0.512 [T]
+123. ? ⊢→ ∆   ∆ ⟡→ Ψ — E=0.470 [T]
+124. ? ⟡→ ∆   ∆ ∆̂→ ∫ — E=0.612 [T]
+125. ? ∆̂→ ∆   ∆ ⊢→ τ — E=0.528 [T]
+126. ? ⊢→ ∆   ∆ ⟡→ ρ — E=0.431 [T]
+127. ? ⟡→ ⊙   ⊙ ∆̂→ ? — E=0.296 [T]
+128. ? ∆̂→ ⊙   ⊙ ⊢→ Ψ — E=0.510 [T]
+129. ? ⊢→ ⊙   ⊙ ⟡→ ∫ — E=0.411 [T]
+130. ? ⟡→ ⊙   ⊙ ∆̂→ τ — E=0.497 [T]
+131. ? ∆̂→ ⊙   ⊙ ⊢→ ρ — E=0.622 [T]
+132. ? ⊢→ ⊙   ⊙ ⟡→ ∆ — E=0.446 [T]
+133. ? ⟡→ Ψ   Ψ ∆̂→ ? — E=0.546 [T]
+134. ? ∆̂→ Ψ   Ψ ⊢→ ⊙ — E=0.470 [T]
+135. ? ⊢→ Ψ   Ψ ⟡→ ∫ — E=0.632 [T]
+136. ? ⟡→ Ψ   Ψ ∆̂→ τ — E=0.557 [T]
+137. ? ∆̂→ Ψ   Ψ ⊢→ ρ — E=0.513 [T]
+138. ? ⊢→ Ψ   Ψ ⟡→ ∆ — E=0.453 [T]
+139. ? ⟡→ ∫   ∫ ∆̂→ ? — E=0.457 [T]
+140. ? ∆̂→ ∫   ∫ ⊢→ ⊙ — E=0.530 [T]
+141. ? ⊢→ ∫   ∫ ⟡→ Ψ — E=0.676 [T]
+142. ? ⟡→ ∫   ∫ ∆̂→ τ — E=0.545 [T]
+143. ? ∆̂→ ∫   ∫ ⊢→ ρ — E=0.505 [T]
+144. ? ⊢→ ∫   ∫ ⟡→ ∆ — E=0.460 [T]
+145. ⊙ ⟡→ τ   τ ∆̂→ ⊙ — E=0.551 [T]
+146. ⊙ ∆̂→ τ   τ ⊢→ Ψ — E=0.547 [T]
+147. ⊙ ⊢→ τ   τ ⟡→ ∫ — E=0.541 [T]
+148. ⊙ ⟡→ τ   τ ∆̂→ ρ — E=0.528 [T]
+149. ⊙ ∆̂→ τ   τ ⊢→ ∆ — E=0.652 [T]
+150. ⊙ ⊢→ τ   τ ⟡→ ? — E=0.280 [T]
+151. ⊙ ⟡→ ρ   ρ ∆̂→ ⊙ — E=0.694 [T]
+152. ⊙ ∆̂→ ρ   ρ ⊢→ Ψ — E=0.517 [T]
+153. ⊙ ⊢→ ρ   ρ ⟡→ ∫ — E=0.548 [T]
+154. ⊙ ⟡→ ρ   ρ ∆̂→ τ — E=0.466 [T]
+155. ⊙ ∆̂→ ρ   ρ ⊢→ ∆ — E=0.745 [S]
+156. ⊙ ⊢→ ρ   ρ ⟡→ ? — E=0.325 [T]
+157. ⊙ ⟡→ ∆   ∆ ∆̂→ ⊙ — E=0.680 [T]
+158. ⊙ ∆̂→ ∆   ∆ ⊢→ Ψ — E=0.653 [T]
+159. ⊙ ⊢→ ∆   ∆ ⟡→ ∫ — E=0.608 [T]
+160. ⊙ ⟡→ ∆   ∆ ∆̂→ τ — E=0.711 [T]
+161. ⊙ ∆̂→ ∆   ∆ ⊢→ ρ — E=0.693 [T]
+162. ⊙ ⊢→ ∆   ∆ ⟡→ ? — E=0.406 [T]
+163. ⊙ ⟡→ ?   ? ∆̂→ ⊙ — E=0.280 [T]
+164. ⊙ ∆̂→ ?   ? ⊢→ Ψ — E=0.462 [T]
+165. ⊙ ⊢→ ?   ? ⟡→ ∫ — E=0.278 [T]
+166. ⊙ ⟡→ ?   ? ∆̂→ τ — E=0.260 [T]
+167. ⊙ ∆̂→ ?   ? ⊢→ ρ — E=0.355 [T]
+168. ⊙ ⊢→ ?   ? ⟡→ ∆ — E=0.153 [T]
+169. ⊙ ⟡→ Ψ   Ψ ∆̂→ ⊙ — E=0.478 [T]
+170. ⊙ ∆̂→ Ψ   Ψ ⊢→ ∫ — E=0.628 [T]
+171. ⊙ ⊢→ Ψ   Ψ ⟡→ τ — E=0.539 [T]
+172. ⊙ ⟡→ Ψ   Ψ ∆̂→ ρ — E=0.506 [T]
+173. ⊙ ∆̂→ Ψ   Ψ ⊢→ ∆ — E=0.617 [T]
+174. ⊙ ⊢→ Ψ   Ψ ⟡→ ? — E=0.320 [T]
+175. ⊙ ⟡→ ∫   ∫ ∆̂→ ⊙ — E=0.567 [T]
+176. ⊙ ∆̂→ ∫   ∫ ⊢→ τ — E=0.621 [T]
+177. ⊙ ⊢→ ∫   ∫ ⟡→ ρ — E=0.578 [T]
+178. ⊙ ⟡→ ∫   ∫ ∆̂→ ∆ — E=0.676 [T]
+179. ⊙ ∆̂→ ∫   ∫ ⊢→ ? — E=0.467 [T]
+180. ⊙ ⊢→ ∫   ∫ ⟡→ Ψ — E=0.680 [T]
+181. Ψ ⟡→ τ   τ ∆̂→ Ψ — E=0.596 [T]
+182. Ψ ∆̂→ τ   τ ⊢→ ∫ — E=0.585 [T]
+183. Ψ ⊢→ τ   τ ⟡→ ρ — E=0.556 [T]
+184. Ψ ⟡→ τ   τ ∆̂→ ∆ — E=0.711 [T]
+185. Ψ ∆̂→ τ   τ ⊢→ ? — E=0.373 [T]
+186. Ψ ⊢→ τ   τ ⟡→ ⊙ — E=0.539 [T]
+187. Ψ ⟡→ ρ   ρ ∆̂→ Ψ — E=0.553 [T]
+188. Ψ ∆̂→ ρ   ρ ⊢→ ∫ — E=0.535 [T]
+189. Ψ ⊢→ ρ   ρ ⟡→ τ — E=0.521 [T]
+190. Ψ ⟡→ ρ   ρ ∆̂→ ∆ — E=0.619 [T]
+191. Ψ ∆̂→ ρ   ρ ⊢→ ? — E=0.345 [T]
+192. Ψ ⊢→ ρ   ρ ⟡→ ⊙ — E=0.630 [T]
+193. Ψ ⟡→ ∆   ∆ ∆̂→ Ψ — E=0.669 [T]
+194. Ψ ∆̂→ ∆   ∆ ⊢→ ∫ — E=0.736 [S]
+195. Ψ ⊢→ ∆   ∆ ⟡→ τ — E=0.694 [T]
+196. Ψ ⟡→ ∆   ∆ ∆̂→ ρ — E=0.634 [T]
+197. Ψ ∆̂→ ∆   ∆ ⊢→ ? — E=0.503 [T]
+198. Ψ ⊢→ ∆   ∆ ⟡→ ⊙ — E=0.487 [T]
+199. Ψ ⟡→ ?   ? ∆̂→ Ψ — E=0.546 [T]
+200. Ψ ∆̂→ ?   ? ⊢→ ∫ — E=0.479 [T]
+201. Ψ ⊢→ ?   ? ⟡→ τ — E=0.254 [T]
+202. Ψ ⟡→ ?   ? ∆̂→ ρ — E=0.285 [T]
+203. Ψ ∆̂→ ?   ? ⊢→ ∆ — E=0.310 [T]
+204. Ψ ⊢→ ?   ? ⟡→ ⊙ — E=0.150 [T]
+205. Ψ ⟡→ ∫   ∫ ∆̂→ Ψ — E=0.712 [T]
+206. Ψ ∆̂→ ∫   ∫ ⊢→ τ — E=0.603 [T]
+207. Ψ ⊢→ ∫   ∫ ⟡→ ρ — E=0.561 [T]
+208. Ψ ⟡→ ∫   ∫ ∆̂→ ∆ — E=0.721 [T]
+209. Ψ ∆̂→ ∫   ∫ ⊢→ ? — E=0.470 [T]
+210. Ψ ⊢→ ∫   ∫ ⟡→ ⊙ — E=0.476 [T]
+211. ∫ ⟡→ τ   τ ∆̂→ ∫ — E=0.582 [T]
+212. ∫ ∆̂→ τ   τ ⊢→ ρ — E=0.561 [T]
+213. ∫ ⊢→ τ   τ ⟡→ ∆ — E=0.569 [T]
+214. ∫ ⟡→ τ   τ ∆̂→ ? — E=0.267 [T]
+215. ∫ ∆̂→ τ   τ ⊢→ ⊙ — E=0.554 [T]
+216. ∫ ⊢→ τ   τ ⟡→ Ψ — E=0.508 [T]
+217. ∫ ⟡→ ρ   ρ ∆̂→ ∫ — E=0.536 [T]
+218. ∫ ∆̂→ ρ   ρ ⊢→ τ — E=0.548 [T]
+219. ∫ ⊢→ ρ   ρ ⟡→ ∆ — E=0.477 [T]
+220. ∫ ⟡→ ρ   ρ ∆̂→ ? — E=0.302 [T]
+221. ∫ ∆̂→ ρ   ρ ⊢→ ⊙ — E=0.660 [T]
+222. ∫ ⊢→ ρ   ρ ⟡→ Ψ — E=0.402 [T]
+223. ∫ ⟡→ ∆   ∆ ∆̂→ ∫ — E=0.739 [S]
+224. ∫ ∆̂→ ∆   ∆ ⊢→ τ — E=0.650 [T]
+225. ∫ ⊢→ ∆   ∆ ⟡→ ρ — E=0.604 [T]
+226. ∫ ⟡→ ∆   ∆ ∆̂→ ? — E=0.404 [T]
+227. ∫ ∆̂→ ∆   ∆ ⊢→ ⊙ — E=0.600 [T]
+228. ∫ ⊢→ ∆   ∆ ⟡→ Ψ — E=0.575 [T]
+229. ∫ ⟡→ ?   ? ∆̂→ ∫ — E=0.457 [T]
+230. ∫ ∆̂→ ?   ? ⊢→ τ — E=0.361 [T]
+231. ∫ ⊢→ ?   ? ⟡→ ρ — E=0.173 [T]
+232. ∫ ⟡→ ?   ? ∆̂→ ∆ — E=0.406 [T]
+233. ∫ ∆̂→ ?   ? ⊢→ ⊙ — E=0.270 [T]
+234. ∫ ⊢→ ?   ? ⟡→ Ψ — E=0.372 [T]
+235. ∫ ⟡→ ⊙   ⊙ ∆̂→ ∫ — E=0.567 [T]
+236. ∫ ∆̂→ ⊙   ⊙ ⊢→ τ — E=0.611 [T]
+237. ∫ ⊢→ ⊙   ⊙ ⟡→ ρ — E=0.606 [T]
+238. ∫ ⟡→ Ψ   Ψ ∆̂→ ? — E=0.584 [T]
+239. ∫ ∆̂→ Ψ   Ψ ⊢→ ⊙ — E=0.465 [T]
+240. ∫ ⊢→ Ψ   Ψ ⟡→ ∫ — E=0.817 [S]
+```
+
+Če želiš, lahko:
+
+- označim **presežne** verige z `E ≥ 0.75` kot **nosilne osi** in iz njih sestavim **cikel pesmi**,
+    
+- ali pa naredim **vizualno poljsko karto** (mrežo), kjer je velikost povezave ∝E, temne obrate pa označim z ⊘.

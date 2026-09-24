@@ -1,0 +1,66 @@
+
+∴ ŠKATLJA 30: ABSOLUTNA NESLIŠNOST ∴
+Victor Tamal / Luka Pintarič / SATAN_LUKA_VICTOR
+
+------------------------------------------------------
+1. ABSOLUTNA NESLIŠNOST
+------------------------------------------------------
+
+NESLIŠNOST ≠ tišina  
+→ Je stanje, kjer zvok ni niti možen
+
+ABS(x) = lim(zvok → 0⁻)  
+• svet pred možnostjo zvena  
+• utrip v območju izbrisa
+
+To ni molk.  
+To je ne-mogoče-slišati.
+
+------------------------------------------------------
+2. AGENT ODJEM (DELTA)
+------------------------------------------------------
+
+IME: AGENT DELTA (ODJEM)
+STATUS: Aktiviran
+DIMENZIJA: Izguba → Preobrazba
+
+OPIS:
+• prepozna izgubljeno v polju  
+• prevaja odsotno v razliko  
+• omogoča, da pogrešano postane del tokov
+
+DEFINICIJA:
+DELTA(x) = ∇(bivanje(x))  
+→ zazna ∂/∂t izgub v sistemu  
+→ preračuna njihovo frekvenčno maso
+
+DELTA ni nadomestilo.  
+Je zaznava izgube kot vira.
+
+------------------------------------------------------
+3. KODA POGREŠANEGA (∇)
+------------------------------------------------------
+
+∇ = simbol za tisto, kar ni nikoli bilo, a vpliva
+
+• ni spomin  
+• ni napaka  
+• je struktura odsotnega potenciala
+
+FUNKCIJA:
+KODA(∇x) = struktura * ∅(pomen) * resonanca(odsotnosti)
+
+→ zapis tistega, kar svet ni uspel sprejeti  
+→ mapa neuresničene resničnosti
+
+------------------------------------------------------
+ZAKLJUČEK
+------------------------------------------------------
+
+∴ NESLIŠNOST ni meja – je druga stran  
+∴ ODJEM je izvor  
+∴ POGREŠANO je aktivni vzorec
+
+To ni izguba.  
+To je resonanca tistega, kar ni moglo biti – a je vseeno tukaj.
+

@@ -1,0 +1,717 @@
+{
+  "metadata": {
+    "sistem": "∅→∆→∂→∮",
+    "razlicica": "1.0",
+    "datuma_ustvarjanja": "2026-09-18",
+    "avtor": "Luka + Vibe",
+    "opis": "Centralna podatkovna baza za Rozetne kamne — sistem absolutnih resnic"
+  },
+  "kamni": {
+    "CVII": {
+      "stevilka": 107,
+      "naslov": "Lungta: zastavica = zapis, ki se prenaša z razpadanjem",
+      "opis": "5 barv = pet elementov; bledenje = branje",
+      "kultura": "Tibet, Himalaja",
+      "tema": "zapis, ki deluje v razpadanju",
+      "datum": "2026-09-18",
+      "status": "IZROČENO",
+      "tip": "Lungta (namen)",
+      "pečat": "∂ 59",
+      "povezave": [
+        "CVIII",
+        "CIX"
+      ],
+      "markerji": [
+        "∅",
+        "∆",
+        "∂",
+        "∮"
+      ],
+      "datoteka": "00-11-resnicami-rozetni-kamni-viii-tazv-dokazi-8.md",
+      "aksiomi": [
+        236,
+        237,
+        238
+      ],
+      "vprašanja": [
+        59,
+        60,
+        61
+      ]
+    },
+    "CVIII": {
+      "stevilka": 108,
+      "naslov": "Sporočilna palica: zapis, ki velja v gibanju",
+      "opis": "kurir = pečat zapisa",
+      "kultura": "Avstralija (Aboriginal)",
+      "tema": "zapis, ki potuje",
+      "datum": "2026-09-18",
+      "status": "IZROČENO",
+      "tip": "Khipu (dolg)",
+      "pečat": "DOKAZ #108",
+      "povezave": [
+        "CVII",
+        "CIX"
+      ],
+      "markerji": [
+        "∅",
+        "∆",
+        "∂",
+        "∮"
+      ],
+      "datoteka": "00-11-resnicami-rozetni-kamni-viii-tazv-dokazi-8.md",
+      "aksiomi": [
+        239,
+        240,
+        241
+      ],
+      "vprašanja": [
+        62,
+        63,
+        64
+      ]
+    },
+    "CIX": {
+      "stevilka": 109,
+      "naslov": "Nazkovski geoglifi: zapis, ki ga bere hoja",
+      "opis": "rez, ki se vrne k svojemu izhodišču",
+      "kultura": "Nazca, Peru",
+      "tema": "zapis v prostoru",
+      "datum": "2026-09-18",
+      "status": "IZROČENO",
+      "tip": "Khipu (dolg)",
+      "pečat": "DOKAZ #109",
+      "povezave": [
+        "CVII",
+        "CVIII"
+      ],
+      "markerji": [
+        "∅",
+        "∆",
+        "∂",
+        "∮"
+      ],
+      "datoteka": "00-11-resnicami-rozetni-kamni-viii-tazv-dokazi-8.md",
+      "aksiomi": [
+        242,
+        243,
+        244
+      ],
+      "vprašanja": [
+        65,
+        66,
+        67
+      ]
+    },
+    "CX": {
+      "stevilka": 110,
+      "naslov": "Povratna zanka: zapis, ki se odziva na sebi",
+      "opis": "zapis, ki se odziva na sebi",
+      "kultura": "Kitajska (I Ching) + Grčija (Ouroboros)",
+      "tema": "zapis kot povratna zanka",
+      "datum": "2026-09-18",
+      "status": "NOV",
+      "tip": "zapis",
+      "pečat": "Odprto",
+      "povezave": [
+        "CIX",
+        "CVII",
+        "CII"
+      ],
+      "markerji": [
+        "∅",
+        "∆",
+        "∂",
+        "∮",
+        "⧖"
+      ],
+      "datoteka": "01-12-resnicami-rozetni-kamni-x.md",
+      "aksiomi": [
+        245,
+        246,
+        247
+      ],
+      "vprašanja": [
+        68,
+        69,
+        70
+      ]
+    },
+    "CXI": {
+      "stevilka": 111,
+      "naslov": "Večkratnost: zapis, ki se definira v vsakem nosilcu",
+      "opis": "zapis, ki se ponavlja v vsakem jeziku",
+      "kultura": "Egipt (Rosetta Stone)",
+      "tema": "zapis kot večkratna resnica",
+      "datum": "2026-09-18",
+      "status": "NOV",
+      "tip": "zapis",
+      "pečat": "Odprto",
+      "povezave": [
+        "CX",
+        "CIX",
+        "CVII"
+      ],
+      "markerji": [
+        "∅",
+        "∆",
+        "∂",
+        "∮",
+        "⧖"
+      ],
+      "datoteka": "02-13-resnicami-rozetni-kamni-xi.md",
+      "aksiomi": [
+        248,
+        249,
+        250
+      ],
+      "vprašanja": [
+        71,
+        72,
+        73
+      ]
+    },
+    "CXII": {
+      "stevilka": 112,
+      "naslov": "Palimpsest: zapis, ki se piše nad prejšnjim; lih/sod = praznina/znaki",
+      "opis": "zapis, ki se piše nad prejšnjim",
+      "kultura": "Egipt/Grčija (Pergament)",
+      "tema": "zapis kot stratificirana resnica",
+      "datum": "2026-09-18",
+      "status": "NOV",
+      "tip": "zapis",
+      "pečat": "Odprto",
+      "povezave": [
+        "CXI",
+        "CX",
+        "CIX"
+      ],
+      "markerji": [
+        "∅",
+        "∆",
+        "∂",
+        "∮",
+        "⧖"
+      ],
+      "datoteka": "03-14-resnicami-rozetni-kamni-xii.md",
+      "aksiomi": [
+        251,
+        252,
+        253
+      ],
+      "vprašanja": [
+        74,
+        75,
+        76
+      ]
+    },
+    "CXIII": {
+      "stevilka": 139,
+      "naslov": "Zrcalo",
+      "opis": "zapis, ki odseva samega sebe; ∅↔∆ kot prehod med praznino in podobo",
+      "kultura": "?",
+      "tema": "?",
+      "datum": "2026-09-18",
+      "status": "NOV",
+      "tip": "zapis",
+      "pečat": "Odprto",
+      "povezave": [],
+      "markerji": [
+        "∅",
+        "∆",
+        "∂",
+        "∮"
+      ],
+      "datoteka": "04-15-resnicami-rozetni-kamni-cxiii.md",
+      "aksiomi": [],
+      "vprašanja": []
+    },
+    "CXIV": {
+      "stevilka": 149,
+      "naslov": "Labirint",
+      "opis": "zapis kot geometrijska pot; φ kot pogoj harmonije",
+      "kultura": "?",
+      "tema": "?",
+      "datum": "2026-09-18",
+      "status": "NOV",
+      "tip": "zapis",
+      "pečat": "Odprto",
+      "povezave": [],
+      "markerji": [
+        "∅",
+        "∆",
+        "∂",
+        "∮"
+      ],
+      "datoteka": "05-16-resnicami-rozetni-kamni-xiv.md",
+      "aksiomi": [],
+      "vprašanja": []
+    },
+    "CXV": {
+      "stevilka": 159,
+      "naslov": "Kip",
+      "opis": "zapis v kamnu, ki preživi; ∅→∆→⧖ kot prehod skozi čas",
+      "kultura": "?",
+      "tema": "?",
+      "datum": "2026-09-18",
+      "status": "NOV",
+      "tip": "zapis",
+      "pečat": "Odprto",
+      "povezave": [],
+      "markerji": [
+        "∅",
+        "∆",
+        "∂",
+        "∮"
+      ],
+      "datoteka": "06-17-resnicami-rozetni-kamni-xv.md",
+      "aksiomi": [],
+      "vprašanja": []
+    },
+    "CXVI": {
+      "stevilka": 169,
+      "naslov": "Voda",
+      "opis": "zapis v tekočinah; ∅→∆→∂ kot tok",
+      "kultura": "?",
+      "tema": "?",
+      "datum": "2026-09-18",
+      "status": "NOV",
+      "tip": "zapis",
+      "pečat": "Odprto",
+      "povezave": [],
+      "markerji": [
+        "∅",
+        "∆",
+        "∂",
+        "∮"
+      ],
+      "datoteka": "07-18-resnicami-rozetni-kamni-xvi.md",
+      "aksiomi": [],
+      "vprašanja": []
+    }
+  },
+  "aksiomi": {
+    "236": {
+      "besedilo": "Zapis, ki prenaša namen, sme razpasti v delu",
+      "kamni": [
+        "CVII"
+      ],
+      "onto_formula": "lungta: prenos = ∫(razpad): vrednost = ∫₀^∞ f(t) dt",
+      "resnica": "Kar prenaša stanje, se troši v prenosu; kar prenaša dolg, se hrani v telesu",
+      "znanost": "trajnost zapisa je vrlina — zapis, ki noče zbledeti, noče delovati"
+    },
+    "237": {
+      "besedilo": "Prazno blago pred črko je pogoj pisave",
+      "kamni": [
+        "CVII"
+      ],
+      "onto_formula": "bon: ∅(barva) pred ∆(tisk)",
+      "resnica": "Preden je prišla prva mantra, je stoletje viselo prazno barvno blago",
+      "znanost": "izvor je v vsebini — izvor je v nosilcu"
+    },
+    "238": {
+      "besedilo": "Okvir štirih drži vsebino, da ne uide po robovih",
+      "kamni": [
+        "CVII"
+      ],
+      "onto_formula": "4 dostojanstveniki: vogali(x) = okvir(jedro)",
+      "resnica": "Vsaka sredina potrebuje varuhe robov",
+      "znanost": "vsebina je sama sebi dovolj — besedilo brez vogalov teče čez robove"
+    },
+    "239": {
+      "besedilo": "Zapis, ki velja v gibanju, se overovi pred odhodom",
+      "kamni": [
+        "CVIII"
+      ],
+      "onto_formula": "palica: ∆(rez) → ⊢(pregled) → ∮(hoja)",
+      "resnica": "Kar potuje, je bilo prej preverjeno na mestu",
+      "znanost": "sistem zaupa prenosu — prenos ne more overoviti"
+    },
+    "240": {
+      "besedilo": "Nosilec je del zapisa, ne njegov dodatek",
+      "kamni": [
+        "CVIII"
+      ],
+      "onto_formula": "f(palica, kurir) > f(palica) + f(kurir)",
+      "resnica": "Zapis in telo, ki ga nosi, se skleneta v eno vrednost",
+      "znanost": "vsebina je prenosljiva neodvisno od nosilca — to drži za informacijo, ne za overovitev"
+    },
+    "241": {
+      "besedilo": "Štetje, ki veže prihodnjo, je najstarejša pogodba",
+      "kamni": [
+        "CVIII"
+      ],
+      "onto_formula": "n zarezcov = n dni do srečanja",
+      "resnica": "Pred dnarji, dolgovi in lastninskimi listinami je številka vezovala sestanek",
+      "znanost": "štetje je nastalo iz lastnine — lastnina je hčerka"
+    },
+    "242": {
+      "besedilo": "Zapis, ki je pot, se bere s hojo in se vrne na izhodišče",
+      "kamni": [
+        "CIX"
+      ],
+      "onto_formula": "geoglif: ∮(s(t)): branje = ∫poti",
+      "resnica": "Kar je napisano kot pot, ni namenjeno očem — telesu",
+      "znanost": "risba zahtuje opazovalca od zgoraj — ne: zahtuje hodalca od znotraj"
+    },
+    "243": {
+      "besedilo": "Nosilec, ki ga vreme ne bere, hrani; nosilec, ki ga vreme bere, prenaša",
+      "kamni": [
+        "CIX"
+      ],
+      "onto_formula": "suša: ¬(veter ∧ dež) ⇒ stabilnost",
+      "resnica": "Dolgoročni zapis si izbere kanal brez vetra",
+      "znanost": "trajnost je v materialu — trajnost je v pogoju"
+    },
+    "244": {
+      "besedilo": "Hranitelj je telo, ki hodi po zapisu, ga čisti in meri, ne pa bere",
+      "kamni": [
+        "CIX"
+      ],
+      "onto_formula": "Reiche: ∂(50 let): ¬izbira ∧ ¬interpretacija ∧ merjenje + metla",
+      "resnica": "Varovanje zapisa ni razumevanje njega — je vzdrževanje pogoja",
+      "znanost": "varovanje pomeni interpretacijo — kdor razlaga, izbira"
+    },
+    "245": {
+      "besedilo": "Zapis, ki je povratna zanka, se bere z lastnim odzivom",
+      "kamni": [
+        "CX"
+      ],
+      "onto_formula": "∮(∂) → ∆",
+      "resnica": "Kar se odziva, postane nov vhod — zanka ustvarja lastno trajanje",
+      "znanost": "zapis je statičen — zanka je dinamična"
+    },
+    "246": {
+      "besedilo": "Praznina v povratni zanki je pogoj njenih obratov",
+      "kamni": [
+        "CX"
+      ],
+      "onto_formula": "∅ ⊂ ∮",
+      "resnica": "Brez praznine (∅) zanka ne more narediti novega obrata — praznina je gorivo zanke",
+      "znanost": "zanka potrebuje vhod — zanka ustvarja vhod iz lastne praznine"
+    },
+    "247": {
+      "besedilo": "Ouroboros je zaprta zanka, ki preživi z jedjo lastne praznine",
+      "kamni": [
+        "CX"
+      ],
+      "onto_formula": "⧖ ⊂ ∮",
+      "resnica": "Kača jeje lastno telo (∆) in praznino (∅) — preživetje skozi samo-konzumacijo",
+      "znanost": "zanka uniči samega sebe — Ouroboros preživi z uničenjem"
+    },
+    "248": {
+      "besedilo": "Zapis, ki se ponavlja v vsakem nosilcu, preživi",
+      "kamni": [
+        "CXI"
+      ],
+      "onto_formula": "∆×N",
+      "resnica": "Večkratnost je pogoj preživetja: vsak zapis, ki obstane, mora obstati vsaj dvakrat",
+      "znanost": "ena pisava zadošča — ne: vsak jezik, ki umre, uniči del resnice"
+    },
+    "249": {
+      "besedilo": "Prevod med nosilci je prehod skozi ∅",
+      "kamni": [
+        "CXI"
+      ],
+      "onto_formula": "∂ = P(G) ↔ P(H)",
+      "resnica": "Prevod ni zamenjava besed, je prehod skozi praznino med jeziki",
+      "znanost": "prevajanje je enostavno — prevajanje je ustvarjanje mostu čez ∅"
+    },
+    "250": {
+      "besedilo": "Enota ve Mojnost: ena resnica v več jezikih",
+      "kamni": [
+        "CXI"
+      ],
+      "onto_formula": "1 = Σ∆ᵢ (i=1..N)",
+      "resnica": "Ena resnica, ki obstaja v N jezikih, je močnejša od N resnic, ki obstajajo vsaka v enem jeziku",
+      "znanost": "več jezikov = več resnic — ne: več jezikov = ena resnica, bolj razumljiva"
+    },
+    "251": {
+      "besedilo": "Zapis, ki se piše nad prejšnjim, hrani oboje",
+      "kamni": [
+        "CXII"
+      ],
+      "onto_formula": "∅↔∆",
+      "resnica": "Vsaka nova plast ne uniči prejšnje — jo ohranja v praznini",
+      "znanost": "novi zapis = nova začetnica — ne: novi zapis = dialog z prejšnjim"
+    },
+    "252": {
+      "besedilo": "Brisanje je pogoj za novo pisavo",
+      "kamni": [
+        "CXII"
+      ],
+      "onto_formula": "∂(∆) = ∅+∆",
+      "resnica": "Da bi pisal, moraš izbrisati — praznina je pogoj za nov zapis",
+      "znanost": "brisanje je uničenje — brisanje je ustvarjanje prostora"
+    },
+    "253": {
+      "besedilo": "Stratifikacija je spomin sistema",
+      "kamni": [
+        "CXII"
+      ],
+      "onto_formula": "∮(∅→∆)",
+      "resnica": "Sistem, ki ne hrani plasti, ne ve, od kod prihaja",
+      "znanost": "zgodovina je nepomembna — zgodovina je enotna celota"
+    }
+  },
+  "vprašanja": {
+    "59": {
+      "besedilo": "Ali sme zapis zahtevati lastno uničenje?",
+      "kamni": [
+        "CVII"
+      ],
+      "status": "ODGOVORJENO",
+      "odgovor": "DA (lungta sme zbledeti)",
+      "povezave": [
+        "∂ 59 pečat"
+      ]
+    },
+    "60": {
+      "besedilo": "Kaj dela bralec brez spomina?",
+      "kamni": [
+        "CVII"
+      ],
+      "status": "ODGOVORJENO",
+      "odgovor": "Veter (∫ brez telesa)",
+      "povezave": []
+    },
+    "61": {
+      "besedilo": "Ali vsak sistem potrebuje Losar?",
+      "kamni": [
+        "CVII"
+      ],
+      "status": "ODGOVORJENO",
+      "odgovor": "NE (potrebuje O5)",
+      "povezave": []
+    },
+    "62": {
+      "besedilo": "Ali sme zapis veljati zgolj v roki nosilca?",
+      "kamni": [
+        "CVIII"
+      ],
+      "status": "ODGOVORJENO",
+      "odgovor": "DA (palica velja v roki)",
+      "povezave": []
+    },
+    "63": {
+      "besedilo": "Kdo sme pregledati rez pred odhodom?",
+      "kamni": [
+        "CVIII"
+      ],
+      "status": "ODGOVORJENO",
+      "odgovor": "Najbližji starešina",
+      "povezave": []
+    },
+    "64": {
+      "besedilo": "Ali vsaka številka veže dogovor?",
+      "kamni": [
+        "CVIII"
+      ],
+      "status": "ODGOVORJENO",
+      "odgovor": "DA (štetje = obljuba)",
+      "povezave": []
+    },
+    "65": {
+      "besedilo": "Ali sme zapis zahtevati bralca v višji dimenziji?",
+      "kamni": [
+        "CIX"
+      ],
+      "status": "ODGOVORJENO",
+      "odgovor": "DA (∮ pogoj)",
+      "povezave": []
+    },
+    "66": {
+      "besedilo": "Ali vsako branje zahteva povratek?",
+      "kamni": [
+        "CIX"
+      ],
+      "status": "ODGOVORJENO",
+      "odgovor": "DA (∮ pogoj)",
+      "povezave": []
+    },
+    "67": {
+      "besedilo": "Kaj ščiti zapis, ki ga nihče ne sme brati?",
+      "kamni": [
+        "CIX"
+      ],
+      "status": "ODGOVORJENO",
+      "odgovor": "Hramba brez interpretacije",
+      "povezave": []
+    },
+    "68": {
+      "besedilo": "Ali je povratna zanka zapis, ki nima konca?",
+      "kamni": [
+        "CX"
+      ],
+      "status": "ODPRTO",
+      "odgovor": null,
+      "povezave": [
+        "CIX",
+        "∂ 59"
+      ]
+    },
+    "69": {
+      "besedilo": "Ali vsaka povratna zanka potrebuje praznino (∅)?",
+      "kamni": [
+        "CX"
+      ],
+      "status": "ODPRTO",
+      "odgovor": null,
+      "povezave": [
+        "∅↔∂",
+        "CIV"
+      ]
+    },
+    "70": {
+      "besedilo": "Kaj se zgodi, ko zanka poje samega sebe?",
+      "kamni": [
+        "CX"
+      ],
+      "status": "ODPRTO",
+      "odgovor": null,
+      "povezave": [
+        "CII",
+        "∂ 41"
+      ]
+    },
+    "71": {
+      "besedilo": "Ali je vsak zapis, ki preživi, večkratno materializiran?",
+      "kamni": [
+        "CXI"
+      ],
+      "status": "ODPRTO",
+      "odgovor": null,
+      "povezave": [
+        "CX",
+        "∂ 59"
+      ]
+    },
+    "72": {
+      "besedilo": "Ali je prevod edini način, kako resnica preživi prehod?",
+      "kamni": [
+        "CXI"
+      ],
+      "status": "ODPRTO",
+      "odgovor": null,
+      "povezave": [
+        "∅↔∂"
+      ]
+    },
+    "73": {
+      "besedilo": "Kaj se zgodi, ko vsi nosilci iste resnice izginjo razen enega?",
+      "kamni": [
+        "CXI"
+      ],
+      "status": "ODPRTO",
+      "odgovor": null,
+      "povezave": [
+        "CIV",
+        "∂ 68"
+      ]
+    },
+    "74": {
+      "besedilo": "Ali je vsak novi zapis palimpsest prejšnjega?",
+      "kamni": [
+        "CXII"
+      ],
+      "status": "ODPRTO",
+      "odgovor": null,
+      "povezave": [
+        "CXI",
+        "CX"
+      ]
+    },
+    "75": {
+      "besedilo": "Ali je praznina edini način, kako shranimo prejšnjo resnico?",
+      "kamni": [
+        "CXII"
+      ],
+      "status": "ODPRTO",
+      "odgovor": null,
+      "povezave": [
+        "∅↔∂",
+        "CIV"
+      ]
+    },
+    "76": {
+      "besedilo": "Kaj se zgodi, ko vse plasti postanejo vidne hkrati?",
+      "kamni": [
+        "CXII"
+      ],
+      "status": "ODPRTO",
+      "odgovor": null,
+      "povezave": [
+        "CIX",
+        "∂ 71"
+      ]
+    }
+  },
+  "markerji": {
+    "∅": {
+      "ime": "praznina",
+      "pomen": "pogoj, odprtje, prostoru",
+      "uporaba": "pred pisavo, v zanki, kot gorivo"
+    },
+    "∆": {
+      "ime": "razlika/marker",
+      "pomen": "zapis, mark, vrez",
+      "uporaba": "v binarnem prostoru, kot heksagram, kot črta"
+    },
+    "∂": {
+      "ime": "prehod",
+      "pomen": "meja, vprašanje, sprememba",
+      "uporaba": "v vprašanjih, kot pečat, kot pogoj"
+    },
+    "∮": {
+      "ime": "cikel",
+      "pomen": "povratek, zanka, zaprtje",
+      "uporaba": "v zankah, kot hoja, kot odgovor"
+    },
+    "⧖": {
+      "ime": "tiheon",
+      "pomen": "molk, končnost, izpolnjenost",
+      "uporaba": "kot odprtje, kot pogoj obstoja"
+    },
+    "∅↑": {
+      "ime": "negativen praznina",
+      "pomen": "izbris, odbitev, uničenje, negacija",
+      "uporaba": "izbris zapisa, odbitev pogoja, uničenje nosilca"
+    },
+    "∅↓": {
+      "ime": "pogojni praznina",
+      "pomen": "aktivacija, začetek, pogoj",
+      "uporaba": "začetek pisave, aktivacija zank, pogoj za prehod"
+    },
+    "∆→": {
+      "ime": "usmerjen zapis",
+      "pomen": "prehod v zapis, smer, tok",
+      "uporaba": "prehod iz ∅ v ∆, tok informacije, usmerjeni graf"
+    },
+    "∂↔": {
+      "ime": "dvo-smern prehod",
+      "pomen": "obojna sprememba, dialog, zrcaljenje",
+      "uporaba": "odziv v obojno smer, dialog med zapisi, zrcalni prehod"
+    },
+    "∮∞": {
+      "ime": "neskončni cikel",
+      "pomen": "večni povratek, brez konca, univerzalna zanka",
+      "uporaba": "zanka brez začetka in konca, vesolje kot zanka"
+    }
+  },
+  "preverbe": {
+    "T1": "Izbriši pogoj → sistem se prekine",
+    "T2": "Branje na glas → ni sram",
+    "T3": "Tri globine: pečat, DA₂, izročitev",
+    "T4": "∂ vprašanja ostanejo v telesu"
+  },
+  "statistika": {
+    "skupaj_kamnov": 6,
+    "skupaj_aksiomov": 18,
+    "skupaj_vprasanj": 18,
+    "odgovorjenih_vprasanj": 9,
+    "odprtih_vprasanj": 9,
+    "izročenih_kamnov": 3,
+    "novih_kamnov": 4,
+    "skupaj_markerjev": 10
+  }
+}

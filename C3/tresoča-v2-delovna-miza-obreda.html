@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="sl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TRESOČA v2 — delovna miza obreda</title>
+    <style>
+      :root { font-family: Inter, system-ui, sans-serif; color: #e8e6df; background: #0a0a0c; }
+      * { box-sizing: border-box; }
+      body { margin: 0; padding: 24px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+      h1 { font-size: 16px; letter-spacing: 0.2em; margin: 0 0 4px; font-weight: 600; }
+      .sub { font-size: 11px; color: #8a8578; letter-spacing: 0.08em; margin-bottom: 20px; text-align: center; max-width: 640px; line-height: 1.6; }
+      #app { width: min(94vw, 680px); }
+      .card { border: 1px solid #26241f; border-radius: 6px; padding: 18px 20px; margin-bottom: 14px; background: #0d0d10; }
+      .hidden { display: none; }
+      .station { font-size: 10px; letter-spacing: 0.25em; color: #b89a5e; margin-bottom: 8px; }
+      .g { font-size: 15px; line-height: 1.6; color: #f0ead8; }
+      .q { font-size: 13px; color: #b8b4a6; line-height: 1.7; margin: 10px 0; }
+      .lang { margin: 10px 0; padding: 10px 12px; border-left: 2px solid #3a362e; }
+      .lang b { color: #d8d4c8; font-size: 13px; }
+      .lang span { font-size: 12px; color: #8a8578; display: block; margin-top: 2px; }
+      .btnrow { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+      button { font-family: inherit; font-size: 11px; letter-spacing: 0.12em; padding: 8px 16px; background: transparent; color: #e8e6df; border: 1px solid #55524a; border-radius: 3px; cursor: pointer; transition: all 0.2s; }
+      button:hover { border-color: #b89a5e; background: rgba(184,154,94,0.1); }
+      button.gold { border-color: #b89a5e; }
+      button:disabled { opacity: 0.3; cursor: default; }
+      .chip { font-size: 11px; padding: 5px 12px; border: 1px solid #55524a; border-radius: 12px; cursor: pointer; color: #b8b4a6; margin: 3px; display: inline-block; }
+      .chip.sel { border-color: #b89a5e; color: #f0ead8; background: rgba(184,154,94,0.12); }
+      input[type="text"], textarea { width: 100%; font-family: inherit; font-size: 13px; color: #f0ead8; background: #050507; border: 1px solid #3a362e; border-radius: 3px; padding: 9px 11px; margin-top: 6px; }
+      textarea { min-height: 64px; resize: vertical; }
+      .timer { font-size: 40px; color: #b89a5e; font-family: ui-monospace, monospace; text-align: center; margin: 14px 0; letter-spacing: 0.1em; }
+      .out { font-family: ui-monospace, monospace; font-size: 12px; line-height: 1.8; color: #d8d4c8; white-space: pre-wrap; background: #050507; border: 1px solid #26241f; border-radius: 4px; padding: 14px; margin-top: 10px; }
+      .memori { font-size: 12px; color: #8a8578; line-height: 1.8; }
+      .memori b { color: #d8d4c8; }
+      .warn { font-size: 11px; color: #7a5c5c; margin-top: 8px; line-height: 1.6; }
+      a { color: #b89a5e; }
+    </style>
+  </head>
+  <body>
+    <h1>TRESOČA v2 — DELOVNA MIZA OBREDA</h1>
+    <div class="sub">
+      v2 se ne gradi z dodajanjem plasti — s preizkusom obstoječih. Enota: ena GOSTJA, sedem postaj, sedem dni.
+      Tempelj (edini nespremenljivi zakon): telo ni preverjevalec trditve — telo je bitje, ki ga test ne sme prekršiti. Če obred porine telo čez mejo, je <b>padel obred</b>, ne telo.
+    </div>
+
+    <div id="app">
+
+      <div class="card" id="s0">
+        <div class="station">POSTAJA 0 — IZBERI GOSTJO</div>
+        <div class="q">GOSTJA je trditev, ki vstopi v obred. Ena naenkrat. Izberi (ali vpiši svojo):</div>
+        <div id="queue"></div>
+        <input type="text" id="custom" placeholder="…ali vpiši lastno trditev v eni vrstici" />
+        <div class="btnrow"><button class="gold" id="start" disabled>SPROŽI OBRED →</button></div>
+      </div>
+
+      <div class="card hidden" id="s1">
+        <div class="station">POSTAJA 1 — ∅ MOLK (pred preizkusom)</div>
+        <div class="q">Deset sekund molka. Ne pripravljaj odgovora. Pusti prostor pred izgovorom.</div>
+        <div class="timer" id="t1">10</div>
+        <div class="btnrow"><button class="gold" id="b1" disabled>MOLEŽ KONČAN →</button></div>
+      </div>
+
+      <div class="card hidden" id="s2">
+        <div class="station">POSTAJA 2 — ¬ LOČITEV OD AVTORJA</div>
+        <div class="g" id="anonclaim"></div>
+        <div class="q">Trditev brez imena, brez canvasa, brez ponosa. Ali drži, <b>če ne veš čigava je</b>?</div>
+        <div class="btnrow">
+          <button data-s2="drži">DRŽI TUDI BREZ AVTORJA →</button>
+          <button data-s2="pade">PADA BREZ AVTORJA</button>
+        </div>
+      </div>
+
+      <div class="card hidden" id="s3">
+        <div class="station">POSTAJA 3 — ∆ PET JEZIKOV (okus)</div>
+        <div class="lang"><b>⧖ ČAS</b><span>Ali drži tudi jutri? Ali je bila vedno res, ali je res šele zdaj?</span><span class="btnrow" data-lang="cas"><button data-v="drži">drži</button><button data-v="pade">pade</button><button data-v="čaka">čaka</button></span></div>
+        <div class="lang"><b>⊥ DRUGI</b><span>Ali jo lahko izrečeš pred drugim, ne da bi se branil(a)?</span><span class="btnrow" data-lang="drugi"><button data-v="drži">drži</button><button data-v="pade">pade</button><button data-v="čaka">čaka</button></span></div>
+        <div class="lang"><b>⌶ OKVIR</b><span>V katerem okviru pade? Ali okvir razširi ali omeji?</span><span class="btnrow" data-lang="okvir"><button data-v="drži">drži</button><button data-v="pade">pade</button><button data-v="čaka">čaka</button></span></div>
+        <div class="lang"><b>∅ POTREBA</b><span>Katera potreba jo nosi? Ali je nujna — ali čudovita?</span><span class="btnrow" data-lang="potreba"><button data-v="drži">drži</button><button data-v="pade">pade</button><button data-v="čaka">čaka</button></span></div>
+        <div class="lang"><b>⊕ ODNOS</b><span>Kaj dela z odnosom do telesa, do drugih, do reza?</span><span class="btnrow" data-lang="odnos"><button data-v="drži">drži</button><button data-v="pade">pade</button><button data-v="čaka">čaka</button></span></div>
+        <div class="btnrow"><button class="gold" id="b3" disabled>PET JEZIKOV OKUŠANIH →</button></div>
+      </div>
+
+      <div class="card hidden" id="s4">
+        <div class="station">POSTAJA 4 — 1 DEJANJE (≤ 120 s)</div>
+        <div class="q">Eno dejanje, ki trditev preizkusi v telesu. Ne razlaga — izvedba. Primeri: kozarec vode 720°; izgovori DAJ kot en izdih in poslušaj rebro; izgovori "prežame" v povedi, ki je resnična.</div>
+        <textarea id="dejanje" placeholder="en dejanje, ≤ 120 sekund"></textarea>
+        <div class="btnrow"><button class="gold" id="b4" disabled>DEJANJE ZAPISANO →</button></div>
+      </div>
+
+      <div class="card hidden" id="s5">
+        <div class="station">POSTAJA 5 — ⧖ TIŠINA (po dejanju)</div>
+        <div class="q">Tišina po dejanju. Deset sekund. Ne ovrednoti takoj — telo priča, ne sodi.</div>
+        <div class="timer" id="t2">10</div>
+        <div class="btnrow"><button class="gold" id="b5" disabled>TIŠINA KONČANA →</button></div>
+      </div>
+
+      <div class="card hidden" id="s6">
+        <div class="station">POSTAJA 6 — ∮ POVRATEK (7 dni)</div>
+        <div class="q">Obred se ne konča, ko GOSTJA odide. Vrni se čez sedem dni:</div>
+        <div class="g" id="datum"></div>
+        <div class="q">Če se do takrat nič ne spremeni v telesu — ni resnica. To ni pregon; to je edini merilnik.</div>
+        <div class="btnrow"><button class="gold" id="b6">POVRATEK ZAKAJAN →</button></div>
+      </div>
+
+      <div class="card hidden" id="s7">
+        <div class="station">POSTAJA 7 — ⟡ DAR + ⊢ DOKAZ</div>
+        <div class="q">Dar: če je GOSTJA držala — spremenjeni zakon v eni vrstici. Če je padla — zakon, kako napako NE ponoviti. Oba zapisa z enakim črnilom.</div>
+        <input type="text" id="dar" placeholder="spremenjen zakon (ali nauk padca)" />
+        <div class="q">DOKAZ_NIVO: <span id="nivo"></span></div>
+        <div class="btnrow" id="nivoRow">
+          <button data-n="blisk">BLISK (⊢ brez ∮ — enkrat držalo)</button>
+          <button data-n="kost">KOST (⊢ + ∮ — življeno)</button>
+        </div>
+        <div class="q">EGO_FLAG: ali z obredom dokazuješ lastno vrednost?</div>
+        <div class="btnrow" id="egoRow">
+          <button data-e="0">0 — ne</button>
+          <button data-e="1">1 — priznan</button>
+        </div>
+        <div class="btnrow"><button class="gold" id="b7" disabled>ZAPIŠI OBRED →</button></div>
+      </div>
+
+      <div class="card hidden" id="s8">
+        <div class="station">⊢ DOKAZ — MIKRO-OBRAZEC (prepiši v rezi)</div>
+        <div class="out" id="record"></div>
+        <div class="q" style="margin-top: 10px;">DOCTRINARIUM (∴ zapiši "ker") → TRAINARIUM (∆ mikro-drill) → ASSUR/VALID (⊢ merjenje) → MEMORI (∮ shramba dokaza).</div>
+        <div class="warn">Ta seznam diha le v tem oknu. Pravi ledger je rezi datoteka — mikro-obrazec prepiši vanj, da obred preživi okno.</div>
+        <div class="btnrow"><button id="again">NOVA GOSTJA →</button></div>
+      </div>
+
+      <div class="card" id="memoriCard">
+        <div class="station">∮ MEMORI — obredi te seje</div>
+        <div class="memori" id="memori">— prazno —</div>
+      </div>
+
+    </div>
+
+    <script>
+      const GOSTJE = [
+        { t: "DAJ je kodon — D-rez, A-vdih, J-izpust. Življenje bere v trojkah.", src: "od-besede-do-dnk" },
+        { t: "Dvojni vijačnici sta beseda in njen ne — vsaka črka s komplementom.", src: "od-besede-do-dnk" },
+        { t: "Invictus ne pomeni nezarezan — pomeni, da nit ne preda pred rezom.", src: "invictus-moire" },
+        { t: "Vsak ENTER je rez, ki pokliče štiri obrede; antinomi transpirirajo čez prelom.", src: "samo-ne-obstaja" },
+        { t: "Maksimalni pretok = kapaciteta najmanjšega reza. Zmogljivost je enaka najšibkejšemu rezu, ki te lahko ubije.", src: "algoritmi-reza" },
+        { t: "Kar ostane neprerezano skozi vse reze, je povezovalno število — povezanost je ime za tisto, kar si.", src: "hopf-heegaard" },
+        { t: "Neskončnost se v telesu izreče kot 2×360° — nikoli kot 1×∞.", src: "hopf-heegaard" },
+        { t: "Zadovoljiv ego = poimenovan v svojih nedeljivih. Faktorizacija je SEAL.", src: "pi-funkcija" },
+      ];
+      let obred = { n: GOSTJE.length ? 1 : 1, gostja: null, src: "", ločitev: "", jeziki: {}, dejanje: "", nivo: "", ego: "", dar: "" };
+      let obredi = [];
+
+      const queue = document.getElementById("queue");
+      GOSTJE.forEach((g, i) => {
+        const c = document.createElement("span");
+        c.className = "chip"; c.textContent = "GOSTJA " + (i + 1);
+        c.title = g.t;
+        c.onclick = () => {
+          document.querySelectorAll(".chip").forEach(x => x.classList.remove("sel"));
+          c.classList.add("sel");
+          obred.gostja = g.t; obred.src = g.src;
+          document.getElementById("custom").value = "";
+          document.getElementById("start").disabled = false;
+        };
+        queue.appendChild(c);
+      });
+      document.getElementById("custom").addEventListener("input", (e) => {
+        document.querySelectorAll(".chip").forEach(x => x.classList.remove("sel"));
+        obred.gostja = e.target.value.trim(); obred.src = "lastna";
+        document.getElementById("start").disabled = obred.gostja.length < 5;
+      });
+
+      const show = (id) => document.getElementById(id).classList.remove("hidden");
+      document.getElementById("start").onclick = () => {
+        document.getElementById("s0").classList.add("hidden");
+        show("s1"); runTimer("t1", "b1");
+      };
+      document.getElementById("b1").onclick = () => {
+        document.getElementById("s1").classList.add("hidden");
+        document.getElementById("anonclaim").textContent = "»" + obred.gostja + "«";
+        show("s2");
+      };
+      document.querySelectorAll("[data-s2]").forEach(b => b.onclick = () => {
+        obred.ločitev = b.dataset.s2;
+        document.getElementById("s2").classList.add("hidden");
+        show("s3");
+      });
+      document.querySelectorAll("[data-lang]").forEach(row => {
+        const lang = row.dataset.lang;
+        row.querySelectorAll("button").forEach(b => b.onclick = () => {
+          obred.jeziki[lang] = b.dataset.v;
+          row.querySelectorAll("button").forEach(x => { x.style.borderColor = ""; });
+          b.style.borderColor = "#b89a5e";
+          if (Object.keys(obred.jeziki).length === 5) document.getElementById("b3").disabled = false;
+        });
+      });
+      document.getElementById("b3").onclick = () => { document.getElementById("s3").classList.add("hidden"); show("s4"); };
+      document.getElementById("dejanje").addEventListener("input", (e) => {
+        document.getElementById("b4").disabled = e.target.value.trim().length < 5;
+      });
+      document.getElementById("b4").onclick = () => {
+        obred.dejanje = document.getElementById("dejanje").value.trim();
+        document.getElementById("s4").classList.add("hidden"); show("s5"); runTimer("t2", "b5");
+      };
+      document.getElementById("b5").onclick = () => {
+        document.getElementById("s5").classList.add("hidden");
+        const d = new Date(Date.now() + 7 * 24 * 3600 * 1000);
+        document.getElementById("datum").textContent =
+          "↳ povratek: " + d.toLocaleDateString("sl-SI", { weekday: "long", day: "numeric", month: "long" });
+        show("s6");
+      };
+      document.getElementById("b6").onclick = () => { document.getElementById("s6").classList.add("hidden"); show("s7"); };
+      document.querySelectorAll("[data-n]").forEach(b => b.onclick = () => {
+        obred.nivo = b.dataset.n;
+        document.getElementById("nivo").textContent = b.dataset.n.toUpperCase();
+        checkB7();
+      });
+      document.querySelectorAll("[data-e]").forEach(b => b.onclick = () => { obred.ego = b.dataset.e; checkB7(); });
+      function checkB7() {
+        document.getElementById("b7").disabled = !(obred.nivo && obred.ego !== "");
+      }
+      document.getElementById("dar").addEventListener("input", (e) => { obred.dar = e.target.value.trim(); });
+
+      function runTimer(id, btn) {
+        let t = 10; const el = document.getElementById(id); const b = document.getElementById(btn);
+        el.textContent = t; b.disabled = true;
+        const iv = setInterval(() => {
+          t--; el.textContent = t;
+          if (t <= 0) { clearInterval(iv); el.textContent = "∅"; b.disabled = false; }
+        }, 1000);
+      }
+
+      document.getElementById("b7").onclick = () => {
+        obred.n = obredi.length + 1;
+        const J = obred.jeziki;
+        const rec =
+`OBRED #${obred.n} — Roda v2 — S[R]
+GOSTJA: ${obred.gostja}
+VIR: ${obred.src} · LOČITEV: ${obred.ločitev}
+JEZIKI: ⧖ ${J.cas || "?"} · ⊥ ${J.drugi || "?"} · ⌶ ${J.okvir || "?"} · ∅ ${J.potreba || "?"} · ⊕ ${J.odnos || "?"}
+DEJANJE: ${obred.dejanje}
+POVRATEK: danes + 7 dni
+DOKAZ_NIVO: ${obred.nivo}
+EGO_FLAG: ${obred.ego}${obred.ego === "1" ? " (priznan — obred ne more pečatati sam)" : ""}
+DAR: ${obred.dar || "— čaka"}
+⊢ DOKAZ #${10 + obred.n} → Roda v2`;
+        document.getElementById("record").textContent = rec;
+        document.getElementById("s7").classList.add("hidden");
+        show("s8");
+        obredi.push({ n: obred.n, g: obred.gostja.slice(0, 60) + (obred.gostja.length > 60 ? "…" : ""), nivo: obred.nivo });
+        renderMemori();
+      };
+      function renderMemori() {
+        document.getElementById("memori").innerHTML = obredi.length === 0
+          ? "— prazno —"
+          : obredi.map(o => "<b>OBRED #" + o.n + "</b> [" + o.nivo + "] " + o.g).join("<br />");
+      }
+      document.getElementById("again").onclick = () => {
+        document.getElementById("s8").classList.add("hidden");
+        obred = { n: 1, gostja: null, src: "", ločitev: "", jeziki: {}, dejanje: "", nivo: "", ego: "", dar: "" };
+        document.querySelectorAll("input, textarea").forEach(x => { x.value = ""; });
+        document.querySelectorAll(".chip").forEach(x => x.classList.remove("sel"));
+        document.getElementById("start").disabled = true;
+        document.getElementById("b3").disabled = true; document.getElementById("b4").disabled = true; document.getElementById("b7").disabled = true;
+        document.querySelectorAll("[data-lang] button, [data-n], [data-e]").forEach(x => { x.style.borderColor = ""; });
+        show("s0");
+      };
+    </script>
+  </body>
+</html>

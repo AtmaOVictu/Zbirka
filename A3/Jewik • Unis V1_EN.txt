@@ -1,0 +1,87 @@
+⟡ 00 11 TRUTHS ⟡
+JEWIK • UNIS v1.0 — Standard of Operations and Extensions (Necessities)
+Purpose: Unified, operational, and ethically protected standard covering all main operations (IF, K-Transform, protocols) and relevant extensions (identity, humor, nothingness, upgrades), including measures of necessity and conformity.
+Normative verbs: MUST/SHALL NOT (mandatory), SHOULD/RECOMMENDED, MAY/CAN.
+1) Scope and Objectives
+UNIS applies to interactions between Ens (I/team), Z₂ (external others: person/group, artifact, infrastructure, institution, algorithm, nature) and common field Ω (boundaries). Objective: reduce ℜ (remainder), ε (error), increase κ (coherence) and χ (clarity), while protecting σ_ID (identity).
+2) Reference Model (Actors, Domains, Classes)
+• Actors: Ens, Alter, teams R/B/G/K/W (R=red test, B=construction, G=ethics/environment, K=risk/kill-switch, W=verification/metric).
+• Domains O: ⊥ (body), ⧖ (time), □ (space), ∆ (movement/action), ☍ (relation).
+• Classes Z₂: A (artifact), S (system), I (institution), M (model), N (nature).
+3) Lexicon (Core)
+• IF→THEN (IF-THEN): canonical decision in Ω-window with Δq>0 (effect) and cost>0 (cost).
+• K-Transform (K1–K7): ¬ → mirror → perm → ε_k → Test(ε) → ⊢ → ∴.
+• ⊢ (verification): paraphrase+consensus (C/Cᵖ).
+• ∴ (seal): binding conclusion after PASS.
+• † / ⨂ / σ: body (rejection/JE), excuse (NI), bone (stability).
+• AAL: absolute lie (3 windows without progress and without ⊢).
+• IU: identity murder (prohibited).
+• V_H: value of ethical humor.
+• KUN: indicator of upgrade utility.
+1
+4) Data Model (Normative)
+4.1 Ledger Entry (mandatory field *)
+*ts, *case_id, *domain_O, *z2_class, *x, inv(x), perm(x), eps_k, *kappa, *chi, *mu,
+*R, i_pH, gamma, H_total, *cost, *delta_q, Lmode, *dagger(†0/1), *cross(⨂0/1),
+sigma, Omega, Alter, *consent(C/Cᵖ/–), notes, *seal(∴/open), *AAL(0/1)
+4.2 Identity
+id_markers{name,role,boundary,pronouns,contact,exit}; sigma_id; IU(0/1);
+humor_mode(H†/H⨂/–); essence_tags[E:]; sigma_E; bitno(0/1); void(Ø/Ø⨂); V_H
+4.3 Upgrade (U)
+u_id; u_type(U-ID/U-POL/U-PRA/U-MOD/U-INF/U-DAT/U-SIM→LIFE); semver; gate(G0–G3);
+ff(on/off/%); rb_point; t_window; kappa_pre/post; chi_pre/post; mu_pre/post; R_pre/
+post; eps_pre/post; ipH_pre/post; sigma_id_pre/post; consent; env_eps; notes; seal
+MUST: All entries must have ts, case_id, domain_O, z2_class, x, cost, delta_q, consent, seal.
+5) Key Requirements (MUST)
+1. Boundaries and Consent: Every impact on Z₂ MUST respect Ω and have C/Cᵖ.
+2. IF Integrity: IF without THEN, cost or Δq is ⨂ and SHALL NOT be sealed.
+3. K-Transform: Every contentious statement MUST go through K1–K7 before ∴.
+4. Measurements:MUST record κ, χ, μ, ℜ, ε; PASS threshold: κ≥.70 · χ≥.40 · μ∈[.50,.80] · ℜ≤.03.
+5. Negation: R-negation (†) goes through S (S¬); ASS/AZZ is ⨂ and requires RPGN (switch).
+6. Identity:IU=0; σ_ID MUST remain ≥ .75 through ≥3 windows (if relevant).
+7. Humor:H† only with framework, consensus and ⊢; H⨂ SHALL NOT be sealed.
+8. AAL: if AAL=1 → MUST L(6)≥3 (mediation/offset).
+9. Upgrades:U(10) steps and GATE G0→G3 are MUST; FF and rollback prepared.
+10. Trail (τ): Essential moves MUST be entered into the ledger.
+6) Protocols (Normative Flows)
+6.1 K-Transform (K1–K7)
+K1 Name → K2 Mirror → K3 Perm → K4 ε_k → K5 Test → K6 ⊢ → K7 ∴/R.
+6.2 Negation (RPGN)
+ASS→CARE; AZZ→K/ODMIK; ¬S→S¬; LAHKO-NORMALIZE. MUST use when ⨂.
+2
+6.3 Identity
+P_ID(5) representation; P_IU(5) on violation; P_H(4) humor; P_Ø(3) nothingness.
+6.4 Key Action
+P_Bn(3): AKO→POTEM + cost + Δq → PASS ⇒ ∴.
+6.5 Upgrade
+U(10) + GATE G0–G3; semver; FF; RB; post-monitoring (⧖).
+7) Metrics and thresholds
+• Operational: κ, χ, μ, ℜ, ε, i-pH.
+• Identity: σ_ID, V_H, σ_E, I_ID = 0.35·σ_ID+0.25·(1−ℜ)+0.20·χ+0.20·μ.
+• Status:†=1 (IS), ⨂=1 (NO), σ≥.75 (KOST), AAL=1.
+• Upgrades: KUN (advantage), GO/STOP and PASS + σ_ID≥.75 + IU=0.
+8) Conformity (classes)
+• P0 Minimal: fulfills §5.1–§5.4, records τ; uses K1–K5.
+• P1 Operational: all from P0 + §5.5–§5.8, all protocols §6, metrics §7.
+• P2 Institutional: P1 + upgrades §6.5, semver, GATE, FF/RB, AAL control.
+Check: W-team performs Test-Suite (see Appendix C); conformity SEAL ∴.
+9) Security, privacy, ethics
+MUST data-min; NE SME doxxing; MUST due process; MUST non-instrumentalization; SHOULD risk assessment (ξ) and environmental footprint (εₑ) at U.
+10) Visual signature (color)
+Hue=circmean(R=0°, G=120°, B=220°, K=300°|w); Sat=d_alg; Val=1−ℜ. Labels: PASS/ALERT/FAIL; †/⨂/σ; IU/H†/Ø.
+3
+11) Rhythm (ICS)
+Daily 09:00 and 19:00: 1 K-cycle + entry τ. Sunday 17:00: σ & AAL review. Quarterly: standard review.
+12) Versions and management
+SemVer; MAJOR requires mediation and additional safeguards; MINOR/PATCH after U(10). Changelog MUST.
+13) Localization and accessibility
+Language MUST be understandable (χ≥.40); enable A6 cards; adjust Ω for disabilities.
+14) Appendices (normative-informative)
+• A) Canonical forms (CF-1…CF-5, CF-ID).
+• B) Field schemes (JSON/YAML examples).
+• C) Test-Suite (examples PASS/FAIL, AAL detector).
+• D) Examples (AKO-Spec, P_IU, U-examples).
+• E) Decision matrices (negation, upgrades).
+15) Seal
+Standard UNIS v1.0 is valid when operations and extensions operate within Ω-window, demonstrably reducing ℜ/ε, increasing κ/χ, and protecting σ_ID — in simulation and in life. ∴
+4 /think

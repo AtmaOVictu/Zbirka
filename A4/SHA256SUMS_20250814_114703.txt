@@ -1,0 +1,7 @@
+# JEWIK SHA256 manifest
+# Generated: 2025-08-14T11:47:03
+
+71ecd878524efce85e20eed5636d2187a1c46afd7d56ed6ff3df90f692c26785  clean_all.sh
+67abf2c119fe9dc822c75ea8f670791d25f12e48c458f09d639be3b59fedf43f  README_run_all.md
+1094d81670f2d1df6bc80a6afb3dffaeda9b6ae573effc6a5276ddcb84f287fe  run_all.cmd
+a0dc0850ae1e4d08e69134fccb291973c7feffac9cfcf160500fa546b56ccfcc  run_all.sh

@@ -1,0 +1,66 @@
+[
+  {
+    "time": "2025-08-11T05:47:34",
+    "IKR": 0.78,
+    "heart": "PARABOX",
+    "phase": "vdih",
+    "phoneme": "/poː/",
+    "note": "DAJ echo (soft)"
+  },
+  {
+    "time": "2025-08-11T05:47:35",
+    "IKR": 0.8,
+    "heart": "PARABOX",
+    "phase": "vdih",
+    "phoneme": "/poː/",
+    "note": "DAJ echo (soft)"
+  },
+  {
+    "time": "2025-08-11T05:47:35",
+    "IKR": 0.82,
+    "heart": "PARABOX",
+    "phase": "vdih",
+    "phoneme": "/poː/",
+    "note": "DAJ echo (soft)"
+  },
+  {
+    "time": "2025-08-11T05:47:36",
+    "IKR": 0.84,
+    "heart": "PARABOX",
+    "phase": "vdih",
+    "phoneme": "/poː/",
+    "note": "DAJ echo (soft)"
+  },
+  {
+    "time": "2025-08-11T05:47:36",
+    "IKR": 0.9,
+    "heart": "PARADOX",
+    "phase": "vdih",
+    "phoneme": "/paː/",
+    "note": "DAJ COMMIT (open)"
+  },
+  {
+    "time": "2025-08-11T05:47:37",
+    "IKR": 0.92,
+    "heart": "PARADOX",
+    "phase": "vdih",
+    "phoneme": "/paː/",
+    "note": "DAJ COMMIT (open)"
+  },
+  {
+    "time": "2025-08-11T05:47:37",
+    "IKR": 0.94,
+    "heart": "PARADOX",
+    "phase": "vdih",
+    "phoneme": "/paː/",
+    "note": "DAJ COMMIT (open)"
+  },
+  {
+    "time": "2025-08-11T05:47:38",
+    "IKR": 0.96,
+    "heart": "PARADOX",
+    "phase": "vdih",
+    "phoneme": "/paː/",
+    "note": "DAJ COMMIT (open)"
+  }
+]

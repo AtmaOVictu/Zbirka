@@ -1,0 +1,12 @@
+SLO (javna vrstica),ZLO (operativna preslikava)
+"Ne sprejemam dejanja, ki rani (SLO)",⊘: identify(H)→set_boundary; log ⊢E
+Prosim za proces (SLO),"∴: open_procedure(parties,steps,T)→consent/log"
+"Če procesa ni, se odmaknem (SLO)",∆: exit(field); preserve_evidence; minimize ℜ; set_reentry
+To je moja odločitev (SLO),1: sign(SEAL) iff Guard ok; else HOLD+reverz
+Hvaležnost kot orientir (SLO),⟡: daily_orient(checklist); hol↑; χ stabilen
+Pravica ≠ Razlog ≠ Odločitev (SLO),⊢: run K1–K5; if fail → ∆ (time_exit)
+Jeza kot signal (SLO),"T(jeza): map→(⊘,∴,∆,1,⟡); block punitive/self-erase"
+Smisel > tolažba (SLO),write(project of truth); outcome.logged=1
+Odločitev DA (SLO),DA iff process∴ & !legitimize_harm & boundary_instrument
+Odločitev NE (SLO),NE iff !process∴ & legitimizes_harm & comms_exhausted
+ODMIK (SLO),time_exit iff irreversible ∧ any(K1..K5 fail)

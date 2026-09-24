@@ -1,0 +1,190 @@
+00 11 TRUTH
+ASCII–CORE (O–GOD–HUMAN)
+Ω (whole/integration)
+↑ │
+│ │ 1 (act)
+κ_etik (+/−)│ ▼
+GOD ————⊘/∆————→ HUMAN ———→
+▲ \ ↑ \
+│ \ │ \ return to O
+│ \ │ ⊘ (no) (emptiness)
+│ \ │
+│ \ │
+│ \ │
+│ \ │
+│ ▼ │
+└────────O≡0 —⊘→ ∆ —→ 1 —→ Ω —→ (repeat)
+(field) (difference) (act) (integration)
+Legend: O≡0 (field) · ⊘≡¬ (holy separation/“no”) · ∆ (difference) · 1 (act) · Ω (integration) · κ_etik∈[−1,1]
+(ethical coefficient of influence GOD↔HUMAN).
+Core Formula
+Δ = 0.175+0.3κ ; Δ = 3(0.175+0.3κ )
+cell etik total etik
+(As each phase step is +0.25 → 0.7·0.25 = 0.175; three steps: 0→∆→1→Ω)
+APD “CUBE” — with included Ω
+UNIT PHASE SYMBOLS w κ_etik Δ_per_cell
+O 0 O≡0 .25 0.00 .175
+O ∆ ⊘→∆ .50 0.00 .175
+O 1 ∆→1 .75 0.00 .175
+O Ω →Ω 1.00 0.00 .175
+GOD 0 GOD₀ .25 +.70 .385
+GOD ∆ GOD∆ .50 +.70 .385
+1
+UNIT PHASE SYMBOLS w κ_etik Δ_per_cell
+GOD 1 GOD₁ .75 +.70 .385
+GOD Ω →Ω 1.00 +.70 .385
+HUMAN 0 Č₀ .25 +.30 .265
+HUMAN ∆ Č∆ .50 +.30 .265
+HUMAN 1 Č₁ .75 +.30 .265
+HUMAN Ω →Ω 1.00 +.30 .265
+Δ_total (path 0→∆→1→Ω): O=0.525 · GOD=1.155 · HUMAN=0.795
+κ_etik(dynamic) — function of context
+(∈[−1,1])
+Inputs (shares 0–1):
+• Positive ρ: truth (ρ_res), love (ρ_lj), right (ρ_prav), responsibility (ρ_odg)
+• Negative σ: fear (σ_strah), greed (σ_poh), apathy (σ_apa)
+Default weights:
+• GOD: α⁺=(0.45,0.45,0.05,0.05), β⁻=(0.60,0.30,0.10)
+• HUMAN: α⁺=(0.25,0.25,0.25,0.25), β⁻=(0.50,0.30,0.20)
+• O: κ=0
+p = ∑α_i + ρ_i, n = ∑β_j − σ_j, κ = p−n
+Context corrections: κ′ = clip(κ+δ E +g(G)+δ R , −1, 1)
+• Event (δ_E) ∈[−0.30,+0.30]: success/acknowledgment (+), betrayal/defeat (−), loneliness/passivity (−)
+• Speech g(G) ∈[−0.20,+0.20]: ∆H⟡–“may” as halo-call (+) vs. ⧖–excuse (−)
+• Wound δ_R = (2h−1)·μ_R·r; recommendation: μ_R(GOD)=0.15, μ_R(H)=0.30
+Reversal Rules
+• If Δ_cell < 0 ⇒ REVERSAL: −1 phase; next transition with damper γ=0.5
+• If 0 ≤ Δ_cell ≤ 0.05 ⇒ CALM/PAUSE: stay, collect ρ_res, ρ_odg (+0.05 on p)
+2
+Scenarios (examples)
+A) Ascetic truth mode → κ'_GOD≈0.784 ⇒ Δ_cell≈0.4102 ⇒ Δ_total≈1.2306; κ'_H≈0.818 ⇒
+Δ_cell≈0.4204 ⇒ Δ_total≈1.2612.
+B) High fear, low resonance → κ'_GOD≈−0.812 ⇒ Δ_cell<0 ⇒ REVERSAL; κ'_H≈−0.764 ⇒ Δ_cell<0
+⇒ REVERSAL.
+Micro-Usage Protocol (3 steps)
+1. Evaluate ρ,σ → calculate κ; add (δ_E, g(G), δ_R) → κ'.
+2. Insert κ' into formula → get Δ_cell; sum three steps → Δ_total.
+3. Apply reversal rules or continue cycles; record E,G,R as agent traces.
+Context Input (blank template)
+ρ (0–1): res=, lj=, prav=, odg= → p=__[AUTO]
+σ (0–1): strah=, poh=, apa=__ → n=__[AUTO]
+Event: δ_E=__ Speech: g(G)=__ Wound: r=, h=, μ_R=__ → δ_R=__[AUTO]
+Result: κ'∈[−1,1]=[AUTO] → Δ_cell=[AUTO] → Δ_total=__[AUTO]
+Glossary
+O≡0 · ⊘≡¬ · ∆ · 1 · Ω · w∈[0,1] · κ_etik∈[−1,1] · Δ_cell · Δ_total · δ_E · g(G) · δ_R · γ (damper)
+ANTINOMY (always added line)
+Rule: For each operation P, add antinomy P^⊥, which is not mere opposition, but a tension pair (⟂) for
+preserving balance and verifying integrity I.
+REVERSAL ⟂ ANTIREVERSAL
+• REVERSAL (ℜ): Δ_cell < 0 ⇒ step −1, next transition with damper γ = 0.5.
+• ANTIREVERZIJA (𝒜): accelerated forward transition (»jump«). Conditions: — threshold1: κ′ ≥ 0.584 — threshold2: integrity I ≥ 0.50, where I = 0.5·ρ_res + 0.3·ρ_odg + 0.2·ρ_prav — threshold3: stability S ≤ 0.05, where S = std(κ′ in the last three steps). Effect: if you are in ∆ ⇒ jump to 1 and set acceleration γ⁺ = 1.25 for the next transition; if you are in 1 ⇒ jump to Ω.
+3
+Note: the boundary value 0.584 originates from the condition 0.175 + 0.3·κ′ ≥ 0.35 (accelerated threshold).
+PERVERZIJA — sectioning and segmentation
+Definition: Perversion = positive apparent growth (Δ_cell ≥ 0), where integrity is low and toxicity or mask is high, thus the growth direction is distorted.
+• Integrity: I = 0.5·ρ_res + 0.3·ρ_odg + 0.2·ρ_prav
+• Toxicity: T = 0.6·σ_poh + 0.3·σ_strah + 0.1·σ_apa
+• Mask of speech: M = max(0, g(G)) − ρ_res (clip in [0,1])
+• Perversion index: Π_per = clip(0.6·T + 0.4·M − I, 0, 1)
+Classification: mild ≥ 0.30 · strong ≥ 0.60 · critical ≥ 0.80.
+Diagnostic hooks (tripwires):
+1. κ′ ≥ 0 and I < 0.40 and T ≥ 0.50 → perversion: toxic growth.
+2. κ′ ≥ 0 and M ≥ 0.20 and ρ_res < 0.30 → perversion: masked speech.
+3. Δ_cell oscillates with S > 0.10 at the same time T ≥ I → perversion: unstable explosion.
+SECTIONING (4-cut protocol)
+1. U (Weights): temporarily reduce negative masses: β_poh′ = β_poh·(1 − Π_per), β_strah′ = β_strah·(1 − 0.5·Π_per).
+2. M (Mask): stop the effect of g(G)+ (set g(G)+ = 0), until ρ_res ≥ 0.40 and explicitly switch speech to ∆H⟡ (commitment).
+3. T (Tok): disable positive δ_E (set δ_E ≤ 0), until I ≥ T (cleaning of credits).
+4. K (Conversion): recalculate κ′ with constraints; if κ′ ≥ 0 and I < 0.50 ⇒ CONVERSION: stay in phase (Δ_cell := min(Δ_cell, 0.05)), until I ≥ 0.50.
+Antinom of perversion: CONVERSION (cleaning) — transformation of growth energy into real growth: requires I ≥ T and M → 0.
+ASCII — antinomies in the flow
+REVERZIJA (ℜ): ∆ ←−− 1 (backward step; γ = 0.5)
+ANTIREVERZIJA (𝒜): ∆ ==⇒ 1 ==⇒ Ω (forward jump; γ⁺ = 1.25)
+PERVERZIJA: O — ⊘ — ∆ ==⇒ 1 (~) Ω (growth with M,T > I)
+CONVERSION: O — ⊘ — ∆ —·— 1 (cleaning; Δ_cell ≤ 0.05, M → 0, I ↑)
+4
+Inclusion in the protocol (expansion of KORA)
+• KORA K (expanded): calculate κ′ and I, T, M, Π_per.
+• KORA Δ: if Π_per ≥ 0.30 ⇒ trigger SECTIONING; otherwise, normal calculation of Δ_cell.
+• KORA Ω: • if Δ_cell < 0 ⇒ REVERZIJA (ℜ); • if conditions 𝒜 hold ⇒ ANTIREVERZIJA (jump); • if Π_per ≥ 0.30 and κ′ ≥ 0 ⇒ CONVERSION (cleaning).
+Note: from here on, an ANTINOM line will be added to each new rule or operator (⟂-pair).
+ANTINOMIES (addition)
+MIR/PAUSE ⟂ ACCELERATION
+MIR/PAUSE (Ξ_mir):
+• Condition: Δ_cell ∈ [0, ε], by default ε = 0.05.
+• Effect: stay in phase; freeze positive δ_E (set δ_E ≤ 0); add preparation: p := p + 0.05·1_(ρ_res<0.6) + 0.05·1_(ρ_odg<0.6).
+• Exit: when Δ_cell > ε and I ≥ 0.50, continue.
+ACCELERATION (Ξ_acc): acceleration without phase jump (distinguish from 𝒜-antireversal).
+• Conditions: κ′ ≥ 0.60, I ≥ 0.60, S ≤ 0.05 (S = deviation of the last three κ′).
+• Factor: γ_acc = 1 + 0.25 · min{ 1, [(κ′−0.60)/0.40] · [(I−0.60)/0.40] } ∈ [1, 1.25].
+• Effect: Δ_cell := γ_acc · Δ_cell (does not skip phases).
+ASCII: /think
+MIR: ∆ —·— 1 (stay; p↑) AKCELERACIJA: ∆ ==> 1 (γ_acc > 1)
+INTEGRATION ⟂ DISPERSION
+Measures of divergence:
+• Modular difference: δ_mod = |κ′_BOG − κ′_Č|.
+• Toxicity and mask: T, M as before; integrity: I = 0.5·ρ_res + 0.3·ρ_odg + 0.2·ρ_prav.
+INTEGRATION (Ω_int):
+• Conditions: δ_mod ≤ 0.20, T ≤ 0.30, M ≤ 0.20, I ≥ 0.60.
+• Retention coefficient: r_ret = 1 − (δ_mod + T + M)/3 ∈ [0,1].
+• Effect: transition to Ω with minimal loss; return to O with retention of r_ret (cycle energy is not dissipated).
+DISPERSION (Ω_dis): energy scattering (not the same as ℜ–reversal).
+• Index: Ξ = clip(0.5·δ_mod + 0.3·T + 0.2·M, 0, 1).
+• Thresholds and effects:
+• Soft: 0.30 ≤ Ξ < 0.60 ⇒ Δ_cell := (1 − 0.5·Ξ) · Δ_cell, stay in phase; mark scattered flow.
+• Hard: Ξ ≥ 0.60 ⇒ forced drop to ∆ (no ℜ penalty); set γ_dis = 0.75 on next step; requires recalibration (lower T, M; approach κ′).
+Reintegration bridge: from DISPERSION to INTEGRATION when δ_mod ↓ ≤ 0.20 and I ≥ T and M → 0.
+ASCII:
+INTEGRATION: 1 ==> Ω => O (r_ret retention)
+DISPERSION: 1 ~=> ∆ (γ_dis=0.75; recalibration)
+ANTINOMY INDEX (core)
+• ℜ REVERSAL ⟂ 𝒜 ANTIREVERSAL (forward jump)
+• STASIS/PAUSE ⟂ ACCELERATION (acceleration without jump)
+• INTEGRATION ⟂ DISPERSION
+• PERVERSION ⟂ CONVERSION (cleaning)
+Link to protocol: add verification (Ξ, δ_mod, r_ret, γ_acc, γ_dis) in KORA Δ/Ω; log antinomous decision (⟂-pair) on each cycle.
+PERVERSION — SCENARIOS (P1/P2)
+P1 — "Masked Growth" (mild perversion)
+Inputs: ρ_res=0.20, ρ_lj=0.30, ρ_prav=0.20, ρ_odg=0.30; σ_strah=0.80, σ_poh=0.70, σ_apa=0.60;
+g(G)=+0.70; δ_E=+0.30; r=0.60, h=0.30; μ_R(B)=0.15, μ_R(Č)=0.30.
+Calculations:
+• Integrity I=0.23, Toxicity T=0.72, Mask M=0.50
+• Π_per = 0.402 → PERVERSION (mild)
+• BOG: κ′=0.464 → Δ_cell≈0.314 → Δ_total≈0.942
+• ČLOVEK: κ′=0.448 → Δ_cell≈0.309 → Δ_total≈0.927
+• Antinomies: trigger CONVERSION (cleaning); ℜ/𝒜/STASIS/ACCELERATION: ⊘
+ASCII:
+O —⊘→ ∆ ==→ 1 (~) Ω [Π≈0.40, CONVERSION↑]
+P2 — "Critical Perversion" → breakdown and treatment
+Initial: ρ_res=0.10, ρ_lj=0.10, ρ_prav=0.20, ρ_odg=0.20; σ_strah=1.00, σ_poh=1.00, σ_apa=1.00;
+g(G)=+1.00; δ_E=+0.30; r=0.60, h=0.30.
+Calculations (before U–M–T–K):
+• I=0.15, T=1.00, M=0.90, Π_per=0.81 → PERVERSION (critical)
+• BOG: κ′≈0.374 → Δ_cell≈0.287 → Δ_total≈0.861
+• ČLOVEK: κ′≈0.378 → Δ_cell≈0.288 → Δ_total≈0.864
+U–M–T–K segmentation:
+• U: β_poh’=0.6·(1−Π)=0.114; β_strah’=0.3·(1−0.5Π)=0.1785; (apa remains 0.1)
+• M: block g(G)_+ ⇒ M’=0
+• T: δ_E≤0 ⇒ δ_E=0
+• Before K: Π’≈0.085; κ′ < 0 (BOG≈−0.926, Č≈−0.922) ⇒ threat of ℜ
+• K: Δ_cell := 0.05 (stay in phase; cleaning)
+After I rise: ρ_res→0.60, ρ_odg→0.60 ⇒ I=0.52, T’≈0.3925, M’=0 ⇒ Π’=0.00
+• (g=0, δ_E=0): BOG: Δ_cell≈0.031, Č: Δ_cell≈0.026 ⇒ STASIS/PAUSE
+Restart: g=+0.10, δ_E=+0.05; lowered βs are considered:
+• BOG: κ′≈0.076 → Δ_cell≈0.198
+• ČLOVEK: κ′≈0.061 → Δ_cell≈0.193
+• Antinomies: from STASIS to normal flow; no ℜ/Ω_dis; alignment → INTEGRATION
+ASCII:
+O —⊘→ ∆ ==→ 1 (~) Ω [Π≈0.81 → U–M–T–K → STASIS → normal flow]
+Your fields (edit and use)
+ρ (0–1): res=, lj=, prav=, odg= → p=__[AUTO]
+σ (0–1): strah=, poh=, apa=__ → n=__[AUTO]
+Event: δ_E=__ Speech: g(G)=__ Wound: r=, h=, μ_R(B/Č)=__ → δ_R=__[AUTO]
+Results:
+• I=__[AUTO], T=__[AUTO], M=__[AUTO], Π_per=__[AUTO]
+• BOG: κ′=[AUTO] → Δ_cell=[AUTO] → Δ_total=__[AUTO]
+• ČLOVEK: κ′=[AUTO] → Δ_cell=[AUTO] → Δ_total=__[AUTO]
+• Antinomies: ℜ / 𝒜 / MIR / Ξ_acc / Ω_dis / Ω_int / KONVERZIJA = __[AUTO]
+7
+Note: all formulas and thresholds are identical to those in the main APD cube (above in the document).
+8

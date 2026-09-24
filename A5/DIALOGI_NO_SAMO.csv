@@ -1,0 +1,13 @@
+ID,Okvir,Predloga,Osa,Primer
+1,Potrditev (afirmacija),"temeljno potrjujem, da {X} v okviru {AXIS}",vest,"temeljno potrjujem, da meje veljajo v okviru vest"
+2,Pogoj,"pod pogojem, da {X}, nadaljujemo v osi {AXIS}",vest,"pod pogojem, da je privolitev jasna, nadaljujemo v osi vest"
+3,Omejitev,v tem okviru je merodajno {X},svet,"v tem okviru je merodajno, da ostanemo v tišini"
+4,Fokus,osrediščeno obravnavam {X} na osi {AXIS},sebe,osrediščeno obravnavam svoj odziv na osi sebe
+5,Prioriteta,prednostno naslavljam {X},svet,prednostno naslavljam varnost pogovora
+6,Odgovornost,v tej odgovornosti prevzemam {X},sebe,v tej odgovornosti prevzemam jasen stik
+7,Meja,merodajno postavljam mejo: {X},vest,merodajno postavljam mejo: brez pritiska
+8,Priznanje,temeljno priznavam {X} kot veljavno,svet,temeljno priznavam tvojo odločitev kot veljavno
+9,Prošnja,osrediščeno prosim za {X} v okviru {AXIS},svet,osrediščeno prosim za več jasnosti v okviru svet
+10,Strinjanje,v tem okviru se strinjam z {X},svet,v tem okviru se strinjam z razporeditvijo časa
+11,Nestrinjanje,"v tem okviru se ne strinjam z {X}, predlagam {Y}",vest,"v tem okviru se ne strinjam z nadaljevanjem pritiska, predlagam tišino s skrbjo"
+12,Prehod,prestopimo v {PHASE} in ohranimo μ v sredini,sebe|svet|vest,prestopimo v hold in ohranimo μ v sredini

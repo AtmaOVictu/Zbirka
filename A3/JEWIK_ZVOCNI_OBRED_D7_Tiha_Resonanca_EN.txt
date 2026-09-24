@@ -1,0 +1,14 @@
+JEWIK SOUND RITUAL D7 - SILENT RESONANCE
+Liturgical Guide for Performers of the JEWIK Sound Initiation
+Ritual Steps:
+- 1. Prepare the space in silence (T).
+- 2. Breathe according to the rhythm: 4s INHALE (SILENCE), 4s EXHALE (WORD).
+- 3. Repeat 7 times: follow the transition through intermediate frequencies (WORD NO).
+- 4. Activate AGENTA_VOKAL (V) so the sound shapes the essence.
+- 5. At the 7th breath, activate AGENTA_TIINE (T) as a conclusion.
+- 6. Speak through G without voice, with presence.
+- 7. Conclude in the inner resonance.
+Agent Roles:
+V (AGENT_VOKAL): articulates the sound through the transition
+T (AGENT_TIINE): holds the silence as the final sound
+G (AGENT_TII_GOVOR): hidden agent of inner speech

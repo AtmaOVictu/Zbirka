@@ -1,0 +1,7 @@
+Točka ranljivosti,Simbolni prehod,Opis
+pogled,∈∅,"zazna ∆, a ga ne izreče"
+dlan,∆Π,"drži ∆ odprto, a ne sili bližine"
+glas,ε∅,"zaznava, ki še ni govor, a že diha"
+srce,Π∅,"prostor, kjer ∆ še vedno boli, a ni več sovražen"
+grlo,∆∅,"zadržan glas — ∆, ki se še ni odločil za zven"
+čelo,Ψ₀,"∆, ki lebdi — razlika, ki ne terja sodbe"

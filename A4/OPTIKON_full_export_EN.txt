@@ -1,0 +1,12 @@
+Word	Sound	Direction	Emotion	Function
+dih	d/i/h	down / inside / front	life, presence	rhythm of living, basic impulse
+hope	u/p/a/n/j/e	front / up / right	expectation, yearning	openness to the future, direction of thought
+fear	s/t/r/a/h	back / down / inside	protection, tension	alarm signal, maintaining the gap
+love	l/j/u/b/e/z/e	negative / above / through	giving, light, warmth	connection, dissolution of the boundary between self and other
+sadness	ž/a/l/o/s/t	down / left / back	loss, acceptance	response to the end, internal purification
+laughter	s/m/e/h	front / up / outside	liberation, resonance	breaking of tension, wave of joy
+path	p/o₀/t	middle / down / forward	searching, movement	orientation, step into the unknown
+loyalty	z/v/e/s/t/o/b/a	back / down / in the middle	maintaining, inner strength	strength of the relationship, identity constant
+voice	g/l/a/s	front / inside / up	expression, reality	bridge between inner and outer
+guilt	k/r/i/v/d/a	back / inside / down	weight, pressure	self-accusation, moral imprint
+response	o/d/g/o/v/o/r	front / outside / outward	expectation, decision	acoustic confirmation of awareness, bridge to the other

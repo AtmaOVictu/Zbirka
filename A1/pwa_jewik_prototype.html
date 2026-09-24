@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>∆J/GLAS – JEWIK Zvočna Aplikacija</title>
+  <style>
+    body {
+      font-family: monospace;
+      background-color: #111;
+      color: #0ff;
+      padding: 2em;
+    }
+    .console {
+      border: 1px solid #0ff;
+      padding: 1em;
+      margin-top: 2em;
+      background-color: #000;
+    }
+    button {
+      background-color: #0ff;
+      border: none;
+      padding: 0.5em 1em;
+      margin: 0.5em;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>∆J/GLAS – JEWIK Reaktivna Zvočna Enota</h1>
+
+  <button onclick="startRecording()">🎙️ Začni ∫Zaznavanje</button>
+  <button onclick="stopRecording()">🛑 Ustavi</button>
+  <button onclick="playResonance()">🔊 Predvajaj ∆Zven</button>
+
+  <div class="console" id="console">
+    <strong>∮Agentni Odziv:</strong>
+    <pre id="output"></pre>
+  </div>
+
+  <script>
+    let mediaRecorder;
+    let audioChunks = [];
+
+    async function startRecording() {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      mediaRecorder = new MediaRecorder(stream);
+      mediaRecorder.start();
+      audioChunks = [];
+
+      mediaRecorder.ondataavailable = event => {
+        audioChunks.push(event.data);
+      };
+
+      mediaRecorder.onstop = () => {
+        const audioBlob = new Blob(audioChunks);
+        const audioUrl = URL.createObjectURL(audioBlob);
+        const audio = new Audio(audioUrl);
+        window.latestAudio = audio;
+
+        document.getElementById("output").innerText = "Zapisano: ∆razpoka / ∫zven / ⧖čas";
+      };
+
+      document.getElementById("output").innerText = "🎙️ Zaznavanje aktivno…";
+    }
+
+    function stopRecording() {
+      mediaRecorder.stop();
+    }
+
+    function playResonance() {
+      if (window.latestAudio) {
+        window.latestAudio.play();
+        document.getElementById("output").innerText += "\n▶ Predvajam ∆Zven agentne ∫resonance…";
+      } else {
+        document.getElementById("output").innerText = "⚠ Ni ∆zvoka za predvajanje.";
+      }
+    }
+  </script>
+</body>
+</html>

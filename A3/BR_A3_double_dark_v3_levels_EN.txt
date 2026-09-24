@@ -1,0 +1,48 @@
+BOGOVSKI REGISTER I Prstani + nivoji (TEMNA)
+Egypt M
+Gr ija A
+Nordija X
+Zeus Perun
+Slovani
+Luka H
+Amalgam
+w_degree: 2.0
+P
+H
+Veles
+w_degree: 4.0 w_degree: 4.0
+Izida Freya w_degree: 3.0
+Thor
+w_degree: 2.0
+w_degree: 5.0
+Mokosh
+Athena
+w_degree: 1.0 Loki
+w_degree: 3.0
+Izida
+w_degree: 6.0 Hades
+w_degree: 9.0
+w_degree: 4.0 Osiris
+w_degree: 7.0
+VOLK Ra Zeus Odin Perun SAMO Seth Loki
+Egypt Gr ija Nordija Slovani Luka Amalgam
+KOZMI NI DRU BENI OSEBNI HIBRIDNI
+w_degree: 2.0 w_degree: 5.5 w_degree: 11.0 w_degree: 5.0 w_degree: 9.0 w_degree: 5.0 w_degree: 2.0
+Horus
+Dioniz w_degree: 7.0
+Seth
+Freya w_degree: 2.0
+w_degree: 8.5
+Hermes
+Svarog w_degree: 3.0
+w_degree: 4.0
+w_degree: 1.0
+Hel
+Hades Hel
+w_degree: 6.0
+w_degree: 2.0 Morana
+MOLK DOLG
+w_degree: 5.0
+w_degree: 1.0 w_degree: 2.0
+SAMO Morana
+w_degree: 2.0 /think

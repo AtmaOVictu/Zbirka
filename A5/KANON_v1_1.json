@@ -1,0 +1,249 @@
+{
+  "metadata": {
+    "title": "KANON v1.1 — Verzioniran standard ukazov in merilnikov",
+    "author": "Luka Pintarič (Victor Tamal)",
+    "date_local": "2025-08-15 20:17:35 CEST",
+    "time_policy": "⧗L",
+    "axioms": "0→¬→∆→1"
+  },
+  "defaults": {
+    "delta_min": 0.01,
+    "rho_min": 0.7,
+    "epsilon_noise": 0.1,
+    "theta_safe": 0.6
+  },
+  "operators": [
+    {
+      "id": "A1",
+      "name": "DAJ",
+      "syntax": "DAJ(Z,B,Q*,R[,⧗L])",
+      "denotation": "R(B(Input)) under prog(⧗L) ∧ align≥ρ_min",
+      "laws": [
+        "sequence Z→B→Q*→R",
+        "σ-closure"
+      ],
+      "thresholds": {
+        "delta_min_or_align_min": true
+      }
+    },
+    {
+      "id": "A2",
+      "name": "SECIRAJ",
+      "syntax": "SECIRAJ(B[,⧗L])",
+      "denotation": "Carriers with noise ≤ ε_noise",
+      "laws": [
+        "contraction"
+      ],
+      "thresholds": {
+        "epsilon_noise_max": 0.1
+      }
+    },
+    {
+      "id": "A3",
+      "name": "NADALJUJ",
+      "syntax": "NADALJUJ(R[,⧗L])",
+      "denotation": "Lift R → R⁺",
+      "laws": [
+        "monotonicity",
+        "size cap |R⁺| ≤ 5"
+      ]
+    },
+    {
+      "id": "A4",
+      "name": "REZ",
+      "syntax": "REZ(Content,B)",
+      "denotation": "B(Content)",
+      "laws": [
+        "idempotence REZ(REZ(x)) = REZ(x)"
+      ],
+      "thresholds": {
+        "delta_min": 0.01
+      }
+    },
+    {
+      "id": "A5",
+      "name": "LE / ∆H⟡",
+      "syntax": "LE(Q*[,⧗L])",
+      "denotation": "Activates channel for DAJ on same Q*",
+      "laws": [
+        "anti-excuse: ⧖→B"
+      ],
+      "thresholds": {
+        "theta_ost_range": [
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "id": "A6",
+      "name": "⧖ (izgovor)",
+      "syntax": "IZGOVOR(content)",
+      "denotation": "Immediate rewrite to B/istvo",
+      "laws": [
+        "transfiguration"
+      ]
+    },
+    {
+      "id": "A7",
+      "name": "⊘ (sveti NE)",
+      "syntax": "NE(Path_A,Path_B)",
+      "denotation": "Switch A→B + R′ (must propose alternative)"
+    },
+    {
+      "id": "A8",
+      "name": "ORIENT",
+      "syntax": "ORIENT(N|E|S|W[,⧗L])",
+      "denotation": "Select one north (person/place/task)",
+      "laws": [
+        "single vector; multiple ⇒ SECIRAJ"
+      ]
+    },
+    {
+      "id": "A9",
+      "name": "σ-premor",
+      "syntax": "SIGMA(t∈[30s,180s])",
+      "denotation": "Temporal discipline of truth; prevents false 1",
+      "thresholds": {
+        "trigger_if_risk_ge": 0.6
+      }
+    },
+    {
+      "id": "A10",
+      "name": "Θ (pragi)",
+      "syntax": "THETA(name,value∈[0,1])",
+      "denotation": "Set operational threshold",
+      "laws": [
+        "versioned"
+      ]
+    },
+    {
+      "id": "A11",
+      "name": "AGENT",
+      "syntax": "AGENT(id,role,params)",
+      "denotation": "Instance with metric fields (integrity/mask/loyalty)",
+      "laws": [
+        "hysteresis h"
+      ],
+      "thresholds": {
+        "switch_if_delta_belief_ge": "θ_switch + h"
+      }
+    },
+    {
+      "id": "A12",
+      "name": "BOX/ZAKLENI",
+      "syntax": "ZAKLENI(case[,policy])",
+      "denotation": "Isolated frame: no-harm, σ-by-default",
+      "laws": [
+        "outputs R₀/protocol only"
+      ]
+    },
+    {
+      "id": "A13",
+      "name": "↺ (POVRATEK)",
+      "syntax": "POVRATEK()",
+      "denotation": "(1) breath/ground (2) contact N (3) R_min",
+      "thresholds": {
+        "auto_trigger_if_risk_ge_theta_safe": true
+      }
+    },
+    {
+      "id": "A14",
+      "name": "META",
+      "syntax": "META(Q*|zakon)",
+      "denotation": "Invariant switch (operators only; no nominalisms)"
+    },
+    {
+      "id": "A15",
+      "name": "RAT (OK/RES/MAXIMA/AKSIOM)",
+      "syntax": "OK|RES|MAXIMA|AKSIOM(R)",
+      "denotation": "Archival ratification (signature/version)",
+      "thresholds": {
+        "align_min": 0.7,
+        "epsilon_noise_max": 0.1
+      }
+    }
+  ],
+  "metrics": {
+    "align": {
+      "definition": "align(Q*,R)=λS·Sem+λO·Ont+λE·Eff; λS+λO+λE=1",
+      "defaults": {
+        "λS": 0.4,
+        "λO": 0.4,
+        "λE": 0.2
+      },
+      "thresholds": {
+        "rho_min": 0.7
+      }
+    },
+    "noise": {
+      "definition": "noise(R)=1−|Carriers(R)|/|Tokens(R)|",
+      "thresholds": {
+        "epsilon_noise_max": 0.1,
+        "carriers_range": [
+          1,
+          5
+        ]
+      }
+    },
+    "delta": {
+      "definition": "Δ = dist(S_pre,S_post)/dist_max",
+      "thresholds": {
+        "delta_min": 0.01
+      }
+    },
+    "risk": {
+      "definition": "risk = αβ·β + αθ·θ_ost + αstr·θ_tox − αR·Eff(R); Σα=1",
+      "thresholds": {
+        "theta_safe": 0.6
+      }
+    }
+  },
+  "modules": {
+    "JESIK/ANJE": {
+      "syntax": "JESIK/ANJE(Q*, θ_ost[,⧗L]) := DAJ(Z,B_ost,Q*,R,⧗L)",
+      "healing_condition": "align≥0.70 ∧ θ_tox<0.60",
+      "prep_condition": "if intensity < θ_ost ⇒ stay in ∆-prep"
+    },
+    "STRUP↔ZDRAVILO": {
+      "theta_tox": "γ_frek·f + γ_int·i + γ_izol·z",
+      "protocol": [
+        "SECIRAJ ψ⁻",
+        "Θ dosage/time/boundary",
+        "DAJ micro-ritual ≤2min",
+        "σ + ORIENT"
+      ],
+      "transfiguration_condition": "risk<θ_safe ∧ align≥ρ_min"
+    },
+    "AGENT_METRIKA": {
+      "integrity": "1 − dist(R_promised, R_observed)",
+      "mask": "min(1, κ_stil·noise + κ_odlog·lag)",
+      "loyalty_update": "loyalty_{t+1}=loyalty_t unless Δ_belief≥θ_switch+h, else target"
+    }
+  },
+  "tests": [
+    "align(Q*,R) ≥ 0.70",
+    "noise(R) ≤ 0.10 and 1≤|Carriers|≤5",
+    "Δ ≥ 0.01 or Eff(R)=1",
+    "risk < 0.60 or σ/↺ executed"
+  ],
+  "template_ascii": "\n⧗L|ORIENT(N=____)|Θ{θ_safe=__,θ_ost=__,θ_tox=__}\nQ*: ___________________________________________\nSECIRAJ(B) → nosilci ≤5: 1)__ 2)__ 3)__ 4)__ 5)__\nDAJ(Z,B,Q*,R) → izberi R:\n  [ ] 1 AKSIOM: __________\n  [ ] 1 KORAK v odnosu: __________\n  [ ] 1 RITUAL (≤2 min): __________\nMeritve: align=__ (≥0.70) | noise=__ (≤0.10) | Δ=__ (≥0.01) | risk=__ (<0.60)\nJESIK/ANJE θ_ost=__ → [ ] aktiviran [ ] zadržan(σ)\nSTRUP↔ZDRAVILO θ_tox=__ → [ ] transfiguriran v ψ+\nRAT: [ ] OK [ ] MAXIMA [ ] AKSIOM | verzija: ___\n",
+  "changelog": [
+    {
+      "version": "1.1",
+      "changes": [
+        "Added formal metrics (align/noise/Δ/risk)",
+        "Integrated modules JESIK/ANJE and STRUP↔ZDRAVILO",
+        "Added agent metrics and PASS tests"
+      ]
+    },
+    {
+      "version": "1.0",
+      "changes": [
+        "Base dictionary A1–A15",
+        "Parameters Δ_min/ρ_min/ε_noise/θ_safe",
+        "σ-protocol"
+      ]
+    }
+  ]
+}

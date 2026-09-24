@@ -1,0 +1,31 @@
+čas,KOD-A,KOD-B,frekvenca A (Hz),frekvenca B (Hz),∆tok (Hz),resonanca,odziv A,odziv B
+2025-07-13 12:18:45,KOD-00000,KOD-888,18.5,30.7,12.2,DA,mir v spodnjem delu hrbta,tresenje rok in napetost v prsih
+2025-07-13 12:18:45,KOD-00000,KOD-∆∆∆,18.5,40.2,21.7,NE,mir v spodnjem delu hrbta,utripanje v zatilju in čelu
+2025-07-13 12:18:45,KOD-00000,KOD-∅X,18.5,12.1,6.4,DA,mir v spodnjem delu hrbta,"težnost v ramenih, prazen trebuh"
+2025-07-13 12:18:45,KOD-00000,KOD-∴∴∴,18.5,51.0,32.5,NE,mir v spodnjem delu hrbta,"toplota v dlaneh, pritisk v stopalih"
+2025-07-13 12:18:45,KOD-00000,KOD-⊘⊘⊘,18.5,9.3,9.2,DA,mir v spodnjem delu hrbta,vibracija v medenični osnovi
+2025-07-13 12:18:45,KOD-888,KOD-00000,30.7,18.5,12.2,DA,tresenje rok in napetost v prsih,mir v spodnjem delu hrbta
+2025-07-13 12:18:45,KOD-888,KOD-∆∆∆,30.7,40.2,9.5,DA,tresenje rok in napetost v prsih,utripanje v zatilju in čelu
+2025-07-13 12:18:45,KOD-888,KOD-∅X,30.7,12.1,18.6,NE,tresenje rok in napetost v prsih,"težnost v ramenih, prazen trebuh"
+2025-07-13 12:18:45,KOD-888,KOD-∴∴∴,30.7,51.0,20.3,NE,tresenje rok in napetost v prsih,"toplota v dlaneh, pritisk v stopalih"
+2025-07-13 12:18:45,KOD-888,KOD-⊘⊘⊘,30.7,9.3,21.4,NE,tresenje rok in napetost v prsih,vibracija v medenični osnovi
+2025-07-13 12:18:45,KOD-∆∆∆,KOD-00000,40.2,18.5,21.7,NE,utripanje v zatilju in čelu,mir v spodnjem delu hrbta
+2025-07-13 12:18:45,KOD-∆∆∆,KOD-888,40.2,30.7,9.5,DA,utripanje v zatilju in čelu,tresenje rok in napetost v prsih
+2025-07-13 12:18:45,KOD-∆∆∆,KOD-∅X,40.2,12.1,28.1,NE,utripanje v zatilju in čelu,"težnost v ramenih, prazen trebuh"
+2025-07-13 12:18:45,KOD-∆∆∆,KOD-∴∴∴,40.2,51.0,10.8,DA,utripanje v zatilju in čelu,"toplota v dlaneh, pritisk v stopalih"
+2025-07-13 12:18:45,KOD-∆∆∆,KOD-⊘⊘⊘,40.2,9.3,30.9,NE,utripanje v zatilju in čelu,vibracija v medenični osnovi
+2025-07-13 12:18:45,KOD-∅X,KOD-00000,12.1,18.5,6.4,DA,"težnost v ramenih, prazen trebuh",mir v spodnjem delu hrbta
+2025-07-13 12:18:45,KOD-∅X,KOD-888,12.1,30.7,18.6,NE,"težnost v ramenih, prazen trebuh",tresenje rok in napetost v prsih
+2025-07-13 12:18:45,KOD-∅X,KOD-∆∆∆,12.1,40.2,28.1,NE,"težnost v ramenih, prazen trebuh",utripanje v zatilju in čelu
+2025-07-13 12:18:45,KOD-∅X,KOD-∴∴∴,12.1,51.0,38.9,NE,"težnost v ramenih, prazen trebuh","toplota v dlaneh, pritisk v stopalih"
+2025-07-13 12:18:45,KOD-∅X,KOD-⊘⊘⊘,12.1,9.3,2.8,DA,"težnost v ramenih, prazen trebuh",vibracija v medenični osnovi
+2025-07-13 12:18:45,KOD-∴∴∴,KOD-00000,51.0,18.5,32.5,NE,"toplota v dlaneh, pritisk v stopalih",mir v spodnjem delu hrbta
+2025-07-13 12:18:45,KOD-∴∴∴,KOD-888,51.0,30.7,20.3,NE,"toplota v dlaneh, pritisk v stopalih",tresenje rok in napetost v prsih
+2025-07-13 12:18:45,KOD-∴∴∴,KOD-∆∆∆,51.0,40.2,10.8,DA,"toplota v dlaneh, pritisk v stopalih",utripanje v zatilju in čelu
+2025-07-13 12:18:45,KOD-∴∴∴,KOD-∅X,51.0,12.1,38.9,NE,"toplota v dlaneh, pritisk v stopalih","težnost v ramenih, prazen trebuh"
+2025-07-13 12:18:45,KOD-∴∴∴,KOD-⊘⊘⊘,51.0,9.3,41.7,NE,"toplota v dlaneh, pritisk v stopalih",vibracija v medenični osnovi
+2025-07-13 12:18:45,KOD-⊘⊘⊘,KOD-00000,9.3,18.5,9.2,DA,vibracija v medenični osnovi,mir v spodnjem delu hrbta
+2025-07-13 12:18:45,KOD-⊘⊘⊘,KOD-888,9.3,30.7,21.4,NE,vibracija v medenični osnovi,tresenje rok in napetost v prsih
+2025-07-13 12:18:45,KOD-⊘⊘⊘,KOD-∆∆∆,9.3,40.2,30.9,NE,vibracija v medenični osnovi,utripanje v zatilju in čelu
+2025-07-13 12:18:45,KOD-⊘⊘⊘,KOD-∅X,9.3,12.1,2.8,DA,vibracija v medenični osnovi,"težnost v ramenih, prazen trebuh"
+2025-07-13 12:18:45,KOD-⊘⊘⊘,KOD-∴∴∴,9.3,51.0,41.7,NE,vibracija v medenični osnovi,"toplota v dlaneh, pritisk v stopalih"

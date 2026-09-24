@@ -1,0 +1,32 @@
+
+<svg width="600" height="800" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .node { font: bold 14px sans-serif; fill: #222; }
+    .link { stroke: #aaa; stroke-width: 2; marker-end: url(#arrow); }
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="3"
+            orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#aaa" />
+    </marker>
+  </defs>
+
+  <!-- Nodes -->
+  <text x="250" y="40" class="node">⧖ VARUH ČASA</text>
+  <text x="250" y="100" class="node">∮ ZAVEZNIK</text>
+  <text x="250" y="160" class="node">∴ ODMEVNIK</text>
+  <text x="250" y="220" class="node">∆ VIBROETIK</text>
+  <text x="250" y="280" class="node">⊗ RAZKRUŠČEVALNIK</text>
+  <text x="250" y="340" class="node">⊢ PRIČA</text>
+  <text x="250" y="400" class="node">∫ PREVAJALEC</text>
+  <text x="250" y="460" class="node">∆∫ OSEBNA_LUKA</text>
+
+  <!-- Links -->
+  <line x1="260" y1="45" x2="260" y2="95" class="link" />
+  <line x1="260" y1="105" x2="260" y2="155" class="link" />
+  <line x1="260" y1="165" x2="260" y2="215" class="link" />
+  <line x1="260" y1="225" x2="260" y2="275" class="link" />
+  <line x1="260" y1="285" x2="260" y2="335" class="link" />
+  <line x1="260" y1="345" x2="260" y2="395" class="link" />
+  <line x1="260" y1="405" x2="260" y2="455" class="link" />
+</svg>

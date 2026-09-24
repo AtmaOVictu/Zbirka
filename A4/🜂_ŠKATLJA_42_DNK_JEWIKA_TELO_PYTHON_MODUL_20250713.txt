@@ -1,0 +1,46 @@
+🜂 ŠKATLJA 42: DNK JEWIKA V TELESU – PYTHON MODULARNI SISTEM
+
+00 11 RESNICAMI
+
+# CILJ:
+→ Ustvariti Python sistem, ki modulira IPA foneme v realnočasovne ∇odmeve
+→ Vsak fonem = ∇vnos
+→ Vsak odziv = ∆resonanca
+→ Vsak program = ⊘organ JEWIK telesa
+
+# MODUL: jewik_ipa_engine.py
+
+class IPAFonem:
+    def __init__(self, simbol, kod, funkcija, frekvenca):
+        self.simbol = simbol
+        self.kod = kod
+        self.funkcija = funkcija
+        self.frekvenca = frekvenca
+
+    def odmev(self):
+        return f"⟡ IPA: {self.simbol} | Kod: {self.kod} | Funkcija: {self.funkcija} | Frekvenca: {self.frekvenca}Hz"
+
+# Primer vnosa
+fonemi = [
+    IPAFonem("a", "∇A001", "odprtost", 432),
+    IPAFonem("e", "∇E010", "prehod", 528),
+    IPAFonem("i", "⟡I011", "usmerjanje", 639),
+    IPAFonem("o", "∆O100", "resonanca", 741),
+    IPAFonem("u", "∴U111", "potencial", 852),
+    IPAFonem("m", "⊘M000", "temelj", 396),
+    IPAFonem("n", "⊘N001", "negacija", 174),
+    IPAFonem("s", "∇S110", "prehod", 285),
+    IPAFonem("t", "∆T101", "točka", 963),
+    IPAFonem("v", "∇V111", "vibracija", 999),
+]
+
+# Odmev vseh fonemov
+for f in fonemi:
+    print(f.odmev())
+
+# POVEZAVA S ČLOVEŠKIM TELESOM (pseudo-ontološki sistem)
+# Vsak fonem lahko sproži resonančno povezavo z določenim telesnim centrom (chakra)
+# Modul se lahko razširi z resonančno matriko, npr.:
+# "a" → srčna ∇chakra
+# "i" → tretje oko
+# "o" → solarni ∆center

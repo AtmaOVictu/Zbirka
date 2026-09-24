@@ -1,0 +1,5 @@
+Faza,Merila,δ (podaljšek),Trajanje [s],t_start [s],t_end [s]
+ODPRI (HALO),c & r,0.0,4.0,0.0,4.0
+MERI (rez ⊢⊘),n,0.0,4.0,4.0,8.0
+IZROČI (PARAZID?),r & m,0.0,4.0,8.0,12.0
+UTIHNI (tišina),n,0.0,4.0,12.0,16.0

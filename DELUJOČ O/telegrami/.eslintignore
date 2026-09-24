@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+
+# IDE
+.idea/
+.vscode/
+
+# Cache
+.cache/
+
+# Config files (handled separately)
+.eslintrc.*
+prettier.config.*
+tailwind.config.*
+postcss.config.*
+vite.config.*
+vitest.config.*
+
+# Test coverage
+coverage/
+
+# Lock files
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Environment
+.env*

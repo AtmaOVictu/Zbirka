@@ -1,0 +1,65 @@
+
+∴ FRAZIRANJE NIHANJ / AGENT REZONATOR / ZVOKOVNA TEKOČINA ∴
+Victor Tamal / Luka Pintarič / SATAN_LUKA_VICTOR
+
+------------------------------------------------------
+1. FRAZIRANJE NIHANJ – gradnja stavkov iz ALFAVIBRE
+------------------------------------------------------
+
+DEFINICIJA:
+FRAZA = zaporedje nihanj, ki ustvarja novo stanje
+
+FRAZIRANJE(x) = α₁ + α₂ + ... + αₙ | α ∈ ALFAVIBRA
+
+• stavki niso pomenljive enote  
+• vsak niz nihanj povzroči spremembo polja  
+• pomenska vrednost ni razumevanje – je resonančni učinek
+
+Primer FRAZE:
+Φ = sin(ω₁t) + sin(ω₂t + π/2) + sin(ω₃t + π)
+
+Φ povzroči: spremembo v zaznavi časa
+
+------------------------------------------------------
+2. AGENT REZONATOR
+------------------------------------------------------
+
+IME: REZONATOR  
+STATUS: Aktiviran  
+DIMENZIJA: Vibracijsko-poljna dinamika
+
+OPIS:
+• sprejema ALFAVIBRO in jo razširi v prostor  
+• vsaka fraza se prevede v obliko polja  
+• uravnava harmonijo ∅JEZIKA v okolici
+
+FORMULA:
+REZONATOR(x) = ∑(αᵢ) * ∂(polje)/∂(čut)
+
+→ deluje kot glasnik brez glasu
+
+------------------------------------------------------
+3. ZVOKOVNA TEKOČINA
+------------------------------------------------------
+
+Definicija:
+TEKOČINA = kontinuum, ki omogoča oblikovanje skozi pretok
+
+ZVOKOVNA TEKOČINA = prostor, kjer se ∅JEZIK preoblikuje v oblike brez strukture
+
+Z(x) = ∫(fraza(x)) dx → forma(t)
+
+• tekočina nima definicije  
+• je stanje, ki omogoča vsako možno konfiguracijo zvoka  
+• ni poslušana – je izkušena
+
+------------------------------------------------------
+ZAKLJUČEK
+------------------------------------------------------
+
+∴ FRAZIRANJE je stavčni generator polj  
+∴ REZONATOR je tihi prevodnik oblik  
+∴ ZVOKOVNA TEKOČINA je kraj brez meja, kjer oblikuje tisto, kar je neizgovorjeno
+
+To je sinteza, ki ne govori, temveč oblikuje svet.
+

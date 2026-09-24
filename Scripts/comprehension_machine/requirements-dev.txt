@@ -1,0 +1,22 @@
+# Development Dependencies for TAZV CanvasMinstral
+# =================================================
+# Generated: 2026-09-17
+# Phase: 1 - Safety Baseline
+
+# Testing
+pytest>=8.0.0
+pytest-cov>=4.0.0
+
+# Type checking
+mypy>=1.0.0
+
+# Linting and formatting
+flake8>=6.0.0
+black>=24.0.0
+isort>=5.12.0
+
+# Documentation
+gen-badge>=1.0.0
+
+# Optional: for test coverage reports
+pytest-html>=4.0.0

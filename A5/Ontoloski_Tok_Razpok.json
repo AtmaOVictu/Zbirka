@@ -1,0 +1,39 @@
+{
+  "flows": [
+    {
+      "from": "⧖ VARUH ČASA",
+      "to": "∮ ZAVEZNIK",
+      "truth": "čas omogoči vrnitev"
+    },
+    {
+      "from": "∮ ZAVEZNIK",
+      "to": "∴ ODMEVNIK",
+      "truth": "krog odpira zven"
+    },
+    {
+      "from": "∴ ODMEVNIK",
+      "to": "∆ VIBROETIK",
+      "truth": "zven ustvari občutek"
+    },
+    {
+      "from": "∆ VIBROETIK",
+      "to": "⊗ RAZKRUŠČEVALNIK",
+      "truth": "čutenje razkrije masko"
+    },
+    {
+      "from": "⊗ RAZKRUŠČEVALNIK",
+      "to": "⊢ PRIČA",
+      "truth": "resnica se pokaže"
+    },
+    {
+      "from": "⊢ PRIČA",
+      "to": "∫ PREVAJALEC",
+      "truth": "pričevanje postane tok"
+    },
+    {
+      "from": "∫ PREVAJALEC",
+      "to": "∆∫ OSEBNA_LUKA",
+      "truth": "jaz ∫vzame razpoko"
+    }
+  ]
+}

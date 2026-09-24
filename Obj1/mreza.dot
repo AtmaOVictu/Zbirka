@@ -1,0 +1,92 @@
+// Mreža povezav med kamni - Sistem ∅→∆→∂→∮
+// Ustvarjeno: 2026-09-18 14:40:51
+
+digraph RozetniKamni {
+    // Nastavitve
+    rankdir=LR;
+    node [shape=box, style="rounded,filled", fillcolor=lightblue, fontname="Arial"];
+    edge [color=gray40, penwidth=1.5];
+    
+    // Kamni
+    CVII [label="CVII
+Lungta
+(zapis v razpadanju)"];
+    CVIII [label="CVIII
+Sporočilna palica
+(zapis v gibanju)"];
+    CIX [label="CIX
+Nazkovski geoglifi
+(zapis v prostoru)"];
+    CX [label="CX
+Povratna zanka
+(zapis, ki se odziva)"];
+    CXI [label="CXI
+Večkratnost
+(zapis v več nosilcih)"];
+    CXII [label="CXII
+Palimpsest
+(zapis nad zapisa)"];
+    
+    // Povezave (iz CXII dokumenta)
+    CXII -> CXI [label="večkratnost", color=blue];
+    CXII -> CX [label="povratna zanka", color=blue];
+    CXII -> CIX [label="geoglifi", color=green];
+    CXI -> CX [label="odziv", color=blue];
+    CXI -> CIX [label="∮", color=green];
+    CXI -> CVII [label=" namen", color=purple];
+    CX -> CIX [label="hoja", color=green];
+    CX -> CVII [label="veter", color=purple];
+    CIX -> CVII [label="puščava", color=orange];
+    CIX -> CVIII [label="kurir", color=orange];
+    CVII -> CVIII [label="zapis", color=orange];
+    
+    // Markerji (dodani kot vozlišča)
+    marker_∅ [label="∅
+praznina", shape=ellipse, fillcolor=lightgreen];
+    marker_∆ [label="∆
+zapis", shape=ellipse, fillcolor=lightsalmon];
+    marker_∂ [label="∂
+prehod", shape=ellipse, fillcolor=lightpink];
+    marker_∮ [label="∮
+cikel", shape=ellipse, fillcolor=lightyellow];
+    marker_⧖ [label="⧖
+tiheon", shape=ellipse, fillcolor=white];
+    
+    // Povezave markerjev (nevidne)
+    edge [style=dashed, color=gray, penwidth=0.5];
+    CVII -> marker_∅;
+    CVII -> marker_∆;
+    CVII -> marker_∂;
+    CVII -> marker_∮;
+    CVIII -> marker_∅;
+    CVIII -> marker_∆;
+    CVIII -> marker_∂;
+    CIX -> marker_∅;
+    CIX -> marker_∆;
+    CIX -> marker_∂;
+    CIX -> marker_∮;
+    CX -> marker_∅;
+    CX -> marker_∆;
+    CX -> marker_∂;
+    CX -> marker_∮;
+    CX -> marker_⧖;
+    CXI -> marker_∅;
+    CXI -> marker_∆;
+    CXI -> marker_∂;
+    CXI -> marker_∮;
+    CXII -> marker_∅;
+    CXII -> marker_∆;
+    CXII -> marker_∂;
+    CXII -> marker_∮;
+    CXII -> marker_⧖;
+    
+    // Legenda
+    legend [label=<
+        <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="3">
+            <TR><TD COLSPAN="2" ALIGN="CENTER"><B>Legenda</B></TD></TR>
+            <TR><TD>Kamni</TD><TD>Povezave</TD></TR>
+            <TR><TD>• CVII-CXII</TD><TD>• Večkratnost</TD></TR>
+            <TR><TD>• Markerji</TD><TD>• Prehodi</TD></TR>
+        </TABLE>
+    >, shape=plaintext];
+}

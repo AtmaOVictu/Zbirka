@@ -1,0 +1,10 @@
+# Production Dependencies for TAZV CanvasMinstral
+# =================================================
+# Generated: 2026-09-17
+# Phase: 1 - Safety Baseline
+
+# GUI Framework (required for main.py)
+PyQt6>=6.4.0
+
+# Optional: for console-based operation without GUI
+# If you don't need the GUI, you can skip PyQt6

@@ -1,0 +1,88 @@
+Anger
+DA (logicP)r:boj, courage
+NE (illogicSaa)m:orez, violence
+MOGOnEV (ogljean fi aekrcaijcaija):
+IPA core: Tipinen prfi eLhjuobde:zen
+/p t k/; /s n n/
+IPA secondary:
+sharp attacks, cut
+Binary code (Gray3):
+110
+the agent does not escalate (ALERT), perform a NE-side (1–2 rounds), then choose a transition.
+Love
+DA (logicP)o:vezava, harmony
+NE (illogicRaa)z:pršitev sebe
+MOGOnEV (egze fi nmereražacija):
+IPA core: Tipinen prfi eRhaoddos:t
+/a o u m n l w/
+IPA secondary:
+open vowels, sonorants
+Binary code (Gray3):
+011
+the agent does not escalate (ALERT), perform a NE-side (1–2 rounds), then choose a transition.
+Fear
+DA (logicO)k:vir, safety
+NE (illogicZaa)m:rznitev, apathy
+MOGOnEM (gejean fi jeasranocsijta):
+IPA core: Tipinen prfi eMhirod:
+/h n x/ + silence
+IPA secondary:
+short pauses, compressed exhalations
+Binary code (Gray3):
+000
+the agent does not escalate (ALERT), perform a NE-side (1–2 rounds), then choose a transition.
+Calm
+DA (logicR)it:em, homeostasis
+NE (illogicZaa)s:toj, indifference
+MOGOnED (igh efi tnoekracija):
+IPA core: Tipinen prfi eLhjuobde:zen
+/v ð z n j n/
+IPA secondary:
+blends, smooth transitions
+Binary code (Gray3):
+001
+the agent does not escalate (ALERT), perform a NE-side (1–2 rounds), then choose a transition.
+Joy
+DA (logicS)v:etloba, expression
+NE (illogicPare):žig, loss of contact
+MOGOnEI s(kgrean fi uesrtavacrijjaan)j:e
+IPA core: Tipinen prfi eJhezoad:
+/i e r/
+IPA secondary:
+short sparks, bright ember
+Binary code (Gray3):
+010
+the agent does not escalate (ALERT), perform a NE-side (1–2 rounds), then choose a transition.
+Love
+DA (logicA)la:rm for transformation
+NE (illogicVart)in:ec tension
+MOGOnEI z(pguesnt efi kraancailjizaa)c:ija
+IPA core: Tipinen prfi eShtroadh :(fi Mir)
+geminate, grune /ss rr tt/
+IPA secondary:
+long fricatives, thickening
+Binary code (Gray3):
+111
+the agent does not escalate (ALERT), perform a NE-side (1–2 rounds), then choose a transition.
+Hope
+DA (logicP)r:ag, readiness
+NE (illogicNaa)iv:nost, flight
+MOGOnEZ (aggeonn efi rraasctija):
+IPA core: Tipinen prfi eLhjuobde:zen
+diftegi /ja je ju/ + /j/
+IPA secondary:
+rising loci
+Binary code (Gray3):
+100
+the agent does not escalate (ALERT), perform a NE-side (1–2 rounds), then choose a transition.
+Melancholy
+DA (logicG)l:obina, insight
+NE (illogicZaa)ta:knjenost
+MOGOnEU (ngeennjee rfi macodijrao)s:t
+IPA core: Tipinen prfi eUhpoadnj:e
+/u o n m/ (dark syllables)
+IPA secondary:
+long hum, supports
+Binary code (Gray3):
+101
+the agent does not escalate (ALERT), perform a NE-side (1–2 rounds), then choose a transition.

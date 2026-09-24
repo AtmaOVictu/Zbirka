@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="sl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INVICTUS × MOIRA — simulacija da/j</title>
+    <style>
+      :root {
+        font-family: Inter, system-ui, sans-serif;
+        color: #e8e6df;
+        background: #0a0a0c;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; padding: 24px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+      h1 { font-size: 18px; letter-spacing: 0.18em; font-weight: 600; margin: 0 0 4px; }
+      h1 .x { color: #8a8578; font-weight: 300; }
+      .sub { font-size: 12px; color: #8a8578; letter-spacing: 0.08em; margin-bottom: 18px; text-align: center; }
+      #stage {
+        position: relative;
+        width: min(86vw, 480px);
+        height: min(86vw, 480px);
+        background: #050507;
+        border: 1px solid #26241f;
+        border-radius: 6px;
+        overflow: hidden;
+      }
+      .grating { position: absolute; inset: 0; mix-blend-mode: screen; }
+      #invictus { background: repeating-linear-gradient(15deg, rgba(255,210,122,0.5) 0 2px, transparent 2px 7px); }
+      #moira { background: repeating-linear-gradient(0deg, rgba(122,184,255,0.5) 0 2px, transparent 2px 7px); }
+      #stage .label {
+        position: absolute; font-size: 10px; letter-spacing: 0.25em; color: #55524a;
+        user-select: none; pointer-events: none;
+      }
+      #lab-i { top: 10px; left: 12px; }
+      #lab-m { bottom: 10px; right: 12px; }
+      #lab-daj {
+        top: 50%; left: 50%; transform: translate(-50%, -50%);
+        font-size: 15px; letter-spacing: 0.3em; color: #d8d4c8;
+        text-align: center; opacity: 0; transition: opacity 0.6s;
+      }
+      #phase {
+        margin-top: 14px; font-size: 13px; min-height: 40px; text-align: center; color: #b8b4a6;
+      }
+      #phase b { color: #f0ead8; font-size: 16px; letter-spacing: 0.12em; }
+      .controls { display: flex; flex-wrap: wrap; gap: 10px 22px; justify-content: center; margin-top: 10px; align-items: center; }
+      .ctl { display: flex; flex-direction: column; font-size: 10px; color: #8a8578; letter-spacing: 0.1em; gap: 4px; }
+      input[type="range"] { width: 130px; accent-color: #b89a5e; }
+      #daj-btn {
+        margin-top: 16px; padding: 10px 26px; font-size: 13px; letter-spacing: 0.28em;
+        background: transparent; color: #e8e6df; border: 1px solid #b89a5e; border-radius: 3px;
+        cursor: pointer; font-family: inherit; transition: all 0.25s;
+      }
+      #daj-btn:hover { background: rgba(184,154,94,0.12); }
+      #daj-btn:disabled { opacity: 0.35; cursor: default; }
+      #readout { margin-top: 10px; font-size: 11px; color: #6f6b60; letter-spacing: 0.06em; text-align: center; }
+      .etym {
+        margin-top: 22px; max-width: 620px; font-size: 12px; line-height: 1.7; color: #a8a496;
+        border-top: 1px solid #26241f; padding-top: 16px;
+      }
+      .etym b { color: #d8d4c8; }
+      .etym .gr { color: #7ab8ff; }
+      .etym .lat { color: #ffd27a; }
+      .formula { font-family: ui-monospace, monospace; color: #b89a5e; font-size: 12px; text-align: center; margin-top: 14px; }
+    </style>
+  </head>
+  <body>
+    <h1>INVICTUS <span class="x">×</span> MOIRA</h1>
+    <div class="sub">dve mreži · tretji vzorec, ki ne pripada nobeni · da/j</div>
+
+    <div id="stage">
+      <div class="grating" id="invictus"></div>
+      <div class="grating" id="moira"></div>
+      <div class="label" id="lab-i">INVICTUS — nit, ki se ne preda</div>
+      <div class="label" id="lab-m">MOIRA — delež, ki pride</div>
+      <div class="label" id="lab-daj">da/j</div>
+    </div>
+
+    <div id="phase"><b>&#9678;</b> &nbsp;usoda drsi sama — ti lahko režeš</div>
+
+    <div class="controls">
+      <div class="ctl">INVICTUS kot
+        <input type="range" id="angleA" min="0" max="90" step="0.5" value="15" />
+      </div>
+      <div class="ctl">MOIRA kot
+        <input type="range" id="angleB" min="0" max="90" step="0.5" value="0" />
+      </div>
+      <div class="ctl">gostota nití
+        <input type="range" id="spacing" min="4" max="16" step="0.5" value="7" />
+      </div>
+    </div>
+
+    <button id="daj-btn">D A / J</button>
+    <div id="readout"></div>
+
+    <div class="formula">NESKONČNOST = &#8751;( da &middot; / &middot; j &middot; esz &middot; ik )</div>
+
+    <div class="etym">
+      <b class="lat">in·vic·tus</b> — <i>in-</i> (ne-) + <i>victus</i>, deležnik glagola <i>vincere</i> (premagati; sorodno <i>vincire</i> — vezati, <b>upogniti</b>). Invictus = <b>ne-upognjen</b>. Henley: &raquo;my head is bloody, but unbowed&laquo; (1875, napisano z bolnišnične postelje). <i>Sol Invictus</i> — nepremagano sonce, ki vsako zimo znova vzide: &#8751;.<br />
+      <b class="gr">moîra</b> (μοῖρα) — <b>delež</b>, usojeni kos. Moirai: Klothō predje nit, Lachesis jo meri, <b>Atropos jo reže</b> (<i>a-tropos</i> — tista, ki je ne moreš obrniti).<br />
+      <b class="gr">moi·ré</b> — iz fr. <i>mouaire</i> ← ar. <i>mukhayyar</i> (&raquo;izbrana dlaka kozlička&laquo;) ← <i>khayyara</i> (izbrati). Vzorec, ki se rodi med dvema mrežama in ne pripada nobeni.<br /><br />
+      <b>Rez:</b> INVICTUS ne pomeni nezarezan. Atropos reže vseeno — <b>moira je rez, ki pride</b>. Invictus je nit, ki <b>ne preda pred rezom</b>: dih (A) med rezom (D) in izpustom (J). Da/j je meritev, ne ponovitev — zato D nikoli ne reže dvakrat na isti kot.<br />
+      V sredini da<b>/j/</b>esz/ik biva <b>JESIK</b> — rezonančni filter resnice.
+    </div>
+
+    <script>
+      const inv = document.getElementById("invictus");
+      const moi = document.getElementById("moira");
+      const sAngleA = document.getElementById("angleA");
+      const sAngleB = document.getElementById("angleB");
+      const sSpacing = document.getElementById("spacing");
+      const phaseEl = document.getElementById("phase");
+      const readout = document.getElementById("readout");
+      const labDaj = document.getElementById("lab-daj");
+      const btn = document.getElementById("daj-btn");
+
+      let angleA = 15, angleB = 0, spacing = 7, spacingA = 7;
+      let autoMoira = true;
+      let dajRunning = false;
+
+      function apply() {
+        inv.style.background =
+          "repeating-linear-gradient(" + angleA + "deg, rgba(255,210,122,0.5) 0 2px, transparent 2px " + spacingA + "px)";
+        moi.style.background =
+          "repeating-linear-gradient(" + angleB + "deg, rgba(122,184,255,0.5) 0 2px, transparent 2px " + spacing + "px)";
+        const d = Math.abs(angleA - angleB);
+        const dr = (d * Math.PI) / 180;
+        const fringe = dr < 0.0005 ? "∞" : (spacing / (2 * Math.sin(Math.min(dr, Math.PI - dr) / 2))).toFixed(1);
+        readout.textContent =
+          "Δθ = " + d.toFixed(1) + "° · interferenčni trak ≈ " + fringe + " px — manjši kot je kot med narezi, večji vzorec raste iz njiju";
+      }
+
+      sAngleA.addEventListener("input", (e) => { angleA = parseFloat(e.target.value); apply(); });
+      sAngleB.addEventListener("input", (e) => { angleB = parseFloat(e.target.value); autoMoira = false; apply(); });
+      sSpacing.addEventListener("input", (e) => { spacing = parseFloat(e.target.value); spacingA = spacing; apply(); });
+
+      (function loop() {
+        if (autoMoira) {
+          angleB = (angleB + 0.02) % 360;
+          const shown = Math.min(angleB, 180 - angleB) >= 0 ? angleB % 91 : angleB;
+          sAngleB.value = angleB % 91;
+          apply();
+        }
+        requestAnimationFrame(loop);
+      })();
+
+      function setPhase(sym, txt) {
+        phaseEl.innerHTML = "<b>" + sym + "</b> &nbsp;" + txt;
+      }
+
+      function animateSpacing(from, to, dur, ease) {
+        return new Promise((resolve) => {
+          const t0 = performance.now();
+          function step(t) {
+            const k = Math.min(1, (t - t0) / dur);
+            const e = ease ? ease(k) : k;
+            spacingA = from + (to - from) * e;
+            apply();
+            if (k < 1) requestAnimationFrame(step); else resolve();
+          }
+          requestAnimationFrame(step);
+        });
+      }
+      const easeInOut = (k) => k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+      const easeOut = (k) => 1 - Math.pow(1 - k, 3);
+
+      btn.addEventListener("click", async () => {
+        if (dajRunning) return;
+        dajRunning = true; btn.disabled = true;
+        labDaj.style.opacity = "1";
+
+        // D — rez: oster skok kota (meritev, ki izbere)
+        setPhase("D", "rez — delitev realnosti (DA = meritev, ne ponovitev)");
+        const jump = (Math.random() * 8 + 3) * (Math.random() < 0.5 ? -1 : 1);
+        angleA = (angleA + jump + 360) % 360;
+        sAngleA.value = angleA % 91;
+        apply();
+        await new Promise((r) => setTimeout(r, 700));
+
+        // A — vdih: razširitev prostora med nitmi
+        setPhase("A", "vdih — aktivacija možnosti v prisotnosti");
+        await animateSpacing(spacingA, spacingA * 1.9, 2400, easeInOut);
+
+        // J — izpust: vrnitev z izpustom
+        setPhase("J", "izpust — dih, ki odide in pusti vzorec");
+        await animateSpacing(spacingA, spacing, 2400, easeOut);
+
+        setPhase("da/j", "JESIK — resonančni filter: ali vzorec drži? Preverba v telesu (7 dni)");
+        await new Promise((r) => setTimeout(r, 1200));
+        labDaj.style.opacity = "0";
+        setPhase("&#9678;", "usoda drsi sama — ti lahko režeš");
+        dajRunning = false; btn.disabled = false;
+      });
+
+      apply();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,276 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "nodes": [
+    {
+      "id": "Anu",
+      "name": "Anu",
+      "pantheon": "Mezopotamija",
+      "status": "Znani",
+      "oznaka": "⊙∆",
+      "w_degree": 4.0
+    },
+    {
+      "id": "Enlil",
+      "name": "Enlil",
+      "pantheon": "Mezopotamija",
+      "status": "Znani",
+      "oznaka": "⊗∆",
+      "w_degree": 3.0
+    },
+    {
+      "id": "Enki",
+      "name": "Enki (Ea)",
+      "pantheon": "Mezopotamija",
+      "status": "Znani",
+      "oznaka": "∫⟡",
+      "w_degree": 3.0
+    },
+    {
+      "id": "Inanna",
+      "name": "Inanna/Ishtar",
+      "pantheon": "Mezopotamija",
+      "status": "Znani",
+      "oznaka": "∆⟡",
+      "w_degree": 1.0
+    },
+    {
+      "id": "Marduk",
+      "name": "Marduk",
+      "pantheon": "Mezopotamija",
+      "status": "Znani",
+      "oznaka": "⊗∆",
+      "w_degree": 3.0
+    },
+    {
+      "id": "Tiamat",
+      "name": "Tiamat",
+      "pantheon": "Mezopotamija",
+      "status": "Znani",
+      "oznaka": "⊘∆",
+      "w_degree": 2.0
+    },
+    {
+      "id": "Brahma",
+      "name": "Brahmā",
+      "pantheon": "Indija",
+      "status": "Znani",
+      "oznaka": "⊙∆",
+      "w_degree": 4.0
+    },
+    {
+      "id": "Vishnu",
+      "name": "Viṣṇu",
+      "pantheon": "Indija",
+      "status": "Znani",
+      "oznaka": "⊢⟡",
+      "w_degree": 5.0
+    },
+    {
+      "id": "Shiva",
+      "name": "Śiva",
+      "pantheon": "Indija",
+      "status": "Znani",
+      "oznaka": "∆⊘⊗",
+      "w_degree": 5.0
+    },
+    {
+      "id": "Saraswati",
+      "name": "Sarasvatī",
+      "pantheon": "Indija",
+      "status": "Znani",
+      "oznaka": "∮⊢⟡",
+      "w_degree": 2.0
+    },
+    {
+      "id": "Lakshmi",
+      "name": "Lakṣmī",
+      "pantheon": "Indija",
+      "status": "Znani",
+      "oznaka": "⟡∮",
+      "w_degree": 2.0
+    },
+    {
+      "id": "Durga",
+      "name": "Durgā/Kālī",
+      "pantheon": "Indija",
+      "status": "Znani",
+      "oznaka": "∆⊗⊘",
+      "w_degree": 2.0
+    },
+    {
+      "id": "Indra",
+      "name": "Indra",
+      "pantheon": "Indija",
+      "status": "Znani",
+      "oznaka": "⊗∆",
+      "w_degree": 2.0
+    },
+    {
+      "id": "Tian",
+      "name": "Tiān/Shangdi",
+      "pantheon": "Kitajska",
+      "status": "Znani",
+      "oznaka": "⊙",
+      "w_degree": 2.0
+    },
+    {
+      "id": "JadeEmperor",
+      "name": "Jade Emperor",
+      "pantheon": "Kitajska",
+      "status": "Znani",
+      "oznaka": "⊗∆",
+      "w_degree": 5.0
+    },
+    {
+      "id": "Nuwa",
+      "name": "Nüwa",
+      "pantheon": "Kitajska",
+      "status": "Znani",
+      "oznaka": "⟡∫",
+      "w_degree": 3.0
+    },
+    {
+      "id": "Fuxi",
+      "name": "Fúxī",
+      "pantheon": "Kitajska",
+      "status": "Znani",
+      "oznaka": "∮⊢",
+      "w_degree": 3.0
+    },
+    {
+      "id": "Pangu",
+      "name": "Pángǔ",
+      "pantheon": "Kitajska",
+      "status": "Znani",
+      "oznaka": "∆⊙",
+      "w_degree": 1.0
+    },
+    {
+      "id": "Guanyin",
+      "name": "Guānyīn",
+      "pantheon": "Kitajska",
+      "status": "Znani",
+      "oznaka": "⟡∫",
+      "w_degree": 0.0
+    },
+    {
+      "id": "SunWukong",
+      "name": "Sūn Wùkōng",
+      "pantheon": "Kitajska",
+      "status": "Znani",
+      "oznaka": "∆⟡",
+      "w_degree": 2.0
+    }
+  ],
+  "edges": [
+    {
+      "source": "Anu",
+      "target": "Enlil",
+      "relation": "P",
+      "weight": 2.0
+    },
+    {
+      "source": "Anu",
+      "target": "Enki",
+      "relation": "P",
+      "weight": 2.0
+    },
+    {
+      "source": "Marduk",
+      "target": "Tiamat",
+      "relation": "X",
+      "weight": 2.0
+    },
+    {
+      "source": "Enki",
+      "target": "Inanna",
+      "relation": "A",
+      "weight": 1.0
+    },
+    {
+      "source": "Enlil",
+      "target": "Marduk",
+      "relation": "A",
+      "weight": 1.0
+    },
+    {
+      "source": "Brahma",
+      "target": "Vishnu",
+      "relation": "A",
+      "weight": 1.0
+    },
+    {
+      "source": "Vishnu",
+      "target": "Shiva",
+      "relation": "A",
+      "weight": 1.0
+    },
+    {
+      "source": "Brahma",
+      "target": "Shiva",
+      "relation": "A",
+      "weight": 1.0
+    },
+    {
+      "source": "Brahma",
+      "target": "Saraswati",
+      "relation": "M",
+      "weight": 2.0
+    },
+    {
+      "source": "Vishnu",
+      "target": "Lakshmi",
+      "relation": "M",
+      "weight": 2.0
+    },
+    {
+      "source": "Shiva",
+      "target": "Durga",
+      "relation": "M",
+      "weight": 2.0
+    },
+    {
+      "source": "Indra",
+      "target": "Vishnu",
+      "relation": "A",
+      "weight": 1.0
+    },
+    {
+      "source": "Indra",
+      "target": "Shiva",
+      "relation": "A",
+      "weight": 1.0
+    },
+    {
+      "source": "Tian",
+      "target": "JadeEmperor",
+      "relation": "P",
+      "weight": 2.0
+    },
+    {
+      "source": "Nuwa",
+      "target": "Fuxi",
+      "relation": "M",
+      "weight": 2.0
+    },
+    {
+      "source": "SunWukong",
+      "target": "JadeEmperor",
+      "relation": "X",
+      "weight": 2.0
+    },
+    {
+      "source": "Nuwa",
+      "target": "Pangu",
+      "relation": "A",
+      "weight": 1.0
+    },
+    {
+      "source": "Fuxi",
+      "target": "JadeEmperor",
+      "relation": "A",
+      "weight": 1.0
+    }
+  ]
+}

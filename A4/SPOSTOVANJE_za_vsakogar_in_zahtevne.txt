@@ -1,0 +1,47 @@
+SPOSTOVANJE — za vsakogar in za zahtevne  |  2025-08-31
+
+A) ZA VSAKOGAR (PREPROSTO, UPORABNO)
+1) Srce stvari (3 stavki)
+- SPOSTOVANJE = mirna meja + moja odgovornost + prisotnost.
+- Ce ga zahtevam z glasom, prodajam strah/status, ne odnos.
+- Zamenjava ukaza: "Moja meja je X. Jaz bom Y. Ce zelis ostati v odnosu, potrdi z Z."
+
+2) 60s protokol (brez hrupa)
+- 0–10s: dih; ton glasu miren (0.2–0.4).
+- 10–25s: meja (1 stavek): "Ko se zgodi X, je to moja meja."
+- 25–40s: odgovornost (1 stavek): "Jaz bom Y (do T1)."
+- 40–55s: priznanje drugega (1 stavek): "Slisim te pri Z."
+- 55–60s: ce drugi krici: "Nadaljujeva, ko oba znizava ton." Sicer postopek/pravila.
+
+3) Tri prizorisca
+- Partnerstvo: "Ko se me ponizuje pred drugimi, je to moja meja. Danes odidem. Ce zelis nadaljevati, potrdi jutri: 'se strinjam, brez ponizevanja'."
+- Delo/sef: "Ko se roki spreminjajo brez dogovora, je to moja meja. Danes predam, kar je realno. Naslednji rok pisno—drugace ustavim prevzem."
+- Ulica: "Slisim te. Ne pristajam na zaljivke. Oddaljim se zdaj."
+
+4) Najpogostejse napake → takojsnji popravki
+- "Spostuj me!" → "Moja meja je X."
+- "Poglej, kaj si TI naredil!" → "Jaz bom Y."
+- 10 min razlaganja → 1 stavek meje + 1 dejanje.
+- Povisani toni → Ton <= (meja + prisotnost).
+
+B) ZA ZAHTEVNE (STROGO, A KRATKO)
+5) Jedrna formula
+- s (self-respect), o (other-recognition), b (boundary clarity), a (accountability), p (presence), phi (glas/ton).
+- RES = min(s,o) * b * a * p.
+- Penal glasu: ce phi > (b + p), potem RES' = RES * (1 - (phi - (b + p))). (clamp 0..1)
+- Intuicija: glas nad pragom je substitucija za manko b, a, p → pokorscina, ne spostovanje.
+
+6) Igre in norme (1 vrstica vsaka)
+- Igro-teorija: "Spostuj me!" je cheap talk; verodostojnost nosijo meja (b) in zaveza (a).
+- Kant: dostojanstvo → osebe ne smejo biti zgolj sredstvo.
+- Levinas: obraz drugega → primat odgovornosti.
+- Nietzsche: ressentiment → moralni hrup.
+- Habermas: veljavnostni zahtevki brez prisile.
+- Foucault: glas lahko reproducira oblastni rezim (ne odnos).
+
+C) ZAKLJUCEK + TEST
+7) Ena vrstica za vsakogar
+- Ignoranca je hrup brez nosilca. Na hrup ne odgovarjamo s hrupom.
+8) Samotest (30 s)
+- Miren glas? Povedana moja odgovornost? Priznanje drugega?
+- Ce katero = NE → ne krici; popravi tocko; sele nato govor naprej.

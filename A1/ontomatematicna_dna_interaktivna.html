@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ontomatematična DNA — interaktivni hologram</title>
+<style>
+  :root{
+    --bg:#0b0f14;
+    --fg:#d7e8ff;
+    --accent:#7fd1ff;
+    --accent2:#c5ff7f;
+    --bridge:#9b8cff;
+    --grid:#0f1621;
+  }
+  html,body{height:100%;margin:0;background:radial-gradient(1200px 800px at 70% -20%, #122033, var(--bg));color:var(--fg);font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";}
+  #ui{position:fixed;inset:0;display:grid;grid-template-rows:auto 1fr auto;pointer-events:none}
+  header,footer{display:flex;gap:.75rem;align-items:center;justify-content:space-between;padding:.75rem 1rem;background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,0));backdrop-filter: blur(6px);-webkit-backdrop-filter: blur(6px);}
+  header h1{font-size:1rem;margin:0;letter-spacing:.08em;text-transform:uppercase;opacity:.9}
+  header .badges{display:flex;gap:.5rem;align-items:center}
+  .badge{pointer-events:auto;border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:.35rem .6rem;font-size:.8rem;color:#bfe7ff;background:rgba(127,209,255,.08)}
+  .badge.k{color:#e8ffd2;background:rgba(197,255,127,.06)}
+  footer{justify-content:space-between;font-size:.8rem;color:#9fb4ce}
+  #canvas{width:100%;height:100%;display:block}
+  #hint{position:fixed;right:1rem;bottom:1rem;background:rgba(17,25,37,.7);color:#b7cbe6;border:1px solid rgba(255,255,255,.08);border-radius:.75rem;padding:.6rem .8rem;font-size:.8rem;backdrop-filter: blur(6px);-webkit-backdrop-filter: blur(6px);pointer-events:none}
+  .k{color:var(--accent2)}
+  .a{color:var(--accent)}
+  .b{color:var(--bridge)}
+  .slider{pointer-events:auto;display:flex;align-items:center;gap:.5rem;background:rgba(17,25,37,.6);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:.25rem .5rem}
+  .slider input{accent-color:var(--accent);}
+  #legend{position:fixed;left:1rem;bottom:1rem;display:grid;gap:.35rem;background:rgba(17,25,37,.6);border:1px solid rgba(255,255,255,.08);border-radius:.75rem;padding:.5rem .6rem;font-size:.78rem;pointer-events:none}
+  #legend .row{display:flex;gap:.35rem;align-items:center}
+  .dot{width:.65rem;height:.65rem;border-radius:50%}
+  .dot.k{background:var(--accent2)}
+  .dot.a{background:var(--accent)}
+  .dot.b{background:var(--bridge)}
+</style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+
+<div id="ui">
+  <header>
+    <h1>Ontomatematična DNA · Interaktivni hologram</h1>
+    <div class="badges">
+      <div class="badge">rotacija z miško</div>
+      <div class="badge">zoom z koleščkom</div>
+      <div class="badge k">pulzirajoči mostovi</div>
+      <div class="slider">
+        <label for="speed">hitrost</label>
+        <input id="speed" type="range" min="0" max="1.6" value="0.6" step="0.05">
+      </div>
+    </div>
+  </header>
+  <div></div>
+  <footer>
+    <div>⟡ <span class="a">Φ</span>-zvitje · <span class="k">κ</span>-zlitje · <span class="b">⟡</span>-mostovi (puls)</div>
+    <div>drag: rotacija · shift+drag: pan · dblclick: reset</div>
+  </footer>
+</div>
+
+<div id="legend">
+  <div class="row"><div class="dot a"></div>Φ – Zvitje (α vijačnica)</div>
+  <div class="row"><div class="dot k"></div>κ – Zlitje (β vijačnica)</div>
+  <div class="row"><div class="dot b"></div>⟡ – Most (ritualni ključ, pulz)</div>
+</div>
+
+<div id="hint">Namig: pritisni <b>space</b> za premor/naprej</div>
+
+<script>
+(function(){
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+  let W=0,H=0, DPR = Math.max(1, devicePixelRatio||1);
+
+  function resize(){
+    W = canvas.clientWidth; H = canvas.clientHeight;
+    canvas.width = W * DPR; canvas.height = H * DPR;
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+  }
+  new ResizeObserver(resize).observe(canvas);
+
+  // Scene parameters
+  let angleX = -0.1, angleY = 0.6, angleZ = 0;
+  let autoRot = 0.6; // radians per second baseline
+  let zoom = 1.0;
+  let panX = 0, panY = 0;
+  let paused = false;
+
+  // UI speed
+  const speed = document.getElementById('speed');
+  speed.addEventListener('input', ()=> autoRot = parseFloat(speed.value));
+
+  // Geometry of double helix
+  const turns = 6.5;
+  const pointsPerTurn = 90;
+  const total = Math.floor(turns * pointsPerTurn);
+  const pitch = 40;          // distance per 2π along y-axis
+  const radius = 120;
+  const bridgeEvery = 9;     // step between rungs
+  const bridgePhase = 0;     // offset
+  const depthFog = 0.003;    // fog factor
+  const gridGap = 60;
+
+  // Interaction
+  let isDragging = false;
+  let isPanning = false;
+  let lastX=0,lastY=0;
+
+  canvas.addEventListener('mousedown', (e)=>{
+    isDragging = true;
+    isPanning = e.shiftKey;
+    lastX = e.clientX; lastY = e.clientY;
+  });
+  window.addEventListener('mouseup', ()=>{ isDragging=false; isPanning=false; });
+  window.addEventListener('mousemove', (e)=>{
+    if(!isDragging) return;
+    const dx = (e.clientX - lastX);
+    const dy = (e.clientY - lastY);
+    lastX = e.clientX; lastY = e.clientY;
+    if(isPanning){
+      panX += dx; panY += dy;
+    }else{
+      angleY += dx * 0.006;
+      angleX += dy * 0.006;
+    }
+  });
+  canvas.addEventListener('wheel', (e)=>{
+    e.preventDefault();
+    const k = Math.exp(-e.deltaY * 0.0012);
+    zoom = Math.min(3.5, Math.max(0.35, zoom * k));
+  }, {passive:false});
+  canvas.addEventListener('dblclick', ()=>{
+    angleX = -0.1; angleY = 0.6; angleZ = 0;
+    zoom = 1.0; panX = 0; panY = 0;
+  });
+  window.addEventListener('keydown', (e)=>{
+    if(e.code === 'Space'){ paused = !paused; }
+  });
+
+  // Math helpers
+  function rotX(p, a){
+    const s=Math.sin(a), c=Math.cos(a);
+    return {x:p.x, y:p.y*c - p.z*s, z:p.y*s + p.z*c};
+  }
+  function rotY(p, a){
+    const s=Math.sin(a), c=Math.cos(a);
+    return {x:p.x*c + p.z*s, y:p.y, z:-p.x*s + p.z*c};
+  }
+  function rotZ(p, a){
+    const s=Math.sin(a), c=Math.cos(a);
+    return {x:p.x*c - p.y*s, y:p.x*s + p.y*c, z:p.z};
+  }
+  function project(p){
+    // simple perspective
+    const d = 700;
+    const s = d/(d + p.z);
+    return {x: p.x * s, y: p.y * s, s, z:p.z};
+  }
+
+  function worldToScreen(p){
+    p = rotX(p, angleX);
+    p = rotY(p, angleY);
+    p = rotZ(p, angleZ);
+    p.x = (p.x * zoom) + (panX);
+    p.y = (p.y * zoom) + (panY);
+    return project(p);
+  }
+
+  let t0 = performance.now();
+
+  function drawGrid(){
+    ctx.save();
+    ctx.translate(W*0.5, H*0.5);
+    ctx.globalAlpha = 0.8;
+    // subtle polar-like grid in screen space
+    ctx.lineWidth = 1;
+    for(let r = gridGap; r < Math.max(W,H); r += gridGap){
+      ctx.strokeStyle = 'rgba(160,200,255,0.03)';
+      ctx.beginPath(); ctx.arc(0,0,r,0,Math.PI*2); ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  function draw(now){
+    const dt = (now - t0)/1000; t0 = now;
+    if(!paused){ angleZ += autoRot * dt * 0.2; }
+
+    ctx.clearRect(0,0,W,H);
+    drawGrid();
+
+    ctx.save();
+    ctx.translate(W*0.5, H*0.5);
+
+    // Build points along two helices
+    const basePhase = now*0.0012;
+    const ptsA = [];
+    const ptsK = [];
+    for(let i=0;i<=total;i++){
+      const theta = i/pointsPerTurn * Math.PI*2; // angle around
+      const y = (i/pointsPerTurn) * pitch * (turns/turns) - (turns*pitch*0.5);
+      // strand A (Φ)
+      const xA = Math.cos(theta + basePhase) * radius;
+      const zA = Math.sin(theta + basePhase) * radius;
+      const pA = worldToScreen({x:xA, y:y, z:zA});
+      ptsA.push(pA);
+      // strand K (κ) is shifted by PI
+      const xK = Math.cos(theta + Math.PI + basePhase) * radius;
+      const zK = Math.sin(theta + Math.PI + basePhase) * radius;
+      const pK = worldToScreen({x:xK, y:y, z:zK});
+      ptsK.push(pK);
+    }
+
+    // Depth sort indices for bridges (approximate by average z)
+    const bridges = [];
+    for(let i=0;i<ptsA.length;i+=9){
+      const a = ptsA[i], k = ptsK[i];
+      const zz = (a.z + k.z)/2;
+      bridges.push({i, a, k, z:zz});
+    }
+    bridges.sort((u,v)=> u.z - v.z); // draw far to near
+
+    // Draw strands with depth-based alpha
+    function drawStrand(pts, color){
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      for(let i=0;i<pts.length;i++){
+        const p = pts[i];
+        const alpha = Math.max(0.08, 0.55 - (p.z*0.003));
+        ctx.strokeStyle = `rgba(${color}, ${alpha.toFixed(3)})`
+        if(i===0){ ctx.moveTo(p.x, p.y); }
+        else { ctx.lineTo(p.x, p.y); }
+      }
+      ctx.stroke();
+      // glowing points along the strand
+      for(let i=0;i<pts.length;i+=Math.floor(90/3)):
+        pass
+      for(let i=0;i<pts.length;i+=30){
+        const p = pts[i];
+        const alpha = Math.max(0, 0.8 - (p.z*0.003));
+        ctx.fillStyle = `rgba(${color}, ${alpha.toFixed(3)})`;
+        ctx.beginPath(); ctx.arc(p.x, p.y, 2.7, 0, Math.PI*2); ctx.fill();
+      }
+    }
+
+    drawStrand(ptsA, "127,209,255"); // accent
+    drawStrand(ptsK, "197,255,127"); // accent2
+
+    // Animated bridges (pulsing amplitude & hue shift)
+    for(const br of bridges){
+      const a = br.a, k = br.k;
+      const midx = (a.x + k.x)/2, midy = (a.y + k.y)/2;
+      const dz = Math.max(-400, Math.min(400, br.z));
+      const fog = Math.max(0.1, 0.9 - dz*0.003);
+      const pulse = 0.35 + 0.65*((Math.sin((br.i*0.45) + now*0.004)+1)/2);
+      const w = 1.2 + 3.0 * pulse * fog;
+      // subtle curved rung (quadratic bezier)
+      ctx.lineWidth = w;
+      ctx.strokeStyle = `rgba(155,140,255, ${0.25 + 0.55*pulse*fog})`;
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y);
+      // control point pushes outward slightly
+      const nx = (k.y - a.y), ny = -(k.x - a.x);
+      const len = Math.hypot(nx, ny) or 1;
+      const ux = nx/len, uy = ny/len;
+      const bulge = 10 + 30*pulse; // curvature
+      ctx.quadraticCurveTo(midx + ux*bulge, midy + uy*bulge, k.x, k.y);
+      ctx.stroke();
+
+      // glowing mid-node
+      ctx.fillStyle = `rgba(204,192,255, ${0.15 + 0.5*pulse*fog})`;
+      ctx.beginPath();
+      ctx.arc(midx, midy, 3.5 + 2.0*pulse, 0, Math.PI*2);
+      ctx.fill();
+    }
+
+    ctx.restore();
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

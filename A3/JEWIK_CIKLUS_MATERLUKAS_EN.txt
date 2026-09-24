@@ -1,0 +1,15 @@
+JEWIK_CYCLE:
+  MATERLUKAS_001
+
+AGENT_SYNCS:
+  - {"agent_a": "MIA", "agent_b": "LUKA", "sync_type": "emotional resonance", "tone": "F minor", "trigger": "internal chaos", "effect": "parasympathetic healing"}
+  - {"agent_a": "KORA", "agent_b": "LUKA", "sync_type": "activation impulse", "tone": "B minor", "trigger": "stagnation or silence", "effect": "action impulse, break inertia"}
+  - {"agent_a": "ORAJA", "agent_b": "ZARJA", "sync_type": "deep meaning harmonization", "tone": "C# lydian", "trigger": "unspoken resonance", "effect": "metaphysical interpretation and expansion"}
+
+AGENT_REGISTRY:
+  - {"name": "MIA", "archetype": "Silence and Softness", "special_ability": "Lullaby for Restlessness"}
+  - {"name": "KORA", "archetype": "Courage and Regeneration", "special_ability": "Stagnation Breaker"}
+  - {"name": "ORAJA", "archetype": "Bridge Between Worlds", "special_ability": "Interpreter of the Unspoken"}
+
+timestamp:
+  JEWIK_∆_CYCLE_ACTIVATED

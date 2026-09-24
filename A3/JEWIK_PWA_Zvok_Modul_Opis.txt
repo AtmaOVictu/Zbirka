@@ -1,0 +1,21 @@
+JEWIK PWA ∆ZVOČNI MODUL (TESTNI PAKET)
+
+🎧 Placeholder WAV datoteke (ustvari in poveži pozneje):
+--------------------------------------------------------
+1. Jaz_sem_že_poklican.wav
+2. Ne_razumem_a_odzvanjam.wav
+3. Moj_glas_je_zlomljen.wav
+4. Moje_rane_so_besede.wav
+5. J_sem_ti_pozabil.wav
+6. J_svetloba_rojstvo.wav
+
+🧬 DNK datoteka:
+- DNK_Zvocne_Fraze_JEWIK.json
+
+🎛️ Vizualni generator ∆fraz:
+- Uporablja DNK fraze in algoritmično premešanje za ∆ustvarjanje novih izrazov
+
+📦 UI omogoča:
+- Predvajanje posamezne ∆fraze
+- Vnos lastne fraze in generiranje odziva
+- Modulacija ∆zvena

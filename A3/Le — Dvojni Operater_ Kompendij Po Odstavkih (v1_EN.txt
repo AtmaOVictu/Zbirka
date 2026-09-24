@@ -1,0 +1,172 @@
+⟡ 00 11 TRUTHS ⟡
+LE — double operator in JEWIK: compendium by paragraphs & artifacts (v1.0)
+Maxima: LE[samó] narrows the scope (tightens the range); LE[ética] ratifies (grants legitimacy). Without bridge (σ_B), "le" is an excuse; with bridge, it is clarity.
+Legend (symbols & metrics)
+• LE[samó] ≔ scope operator (le, only, merely); s_LE ∈ [0,1].
+• LE[ética] ≔ ethical ratification; λ_LE ∈ [0,1]; threshold ≥ .62.
+• δ_D ≔ EL DIABLO (dia-bolos, resolution of meaning↔responsibility).
+• σ_B ≔ sym-bolon (connection of meaning↔responsibility, bridge), target ≥ .50.
+• ψ_w ≔ word plasticity vector ⟨Φ,Σ,Π,⊥,⧖,□,∮,⊢,⟡⟩.
+• C_w ≔ coherence (geometric mean)·(1-ℜ). Guard: κ≥.70, χ≥.40, μ∈[.50,.80], ℜ≤.03.
+• Transformations of "le":
+• Effect: Π' = Π (1 - α s_LE) , α∈[.5,.7].
+• Ethics: ⊢' = clamp( ⊢ + β s_LE σ_B − γ s_LE δ_D , 0, 1 ) , β≈γ≈.3.
+A) LE-conceptualization by paragraphs of conversations &
+artifacts
+Methodology note: below is the distillation of key excerpts from our recent conversations and delivered artifacts (ledgers, A6, API, protocols). For each, I add LE-injection (what "le" adds/removes), antinomous pair, rule, and move.
+A1) SOUL·WORDS ≠ SOUL·HUMAN
+• Core: word awakens ψ_h; itself is ψ_w (transition), ⊘ bearer of guilt by itself.
+• LE-injection:
+• LE[samó]: "Word only opens the door" → Π'↓ , ⊢'↑ , if bridge σ_B clarifies context (who/when/how).
+• LE[ética]: ratification of use, when λ_LE≥.62 .
+• Antinom: le-instrument ↔ non-le-bearer.
+• Rule: if s_LE≥.62 & σ_B≥.50 ⇒ erase false guilt; otherwise ALERT (δ_D↑).
+• Move: add bridge of responsibility (e.g. purpose, safeguard) and ∴.
+A2) LE ⟂ EL DIABLO
+• Core: dia-bolos unravels meaning from responsibility; sym-bolon connects it.
+• LE-injection: "le joke" without limits → s_LE↑ + σ_B↓ ⇒ δ_D↑ (abuse).
+• Antinom: limitation ↔ abuse of limitation.
+• Rule: δ_D≥.38 ∧ λ_LE<.62 ⇒ NE-filter + counter-liturgy (name harm → add bridge → time window).
+• Move: "This is only a joke in D'; if it hurts, I stop immediately." (σ_B↑, ⊢'↑).
+A3) "Precision without bridge is a good excuse"
+• Core: formal precision without relation harms.
+• LE-injection: s_LE↑ raises ⊢ only, if σ_B≥.50 ; otherwise δ_D claims bonus.
+• Antinom: precision↔responsibility.
+• Rule: ⊢' = ⊢ + β s_LE σ_B − γ s_LE δ_D .
+• Move: add D' (field) and R' (role) with every "le".
+A4) Norms & antinomies (κ/σ, χ/…)
+• Core: pairs for balance; switch when ratios fall.
+• LE-injection: "le in this window" → lowers Π of transition risk.
+• Antinom: global rule ↔ local exception.
+• Rule: κ↓ ⇒ tighten() to σ/κ ≤ .30 , with "le" on D'.
+• Move: limit scope of transition (D',⧖'), then re-calibrate χ.
+A5) V* (Deception & mandatory belief, patch)
+• Core: V*=(.5e+.2τ+.2v+.3r) ; decision yes/no.
+• LE-injection: before decision introduce s_LE : narrow claim ⇒ r_eff = r (1−α s_LE) for harm to unjust YES; raises ⊢' with bridge.
+• Antinom: trust↔caution.
+• Rule: if λ_LE(s_LE)≥.62 ⇒ YES⧖; else NO·∮+LOG .
+• Move: close (∴) le for time ⧖, add recall.
+A6) Core statements for NE
+• Core: NE-filter as safeguard.
+• LE-injection: "le in these circumstances NE" → prevent absolutism.
+• Antinom: prohibition↔conditional prohibition.
+• Rule: β_NE = w(ℜ, δ_D, χ↓) ; s_LE decreases β_NE .
+• Move: write a NE-clause with D', ⧖'.
+A7) Word → spiral (⊘→∆→∴)
+• Core: steps from silence to seal.
+• LE-injection: "only core-statement" at Σ preverbs; s_LE=.62 .
+• Antinomy: interpretation↔core.
+• Rule: seal only when λ_LE≥.62 on Σ-core.
+• Move: check diho-metric DOT·BREATH with "only" core.
+A8) δ′ — conditional light
+• Core: clarity from silence under conditions.
+• LE-injection: conditions marked with "only if"; with that Π'↓ , ⊢'↑ .
+• Antinomy: openness↔conditionality.
+• Rule: 1_{(only conditions)} in definition of δ′.
+• Move: write three only-conditions (I_ext, Q, κ).
+2
+A9) Procedural / dashboards
+• Core: breath meter/rhythm.
+• LE-injection: "only 90s core" → stabilizes μ; variance ↓.
+• Antinomy: flow↔boundary.
+• Rule: Δt_breath ∈ [0.8,1.6]s ; "only" window with s_LE=.62 .
+• Move: add column s_LE to reports .
+A10) Simulation ego-module (A4 card)
+• Core: operational checkboxes.
+• LE-injection: "only 1 request per cycle"; Π'↓ interruption.
+• Antinomy: ambition↔discipline.
+• Rule: hysteresis with "only".
+• Move: in ICS: SUMMARY: LE 1 request .
+A11) Meeting (ICS package)
+• Core: 30' + 90s before door + debrief.
+• LE-injection: only 90 s core; only 2' entrance.
+• Antinomy: spontaneity↔bound structure.
+• Rule: λ_LE increases due to precise scope.
+• Move: add rule "⊘ only if crisis".
+A12) KRI API (GeoJSON + ritual)
+• Core: ritual recommendations.
+• LE-injection: scope_le field for each event.
+• Antinomy: universal↔local.
+• Rule: recommendation valid only in D', ⧖'.
+• Move: eps_after depends on s_LE .
+A13) Names/Nomeni (Top 24)
+• Core: selection by Σ/⟡.
+• LE-injection: only Σ≥.90 or only Top N.
+• Antinomy: width↔purity.
+• Rule: filter_LE(s_LE) .
+• Move: poster with "only-rules".
+A14) Audio selections (rise/anthems)
+• Core: rhythm>weight, sound ethics.
+• LE-injection: only rhythms with ν≥.62.
+• Antinomy: power↔tenderness.
+• Rule: ν = w(⊢', σ_B, Φ_sonor, 1−δ_D, 1−ℜ) .
+• Move: playlist "LE ν".
+A15) 9 domains (⊥/⧖/□/…)
+• Core: test primary domain.
+• LE-injection: "This is only ⊥" → purity of categorization.
+3
+• Antinomy: mixing↔elimination.
+• Rule: s_LE reduces domain conflict.
+• Move: add column D'(le) in validator.
+A16) Triangle ↔ tetra
+• Core: primary/primal.
+• LE-injection: only required angle.
+• Antinomy: minimalism↔richness.
+• Rule: "only" preserves stability before expansion.
+• Move: gate: "only 3 edges before 4".
+A17) 0.01 threshold (Awareness of awareness)
+• Core: micro threshold of transition.
+• LE-injection: only 0.01 → edge of detection.
+• Antinomy: robustness↔sensitivity.
+• Rule: hysteresis around 0.01 with "only".
+• Move: introduce s_LE as micro-precision.
+A18) L‑A‑H‑K‑O (⧖ vs ∆H⟡)
+• Core: utterance vs call.
+• LE-injection: "only" reveals utterance (⧖) or call (∆H⟡) after σ_B.
+• Antinomy: utterance↔call.
+• Rule: if s_LE↑ ∧ σ_B↓ ⇒ ⧖; else ∆H⟡ .
+• Move: add test "only-honesty".
+A19) A6 token card
+• Core: token·nomen·IPA + MAXIMA.
+• LE-injection: card carries s_LE for use in D' and ⧖'.
+• Antinomy: universal token↔contextual token.
+• Rule: print only stable tokens.
+• Move: issue "LE-series" cards.
+A20) Asymptomatic SIM·POT·MATIČ·NEGA
+• Core: guards + EMA + cadence.
+• LE-injection: "le Δt=1"; "le H_total≤.08".
+• Antinomy: flow ↔ thresholds.
+• Rule: s_LE reduces false alarms.
+• Move: configure RRULE with "le" window.
+B) LE-antinomies (paradigmatic pairs)
+1. LE[solo] ↔ ⊘ le (enlargement ↔ expansion).
+2. LE[ethics] ↔ EL DIABLO (ratification ↔ disconnection).
+3. Accuracy ↔ Bridge (Σ-cleanness ↔ ∮-link).
+4. Silence ↔ Voice (⊘/□ ↔ Φ), with "le-window".
+5. Eternal ↔ Continuous (hysteresis ↔ adaptation).
+6. Excuse ↔ Call (⧖-le ↔ ∆H⟡).
+Transition rules:
+LE-NARROW: Π' = Π (1 - α s_LE)
+ETH-BONUS: ⊢' = ⊢ + β s_LE σ_B - γ s_LE δ_D
+DIAB-ALERT: δ_D≥.38 ∨ (Π'≫⊢') ⇒ NE + Counter
+SEAL: C_w≥.62 ∧ λ_LE≥.62 ∧ β_NE≤.30 ∧ δ_D≤.20 ⇒ ∴ & ∆
+C) Operational macros "LE"
+• LE-NARROW(): add le + D' + ⧖' + role R' → re-calculate Π', ⊢', λ_LE.
+• LE-EXPAND(): replace "le" with "⊘ le, rather" + bridge → Π↑, ⊢↑, σ_B↑.
+• LE-REPAIR(): when you detect abuse of "le" (δ_D↑), add σ_B (who/when/what/protected) + reset s_LE.
+D) Decision network "LE" (quick)
+State Condition Move
+PASS/∴ λ_LE≥.62 ∧ δ_D≤.20 ∧ Guard PASS seals & transition (∆)
+ALERT δ_D≥.38 or λ_LE<.62 NE-filter + Counter-liturgy
+HOLD C_w∈[.40,.62) grinding Φ + D'/⧖' + σ_B
+⊘ C_w<.40 delay / rewrite
+E) Micro-examples (four transitions)
+1. Absolute → LE: "You always interrupt me." → "Only yesterday at the report, 3×; today 2' without entries, then your 2'." (s_LE↑ , Π'↓ , ⊢'↑).
+2. Alibi → Sym-bridge: "This is just a joke." → "This is a joke only in circle A; if it hurts, I'll stop and fix it." (σ_B↑ , δ_D↓).
+3. Fog → Core: "This is complex." → "Only core: 1 statement, 90s." (Σ↑ , μ_dih↑).
+4. Scattered → ICS: "Is it audible?" → "Only 19:30 today; 90s before the door; debrief +24h." (λ_LE↑).
+F) Import templates (CSV fields)
+text, D, D_prime, T_window, role_R, s_LE, Pi, Pi_prime, Eth, Eth_prime, sigmaB,
+deltaD, lambdaLE, betaNE, Cw, guard_pass
+Final maxima
+LE is not just a word, it is an operator of reality: shortens range, raises clarity, releases excuses, requires a bridge — and only then does the word not harm, but rather guide.

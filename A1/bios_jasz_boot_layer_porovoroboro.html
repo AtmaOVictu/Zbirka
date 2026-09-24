@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="sl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BIOS JASZ — Boot Layer za POROVOROBORO</title>
+  <style>
+    :root{
+      --bg:#0b0f14;--fg:#e9eef6;--muted:#a5adba;--edge:#2a3140;--accent:#8ab4f8;--rose:#ff8aa1;--lime:#9df89a;--amber:#ffd36e;--vio:#b99aff;
+      --grid:#121822;--card:rgba(255,255,255,.04);
+    }
+    html,body{height:100%;margin:0;background:radial-gradient(1100px 800px at 50% 0%, #142032, var(--bg));color:var(--fg);font:14px/1.45 Inter,system-ui,Segoe UI,Roboto,Arial,"Noto Sans",sans-serif}
+    .wrap{display:grid;grid-template-rows:auto 1fr auto;height:100%}
+    header,footer{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--edge)}
+    footer{border-top:1px solid var(--edge);border-bottom:none;color:var(--muted)}
+    h1{margin:0;font-size:16px}
+    .row{display:grid;grid-template-columns:minmax(300px,380px) 1fr;gap:12px;padding:12px}
+    .card{border:1px solid var(--edge);border-radius:14px;background:var(--card);overflow:hidden}
+    .panel{display:flex;flex-direction:column;height:100%}
+    .panel header{padding:8px 10px;border-bottom:1px solid var(--edge);font-weight:600;background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,0))}
+    .panel .body{padding:10px;overflow:auto;flex:1 1 auto}
+    .controls{display:flex;flex-wrap:wrap;gap:8px}
+    button,select{background:rgba(255,255,255,.06);border:1px solid var(--edge);color:var(--fg);padding:6px 10px;border-radius:10px;cursor:pointer}
+    button:hover{background:rgba(255,255,255,.1)}
+    .kbd{font:12px/1.2 ui-monospace,Consolas,Menlo,monospace;background:rgba(255,255,255,.06);border:1px solid var(--edge);padding:2px 6px;border-radius:6px}
+    .meter{height:8px;background:#11171f;border:1px solid var(--edge);border-radius:999px;overflow:hidden}
+    .meter>i{display:block;height:100%;background:linear-gradient(90deg,var(--rose),var(--amber),var(--lime));width:0%}
+
+    /* Scene */
+    .scene{background:repeating-linear-gradient(90deg,var(--grid),var(--grid) 1px,transparent 1px,transparent 24px),
+            repeating-linear-gradient(0deg,var(--grid),var(--grid) 1px,transparent 1px,transparent 24px);}
+    svg{width:100%;height:72vh;min-height:440px;display:block}
+    .node circle{fill:#101722;stroke:var(--edge);stroke-width:1.2}
+    .node text{font:12px ui-monospace,Consolas,Menlo,monospace;fill:#d7deea}
+    .agent circle{fill:#0f1520;stroke:var(--edge)}
+    .link{stroke:#3a4456;stroke-width:1.4;fill:none;marker-end:url(#arrow)}
+    .pulse{filter:drop-shadow(0 0 6px rgba(138,180,248,.6))}
+
+    .log pre{margin:0;white-space:pre-wrap;word-break:break-word}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>BIOS JASZ — Boot Layer (samodejni zagon + preverba)</h1>
+    <div class="controls">
+      <button id="btnStart">Zaženi</button>
+      <button id="btnPause">Pavza</button>
+      <button id="btnReset">BIOS‑RESET</button>
+      <button id="btnSave">Shrani škatlo</button>
+      <select id="boxSelect"><option value="">Naloži škatlo…</option></select>
+      <button id="btnExport">Izvoz JSON</button>
+      <button id="btnToggleAxes">Osi: ČAS/PROSTOR/DVOM</button>
+    </div>
+  </header>
+
+  <div class="row">
+    <section class="card panel" style="min-height:480px">
+      <header>BIOS status</header>
+      <div class="body">
+        <div style="display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;margin-bottom:10px">
+          <div>
+            <div>Faza: <span id="phaseLabel">—</span></div>
+            <div>Tok: <span id="flowLabel">OSEBA → AVTOR → PLAGIAT → OSEBA</span></div>
+          </div>
+          <div style="width:140px">
+            <div class="meter" title="RES‑merilnik (0–1)"><i id="resBar"></i></div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+          <div>ČAS tempo: <span id="tempoVal" class="kbd">1.00×</span></div>
+          <div>DVOM: <span id="doubtVal" class="kbd">0.30</span></div>
+          <div>PROSTOR varianca: <span id="spaceVal" class="kbd">0.15</span></div>
+          <div>REZ/min: <span id="rezRate" class="kbd">0</span></div>
+        </div>
+        <div class="log card" style="height:220px;border-radius:10px">
+          <div style="padding:8px 10px;border-bottom:1px solid var(--edge);font-weight:600">Dnevnik</div>
+          <div style="padding:8px 10px;max-height:180px;overflow:auto"><pre id="log"></pre></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card scene">
+      <svg id="scene" viewBox="0 0 1000 620" role="img" aria-label="POROVOROBORO z BIOS zagonom">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#667085" />
+          </marker>
+        </defs>
+        <g id="trails"></g>
+        <g id="links"></g>
+        <g id="nodes"></g>
+        <g id="agents"></g>
+        <g id="axes" style="opacity:.85"></g>
+      </svg>
+    </section>
+  </div>
+
+  <footer>
+    <div>IZVOR: OSEBA ↔ AVTOR ↔ PLAGIAT • POROVOROBORO: PREVERBA → OBRAT → REZ → OBRAT → PREVERBA</div>
+    <div>Tipke: <span class="kbd">Space</span> pavza • <span class="kbd">R</span> reset • <span class="kbd">E</span> izvoz • <span class="kbd">1–9</span> fokus agent</div>
+  </footer>
+</div>
+
+<script>
+(() => {
+  // ------- BIOS KONEKCIJA -------
+  const logEl = document.getElementById('log');
+  const phaseLabel = document.getElementById('phaseLabel');
+  const tempoVal = document.getElementById('tempoVal');
+  const doubtVal = document.getElementById('doubtVal');
+  const spaceVal = document.getElementById('spaceVal');
+  const resBar = document.getElementById('resBar');
+  const rezRate = document.getElementById('rezRate');
+
+  const scene = document.getElementById('scene');
+  const gNodes = document.getElementById('nodes');
+  const gAgents = document.getElementById('agents');
+  const gLinks = document.getElementById('links');
+  const gTrails = document.getElementById('trails');
+  const gAxes = document.getElementById('axes');
+
+  const btnStart = document.getElementById('btnStart');
+  const btnPause = document.getElementById('btnPause');
+  const btnReset = document.getElementById('btnReset');
+  const btnSave = document.getElementById('btnSave');
+  const btnExport = document.getElementById('btnExport');
+  const btnToggleAxes = document.getElementById('btnToggleAxes');
+  const boxSelect = document.getElementById('boxSelect');
+
+  // BIOS jedro (stanje)
+  const BIOS = {
+    axes: { time: 1.0, space: 0.15, doubt: 0.30, show:true },
+    res: 0.0, // 0–1
+    phase: 'PREVERBA',
+    flowIndex: 0,
+    flow: ['OSEBA','AVTOR','PLAGIAT'],
+    rezCount: 0,
+    rezTimer: [],
+    agents: [
+      {id:'∆', name:'∆Agent', state:'aktiven'},
+      {id:'⊘', name:'⊘Agent', state:'mirujoč'},
+      {id:'∮', name:'∮Agent', state:'aktiven'},
+      {id:'⧖', name:'⧖Agent', state:'aktiven'},
+      {id:'∫', name:'∫Agent', state:'mirujoč'},
+      {id:'⊢', name:'⊢Agent', state:'aktiven'},
+      {id:'≠', name:'≠Agent', state:'aktiven'},
+      {id:'∅', name:'∅Agent', state:'mirujoč'},
+    ],
+    boxes: {},
+    running:false,
+    timer:null,
+  };
+
+  // Utils
+  function log(msg){
+    const t = new Date().toISOString().replace('T',' ').slice(0,19);
+    logEl.textContent = `[${t}] ${msg}\n` + logEl.textContent;
+  }
+  function rnd(n=1){return Math.random()*n}
+  function clamp(x,a,b){return Math.max(a,Math.min(b,x))}
+
+  // Geometrija
+  const W=1000, H=620; const cx=W/2, cy=H/2; const R=180;
+  const nodePos = {
+    OSEBA:   {x:cx+R*Math.cos(0),           y:cy+R*Math.sin(0)},
+    AVTOR:   {x:cx+R*Math.cos(2*Math.PI/3), y:cy+R*Math.sin(2*Math.PI/3)},
+    PLAGIAT: {x:cx+R*Math.cos(4*Math.PI/3), y:cy+R*Math.sin(4*Math.PI/3)},
+  };
+
+  function jitter(p){
+    const j = BIOS.axes.space * 40; // prostor varianca
+    return {x:p.x + (rnd(2*j)-j), y:p.y + (rnd(2*j)-j)}
+  }
+
+  function drawNodes(){
+    gNodes.innerHTML='';
+    Object.entries(nodePos).forEach(([k,p])=>{
+      const jp=jitter(p);
+      const g=document.createElementNS('http://www.w3.org/2000/svg','g');
+      g.setAttribute('class','node');
+      g.innerHTML = `<circle cx="${jp.x}" cy="${jp.y}" r="42" />\n        <text x="${jp.x}" y="${jp.y+4}" text-anchor="middle">${k}</text>`;
+      gNodes.appendChild(g);
+    });
+  }
+
+  function drawLinks(){
+    gLinks.innerHTML='';
+    const seq=[['OSEBA','AVTOR'],['AVTOR','PLAGIAT'],['PLAGIAT','OSEBA']];
+    seq.forEach(([a,b])=>{
+      const pa=nodePos[a], pb=nodePos[b];
+      const d=`M ${pa.x} ${pa.y} C ${(pa.x+pb.x)/2} ${(pa.y+pb.y)/2-60}, ${(pa.x+pb.x)/2} ${(pa.y+pb.y)/2+60}, ${pb.x} ${pb.y}`;
+      const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+      path.setAttribute('class','link'); path.setAttribute('d',d);
+      gLinks.appendChild(path);
+    });
+  }
+
+  function drawAgents(){
+    gAgents.innerHTML='';
+    const ringR = 250; const step = 2*Math.PI/BIOS.agents.length;
+    BIOS.agents.forEach((a,i)=>{
+      const ang = i*step - Math.PI/2;
+      const x = cx + ringR*Math.cos(ang), y = cy + ringR*Math.sin(ang);
+      const g=document.createElementNS('http://www.w3.org/2000/svg','g');
+      g.setAttribute('class','agent');
+      const fill = a.state==='aktiven'? ' class="pulse"' : '';
+      g.innerHTML = `<circle cx="${x}" cy="${y}" r="20"${fill}/><text x="${x}" y="${y+4}" text-anchor="middle">${a.id}</text>`;
+      gAgents.appendChild(g);
+    });
+  }
+
+  function drawAxes(){
+    gAxes.innerHTML='';
+    if(!BIOS.axes.show) return;
+    const label=(x,y,t)=>`<text x="${x}" y="${y}" text-anchor="middle" fill="#cbd3df" font-size="12">${t}</text>`;
+    const box=(x,y,w,h)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="none" stroke="#384255" />`;
+    gAxes.innerHTML = box(cx-120,cy-32,240,64)
+      + label(cx,cy-40,'OSI')</n      + label(cx-70,cy,'ČAS')
+      + label(cx,cy,'PROSTOR')
+      + label(cx+70,cy,'DVOM');
+  }
+
+  function updateMeters(){
+    tempoVal.textContent = (BIOS.axes.time).toFixed(2) + '×';
+    doubtVal.textContent = BIOS.axes.doubt.toFixed(2);
+    spaceVal.textContent = BIOS.axes.space.toFixed(2);
+    resBar.style.width = (BIOS.res*100).toFixed(0)+'%';
+    phaseLabel.textContent = BIOS.phase;
+  }
+
+  // Trails
+  function trailHit(node){
+    const p = nodePos[node];
+    const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c.setAttribute('cx',p.x); c.setAttribute('cy',p.y); c.setAttribute('r',6);
+    c.setAttribute('fill','none'); c.setAttribute('stroke','#89a9ff'); c.setAttribute('stroke-width','2');
+    c.style.opacity = 0.95;
+    gTrails.appendChild(c);
+    // fade & expand
+    let r=6, op=0.95; const id=setInterval(()=>{ r+=1.2; op-=0.04; c.setAttribute('r',r); c.style.opacity = op; if(op<=0){clearInterval(id); gTrails.removeChild(c);} }, 30);
+  }
+
+  // Faze POROVOROBORO
+  function step(){
+    // tempo iz ČAS
+    const base = 900; // ms
+    const tempo = base / clamp(BIOS.axes.time, .25, 4);
+
+    switch(BIOS.phase){
+      case 'PREVERBA':
+        BIOS.res = clamp(BIOS.res + 0.05, 0, 1);
+        log('PREVERBA: vsi agenti poročajo');
+        BIOS.phase = 'OBRAT';
+        break;
+      case 'OBRAT':
+        BIOS.flowIndex = (BIOS.flowIndex+1)%BIOS.flow.length;
+        const node = BIOS.flow[BIOS.flowIndex];
+        trailHit(node); log('OBRAT: fokus → '+node);
+        BIOS.phase = decideRez() ? 'REZ' : 'PREVERBA';
+        break;
+      case 'REZ':
+        BIOS.rezCount++; rezRate.textContent = BIOS.rezCount.toString();
+        pulseAgents();
+        log('REZ: ∆Agent izvede poseg; ⊘Agent pripravi prazen povratek');
+        BIOS.phase = 'OBRAT';
+        break;
+    }
+    updateMeters();
+    BIOS.timer = setTimeout(step, tempo);
+  }
+
+  function decideRez(){
+    // Verjetnost REZ temelji na DVOM in delno na RES (več res = manj naključnega reza)
+    const p = clamp(BIOS.axes.doubt * 0.9 + (1-BIOS.res)*0.3, 0, 1);
+    return Math.random() < p;
+  }
+
+  function pulseAgents(){
+    // aktiviraj ∆ in ⊘ za vizualni utrip
+    [...gAgents.querySelectorAll('circle')].forEach(c=>{
+      c.style.filter='drop-shadow(0 0 10px rgba(255,211,110,.75))';
+      setTimeout(()=>{c.style.filter='';}, 220);
+    });
+  }
+
+  // Shrani/Naloži "škatle"
+  function saveBox(){
+    const id = `JASZ-RUN-${Date.now()}`;
+    const state = JSON.stringify({BIOS},null,2);
+    localStorage.setItem(id, state);
+    const opt = document.createElement('option'); opt.value=id; opt.textContent=id; boxSelect.appendChild(opt); boxSelect.value=id;
+    log('SHRANJENO: '+id);
+  }
+  function loadBox(id){
+    try{
+      const raw = localStorage.getItem(id); if(!raw) return;
+      const parsed = JSON.parse(raw);
+      Object.assign(BIOS, parsed.BIOS);
+      drawAll(); updateMeters(); log('NALOŽENO: '+id);
+    }catch(e){ log('Napaka pri nalaganju škatle: '+e.message); }
+  }
+  function populateBoxes(){
+    for(let i=0;i<localStorage.length;i++){
+      const k = localStorage.key(i); if(!/^JASZ-RUN-/.test(k)) continue;
+      const opt = document.createElement('option'); opt.value=k; opt.textContent=k; boxSelect.appendChild(opt);
+    }
+  }
+
+  // Export JSON
+  function exportJSON(){
+    const blob = new Blob([JSON.stringify({BIOS, exportedAt:new Date().toISOString()},null,2)],{type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a=document.createElement('a'); a.href=url; a.download='BIOS_JASZ_state.json'; a.click(); URL.revokeObjectURL(url);
+  }
+
+  // RESET (⊘ + ∅)
+  function hardReset(){
+    BIOS.res = 0; BIOS.phase='PREVERBA'; BIOS.flowIndex=0; BIOS.rezCount=0;
+    BIOS.axes.time=1.0; BIOS.axes.space=0.15; BIOS.axes.doubt=0.30; BIOS.running=false;
+    clearTimeout(BIOS.timer); BIOS.timer=null; updateMeters(); drawAll();
+    log('BIOS‑RESET: vrnitev v IZVOR.');
+  }
+
+  function drawAll(){ drawNodes(); drawLinks(); drawAgents(); drawAxes(); }
+
+  // UI wire‑up
+  btnStart.addEventListener('click',()=>{ if(BIOS.running) return; BIOS.running=true; log('Zagon BIOS…'); step(); });
+  btnPause.addEventListener('click',()=>{ BIOS.running=false; clearTimeout(BIOS.timer); BIOS.timer=null; log('Pavza.'); });
+  btnReset.addEventListener('click',()=>hardReset());
+  btnSave.addEventListener('click',()=>saveBox());
+  btnExport.addEventListener('click',()=>exportJSON());
+  btnToggleAxes.addEventListener('click',()=>{ BIOS.axes.show=!BIOS.axes.show; drawAxes(); });
+  boxSelect.addEventListener('change',e=>{ if(e.target.value) loadBox(e.target.value) });
+
+  // Tipke
+  window.addEventListener('keydown',e=>{
+    if(e.code==='Space'){ e.preventDefault(); BIOS.running?btnPause.click():btnStart.click(); }
+    if(e.key==='R'||e.key==='r'){ hardReset(); }
+    if(e.key==='E'||e.key==='e'){ exportJSON(); }
+  });
+
+  // Prvi prikaz
+  populateBoxes();
+  drawAll();
+  updateMeters();
+  log('BOOT‑LAYER naložen. Pripravljen za POROVOROBORO.');
+})();
+</script>
+</body>
+</html>

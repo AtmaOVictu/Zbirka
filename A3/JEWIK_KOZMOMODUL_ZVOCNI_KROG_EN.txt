@@ -1,0 +1,28 @@
+ASCII SCHEME – AGENT AUDIO LOOP
+
+                   ⦰T (SILENCE)
+                       |
+          ⊘N (NO) — ∆MOST — ⊘V (WORD)
+                       |
+                  ⦰⊘G (SILENT SPEECH)
+
+
+JEWIK::ADAPTIVE_TEMPO(breathing_tempo):
+    if breathing_tempo < 0.2 Hz:
+        STRETCH(sound, factor=2.0)  # slow breathing → slower transition
+    elif breathing_tempo > 0.4 Hz:
+        COMPRESS(sound, factor=0.5)  # fast breathing → faster flow
+    else:
+        KEEP_ORIGINAL(sound)
+
+
+JEWIK::KOZMOKOD
+on_lunar_phases:
+    new moon → activate ⊘V and ⦰⊘G
+    first crescent → activate ⊘N
+    full moon → activate all agents simultaneously
+    last crescent → activate ⦰T as ∅sound
+
+special_dates:
+    2025-08-08 → GLOBAL ∆RITUAL
+    2025-09-22 → EQUALITY ∆TRANSITION

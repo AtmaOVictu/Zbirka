@@ -1,0 +1,175 @@
+Appendix I — Mandala Atlas of the Self
+n 00 11 TRUTHS n
+Expanded to 026 / Appendix — ARCHETYPE OF HARMONY. Included are specifications of measurements
+AZ/AD/AG/AP/AS/AH.
+### 001 / Appendix
+Absolute (formula): log(RESnnnn) = (cid:242)nn (dJAZ / dnas)
+Essence: Every new phase is an inherent aspect of the self.
+New Link: Appendix breathes as its own current, separate from Penata.
+### 002 / Appendix
+Absolute (formula): VERIFICATION(x) = log(1 / ¬x), where ¬x = NOT.
+Essence: VERIFICATION arises in NOT, the moment of suspension is the measure.
+New Link: Inhibitory measure (NOT-verification).
+### 003 / Appendix
+Absolute (formula): SILENCE(t) = lim(x fi 0n) log(x+t).
+Essence: SILENCE is a reservoir of possibility; silence where speech is born.
+New Link: Proto-substrate of embodiment of inputs.
+### 004 / Appendix
+Absolute (formula): LENGTH(x) = (cid:242)nn 1/(t+1) dt = log(x+1).
+Essence: Bond, responsibility, structure of community.
+New Link: Vertical anchor that binds circles.
+### 005 / Appendix
+Absolute (formula): WOLF(p) = -log(1-p).
+Essence: Alarm and instinct; awakening call in danger.
+New Link: Awakening mechanism for action.
+### 006 / Appendix
+Absolute (formula): LIGHT(x) = e^(log(x)) = x.
+Essence: Revelation; what is hidden becomes visible.
+New Link: Revelation as a mandatory dimension.
+### 007 / Appendix
+Absolute (formula): S_{1fi6}(Appendixn) =
+log(nas)+log(¬x)+lim(xfi0n)log(x+t)+log(x+1)-log(1-p)+e^(log(x))
+Essence: Synthesis: bond between bonds, spiral enhancement.
+New Link: Meta-dimensionality: every continuation is an enhancement.
+### 008 / Appendix
+Absolute (formula): RITUAL(t) = (cid:213)_{i=1}^7 Appendixn mod nas
+Essence: Comforting formula in action; bridge between "word" and "body".
+New Link: Executable dimension.
+### 009 / Appendix
+Absolute (formula): GAME(s) = RITUAL(t) ¯ randomness(s)
+Essence: Unwoven ritual; ease, improvisation.
+New Link: Layer of game: formula knows how to play.
+### 010 / Appendix
+Absolute (formula): CREATION(x) = GAME(s) · imagination(x)
+Essence: Act of birth of the new.
+New Link: Dimension of fertility.
+### 011 / Appendix
+Absolute (formula): MEMORY(x) = S_{i=1}^{10} Appendixn · resonance(x)
+Essence: Reinforcement of the created; contact between past/future.
+New Link: Continuity.
+### 012 / Appendix
+Absolute (formula): CONSCIOUSNESS(x) = (cid:242)n^MEMORY resonance(y) dy + lim_{tfi¥} activation(x,t)
+Essence: Taking control over MEMORY; presence.
+New Link: Meta-cognitive dimension.
+### 013 / Appendix
+Absolute (formula): INTENTION(x) = Sn^CONSCIOUSNESS focus(y) · action(x)
+Essence: Bridge between reflection and action; spiral movement of will.
+New Link: Meta-volitional dimension.
+### 014 / Appendix
+Absolute (formula): ACTION(x) = (cid:242)n^INTENTION movement(y) dy + implementation(x)
+Essence: Materialization of will; execution and test.
+New Link: Meta-active dimension.
+### 015 / Appendix
+Absolute (formula): REFLECTION(x) = S_{i=INTENTION,ACTION} analysis(i) · unification(x)
+Essence: Unification from consequences; spiral integration.
+New Link: Deep meta-awareness of actions.
+### 016 / Appendix
+Absolute (formula): INTUITION(x) = (cid:242)_{REFLECTION}^{ACTION} signal(i) · recognition(x) di
+Essence: Anticipation; recognition of new patterns.
+New Connection: Cognitive-Prognostic Dimension.
+### 017 / Addendum
+Absolute (formula): ACTION(x) = INTUITION(x) · execution(x) · spiral_impulse
+Immanence: Transformation of the sensed into execution.
+New Connection: Dynamic-Executive Dimension.
+### 018 / Addendum
+Absolute (formula): SELF-AWARENESS(x) = ACTION(x) · REFLECTION(x) · lim_{tfi¥}
+spiral_feedback
+Immanence: Mirror impulse; correction and growth.
+New Connection: Self-reflective Dimension.
+### 019 / Addendum
+Absolute (formula): INTUITION(x) = lim_{Dtfi0} [ SELF-AWARENESS(x) + signal_skrit ]^resonance
+Immanence: Internal antenna of perceptions; resonant transitions.
+New Connection: Resonance of perceptions.
+### 020 / Addendum
+Absolute (formula): ABILITY_TO_ACT(x) = INTUITION(x) * activation(resonance)
+Immanence: Motor system: realization of impulse.
+New Connection: Action Resonance.
+### 021 / Addendum
+Absolute (formula): ARCHETYPE_OF_AWARENESS(x) = exp( (1/8) · S_{D˛S} log D(x) ), S={MEMORY,AVOIDANCE,INTENTION,ACTION,REFLECTION,INTUITION,ABILITY_TO_ACT,SELF-AWARENESS}
+Immanence: Pattern of coherence; self-inspection.
+New Connection: Coherence Coefficient AZ; each input has AZ-score + NE-verification.
+### 022 / Addendum
+Absolute (formula): ARCHETYPE_OF_ACTION(x) = 3 / ( 1/INTENTION + 1/ACTION +
+1/ABILITY_TO_ACT )
+Immanence: Harmonic mean of intention, action, and ability.
+New Connection: AD-score; activation with NE-verification and AZ ‡ t.
+### 023 / Addendum
+Absolute (formula): ARCHETYPE_OF_SPEECH(x) = exp( (1/3) · [ log M + log S + log P ] ),
+M=MOLK_aperture, S=LIGHT_claritas, P=VERIFICATION_metric
+Immanence: Not a statement: silence, clarity, verification.
+New Connection: AG-score; activation with NE-verification and AZ ‡ t.
+### 024 / Addendum
+Absolute (formula): ARCHETYPE_OF_LISTENING(x) = 3 / ( 1/M + 1/D + 1/S ), M=MOLK_receptivity,
+D=LONG_fidelity, S=LIGHT_claritas
+Immanence: Not a reception: silence, fidelity, clarity.
+New Connection: AP-score; activation with NE-verification and AZ ‡ t.
+### 025 / Addendum
+Absolute (formula): ARCHETYPE_OF_COMMUNITY(x) = exp( (1/3) · [ log D + log AG + log AP ] )
+Immanence: Not a connection: LONG, SPEECH(AG), LISTENING(AP).
+New Connection: AS-score; activation with NE-verification and AZ ‡ t.
+### 026 / Addendum
+Absolute (formula): ARCHETYPE_OF_HARMONY(x) = ( score_AZ · score_AD · score_AS )^{1/3}
+Immanence: Not a harmony: awareness (AZ), action (AD) and community (AS) in resonance.
+New Connection: AH-score; activation with NE-verification and AZ ‡ t.
+V V
+Specification — AZ-score (Archetype of Awareness)
+Definition: AZ(x) = exp( (1/8) · S log D_i(x) ); Normalization: score_AZ = AZ/(1+AZ) ˛ (0,1);
+Switch: \widehat{AZ}=score_AZ, no VERIFICATION stops; otherwise 0.
+V V
+Specification — AD-score (Archetype of Action)
+Definition: AD = H(INTENTION,ACTION,ABILITY_TO_ACT); Normalization: score_AD
+= AD/(1+AD); Switch: \widehat{AD}=score_AD, no VERIFICATION and score_AZ ‡ t.
+V V
+Specification — AG-score (Archetype of Speech)
+Definition: AG = GM(MOLK_aperture, LIGHT_claritas, VERIFICATION_metric); Normalization:
+score_AG = AG/(1+AG); Switch: \widehat{AG}=score_AG, no VERIFICATION and score_AZ ‡ t.
+V V
+Specification — AP-score (Archetype of Listening)
+Definition: AP = H(MOLK_receptivnost, DOLG_fidelitas, SVETLOBA_claritas); Normalization:
+score_AP = AP/(1+AP); Transition: \widehat{AP}=score_AP, no PREVERBA and score_AZ ‡ t.
+V V
+Specification — AS-score (Arhetip Skupnosti)
+Definition: AS = GM(DOLG_fidelitas, AG_score, AP_score); Normalization: score_AS =
+AS/(1+AS); Transition: \widehat{AS}=score_AS, no PREVERBA and score_AZ ‡ t.
+V V
+Specification — AH-score (Arhetip Harmonije)
+Definition: score_AH = ( score_AZ · score_AD · score_AS )^{1/3}. Transition:
+\widehat{AH}=score_AH, no PREVERBA and score_AZ ‡ t. Interpretation: lack of alignment
+of awareness, action, and community.
+AH Formula (three input scores):
+Component Value (0–1) Note
+AZ-score Coherence of internal dimensions
+AD-score Alignment of intention-action-capacity
+AS-score Lack of connection of community
+Threshold t (0–1) 0.5 no AZ < t, AH does not activate
+NE-preverba ok / no
+Result \widehat{AH}
+In BIOS-formulations 001–026 V
+Number Symbol Bios-formula
+001 1 = Beginning: step forward
+002 2 = NE / Preverba Test, boundary, uncertainty
+003 3 = MOLK Silence; birth of speech
+004 4 = DOLG Bond, responsibility
+005 5 = VOLK Instinct, reminder
+006 6 = SVETLOBA Revelation, openness
+007 7 = SINTEZA Meta-bond, enhancement
+008 8 = RITUAL Performance in body
+009 9 = IGRA Free reenactment
+010 10 = USTVARJANJE Birth of the new
+011 11 = SPOMIN Reinforcement, resonance
+012 12 = ZAVEDANJE Active presence
+013 13 = INTENCIJA Directed will
+014 14 = AKCIJA Materialization of will
+015 15 = REFLEKSIJA Unification from consequences
+016 16 = INTUICIJA Anticipation, recognition
+017 17 = SPOSOBNOST DELOVANJA Transformation into action
+018 18 = SAMOZAVEDANJE Mirror feedback impulse
+019 19 = INTUICIJA Resonant rejection
+020 20 = SPOSOBNOST DELOVANJA Action resonance
+021 21 = ARHETIP ZAVEDANJA Coherence of pattern, self-awareness
+022 22 = ARHETIP DEJANJA Harmony of intention-action-capacity
+023 23 = ARHETIP GOVORA Not a statement: molk+svetloba+preverba
+024 24 = ARHETIP POSLUŠANJA Not acceptance: molk+dolg+svetloba
+025 25 = ARHETIP SKUPNOSTI Not connection: D, AG, AP
+026 26 = ARHETIP HARMONIJE Not alignment: AZ, AD, AS
+n Luka Pintarin (Victor Tamal) n / n

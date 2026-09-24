@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="utf-8"/>
+<title>ATLAS KVAZI-ZNANJA — interaktivno (w-robovi · filtri · mini‑VDP)</title>
+<style>
+  body {{ margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial; background:#0b0f14; color:#e6edf3; }}
+  .wrap {{ display:flex; height:100vh; }}
+  .graph {{ flex:1 1 auto; position:relative; }}
+  .panel {{ width:380px; background:#0f1620; border-left:1px solid #1f2a37; padding:16px; overflow:auto; }}
+  h1 {{ font-size:18px; margin:0 0 8px 0; color:#cdd9e5; }}
+  .legend span {{ display:inline-block; margin-right:8px; padding:4px 8px; border-radius:999px; font-size:12px; }}
+  .legend .kul {{ background:#f6a5c0; color:#222; }}
+  .legend .pra {{ background:#b9e6b3; color:#222; }}
+  .legend .jed {{ background:#a8c5ff; color:#222; }}
+  .tip {{ position:absolute; pointer-events:none; background:#111827; border:1px solid #1f2937; padding:8px; border-radius:8px; font-size:12px; color:#e5e7eb; }}
+  svg {{ width:100%; height:100%; background:#0b0f14; }}
+  .node {{ cursor:grab; stroke:#0b0f14; stroke-width:1.2; }}
+  .node:active {{ cursor:grabbing; }}
+  .label {{ fill:#d1d5db; font-size:12px; pointer-events:none; text-anchor:middle; }}
+  .edge {{ stroke:#73839c; opacity:.9; }}
+  .edge.highlight {{ stroke:#ffffff; opacity:1; }}
+  .node.highlight {{ stroke:#ffffff; stroke-width:2; }}
+  .edge-label {{ fill:#9fb3c8; font-size:10px; pointer-events:none; }}
+  .controls label {{ display:block; margin:6px 0; font-size:13px; }}
+  .small {{ font-size:12px; color:#9fb3c8; }}
+  .sep {{ border-top:1px solid #1f2a37; margin:12px 0; }}
+  a.btn {{ display:inline-block; background:#1f2937; color:#e5e7eb; padding:8px 10px; border-radius:8px; text-decoration:none; margin-right:8px; border:1px solid #374151; }}
+  .badge {{ display:inline-block; padding:2px 6px; border-radius:6px; background:#1f2937; border:1px solid #374151; font-size:11px; margin-right:6px; }}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="graph" id="graph">
+    <svg id="svg" viewBox="-420 -420 840 840">
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="12" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#73839c"></path>
+        </marker>
+        <marker id="arrowH" viewBox="0 0 10 10" refX="12" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#ffffff"></path>
+        </marker>
+      </defs>
+      <g id="zoom">
+        <g id="edges"></g>
+        <g id="edgeLabels"></g>
+        <g id="nodes"></g>
+        <g id="labels"></g>
+      </g>
+    </svg>
+    <div class="tip" id="tip" style="display:none"></div>
+  </div>
+  <aside class="panel">
+    <h1>⟡ ATLAS KVAZI-ZNANJA</h1>
+    <div class="legend">
+      <span class="kul">kulturni</span>
+      <span class="pra">praktični</span>
+      <span class="jed">jedro</span>
+    </div>
+    <div class="sep"></div>
+    <div class="controls">
+      <label><input type="checkbox" id="toggle-edges" checked/> Pokaži oznake razmerij</label>
+      <label><input type="checkbox" id="toggle-labels" checked/> Pokaži imena vozlišč</label>
+      <label><input type="checkbox" id="lock-layout"/> Zakleni razporeditev (brez vlačenja)</label>
+      <div class="sep"></div>
+      <div class="small">Filtri po skupinah</div>
+      <label><input type="checkbox" id="f-kul" checked/> kulturni</label>
+      <label><input type="checkbox" id="f-pra" checked/> praktični</label>
+      <label><input type="checkbox" id="f-jed" checked/> jedro</label>
+      <div class="sep"></div>
+      <div class="small">Prag vidnosti robov (w): <span id="wval">0.00</span></div>
+      <input type="range" id="wmin" min="0" max="100" value="0" />
+      <div class="small">Debelina robov ∝ w (0..1)</div>
+    </div>
+    <div class="sep"></div>
+    <div id="info" class="small">Klikni vozlišče za **mini‑VDP**: AX, MAX, pečati.</div>
+    <div class="sep"></div>
+    <div>
+      <a class="btn" href="ATLAS_KVZ_graph.json" download>⬇️ JSON</a>
+      <a class="btn" href="ATLAS_KVZ_A4.pdf" download>⬇️ PDF (A4)</a>
+      <a class="btn" href="ATLAS_KVZ_interaktivno.html" download>↺ Reset</a>
+    </div>
+  </aside>
+</div>
+<script>
+const data = {"nodes": [{"id": "MIT", "x": 320.0, "y": 4.704877455120472e-06, "weight": 0.12, "type": "arhetip", "group": "kulturni", "vdp": {"AX": ["AX-MIT1: arhetip kot vzorec pomena"], "MAX": ["MAX-MIT: navdih je veljaven dokaz izvora smisla (.90)"], "pečati": ["PEČAT: simbolni imenik (arhetipski ključ)"]}}, {"id": "ZMOTA", "x": 258.8854411906871, "y": 188.09128165993795, "weight": 0.08, "type": "odklon", "group": "jedro", "vdp": {"AX": ["AX-ZM1: napaka je merljiv odklon"], "MAX": ["MAX-KVZ1: nič se ne briše; zmota = ∆gorivo (.99)"], "pečati": ["PEČAT: korekcijski rez"]}}, {"id": "UMETNOST", "x": 98.88543260761836, "y": 304.3380956948361, "weight": 0.1, "type": "resonanca", "group": "kulturni", "vdp": {"AX": ["AX-UM1: resonanca kot filter"], "MAX": ["MAX-UM: lepota kot prehod v pozornost (.88)"], "pečati": ["PEČAT: estetski red"]}}, {"id": "VERA", "x": -98.88544786640735, "y": 304.3380766213499, "weight": 0.08, "type": "pečat", "group": "kulturni", "vdp": {"AX": ["AX-VE1: pečat legitimacije"], "MAX": ["MAX-VE: zaveza dvigne prag dejanja (.92)"], "pečati": ["PEČAT: obljuba"]}}, {"id": "ZNANOST", "x": -258.8854373759899, "y": 188.09128165993795, "weight": 0.18, "type": "preverba", "group": "praktični", "vdp": {"AX": ["AX-PREHOD: smer loka nosi razmerje", "AX-HUB: vsak vozlišče ima rob do KVZ"], "MAX": ["MAX-KVZ2: resnica = funkcija odnosa (.95)"], "pečati": ["PEČAT: dokaz (⊢)"]}}, {"id": "POLITIKA", "x": -319.99999618530273, "y": -2.327041088164609e-05, "weight": 0.1, "type": "moč", "group": "praktični", "vdp": {"AX": ["AX-PO1: moč strukturira tok"], "MAX": ["MAX-PO: javna odgovornost > zasebni interes (.85)"], "pečati": ["PEČAT: mandat"]}}, {"id": "EKONOMIJA", "x": -258.8854183025037, "y": -188.09129132366922, "weight": 0.12, "type": "preživetje", "group": "praktični", "vdp": {"AX": ["AX-EK1: viri diktirajo mejo"], "MAX": ["MAX-EK: vzdržnost pred rastjo (.90)"], "pečati": ["PEČAT: bilanca"]}}, {"id": "TEHNOLOGIJA", "x": -98.88547647663665, "y": -304.338067211595, "weight": 0.12, "type": "sredstva", "group": "praktični", "vdp": {"AX": ["AX-TE1: sredstvo raztegne doseg"], "MAX": ["MAX-TE: orodje služi smislu (.88)"], "pečati": ["PEČAT: protokol"]}}, {"id": "RITUAL", "x": 98.88548029133389, "y": -304.338067211595, "weight": 0.1, "type": "prehod", "group": "kulturni", "vdp": {"AX": ["AX-RI1: prehod terja pečat in mejo"], "MAX": ["MAX-RI: brez pečata ni prehoda (.90)"], "pečati": ["PEČAT: prag"]}}, {"id": "KVZ", "x": 258.88542211720096, "y": -188.09129132366922, "weight": 0.0, "type": "jedro", "group": "jedro", "vdp": {"AX": ["AX-KVZ: ∮ integrira, ⊘ filtrira, ∆ prehaja, ⟡ sintetizira"], "MAX": ["MAX-KVZ3: meri se po F(x) (.90)"], "pečati": ["PEČAT: jedrni zvezek"]}}], "edges": [{"source": "MIT", "target": "KVZ", "relation": "prispeva", "w": 0.7}, {"source": "MIT", "target": "UMETNOST", "relation": "navdihuje", "w": 0.75}, {"source": "ZMOTA", "target": "KVZ", "relation": "izziva", "w": 0.65}, {"source": "ZMOTA", "target": "ZNANOST", "relation": "spodbuja", "w": 0.55}, {"source": "UMETNOST", "target": "KVZ", "relation": "filtrira", "w": 0.55}, {"source": "UMETNOST", "target": "VERA", "relation": "podpira", "w": 0.6}, {"source": "UMETNOST", "target": "POLITIKA", "relation": "kritizira", "w": 0.5}, {"source": "VERA", "target": "KVZ", "relation": "pečati", "w": 0.6}, {"source": "VERA", "target": "RITUAL", "relation": "uteleša", "w": 0.65}, {"source": "VERA", "target": "POLITIKA", "relation": "legitimira", "w": 0.6}, {"source": "ZNANOST", "target": "KVZ", "relation": "preverja", "w": 0.85}, {"source": "ZNANOST", "target": "TEHNOLOGIJA", "relation": "omogoči", "w": 0.8}, {"source": "ZNANOST", "target": "ZMOTA", "relation": "popravlja", "w": 0.75}, {"source": "POLITIKA", "target": "KVZ", "relation": "ureja", "w": 0.55}, {"source": "POLITIKA", "target": "ZNANOST", "relation": "usmerja", "w": 0.55}, {"source": "EKONOMIJA", "target": "KVZ", "relation": "napaja", "w": 0.6}, {"source": "EKONOMIJA", "target": "POLITIKA", "relation": "vpliva", "w": 0.6}, {"source": "TEHNOLOGIJA", "target": "KVZ", "relation": "razširi", "w": 0.7}, {"source": "TEHNOLOGIJA", "target": "EKONOMIJA", "relation": "spremeni", "w": 0.7}, {"source": "TEHNOLOGIJA", "target": "POLITIKA", "relation": "koncentrira", "w": 0.5}, {"source": "RITUAL", "target": "KVZ", "relation": "prevede", "w": 0.5}, {"source": "RITUAL", "target": "ZNANOST", "relation": "omejuje/meri", "w": 0.4}, {"source": "RITUAL", "target": "MIT", "relation": "obnavlja", "w": 0.45}]};
+const colors = {"kulturni": "#f6a5c0", "praktični": "#b9e6b3", "jedro": "#a8c5ff"};
+const svg = document.getElementById('svg');
+const gZoom = document.getElementById('zoom');
+const gEdges = document.getElementById('edges');
+const gEdgeLabels = document.getElementById('edgeLabels');
+const gNodes = document.getElementById('nodes');
+const gLabels = document.getElementById('labels');
+const tip = document.getElementById('tip');
+const info = document.getElementById('info');
+
+const nodeIndex = new Map(data.nodes.map((n,i)=>[n.id,i]));
+const adj = new Map();
+data.nodes.forEach(n=>adj.set(n.id,{out:[],in:[]}));
+data.edges.forEach(e=>{
+  adj.get(e.source).out.push(e);
+  adj.get(e.target).in.push(e);
+});
+
+const filters = {kul:true,pra:true,jed:true};
+let wThreshold = 0.0;
+
+function nodeRadius(w){ return 18 + 36 * (w || 0.0); }
+function edgeWidth(w){ return 0.6 + 3.6 * (w || 0.0); }
+
+function visibleNode(n){
+  if(n.group==='kulturni' && !filters.kul) return false;
+  if(n.group==='praktični' && !filters.pra) return false;
+  if(n.group==='jedro' && !filters.jed) return false;
+  return true;
+}
+
+function draw(){
+  gEdges.innerHTML = '';
+  gEdgeLabels.innerHTML = '';
+  gNodes.innerHTML = '';
+  gLabels.innerHTML = '';
+
+  // Nodes
+  data.nodes.forEach(n=>{
+    if(!visibleNode(n)) return;
+    const r = nodeRadius(n.weight);
+    const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    circle.setAttribute('cx', n.x); circle.setAttribute('cy', n.y);
+    circle.setAttribute('r', r);
+    circle.setAttribute('fill', colors[n.group] || '#ddd');
+    circle.setAttribute('class','node');
+    circle.dataset.id = n.id;
+    gNodes.appendChild(circle);
+
+    const label = document.createElementNS('http://www.w3.org/2000/svg','text');
+    label.setAttribute('x', n.x);
+    label.setAttribute('y', n.y + r + 14);
+    label.setAttribute('class','label');
+    label.textContent = n.id;
+    gLabels.appendChild(label);
+
+    // Hover tip
+    circle.addEventListener('mousemove', (ev)=>{
+      tip.style.display = 'block';
+      tip.style.left = (ev.clientX+12)+'px';
+      tip.style.top = (ev.clientY+12)+'px';
+      tip.innerHTML = '<b>'+n.id+'</b><br/>vrsta: '+n.type+'<br/>skupina: '+n.group+'<br/>w='+n.weight;
+    });
+    circle.addEventListener('mouseleave', ()=> tip.style.display='none');
+
+    // Drag
+    let dragging=false, ox=0, oy=0;
+    circle.addEventListener('mousedown', (ev)=>{
+      if (document.getElementById('lock-layout').checked) return;
+      dragging=true; ox=ev.clientX; oy=ev.clientY; circle.style.cursor='grabbing';
+      ev.preventDefault();
+    });
+    window.addEventListener('mouseup', ()=>{ dragging=false; circle.style.cursor='grab'; });
+    window.addEventListener('mousemove', (ev)=>{
+      if(!dragging) return;
+      const dx = (ev.clientX-ox); const dy = (ev.clientY-oy);
+      ox = ev.clientX; oy = ev.clientY;
+      n.x += dx; n.y += dy;
+      circle.setAttribute('cx', n.x); circle.setAttribute('cy', n.y);
+      label.setAttribute('x', n.x); label.setAttribute('y', n.y + r + 14);
+      // update connected edges + labels
+      document.querySelectorAll('.edge').forEach(el=>{
+        const sid = el.dataset.source, tid = el.dataset.target;
+        if (sid===n.id) { el.setAttribute('x1', n.x); el.setAttribute('y1', n.y); }
+        if (tid===n.id) { el.setAttribute('x2', n.x); el.setAttribute('y2', n.y); }
+      });
+      const els = Array.from(gEdgeLabels.querySelectorAll('text'));
+      let idx=0;
+      data.edges.forEach((e)=>{
+        // compute index only for drawn edges
+        if(!edgeVisible(e)) return;
+        const s = data.nodes[nodeIndex.get(e.source)];
+        const t = data.nodes[nodeIndex.get(e.target)];
+        const mx = (s.x + t.x)/2, my=(s.y+t.y)/2;
+        els[idx].setAttribute('x', mx); els[idx].setAttribute('y', my - 4);
+        idx++;
+      });
+    });
+
+    // Click = mini-VDP
+    circle.addEventListener('click', ()=>{
+      document.querySelectorAll('.edge').forEach(el=>{ el.classList.remove('highlight'); el.setAttribute('marker-end','url(#arrow)'); });
+      document.querySelectorAll('.node').forEach(el=>el.classList.remove('highlight'));
+      circle.classList.add('highlight');
+      const ins = adj.get(n.id).in.filter(edgeVisible);
+      const outs = adj.get(n.id).out.filter(edgeVisible);
+      const fmt = (arr,dir)=>(arr.length?arr.map(e=>(dir==='out'?'→ '+e.target:'← '+e.source)+' <span class="small">('+e.relation+' · w='+e.w.toFixed(2)+')</span>').join('<br/>'):'—');
+      const vdp = n.vdp || {AX:[],MAX:[],pečati:[]};
+      info.innerHTML = '<b>Vozlišče:</b> '+n.id+
+        ' <span class="badge">'+n.group+'</span>'+
+        '<div class="sep"></div>'+
+        '<b>mini‑VDP</b><br/>'+
+        '<b>AX:</b><br/>'+(vdp.AX&&vdp.AX.length?vdp.AX.map(x=>'⊢ '+x).join('<br/>'):'—')+'<br/>'+
+        '<b>MAX:</b><br/>'+(vdp.MAX&&vdp.MAX.length?vdp.MAX.map(x=>'⟡ '+x).join('<br/>'):'—')+'<br/>'+
+        '<b>Pečati:</b><br/>'+(vdp.pečati&&vdp.pečati.length?vdp.pečati.map(x=>'✶ '+x).join('<br/>'):'—')+
+        '<div class="sep"></div>'+
+        '<b>Izhodi ('+outs.length+')</b><br/>'+fmt(outs,'out')+
+        '<div class="sep"></div>'+
+        '<b>Vhodi ('+ins.length+')</b><br/>'+fmt(ins,'in');
+      // highlight neighbor nodes & edges
+      const highlightNode = (id)=>{
+        const el = document.querySelector('.node[data-id="'+id+'"]'); if (el) el.classList.add('highlight');
+      };
+      const highlightEdge = (s,t)=>{
+        const el = document.querySelector('.edge[data-source="'+s+'"][data-target="'+t+'"]');
+        if (el) { el.classList.add('highlight'); el.setAttribute('marker-end','url(#arrowH)'); }
+      };
+      outs.forEach(e=>{ highlightNode(e.target); highlightEdge(e.source,e.target); });
+      ins.forEach(e=>{ highlightNode(e.source); highlightEdge(e.source,e.target); });
+    });
+  });
+
+  // Edges (draw after nodes to use visibility)
+  const drawnEdges = [];
+  data.edges.forEach((e)=>{
+    if(!edgeVisible(e)) return;
+    const s = data.nodes[nodeIndex.get(e.source)];
+    const t = data.nodes[nodeIndex.get(e.target)];
+    if(!visibleNode(s) || !visibleNode(t)) return;
+
+    const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+    line.setAttribute('x1', s.x); line.setAttribute('y1', s.y);
+    line.setAttribute('x2', t.x); line.setAttribute('y2', t.y);
+    line.setAttribute('class','edge');
+    line.setAttribute('marker-end','url(#arrow)');
+    line.dataset.source = s.id; line.dataset.target = t.id;
+    line.dataset.rel = e.relation || '';
+    line.style.strokeWidth = (0.6 + 3.6 * e.w).toFixed(2);
+    gEdges.appendChild(line);
+
+    const mx = (s.x + t.x)/2;
+    const my = (s.y + t.y)/2;
+    const lbl = document.createElementNS('http://www.w3.org/2000/svg','text');
+    lbl.setAttribute('x', mx); lbl.setAttribute('y', my - 4);
+    lbl.setAttribute('class','edge-label');
+    lbl.textContent = (document.getElementById('toggle-edges')?.checked ?? true) ? (e.relation + ' · w=' + e.w.toFixed(2)) : '';
+    gEdgeLabels.appendChild(lbl);
+    drawnEdges.push(lbl);
+  });
+
+  // respect toggles
+  document.getElementById('edgeLabels').style.display = document.getElementById('toggle-edges').checked ? 'block' : 'none';
+  document.getElementById('labels').style.display = document.getElementById('toggle-labels').checked ? 'block' : 'none';
+}
+
+function edgeVisible(e){ return (e.w || 0) >= wThreshold; }
+
+// Toggles
+document.getElementById('toggle-edges').addEventListener('change', ()=> draw());
+document.getElementById('toggle-labels').addEventListener('change', ()=> draw());
+
+// Filters
+document.getElementById('f-kul').addEventListener('change', (ev)=>{ filters.kul = ev.target.checked; draw(); });
+document.getElementById('f-pra').addEventListener('change', (ev)=>{ filters.pra = ev.target.checked; draw(); });
+document.getElementById('f-jed').addEventListener('change', (ev)=>{ filters.jed = ev.target.checked; draw(); });
+
+// Edge threshold
+const wmin = document.getElementById('wmin');
+const wval = document.getElementById('wval');
+wmin.addEventListener('input', (ev)=>{
+  wThreshold = (+ev.target.value)/100.0;
+  wval.textContent = wThreshold.toFixed(2);
+  draw();
+});
+wval.textContent = wThreshold.toFixed(2);
+
+draw();
+
+// Simple zoom/pan
+let isPanning = false, sx=0, sy=0, tx=0, ty=0, scale=1;
+svg.addEventListener('mousedown', (ev)=>{ if (ev.target.tagName==='circle') return; isPanning=true; sx=ev.clientX; sy=ev.clientY; });
+window.addEventListener('mouseup', ()=> isPanning=false);
+window.addEventListener('mousemove', (ev)=>{
+  if(!isPanning) return;
+  const dx = (ev.clientX - sx), dy = (ev.clientY - sy);
+  sx = ev.clientX; sy = ev.clientY;
+  tx += dx; ty += dy;
+  gZoom.setAttribute('transform', `translate(${tx},${ty}) scale(${scale})`);
+});
+svg.addEventListener('wheel', (ev)=>{
+  ev.preventDefault();
+  const k = Math.exp(-ev.deltaY * 0.001);
+  scale *= k;
+  gZoom.setAttribute('transform', `translate(${tx},${ty}) scale(${scale})`);
+}, {passive:false});
+</script>
+</body>
+</html>

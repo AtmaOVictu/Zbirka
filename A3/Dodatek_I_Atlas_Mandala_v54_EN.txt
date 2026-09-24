@@ -1,0 +1,71 @@
+Appendix I — Atlas of the Individual's Mandala
+n 00 11 Realities n
+054 / Appendix — Archetype of Unification
+Not an increase in knowledge: echo (AECHO) triggers REFLECTION, which is organized by RENEWAL (AREN)
+Specification — ALEARN-score
+Components: score_AECHO, score_REF (REFLECTION), score_AREN (RENEWAL) — all normalized in [0,1]; score_REF = REFLECTION_integrity/(1+REFLECTION_integrity). Definition:
+score_ALEARN = ( score_AECHO · score_REF · score_AREN )^{1/3}. Transition:
+\widehat{ALEARN} = score_ALEARN, not NE-verification completed and score_AZ ‡ t (default t = 0.5). Interpretation: higher score_ALEARN means the echo of action transforms into structural knowledge, prepared for the next cycle.
+Component Value (0–1) Note
+score_AECHO echo (053)
+score_REF REFLECTION (015) — unification
+score_AREN RENEWAL (042) — re-initiation
+AZ-score (0–1) 0.5 Threshold t (adjustable)
+NE-verification ok / ne
+Result \widehat{ALEARN}
+In BIOS-formulations 001–054 V
+Number Symbol BIOS-formula
+001 1 = Initiation: step forward
+002 2 = NE / Verification Test, boundary, hesitation
+003 3 = SILENCE Silence; birth of speech
+004 4 = LONG Bond, responsibility
+005 5 = WOLF Instinct, alert
+006 6 = LIGHT Revelation, openness
+007 7 = SYNTHESIS Meta-bond, upgrading
+008 8 = RITUAL Performance in the body
+009 9 = GAME Free reenactment
+010 10 = CREATION Birth of the new
+011 11 = MEMORY Reinforcement, resonance
+012 12 = AWARENESS Active presence
+013 13 = INTENTION Directed will
+014 14 = ACTION Materialization of will
+015 15 = REFLECTION Unification from consequences
+016 16 = INTUITION Anticipation, recognition
+017 17 = ABILITY TO ACT Transformation into action
+018 18 = SELF-AWARENESS Mirror feedback impulse
+019 19 = INTUITION Resonant response
+020 20 = ABILITY TO ACT Action resonance
+021 21 = ARCHETYPE OF AWARENESS Coherence of pattern, self-reflection
+022 22 = ARCHETYPE OF ACTION Harmony of intention-action-capacity
+023 23 = ARCHETYPE OF SPEECH Not a statement: silence + light + verification
+024 24 = ARCHETYPE OF LISTENING Not acceptance: silence + long + light
+025 25 = ARCHETYPE OF COMMUNITY Not connection: D, AG, AP
+026 26 = ARCHETYPE OF HARMONY Not alignment: AZ, AD, AS
+027 27 = ARCHETYPE OF BALANCE Not measure: AG, AP, AD, score_P
+028 28 = ARCHETYPE OF PERMANENCE Not stability: LONG, VERIFICATION, LIGHT
+029 29 = ARCHETYPE OF TRANSITION Not threshold: VERIFICATION, INTUITION, RITUAL
+030 30 = ARCHETYPE OF COMMITMENT Not promise: LONG, AS, AG
+031 31 = ARCHETYPE OF MERGER Not convergence: AH, AR, AT
+032 32 = ARCHETYPE OF INTERSECTION Not cross: AG, AP, AZL
+033 33 = ARCHETYPE OF INTERWEAVING Not network: AS, AZa, AZL
+034 34 = ARCHETYPE OF RESPONSE Not feedback: APR, AD, AK
+035 35 = ARCHETYPE OF SYNCHRONIZATION Not timing: AO, AT, AH
+036 36 = ARCHETYPE OF FLOW Not flow: ASIN, APP, AZ
+037 37 = ARCHETYPE OF INCARNATION Not body of process: AFLUX, AK, AD
+038 38 = ARCHETYPE OF EMBODIMENT Not inhalation: AEMB, AP, SILENCE
+039 39 = ARCHETYPE OF EMISSION Not exhalation: AEMB, AG, LIGHT
+040 40 = ARCHETYPE OF CYCLE Not circle: AIN, AEX, ASIN
+041 41 = ARCHETYPE OF CONCLUSION Not conclusion: ACYC, APR, AZ
+042 42 = ARCHETYPE OF RENEWAL Not re-initiation: ACON, CREATION, SYNTHESIS(007)
+043 43 = ARCHETYPE OF CALIBRATION Not balancing: AREN, AR, P
+044 44 = Archetype of Alignment is not alignment: ACAL, AH, AK
+045 45 = Archetype of Persistence is not consistency: AALN, DOLG, ACYC
+046 46 = Archetype of Depletion is not decay/end of phase: APERS, VOLK, PREVERBA
+047 47 = Archetype of Transformation is not transition of state: ADECAY, AT, AZ
+048 48 = Archetype of Branching is not splitting of paths: ATRANS, INTUICIJA, IGRA
+049 49 = Archetype of Choice is not selection of path: ABRANCH, PREVERBA, AR
+050 50 = Archetype of Commitment is not signing of choice: ASELECT, AZa, AK
+051 51 = Archetype of Execution is not signing in action: ACOMMIT, AD, AFLUX
+052 52 = Archetype of Influence is not uninek: AEXEC, AG, AS
+053 53 = Archetype of Echo is not resonance: AIMPACT, SPOMIN, ZAVEDANJE
+054 54 = Archetype of UnENja is not increase of knowledge: AECHO, REFLEKSIJA, AREN

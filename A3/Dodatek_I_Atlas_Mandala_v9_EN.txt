@@ -1,0 +1,52 @@
+Appendix I — Mandala Atlas of the Self
+n 00 11 TRUTHS n
+This appendix is not a change to the Atlas, but rather a contribution. Each page records a new expansion, formula, and immanence, so that the Penat remains untouched.
+### 001 / Appendix
+Absolute (formula): log(RESnnnn) = (cid:242)nn (dJAZ / dnas)
+Immanence: Every new phase is an immanent slice of self.
+New connection: Appendix is not to breathe as its own current, but as a vessel from the Penat.
+### 002 / Appendix
+Absolute (formula): PREVERBA(x) = log(1 / ¬x), where ¬x = NE.
+Immanence: Every PREVERBA arises only in NE, at the moment of suspension.
+New connection: Appendix I acquires a brake, which is simultaneously a measure.
+### 003 / Appendix
+Absolute (formula): MOLK(t) = lim(x fi 0n) log(x+t).
+Immanence: MOLK is an immanent moment, when voice is not uttered, yet holds the entire space.
+New connection: Appendix I acquires a primal substrate: space, into which all subsequent entries can be embodied.
+### 004 / Appendix
+Absolute (formula): DOLG(x) = (cid:242)nn 1/(t+1) dt = log(x+1).
+Immanence: DOLG is not merely obligation, but a bond between beings, arising through us.
+New connection: Appendix I acquires a vertical connection: a bond that ties all circles together.
+### 005 / Appendix
+Absolute (formula): VOLK(p) = -log(1-p).
+Immanence: VOLK is a call of instinct: when danger arises, the voice awakens the body.
+New connection: Appendix I acquires an awakening mechanism.
+### 006 / Appendix
+Absolute (formula): SVETLOBA(x) = e^(log(x)) = x.
+Immanence: SVETLOBA is an act of unveiling: what was in shadow now becomes visible.
+New connection: Appendix I acquires unveiling as a dimension.
+### 007 / Appendix
+Absolute (formula): S_{1fi6}(Dodatekn) =
+log(nas)+log(¬x)+lim(xfi0n)log(x+t)+log(x+1)-log(1-p)+e^(log(x))
+Immanence: 007 is a connection between connections: meta-synthesis.
+New connection: Appendix I acquires metadimensionality.
+### 008 / Appendix
+Absolute (formula): RITUAL(t) = (cid:213)_{i=1}^7 Dodatekn mod nas
+Immanence: RITUAL is the soothing of formula into action.
+New connection: Appendix I acquires an enacted dimension.
+### 009 / Appendix
+Absolute (formula): IGRA(s) = RITUAL(t) ¯ chance(s)
+Immanence: IGRA is a loosened ritual: repetition opened to ease and improvisation.
+New connection: Appendix I acquires a layer of ease: every formula can also play.
+In BIOS-formulas 001–009 V
+Number Symbol BIOS-formula
+001 1 = Beginning Life as a step forward (nas)
+002 2 = NE / Preverba Life as a test, boundary, revelation
+003 3 = MOLK Life as space of silence, birth of speech
+004 4 = DOLG Life as connection and responsibility
+005 5 = VOLK Life as instinct and warning
+006 6 = SVETLOBA Life as unveiling and openness
+007 7 = SYNTHESIS Life as meta-connection, advancement
+008 8 = RITUAL Life as repetition in actions that create unity
+009 9 = IGRA Life as freely reenacted, ease
+n Luka Pintarin (Victor Tamal) n /think

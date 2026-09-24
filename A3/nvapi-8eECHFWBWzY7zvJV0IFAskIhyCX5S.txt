@@ -1,0 +1,12 @@
+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
+
+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
+
+
+
+
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
+
+sudo
+
+

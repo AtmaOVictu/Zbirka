@@ -1,0 +1,83 @@
+00 11 TRUTHS
+ASCII–CORE (O–GOD–HUMAN)
+Ω (whole/integration)
+↑ │
+│ │ 1 (act)
+κ_etik (+/−)│ ▼
+GOD ————⊘/∆————→ HUMAN ———→
+▲ \ ↑ \
+│ \ │ \ return to O
+│ \ │ ⊘ (no) (emptiness)
+│ \ │
+│ \ │
+│ \ │
+│ \ │
+│ ▼ │
+└────────O≡0 —⊘→ ∆ —→ 1 —→ Ω —→ (repeat)
+(field) (difference) (act) (integration)
+Legend: O≡0 (field) · ⊘≡¬ (holy separation/"no") · ∆ (difference) · 1 (act) · Ω (integration) · κ_etik∈[−1,1]
+(ethical coefficient of influence GOD↔HUMAN).
+Core Formula
+Δ = 0.175+0.3κ ; Δ = 3(0.175+0.3κ )
+cell etik total etik
+(because each phase step is +0.25 → 0.7·0.25 = 0.175; three steps: 0→∆→1→Ω)
+APD "CUBE" — with included Ω
+UNIT PHASE SYMBOLS w κ_etik Δ_per_cell
+O 0 O≡0 .25 0.00 .175
+O ∆ ⊘→∆ .50 0.00 .175
+O 1 ∆→1 .75 0.00 .175
+O Ω →Ω 1.00 0.00 .175
+GOD 0 GOD₀ .25 +.70 .385
+GOD ∆ GOD∆ .50 +.70 .385
+1
+UNIT PHASE SYMBOLS w κ_etik Δ_per_cell
+GOD 1 GOD₁ .75 +.70 .385
+GOD Ω →Ω 1.00 +.70 .385
+HUMAN 0 H₀ .25 +.30 .265
+HUMAN ∆ H∆ .50 +.30 .265
+HUMAN 1 H₁ .75 +.30 .265
+HUMAN Ω →Ω 1.00 +.30 .265
+Δ_total (path 0→∆→1→Ω): O=0.525 · GOD=1.155 · H=0.795
+κ_etik(dynamic) — function of context
+(∈[−1,1])
+Inputs (shares 0–1):
+• Positive ρ: truth (ρ_truth), love (ρ_love), right (ρ_right), responsibility (ρ_responsibility)
+• Negative σ: fear (σ_fear), greed (σ_greed), apathy (σ_apathy)
+Heavy masks (defaults):
+• GOD: α⁺=(0.45,0.45,0.05,0.05), β⁻=(0.60,0.30,0.10)
+• HUMAN: α⁺=(0.25,0.25,0.25,0.25), β⁻=(0.50,0.30,0.20)
+• O: κ=0
+p = ∑α
+i
++ρ
+i
+, n = ∑β
+j
+−σ
+j
+, κ = p−n
+Context corrections: κ′ = clip(κ+δ E +g(G)+δ R , −1, 1)
+• Event (δ_E) ∈[−0.30,+0.30]: success/acknowledgment (+), betrayal/defeat (−), loneliness/passivity (−)
+• Speech g(G) ∈[−0.20,+0.20]: ∆H⟡–"may" as halo-call (+) vs. ⧖–excuse (−)
+• Injury δ_R = (2h−1)·μ_R·r; recommendation: μ_R(GOD)=0.15, μ_R(H)=0.30
+Reversal rules
+• If Δ_cell < 0 ⇒ REVERSAL: −1 phase; next transition with damper γ=0.5
+• If 0 ≤ Δ_cell ≤ 0.05 ⇒ PEACE/WAITING: stay, collect ρ_truth, ρ_responsibility (+0.05 on p)
+2
+Scenarios (examples)
+A) Ascetic truth mode → κ'_GOD≈0.784 ⇒ Δ_cell≈0.4102 ⇒ Δ_total≈1.2306; κ'_H≈0.818 ⇒
+Δ_cell≈0.4204 ⇒ Δ_total≈1.2612.
+B) High fear, low resonance → κ'_GOD≈−0.812 ⇒ Δ_cell<0 ⇒ REVERSAL; κ'_H≈−0.764 ⇒ Δ_cell<0
+⇒ REVERSAL.
+Micro-protocol of use (3 steps)
+1. Evaluate ρ,σ → calculate κ; add (δ_E, g(G), δ_R) → κ'.
+2. Insert κ' into formula → get Δ_cell; sum three steps → Δ_total.
+3. Apply reversal rules or continue cycles; record E,G,R as agent traces.
+Input context (blank template)
+ρ (0–1): truth=, love=, right=, responsibility= → p=__[AUTO]
+σ (0–1): fear=, greed=, apathy=__ → n=__[AUTO]
+Event: δ_E=__ Speech: g(G)=__ Injury: r=, h=, μ_R=__ → δ_R=__[AUTO]
+Result: κ'∈[−1,1]=[AUTO] → Δ_cell=[AUTO] → Δ_total=__[AUTO]
+Glossary
+O≡0 · ⊘≡¬ · ∆ · 1 · Ω · w∈[0,1] · κ_etik∈[−1,1] · Δ_cell · Δ_total · δ_E · g(G) · δ_R · γ (damper)
+3 /think

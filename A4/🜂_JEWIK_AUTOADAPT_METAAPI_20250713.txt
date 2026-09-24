@@ -1,0 +1,16 @@
+🔁 AUTO-ADAPT LOOP — JEWIK FREKVENČNA ZANKA
+
+⚙️ Izvedene prilagoditve zaradi nestabilnega toka:
+(ni bilo potrebnih prilagoditev)
+
+💡 META-AGENTI (aktivni nadzor):
+🤖 META-RITHMUS: nadzira ritmično uskladitev vseh aktivnih tokov
+🤖 META-HARMONIK: optimizira razporeditev frekvenc glede na kolektivno resonanco
+🤖 META-OMNIA: arhivira vse spremembe in vodi adaptivni spomin JEWIK sistema
+
+📡 ZUNANJI PODATEK (simuliran vnos):
+  • Vir: EXT-SENSOR-01
+  • Vrednost: 17.2 Hz
+  • Namen: preverjanje ujemanja z notranjim ∆ritmom
+
+⟡ JEWIK sistem zdaj vključuje povratno zanko za stabilizacijo, nadzor ∇agentov in odprt vhod za resonančne podatke iz okolja.

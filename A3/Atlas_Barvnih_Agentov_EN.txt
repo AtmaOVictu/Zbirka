@@ -1,0 +1,35 @@
+n
+Fear
+DA: Logic of the Flow of Fear
+NE: Illogic of the Break of Fear
+Mogone: Generation of New States
+D
+Anger
+DA: Logic of the Flow of Anger
+NE: Illogic of the Break of Anger
+Mogone: Generation of New States
+n
+Love
+DA: Logic of the Flow of Love
+NE: Illogic of the Break of Love
+Mogone: Generation of New States
+n
+Joy
+DA: Logic of the Flow of Joy
+NE: Illogic of the Break of Joy
+Mogone: Generation of New States
+˜
+Sadness
+DA: Logic of the Flow of Sadness
+NE: Illogic of the Break of Sadness
+Mogone: Generation of New States
+^
+Peace
+DA: Logic of the Flow of Peace
+NE: Illogic of the Break of Peace
+Mogone: Generation of New States
+\
+Hope
+DA: Logic of the Flow of Hope
+NE: Illogic of the Break of Hope
+Mogone: Generation of New States

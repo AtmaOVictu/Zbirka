@@ -1,0 +1,26 @@
+# Ignore files
+node_modules/
+dist/
+build/
+coverage/
+.cache/
+
+# Config files
+package.json
+package-lock.json
+vite.config.ts
+vitest.config.ts
+tailwind.config.js
+postcss.config.js
+.tsconfig*.json
+.eslintrc.*
+
+# IDE
+.idea/
+.vscode/
+
+# Environment
+.env*
+
+# Logs
+*.log

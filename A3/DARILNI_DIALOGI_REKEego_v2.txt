@@ -1,0 +1,467 @@
+DARILNI DIALOGI REKE
+Normalizirana oblika za kopiranje; vsak dialog ima 3 vrstice + DAR.
+
+REK 01 — Kapaciteta
+A: Hočem te danes.
+B: Danes imam samo dih za sebe.
+DAR: Rečem NE zdaj, da bo najin DA resničen.
+
+REK 02 — Vzorci
+A: Bojim se, da me spet pustiš na cedilu.
+B: Bojim se, da te spet vzamem kot breme.
+DAR: Učiva se novega ritma, ne ponavljava starega.
+
+REK 03 — Meja
+A: Pridem z ognjem.
+B: Jaz najprej postavim vodo.
+DAR: Tako oba ostaneva živa.
+
+REK 04 — Čas
+A: Hočem eksplozijo.
+B: Jaz gradim tiho tkivo.
+DAR: Naj molk postane polje, ne kazen.
+
+REK 05 — Spoštovanje
+A: Vzemi me, kakršen sem.
+B: Te ne vzamem, dokler ne morem držati sebe.
+DAR: Tvoj prostor je varnejši, ko je moj cel.
+
+REK 06 — Iskrenost
+A: Priznam, da hočem bližje.
+B: Priznam, da hočem počasneje.
+DAR: Odkritost ni igra, je nega.
+
+REK 07 — Ego
+A: Moje besede so rez.
+B: Moj odgovor je dejanje.
+DAR: Ko se ujameta, pride mir.
+
+REK 08 — Lakota
+A: Nahrani se z mojim ognjem.
+B: Najprej nahranim svoj dih.
+DAR: Polna ti dam polnost, ne krče.
+
+REK 09 — Lahkotnost
+A: Tvoja lahkotnost me jezi.
+B: Moja lahkotnost je preživetje.
+DAR: Iz nje bo zrasla nosljivost.
+
+REK 10 — Nosilnost
+A: Držal bi te takoj.
+B: Držala te bom, ko ne bom padla.
+DAR: Raje kasneje res, kot zdaj na pol.
+
+REK 11 — Ne-seks
+A: Hočem te tudi s telesom.
+B: Raje te ne vzamem, kot da se raztrgam.
+DAR: Užitek pride, ko je telo celo.
+
+REK 12 — Alarm
+A: Močna je moja želja.
+B: Ko je premočna, se vklopi alarm, ne srce.
+DAR: Zmanjšava ogenj, da zaslišiva glas.
+
+REK 13 — Nositi vs. ljubiti
+A: Naj te nosim?
+B: Nočem, da me nosiš; hočem, da me ljubiš.
+DAR: Najdeva način, da hodiva oba.
+
+REK 14 — Ne prikrivati
+A: Ne bova prikrivala tiča.
+B: Ne bom več prikrivala sebe.
+DAR: Resnica ostane erotična, ko je mehka in jasna.
+
+REK 15 — Pljunek
+A: Zakaj ne rečeš DA?
+B: Ker bi to bil pljunek po sebi in po tebi.
+DAR: Raje sapo, da bo govor jasen.
+
+REK 16 — Olupki
+A: Vzemi, kar je.
+B: Brez sebe dam le olupke.
+DAR: Počakava na sadež, ne na lupino.
+
+REK 17 — Podpis
+A: Daj mi svoj da.
+B: Ne podpisujem, kar razjeda naju.
+DAR: Naj bo potrditev zdrava.
+
+REK 18 — Zrak
+A: Moj DA je požar.
+B: Moj DA je zrak.
+DAR: Izberem zrak, da oba dihava.
+
+REK 19 — Molčanje
+A: Sovražim to tišino.
+B: Zdaj jo nosim kot most.
+DAR: Molk je prostor, ne kazen.
+
+REK 20 — Vzdržnost
+A: Hočem zdaj.
+B: Čakam, da pridem cela.
+DAR: Čakanje je spoštovanje.
+
+REK 21 — Držati hrbet
+A: Nesi še moj ego.
+B: Držim svoj hrbet, da bom kdaj držala tvojega.
+DAR: Moč deliva, ne prelagava.
+
+REK 22 — Ne mešanica
+A: Hočem te v vseh vlogah.
+B: Ne bom ti mama, ljubica in smetišče v enem.
+DAR: Čista vloga rodi čisto nežnost.
+
+REK 23 — Ne umreti za trenutek
+A: Hočeš me zdaj?
+B: Nočem umreti za tvoj trenutek.
+DAR: Varujem življenje za odnos.
+
+REK 24 — Epilog
+A: Sprejemam tvoj nesprejem.
+B: Zato te spoštujem.
+DAR: Ostaneva resnična in možna.
+
+DARILNI DIALOGI REKE — SERIJA II
+Normalizirana oblika; vsak dialog ima 3 vrstice + DAR.
+
+REK 25 — Zaupanje
+A: Zaupaj mi, da ostajam.
+B: Zaupaj meni, da se vračam pozno, a cela.
+DAR: Zaupanje je čas, ne nadzor.
+
+REK 26 — Krhkost
+A: Bojim se, da se zlomiš.
+B: Sem krhka in ostajam resnična.
+DAR: Krhkost je dar, če jo drži nežnost.
+
+REK 27 — Ranjivost
+A: Odprem svojo rano.
+B: Ne vstopam s čevlji.
+DAR: Rano gledava kot svetlobo, ne kot orožje.
+
+REK 28 — Kritika
+A: Vidim tvojo napako.
+B: Hvala, če pride brez ponižanja.
+DAR: Resnico namažem z odgovornostjo.
+
+REK 29 — Sram
+A: Sram me je svoje potrebe.
+B: Ne sramujem tebe, samo varujem sebe.
+DAR: Sram zamenjava za jasno prošnjo.
+
+REK 30 — Krivda
+A: Kriv sem, ker sem pritiskal.
+B: Odpuščam, ko se naučiš meje.
+DAR: Krivda postane zaveza, ne kazen.
+
+REK 31 — Sporočila
+A: Ne odgovoriš hitro.
+B: Potrebujem prostor brez kravate časa.
+DAR: Napiševa pravilo, da ni fantomskih strahov.
+
+REK 32 — Dvom
+A: Dvomiš v naju?
+B: Dvomim brez sodbe, da pride jasnost.
+DAR: Dvom je most, ne prepad.
+
+REK 33 — Sanjanje
+A: Sanjam o skupnem domu.
+B: Sanjam o skupni svobodi.
+DAR: Najprej zgradiva navado nežnosti.
+
+REK 34 — Telo
+A: Telo me kliče k tebi.
+B: Moje telo hoče počasi.
+DAR: Počasnost je erotična, ker vidi.
+
+REK 35 — Ritem
+A: Hočem tempo.
+B: Jaz držim ritem.
+DAR: Metronom postaneva oba.
+
+REK 36 — Zelena luč
+A: Kdaj je DA?
+B: Ko srce in hrbet držita skupaj.
+DAR: DA je, ko oba nosiva svojo težo.
+
+REK 37 — Rdeča luč
+A: Zakaj STOP?
+B: Ker se bliža preplavitev.
+DAR: Stop je dar pred nesrečo.
+
+REK 38 — Klic
+A: Kličem te, da prideš.
+B: Odgovorim, ko sem cela.
+DAR: Klic in odgovor sta ples, ne ukaz.
+
+REK 39 — Prisotnost
+A: Glej me.
+B: Vidim te, ko gledam tudi sebe.
+DAR: Prisotnost je dvojna luč.
+
+REK 40 — Ponižnost
+A: Ne vem, kako naprej.
+B: Potem greva počasi in tiho.
+DAR: Ponižnost naredi prostor za resnico.
+
+REK 41 — Pogum
+A: Strah me je tvojega NE.
+B: Moj NE te ne kaznuje, te čuva.
+DAR: Pogum je ostati, ko ni potrditve.
+
+REK 42 — Nadzor
+A: Rad bi vedel vse.
+B: Jaz rabim skrivnost za dih.
+DAR: Zaupanje je lepše kot nadzor.
+
+REK 43 — Predaja
+A: Predam se ti.
+B: Predam se sebi — potem tebi.
+DAR: Predaja brez izgube je zvestoba telesu.
+
+REK 44 — Vračanje
+A: Se boš vrnila?
+B: Vedno, ko bo polnost v meni.
+DAR: Vrnitev je dar, ne dolžnost.
+
+REK 45 — Odhod
+A: Zakaj greš?
+B: Da se lahko vrnem živa.
+DAR: Odhod je kroženje, ne konec.
+
+REK 46 — Vrata
+A: Naj jih odprem na stežaj?
+B: Odpri na reže, da ne poči vrat.
+DAR: Vrata drživa skupaj.
+
+REK 47 — Glas
+A: Kričim po tebi.
+B: Šepetam resnico.
+DAR: Glas izbere ton, ki zdravi.
+
+REK 48 — Molk
+A: Molk me straši.
+B: Molk me zdravi.
+DAR: Določiva dolžino molka in namen.
+
+DARILNI DIALOGI — EGO SERIJA
+Normalizirana oblika; vsak dialog = 3 vrstice + DAR. Kopiraj in podari.
+
+EGO 01 — Ego — Mera
+A: Moj ego hoče prostor.
+B: Moja mera hoče mir.
+DAR: Določiva prostor, da ego postane sobivanje.
+
+EGO 02 — Ego — Ogledalo
+A: Tvoje tišine berem kot prezir.
+B: Moje tišine berem kot skrb zase.
+DAR: Najprej preveriva branje, šele potem sodbo.
+
+EGO 03 — Ego — Rez in šiv
+A: Moje besede so rez.
+B: Moja dejanja so šiv.
+DAR: Naj se ujameta, da rana postane brazgotina, ne prepad.
+
+EGO 04 — Ego — Hranjenje
+A: Hočem tvojo pozornost.
+B: Hočem svojo celoto.
+DAR: Izmenjava: minuta zate, ura zame, potem midva.
+
+EGO 05 — Ego — Ponižanje
+A: Če me popraviš, me nehaš ljubiti?
+B: Če te popravim nežno, te začnem spoštovati.
+DAR: Kritika brez sramu, učenje brez kazni.
+
+EGO 06 — Ego — Primerjava
+A: Primerjam te z drugimi.
+B: S tem izgubiš mene.
+DAR: Zamenjaj lestvico za prisotnost.
+
+EGO 07 — Ego — Povišava
+A: Potrebujem, da rečeš: dobro mi gre.
+B: Rečem, ko to vidim v dejanjih, ne v prošnjah.
+DAR: Pohvala kot resnica, ne kot miloščina.
+
+EGO 08 — Ego — Krivda
+A: Kriv sem, da sem pritiskal.
+B: Jaz sem kriva, da sem bežala.
+DAR: Krivda → odgovornost: danes novo pravilo.
+
+EGO 09 — Ego — Nadzor
+A: Hočem vedeti vse.
+B: Hočem ohraniti nekaj skrivnosti.
+DAR: Zaupanje je lepše kot nadzor — in bolj erotično.
+
+EGO 10 — Ego — Opravičilo
+A: Oprosti, ker sem te preglasil.
+B: Hvala. Zdaj govoriva isto višino.
+DAR: Opravičilo kot uglasitev, ne ponižanje.
+
+EGO 11 — Ego — Vloga
+A: Naj bom tvoj učitelj?
+B: Najprej bodi učenec resnice.
+DAR: Menjava vlog šele, ko oba dihava.
+
+EGO 12 — Ego — Ranjivost
+A: Ne maram, da me vidiš slabega.
+B: Raje te imam resničnega.
+DAR: Slabost je vrata; skoznja pride toplina.
+
+EGO 13 — Ego — Projekcija
+A: Ti si hladna.
+B: Ti si preplavljen.
+DAR: Preveriva, kaj je čigavo, preden proglasiva sodbo.
+
+EGO 14 — Ego — Dominacija
+A: Rad vodim.
+B: Vodim, ko vidim, da me vidiš.
+DAR: Vodenje kot skrb, ne kot zasluga.
+
+EGO 15 — Ego — Zahteva vs. prošnja
+A: Zahtevam tvoj čas.
+B: Slišim prošnjo, ne ukaza.
+DAR: Prosi jasno, da lahko izberem svobodno.
+
+EGO 16 — Ego — Pohlep po potrditvi
+A: Povej mi, da sem najboljši.
+B: Povej mi, kaj si pripravljen narediti boljše.
+DAR: Potrditev kot pot, ne kot trofeja.
+
+EGO 17 — Ego — Sram
+A: Sram me je, da potrebujem.
+B: Mene sram mine, ko prosim jasno.
+DAR: Sram razveževa v prošnjo + mejo.
+
+EGO 18 — Ego — Hitrost
+A: Hočem zdaj.
+B: Jaz držim ritem.
+DAR: Metronom nama meri srce, ne ego.
+
+EGO 19 — Ego — Želja
+A: Želim si, da me častiš.
+B: Častim te, ko se častiš sam — brez mask.
+DAR: Samočast je temelj darila.
+
+EGO 20 — Ego — Jeza
+A: Jezijo me tvoje meje.
+B: Moje meje me držijo pri tebi.
+DAR: Jezo prevedeva v pravilo stika.
+
+EGO 21 — Ego — Hvalisanje
+A: Govorim o svojih zmagah.
+B: Poslušam, ko slišim tudi, kje si bil človek.
+DAR: Zmaga + ranljivost = zaupanje.
+
+EGO 22 — Ego — Tekmovanje
+A: Nočem izgubiti.
+B: Nočem, da naju zmaga loči.
+DAR: Odigrajva skupaj proti težavi, ne drug proti drugemu.
+
+EGO 23 — Ego — Umik
+A: Umaknem se, ko me boli.
+B: Ostani, a govori malo.
+DAR: Mikro-odmor namesto velike vojne.
+
+EGO 24 — Ego — Pripadnost
+A: Si moja?
+B: Sem svoja, da sem lahko tvoja.
+DAR: Pripadnost brez lastništva.
+
+EGO 25 — Ego — Jezik
+A: Moje besede te režejo?
+B: Reže me neskladje z dejanji.
+DAR: Besedo potrdi dejanje; šele potem rasteta oba.
+
+EGO 26 — Ego — Videnje
+A: Poglej me do konca.
+B: Vidim te, ko ne zakrijem sebe.
+DAR: Dvojno videnje ali nič.
+
+EGO 27 — Ego — Zahvala
+A: Hvala, da me zadržiš, ko letim predaleč.
+B: Hvala, da se ustaviš, ko te prosim.
+DAR: Zahvala kot gorivo, ne kot dolg.
+
+EGO 28 — Ego — Umirjanje
+A: Kričim znotraj.
+B: Šepetam mejo.
+DAR: Šepet pogosto zmaguje.
+
+EGO 29 — Ego — Dovoljenje
+A: Dovoli mi, da vodim nocoj.
+B: Dovoli mi, da rečem kdaj ne.
+DAR: Dovoljenje kot izmenjava, ne kot pravica.
+
+EGO 30 — Ego — Skromnost
+A: Ne znam prositi lepo.
+B: Nauči se. Jaz se učim reči NE lepo.
+DAR: Lepo je oblika resnice.
+
+EGO 31 — Ego — Trma
+A: Ne popuščam.
+B: Jaz ne izsiljujem.
+DAR: Popustiva oba po en korak — to je most.
+
+EGO 32 — Ego — Zvestoba resnici
+A: Hočem, da verjameš meni.
+B: Hočem, da verjameva resnici.
+DAR: Resnica je najin tretji člen.
+
+EGO 33 — Ego — Eros
+A: Ego hoče aplavz.
+B: Telo hoče prisotnost.
+DAR: Iz aplavza narediva dotik.
+
+EGO 34 — Ego — Epilog
+A: Sprejemam korekcijo.
+B: Sprejemam tvoj pogum.
+DAR: Ego postane orodje, ko se uči.
+REK 49 — Ljubezen/Strah
+A: Rad te imam, a sem preveč?
+B: Rad te imam, a sem premalo?
+DAR: Strah spremeniva v ritem, da ljubezen nosi oba.
+
+REK 50 — Sram/Ponos
+A: Sramota je moj ponos.
+B: Moje meje so tvoje spoštovanje.
+DAR: Sram zamenjava za prošnjo, ponos za jasnost.
+
+REK 51 — Iskrenost
+A: Ponižam se s iskreno besedo.
+B: Resničnost drži več polj.
+DAR: Iskrenost ni igra, je nega.
+
+REK 52 — Odsotnost
+A: Mene boli, da te ni.
+B: Moč v meni ostane tvoja sled.
+DAR: Odsotnost je kroženje, ne konec.
+
+REK 53 — Opravičilo
+A: Oprosti za besede, ki te žale.
+B: Sprejemam, ko se soočiš s seboj.
+DAR: Opravičilo je uglasitev, ne ponižanje.
+
+REK 54 — Sprememba skozi čas
+A: Zame si vsakič drugačna.
+B: Preteklost je manjša od sedanjega.
+DAR: Sedanjost je dar, vrnitev pa svobodna.
+
+EGO 35 — Ponižnost
+A: Hotel sem, da me oropaš.
+B: Obogatila sem te s samoto.
+DAR: Ponižnost rodi resnico, ne kazen.
+
+EGO 36 — Jezik
+A: Besede so moje sikajoče rane.
+B: Moja meja je, da jih ne nosim.
+DAR: Beseda naj potrdi dejanje.
+
+EGO 37 — Resnica
+A: Mislim nate, kot da si jaz.
+B: Mislim nase, kot da sem ti.
+DAR: Sebičnost prevedeva v skupno resonanco.
+
+EGO 38 — Epilog
+A: Sprejmem, da bom umrl sam.
+B: Sprejmem, da sem bila ob tebi.
+DAR: Ego se umiri v resnici odnosa.

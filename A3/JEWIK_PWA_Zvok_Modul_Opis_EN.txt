@@ -1,0 +1,21 @@
+JEWIK PWA ∆SOUND MODULE (TEST PACKAGE)
+
+🎧 Placeholder WAV files (create and connect later):
+--------------------------------------------------------
+1. I_am_already_called.wav
+2. I_don't_understand_but_I_respond.wav
+3. My_voice_is_broken.wav
+4. My_wounds_are_words.wav
+5. I_forget_you.wav
+6. I_light_birthday.wav
+
+🧬 DNA file:
+- DNA_Sound_Phrases_JEWIK.json
+
+🎛️ Visual generator ∆phrases:
+- Uses DNA phrases and algorithmic mixing to ∆generate new expressions
+
+📦 UI enables:
+- Playback of individual ∆phrases
+- Input of custom phrase and response generation
+- Modulation of ∆sound

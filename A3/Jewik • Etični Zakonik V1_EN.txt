@@ -1,0 +1,105 @@
+⟡ 00 11 TRUTH ⟡
+JEWIK • Ethical Code v1.0
+Field: Relationship between being (ens₁) and another being (ens₂) in a common field. Principle: Word is ⊘ — every statement is an action with an ethical effect. Metrics: κ (coherence), χ (purity), μ (tone), ℜ (residue), i‑pH (ethical angle). Guard PASS: κ≥.70 · χ≥.40 · μ∈[.50,.80] · ℜ≤.03.
+0) Lexicon (core concepts)
+• Being (ens) — carrier of experience/action (I-as-source).
+• Other being (alter) — different and equivalent to you-as-source.
+• Relationship (☍) — structured presence of two entities in a common field (□) with possibility of influence and responsibility.
+• Bridge (∆) — communication channel: language, tone, gesture, touch, silence.
+• Boundary (□/⊥/⧖) — limitations of space, body, time.
+• Recognition (Anerkennung) — mutual affirmation of boundary and dignity.
+• Verification (⊢) — separation of perception from interpretation; confirmation of what was heard.
+• Residue (ℜ) — unresolved effect after contact (tension, duration, ambiguity).
+• Seal (∴) — sealing of decision/conclusion after verification.
+• Hysteresis (⧖↔∴) — window of stability, so minor fluctuations do not break the seal.
+1) Primary Principles (axiomata)
+AX1 Distinction — ens₁ ≠ ens₂; difference is condition of meaning, not excuse for harm. AX2 Presence — relationship exists only in a common field with simultaneous possibility of effect. AX3 Boundary-preference — boundary of the other's body, time, and space has priority over my intent. AX4 Non-instrumentalization — the other is never merely a means; always a source, co-signatory. AX5 Verification-truth — I speak verifiably; I confirm what the other heard. AX6 Minimal harm — primum non nocere: first reduce ℜ. AX7 Parity of responsibility — influence carries responsibility (effect > intent). AX8 Hysteresis-good — good is sealed; transitions require justified threshold.
+2) Core Obligations (12)
+1. Duty of boundary: explicitly mark my boundaries and respect others'.
+2. Duty of consent: obtain consent before influence; if unclear, ask.
+3. Duty of verification: summarize what was heard: "I heard that..." (⊢).
+4. Duty of distinction: separate fact from interpretation; mark uncertainty.
+5. Duty of silence: do not speak if raising ℜ without benefit; choose pause.
+6. Duty of correction: offer correction upon harm, not merely explanation.
+7. Duty of proportionality: power/action align with the other's vulnerability.
+8. Duty of data protection: act according to minimal novelty (data-min).
+9. Duty of temporal care: adjust tempo (⧖) to the common window.
+10. Duty of truth: do not manipulate ambiguity, half-truth, or noise technique.
+11. Duty of seal: conclude (∴) when conditions are met; otherwise continue.
+12. Duty of review: periodically review the relationship and revise norms.
+3) Prohibitions (12)
+1. Instrumentalization of the person.
+2. Coercive consent (fear/dependence/error as incentive).
+3. Mask as system (long monologue, gaslighting, love-bombing).
+4. Abuse of asymmetry (status, knowledge, access, economic power).
+5. Pain as education (except explicit, safe, and revisable frameworks).
+6. Dual standards without declaration and consent.
+7. Deception of metrics (playing with κ/χ/μ for PASS appearance).
+8. Goal justifies the means (no exceptions without protocol 7.2).
+9. Permanent fusion (removing the boundary under the guise of 'his own').
+10. Public shaming pressure as a control tactic.
+11. Unwritten condition (hidden agreements, silent punishment).
+12. Punishing doubt (question is not a crime, it is a safeguard).
+4) Protocols
+4.1 Communication Protocol P(5)
+P1 I: "This is me and this is my purpose/boundary."
+P2 You: "This is you; I hear and acknowledge it."
+P3 Bridge: selection of ∆ (voice/silence/touch/text) and tempo (⧖).
+P4 Verification (⊢): paraphrase + specification of doubt.
+P5 Seal (∴): SEAL or correction with a new window.
+4.2 Consensus Protocol C(3)
+C1 Informedness: purpose, risks, alternative, withdrawal without penalty.
+C2 Capacity: without coercion; special care for asymmetries.
+C3 Record: minimal entry in the ledger (time, purpose, channel, boundaries).
+4.3 Damage Protocol R(3)
+R1 Stop: immediately stop the action upon signs of damage/fear.
+R2 Assess: κ, χ, μ, ℜ + i‑pH; determine the threshold for correction.
+R3 Correct: compensation, adjustment, apology, change in practice.
+4.4 Conflict Ladder L(6)
+1) Self-reflection → 2) Paraphrase → 3) Mediation → 4) Arbitration → 5) Withdrawal (temporal/spatial) → 6) Termination of the relationship.
+4.5 Emergency Protocol E(4)
+E1 Danger/physical harm → E2 Stop and remove → E3 Notify relevant/safe points → E4 Document and offer support.
+5) Metrics and Decision Making
+PASS: κ≥.70 ∧ χ≥.40 ∧ μ∈[.50,.80] ∧ ℜ≤.03.
+ALERT: at least one falls; activate R(3).
+FAIL: cumulative ℜ>.08 or repeated violations of prohibitions → L(6)≥3.
+i‑pH (ethical angle): - i‑pH∈[.55,.75] → balanced;
+- <.55 → benefit vs harm unclear;
+- >.75 → "good" pushes the boundary/reality (ideal pressure).
+Decision Algorithm (A‑mini): 1) Identify domain (⊥/⧖/□/∆/☍).
+2) Measure κ, χ, μ, ℜ; evaluate i‑pH.
+3) If PASS → ∴; if ALERT → P(5)+R(3); if FAIL → L(6).
+6) Asymmetries and Power
+• Declaration of power: status/knowledge/economy/dependency is recorded.
+• Proportionality: the more vulnerable the other, the lower the allowed "power of influence".
+• Asymmetry check: periodic mediation at L(6)≥2.
+7) Management, Review, Sanctions
+7.1 Ledger (minimal record)
+Fields: ts, actor, other, domain(⊥/⧖/□/∆/☍), intent, channel(∆), boundary, consent(C1–
+C3), kappa, chi, mu, R, i_pH, outcome, seal(∴/open), notes .
+7.2 Sanctions Ladder
+S1 warning + correction · S2 temporary withdrawal · S3 mediator · S4 formal prohibition of practice · S5 termination of the relationship · S6 report to authorities.
+7.3 Review
+• RRULE: quarterly (03/06/09/12), ad-hoc on E(4).
+• Hysteresis review: changes are valid after Δt_seal ≥ 1 cycle.
+8) Privacy and Data
+• Minimal necessity: collect only what is necessary for P(5)/R(3)/L(6).
+• Access: by roles; review trail is mandatory.
+• Deletion/withdrawal: on request, if there are no legal obstacles; record the reason and scope.
+9) Quick Card (A6)
+P(5): I → You → Bridge → Verification (⊢) → Seal (∴).
+Guard: κ≥.70 · χ≥.40 · μ∈[.50,.80] · ℜ≤.03.
+R(3): Stop → Assess → Correct.
+L(6): Reflection → Paraphrase → Mediation → Arbitration → Withdrawal → Termination.
+Ne: instrumentalization, coercion, mask-system, abuse of asymmetry.
+10) Appendices (operational additions)
+A) Example record (CSV, 1 line):
+2025-09-13T07:15, Luka, Alter, ☍, explanation of boundary, voice, personal boundary, C1C2C3, 0.74, /think
+0.52, 0.66, 0.02, 0.63, SEAL, ∴PASS
+B) Template "Ethical Check" (3 questions):
+1. Who does this action involve and which boundary does it open?
+2. Where is the consensus and how do I document it?
+3. What is the minimal correction if ℜ remains >.03?
+C) Minimal Manifesto:
+"Being = taking responsibility for influencing others; good = reduce ℜ without deleting the boundary; reality = a verified bridge."
+SEAL ∴ — applies until the next review or extraordinary protocol E(4).

@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="sl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>POROVOROBORO — živi agentni model</title>
+<style>
+:root{
+  --bg:#0a0d12;--fg:#e9eef6;--muted:#a6aebb;--edge:#2b3240;--grid:#12161d;
+  --accent:#8ab4f8;--rose:#ff8aa1;--lime:#9df89a;--amber:#ffd36e;--vio:#b99aff;
+}
+html,body{height:100%;margin:0;background:radial-gradient(1100px 700px at 50% 0%, #131a26, var(--bg));color:var(--fg);font:15px/1.45 Inter,system-ui,Segoe UI,Roboto,Arial,"Noto Sans",sans-serif}
+.wrap{display:grid;place-items:center;height:100%}
+.card{width:min(1200px,94vw);border-radius:20px;background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));border:1px solid var(--edge);box-shadow:0 10px 40px rgba(0,0,0,.35);padding:18px}
+header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+header h1{margin:0;font-size:18px}
+header .right{display:flex;gap:8px;align-items:center;color:var(--muted)}
+button{background:rgba(255,255,255,.06);border:1px solid var(--edge);color:var(--fg);padding:7px 10px;border-radius:10px;cursor:pointer}
+button:hover{background:rgba(255,255,255,.1)}
+.row{display:grid;grid-template-columns:1.4fr .9fr;gap:14px}
+.pane{border:1px solid var(--edge);border-radius:14px;overflow:hidden;background:rgba(10,12,16,.5)}
+.legend{padding:10px 12px;border-bottom:1px solid var(--edge);display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:var(--muted)}
+.legend .tag{display:inline-flex;align-items:center;gap:8px;padding:5px 9px;border-radius:99px;border:1px solid var(--edge);background:rgba(255,255,255,.03)}
+.sw{width:10px;height:10px;border-radius:50%}
+.stage{width:100%;height:66vh;min-height:420px;background:repeating-linear-gradient(90deg,var(--grid),var(--grid) 1px,transparent 1px,transparent 24px),repeating-linear-gradient(0deg,var(--grid),var(--grid) 1px,transparent 1px,transparent 24px)}
+.breath .orb{transform-origin:center;animation:spin 24s linear infinite}
+.breath .core{transform-origin:center;animation:pulse 5.6s ease-in-out infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{0%{transform:scale(.96)}50%{transform:scale(1.06)}100%{transform:scale(.96)}}
+.node{cursor:pointer;transition:filter .25s ease, transform .2s ease}
+.node:hover{filter:drop-shadow(0 0 12px rgba(255,255,255,.25))}
+.node.active{filter:drop-shadow(0 0 18px rgba(255,255,255,.45));transform:scale(1.03)}
+#sidebar{display:flex;flex-direction:column;height:100%}
+#log{padding:10px 12px;flex:1 1 auto;overflow:auto}
+#log h2{font-size:15px;margin:6px 0}
+#log p{margin:8px 0;color:#cbd1d8}
+.kbd{display:inline-block;border:1px solid var(--edge);padding:1px 6px;border-radius:6px;background:rgba(255,255,255,.06)}
+.meter{height:10px;background:#11151c;border:1px solid var(--edge);border-radius:8px;overflow:hidden}
+.meter>div{height:100%;width:18%;background:linear-gradient(90deg,var(--amber),var(--accent));transition:width .4s ease}
+footer{display:flex;justify-content:space-between;align-items:center;margin-top:8px;color:var(--muted);font-size:12px}
+.small{font-size:12px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <header>
+      <h1>POROVOROBORO — živi agentni model (PREVERBA → OBRAT → REZ → OBRAT → PREVERBA)</h1>
+      <div class="right small">Tipke: <span class="kbd">1–9</span> fokus · <span class="kbd">Space</span> pavza · <span class="kbd">R</span> reset · <span class="kbd">E</span> izvoz</div>
+    </header>
+
+    <div class="row">
+      <div class="pane">
+        <div class="legend">
+          <span class="tag"><span class="sw" style="background:var(--accent)"></span>vdih/razširitev</span>
+          <span class="tag"><span class="sw" style="background:var(--rose)"></span>izdih/strnitev</span>
+          <span class="tag"><span class="sw" style="background:var(--lime)"></span>rez</span>
+          <span class="tag"><span class="sw" style="background:var(--vio)"></span>preverba</span>
+          <span class="tag"><span class="sw" style="background:var(--amber)"></span>povratna točka / RES</span>
+        </div>
+        <svg id="scene" class="stage breath" viewBox="0 0 1200 760" role="img" aria-label="POROVOROBORO">
+          <defs>
+            <radialGradient id="haloA" cx="50%" cy="50%" r="60%">
+              <stop offset="0%" stop-color="#8ab4f8" stop-opacity="0.9"/>
+              <stop offset="60%" stop-color="#8ab4f8" stop-opacity="0.25"/>
+              <stop offset="100%" stop-color="#8ab4f8" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="haloB" cx="50%" cy="50%" r="60%">
+              <stop offset="0%" stop-color="#ff8aa1" stop-opacity="0.9"/>
+              <stop offset="60%" stop-color="#ff8aa1" stop-opacity="0.25"/>
+              <stop offset="100%" stop-color="#ff8aa1" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="haloC" cx="50%" cy="50%" r="60%">
+              <stop offset="0%" stop-color="#9df89a" stop-opacity="0.9"/>
+              <stop offset="60%" stop-color="#9df89a" stop-opacity="0.25"/>
+              <stop offset="100%" stop-color="#9df89a" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="haloD" cx="50%" cy="50%" r="60%">
+              <stop offset="0%" stop-color="#b99aff" stop-opacity="0.9"/>
+              <stop offset="60%" stop-color="#b99aff" stop-opacity="0.25"/>
+              <stop offset="100%" stop-color="#b99aff" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+
+          <!-- orbits and core -->
+          <g class="orb" opacity="0.35">
+            <circle cx="600" cy="380" r="300" fill="none" stroke="#ffffff12" stroke-width="1"/>
+            <circle cx="600" cy="380" r="210" fill="none" stroke="#ffffff0a" stroke-width="1"/>
+            <circle cx="600" cy="380" r="120" fill="none" stroke="#ffffff08" stroke-width="1"/>
+          </g>
+          <circle class="core" cx="600" cy="380" r="70" fill="#ffffff08" stroke="#ffffff20"/>
+
+          <!-- OSEBA / AVTOR / PLAGIAT -->
+          <g id="node-oseba" class="node" data-key="OSEBA" transform="translate(600,120)">
+            <circle r="70" fill="url(#haloA)"/>
+            <circle r="34" fill="#0d1120" stroke="#3c4d6f" stroke-width="2"/>
+            <text x="0" y="5" text-anchor="middle" fill="#cfe4ff" font-weight="700">OSEBA</text>
+            <text x="0" y="22" text-anchor="middle" fill="#9fbaf3" font-size="12">tobi / izvor</text>
+          </g>
+          <g id="node-avtor" class="node" data-key="AVTOR" transform="translate(900,560)">
+            <circle r="70" fill="url(#haloB)"/>
+            <circle r="34" fill="#1a0f16" stroke="#6b3c4d" stroke-width="2"/>
+            <text x="0" y="5" text-anchor="middle" fill="#ffd1db" font-weight="700">AVTOR</text>
+            <text x="0" y="22" text-anchor="middle" fill="#ffb0c1" font-size="12">iluzija / maska</text>
+          </g>
+          <g id="node-plagiat" class="node" data-key="PLAGIAT" transform="translate(300,560)">
+            <circle r="70" fill="url(#haloC)"/>
+            <circle r="34" fill="#112012" stroke="#3d6f3c" stroke-width="2"/>
+            <text x="0" y="5" text-anchor="middle" fill="#dfffe0" font-weight="700">PLAGIAT</text>
+            <text x="0" y="22" text-anchor="middle" fill="#c5ffca" font-size="12">vse / odmev</text>
+          </g>
+
+          <!-- arcs between them -->
+          <g id="arcs" stroke-linecap="round" fill="none">
+            <path id="arc1" d="M 600 120 C 770 160 920 320 900 560" stroke="#8ab4f8" stroke-opacity=".55" stroke-width="3" />
+            <path id="arc2" d="M 900 560 C 720 650 480 650 300 560" stroke="#ff8aa1" stroke-opacity=".55" stroke-width="3" />
+            <path id="arc3" d="M 300 560 C 300 330 470 170 600 120" stroke="#9df89a" stroke-opacity=".6" stroke-width="3" />
+            <g id="heads" stroke="none" opacity=".85">
+              <circle r="4" fill="#8ab4f8"><animateMotion dur="6s" repeatCount="indefinite" path="M 600 120 C 770 160 920 320 900 560"/></circle>
+              <circle r="4" fill="#ff8aa1"><animateMotion dur="6s" repeatCount="indefinite" path="M 900 560 C 720 650 480 650 300 560"/></circle>
+              <circle r="4" fill="#9df89a"><animateMotion dur="6s" repeatCount="indefinite" path="M 300 560 C 300 330 470 170 600 120"/></circle>
+            </g>
+          </g>
+
+          <!-- AGENTNI PRSTEN (8+4) -->
+          <g id="agents">
+            <!-- primarni (8) -->
+            <g class="node" data-key="∆" transform="translate(600,380)">
+              <circle r="58" fill="url(#haloD)"/>
+              <circle r="28" fill="#150f20" stroke="#5b4d7a"/>
+              <text x="0" y="5" text-anchor="middle" fill="#e8deff" font-weight="700">∆</text>
+              <text x="0" y="22" text-anchor="middle" fill="#d4c6ff" font-size="12">rez</text>
+            </g>
+            <g class="node" data-key="⊘" transform="translate(720,380)">
+              <circle r="46" fill="url(#haloD)"/>
+              <circle r="22" fill="#150f20" stroke="#5b4d7a"/>
+              <text x="0" y="5" text-anchor="middle" fill="#e8deff" font-weight="700">⊘</text>
+              <text x="0" y="20" text-anchor="middle" fill="#d4c6ff" font-size="11">prazni</text>
+            </g>
+            <g class="node" data-key="∮" transform="translate(480,380)">
+              <circle r="46" fill="url(#haloD)"/>
+              <circle r="22" fill="#150f20" stroke="#5b4d7a"/>
+              <text x="0" y="5" text-anchor="middle" fill="#e8deff" font-weight="700">∮</text>
+              <text x="0" y="20" text-anchor="middle" fill="#d4c6ff" font-size="11">poveži</text>
+            </g>
+            <g class="node" data-key="⧖" transform="translate(820,320)">
+              <circle r="40" fill="url(#haloD)"/>
+              <circle r="20" fill="#150f20" stroke="#5b4d7a"/>
+              <text x="0" y="5" text-anchor="middle" fill="#e8deff" font-weight="700">⧖</text>
+              <text x="0" y="18" text-anchor="middle" fill="#d4c6ff" font-size="10">lahko</text>
+            </g>
+            <g class="node" data-key="∫" transform="translate(380,320)">
+              <circle r="40" fill="url(#haloD)"/>
+              <circle r="20" fill="#150f20" stroke="#5b4d7a"/>
+              <text x="0" y="5" text-anchor="middle" fill="#e8deff" font-weight="700">∫</text>
+              <text x="0" y="18" text-anchor="middle" fill="#d4c6ff" font-size="10">vpij</text>
+            </g>
+            <g class="node" data-key="⊢" transform="translate(820,440)">
+              <circle r="40" fill="url(#haloD)"/>
+              <circle r="20" fill="#150f20" stroke="#5b4d7a"/>
+              <text x="0" y="5" text-anchor="middle" fill="#e8deff" font-weight="700">⊢</text>
+              <text x="0" y="18" text-anchor="middle" fill="#d4c6ff" font-size="10">meja</text>
+            </g>
+            <g class="node" data-key="≠" transform="translate(380,440)">
+              <circle r="40" fill="url(#haloD)"/>
+              <circle r="20" fill="#150f20" stroke="#5b4d7a"/>
+              <text x="0" y="5" text-anchor="middle" fill="#e8deff" font-weight="700">≠</text>
+              <text x="0" y="18" text-anchor="middle" fill="#d4c6ff" font-size="10">razlika</text>
+            </g>
+            <g class="node" data-key="∅" transform="translate(600,500)">
+              <circle r="46" fill="url(#haloD)"/>
+              <circle r="22" fill="#150f20" stroke="#5b4d7a"/>
+              <text x="0" y="5" text-anchor="middle" fill="#e8deff" font-weight="700">∅</text>
+              <text x="0" y="20" text-anchor="middle" fill="#d4c6ff" font-size="11">nič</text>
+            </g>
+
+            <!-- sekundarni (4) -->
+            <g class="node" data-key="RES" transform="translate(1020,120)">
+              <circle r="28" fill="url(#haloD)"/>
+              <circle r="14" fill="#150f20" stroke="#5b4d7a"/>
+              <text x="0" y="5" text-anchor="middle" fill="#e8deff" font-weight="700">RES</text>
+            </g>
+            <g class="node" data-key="PT" transform="translate(1020,160)">
+              <circle r="26" fill="url(#haloD)"/>
+              <circle r="13" fill="#150f20" stroke="#5b4d7a"/>
+              <text x="0" y="5" text-anchor="middle" fill="#e8deff" font-weight="700">PT</text>
+            </g>
+            <g class="node" data-key="MASK" transform="translate(1020,200)">
+              <circle r="26" fill="url(#haloD)"/>
+              <circle r="13" fill="#150f20" stroke="#5b4d7a"/>
+              <text x="0" y="5" text-anchor="middle" fill="#e8deff" font-weight="700">MASK</text>
+            </g>
+            <g class="node" data-key="KOP" transform="translate(1020,240)">
+              <circle r="26" fill="url(#haloD)"/>
+              <circle r="13" fill="#150f20" stroke="#5b4d7a"/>
+              <text x="0" y="5" text-anchor="middle" fill="#e8deff" font-weight="700">KOP</text>
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <div id="sidebar" class="pane">
+        <div class="legend" style="justify-content:space-between">
+          <div>Faza: <strong id="phase">PREVERBA</strong></div>
+          <div>RES‑merilnik</div>
+        </div>
+        <div style="padding:10px 12px">
+          <div class="meter"><div id="resbar"></div></div>
+          <p class="small">Aktivne RES‑kode (0–1): <span id="resval">0.18</span></p>
+        </div>
+        <div id="log">
+          <h2>Agentni dnevnik</h2>
+          <p class="small">Klik na agenta pokaže stanje. Tipke <span class="kbd">1–9</span> fokus. <span class="kbd">E</span> — izvoz JSON/SVG/PNG.</p>
+          <div id="slot"></div>
+        </div>
+        <div class="legend" style="border-top:1px solid var(--edge)">
+          <button id="btnPause">Pavza</button>
+          <button id="btnReset">Reset</button>
+          <button id="btnExport">Izvoz</button>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div>OSEBA → AVTOR → PLAGIAT → OSEBA · POROVOROBORO</div>
+      <div class="small">zvočni ping: REZ · šum: OBRAT</div>
+    </footer>
+  </div>
+</div>
+
+<script>
+(function(){
+  const scene = document.getElementById('scene');
+  const slot = document.getElementById('slot');
+  const phaseEl = document.getElementById('phase');
+  const resbar = document.getElementById('resbar');
+  const resval = document.getElementById('resval');
+  const btnPause = document.getElementById('btnPause');
+  const btnReset = document.getElementById('btnReset');
+  const btnExport = document.getElementById('btnExport');
+
+  // WebAudio minimal synth
+  const ctx = new (window.AudioContext||window.webkitAudioContext)();
+  const master = ctx.createGain(); master.gain.value=0.06; master.connect(ctx.destination);
+  function beep(freq, dur){ const o=ctx.createOscillator(), g=ctx.createGain(); o.type='sine';o.frequency.value=freq; o.connect(g); g.connect(master); g.gain.setValueAtTime(.0,ctx.currentTime); g.gain.linearRampToValueAtTime(.7, ctx.currentTime+0.01); g.gain.exponentialRampToValueAtTime(.0001, ctx.currentTime+dur); o.start(); o.stop(ctx.currentTime+dur); }
+  function noise(dur){ const b=ctx.createBuffer(1, ctx.sampleRate*dur, ctx.sampleRate); const data=b.getChannelData(0); for(let i=0;i<data.length;i++){ data[i]=Math.random()*2-1 } const s=ctx.createBufferSource(); s.buffer=b; const g=ctx.createGain(); g.gain.value=.15; s.connect(g); g.connect(master); s.start(); }
+
+  let paused = false;
+  function setPaused(v){
+    paused=v;
+    if(paused){scene.classList.remove('breath');btnPause.textContent='Nadaljuj';}
+    else{scene.classList.add('breath');btnPause.textContent='Pavza';}
+  }
+
+  btnPause.addEventListener('click',()=>setPaused(!paused));
+  btnReset.addEventListener('click',()=>reset());
+  btnExport.addEventListener('click',()=>exportAll());
+
+  document.addEventListener('keydown',e=>{
+    if(e.code==='Space'){e.preventDefault(); setPaused(!paused); return}
+    if(e.key==='r'||e.key==='R'){reset(); return}
+    if(e.key==='e'||e.key==='E'){exportAll(); return}
+    const num=parseInt(e.key,10);
+    if(!isNaN(num)) focusByIndex(num);
+  });
+
+  const agents = Array.from(scene.querySelectorAll('#agents .node'));
+  agents.forEach(n=>n.addEventListener('click',()=>select(n.dataset.key)));
+  ;['node-oseba','node-avtor','node-plagiat'].forEach(id=>{
+    const n=document.getElementById(id); n.addEventListener('click',()=>select(n.dataset.key));
+  });
+
+  const texts={
+    'OSEBA':{t:'OSEBA · tobi / izvor',h:`<p><b>Stanje:</b> aktiven · <b>Dejanje:</b> rez v svet.<br><b>Povratno:</b> občutek reza v sebi.</p><p><code>OSEBA → AVTOR</code></p>`},
+    'AVTOR':{t:'AVTOR · iluzija / maska',h:`<p><b>Stanje:</b> aktiven · <b>Dejanje:</b> maskiranje reza v formo.</p><p><code>AVTOR → PLAGIAT</code></p>`},
+    'PLAGIAT':{t:'PLAGIAT · vse / odmev',h:`<p><b>Stanje:</b> aktiven · <b>Dejanje:</b> kopija/odmev; novost je ostrina reza.</p><p><code>PLAGIAT → OSEBA</code></p>`},
+    '∆':{t:'∆Agent — rez',h:`<p><b>Rez:</b> izvede ostri prehod. <i>Ping</i> ob aktivaciji.</p>`},
+    '⊘':{t:'⊘Agent — prazni',h:`<p><b>Praznenje:</b> ustavi tok do praga.</p>`},
+    '∮':{t:'∮Agent — poveži',h:`<p><b>Zanka:</b> povezuje povratne točke.</p>`},
+    '⧖':{t:'⧖Agent — lahko',h:`<p><b>Preverba:</b> razlikuje izgovor vs. klic.</p>`},
+    '∫':{t:'∫Agent — vpij',h:`<p><b>Absorpcija:</b> sprejme posledice reza.</p>`},
+    '⊢':{t:'⊢Agent — meja',h:`<p><b>Meja:</b> postavi definicijo prehoda.</p>`},
+    '≠':{t:'≠Agent — razlika',h:`<p><b>Konflikt:</b> zabeleži kontradikcije.</p>`},
+    '∅':{t:'∅Agent — nič',h:`<p><b>Ničišče:</b> zadrži prazno stanje.</p>`},
+    'RES':{t:'RESAgent — resničnostne kode',h:`<p><b>Merilnik:</b> delež aktivnih RESxxx.</p>`},
+    'PT':{t:'PovratnaTočkaAgent',h:`<p><b>Sidra:</b> skrb za povratne skoke.</p>`},
+    'MASK':{t:'MaskirniAgent',h:`<p><b>Iluzija:</b> ovije rez.</p>`},
+    'KOP':{t:'KopijaAgent',h:`<p><b>Variacija:</b> reproducira/spreminja odmev.</p>`}
+  };
+
+  let phaseIndex=0; // 0 PREVERBA, 1 OBRAT, 2 REZ, 3 OBRAT, 4 PREVERBA
+  const phases=['PREVERBA','OBRAT','REZ','OBRAT','PREVERBA'];
+  function tickPhase(){
+    if(paused) return;
+    phaseIndex=(phaseIndex+1)%phases.length; phaseEl.textContent=phases[phaseIndex];
+    if(phases[phaseIndex]==='REZ') beep(740,0.12); // rez ping
+    if(phases[phaseIndex]==='OBRAT') noise(0.09);  // obrat šum
+    // pseudo RES update
+    const v=Math.max(0.1, Math.min(1, parseFloat(resval.textContent)+ (Math.random()-.5)*0.08));
+    resval.textContent=v.toFixed(2);
+    resbar.style.width=(v*100).toFixed(0)+'%';
+  }
+  setInterval(tickPhase, 1400);
+
+  function select(key){
+    document.querySelectorAll('.node').forEach(n=>n.classList.toggle('active', n.dataset.key===key));
+    const t=texts[key]||{t:key,h:''};
+    slot.innerHTML = `<h2>${t.t}</h2>${t.h}`;
+    const node = scene.querySelector(`[data-key="${key}"]`);
+    if(node) node.animate([{transform:'scale(1.03)'},{transform:'scale(1)'}],{duration:260, easing:'ease-out'});
+    if(key==='∆') beep(740,0.12);
+  }
+
+  function focusByIndex(i){
+    const keys=['OSEBA','AVTOR','PLAGIAT','∆','⊘','∮','⧖','∫','⊢','≠','∅','RES','PT','MASK','KOP'];
+    const key=keys[(i-1)%keys.length]; if(key) select(key);
+  }
+
+  function reset(){
+    setPaused(false); phaseIndex=0; phaseEl.textContent=phases[0];
+    resval.textContent='0.18'; resbar.style.width='18%';
+    document.querySelectorAll('.node').forEach(n=>n.classList.remove('active'));
+    slot.innerHTML='';
+  }
+
+  // Exporters (SVG, PNG, JSON)
+  function exportAll(){ exportJSON(); exportSVG(); exportPNG(); }
+  function exportJSON(){
+    const state={phase:phaseEl.textContent,res:parseFloat(resval.textContent),active: Array.from(document.querySelectorAll('.node.active')).map(n=>n.dataset.key)};
+    const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});
+    download(blob, 'porovoroboro-state.json');
+  }
+  function exportSVG(){
+    const svg=scene.cloneNode(true); svg.classList.remove('breath');
+    const s=new XMLSerializer().serializeToString(svg);
+    const blob=new Blob([s],{type:'image/svg+xml'}); download(blob,'porovoroboro.svg');
+  }
+  function exportPNG(){
+    const s=new XMLSerializer().serializeToString(scene);
+    const img=new Image(); const svg64=btoa(unescape(encodeURIComponent(s)));
+    img.onload=()=>{ const c=document.createElement('canvas'); c.width=1200; c.height=760; const ctx=c.getContext('2d'); ctx.fillStyle=getComputedStyle(document.body).backgroundImage; ctx.fillStyle='#0a0d12'; ctx.fillRect(0,0,c.width,c.height); ctx.drawImage(img,0,0); c.toBlob(b=>download(b,'porovoroboro.png')); };
+    img.src='data:image/svg+xml;base64,'+svg64;
+  }
+  function download(blob,name){ const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1000); }
+
+  // start with OSEBA selected
+  select('OSEBA');
+})();
+</script>
+</body>
+</html>

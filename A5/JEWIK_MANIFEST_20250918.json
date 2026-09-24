@@ -1,0 +1,14 @@
+{
+  "project": "OSEBNE VOIDE / JEWIK",
+  "created_at": "2025-09-18 08:57:00",
+  "env": {
+    "cwd": "/mnt/data",
+    "python": "3.11.8"
+  },
+  "files": [],
+  "rehydrate_instructions": [
+    "1) Naloži ta manifest skupaj z istimi .docx datotekami.",
+    "2) V sporočilo napiši: REHYDRATE JEWIK — in priloži manifest.",
+    "3) Jaz bom prebral manifest, indeks in datoteke ter takoj vzpostavil kontekst."
+  ]
+}

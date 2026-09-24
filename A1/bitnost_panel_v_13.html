@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="sl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BITNOST — v13 (M3 + Δ način) + vse iz v12</title>
+<style>
+  :root{
+    --bg:#0b0b0c;--fg:#ececf1;--muted:#a1a1aa;--panel:#101115;--panel2:#12131a;
+    --line:#1f2937;--good:#86efac;--warn:#fde68a;--bad:#fca5a5;
+    --intA:0.5; --intB:0.5;
+  }
+  html,body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans",Ubuntu,Cantarell}
+  header{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:.75rem 1rem;z-index:10}
+  h1{font-size:1.05rem;margin:0;letter-spacing:.06em;text-transform:uppercase}
+  main{display:grid;grid-template-columns:1.1fr .9fr;gap:12px;padding:12px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px}
+  .card header{position:unset;border:0;padding:.8rem 1rem}
+  .card h2{font-size:.95rem;margin:0;letter-spacing:.04em;text-transform:uppercase}
+  .content{padding:1rem}
+  .hint{color:var(--muted);font-size:.9rem}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .row{display:flex;gap:8px;align-items:center;margin:.4rem 0;flex-wrap:wrap}
+  label{font-size:.9rem;color:var(--muted)}
+  input[type="number"]{width:6.5rem}
+  input[type="range"]{width:160px}
+  input[type="time"], input[type="date"]{padding:.25rem .4rem;background:var(--panel2);border:1px solid #23232a;border-radius:8px;color:var(--fg)}
+  textarea, input[type="text"], input[type="password"]{width:100%;background:var(--panel2);color:var(--fg);border:1px solid #23232a;border-radius:10px;padding:.6rem}
+  select{background:var(--panel2);color:var(--fg);border:1px solid #23232a;border-radius:8px;padding:.35rem .5rem}
+  .pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:.25rem .55rem;border:1px solid #27272a;background:var(--panel2);font-size:.8rem}
+  .status{font-weight:700}
+  .ok{color:var(--good)}
+  .svgwrap{background:var(--panel2);border:1px solid #23232a;border-radius:12px;padding:.5rem}
+  .tbl{width:100%;border-collapse:collapse;font-size:.9rem}
+  .tbl th,.tbl td{border-bottom:1px solid #1f2937;padding:.35rem .5rem;text-align:left}
+  .met{display:flex;align-items:center;gap:12px}
+  .beat{width:14px;height:14px;border-radius:50%;border:1px solid #334155;background:#111}
+  .beat.active{background:#e5e7eb}
+  .accent{outline:2px solid #64748b}
+  .progress{height:10px;border-radius:999px;background:#111;border:1px solid #23232a;overflow:hidden}
+  .bar{height:100%;width:0;background:linear-gradient(90deg,#60a5fa,#a78bfa)}
+  .btn{appearance:none;border:1px solid var(--line);background:var(--panel2);padding:.45rem .7rem;border-radius:10px;color:var(--fg);cursor:pointer}
+  .btn:hover{border-color:#334155}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,"Roboto Mono",monospace}
+</style>
+</head>
+<body>
+<header><h1>00 11 RESNICAMI — BITNOST v13 • M3 (pomožna) • Δ način (M & NE) — vse iz v12 ostane</h1></header>
+
+<main>
+  <section class="card"><header><h2>MERILNIK K</h2></header>
+    <div class="content">
+      <div class="row"><label>Ure spanja</label><input type="number" id="sleep" min="0" step="0.25" value="6">
+           <label>Min ruminacije</label><input type="number" id="rum" min="0" step="1" value="10">
+           <label>Volja/klariteta (V)</label><input type="range" id="clar" min="0" max="1" step="0.01" value="0.6"></div>
+      <div class="row"><span class="pill">H: <span id="H">–</span></span><span class="pill">R: <span id="R">–</span></span><span class="pill">K: <span id="K">–</span></span></div>
+      <div class="row status" id="status">–</div>
+      <div class="row"><button class="btn" onclick="window.print()">Natisni / PDF</button><button class="btn" id="clear">Počisti shrambo</button><span class="hint" id="storeNote">—</span></div>
+    </div>
+  </section>
+
+  <section class="card"><header><h2>PEARL duet — barvni gradient</h2></header>
+    <div class="content">
+      <div class="row">
+        <label>Intenziteta A</label><input type="range" id="intA" min="0" max="1" step="0.01" value="0.5">
+        <label>Intenziteta B</label><input type="range" id="intB" min="0" max="1" step="0.01" value="0.5">
+      </div>
+      <div class="grid">
+        <div class="svgwrap">A · Luka — ogenj</div>
+        <div class="svgwrap">B · Zarja — pepel</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card dim"><header><h2>Metronom 4/4</h2></header>
+    <div class="content">
+      <div class="row met">
+        <button class="btn" id="startStop">Start</button>
+        <label>BPM</label><input type="number" id="bpm" min="30" max="120" step="1" value="60">
+        <label><input type="checkbox" id="sound" checked> Zvok</label>
+        <label><input type="checkbox" id="accent" checked> Akcent 1</label>
+        <div class="beat accent" id="b1"></div><div class="beat" id="b2"></div><div class="beat" id="b3"></div><div class="beat" id="b4"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card" style="grid-column:1/-1"><header><h2>Uvoz H/R/V + trend K</h2></header>
+    <div class="content">
+      <div class="row"><textarea id="data" rows="6" spellcheck="false">[
+{"date":"2025-08-14","sleep":5.5,"rum":40,"V":0.45},
+{"date":"2025-08-15","sleep":6.5,"rum":20,"V":0.60}
+]</textarea></div>
+      <div class="row"><button class="btn" id="importBtn">Uvozi</button><button class="btn" id="exportBtn">Izvozi CSV</button>
+        <span class="hint">JSON: <span class="mono">[{date,sleep,rum,V}, …]</span></span></div>
+      <div class="row" id="tableWrap"></div>
+      <div class="row svgwrap"><svg id="chart" viewBox="0 0 600 160" width="100%" height="160" preserveAspectRatio="none"></svg></div>
+    </div>
+  </section>
+
+  <!-- ANALITIKA z M1+M2+M3 + Δ mode -->
+  <section class="card" style="grid-column:1/-1">
+    <header><h2>Analitika — NE/dan × metrike (M1, M2, M3) + Δ način</h2></header>
+    <div class="content">
+      <div class="row">
+        <button class="btn" id="recompute">Preračunaj</button>
+        <label><input type="checkbox" id="showLabels" checked> Etikete NE</label>
+        <label><input type="checkbox" id="showPeaks" checked> Vrhovi/minima M1</label>
+        <label>Δ način</label><input type="checkbox" id="deltaMode">
+        <button class="btn" id="savePNG">Shrani PNG</button>
+      </div>
+      <div class="row">
+        <label>M1</label>
+        <select id="metric1">
+          <option value="K" selected>K (kompozit)</option>
+          <option value="H">H (spanje/8)</option>
+          <option value="R">R (rum/60)</option>
+          <option value="V">V (volja)</option>
+        </select>
+        <label><input type="checkbox" id="m1avg" checked> M1̄</label>
+        <label><input type="checkbox" id="m1ma7" checked> M1 MA(7)</label>
+        <label><input type="checkbox" id="m1ma14" checked> M1 MA(14)</label>
+      </div>
+      <div class="row">
+        <label><input type="checkbox" id="showM2" checked> Pokaži M2</label>
+        <label>M2</label>
+        <select id="metric2">
+          <option value="H">H (spanje/8)</option>
+          <option value="R" selected>R (rum/60)</option>
+          <option value="V">V (volja)</option>
+          <option value="K">K (kompozit)</option>
+        </select>
+        <label><input type="checkbox" id="m2avg"> M2̄</label>
+        <label><input type="checkbox" id="m2ma7"> M2 MA(7)</label>
+        <label><input type="checkbox" id="m2ma14"> M2 MA(14)</label>
+      </div>
+      <div class="row">
+        <label><input type="checkbox" id="showM3"> Pokaži M3</label>
+        <label>M3</label>
+        <select id="metric3">
+          <option value="V" selected>V (volja)</option>
+          <option value="H">H (spanje/8)</option>
+          <option value="R">R (rum/60)</option>
+          <option value="K">K (kompozit)</option>
+        </select>
+        <span class="hint">M3 je tanká pikčasta linija (leva os).</span>
+      </div>
+      <div class="row">
+        <label>Filter</label>
+        <select id="rangePreset">
+          <option value="all">Vse</option>
+          <option value="7">Zadnjih 7 dni</option>
+          <option value="30" selected>Zadnjih 30 dni</option>
+          <option value="90">Zadnjih 90 dni</option>
+          <option value="custom">Po meri</option>
+        </select>
+        <label>od</label><input type="date" id="rangeStart">
+        <label>do</label><input type="date" id="rangeEnd">
+        <button class="btn" id="applyRange">Uporabi</button>
+      </div>
+      <div class="row">
+        <label>Prag prominence</label><input type="range" id="promThresh" min="0" max="0.30" step="0.01" value="0.06">
+        <span class="pill">p ≥ <span id="promVal">0.06</span></span>
+        <label>Max oznak/vrsto</label><input type="number" id="maxMarks" min="1" max="20" step="1" value="8">
+        <span id="stats" class="hint">—</span>
+      </div>
+      <div class="row svgwrap"><svg id="ana" viewBox="0 0 920 340" width="100%" height="340" preserveAspectRatio="none"></svg></div>
+
+      <details class="svgwrap" style="margin-top:8px">
+        <summary><strong>Dogodki</strong> — klik na graf za opombo; seznam & izvoz</summary>
+        <div class="content" style="padding:0;margin-top:.5rem">
+          <div class="row">
+            <label><input type="checkbox" id="addMode"> Dodaj z miško</label>
+            <button class="btn" id="exportEv">Izvozi dogodke CSV</button>
+            <button class="btn" id="clearEv">Počisti dogodke</button>
+          </div>
+          <div id="evList" class="row"></div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ŠIFRIRAN IZVOZ/UVOZ (ostaja iz v12) -->
+  <section class="card" style="grid-column:1/-1">
+    <header><h2>Šifriran izvoz/uvoz — H/R/V + REZ-LOG + DOGODKI (AES-GCM)</h2></header>
+    <div class="content">
+      <div class="row">
+        <label>Geslo</label><input type="password" id="pwd" placeholder="močno geslo">
+        <button class="btn" id="encExport">Izvozi šifrirano</button>
+        <input type="file" id="encFile" accept=".json">
+        <button class="btn" id="encImport">Uvozi šifrirano</button>
+        <span class="hint">Gesla ni mogoče obnoviti — shrani ga.</span>
+      </div>
+      <div class="row"><span id="encStatus" class="hint">—</span></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="hint">V13: M3 (pomožna pikčasta linija) • Δ način za M & NE (pozit./neg.). — V12 (dvojna metrika + šifrirani paket) ostaja.</div>
+</footer>
+
+<script>
+/* ===== Helpers ===== */
+function clamp(v,min,max){return Math.max(min,Math.min(max,v))}
+function setLS(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)) }catch(e){} }
+function getLS(k, dflt){ try{ const v=JSON.parse(localStorage.getItem(k)); return v==null?dflt:v }catch(e){ return dflt } }
+function pad2(n){ return String(n).padStart(2,'0') }
+function dateOnly(ts){ const d=new Date(ts); return d.getFullYear()+'-'+pad2(d.getMonth()+1)+'-'+pad2(d.getDate()) }
+function parseData(txt){ try{ const arr=JSON.parse(txt); return Array.isArray(arr)?arr:[] }catch(e){ return [] } }
+function computeAll(rec){ const H=clamp((rec.sleep||0)/8,0,1), R=clamp((rec.rum||0)/60,0,1), V=parseFloat(rec.V||0); const K=0.6*H + 0.2*(1-R) + 0.2*V; return {H,R,V,K} }
+function mean(arr){ if(!arr.length) return NaN; let s=0,n=0; arr.forEach(v=>{ if(!isNaN(v)){ s+=v; n++ } }); return n? s/n : NaN }
+function movingAvg(arr, n){ const out=new Array(arr.length).fill(NaN); for(let i=0;i<arr.length;i++){ let s=0,c=0; for(let j=Math.max(0,i-n+1); j<=i; j++){ const v=arr[j]; if(!isNaN(v)){ s+=v; c++ } } out[i]=c? s/c : NaN } return out }
+function diffArr(arr){ const out=new Array(arr.length).fill(NaN); for(let i=1;i<arr.length;i++){ const a=arr[i-1], b=arr[i]; if(isNaN(a)||isNaN(b)) { out[i]=NaN } else { out[i]=b-a } } return out }
+function maxAbs(arr){ let m=0; arr.forEach(v=>{ if(!isNaN(v)) m=Math.max(m, Math.abs(v)) }); return m||1 }
+function copyText(t){ navigator.clipboard.writeText(t).catch(()=>{}) }
+
+/* ===== State ===== */
+let series={dates:[], NE:[], K:[], H:[], R:[], V:[]}
+
+/* ===== K meter ===== */
+function calcK(){
+  const s=parseFloat(document.getElementById('sleep').value||0)
+  const r=parseFloat(document.getElementById('rum').value||0)
+  const v=parseFloat(document.getElementById('clar').value||0)
+  const H=clamp(s/8,0,1), R=clamp(r/60,0,1), K=0.6*H + 0.2*(1-R) + 0.2*v
+  document.getElementById('H').textContent=H.toFixed(2)
+  document.getElementById('R').textContent=R.toFixed(2)
+  document.getElementById('K').textContent=K.toFixed(2)
+  document.getElementById('status').textContent = (K>=0.70? 'K ≥ 0.70 — stik mogoč' : (K>=0.55? '0.55 ≤ K < 0.70 — lahka komunikacija' : 'K < 0.55 — brez stika'))
+  setLS('bitnost.inputs', {sleep:s, rum:r, V:v})
+}
+;['sleep','rum','clar'].forEach(id=>document.getElementById(id).addEventListener('input',calcK));
+
+/* ===== Color intensity ===== */
+function setInt(){ const a=parseFloat(document.getElementById('intA').value||0.5), b=parseFloat(document.getElementById('intB').value||0.5); document.documentElement.style.setProperty('--intA', a); document.documentElement.style.setProperty('--intB', b); setLS('bitnost.intensity', {a,b}) }
+document.getElementById('intA').addEventListener('input', setInt)
+document.getElementById('intB').addEventListener('input', setInt)
+
+/* ===== Metronom ===== */
+let metroTimer=null, metroBeat=0, ctx=null
+function tick(){
+  metroBeat=(metroBeat%4)+1
+  for(let i=1;i<=4;i++){ document.getElementById('b'+i).classList.toggle('active', i===metroBeat) }
+  if(document.getElementById('sound').checked){
+    try{ if(!ctx){ ctx=new (window.AudioContext||window.webkitAudioContext)() } const now=ctx.currentTime, o=ctx.createOscillator(), g=ctx.createGain(); const accent=document.getElementById('accent').checked && metroBeat===1; o.type='sine'; o.frequency.value=accent?880:660; g.gain.value=accent?0.11:0.07; o.connect(g); g.connect(ctx.destination); o.start(now); o.stop(now+0.08) }catch(e){}
+  }
+}
+function getBPM(){ return Math.max(30, Math.min(120, parseFloat(document.getElementById('bpm').value||60))) }
+document.getElementById('startStop').addEventListener('click',()=>{ if(metroTimer){ clearInterval(metroTimer); metroTimer=null; for(let i=1;i<=4;i++){ document.getElementById('b'+i).classList.remove('active') } } else { metroBeat=0; metroTimer=setInterval(tick, 60000/getBPM()) } })
+document.getElementById('bpm').addEventListener('input',()=>{ if(!metroTimer) return; clearInterval(metroTimer); metroTimer=setInterval(tick, 60000/getBPM()) })
+
+/* ===== Import/Export H/R/V ===== */
+function renderTable(arr){
+  if(!arr.length){ document.getElementById('tableWrap').innerHTML='<span class="hint">Ni podatkov.</span>'; drawChart([]); return }
+  let html='<table class="tbl"><tr><th>datum</th><th>spanje</th><th>rum</th><th>V</th><th>H</th><th>R</th><th>K</th></tr>'
+  arr.forEach(r=>{ const m=computeAll(r); html+=`<tr><td>${r.date||''}</td><td>${(r.sleep??'')}</td><td>${(r.rum??'')}</td><td>${(r.V??'')}</td><td>${m.H.toFixed(2)}</td><td>${m.R.toFixed(2)}</td><td>${m.K.toFixed(2)}</td></tr>` })
+  html+='</table>'; document.getElementById('tableWrap').innerHTML=html; drawChart(arr)
+}
+function drawChart(arr){
+  const svg=document.getElementById('chart'); while(svg.firstChild) svg.removeChild(svg.firstChild); if(!arr.length) return
+  const w=600,h=160,pad=24, step=(w-2*pad)/Math.max(1,arr.length-1), ks=arr.map(r=>computeAll(r).K)
+  const poly = document.createElementNS('http://www.w3.org/2000/svg','polyline'); let pts=''
+  ks.forEach((k,i)=>{ const x=pad + i*step; const y=pad + (1-k)*(h-2*pad); pts += `${x},${y} ` })
+  poly.setAttribute('points', pts.trim()); poly.setAttribute('fill','none'); poly.setAttribute('stroke','#e5e7eb'); poly.setAttribute('stroke-width','2'); svg.appendChild(poly)
+  const base = document.createElementNS('http://www.w3.org/2000/svg','line'); base.setAttribute('x1', pad); base.setAttribute('y1', h-pad); base.setAttribute('x2', w-pad); base.setAttribute('y2', h-pad); base.setAttribute('stroke', '#334155'); svg.appendChild(base)
+  const thr = document.createElementNS('http://www.w3.org/2000/svg','line'); const ythr = pad + (1-0.70)*(h-2*pad); thr.setAttribute('x1', pad); thr.setAttribute('y1', ythr); thr.setAttribute('x2', w-pad); thr.setAttribute('y2', ythr); thr.setAttribute('stroke', '#86efac'); thr.setAttribute('stroke-dasharray','4 4'); svg.appendChild(thr)
+}
+document.getElementById('importBtn').addEventListener('click',()=>{
+  const txt = document.getElementById('data').value || '[]'
+  setLS('bitnost.data', txt); const arr=parseData(txt); renderTable(arr)
+})
+document.getElementById('exportBtn').addEventListener('click',()=>{
+  const arr=parseData(getLS('bitnost.data','[]')); const rows=['date,sleep,rum,V,H,R,K']
+  arr.forEach(r=>{ const m=computeAll(r); rows.push([r.date||'',r.sleep??'',r.rum??'',r.V??'',m.H.toFixed(2),m.R.toFixed(2),m.K.toFixed(2)].join(',')) })
+  const blob=new Blob([rows.join('\n')],{type:'text/csv'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url;a.download='bitnost_trend.csv';a.click(); setTimeout(()=>URL.revokeObjectURL(url),1000)
+})
+
+/* ===== Build daily series for analytics ===== */
+function groupNEByDay(arr){ const g={}; arr.forEach(r=>{ const d = dateOnly(new Date(r.ts)); g[d]=(g[d]||0)+1 }); return g }
+function buildSeries(){
+  const rez = getLS('bitnost.rezlog', [])
+  const data = parseData(getLS('bitnost.data','[]'))
+  const NE = groupNEByDay(rez) // {date:count}
+  const map = {} // date -> {K,H,R,V}
+  data.forEach(r=>{ if(r.date){ map[r.date]=computeAll(r) } })
+  const dates = Array.from(new Set([...Object.keys(NE), ...Object.keys(map)])).sort()
+  const out = {dates, NE:[], K:[], H:[], R:[], V:[]}
+  dates.forEach(d=>{
+    const v = map[d] || {}
+    out.NE.push(NE[d]||0)
+    out.K.push(v.K!=null? v.K : NaN)
+    out.H.push(v.H!=null? v.H : NaN)
+    out.R.push(v.R!=null? v.R : NaN)
+    out.V.push(v.V!=null? v.V : NaN)
+  })
+  series = out
+}
+
+/* ===== Analytics rendering (M1, M2, M3 + Δ) ===== */
+function pearson(X,Y){
+  const n=Math.min(X.length,Y.length); if(n===0) return NaN
+  let sx=0, sy=0, sxx=0, syy=0, sxy=0
+  for(let i=0;i<n;i++){ const x=X[i], y=Y[i]; sx+=x; sy+=y; sxx+=x*x; syy+=y*y; sxy+=x*y }
+  const cov = sxy/n - (sx/n)*(sy/n); const vx = sxx/n - (sx/n)**2; const vy = syy/n - (sy/n)**2
+  if(vx<=0 || vy<=0) return NaN
+  return cov / Math.sqrt(vx*vy)
+}
+function applyRange(dates, xs, ys1, ys2, ys3, startISO, endISO){
+  const oD=[], oX=[], o1=[], o2=[], o3=[]
+  for(let i=0;i<dates.length;i++){
+    const d=dates[i]
+    if((!startISO || d>=startISO) && (!endISO || d<=endISO)){ oD.push(d); oX.push(xs[i]); o1.push(ys1[i]); o2.push(ys2[i]); o3.push(ys3[i]) }
+  }
+  return {dates:oD, xs:oX, y1:o1, y2:o2, y3:o3}
+}
+function findPeaksTroughs(vals, thresh, maxEach){
+  const pts=[]; for(let i=1;i<vals.length-1;i++){ const a=vals[i-1], b=vals[i], c=vals[i+1]; if(isNaN(a)||isNaN(b)||isNaN(c)) continue; const p=(Math.abs(b-a)+Math.abs(b-c))/2; const type=(b>a&&b>c)?'peak':(b<a&&b<c)?'trough':null; if(type) pts.push({i:i, p:p, type}) }
+  const peaks=pts.filter(x=>x.type==='peak' && x.p>=thresh).sort((u,v)=>v.p-u.p).slice(0,maxEach).map(o=>o.i)
+  const troughs=pts.filter(x=>x.type==='trough' && x.p>=thresh).sort((u,v)=>v.p-u.p).slice(0,maxEach).map(o=>o.i)
+  return {peaks, troughs}
+}
+function recomputeAnalytics(){
+  buildSeries()
+  const m1 = document.getElementById('metric1').value
+  const m2 = document.getElementById('metric2').value
+  const m3 = document.getElementById('metric3').value
+  const showM2 = document.getElementById('showM2').checked
+  const showM3 = document.getElementById('showM3').checked
+  const delta = document.getElementById('deltaMode').checked
+
+  const preset=document.getElementById('rangePreset').value
+  let startISO=document.getElementById('rangeStart').value || null
+  let endISO=document.getElementById('rangeEnd').value || null
+  if(preset!=='custom' && series.dates.length){
+    const end = new Date(series.dates[series.dates.length-1]+'T00:00:00')
+    let start = new Date(series.dates[0]+'T00:00:00')
+    if(preset==='7') start = new Date(end.getTime()-6*24*60*60*1000)
+    if(preset==='30') start = new Date(end.getTime()-29*24*60*60*1000)
+    if(preset==='90') start = new Date(end.getTime()-89*24*60*60*1000)
+    startISO = (preset==='all')? null : dateOnly(start)
+    endISO = (preset==='all')? null : dateOnly(end)
+    if(startISO) document.getElementById('rangeStart').value = startISO
+    if(endISO) document.getElementById('rangeEnd').value = endISO
+  }
+
+  const vals1 = series[m1], vals2 = series[m2], vals3 = series[m3]
+  const ranged = applyRange(series.dates, series.NE, vals1, vals2, vals3, startISO, endISO)
+  let D=ranged.dates, NE=ranged.xs, M1=ranged.y1, M2=ranged.y2, M3=ranged.y3
+
+  if(delta){
+    NE = diffArr(NE)
+    M1 = diffArr(M1); M2 = diffArr(M2); M3 = diffArr(M3)
+  }
+
+  const corr = (M)=>{
+    const X=[], Y=[]; for(let i=0;i<D.length;i++){ if(!isNaN(M[i])){ X.push(NE[i]); Y.push(M[i]) } } return pearson(X,Y)
+  }
+  const c1=corr(M1), c2= corr(M2)
+  const spanTxt = (D.length? (D[0]+' → '+D[D.length-1]+' · '+D.length+' dni') : '—')
+  document.getElementById('stats').textContent = `Območje: ${spanTxt} • Δ: ${delta?'DA':'NE'} • Corr(NE, M1=${m1}): ${isNaN(c1)?'–':c1.toFixed(2)} • Corr(NE, M2=${m2}): ${isNaN(c2)?'–':c2.toFixed(2)}`
+
+  drawAnalyticsChart(D, NE, M1, M2, M3, {m1, m2, m3, showM2, showM3, delta})
+}
+function drawAnalyticsChart(dates, NE, M1, M2, M3, opts){
+  const svg=document.getElementById('ana'); while(svg.firstChild) svg.removeChild(svg.firstChild)
+  if(!dates.length){ return }
+  const w=920,h=340,pad=36
+  const showLabels=document.getElementById('showLabels').checked
+  const showPeaks=document.getElementById('showPeaks').checked
+  const m1avg=document.getElementById('m1avg').checked, m1ma7=document.getElementById('m1ma7').checked, m1ma14=document.getElementById('m1ma14').checked
+  const m2avg=document.getElementById('m2avg').checked, m2ma7=document.getElementById('m2ma7').checked, m2ma14=document.getElementById('m2ma14').checked
+  const prom = parseFloat(document.getElementById('promThresh').value||0.06)
+  const maxMarks = Math.max(1, Math.min(20, parseInt(document.getElementById('maxMarks').value||8)))
+  const xstep=(w-2*pad)/Math.max(1,dates.length-1)
+
+  const delta = opts.delta
+  // scales
+  let maxNE = Math.max(1, ...NE.map(v=> isNaN(v)?0:Math.abs(v)))
+  let mapNE = v => {
+    if(!delta){ // bars from bottom
+      const m = Math.max(1, ...NE.map(v=> isNaN(v)?0:v))
+      maxNE = m
+      const barH = (v/m) * (h-2*pad)
+      const y = h - pad - barH
+      return {y, h:barH, neg:false}
+    }else{
+      const zeroY = pad + (h-2*pad)/2
+      const m = maxNE
+      const barH = (Math.abs(v)/m) * ((h-2*pad)/2)
+      const y = v>=0? (zeroY - barH) : zeroY
+      return {y, h:barH, neg: v<0, zeroY}
+    }
+  }
+  function mapVal(v){ return pad + (1-v)*(h-2*pad) }
+  function mapDelta(v){ const zeroY = pad + (h-2*pad)/2; return zeroY - v*(h-2*pad)/2 }
+
+  // Bars NE
+  for(let i=0;i<dates.length;i++){
+    const x = pad + i*xstep - 8
+    const m = mapNE( isNaN(NE[i])? 0 : NE[i] )
+    const rect = document.createElementNS('http://www.w3.org/2000/svg','rect')
+    rect.setAttribute('x', x); rect.setAttribute('y', m.y); rect.setAttribute('width', 16); rect.setAttribute('height', m.h)
+    rect.setAttribute('fill', delta ? (m.neg?'#fb7185':'#86efac') : '#fca5a5')
+    rect.setAttribute('opacity','0.8')
+    svg.appendChild(rect)
+    if(showLabels && !delta && m.h>12){
+      const t = document.createElementNS('http://www.w3.org/2000/svg','text')
+      t.setAttribute('x', x+8); t.setAttribute('y', m.y-4); t.setAttribute('font-size','10'); t.setAttribute('text-anchor','middle'); t.setAttribute('fill','#fca5a5')
+      t.textContent = isNaN(NE[i])? '' : NE[i]; svg.appendChild(t)
+    }
+  }
+
+  if(delta){
+    const zeroY = pad + (h-2*pad)/2
+    const z = document.createElementNS('http://www.w3.org/2000/svg','line')
+    z.setAttribute('x1', pad); z.setAttribute('y1', zeroY); z.setAttribute('x2', w-pad); z.setAttribute('y2', zeroY)
+    z.setAttribute('stroke', '#475569'); z.setAttribute('stroke-dasharray','5 5')
+    svg.appendChild(z)
+  }
+
+  function addLine(vals, color, dash, label, thin=false, useDelta=false){
+    const pts=[]
+    for(let i=0;i<dates.length;i++){
+      const v=vals[i]; if(isNaN(v)){ pts.push(null); continue }
+      const x = pad + i*xstep
+      const y = useDelta? mapDelta(v) : mapVal(v)
+      pts.push([x,y])
+    }
+    let d=''; let started=false
+    for(const p of pts){
+      if(!p){ started=false; continue }
+      const [x,y]=p; d += (started?' L ':'M ')+x+' '+y; started=true
+    }
+    const path=document.createElementNS('http://www.w3.org/2000/svg','path')
+    path.setAttribute('d', d.trim()); path.setAttribute('fill','none'); path.setAttribute('stroke', color); path.setAttribute('stroke-width', thin? '1.6':'2')
+    if(dash){ path.setAttribute('stroke-dasharray', dash) }
+    svg.appendChild(path)
+    if(label){
+      const tx=document.createElementNS('http://www.w3.org/2000/svg','text')
+      tx.setAttribute('x', w-pad-4); tx.setAttribute('y', pad+12 + (label.includes('M2')?14:0)); tx.setAttribute('text-anchor','end'); tx.setAttribute('font-size','11'); tx.setAttribute('fill', color)
+      tx.textContent = label; svg.appendChild(tx)
+    }
+  }
+
+  addLine(M1, '#86efac', null, 'M1: '+opts.m1, false, delta)
+
+  if(!delta){
+    if(m1avg){ const avg=mean(M1); if(!isNaN(avg)){ const y=mapVal(avg); const L=document.createElementNS('http://www.w3.org/2000/svg','line'); L.setAttribute('x1',pad); L.setAttribute('y1',y); L.setAttribute('x2',w-pad); L.setAttribute('y2',y); L.setAttribute('stroke','#93c5fd'); L.setAttribute('stroke-dasharray','6 5'); svg.appendChild(L); const t=document.createElementNS('http://www.w3.org/2000/svg','text'); t.setAttribute('x',w-pad-4); t.setAttribute('y',y-4); t.setAttribute('font-size','10'); t.setAttribute('text-anchor','end'); t.setAttribute('fill','#93c5fd'); t.textContent='M1̄='+avg.toFixed(2); svg.appendChild(t) } }
+    if(m1ma7){ addLine(movingAvg(M1,7), '#e5e7eb', '3 4', 'M1·MA(7)', true, false) }
+    if(m1ma14){ addLine(movingAvg(M1,14), '#c4b5fd', '3 5', 'M1·MA(14)', true, false) }
+  }
+
+  if(document.getElementById('showM2').checked){
+    addLine(M2, '#f472b6', null, 'M2: '+opts.m2, false, delta)
+    if(!delta){
+      if(m2avg){ const avg=mean(M2); if(!isNaN(avg)){ const y=mapVal(avg); const L=document.createElementNS('http://www.w3.org/2000/svg','line'); L.setAttribute('x1',pad); L.setAttribute('y1',y); L.setAttribute('x2',w-pad); L.setAttribute('y2',y); L.setAttribute('stroke','#fb7185'); L.setAttribute('stroke-dasharray','6 5'); svg.appendChild(L); const t=document.createElementNS('http://www.w3.org/2000/svg','text'); t.setAttribute('x',w-pad-4); t.setAttribute('y',y-4); t.setAttribute('font-size','10'); t.setAttribute('text-anchor','end'); t.setAttribute('fill','#fb7185'); t.textContent='M2̄='+avg.toFixed(2); svg.appendChild(t) } }
+      if(m2ma7){ addLine(movingAvg(M2,7), '#f9a8d4', '3 4', 'M2·MA(7)', true, false) }
+      if(m2ma14){ addLine(movingAvg(M2,14), '#fdba74', '3 5', 'M2·MA(14)', true, false) }
+      for(let i=0;i<=5;i++){
+        const y = mapVal(i/5)
+        const tick = document.createElementNS('http://www.w3.org/2000/svg','line')
+        tick.setAttribute('x1', w-pad); tick.setAttribute('y1', y); tick.setAttribute('x2', w-pad+6); tick.setAttribute('y2', y); tick.setAttribute('stroke', '#374151'); svg.appendChild(tick)
+        const tt = document.createElementNS('http://www.w3.org/2000/svg','text')
+        tt.setAttribute('x', w-pad+8); tt.setAttribute('y', y+3); tt.setAttribute('font-size','10'); tt.setAttribute('fill','#9ca3af'); tt.textContent = (i/5).toFixed(1); svg.appendChild(tt)
+      }
+    }
+  }
+
+  if(opts.showM3){
+    addLine(M3, '#a1a1aa', '2 3', 'M3: '+opts.m3, true, delta)
+  }
+
+  if(showPeaks){
+    const {peaks, troughs} = findPeaksTroughs(M1, prom, maxMarks)
+    function addMarker(i, color, up){
+      const x = pad + i*xstep, y = (delta? (pad + (h-2*pad)/2 - M1[i]*(h-2*pad)/2) : mapVal(M1[i]))
+      const c = document.createElementNS('http://www.w3.org/2000/svg','rect'); c.setAttribute('x', x-3.6); c.setAttribute('y', y-3.6); c.setAttribute('width',7.2); c.setAttribute('height',7.2); c.setAttribute('transform', `rotate(45 ${x} ${y})`); c.setAttribute('fill', color); svg.appendChild(c)
+      const t = document.createElementNS('http://www.w3.org/2000/svg','text'); t.setAttribute('x', x + 6); t.setAttribute('y', y + (up?-6:12)); t.setAttribute('font-size','10'); t.setAttribute('fill', color); t.textContent = dates[i].slice(5) + ' · ' + (delta? ('Δ'+M1[i].toFixed(2)) : M1[i].toFixed(2)); svg.appendChild(t)
+    }
+    peaks.forEach(i=>addMarker(i,'#60a5fa',true))
+    troughs.forEach(i=>addMarker(i,'#f59e0b',false))
+  }
+
+  const ev = (getLS('bitnost.events', [])||[]).filter(e=> dates.includes(e.date) )
+  for(const e of ev){
+    const i = dates.indexOf(e.date); const val = M1[i]; if(isNaN(val)) continue
+    const y = delta? (pad + (h-2*pad)/2 - val*(h-2*pad)/2) : mapVal(val)
+    const x = pad + i*xstep
+    const c = document.createElementNS('http://www.w3.org/2000/svg','circle'); c.setAttribute('cx', x); c.setAttribute('cy', y-10); c.setAttribute('r', 3.5); c.setAttribute('fill', '#fbbf24'); svg.appendChild(c)
+    const t = document.createElementNS('http://www.w3.org/2000/svg','text'); t.setAttribute('x', x + 6); t.setAttribute('y', y - 10); t.setAttribute('font-size','10'); t.setAttribute('fill', '#fbbf24'); t.textContent = '★ '+ (e.note||''); svg.appendChild(t)
+  }
+
+  const base = document.createElementNS('http://www.w3.org/2000/svg','line'); base.setAttribute('x1',pad); base.setAttribute('y1',h-pad); base.setAttribute('x2',w-pad); base.setAttribute('y2',h-pad); base.setAttribute('stroke','#334155'); svg.appendChild(base)
+  const N = Math.ceil(dates.length/8)
+  for(let i=0;i<dates.length;i+=N){
+    const x = pad + i*xstep
+    const tt = document.createElementNS('http://www.w3.org/2000/svg','text'); tt.setAttribute('x', x); tt.setAttribute('y', h-8); tt.setAttribute('font-size','10'); tt.setAttribute('text-anchor','middle'); tt.setAttribute('fill','#a1a1aa'); tt.textContent = dates[i].slice(5); svg.appendChild(tt)
+  }
+  function addLegend(x,y,txt,color){ const t=document.createElementNS('http://www.w3.org/2000/svg','text'); t.setAttribute('x',x); t.setAttribute('y',y); t.setAttribute('fill',color); t.setAttribute('font-size','11'); t.textContent=txt; svg.appendChild(t) }
+  addLegend(pad,16, delta? 'ΔNE/dan':'NE/dan', delta? '#e5e7eb':'#fca5a5')
+  addLegend(pad+110,16,'M1','#86efac'); if(opts.showM2) addLegend(pad+150,16,'M2','#f472b6'); if(opts.showM3) addLegend(pad+190,16,'M3','#a1a1aa')
+  
+  const addMode = document.getElementById('addMode').checked
+  svg.style.cursor = addMode? 'crosshair' : 'default'
+  svg.onclick = e => {
+    if(!document.getElementById('addMode').checked) return
+    const rect = svg.getBoundingClientRect()
+    const px = e.clientX - rect.left
+    const t = Math.max(0, Math.min(1, (px - pad) / (w - 2*pad)))
+    const idx = Math.round(t * (dates.length-1))
+    const d = dates[idx]
+    const note = prompt('Opomba za '+d+':','')
+    if(note!=null && note.trim()!==''){
+      const evs = getLS('bitnost.events', []); evs.push({date:d, note:note.trim(), ts: new Date().toISOString()}); setLS('bitnost.events', evs); renderEventList(); recomputeAnalytics()
+    }
+  }
+}
+
+/* ===== Events list ===== */
+function renderEventList(){
+  const cont = document.getElementById('evList'); const ev = getLS('bitnost.events', [])
+  if(!ev.length){ cont.innerHTML = '<span class="hint">Ni dogodkov.</span>'; return }
+  let html = '<table class="tbl"><tr><th>datum</th><th>opomba</th><th></th></tr>'
+  ev.slice().reverse().forEach((e,idx)=>{
+    const i = ev.length-1-idx
+    html += `<tr><td>${e.date}</td><td>${(e.note||'')}</td><td><button class="btn" data-i="${i}">✕</button></td></tr>`
+  })
+  html += '</table>'
+  cont.innerHTML = html
+  cont.querySelectorAll('button[data-i]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const i = parseInt(btn.getAttribute('data-i'))
+      const all = getLS('bitnost.events', []); all.splice(i,1); setLS('bitnost.events', all); renderEventList(); recomputeAnalytics()
+    })
+  })
+}
+document.getElementById('exportEv').addEventListener('click', ()=>{
+  const ev = getLS('bitnost.events', [])
+  const rows = ['date,note,ts']
+  ev.forEach(e=> rows.push([JSON.stringify(e.date), JSON.stringify(e.note||''), JSON.stringify(e.ts||'')].join(',')) )
+  const blob=new Blob([rows.join('\n')],{type:'text/csv'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url;a.download='bitnost_dogodki.csv';a.click(); setTimeout(()=>URL.revokeObjectURL(url),1000)
+})
+document.getElementById('clearEv').addEventListener('click', ()=>{ if(confirm('Počistim vse dogodke?')){ setLS('bitnost.events', []); renderEventList(); recomputeAnalytics() } })
+document.getElementById('addMode').addEventListener('change', ()=>{ /* cursor handled in draw */ })
+
+/* ===== PNG export ===== */
+function svgToPng(svgEl, filename='analitika_NE_M_d13.png'){
+  const serializer = new XMLSerializer()
+  const src = serializer.serializeToString(svgEl)
+  const blob = new Blob([src], {type:'image/svg+xml;charset=utf-8'})
+  const url=URL.createObjectURL(blob)
+  const img = new Image()
+  img.onload = function(){
+    const canvas = document.createElement('canvas')
+    const rect = svgEl.viewBox.baseVal || {x:0,y:0,width:svgEl.clientWidth,height:svgEl.clientHeight}
+    canvas.width = rect.width; canvas.height = rect.height
+    const ctx = canvas.getContext('2d')
+    ctx.fillStyle = '#0b0b0c'; ctx.fillRect(0,0,canvas.width,canvas.height)
+    ctx.drawImage(img, 0, 0)
+    URL.revokeObjectURL(url)
+    canvas.toBlob(function(pngBlob){
+      const a=document.createElement('a'); a.href=URL.createObjectURL(pngBlob); a.download=filename; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1000)
+    })
+  }
+  img.onerror = ()=>{ alert('PNG izvoz: napaka pri branju SVG.') }
+  img.src = url
+}
+document.getElementById('savePNG').addEventListener('click', ()=> svgToPng(document.getElementById('ana')) )
+
+/* ===== Encrypted export/import ===== */
+async function hashToBytes(algo, data){ const enc=new TextEncoder(); const d=typeof data==='string'?enc.encode(data):data; return new Uint8Array(await crypto.subtle.digest(algo, d)) }
+function b64enc(arr){ return btoa(String.fromCharCode(...arr)) }
+function b64dec(str){ return new Uint8Array(atob(str).split('').map(c=>c.charCodeAt(0))) }
+async function deriveKey(password, salt){
+  const enc=new TextEncoder()
+  const keyMaterial = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveKey'])
+  return crypto.subtle.deriveKey({name:'PBKDF2', salt, iterations:100000, hash:'SHA-256'}, keyMaterial, {name:'AES-GCM', length:256}, false, ['encrypt','decrypt'])
+}
+async function encryptJSON(obj, password){
+  const salt = crypto.getRandomValues(new Uint8Array(16))
+  const iv = crypto.getRandomValues(new Uint8Array(12))
+  const key = await deriveKey(password, salt)
+  const enc = new TextEncoder().encode(JSON.stringify(obj))
+  const cipher = new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM', iv}, key, enc))
+  return {s:b64enc(salt), i:b64enc(iv), c:b64enc(cipher)}
+}
+async function decryptJSON(blob, password){
+  const txt = await blob.text()
+  let pack = null; try{ pack = JSON.parse(txt) }catch(e){ throw new Error('Ni veljaven JSON paket.') }
+  const salt=b64dec(pack.s), iv=b64dec(pack.i), c=b64dec(pack.c)
+  const key = await deriveKey(password, salt)
+  const plain = new Uint8Array(await crypto.subtle.decrypt({name:'AES-GCM', iv}, key, c))
+  const obj = JSON.parse(new TextDecoder().decode(plain))
+  return obj
+}
+document.getElementById('encExport').addEventListener('click', async()=>{
+  const pwd = (document.getElementById('pwd').value||'').trim()
+  const st = document.getElementById('encStatus')
+  if(!pwd){ st.textContent='Vnesi geslo.'; return }
+  const out = {
+    data: getLS('bitnost.data','[]'),
+    rezlog: getLS('bitnost.rezlog', []),
+    events: getLS('bitnost.events', []),
+    meta: { t: new Date().toISOString(), v: 13 }
+  }
+  try{
+    const pack = await encryptJSON(out, pwd)
+    const blob = new Blob([JSON.stringify(pack)], {type:'application/json'})
+    const url = URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='bitnost_pack.enc.json'; a.click(); setTimeout(()=>URL.revokeObjectURL(url),1000)
+    st.textContent='Izvoz zaključen.'
+  }catch(e){ st.textContent='Napaka pri šifriranju.' }
+})
+document.getElementById('encImport').addEventListener('click', async()=>{
+  const pwd = (document.getElementById('pwd').value||'').trim()
+  const file = document.getElementById('encFile').files[0]
+  const st = document.getElementById('encStatus')
+  if(!pwd || !file){ st.textContent='Potrebujem datoteko in geslo.'; return }
+  try{
+    const obj = await decryptJSON(file, pwd)
+    if(obj.data!=null) setLS('bitnost.data', obj.data)
+    if(obj.rezlog!=null) setLS('bitnost.rezlog', obj.rezlog)
+    if(obj.events!=null) setLS('bitnost.events', obj.events)
+    st.textContent='Uvoz uspel.'
+    document.getElementById('data').value = getLS('bitnost.data','[]')
+    document.getElementById('importBtn').click()
+    renderEventList()
+    recomputeAnalytics()
+  }catch(e){ st.textContent='Napaka: geslo ali paket.' }
+})
+
+/* ===== Controls ===== */
+;['metric1','metric2','metric3','showM2','showM3','m1avg','m1ma7','m1ma14','m2avg','m2ma7','m2ma14','showLabels','showPeaks','deltaMode'].forEach(id=> document.getElementById(id).addEventListener('change', recomputeAnalytics))
+document.getElementById('applyRange').addEventListener('click', recomputeAnalytics)
+document.getElementById('promThresh').addEventListener('input', ()=>{ document.getElementById('promVal').textContent=parseFloat(document.getElementById('promThresh').value).toFixed(2); recomputeAnalytics() })
+document.getElementById('recompute').addEventListener('click', recomputeAnalytics)
+
+/* ===== Init ===== */
+function loadPersisted(){
+  const inp=getLS('bitnost.inputs', {sleep:6, rum:10, V:0.6}); document.getElementById('sleep').value=inp.sleep; document.getElementById('rum').value=inp.rum; document.getElementById('clar').value=inp.V; calcK()
+  const ints=getLS('bitnost.intensity', {a:0.5,b:0.5}); document.getElementById('intA').value=ints.a; document.getElementById('intB').value=ints.b; document.documentElement.style.setProperty('--intA', ints.a); document.documentElement.style.setProperty('--intB', ints.b)
+  const saved=getLS('bitnost.data', null); if(saved!=null){ document.getElementById('data').value=saved }
+  document.getElementById('importBtn').click()
+  renderEventList()
+  recomputeAnalytics()
+}
+document.getElementById('clear').addEventListener('click',()=>{ try{ localStorage.clear() }catch(e){}; loadPersisted() })
+loadPersisted()
+</script>
+</body>
+</html>

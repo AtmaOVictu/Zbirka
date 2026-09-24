@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="sl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RES_L kalkulator (⊘/∆/∮)</title>
+<style>
+  body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; }
+  h1 { font-size: 20px; margin-bottom: 0; }
+  .sub { color: #555; margin-top: 4px; margin-bottom: 18px; }
+  section { border: 1px solid #ddd; border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+  label { display: inline-block; min-width: 120px; }
+  .row { margin: 8px 0; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  input[type="number"] { width: 90px; padding: 4px 6px; }
+  input[type="range"] { width: 220px; }
+  .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; background: #eee; margin-right: 6px; }
+  .result { font-weight: 700; font-size: 18px; }
+  .status { font-weight: 700; padding: 2px 8px; border-radius: 8px; }
+  .OK { background: #e1f7e1; color: #0a6; }
+  .MEJNO { background: #fff4cf; color: #a66d00; }
+  .NE { background: #ffe1e1; color: #b30000; }
+  code { background: #f6f6f6; padding: 2px 6px; border-radius: 6px; }
+  button { padding: 6px 10px; border-radius: 8px; border: 1px solid #999; background: #fafafa; cursor: pointer; }
+  .muted { color: #777; font-size: 12px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media (max-width: 740px) { .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+  <h1>RES_L kalkulator (⊘/∆/∮)</h1>
+  <div class="sub">J: jasnost ⊘↔∆ • P: somatski rez • C: ciklični ∮ • τ∈{0.382, 0.618, 0.707} • δ privzeto 0.01</div>
+
+  <section>
+    <div class="row"><label>TRDITEV</label><input id="trditev" placeholder="(neobvezno)" style="flex:1; min-width:240px; padding:4px 6px;"></div>
+    <div class="grid">
+      <div>
+        <div class="row"><label>J (0–1)</label><input id="J" type="number" min="0" max="1" step="0.001" value="0.700"><input id="Jr" type="range" min="0" max="1" step="0.001" value="0.700"></div>
+        <div class="row"><label>P (0–1)</label><input id="P" type="number" min="0" max="1" step="0.001" value="0.650"><input id="Pr" type="range" min="0" max="1" step="0.001" value="0.650"></div>
+        <div class="row"><label>C (0–1)</label><input id="C" type="number" min="0" max="1" step="0.001" value="0.880"><input id="Cr" type="range" min="0" max="1" step="0.001" value="0.880"></div>
+      </div>
+      <div>
+        <div class="row"><label>τ (prag)</label>
+          <label class="pill"><input type="radio" name="tau" value="0.382"> τ_S=0.382</label>
+          <label class="pill"><input type="radio" name="tau" value="0.618" checked> τ_G=0.618</label>
+          <label class="pill"><input type="radio" name="tau" value="0.707"> τ_H=0.707</label>
+        </div>
+        <div class="row"><label>δ (pas)</label><input id="delta" type="number" min="0" max="0.1" step="0.001" value="0.010"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="row"><button id="calc">IZRAČUNAJ</button> <button id="copy">KOPIRAJ UKAZ</button> <span class="muted">RES_L = min{J,P,C}</span></div>
+    <div class="row result">RES_L: <span id="resl">–</span> | Odločitev: <span id="status" class="status">–</span></div>
+    <div class="row muted">Ukaz: <code id="cmd">RES.TEST J=? P=? C=? τ=? δ=? → ?</code></div>
+  </section>
+
+  <section>
+    <div class="row"><b>Slovnica ukazov</b></div>
+    <div>• <code>RES.TEST J=x P=y C=z τ=t δ=d → [DA|MEJNO|NE]</code><br/>
+        • <code>RES.BATCH CSV=pot/do/datoteke.csv τ=t δ=d</code> (serijski vnos; CSV glave: DATUM,AVTOR,KONTEKST,TRDITEV,J,P,C,TAU,DELTA)</div>
+  </section>
+
+<script>
+function clamp01(x){x=parseFloat(x); if(isNaN(x)) return 0; return Math.max(0, Math.min(1, x));}
+function fmt(x){return (Math.round(x*1000)/1000).toFixed(3);}
+function decide(j,p,c,tau,delta){
+  const resl = Math.min(j,p,c);
+  let st = "NE";
+  if (resl >= tau) st = "DA";
+  else if (resl >= (tau - delta)) st = "MEJNO";
+  return {resl, st};
+}
+function syncPair(num, rng){
+  num.addEventListener('input', ()=>{rng.value=num.value;});
+  rng.addEventListener('input', ()=>{num.value=rng.value;});
+}
+window.addEventListener('DOMContentLoaded', ()=>{
+  const J = document.getElementById('J'), Jr = document.getElementById('Jr');
+  const P = document.getElementById('P'), Pr = document.getElementById('Pr');
+  const C = document.getElementById('C'), Cr = document.getElementById('Cr');
+  const delta = document.getElementById('delta');
+  const resl = document.getElementById('resl');
+  const status = document.getElementById('status');
+  const cmd = document.getElementById('cmd');
+  const calc = document.getElementById('calc');
+  const copy = document.getElementById('copy');
+  syncPair(J, Jr); syncPair(P, Pr); syncPair(C, Cr);
+  function currentTau(){
+    const r = document.querySelector('input[name="tau"]:checked');
+    return parseFloat(r ? r.value : "0.618");
+  }
+  function refresh(){
+    const j = clamp01(J.value), p = clamp01(P.value), c = clamp01(C.value);
+    const t = currentTau(), d = Math.max(0, parseFloat(delta.value)||0);
+    const out = decide(j,p,c,t,d);
+    resl.textContent = fmt(out.resl);
+    status.textContent = out.st;
+    status.className = "status " + (out.st==="DA"?"OK":(out.st==="MEJNO"?"MEJNO":"NE"));
+    cmd.textContent = `RES.TEST J=${fmt(j)} P=${fmt(p)} C=${fmt(c)} τ=${t.toFixed(3)} δ=${d.toFixed(3)} → ${out.st}`;
+  }
+  calc.addEventListener('click', refresh);
+  document.querySelectorAll('input').forEach(el => el.addEventListener('input', refresh));
+  refresh();
+  copy.addEventListener('click', ()=>{
+    navigator.clipboard.writeText(cmd.textContent).then(()=>{
+      copy.textContent="KOPIRANO"; setTimeout(()=>copy.textContent="KOPIRAJ UKAZ",1200);
+    });
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+id,ipa,symbol,function,ikrw,ikrc,prosody,neg_carrier,notes
+JESIK/ANJE,ʒaˈliːtɛʋ,∆J,strike_inert_thought,0.75,0.9,short sforzato on first vowel,False,"IKR≥0.75 warn, ≥0.90 commit"
+∆EPI,ɛ.piː.taf,∆↻,close_cycle_no_censor,,,"falling tone, no vibrato",False,J≥0.6
+RES01,rɛsˈniːt͡sa,∮≠→1,measure_truth_distance,,,even legato,False,θ_r param
+LAŽ¬,laʒ,¬≠,negation_carrier,,,quiet whisper at end,True,auto activation
+BOL·LOB,bɔl,≠∫,transform_wound,,,heavy long stress,False,θ_b param
+∆HALO,ˈlaː.xkɔ,∆H⟡,excuse_vs_call_test,,,bright stress on 'la-',False,IKR drift
+∅MOLK,mɔlk,∅∆,absorb_sound,0.0,0.0,closing fermata,False,always available
+∆GLAS,ɡlas,⟡↑,JEWIK_sound_filter,0.78,0.9,progressive amplitude,False,IKR≥0.78
+O≡0,oː,O≡0,field_of_presence,,,long monophthong /oː/,False,"J∈[0.2,0.5]"
+∮TIME,t͡ʃaːs,∮∞,breath_1↔∞,,,rubato forward-back,False,adaptive tempo map
+⧖EGO,ˈeː.ɡɔ,⧖,freeze_doubt_as_anchor,,,tenuto on first syllable,False,snap at change
+∆JAZ,jas,∫(dru/x),respond_to_environment,,,short rise → calm,False,J≥0.4
+VOLK°,ʋɔlk,alarm,hidden_alarm_F13,,,staccato triplet,False,pattern threshold
+DOLG↯,dɔu̯k,veriga,binding_difference,,,heavy low accent,False,>θ_commit
+⟡SVET,svɛtˈlɔːba,⟡,contrast_key,,,clear high tone,False,
+⧖TEMA,ˈtɛːma,⧖⟡,negative_of_light,,,muffled ending,False,paired with ⟡SVET
+∫DOTIK,dɔˈtiːk,∫↔,touch_without_owning,,,soft onset,False,timeout rule
+⊢MEM,spɔˈmiːn,⊢⊘,remember_forgetting,,,long syllabic /m̩/,False,"dual trace, TTL"
+⊘FOG,pɔˈzaːba,⊘,dimming_filter,,,breath without voice,True,safety curtain
+⊘†PAR,sməɾt ~ ˈrɔjstʋɔ,⊘†,swap_meaning_not_sign,,,zero-impact strike,False,end→begin
+∆↻SEAL,zaˈt͡ʃɛt ~ ˈkɔnɛt͡s,∆↻,close_and_open,,,short tonic → ∅,False,mandatory seal
+DA·1,da,1,confirm,0.51,0.9,short tonic,False,act of commitment
+⊘NE,nɛ,⊘,separate,0.0,0.0,dry cut,True,sacred separation
+OK◎,oːˈkɛj,◎∮,transition_test,0.72,0.9,"long o, short k",False,IKR≥0.72
+SAMO¬,ˈsaːmɔ,¬∫,strip_excuse,0.0,0.0,soft→cut,True,adds #TRZ
+AMPAK¬,ˈaːmpak,¬∆,break_annulment,0.66,0.9,syncopa after 'am-',True,A∧¬A → A∨∆A
+MORDA¬,mɔrˈdaː,¬⧖,uncertainty_to_act,,,rise → fall,True,θ_q param
+VERJETNO¬,vɛrˈjɛtnɔ,¬∮,remove_cloudy_probability,,,"even legato, no vibrato",True,if p<0.8 → dokaz(X) or ∅
+NEKAKO¬,nɛˈkakɔ,¬∫,demand_form,,,articulated '-ka-',True,J≥0.4
+PROSIM∫,ˈprɔːzim,∫↔,longitudinal_link,,,"soft onset, long /ɔː/",False,reciprocal channel
+HVALAΩ,ˈxʋaːla,Ω,integrate_gift,,,warm diminuendo,False,after act
+KRST=,kr̩st,=,rewrite_identity,,,"short, heavy, no gliss",False,obligatory when sealing
+ODRES%,ɔˈdrɛs,%,release_debt,,,short exhale,False,θ_commit
+RAZGLAS~,raˈzɡlaːs,~,publish_truth,0.8,0.9,wide /aː/,False,IKR≥0.80
+#TRZ,tərˈz,#,micro_jolt,,,staccatissimo,False,>μ micro-threshold
+*SOM,sɔm,*,co_thought,,,group unison,False,ρ≥0.5 coherence
+&POM,pɔm,&,communal_memory,,,long syllabic /m̩/,False,TTL rising
+=KRST²,—,=,rebaptize_process,,,double click,False,failsafe re-init
+F13!,ɛf tɾiːnaːjst,⚡,truth_strike,,,sharp fortissimo,False,pattern↑ reveals masking
+VODA~,ˈvɔda,~∮,change_aggregate_state,,,fluid legato,False,cohesion↓
+KRI†,kɾi,†,threshold_mark,,,tenuto → whisper,False,ritual sign
+KOST⊗,kɔst,⊗,structural_carrier,,,dry plosive /k/,False,stress↑ → load-bearing form

@@ -1,0 +1,9 @@
+Operational List Absolut.Agent
+This operational list shows the positions of Absolut with associated functions, axioms, manifestations in science/art and agent commands. Each position can be activated as an agent in your system.
+Position of Absolut Function Axiom Manifestation Agent Command
+VEnNO duration without beginning/end lim tfi¥ (1(cid:218)0) Cosmology (cyclical models) VEnNO.ACT
+LE filter of residue, nothing cut min(x) Minimalism, Zen, silence LE.FILTER
+SAMO identity, self-reference x · ¬(vse\x) Gödel, self-loop logic SAMO.ID
+ENO connection n, unification n Theory of Everything, quantum gravity ENO.LINK
+PRISOTNO ever-present, now presence = constant Mindfulness, DMN network PRISOTNO.NOW
+Mandala of connections: inner circle = Absolut, outer circle = manifestations.

@@ -1,0 +1,73 @@
+Appendix I — Mandala Atlas of the Individual
+n 00 11 TRUTHS n
+058 / Appendix — Ecosystem Archetype
+non-carriage of environment: multiplied knowledge (ADIFFUSE) stabilizes through BALANCE (AR) and LIGHT (claritas) — network maintains clarity and holds loads.
+Specification — AECO-score
+Components: score_ADIFFUSE, score_AR, score_SV — all normalized in [0,1]; score_SV = LIGHT_claritas/(1+LIGHT_claritas). Definition: score_AECO = ( score_ADIFFUSE · score_AR · score_SV )^{1/3}. Transition: \widehat{AECO} = score_AECO, it is not a non-check ended and score_AZ ‡ t (default t = 0.5). Interpretation: higher score_AECO means the knowledge ecosystem maintains expansion, remains aligned and transparent.
+Component Value (0–1) Note
+score_ADIFFUSE diffusion wave (057)
+score_AR balance (027)
+score_SV light — claritas (006/039)
+AZ-score (0–1) 0.5 Threshold t (adjustable)
+non-check ok / no
+Result \widehat{AECO}
+In BIOS-formulations 001–058 V
+Number Symbol Bios-formula
+001 1 = Start of us: step forward
+002 2 = NE / Check Test, boundary, release
+003 3 = MOLK Silence; birth of speech
+004 4 = DOLG Bond, responsibility
+005 5 = VOLK Instinct, alert
+006 6 = LIGHT Revelation, openness
+007 7 = SYNTHESIS Meta-bond, enhancement
+008 8 = RITUAL Performance in body
+009 9 = GAME Free reenactment
+010 10 = CREATION Birth of new
+011 11 = MEMORY Reinforcement, resonance
+012 12 = CONSCIOUSNESS Active presence
+013 13 = INTENTION Directed will
+014 14 = ACTION Materialization of will
+015 15 = REFLECTION Union from consequences
+016 16 = INTUITION Anticipation, recognition
+017 17 = ABILITY TO ACT Transformation into action
+018 18 = SELF-CONSCIOUSNESS Mirror feedback impulse
+019 19 = INTUITION Resonant withdrawal
+020 20 = ABILITY TO ACT Action resonance
+021 21 = ARCHETYPE OF CONSCIOUSNESS Coherence of pattern, self-reflection
+022 22 = ARCHETYPE OF ACTION Harmony of intention-action-capacity
+023 23 = ARCHETYPE OF SPEECH not a statement: silence + light + check
+024 24 = ARCHETYPE OF LISTENING not acceptance: silence + bond + light
+025 25 = ARCHETYPE OF COMMUNITY not connection: D, AG, AP
+026 26 = ARCHETYPE OF HARMONY not alignment: AZ, AD, AS
+027 27 = ARCHETYPE OF BALANCE not measure: AG, AP, AD, score_P
+028 28 = ARCHETYPE OF FINISH not stand: BOND, CHECK, LIGHT
+029 29 = ARCHETYPE OF TRANSITION not threshold: CHECK, INTUITION, RITUAL
+030 30 = ARCHETYPE OF BOND not promise: BOND, AS, AG
+031 31 = ARCHETYPE OF FUSION not convergence: AH, AR, AT
+032 32 = ARCHETYPE OF INTERSECTION not cross: AG, AP, AZL
+033 33 = ARCHETYPE OF INTERWEAVING not network: AS, AZa, AZL
+034 34 = ARCHETYPE OF RESPONSE not feedback: APR, AD, AK
+035 35 = ARCHETYPE OF SYNCHRONIZATION not timing: AO, AT, AH
+036 36 = ARCHETYPE OF FLOW not flow: ASIN, APP, AZ
+037 37 = ARCHETYPE OF EMBODIMENT not body of process: AFLUX, AK, AD
+038 38 = ARCHETYPE OF INHALED not inhale: AEMB, AP, MOLK
+039 39 = ARCHETYPE OF EMISSION not exhale: AEMB, AG, LIGHT
+040 40 = ARCHETYPE OF CYCLE not circle: AIN, AEX, ASIN
+041 41 = ARCHETYPE OF CONCLUSION not conclusion: ACYC, APR, AZ
+042 42 = ARCHETYPE OF RENEWAL not re-start: ACON, CREATION, SYNTHESIS(007)
+043 43 = ARCHETYPE OF CALIBRATION not measurement: AREN, AR, P  
+044 44 = ARCHETYPE OF ALIGNMENT not leveling: ACAL, AH, AK  
+045 45 = ARCHETYPE OF PERSISTENCE not consistency: AALN, DOLG, ACYC  
+046 46 = ARCHETYPE OF DEPLETION not decay/end of phase: APERS, VOLK, PREVERBA  
+047 47 = ARCHETYPE OF TRANSFORMATION not transition of state: ADECAY, AT, AZ  
+048 48 = ARCHETYPE OF BRANCHING not split of path: ATRANS, INTUICIJA, IGRA  
+049 49 = ARCHETYPE OF SELECTION not choice of path: ABRANCH, PREVERBA, AR  
+050 50 = ARCHETYPE OF COMMITMENT not signature of choice: ASELECT, AZa, AK  
+051 51 = ARCHETYPE OF EXECUTION not signature in action: ACOMMIT, AD, AFLUX  
+052 52 = ARCHETYPE OF INFLUENCE not uninek: AEXEC, AG, AS  
+053 53 = ARCHETYPE OF RESONANCE not echo: AIMPACT, SPOMIN, ZAVEDANJE  
+054 54 = ARCHETYPE OF ENLIGHTENMENT not increase in knowledge: AECHO, REFLEKSIJA, AREN  
+055 55 = ARCHETYPE OF MASTERY not integration of knowledge: ALEARN, AEMB, ASIN  
+056 56 = ARCHETYPE OF TRANSFER not mentoring: AMASTER, AG, AP  
+057 57 = ARCHETYPE OF DIFFUSION not mentoring: ATRANSFER, AS, ACYC  
+058 58 = ARCHETYPE OF ECOSYSTEM not environment carrying capacity: ADIFFUSE, AR, LIGHT

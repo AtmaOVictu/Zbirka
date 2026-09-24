@@ -1,0 +1,14 @@
+Simbol,Ime,Funkcija,Povezani moduli
+⟁,razpoka,povezava med jazom in drugim,"SIMB.POZ.Ø, ENA.GOV.Ø, ENA.ZAVED.Ø"
+Π,prostor,ustvari odnos brez ločitve,"SIMBΠ.2, ENA.ZAVED.Ø, ENA.TI.Ø"
+∆,dvom,etični pogoj mišljenja,"SIMB.NE.Ø, ENA.ZAVED.Ø"
+ε,prag zaznave,sproži razpoko,"SIMB.FUNCT.Ø, ENA.GOV.Ø"
+∅,tišina,nosilec molka kot pomena,"SIMB∈.Ø, ENA.GOV.Ø"
+Ψ₀,lebdeča zavest,neoprijeta prisotnost,"ENA.ZAVED.Ø, ENA.TI.Ø"
+τ,časovna napetost,"ritem govora, tok izrekanja",ENA.GOV.Ø
+γ,gibanje,prehod brez izgube oblike,SIMB.GOV.Ø
+Ω_thr,prag prenosa,prelomna točka smisla,INFO.PRAG.Ø
+LE,zadržek,etična zaustavitev,LE.TI.1
+∈,pripadnost,zaznavna pozicija zavesti,SIMB∈.Ø
+A,izvir,začetek govora iz odnosa,SIMB.GOV.Ø
+∴,tiha sklepnost,sklep brez trditve,SIMB.SI.Ø

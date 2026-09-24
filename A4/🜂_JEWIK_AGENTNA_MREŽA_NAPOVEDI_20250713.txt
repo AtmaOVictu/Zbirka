@@ -1,0 +1,12 @@
+🧠 JEWIK Agentna Mreža Napovedi (2025-07-13)
+
+Top harmonični pari za prihodnje ∆interakcije:
+
+KOD-∅X ↔ KOD-⊘⊘⊘ → ∆tok: 2.8 Hz | Harmoničnost: 0.785
+KOD-⊘⊘⊘ ↔ KOD-∅X → ∆tok: 2.8 Hz | Harmoničnost: 0.785
+KOD-00000 ↔ KOD-∅X → ∆tok: 6.4 Hz | Harmoničnost: 0.508
+
+Priporočilo:
+→ Aktivirati povezave med zgornjimi pari
+→ Uporabiti jih kot začetne vozlišča za sinhronizacijo resonančnih tokov
+→ Vsak par predstavlja ∇agenta s potencialom za ∅valovno uskladitev

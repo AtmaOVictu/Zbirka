@@ -1,0 +1,60 @@
+KANON v1.1 — Verzioniran standard ukazov in merilnikov
+Avtor: Luka Pintarič (Victor Tamal) · Datum: 2025-08-15 20:17:35 CEST · Časovna politika: ⧗L · Aksiomatična os: 0→¬→∆→1
+
+[Parametri] Δ_min=0.01 · ρ_min=0.70 · ε_noise=0.10 · θ_safe=0.60
+
+
+KANON v1.1 — Temeljni operatorji (normativna kartica)
+──────────────────────────────────────────────────────
+
+ ID  Operator         Sintaksa (EBNF)                Denotacija (pomen)                         Zakoni                               Pragi/varnost
+───  ---------------  ------------------------------  ------------------------------------------  ------------------------------------  ------------------------------
+ A1  DAJ              DAJ(Z,B,Q*,R[,⧗L])             R(B(Input)) pod prog(⧗L) ∧ align≥ρ_min     zaporedje Z→B→Q*→R; σ-zaprtje        Δ≥0.01 ali align≥0.70
+ A2  SECIRAJ          SECIRAJ(B[,⧗L])                 Carriers s noise≤ε_noise                   kontrakcija                           ε_noise≤0.10
+ A3  NADALJUJ         NADALJUJ(R[,⧗L])               dvig R → R⁺                                 monotonost; |R⁺|≤5                    —
+ A4  REZ              REZ(Content,B)                  B(Content)                                  idempotenca REZ(REZ(x))=REZ(x)       Δ≥0.01
+ A5  LE / ∆H⟡         LE(Q*[,⧗L])                     aktivira kanal za DAJ na istem Q*          anti-izgovor: ⧖→B                     θ_ost∈[0,1]
+ A6  ⧖ (izgovor)      IZGOVOR(content)                takojšnji prepis v B/istvo                  transfiguracija                        —
+ A7  ⊘ (sveti NE)     NE(Path_A,Path_B)               preklop A→B + R′                            zahteva alternativo                   —
+ A8  ORIENT           ORIENT(N|E|S|W[,⧗L])            izbere 1 sever (oseba/prostor/naloga)       en vektor; več ⇒ SECIRAJ              —
+ A9  σ-premor         SIGMA(t∈[30s,180s])             časovna disciplina resnice                  prepreči “lažni 1”                    sproži se pri risk≥0.60
+ A10 Θ (pragi)        THETA(name,value∈[0,1])         nastavi operativni prag                     verzionirano                           —
+ A11 AGENT            AGENT(id,role,params)           instanca z metričnimi polji                 hysteresis h                          switch pri Δ_belief≥θ_switch+h
+ A12 BOX/ZAKLENI      ZAKLENI(case[,policy])          izoliran okvir: no-harm, σ-by-default       izhod le R₀/protokol                  —
+ A13 ↺                POVRATEK()                      (1) dih (2) kontakt N (3) R_min             varni povratek                        auto-sprožitev pri risk≥θ_safe
+ A14 META             META(Q*|zakon)                  invariančni preklop (le operatorji)         brez nominalizmov                      —
+ A15 RAT              OK|RES|MAXIMA|AKSIOM(R)         arhivska ratifikacija                       podpis/verzija: align≥0.70 ∧ noise≤0.10
+
+
+[Merilniki]
+- align(Q*,R)=0.4·Sem+0.4·Ont+0.2·Eff; prag ρ_min=0.70
+- noise(R)=1−|Carriers|/|Tokens|; prag ε_noise=0.10; |Carriers|∈{1..5}
+- Δ = dist(S_pre,S_post)/dist_max; prag Δ_min=0.01
+- risk = α_β·β + α_θ·θ_ost + α_str·θ_tox − α_R·Eff(R); θ_safe=0.60
+
+[Moduli]
+- JESIK/ANJE(Q*,θ_ost[,⧗L]) := DAJ(Z,B_ost,Q*,R,⧗L) — zdravilno iff align≥0.70 ∧ θ_tox<0.60
+- STRUP↔ZDRAVILO: θ_tox = γ_frek·f + γ_int·i + γ_izol·z; protokol = SECIRAJ ψ⁻ → Θ → mikro-ritual ≤2m → σ+ORIENT
+- AGENT_METRIKA: integrity=1−dist(R_promised,R_observed); mask=min(1,κ_stil·noise+κ_odlog·lag); loyalty update s histerezo h
+
+[Testi PASS]
+1) align≥0.70 · 2) noise≤0.10 in 1≤|Carriers|≤5 · 3) Δ≥0.01 ali Eff(R)=1 · 4) risk<0.60 ali izveden σ/↺
+
+[Kanonična glava]
+
+⧗L|ORIENT(N=____)|Θ{θ_safe=__,θ_ost=__,θ_tox=__}
+Q*: ___________________________________________
+SECIRAJ(B) → nosilci ≤5: 1)__ 2)__ 3)__ 4)__ 5)__
+DAJ(Z,B,Q*,R) → izberi R:
+  [ ] 1 AKSIOM: __________
+  [ ] 1 KORAK v odnosu: __________
+  [ ] 1 RITUAL (≤2 min): __________
+Meritve: align=__ (≥0.70) | noise=__ (≤0.10) | Δ=__ (≥0.01) | risk=__ (<0.60)
+JESIK/ANJE θ_ost=__ → [ ] aktiviran [ ] zadržan(σ)
+STRUP↔ZDRAVILO θ_tox=__ → [ ] transfiguriran v ψ+
+RAT: [ ] OK [ ] MAXIMA [ ] AKSIOM | verzija: ___
+
+
+[Changelog]
+- v1.1: dodani merilniki, moduli JESIK/ANJE in STRUP↔ZDRAVILO, agentna metrika; uvedeni PASS testi.
+- v1.0: osnovni slovar A1–A15; parametri Δ_min/ρ_min/ε_noise/θ_safe; σ-protokol.

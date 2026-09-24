@@ -1,0 +1,418 @@
+GIFT DIALOGUES OF THE RIVER
+Normalized format for copying; each dialogue has 3 lines + DAR.
+
+REK 01 — Capacity
+A: I want you today.
+B: Today I have only breath for myself.
+DAR: I will say NO now, so that our YES becomes genuine.
+
+REK 02 — Patterns
+A: I fear you will let me back on the hook.
+B: I fear I will take you again as a burden.
+DAR: Learning a new rhythm, not repeating the old.
+
+REK 03 — Boundary
+A: I come with fire.
+B: I first place water.
+DAR: Thus both remain alive.
+
+REK 04 — Time
+A: I want an explosion.
+B: I build quiet tissue.
+DAR: Let silence become a field, not a punishment.
+
+REK 05 — Respect
+A: Take me as I am.
+B: I won't take you until I can hold myself.
+DAR: Your space is safer than my whole.
+
+REK 06 — Honesty
+A: I admit I want to be closer.
+B: I admit I want to be slower.
+DAR: Openness is not a game, it is tenderness.
+
+REK 07 — Ego
+A: My words are sharp.
+B: My answer is action.
+DAR: When they meet, peace arises.
+
+REK 08 — Lakota
+A: Nourish with my fire.
+B: First I nourish my breath.
+DAR: Fullness gives you fullness, not cramping.
+
+REK 09 — Lightness
+A: Your lightness angers me.
+B: My lightness is survival.
+DAR: From it will grow tenderness.
+
+REK 10 — Tenderness
+A: I would hold you right away.
+B: I will hold you when I won't fall.
+DAR: Better later, than now half.
+
+REK 11 — Non-sex
+A: I want you also with my body.
+B: Rather not take you as if I were shattered.
+DAR: Pleasure comes when the body is whole.
+
+REK 12 — Alarm
+A: My desire is strong.
+B: When it's overpowering, the alarm sounds, not the heart.
+DAR: Diminish the fire, so you can hear the voice.
+
+REK 13 — To carry vs. to love
+A: Shall I carry you?
+B: I don't want you to carry me; I want you to love me.
+DAR: The way to walk both.
+
+REK 14 — Not to conceal
+A: We won't conceal the hook.
+B: I won't conceal myself anymore.
+DAR: Truth remains erotic when it is soft and clear.
+
+REK 15 — Spit
+A: Why don't you say YES?
+B: Because that would be spitting at myself and you.
+DAR: Rather spit, so the speech is clear.
+
+REK 16 — Picking up
+A: Take what is.
+B: Without myself, I give only scraps.
+DAR: Waits for the fruit, not the husk.
+
+REK 17 — Signature
+A: Give me your YES.
+B: I don't sign what wounds us.
+DAR: Let the confirmation be healthy.
+
+REK 18 — Air
+A: My YES is a fire.
+B: My YES is air.
+DAR: I choose air, so both can breathe.
+
+REK 19 — Silence
+A: I hate this silence.
+B: Now I carry it as a bridge.
+DAR: Silence is space, not punishment.
+
+REK 20 — Endurance
+A: I want it now.
+B: I wait until I come whole.
+DAR: Waiting is respect.
+
+REK 21 — To hold the back
+A: Carry my ego still.
+B: I hold my back, so I may one day hold yours.
+DAR: Strength divides, not postpones.
+
+REK 22 — Not a mixture
+A: I want you in all roles.
+B: I won't be your mother, lover, and trash can all at once.
+DAR: A clean role gives clean tenderness.
+
+REK 23 — Not to die for a moment
+A: Do you want me now?
+B: I don't want to die for your moment.
+DAR: Protect life for the relationship.
+
+REK 24 — Epilogue
+A: I accept your non-acceptance.
+B: Therefore I respect you.
+DAR: They remain real and possible.
+
+GIFT DIALOGUES OF THE RIVER — SERIES II
+Normalized format; each dialogue has 3 lines + DAR.
+
+REK 25 — Trust
+A: Trust me, so I stay.
+B: Trust me, so I return late, but whole.
+DAR: Trust is time, not control.
+
+REK 26 — Fragility
+A: I fear you will break.
+B: I am fragile and remain real.
+DAR: Fragility is a gift, if it is held with tenderness.
+
+REK 27 — Vulnerability
+A: I open my wound.
+B: I don't enter with boots.
+DAR: Sees the wound as light, not as a weapon.
+
+REK 28 — Criticism
+A: I see your mistake.
+B: Thank you, if it comes without humiliation.
+DAR: Anoint the truth with responsibility.
+
+REK 29 — Shame
+A: My shame is my needs.
+B: I don't shame you, only protect myself.
+DAR: Shame replaces a clear request.
+
+REK 30 — Blame
+A: I am at fault, because I pressed.
+B: I forgive when you learn your limits.
+DAR: Blame becomes a bond, not a punishment.
+
+REK 31 — Messages
+A: You don't answer quickly.
+B: I need space without a time constraint.
+DAR: Writes a rule that there are no phantom fears.
+
+REK 32 — Doubt
+A: Do you doubt me?
+B: Doubt without judgment, so clarity comes.
+DAR: Doubt is a bridge, not a fall.
+
+REK 33 — Dreaming
+A: I dream of a shared home.
+B: I dream of shared freedom.
+DAR: First build the habit of tenderness.
+
+REK 34 — Body
+A: My body calls you.
+B: My body wants slowly.
+DAR: Slowness is erotic, because it sees.
+
+REK 35 — Rhythm
+A: I want the tempo.
+B: I hold the rhythm.
+DAR: The metronome becomes both.
+
+REK 36 — Green Light
+A: When is YES?
+B: When the heart and back hold together.
+DAR: YES is when both carry their weight.
+
+REK 37 — Red Light
+A: Why STOP?
+B: Because the flood is coming.
+DAR: Stop is a gift before misfortune.
+
+REK 38 — Call
+A: I call you to come.
+B: I answer when I am whole.
+DAR: Call and answer are a dance, not a command.
+
+REK 39 — Presence
+A: Look at me.
+B: I see you when I look at myself.
+DAR: Presence is a double light.
+
+REK 40 — Humility
+A: I don't know how to proceed.
+B: Then it goes slowly and quietly.
+DAR: Humility makes space for truth.
+
+REK 41 — Courage
+A: Fear of your NO frightens me.
+B: My NO does not punish you, it protects you.
+DAR: Courage is to stay, when there is no confirmation.
+
+REK 42 — Control
+A: I want to know everything.
+B: I need secrecy for breathing.
+DAR: Trust is better than control.
+
+REK 43 — Surrender
+A: I surrender to you.
+B: I surrender to myself — then to you.
+DAR: Surrender without loss is loyalty to the body.
+
+REK 44 — Return
+A: Will you return?
+B: Always, when fullness is in me.
+DAR: Return is a gift, not an obligation.
+
+REK 45 — Departure
+A: Why are you leaving?
+B: So I can return alive.
+DAR: Departure is a cycle, not an end.
+
+REK 46 — Doors
+A: Should I open them on the way?
+B: Open on the seams, so the doors don't close.
+DAR: Doors hold together.
+
+REK 47 — Voice
+A: I call out for you.
+B: I whisper the truth.
+DAR: The voice chooses a tone that heals.
+
+REK 48 — Silence
+A: Silence terrifies me.
+B: Silence heals me.
+DAR: Determine the length of silence and its purpose.
+
+DARILNI DIALOGI — EGO SERIES
+Normalized form; each dialogue = 3 lines + DAR. Copy and give.
+
+EGO 01 — Ego — Measure
+A: My ego wants space.
+B: My measure wants peace.
+DAR: Determine space, so ego becomes cohabitation.
+
+EGO 02 — Ego — Mirror
+A: I read your silence as contempt.
+B: I read my silence as self-care.
+DAR: First check the reading, then the judgment.
+
+EGO 03 — Ego — Cut and Seam
+A: My words are cuts.
+B: My actions are seams.
+DAR: Let them meet, so the wound becomes a scar, not a fall.
+
+EGO 04 — Ego — Preservation
+A: I want your attention.
+B: I want my whole.
+DAR: Exchange: a minute for you, an hour for me, then both.
+
+EGO 05 — Ego — Humiliation
+A: If you correct me, will you stop loving me?
+B: If I correct you gently, I start respecting you.
+DAR: Criticism without shame, learning without punishment.
+
+EGO 06 — Ego — Comparison
+A: I compare you with others.
+B: With that, you lose me.
+DAR: Replace the ladder with presence.
+
+EGO 07 — Ego — Elevation
+A: I need you to say: it's good for me.
+B: I will say it when I see it in actions, not in requests.
+DAR: Praise as a fact, not as a favor.
+
+EGO 08 — Ego — Blame
+A: I am at fault for pressing.
+B: I am at fault for fleeing.
+DAR: Blame → responsibility: today's new rule.
+
+EGO 09 — Ego — Control
+A: I want to know everything.
+B: I want to keep some secret.
+DAR: Trust is better than control — and more erotic.
+
+EGO 10 — Ego — Excuse
+A: Forgive me for overpowering you.
+B: Thank you. Now we speak from the same height.
+DAR: Excuse as elevation, not humiliation.
+
+EGO 11 — Ego — Role
+A: Shall I be your teacher?
+B: First, be a student of truth.
+DAR: Role change only when both breathe.
+
+EGO 12 — Ego — Vulnerability
+A: I don't like you seeing me as weak.
+B: I'd rather have you real.
+DAR: Weakness is the door; through it comes warmth.
+
+EGO 13 — Ego — Projection
+A: You are cold.
+B: You are overwhelmed.
+DAR: Verify what it is before declaring judgment.
+
+EGO 14 — Ego — Domination
+A: I want to lead.
+B: I lead when I see you seeing me.
+DAR: Leadership as care, not as entitlement.
+
+EGO 15 — Ego — Demand vs. Request
+A: I demand your time.
+B: I hear a request, not a command.
+DAR: Request clearly, so I can choose freely.
+
+EGO 16 — Ego — Craving for Approval
+A: Tell me I'm the best.
+B: Tell me what you're willing to do better.
+DAR: Approval as a path, not as a trophy.
+
+EGO 17 — Ego — Shame
+A: I'm ashamed for needing.
+B: I'm ashamed when I request clearly.
+DAR: Shame unties into a request + boundary.
+
+EGO 18 — Ego — Speed
+A: I want it now.
+B: I hold the rhythm.
+DAR: The metronome measures our heart, not ego.
+
+EGO 19 — Ego — Desire
+A: I desire you to honor me.
+B: I honor you when you honor yourself — without masks.
+DAR: Self-honor is the foundation of giving.
+
+EGO 20 — Ego — Anger
+A: My anger is your boundaries.
+B: My boundaries keep me with you.
+DAR: Anger translates into the rule of contact.
+
+EGO 21 — Ego — Praise
+A: I speak of my victories.
+B: I listen when I hear where you were as a human.
+DAR: Victory + vulnerability = trust.
+
+EGO 22 — Ego — Competition
+A: I don't want to lose.
+B: I don't want you to win and separate us.
+DAR: Play together against the challenge, not one against the other.
+
+EGO 23 — Ego — Retreat
+A: I retreat when it hurts.
+B: Stay, but speak a little.
+DAR: Micro-break instead of a big war.
+
+EGO 24 — Ego — Belonging
+A: Are you mine?
+B: I am mine, so I can be yours.
+DAR: Belonging without ownership.
+
+EGO 25 — Ego — Language
+A: Do my words cut you?
+B: They cut me when there's inconsistency with actions.
+DAR: Action confirms words; only then do both grow.
+
+EGO 26 — Ego — Vision
+A: Look at me until the end.
+B: I see you when I don't hide myself.
+DAR: Double vision or nothing.
+
+EGO 27 — Ego — Gratitude
+A: Thank you for holding me when I fly too far.
+B: Thank you for stopping when I ask.
+DAR: Gratitude as fuel, not as a debt.
+
+EGO 28 — Ego — Calming
+A: I scream inside.
+B: I whisper the boundary.
+DAR: Whisper often wins.
+
+EGO 29 — Ego — Permission
+A: Allow me to lead tonight.
+B: Allow me to say when not.
+DAR: Permission as exchange, not as a right.
+
+EGO 30 — Ego — Humility
+A: I don't know how to ask nicely.
+B: Learn. I am learning to say No nicely.
+DAR: The form of the truth is beautiful.
+
+EGO 31 — Ego — Trma
+A: I do not let go.
+B: I do not coerce.
+DAR: Both let go by one step — that is a bridge.
+
+EGO 32 — Ego — Loyalty to the Truth
+A: I want you to believe in me.
+B: I want you to believe in the truth.
+DAR: The truth is our third member.
+
+EGO 33 — Ego — Eros
+A: Ego wants applause.
+B: The body wants presence.
+DAR: From applause, create touch.
+
+EGO 34 — Ego — Epilogue
+A: I accept correction.
+B: I accept your courage.
+DAR: Ego becomes a tool when it learns.

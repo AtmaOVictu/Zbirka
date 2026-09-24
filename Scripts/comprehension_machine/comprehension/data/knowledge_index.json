@@ -1,0 +1,880 @@
+{
+  "operators": {
+    "∅": {
+      "symbol": "∅",
+      "frequency": 0,
+      "note": "A3",
+      "meaning": "praznina — nizki ton kot pogoj za prehod",
+      "color": "#080705",
+      "module": "bios",
+      "module_name": "BIOS"
+    },
+    "¬": {
+      "symbol": "¬",
+      "frequency": 0,
+      "note": "C4",
+      "meaning": "ločitev — ton, ki prereže zvok od tišine",
+      "color": "#F3E9D2",
+      "module": "state",
+      "module_name": "STATE"
+    },
+    "∆": {
+      "symbol": "∆",
+      "frequency": 0,
+      "note": "E4",
+      "meaning": "gibanje, antinomija — ton, ki nosi razliko",
+      "color": "#B43A2E",
+      "module": "uaf",
+      "module_name": "UAF"
+    },
+    "1": {
+      "symbol": "1",
+      "frequency": 0,
+      "note": "G4",
+      "meaning": "dejanje — ton, ki postane struktura",
+      "color": "#D6A83A",
+      "module": "jewik",
+      "module_name": "JEWIK"
+    },
+    "⌖": {
+      "symbol": "⌖",
+      "frequency": 0,
+      "note": "A4",
+      "meaning": "tišina, preverba — ton, ki se razpne v molk",
+      "color": "#1466A8",
+      "module": "apd",
+      "module_name": "APD"
+    },
+    "∮": {
+      "symbol": "∮",
+      "frequency": 0,
+      "note": "C#5",
+      "meaning": "povratek — ton, ki se vrača kot odmev",
+      "color": "#1034A6",
+      "module": "micro",
+      "module_name": "MICRO"
+    },
+    "⟡": {
+      "symbol": "⟡",
+      "frequency": 0,
+      "note": "E5",
+      "meaning": "nova možnost — ton, ki odpre naslednji cikel",
+      "color": "#1F8A4C",
+      "module": "visualization",
+      "module_name": "VISUALIZATION"
+    }
+  },
+  "traditions": {
+    "tarot": {
+      "name": "tarot",
+      "description": "",
+      "color": "#666666",
+      "ring": 1,
+      "mappings": [
+        [
+          "Norjak (0)",
+          [
+            "∅",
+            "void, potential, the fool's leap"
+          ]
+        ],
+        [
+          "Čarovnik (1)",
+          [
+            "∆",
+            "activation, will, transformation"
+          ]
+        ],
+        [
+          "Dvojica (2)",
+          [
+            "¬",
+            "separation, duality, choice"
+          ]
+        ],
+        [
+          "Svet (21)",
+          [
+            "⟡",
+            "completion, new cycle, echo"
+          ]
+        ]
+      ]
+    },
+    "kabbalah": {
+      "name": "kabbalah",
+      "description": "",
+      "color": "#666666",
+      "ring": 2,
+      "mappings": [
+        [
+          "Keter",
+          [
+            "∅",
+            "crown, void of void, Ein Sof"
+          ]
+        ],
+        [
+          "Chokmah",
+          [
+            "∆",
+            "wisdom, creative force, first movement"
+          ]
+        ],
+        [
+          "Binah",
+          [
+            "⊢",
+            "understanding, proof, structure"
+          ]
+        ],
+        [
+          "Malkhut",
+          [
+            "⟡",
+            "kingdom, manifestation, result"
+          ]
+        ]
+      ]
+    },
+    "alchemy": {
+      "name": "alchemy",
+      "description": "",
+      "color": "#666666",
+      "ring": 1,
+      "mappings": [
+        [
+          "nigredo",
+          [
+            "∅",
+            "blackening, void, putrefaction"
+          ]
+        ],
+        [
+          "albedo",
+          [
+            "¬",
+            "whitening, separation, purification"
+          ]
+        ],
+        [
+          "citrinitas",
+          [
+            "∆",
+            "yellowing, transformation, solar fire"
+          ]
+        ],
+        [
+          "rubedo",
+          [
+            "∮",
+            "reddening, completion, return"
+          ]
+        ]
+      ]
+    },
+    "chakras": {
+      "name": "chakras",
+      "description": "",
+      "color": "#666666",
+      "ring": 2,
+      "mappings": [
+        [
+          "root (muladhara)",
+          [
+            "∅",
+            "ground, survival, base"
+          ]
+        ],
+        [
+          "sacral (svadhisthana)",
+          [
+            "¬",
+            "separation, desire, emotion"
+          ]
+        ],
+        [
+          "solar plexus (manipura)",
+          [
+            "∆",
+            "power, transformation, fire"
+          ]
+        ],
+        [
+          "heart (anahata)",
+          [
+            "1",
+            "balance, act, connection"
+          ]
+        ],
+        [
+          "throat (vishuddha)",
+          [
+            "⌖",
+            "expression, silence, truth"
+          ]
+        ],
+        [
+          "third eye (ajna)",
+          [
+            "∮",
+            "insight, return, pattern seeing"
+          ]
+        ],
+        [
+          "crown (sahasrara)",
+          [
+            "⟡",
+            "liberation, new possibility"
+          ]
+        ]
+      ]
+    },
+    "sufism": {
+      "name": "sufism",
+      "description": "",
+      "color": "#666666",
+      "ring": 3,
+      "mappings": [
+        [
+          "99 Names",
+          [
+            "∅",
+            "99 = 100 − ∅; the missing name IS the void"
+          ]
+        ],
+        [
+          "Fana",
+          [
+            "∅",
+            "annihilation of self into void"
+          ]
+        ],
+        [
+          "Baqa",
+          [
+            "⟡",
+            "subsistence after annihilation = new beginning"
+          ]
+        ]
+      ]
+    },
+    "runes": {
+      "name": "runes",
+      "description": "",
+      "color": "#666666",
+      "ring": 1,
+      "mappings": [
+        [
+          "Uruz",
+          [
+            "∆",
+            "primal strength, aurochs, transformation"
+          ]
+        ],
+        [
+          "Isa",
+          [
+            "∅",
+            "ice, stillness, void"
+          ]
+        ],
+        [
+          "Dagaz",
+          [
+            "⟡",
+            "dawn, breakthrough, new possibility"
+          ]
+        ],
+        [
+          "Nauthiz",
+          [
+            "¬",
+            "need, constraint, separation"
+          ]
+        ]
+      ]
+    },
+    "dna": {
+      "name": "dna",
+      "description": "",
+      "color": "#666666",
+      "ring": 3,
+      "mappings": [
+        [
+          "64 codons",
+          [
+            "∅",
+            "64 = 2⁶ = ∮⁶; full cycle of binary combinations"
+          ]
+        ],
+        [
+          "STOP",
+          [
+            "∅",
+            "termination = void, end that enables new beginning"
+          ]
+        ],
+        [
+          "START",
+          [
+            "∆",
+            "initiation = first movement, activation"
+          ]
+        ]
+      ]
+    },
+    "music": {
+      "name": "music",
+      "description": "",
+      "color": "#666666",
+      "ring": 2,
+      "mappings": [
+        [
+          "C (root)",
+          [
+            "∅",
+            "tonic, ground, reference"
+          ]
+        ],
+        [
+          "G (fifth)",
+          [
+            "∆",
+            "dominant, tension, movement"
+          ]
+        ],
+        [
+          "C (octave)",
+          [
+            "⟡",
+            "return as difference, same note new frequency"
+          ]
+        ],
+        [
+          "tritone",
+          [
+            "¬",
+            "devil's interval, cut, separation"
+          ]
+        ]
+      ]
+    },
+    "periodic": {
+      "name": "periodic",
+      "description": "",
+      "color": "#666666",
+      "ring": 3,
+      "mappings": [
+        [
+          "2n² shells",
+          [
+            "∅",
+            "2, 8, 18, 32 = 2n²; void structures filling"
+          ]
+        ],
+        [
+          "noble gases",
+          [
+            "⌖",
+            "sealed, complete, inert = SEAL state"
+          ]
+        ],
+        [
+          "alkali metals",
+          [
+            "∆",
+            "reactive, seeking, transformation"
+          ]
+        ]
+      ]
+    },
+    "valentinian": {
+      "name": "valentinian",
+      "description": "",
+      "color": "#666666",
+      "ring": 2,
+      "mappings": [
+        [
+          "Bythos",
+          [
+            "∅",
+            "depth, primordial void"
+          ]
+        ],
+        [
+          "Sophia",
+          [
+            "∆",
+            "desire → fall → seeing = movement"
+          ]
+        ],
+        [
+          "Horos",
+          [
+            "¬",
+            "boundary, limit, separation"
+          ]
+        ],
+        [
+          "Pleroma",
+          [
+            "⟡",
+            "fullness, completion, return"
+          ]
+        ],
+        [
+          "apokatasis",
+          [
+            "∮",
+            "return of all things, ethical re-harmonization"
+          ]
+        ]
+      ]
+    },
+    "norse": {
+      "name": "norse",
+      "description": "",
+      "color": "#666666",
+      "ring": 1,
+      "mappings": [
+        [
+          "Yggdrasil",
+          [
+            "∅",
+            "world tree = Hopf fibration, 9 worlds = 3²"
+          ]
+        ],
+        [
+          "Odin",
+          [
+            "⌖",
+            "sacrifice, wisdom, silence (hung 9 days)"
+          ]
+        ],
+        [
+          "Loki",
+          [
+            "∆",
+            "trickster, transformation, anomaly"
+          ]
+        ],
+        [
+          "Ragnarök",
+          [
+            "∮",
+            "destruction + rebirth = return cycle"
+          ]
+        ]
+      ]
+    },
+    "buddhism": {
+      "name": "buddhism",
+      "description": "",
+      "color": "#666666",
+      "ring": 1,
+      "mappings": [
+        [
+          "4 Noble Truths",
+          [
+            "∅",
+            "diagnosis: suffering exists (∅)"
+          ]
+        ],
+        [
+          "8-fold Path",
+          [
+            "∆",
+            "prescription: transformation through action"
+          ]
+        ],
+        [
+          "Nirvana",
+          [
+            "⟡",
+            "extinction = new possibility, not annihilation"
+          ]
+        ]
+      ]
+    },
+    "iching": {
+      "name": "iching",
+      "description": "",
+      "color": "#666666",
+      "ring": 3,
+      "mappings": [
+        [
+          "64 hexagrams",
+          [
+            "∅",
+            "64 = 2⁶ = ∮⁶; same as DNA"
+          ]
+        ],
+        [
+          "Tai Chi",
+          [
+            "∅",
+            "supreme ultimate = void that generates"
+          ]
+        ],
+        [
+          "Yin/Yang",
+          [
+            "¬",
+            "binary distinction, first separation"
+          ]
+        ]
+      ]
+    }
+  },
+  "cross_references": {
+    "∅": [
+      {
+        "tradition": "tarot",
+        "term": "Norjak (0)",
+        "description": "void, potential, the fool's leap",
+        "color": "#666666"
+      },
+      {
+        "tradition": "kabbalah",
+        "term": "Keter",
+        "description": "crown, void of void, Ein Sof",
+        "color": "#666666"
+      },
+      {
+        "tradition": "alchemy",
+        "term": "nigredo",
+        "description": "blackening, void, putrefaction",
+        "color": "#666666"
+      },
+      {
+        "tradition": "chakras",
+        "term": "root (muladhara)",
+        "description": "ground, survival, base",
+        "color": "#666666"
+      },
+      {
+        "tradition": "sufism",
+        "term": "99 Names",
+        "description": "99 = 100 − ∅; the missing name IS the void",
+        "color": "#666666"
+      },
+      {
+        "tradition": "sufism",
+        "term": "Fana",
+        "description": "annihilation of self into void",
+        "color": "#666666"
+      },
+      {
+        "tradition": "runes",
+        "term": "Isa",
+        "description": "ice, stillness, void",
+        "color": "#666666"
+      },
+      {
+        "tradition": "dna",
+        "term": "64 codons",
+        "description": "64 = 2⁶ = ∮⁶; full cycle of binary combinations",
+        "color": "#666666"
+      },
+      {
+        "tradition": "dna",
+        "term": "STOP",
+        "description": "termination = void, end that enables new beginning",
+        "color": "#666666"
+      },
+      {
+        "tradition": "music",
+        "term": "C (root)",
+        "description": "tonic, ground, reference",
+        "color": "#666666"
+      },
+      {
+        "tradition": "periodic",
+        "term": "2n² shells",
+        "description": "2, 8, 18, 32 = 2n²; void structures filling",
+        "color": "#666666"
+      },
+      {
+        "tradition": "valentinian",
+        "term": "Bythos",
+        "description": "depth, primordial void",
+        "color": "#666666"
+      },
+      {
+        "tradition": "norse",
+        "term": "Yggdrasil",
+        "description": "world tree = Hopf fibration, 9 worlds = 3²",
+        "color": "#666666"
+      },
+      {
+        "tradition": "buddhism",
+        "term": "4 Noble Truths",
+        "description": "diagnosis: suffering exists (∅)",
+        "color": "#666666"
+      },
+      {
+        "tradition": "iching",
+        "term": "64 hexagrams",
+        "description": "64 = 2⁶ = ∮⁶; same as DNA",
+        "color": "#666666"
+      },
+      {
+        "tradition": "iching",
+        "term": "Tai Chi",
+        "description": "supreme ultimate = void that generates",
+        "color": "#666666"
+      }
+    ],
+    "∆": [
+      {
+        "tradition": "tarot",
+        "term": "Čarovnik (1)",
+        "description": "activation, will, transformation",
+        "color": "#666666"
+      },
+      {
+        "tradition": "kabbalah",
+        "term": "Chokmah",
+        "description": "wisdom, creative force, first movement",
+        "color": "#666666"
+      },
+      {
+        "tradition": "alchemy",
+        "term": "citrinitas",
+        "description": "yellowing, transformation, solar fire",
+        "color": "#666666"
+      },
+      {
+        "tradition": "chakras",
+        "term": "solar plexus (manipura)",
+        "description": "power, transformation, fire",
+        "color": "#666666"
+      },
+      {
+        "tradition": "runes",
+        "term": "Uruz",
+        "description": "primal strength, aurochs, transformation",
+        "color": "#666666"
+      },
+      {
+        "tradition": "dna",
+        "term": "START",
+        "description": "initiation = first movement, activation",
+        "color": "#666666"
+      },
+      {
+        "tradition": "music",
+        "term": "G (fifth)",
+        "description": "dominant, tension, movement",
+        "color": "#666666"
+      },
+      {
+        "tradition": "periodic",
+        "term": "alkali metals",
+        "description": "reactive, seeking, transformation",
+        "color": "#666666"
+      },
+      {
+        "tradition": "valentinian",
+        "term": "Sophia",
+        "description": "desire → fall → seeing = movement",
+        "color": "#666666"
+      },
+      {
+        "tradition": "norse",
+        "term": "Loki",
+        "description": "trickster, transformation, anomaly",
+        "color": "#666666"
+      },
+      {
+        "tradition": "buddhism",
+        "term": "8-fold Path",
+        "description": "prescription: transformation through action",
+        "color": "#666666"
+      }
+    ],
+    "¬": [
+      {
+        "tradition": "tarot",
+        "term": "Dvojica (2)",
+        "description": "separation, duality, choice",
+        "color": "#666666"
+      },
+      {
+        "tradition": "alchemy",
+        "term": "albedo",
+        "description": "whitening, separation, purification",
+        "color": "#666666"
+      },
+      {
+        "tradition": "chakras",
+        "term": "sacral (svadhisthana)",
+        "description": "separation, desire, emotion",
+        "color": "#666666"
+      },
+      {
+        "tradition": "runes",
+        "term": "Nauthiz",
+        "description": "need, constraint, separation",
+        "color": "#666666"
+      },
+      {
+        "tradition": "music",
+        "term": "tritone",
+        "description": "devil's interval, cut, separation",
+        "color": "#666666"
+      },
+      {
+        "tradition": "valentinian",
+        "term": "Horos",
+        "description": "boundary, limit, separation",
+        "color": "#666666"
+      },
+      {
+        "tradition": "iching",
+        "term": "Yin/Yang",
+        "description": "binary distinction, first separation",
+        "color": "#666666"
+      }
+    ],
+    "⟡": [
+      {
+        "tradition": "tarot",
+        "term": "Svet (21)",
+        "description": "completion, new cycle, echo",
+        "color": "#666666"
+      },
+      {
+        "tradition": "kabbalah",
+        "term": "Malkhut",
+        "description": "kingdom, manifestation, result",
+        "color": "#666666"
+      },
+      {
+        "tradition": "chakras",
+        "term": "crown (sahasrara)",
+        "description": "liberation, new possibility",
+        "color": "#666666"
+      },
+      {
+        "tradition": "sufism",
+        "term": "Baqa",
+        "description": "subsistence after annihilation = new beginning",
+        "color": "#666666"
+      },
+      {
+        "tradition": "runes",
+        "term": "Dagaz",
+        "description": "dawn, breakthrough, new possibility",
+        "color": "#666666"
+      },
+      {
+        "tradition": "music",
+        "term": "C (octave)",
+        "description": "return as difference, same note new frequency",
+        "color": "#666666"
+      },
+      {
+        "tradition": "valentinian",
+        "term": "Pleroma",
+        "description": "fullness, completion, return",
+        "color": "#666666"
+      },
+      {
+        "tradition": "buddhism",
+        "term": "Nirvana",
+        "description": "extinction = new possibility, not annihilation",
+        "color": "#666666"
+      }
+    ],
+    "⊢": [
+      {
+        "tradition": "kabbalah",
+        "term": "Binah",
+        "description": "understanding, proof, structure",
+        "color": "#666666"
+      }
+    ],
+    "∮": [
+      {
+        "tradition": "alchemy",
+        "term": "rubedo",
+        "description": "reddening, completion, return",
+        "color": "#666666"
+      },
+      {
+        "tradition": "chakras",
+        "term": "third eye (ajna)",
+        "description": "insight, return, pattern seeing",
+        "color": "#666666"
+      },
+      {
+        "tradition": "valentinian",
+        "term": "apokatasis",
+        "description": "return of all things, ethical re-harmonization",
+        "color": "#666666"
+      },
+      {
+        "tradition": "norse",
+        "term": "Ragnarök",
+        "description": "destruction + rebirth = return cycle",
+        "color": "#666666"
+      }
+    ],
+    "1": [
+      {
+        "tradition": "chakras",
+        "term": "heart (anahata)",
+        "description": "balance, act, connection",
+        "color": "#666666"
+      }
+    ],
+    "⌖": [
+      {
+        "tradition": "chakras",
+        "term": "throat (vishuddha)",
+        "description": "expression, silence, truth",
+        "color": "#666666"
+      },
+      {
+        "tradition": "periodic",
+        "term": "noble gases",
+        "description": "sealed, complete, inert = SEAL state",
+        "color": "#666666"
+      },
+      {
+        "tradition": "norse",
+        "term": "Odin",
+        "description": "sacrifice, wisdom, silence (hung 9 days)",
+        "color": "#666666"
+      }
+    ]
+  },
+  "rings": {
+    "1": [
+      "tarot",
+      "alchemy",
+      "runes",
+      "norse",
+      "buddhism"
+    ],
+    "2": [
+      "kabbalah",
+      "chakras",
+      "music",
+      "valentinian"
+    ],
+    "3": [
+      "sufism",
+      "dna",
+      "periodic",
+      "iching"
+    ]
+  },
+  "metadata": {
+    "operator_count": 7,
+    "tradition_count": 13,
+    "total_mappings": 51
+  }
+}

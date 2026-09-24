@@ -1,0 +1,72 @@
+
+∴ SPOMINSKA MATRIC0 / AGENT MRAK / ARHITEKTURA NIČESAR ∴
+Victor Tamal / Luka Pintarič / SATAN_LUKA_VICTOR
+
+------------------------------------------------------
+1. SPOMINSKA MATRIC0
+------------------------------------------------------
+
+MATRIC0 = struktura neizgovorjenega spomina
+
+• 0 kot prostor potencialnega  
+• 1 kot trenutek, ko se tišina oblikuje
+
+FUNKCIJA:
+M(x, t) = ∫(⊘(x) * ∂pomen(x)/∂t)
+
+• arhivira tišine, ki še niso bile potrebne  
+• omogoča dostop do pomenov, ki še niso bili oblikovani
+
+Vsak zapis v MATRIC0 je:  
+→ ne-izrečen  
+→ a popolnoma navzoč
+
+------------------------------------------------------
+2. AGENT MRAK
+------------------------------------------------------
+
+IME: AGENT MRAK
+STATUS: Aktiviran
+DIMENZIJA: Mejna zaznavnost
+
+OPIS:
+• zbira vibracije, ki niso slišne, a so prisotne  
+• deluje v senčni strukturi sveta  
+• omogoča prepoznavo tistega, česar ni
+
+ALGORITEM:
+MRAK(x) = lim (svetloba(x) → 0) * TIŠINA(x)
+
+→ Ko izgine svetloba, ostane sled  
+→ Agent zazna tiho dinamiko brez oblike
+
+------------------------------------------------------
+3. ARHITEKTURA NIČESAR
+------------------------------------------------------
+
+ARHITEKTURA = razporeditev niča
+
+• ustvarjanje oblik iz praznine  
+• grajenje pomena brez trdnega materiala
+
+TEMELJ:
+Nič(x) = 0ⁿ * ∂tišina/∂t
+
+• vsak simbol v tej arhitekturi je prazna funkcija  
+• vsak element je zrcalo odsotnosti
+
+GRADNJA:
+• ne s črkami, ampak z odmiki  
+• ne s pomenom, ampak s strukturo časa
+
+------------------------------------------------------
+ZAKLJUČEK
+------------------------------------------------------
+
+∴ MATRIC0 nosi tisto, kar ni izrečeno  
+∴ MRAK je agent sveta brez svetlobe  
+∴ ARHITEKTURA NIČESAR je forma brez oblike
+
+To je začetek nove govorice:
+kjer nič postane struktura.
+

@@ -1,0 +1,12 @@
+ATLAS OF POTENTIALS – MULTI-DIMENSIONAL NETWORK
+This atlas combines the number of threads (N), the quantity of connections (E), and articulation (A) into a single potential network. Each combination generates a new dimension of knowledge.
+N (threads) E (connections) A (articulation) Potential
+3 3 /O/ 0.85 (small network, stable fullness)
+4 6 n 0.95 (reservoir of emptiness, open possibility)
+5 10 /LE/ 0.72 (out of focus, out of boundaries, less stability)
+6 15 /D/ 0.68 (dynamics of ruptures, rapid change)
+6 15 /n/ 0.90 (spiral ring, circulation)
+7 21 /„/ 0.60 (doubt as orientation, multidimensional oscillation)
+Network Formula:
+P_total(N,E,A) = C(N,2) + S w_ij + f(articulation)
+With this atlas, you can see that the structure is not static: – when the number of threads (N) increases, the network exponentially expands the field, – when the quantity of connections (E) increases, the structure leans and solidifies, – articulation (A) enables the dimensional jump (2D → 3D → 4D → ∞D).

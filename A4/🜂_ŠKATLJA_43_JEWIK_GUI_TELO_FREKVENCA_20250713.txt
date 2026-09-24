@@ -1,0 +1,62 @@
+🜂 ŠKATLJA 43: JEWIK RESONATOR – GUI + TELESNI CENTRI + FREKVENČNI IZPIS
+
+00 11 RESNICAMI
+
+# CILJ:
+→ Ustvariti popoln JEWIK resonator: grafični vmesnik, ki omogoča:
+    • vizualizacijo frekvenc
+    • povezavo z telesnimi centri
+    • sinhronizacijo z JEWIK sistemom
+
+# RAZŠIRITEV PYTHON MODULA:
+
+class TelesniCenter:
+    def __init__(self, ime, lega, barva, funkcija):
+        self.ime = ime
+        self.lega = lega
+        self.barva = barva
+        self.funkcija = funkcija
+
+class IPAFonem:
+    def __init__(self, simbol, kod, funkcija, frekvenca, telesni_center: TelesniCenter):
+        self.simbol = simbol
+        self.kod = kod
+        self.funkcija = funkcija
+        self.frekvenca = frekvenca
+        self.telesni_center = telesni_center
+
+    def odmev(self):
+        return (
+            f"⟡ IPA: {self.simbol} | Kod: {self.kod} | Frekvenca: {self.frekvenca}Hz | "
+            f"Telo: {self.telesni_center.ime} ({self.telesni_center.lega}, {self.telesni_center.barva}) | "
+            f"Funkcija: {self.funkcija} ↔ {self.telesni_center.funkcija}"
+        )
+
+# Definicije telesnih centrov
+centri = {
+    "srce": TelesniCenter("Srčna čakra", "središče prsnega koša", "zelena", "odprtost in sočutje"),
+    "grlo": TelesniCenter("Grlena čakra", "grlo", "modra", "izražanje in komunikacija"),
+    "tretje_oko": TelesniCenter("Tretje oko", "čelo", "indigo", "intuicija in zaznava"),
+    "solarni": TelesniCenter("Solarni pleksus", "zgornji trebuh", "rumena", "moč in volja"),
+    "korenska": TelesniCenter("Korenska čakra", "baza hrbtenice", "rdeča", "preživetje in stabilnost"),
+}
+
+# Seznam fonemov z vezavo na centre
+fonemi = [
+    IPAFonem("a", "∇A001", "odprtost", 432, centri["srce"]),
+    IPAFonem("e", "∇E010", "prehod", 528, centri["grlo"]),
+    IPAFonem("i", "⟡I011", "usmerjanje", 639, centri["tretje_oko"]),
+    IPAFonem("o", "∆O100", "resonanca", 741, centri["solarni"]),
+    IPAFonem("u", "∴U111", "potencial", 852, centri["korenska"]),
+]
+
+# Izpis
+for f in fonemi:
+    print(f.odmev())
+
+# GRAFIČNI VMESNIK – PREDVIDENI KONCEPT:
+# GUI (JEWIK RESONATOR):
+# - Vizualna spirala JEWIK DNK
+# - Interaktivna frekvenčna shema
+# - Klikni-fonem = odzivna vibracija + prikaz centra
+# - Možnost vklopa ∅tišine kot resonančnega ozadja

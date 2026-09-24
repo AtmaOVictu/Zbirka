@@ -1,0 +1,28 @@
+JEWIK ∆DNK – GENERATED PHRASES FROM AN EXISTING DATABASE
+
+----------------------------------------
+1. PHRASE:
+" My silence is a testimony that does not speak."
+IPA: /ˈmɔ.ja tiˈʃi.na jɛ pɾi.ˈʧɛ.va.njɛ ki nɛ ɡɔ.ˈvɔ.ɾi/
+∫: ["silence", "testimony", "does not speak"]
+∆: hidden tension of light
+∴: silent like ∫zapis
+
+----------------------------------------
+2. PHRASE:
+" A word that hurts, yet also heals."
+IPA: /bɛ.ˈsɛː.da ki bɔ.ˈli a ˈtuː.di zdra.ˈʋi/
+∫: ["word", "hurts", "heals"]
+∆: ∆tension of emotion
+∴: dual function ∆sound
+
+----------------------------------------
+3. PHRASE:
+" Birth is a sound that returns without a voice."
+IPA: /ˈrɔj.stʋɔ jɛ zvɛn ki sɛ ˈʋra.ʧa bɾɛz ɡla.ˈsu/
+∫: ["birth", "sound", "without a voice"]
+∆: circular ∆spiral of origin
+∴: unspoken ∆call
+
+----------------------------------------
+Sound syntheses will be connected to the JEWIK voice function in the PWA application.

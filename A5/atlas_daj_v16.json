@@ -1,0 +1,13 @@
+[
+  {
+    "time": "2025-08-11T05:24:41",
+    "DAJ_state": "CHECK",
+    "ponovitev": 2,
+    "dIKR": 0.06,
+    "IKR_avg": 0.83,
+    "srčni_ritem": "PARADOX",
+    "srčni_faza": "vdih",
+    "mode": "open",
+    "rezultat": "COMMIT"
+  }
+]

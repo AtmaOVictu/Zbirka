@@ -1,0 +1,245 @@
+{
+  "upgrade_id": "evo_20260914_231002_fb89",
+  "predecessor_state_id": "S_0",
+  "candidate_state_id": "S_1",
+  "accepted_successor_state_id": null,
+  "created_at": "2026-09-14T23:10:02.409819",
+  "accepted_at": null,
+  "input_pressure": {
+    "type": "contradiction",
+    "source_refs": [
+      "Obs1",
+      "Obs11",
+      "topic_21"
+    ],
+    "plain_statement": "The system wants to be alive and evolving, but it also wants proof, lineage, and guarded canon."
+  },
+  "declared_ref_context": "AX-EVO-001: Evolution as Guarded Successor-State Transformation",
+  "delta": {
+    "summary": "Evolution is no longer framed as tension between aliveness and proof. It is defined as aliveness through proof-preserving transformation.",
+    "added": [
+      "evolution_ledger.py",
+      "guard.py",
+      "dokaz.py",
+      "upgrade_protocol.py"
+    ],
+    "changed": [
+      {
+        "item": "system_capability",
+        "before": "static",
+        "after": "self-upgrading"
+      }
+    ],
+    "removed_or_deprecated": [],
+    "unchanged_core": [
+      "comprehension_layer",
+      "lock_mechanism",
+      "P1-P7",
+      "A0-A6"
+    ],
+    "breaking_changes": [],
+    "canon_changes": [
+      "AX-EVO-001"
+    ],
+    "symbol_changes": {}
+  },
+  "preservation": {
+    "must_not_erase": [
+      "Canon",
+      "Guard",
+      "DOKAZ",
+      "Residual",
+      "predecessor versions",
+      "Luka review"
+    ],
+    "predecessor_links": [
+      "S_0"
+    ],
+    "rollback_path": "revert_to_S_0",
+    "lineage_status": "linked"
+  },
+  "guard": {
+    "status": "review_required",
+    "authority_required": "Luka",
+    "summary": "First evolution event -- requires Luka review for canonical axiom promotion",
+    "passed_checks": [],
+    "failed_checks": [],
+    "warnings": []
+  },
+  "consequence_preview": {
+    "if_accepted": "ONTOMATEMATIKA gains a true self-upgrading engine: not self-improvement as vague optimism, but self-upgrade as typed, reversible, guarded, proof-bearing transformation.",
+    "if_wrong": "The system may become too bureaucratic and mistake documentation for life.",
+    "affected_registries": [
+      "comprehension",
+      "ontomatematika",
+      "canon"
+    ],
+    "affected_runtime_objects": [
+      "guard.py",
+      "dokaz.py",
+      "evolution_ledger.py",
+      "upgrade_protocol.py"
+    ]
+  },
+  "residual": {
+    "unresolved": [
+      "How automatic may the self-upgrade loop become before Luka review is required?"
+    ],
+    "uncertainty": "",
+    "next_question": "Should this become AX-EVO-001: Evolution as guarded successor-state transformation?"
+  },
+  "evidence_refs": [
+    "AX-EVO-001.md",
+    "evolution_ledger.py",
+    "guard.py",
+    "dokaz.py"
+  ],
+  "test_results": [],
+  "decision": "branch",
+  "dokaz": {
+    "dokaz_id": "dokaz_20260914_231002_7937",
+    "created_at": "2026-09-14T23:10:02.409809",
+    "predecessor": {
+      "state_id": "S_0",
+      "name": "ONTOMATEMATIKA Initial State",
+      "description": "Initial state before evolution engine implementation",
+      "version": "1.0",
+      "created_at": "2026-09-14T23:10:02.409154",
+      "artifacts": {
+        "comprehension_layer": "implemented",
+        "lock_mechanism": "implemented",
+        "field_of_view": "implemented",
+        "resistance": "implemented"
+      },
+      "axioms": [
+        "P1-P7",
+        "A0-A6"
+      ],
+      "scope": "comprehension_machine",
+      "predecessor_state_id": null,
+      "successor_state_ids": [
+        "S_1"
+      ],
+      "tags": [
+        "initial",
+        "pre-evolution"
+      ],
+      "author": "system"
+    },
+    "candidate": {
+      "state_id": "S_1",
+      "name": "ONTOMATEMATIKA with Evolution Engine",
+      "description": "System with Guard, DOKAZ, and self-upgrade loop",
+      "version": "2.0",
+      "created_at": "2026-09-14T23:10:02.409399",
+      "artifacts": {
+        "comprehension_layer": "implemented",
+        "lock_mechanism": "implemented",
+        "field_of_view": "implemented",
+        "resistance": "implemented",
+        "evolution_ledger": "implemented",
+        "guard": "implemented",
+        "dokaz": "implemented",
+        "upgrade_protocol": "implemented"
+      },
+      "axioms": [
+        "P1-P7",
+        "A0-A6",
+        "AX-EVO-001"
+      ],
+      "scope": "ontomatematika",
+      "predecessor_state_id": "S_0",
+      "successor_state_ids": [],
+      "tags": [
+        "evolution",
+        "candidate"
+      ],
+      "author": "system"
+    },
+    "delta": {
+      "summary": "Evolution is no longer framed as tension between aliveness and proof. It is defined as aliveness through proof-preserving transformation.",
+      "added": [
+        "evolution_ledger.py",
+        "guard.py",
+        "dokaz.py",
+        "upgrade_protocol.py"
+      ],
+      "changed": [
+        {
+          "item": "system_capability",
+          "before": "static",
+          "after": "self-upgrading"
+        }
+      ],
+      "removed_or_deprecated": [],
+      "unchanged_core": [
+        "comprehension_layer",
+        "lock_mechanism",
+        "P1-P7",
+        "A0-A6"
+      ],
+      "breaking_changes": [],
+      "canon_changes": [
+        "AX-EVO-001"
+      ],
+      "symbol_changes": {}
+    },
+    "preservation": {
+      "must_not_erase": [
+        "Canon",
+        "Guard",
+        "DOKAZ",
+        "Residual",
+        "predecessor versions",
+        "Luka review"
+      ],
+      "predecessor_links": [
+        "S_0"
+      ],
+      "rollback_path": "revert_to_S_0",
+      "lineage_status": "linked"
+    },
+    "guard": {
+      "status": "review_required",
+      "authority_required": "Luka",
+      "summary": "First evolution event -- requires Luka review for canonical axiom promotion",
+      "passed_checks": [],
+      "failed_checks": [],
+      "warnings": []
+    },
+    "consequence_preview": {
+      "if_accepted": "ONTOMATEMATIKA gains a true self-upgrading engine: not self-improvement as vague optimism, but self-upgrade as typed, reversible, guarded, proof-bearing transformation.",
+      "if_wrong": "The system may become too bureaucratic and mistake documentation for life.",
+      "affected_registries": [
+        "comprehension",
+        "ontomatematika",
+        "canon"
+      ],
+      "affected_runtime_objects": [
+        "guard.py",
+        "dokaz.py",
+        "evolution_ledger.py",
+        "upgrade_protocol.py"
+      ]
+    },
+    "residual": {
+      "unresolved": [
+        "How automatic may the self-upgrade loop become before Luka review is required?"
+      ],
+      "uncertainty": "",
+      "next_question": "Should this become AX-EVO-001: Evolution as guarded successor-state transformation?"
+    },
+    "evidence_refs": [
+      "AX-EVO-001.md",
+      "evolution_ledger.py",
+      "guard.py",
+      "dokaz.py"
+    ],
+    "test_results": [],
+    "decision": "branch",
+    "status": "complete",
+    "version": "1.0"
+  },
+  "status": "complete",
+  "version": "1.0"
+}

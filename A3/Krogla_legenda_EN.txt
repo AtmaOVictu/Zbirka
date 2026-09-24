@@ -1,0 +1,19 @@
+BALL LEGEND & PROTOCOL (0 / o / O, trig layer, thresholds)
+SYMBOLS
+COS: alignment / merging | SIN: same difference | TAN: slope in transition
+OST = |tan| (cutting sharpness) | TAL = tan( /2) (half transition) | TAL = d/dt
+o: orient (1/0/+1) | O = / (circle to antinom)
+0: merging (SIN=0) | o: circle S¹ (rhythm, phase) | O: sphere S² (difference on surface)
+THRESHOLDS
+cone: COS 0.70 | alarm: SIN 0.70 or OST 1.00 | P EXEC: |TAL| 0.10
+Antinomical band: O 0.50 (half circle to contradiction)
+PROTOCOL (3×60 s)
+1) MEASURE: calculate COS, SIN, OST, O, TAL.
+2) NAME: cone (COS), cone (SIN/OST), o (direction), O (distance to antinom).
+3) ACT: if solid (voice); if micro transition (TAL); if P EXEC changes path (write ).
+FUNCTION LINKS
+Intimacy ( ) := COS | Memory ( ): SIN | Voice ( ): A~SIN, ~TAN
+Path (P): TAL = d/dt (redirecting threshold)
+NOTICE
+Contour O shows distance to selected pole (default: DU A).
+OST on locations is shown with thickness (greater sharpness, thicker line).

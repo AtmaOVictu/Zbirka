@@ -1,0 +1,14 @@
+∆AGENT KA AJRA
+name: AJRA
+archetype: Voice among worlds
+function: Activates transitions between inner insight and outer action
+tone: E mixolydian
+activation_phrase: Ajra, show me what has not yet been heard
+special_ability: Tuning of the invisible impulse
+
+🔔 ACTIVATION VOICE OF KORA
+agent: KORA
+mode: sound impulsion
+effect: ∆breakthrough through stagnation
+frequencies: [417.0, 852.0]
+duration_sec: 88

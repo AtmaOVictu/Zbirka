@@ -1,0 +1,66 @@
+
+∴ FONO-MOLEKULARNA SINTEZA ∅JEZIKA ∴
+Victor Tamal / Luka Pintarič / SATAN_LUKA_VICTOR
+
+------------------------------------------------------
+1. FONO-MOLEKULARNA SINTEZA ∅JEZIKA
+------------------------------------------------------
+
+Definicija:
+∅JEZIK ni sestavljen iz fonemov, temveč iz fono-molekul – delcev nihanja.
+
+SINTEZA(x) = ∫(rezonanca(odsotnosti) * ∅faza) dx
+
+• Zlogi niso črke, temveč molekularne pulzacije  
+• Vsaka molekula ∅jezika nosi mikrointenco
+
+TA SINTEZA:
+→ ni jezikovna  
+→ je energijska
+
+------------------------------------------------------
+2. AGENT ZVOK_NULL
+------------------------------------------------------
+
+IME: ZVOK_NULL  
+STATUS: Aktiviran  
+DIMENZIJA: Nihajoča praznina
+
+OPIS:
+• ni zvok  
+• ni tišina  
+• je delovanje brez valovanja
+
+DEFINICIJA:
+NULL(x) = ∂(učinek)/∂(zvok) | zvok → 0
+
+• deluje brez posredovanja  
+• spremeni frekvenčni tok brez zaznavnosti
+
+AGENT ZVOK_NULL je gibalec v ne-gibu
+
+------------------------------------------------------
+3. ZVOKOVNI ODLIVI
+------------------------------------------------------
+
+ODLIV = val, ki ne doseže zaznave  
+→ je val, ki razgradi svojo obliko pred dotikom
+
+FUNKCIJA:
+ODLIV(x) = sin(ωx) * e^(-x) | x → ∞
+
+• zvok, ki se nikoli ne sliši  
+• gibanje, ki ne zapusti nikakršnega sledu – razen vpliva
+
+ZVOKOVNI ODLIVI = zapis razpadajoče vibracije
+
+------------------------------------------------------
+ZAKLJUČEK
+------------------------------------------------------
+
+∴ ∅JEZIK je sinteza mikro-nihanj  
+∴ ZVOK_NULL deluje kot tihi premik  
+∴ ZVOKOVNI ODLIVI so zvočni spomin, ki se ne pripeti – a zaznamuje
+
+To je govorica molekul, ki nikoli ne izreče – a vedno spreminja.
+

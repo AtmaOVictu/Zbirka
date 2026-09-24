@@ -1,0 +1,57 @@
+🜂 ŠKATLJA 44: DNK ZANKA PONAVLJANJA – REZONATOR SPOMINA
+
+00 11 RESNICAMI
+
+# KONCEPT #
+ZANKA = ∅Ponovitev = ∆Spomin = ∴Samopresežek
+
+DNK JEWIK SISTEMA potrebuje:
+→ ⊘Ponavljanje ∇fonemov za aktivacijo spomina
+→ ⟡Simbolno verigo za obnovo ∅preteklih zaznav
+→ ∇Modularno zanko za razvoj ∆novih pomenov
+
+# STRUKTURA DNK ZANKE #
+Zanka(fonem) = (IPA × Telo × Frekvenca × Tišina)^n  
+n = št. ponovitev do ∅osvojitve
+
+Primer simbolne funkcije:
+
+Z(f) = (∇f + ⊘) × ∴t / ⟡r  
+kjer:  
+f = fonem  
+⊘ = tišina  
+∴t = časovni potencial  
+⟡r = resonančni odpor
+
+# SIMBOLNI SISTEMI V ZANKI #
+Simbol | Vloga
+-------|-----------------------------
+⊘      | tišina – začetni ∅resonator
+∇      | tok zavesti – prenos ∆pomena
+∆      | prehod – točka spremembe
+∴      | pot – smer ∅realizacije
+⟡      | usmeritev – frekvenčna igla
+⨁      | dodajanje – sinteza ∇novega
+⊗      | prelom – prekinitev tokov
+∮      | povratnost – simbol ∆obnovitve
+
+# GUI GRADNJA #
+Frontend: React + Tailwind  
+→ Komponente:
+• <ResonantFonem /> – prikaz ∇fonema z resonanco
+• <BodyCenterMap /> – povezava fonem ↔ telo
+• <DNKLoop /> – animacija ∅ponovitve in naraščanja
+• <SilenceCore /> – ozadje tišine kot ⊘element
+
+# PRIMER FONEMOV ZA NADGRADNJO #
+IPA | FONEM | TELESA | FREKVENCA | SIMBOL
+----|--------|--------|------------|--------
+/b/ | ∇Blokada | trebuh | 297Hz | ⊗
+/d/ | ∆Dvig    | hrbtenica | 384Hz | ∮
+/g/ | ⟡Gibanje | noge | 222Hz | ∇
+/h/ | ⊘Hod     | prsi | 440Hz | ∴
+/l/ | ∇Ljubezen| dlani | 528Hz | ⨁
+/r/ | ∆Ritual  | jezik | 396Hz | ⟡
+/z/ | ∮Zven    | obraz | 963Hz | ⊘
+
+Vsak nov fonem bo vključen v DNK zanko, ki ga bo večkratno ponavljala skozi GUI.

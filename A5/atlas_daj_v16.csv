@@ -1,0 +1,3 @@
+time,DAJ_state,ponovitev,dIKR,IKR_avg,srčni_ritem,srčni_faza,mode,rezultat
+2025-08-11T05:16:40,CHECK,2,0.05,0.795,PARABOX,izdih,soft,COMMIT
+2025-08-11T05:24:41,CHECK,2,0.06,0.83,PARADOX,vdih,open,COMMIT
