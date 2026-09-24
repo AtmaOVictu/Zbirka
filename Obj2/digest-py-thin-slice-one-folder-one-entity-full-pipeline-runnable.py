@@ -204,7 +204,7 @@ def _complete(d: Dosje) -> bool:
 def _missing(d: Dosje) -> List[str]:
     return [s for s in CANON_SECTIONS if s not in d.sections]
 
-GLYPHS = set("∅∆∮∴⊢⟡↻∫¬ιπ∂⧖⊘≠λ⧖¬".split()) | {"∅∆", "⊗∫", "∞↧", "⊢∆", "≠∫"}
+GLYPHS = set("∅∆∮∴⊢⟡↻∫¬ιπ∂⧖⊘≠λ") | {"∅∆", "⊗∫", "∞↧", "⊢∆", "≠∫"}  # scar 24.9.: .split() on a spaceless string returns ONE 18-char token — no glyph ever matched; set(text) is the fix
 
 def _prob(source, line, kind, word, missing=None) -> dict:
     p = {"source": source, "line": line, "kind": kind, "word": word}
@@ -344,7 +344,7 @@ def _selftest() -> None:
     assert a.format == "A-bullet" and a.word == "Strah"
     assert a.sections["foneticni_rez"].startswith("s / t / r / a / h")
     assert a.sections["antinoma"].strip() == "pogum"
-    assert a.glyphs == ["⊘"], a.glyphs          # glyph from the Glyph field
+    assert enrich(a).glyphs == ["⊘"], a.glyphs  # scar 24.9.: glyphs are set by enrich(); the traced test asserted them before enrichment ever ran
     assert "prakticna_uporaba" in a.sections    # kept, demoted to annotation
     assert enrich(a).grade == "reported"
     b = parsed[1]
