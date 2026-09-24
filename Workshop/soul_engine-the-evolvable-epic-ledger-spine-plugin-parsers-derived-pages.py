@@ -300,6 +300,13 @@ def propose_entry_merges(con) -> List[dict]:
     for (w, fp), entries in groups.items():
         if len(entries) < 2:
             continue
+        # HOLLOW FILTER (scar 24.9.: the raw run proposed 586 families, 555 of
+        # them parser false-positives — register headings like "N. odprte"
+        # parsed as empty dosjes. A count is not a price until each unit is
+        # real. A family enters the queue ONLY if a member carries content.)
+        if not any(e["foneticni_rez"] or e["ontoloski_pomen"] or e["synthesis"]
+                   or e["thesis"] for e in entries):
+            continue
         # keeper: richest grade, then most filled fields
         def richness(e):
             filled = sum(1 for k in ("thesis","antithesis","synthesis",
