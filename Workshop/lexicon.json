@@ -8,7 +8,7 @@
   "funkcija": null,
   "g2p_ambiguities": [],
   "glyph": "⊘ (praznina, kjer se rodi red)",
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "abakus",
   "ontoloski_pomen": "Abakus kot **orodje štetja** — ne le fizični predmet, temveč **sistem, ki omogoča razumevanje reda skozi štetje**.",
   "phonemes": [
@@ -43,7 +43,7 @@
   "funkcija": null,
   "g2p_ambiguities": [],
   "glyph": "∆ (preobrazba skozi prekinitev)",
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "abortus",
   "ontoloski_pomen": "Abortus kot **prekinitev** — ne le fizični akt, temveč **mejni prehod med življenjem in smrtjo, ki odpira vprašanja o izbiri in odgovornosti**.",
   "phonemes": [
@@ -79,7 +79,7 @@
   "funkcija": null,
   "g2p_ambiguities": [],
   "glyph": "⟡ (odmev, ki povezuje nasprotja)",
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "absurd",
   "ontoloski_pomen": "Absurd kot **nesmisel, ki razkriva resnico**. Absurd ni le pomanjkljivost, temveč **vrata k novemu razumevanju**.",
   "phonemes": [
@@ -114,7 +114,7 @@
   "funkcija": null,
   "g2p_ambiguities": [],
   "glyph": "1 (dejanje, ki zapečati resničnost)",
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "akcija",
   "ontoloski_pomen": "Akcija kot **gibanje, ki ustvarja bitje**. Akcija ni le dejanje, temveč **preobrazba ideje v resničnost**.",
   "phonemes": [
@@ -149,7 +149,7 @@
   "funkcija": null,
   "g2p_ambiguities": [],
   "glyph": "∴ (povezava med temeljem in vprašanjem)",
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "aksiom",
   "ontoloski_pomen": "Aksiom kot **temelj, ki je hkrati vprašanje**. Aksiom ni le trditev, temveč **živo vprašanje, ki drži sistem**.",
   "phonemes": [
@@ -184,7 +184,7 @@
   "funkcija": null,
   "g2p_ambiguities": [],
   "glyph": "∴ (povezava med dejanjem in pomenom)",
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "beseda",
   "ontoloski_pomen": "Beseda kot **dejanje, ne sredstvo**. Beseda ne prenese pomena — **beseda je pomen**.",
   "phonemes": [
@@ -222,7 +222,7 @@
    5
   ],
   "glyph": "1 (dejanje, ki zapečati spremembo)",
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "dejanje",
   "ontoloski_pomen": "Dejanje kot **ustvarjanje spremembe**. Dejanje ni le akcija, temveč **sila, ki preoblikuje resničnost**.",
   "phonemes": [
@@ -258,7 +258,7 @@
   "funkcija": "ritem bivanja, osnovni impulz",
   "g2p_ambiguities": [],
   "glyph": "∫ (tok, ki nosi življenje)",
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "dih",
   "ontoloski_pomen": "Dih kot **nosilec življenja in ritma**. Dih ni le fizična funkcija, temveč **orodje za povezavo z bitjem**.",
   "phonemes": [
@@ -292,7 +292,7 @@
   "funkcija": "nasprotje jaza, vir odnosa",
   "g2p_ambiguities": [],
   "glyph": null,
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "drugo",
   "ontoloski_pomen": null,
   "phonemes": [
@@ -326,7 +326,7 @@
   "funkcija": null,
   "g2p_ambiguities": [],
   "glyph": "⧖ (črta tišine, kjer se rodi resnica)",
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "dvom",
   "ontoloski_pomen": "Dvom kot **pogoj za resnico**. Dvom ni šibkost, temveč **moč iskanja**.",
   "phonemes": [
@@ -361,7 +361,7 @@
    0
   ],
   "glyph": "⊘ (meja, ki loči jaz od drugega)",
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "ego",
   "ontoloski_pomen": "Ego kot **meja, ki omogoča odnos do sebe in drugih**. Ego ni sovražnik, temveč **nosilec zavesti**.",
   "phonemes": [
@@ -395,7 +395,7 @@
    5
   ],
   "glyph": "∆ (preobrazba skozi gibanje)",
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "gibanje",
   "ontoloski_pomen": "Gibanje kot **preobrazba bitja**. Gibanje ni le premik, temveč **sila, ki ustvarja novo resničnost**.",
   "phonemes": [
@@ -428,7 +428,7 @@
   "funkcija": "most med notranjim in zunanjim",
   "g2p_ambiguities": [],
   "glyph": null,
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "glas",
   "ontoloski_pomen": null,
   "phonemes": [
@@ -461,7 +461,7 @@
   "funkcija": null,
   "g2p_ambiguities": [],
   "glyph": "⟡ (notranji odmev)",
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "intuicija",
   "ontoloski_pomen": "Intuicija kot **notranji glas, ki prepoznava**. Intuicija ni le čustvo, temveč **orodje za razumevanje**.",
   "phonemes": [
@@ -500,7 +500,7 @@
   "funkcija": "izhodišče govora, subjektivna referenca",
   "g2p_ambiguities": [],
   "glyph": "∂ (prehod med stanji)",
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "jaz",
   "ontoloski_pomen": "Jaz kot **prehod, ne statična identiteta**. Jaz ni fiksna entiteta, temveč **gib skozi razlike**.",
   "phonemes": [
@@ -534,7 +534,7 @@
   "funkcija": "samosoja, moralni odtis",
   "g2p_ambiguities": [],
   "glyph": null,
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "krivda",
   "ontoloski_pomen": null,
   "phonemes": [
@@ -570,7 +570,7 @@
   "funkcija": "vez, raztopitev meje med jazom in drugim",
   "g2p_ambiguities": [],
   "glyph": "∴ (povezava med stanji)",
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "ljubezen",
   "ontoloski_pomen": "Ljubezen kot **povezava, ki ustvarja novo resničnost**. Ljubezen ni le čustvo, temveč **dejanje, ki povezuje**.",
   "phonemes": [
@@ -613,7 +613,7 @@
    3
   ],
   "glyph": "φ (frekvenca misli)",
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "misel",
   "ontoloski_pomen": "Misel kot **frekvenca čutenja**. Misel ni le ideja, temveč **val, ki odmeva skozi bitje**.",
   "phonemes": [
@@ -651,7 +651,7 @@
   "funkcija": null,
   "g2p_ambiguities": [],
   "glyph": "∮ (spirala modrosti)",
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "modrost",
   "ontoloski_pomen": "Modrost kot **spiralna integracija razumevanja**. Modrost ni znanje, temveč **proces, ki se razvija**.",
   "phonemes": [
@@ -689,7 +689,7 @@
    5
   ],
   "glyph": "⧖ (črta tišine, kjer se rodi povezava)",
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "molitev",
   "ontoloski_pomen": "Molitev kot **povezava z Absolutnim**. Molitev ni le prošenje, temveč **dialog z bitjem**.",
   "phonemes": [
@@ -725,7 +725,7 @@
    1
   ],
   "glyph": null,
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "ne",
   "ontoloski_pomen": null,
   "phonemes": [
@@ -754,7 +754,7 @@
   "funkcija": "ontološki začetek, konec pomena",
   "g2p_ambiguities": [],
   "glyph": null,
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "nič",
   "ontoloski_pomen": null,
   "phonemes": [
@@ -784,7 +784,7 @@
   "funkcija": "zvočna potrditev zavesti, most z drugim",
   "g2p_ambiguities": [],
   "glyph": null,
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "odgovor",
   "ontoloski_pomen": null,
   "phonemes": [
@@ -820,7 +820,7 @@
   "funkcija": null,
   "g2p_ambiguities": [],
   "glyph": "∮ (spirala odnosa)",
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "odnos",
   "ontoloski_pomen": "Odnos kot **spiralna pot med jazom in drugim**. Odnos ni statičen, temveč **gib, ki se razvija**.",
   "phonemes": [
@@ -854,7 +854,7 @@
    2
   ],
   "glyph": null,
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "ogenj",
   "ontoloski_pomen": null,
   "phonemes": [
@@ -885,7 +885,7 @@
   "funkcija": "usmerjanje, korak v neznano",
   "g2p_ambiguities": [],
   "glyph": null,
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "pot",
   "ontoloski_pomen": null,
   "phonemes": [
@@ -920,7 +920,7 @@
    9
   ],
   "glyph": "φ (frekvenca razumevanja)",
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "razumevanje",
   "ontoloski_pomen": "Razumevanje kot **frekvenca odmeva**. Razumevanje ni statično, temveč **gib, ki se razvija**.",
   "phonemes": [
@@ -962,7 +962,7 @@
    1
   ],
   "glyph": "∮ (spiralna pot k razumevanju)",
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "resnica",
   "ontoloski_pomen": "Resnica kot **proces, ne končna točka**. Resnica ni nekaj, kar najdete, temveč **nekaj, kar se dogaja**.",
   "phonemes": [
@@ -1004,7 +1004,7 @@
    4
   ],
   "glyph": "∴ (povezava med nasprotji)",
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "sinteza",
   "ontoloski_pomen": "Sinteza kot **nov pomen, rojen iz napetosti**. Sinteza ni kompromis, temveč **ustvarjanje novega**.",
   "phonemes": [
@@ -1043,7 +1043,7 @@
    2
   ],
   "glyph": "⟡ (odmev, ki regenerira)",
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "smeh",
   "ontoloski_pomen": "Smeh kot **regeneracija skozi odmev**. Smeh ni le veselje, temveč **orodje za preobrazbo**.",
   "phonemes": [
@@ -1080,7 +1080,7 @@
   "funkcija": null,
   "g2p_ambiguities": [],
   "glyph": "π (spomin kot zanka)",
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "spomin",
   "ontoloski_pomen": "Spomin kot **resonančna zanka preteklosti**. Spomin ni le preteklost, temveč **aktivna deformacija sedanjosti**.",
   "phonemes": [
@@ -1116,7 +1116,7 @@
   "funkcija": "alarm zavesti, ohranjanje jaza",
   "g2p_ambiguities": [],
   "glyph": "⊘ (varovalna meja)",
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "strah",
   "ontoloski_pomen": "Strah kot **varovalo, ki obvaruje pred nevarnostjo**. Strah ni le negativno čustvo, temveč **orodje za preživetje**.",
   "phonemes": [
@@ -1157,7 +1157,7 @@
    1
   ],
   "glyph": "∫ (nosilec, ki vsebuje življenje)",
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "telo",
   "ontoloski_pomen": "Telo kot **nosilec bitja in zavesti**. Telo ni le fizična oblika, temveč **orodje za doživljanje sveta**.",
   "phonemes": [
@@ -1192,7 +1192,7 @@
   "funkcija": "ozadje pomena, prostor zavesti",
   "g2p_ambiguities": [],
   "glyph": null,
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "tišina",
   "ontoloski_pomen": null,
   "phonemes": [
@@ -1228,7 +1228,7 @@
   "funkcija": "ritem zavesti, gib zavestne snovi",
   "g2p_ambiguities": [],
   "glyph": "∆ (gibanje, ki preoblikuje)",
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "tok",
   "ontoloski_pomen": "Tok kot **nosilec spremembe**. Tok ni le gibanje, temveč **sila, ki preoblikuje resničnost**.",
   "phonemes": [
@@ -1267,7 +1267,7 @@
    4
   ],
   "glyph": "φ (frekvenca upanja)",
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "upanje",
   "ontoloski_pomen": "Upanje kot **napetost, ki omogoča novo**. Upanje ni le pričakovanje, temveč **pogon za prihodnost**.",
   "phonemes": [
@@ -1306,7 +1306,7 @@
   "funkcija": "notranji zagon, odločitev biti",
   "g2p_ambiguities": [],
   "glyph": "∆ (gibanje, ki ustvarja)",
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "volja",
   "ontoloski_pomen": "Volja kot **pogon gibanja**. Volja ni le želja, temveč **sila, ki ustvarja dejanja**.",
   "phonemes": [
@@ -1343,7 +1343,7 @@
    2
   ],
   "glyph": null,
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "zvestoba",
   "ontoloski_pomen": null,
   "phonemes": [
@@ -1380,7 +1380,7 @@
   "funkcija": null,
   "g2p_ambiguities": [],
   "glyph": "⧖ (črta časa)",
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "čas",
   "ontoloski_pomen": "Čas kot **projekcija gibanja**. Čas ni linearen, temveč **gib, ki se odraža v zavesti**.",
   "phonemes": [
@@ -1413,7 +1413,7 @@
   "funkcija": "odziv na konec, notranje očiščenje",
   "g2p_ambiguities": [],
   "glyph": "∫ (globina, kjer se rodi modrost)",
-  "ingested": "2026-09-24T18:16:32",
+  "ingested": "2026-09-24T19:20:46",
   "ledger_id": "žalost",
   "ontoloski_pomen": "Žalost kot **globina, ki omogoča novo razumevanje**. Žalost ni le bolečina, temveč **vir modrosti**.",
   "phonemes": [

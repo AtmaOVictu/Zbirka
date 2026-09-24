@@ -1,7 +1,7 @@
 @echo off
 rem SODBA #002 discharge — run all receipts with your own eyes.
 rem Each PASS is a receipt UNTIL you have seen it run here. Double-click me.
-cd /d D:\OntoProjekt\CanvasMinstral\Obj2
+cd /d D:OntoProjektCanvasMinstralWorkshop
 echo ============================================
 echo RECEIPT 1/4: the lattice (107 letters)
 echo ============================================
