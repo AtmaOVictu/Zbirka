@@ -31,9 +31,17 @@ exists (the seed stone), it overrides the mapper and provenance says so.
 Where the mapper guesses e vs ɛ, the entry carries e and an ambiguity flag —
 resolving it is a dissection, i.e. a human act, i.e. Cut 5's job.
 
-Self-test: python lexicon_core.py  (parse fidelity: every dosje's four
-components found, zero silent drops; ljubezen regression against the seed
-stone chain)
+BACKLOG (∂ named, per the correction of 24. 9.):
+  - A3/Lukova_sesta_stotnija_501_550.txt is APHORISMS (50 numbered cuts),
+    a different organ — in the ingestion backlog as what it measurably is,
+    NOT force-parsed into dosjes.
+  - A2/UC_DOSJE_Luka*.pdf: extractable-or-not must be DECIDED before any
+    ingestion pass claims "complete." No stdlib PDF reader exists here;
+    the ∂ stays open until measured.
+
+Self-test: python lexicon_core.py  (parse fidelity: 40 unique words with
+provenance, every dosje's four components found, zero silent drops, and the
+12 overlaps asserted consistent-or-conflicted — the parser's real stress test)
 """
 
 from __future__ import annotations
@@ -168,6 +176,10 @@ def parse_optikon(entries: dict) -> tuple:
         e["word"] = e["word"] or beseda
         if e["source_form"] is None:
             e["source_form"] = zven
+        else:
+            # NEVER silently drop the overlapping face (the correction of
+            # 24. 9.: overlap is the parser's real stress test):
+            e["annotations"]["optikon_zven"] = zven
         e["smer"] = smer
         e["custvo"] = custvo
         e["funkcija"] = funkcija
@@ -250,6 +262,29 @@ if __name__ == "__main__":
                     if p["source"].endswith((".md", ".txt"))])
     both = [e["word"] for e in entries.values() if _src_count(e) >= 2]
     check(len(both) == 12, f"12 words with BOTH sources — got {len(both)}: {both}")
+
+    # -- THE 12 OVERLAPS: consistent-or-conflicted (the parser's real stress
+    #    test — overlap is where prose schemas drift from tables; conflicts
+    #    are scars to report, not surprises to hide) --
+    def _norm_rez(s):
+        if not s:
+            return None
+        return re.sub(r"[\s/]+", "", s)
+    comparisons, conflicts = 0, []
+    for e in entries.values():
+        if _src_count(e) < 2:
+            continue
+        comparisons += 1
+        dosje_form = _norm_rez(e["source_form"])
+        optikon_form = _norm_rez(e["annotations"].get("optikon_zven"))
+        if dosje_form != optikon_form:
+            conflicts.append(f"{e['word']}: dosje '{e['source_form']}' "
+                             f"vs OPTIKON '{e['annotations'].get('optikon_zven')}'")
+    check(comparisons == 12, f"12 overlap comparisons made — got {comparisons}")
+    print(f"OVERLAP STRESS TEST: {comparisons} compared, "
+          f"{comparisons - len(conflicts)} consistent, {len(conflicts)} CONFLICTED")
+    for c in conflicts:
+        print("   CONFLICT:", c)
     # -- the system's own name-words have no dosje yet (register's measure-me list)
     for w in ("ne", "nič"):
         check(w in entries, f"{w!r} ingested from OPTIKON")
