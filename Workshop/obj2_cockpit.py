@@ -12,8 +12,15 @@ assumptions. The game view waits for the ball spec.
 TABS
   CANVAS     browse + search every .md canvas/canon file in Obj2
   RECEIPTS   run each sister file's self-test, see PASS/FAIL + full output
+             (each run in its own thread — the window never freezes)
   PERFORM    utter a chain live: state bars vs guard thresholds, ledger
              lines, verdict (WORD/DISCOVERY/FOREIGN + PASS/MORAVA/HOLD/FALL)
+  REVIEW     graft #1: the owner's queue. soul_engine proposes merges; the
+             ambiguous ones (needs_owner) wait HERE for YOUR keypress:
+             [k] keep the proposed keeper · [m] merge with your own keeper
+             [c] conflict — not duplicates, real variants · [s] skip.
+             Every ruling is a ledger line in soul.db; the pending queue is
+             derived by replaying the ledger — the machine proposes, you rule.
   PARK       the decision records + inventory of the parked cube era
 
 LAWS
@@ -28,9 +35,13 @@ Smoke test: python obj2_cockpit.py --smoke   (constructs, no mainloop)
 """
 
 from __future__ import annotations
+import json
 import os
-import sys
+import queue
+import re
 import subprocess
+import sys
+import threading
 import importlib.util
 import tkinter as tk
 from tkinter import ttk, filedialog
@@ -70,6 +81,14 @@ except Exception as e:
     VALIDATOR = None
     _LOAD_ERROR = str(e)
 
+SOUL_FILE = "soul_engine-the-evolvable-epic-ledger-spine-plugin-parsers-derived-pages.py"
+try:
+    SOUL = _load(SOUL_FILE)                     # the spine: soul.db, ledger, merge queue
+    SOUL.DB_PATH = os.path.join(_HERE, "soul.db")   # the .bat runs from _HERE; be explicit
+except Exception as e:
+    SOUL = None
+    _SOUL_LOAD_ERROR = str(e)
+
 
 # =============================================================================
 # CANVAS TAB — browse and search every .md in Obj2
@@ -85,7 +104,9 @@ class CanvasTab(ttk.Frame):
         bar.grid(row=0, column=0, sticky="ew")
         ttk.Label(bar, text="search:").pack(side="left")
         self.search_var = tk.StringVar()
-        ttk.Entry(bar, textvariable=self.search_var).pack(side="left", fill="x", expand=True, padx=4)
+        self.search_entry = ttk.Entry(bar, textvariable=self.search_var)
+        self.search_entry.pack(side="left", fill="x", expand=True, padx=4)
+        self.search_entry.bind("<Return>", self.search)
         ttk.Button(bar, text="find", command=self.search).pack(side="left")
         self.files_var = tk.StringVar(value=f"{len(self._files())} files")
         ttk.Label(bar, textvariable=self.files_var).pack(side="left", padx=8)
@@ -96,6 +117,10 @@ class CanvasTab(ttk.Frame):
         self.text.grid(row=2, column=0, sticky="nsew", pady=2)
         self.results = tk.Text(self, height=6, wrap="none", state="disabled")
         self.results.grid(row=3, column=0, sticky="ew", pady=2)
+        self.results.tag_configure("hit", foreground="#6cf")
+        self.results.bind("<Double-Button-1>", self._open_hit)
+        self.results.bind("<Return>", self._open_hit)
+        self.text.tag_configure("hitline", background="#3a4a2a")
         self._fill_list()
         self.listbox.bind("<Double-Button-1>", self._open)
         self.listbox.bind("<Return>", self._open)
@@ -126,6 +151,31 @@ class CanvasTab(ttk.Frame):
         self.text.insert("1.0", content)
         self.text.configure(state="disabled")
 
+    def _open_hit(self, event=None):
+        """Double-click (or Return on) a search hit: open that file at that
+        line. Hit lines read `file:lineno: text` — filenames carry no ':'."""
+        pos = self.results.index(f"@{event.x},{event.y}") if hasattr(event, "x") else "insert"
+        line_no = int(pos.split(".")[0])
+        text = self.results.get(f"{line_no}.0", f"{line_no}.end")
+        m = re.match(r"^(.+?):(\d+):", text)
+        if not m:
+            return
+        fname, lineno = m.group(1), int(m.group(2))
+        if fname not in self._files():
+            return
+        for i, f in enumerate(self.listbox.get(0, "end")):
+            if f == fname:
+                self.listbox.selection_clear(0, "end")
+                self.listbox.selection_set(i)
+                self.listbox.see(i)
+                break
+        self._open(fname)
+        self.text.configure(state="normal")
+        self.text.tag_remove("hitline", "1.0", "end")
+        self.text.tag_add("hitline", f"{lineno}.0", f"{lineno}.end")
+        self.text.see(f"{lineno}.0")
+        self.text.configure(state="disabled")
+
     def search(self):
         needle = self.search_var.get().strip()
         self.results.configure(state="normal")
@@ -138,7 +188,7 @@ class CanvasTab(ttk.Frame):
                 with open(os.path.join(_HERE, f), encoding="utf-8", errors="replace") as fh:
                     for i, line in enumerate(fh, 1):
                         if needle.lower() in line.lower():
-                            self.results.insert("end", f"{f}:{i}: {line.strip()[:120]}\n")
+                            self.results.insert("end", f"{f}:{i}: {line.strip()[:120]}\n", ("hit",))
                             hits += 1
                             if hits >= 200:
                                 self.results.insert("end", "[...truncated at 200 hits]\n")
@@ -182,15 +232,33 @@ class ReceiptsTab(ttk.Frame):
         for name, fname, expected in SISTERS:
             self.tree.insert("", "end", iid=fname, text=name,
                              values=("not run",), tags=(fname,))
-        self.tree.bind("<Double-Button-1>", lambda e: self.run_one(self.tree.selection()[0]))
+        self.tree.bind("<Double-Button-1>", lambda e: self.run_one(self.tree.selection()[0])
+                       if self.tree.selection() else None)
+        self._running = set()
+        self._done = queue.Queue()
+        self.after(200, self._poll)
 
-    def _run(self, fname):
-        proc = subprocess.run([sys.executable, os.path.join(_HERE, fname)],
-                              capture_output=True, text=True, timeout=120,
-                              encoding="utf-8", errors="replace", cwd=_HERE)
-        blob = (proc.stdout or "") + (proc.stderr or "")
-        ok = proc.returncode == 0
-        return ok, blob
+    def _worker(self, fname):
+        """Runs in its own thread — subprocess blocks there, never the UI."""
+        try:
+            proc = subprocess.run([sys.executable, os.path.join(_HERE, fname)],
+                                  capture_output=True, text=True, timeout=120,
+                                  encoding="utf-8", errors="replace", cwd=_HERE)
+            blob = (proc.stdout or "") + (proc.stderr or "")
+            ok = proc.returncode == 0
+        except Exception as e:
+            ok, blob = False, f"[run error: {e}]"
+        self._done.put((fname, ok, blob))
+
+    def _poll(self):
+        try:
+            while True:
+                fname, ok, blob = self._done.get_nowait()
+                self._running.discard(fname)
+                self._show(fname, ok, blob)
+        except queue.Empty:
+            pass
+        self.after(200, self._poll)
 
     def _show(self, fname, ok, blob):
         expected = next(exp for n, f, exp in SISTERS if f == fname)
@@ -206,9 +274,11 @@ class ReceiptsTab(ttk.Frame):
         self.out.configure(state="disabled")
 
     def run_one(self, fname):
-        if fname not in dict((f, 1) for _n, f, _e in SISTERS):
+        if fname not in dict((f, 1) for _n, f, _e in SISTERS) or fname in self._running:
             return
-        self._show(fname, *self._run(fname))
+        self._running.add(fname)
+        self.tree.item(fname, values=("running…",))
+        threading.Thread(target=self._worker, args=(fname,), daemon=True).start()
 
     def run_all(self):
         for _n, fname, _e in SISTERS:
@@ -251,6 +321,18 @@ class PerformTab(ttk.Frame):
         ttk.Combobox(top, textvariable=self.lang_var, values=("en", "sl", "de"),
                      width=4, state="readonly").pack(side="left", padx=4)
         ttk.Button(top, text="PERFORM", command=self.perform).pack(side="left", padx=6)
+
+        def preset(chain, lang):
+            self.chain_var.set(chain)
+            self.lang_var.set(lang)
+            self.perform()
+        ttk.Label(top, text="  presets:").pack(side="left")
+        for label, chain, lang in (("love", "l ʌ v", "en"),
+                                   ("ljubezen", "ʎ u b e z ɛ n", "sl"),
+                                   ("cat", "k æ t", "en"),
+                                   ("zima", "z i m a", "sl")):
+            ttk.Button(top, text=label, command=lambda c=chain, l=lang: preset(c, l)
+                       ).pack(side="left", padx=1)
         ttk.Button(top, text="reset state", command=self.reset).pack(side="left")
         ttk.Button(top, text="export ledger CSV", command=self.export_csv).pack(side="left", padx=6)
 
@@ -365,6 +447,214 @@ class PerformTab(ttk.Frame):
 
 
 # =============================================================================
+# REVIEW TAB — graft #1: the owner's queue, ruled by keypress (k/c/m/s)
+# =============================================================================
+
+REVIEW_RULES = [
+    ("k", "keep", "accept the proposed keeper, losers merge into it"),
+    ("m", "merge", "overrule the tie — a chooser opens, you pick the keeper"),
+    ("c", "conflict", "not duplicates: real variants, no merge"),
+    ("s", "skip", "stays in the queue, next item"),
+]
+
+
+class ReviewTab(ttk.Frame):
+    """soul_engine proposes entry merges; the ambiguous ones (needs_owner —
+    the machine could not pick a strictly richest keeper) wait here for the
+    owner's ruling. LAWS:
+      - every keep/merge/conflict is a LEDGER LINE in soul.db (kind merge or
+        verdict); nothing is deleted, ever
+      - the pending queue is DERIVED by replaying the ledger (a proposal
+        leaves the queue only when the ledger carries a ruling for its
+        (word, fingerprint)) — the spine's own architecture, not a new table
+      - skip writes nothing: deferred means it stays, honestly"""
+
+    def __init__(self, parent):
+        super().__init__(parent, padding=8)
+        self.alive = False
+        self.btns = []
+        self.queue = []
+        self.i = 0
+        self.columnconfigure(0, weight=1)
+        self.rowconfigure(2, weight=1)
+        if SOUL is None:
+            ttk.Label(self, text=f"cannot load the spine (soul_engine): "
+                                f"{_SOUL_LOAD_ERROR}").grid(row=0, column=0, sticky="w")
+            return
+        if not os.path.exists(SOUL.DB_PATH):
+            ttk.Label(self, text=f"the spine's db is missing: {SOUL.DB_PATH} — "
+                                "run soul_engine scan first").grid(row=0, column=0, sticky="w")
+            return
+        self.con = SOUL.db()
+        self.alive = True
+
+        top = ttk.Frame(self)
+        top.grid(row=0, column=0, sticky="ew")
+        self.status_var = tk.StringVar(value="— loading the queue —")
+        ttk.Label(top, textvariable=self.status_var,
+                  font=("TkDefaultFont", 10, "bold")).pack(side="left")
+        ttk.Button(top, text="reload queue", command=self.load).pack(side="right")
+
+        ttk.Label(self, text="   ·   ".join(f"[{k}] {short}"
+                  for k, short, _long in REVIEW_RULES)
+                  ).grid(row=1, column=0, sticky="w")
+
+        cols = ("id", "role", "word", "format", "grade", "thesis/synthesis",
+                "fonetični rez", "ontološki pomen", "antinoma", "glyph", "doc:line")
+        self.tree = ttk.Treeview(self, columns=cols, show="headings")
+        for c, w in zip(cols, (50, 90, 130, 70, 70, 230, 130, 160, 110, 60, 80)):
+            self.tree.heading(c, text=c)
+            self.tree.column(c, width=w, anchor="w")
+        self.tree.grid(row=2, column=0, sticky="nsew", pady=4)
+        self.tree.tag_configure("keeper", background="#2b3a2b")
+
+        bar = ttk.Frame(self)
+        bar.grid(row=3, column=0, sticky="ew")
+        for key, short, long_ in REVIEW_RULES:
+            b = ttk.Button(bar, text=f"[{key}] {short}",
+                           command=lambda k=key: self._rule(k))
+            b.pack(side="left", padx=(0, 6))
+            self.btns.append(b)
+        ttk.Label(bar, text="   ".join(f"[{k}]: {long_}"
+                  for k, _s, long_ in REVIEW_RULES)).pack(side="left", fill="x", expand=True)
+        self.load()
+
+    # ------------------------------------------------------------ queue ----
+
+    def _ruled(self):
+        """(word, fingerprint) pairs the ledger already carries a ruling for."""
+        ruled = set()
+        for r in self.con.execute("SELECT word, payload FROM ledger "
+                                  "WHERE kind IN ('merge','verdict')"):
+            try:
+                p = json.loads(r["payload"])
+            except (ValueError, TypeError):
+                continue
+            if isinstance(p, dict) and p.get("fingerprint"):
+                ruled.add((SOUL.canon(r["word"] or ""), p["fingerprint"]))
+        return ruled
+
+    def load(self):
+        ruled = self._ruled()
+        self.queue = [p for p in SOUL.propose_entry_merges(self.con)
+                      if p["needs_owner"] and
+                      (p["word"], p["fingerprint"]) not in ruled]
+        self.i = 0
+        self._show()
+
+    def _show(self):
+        self.tree.delete(*self.tree.get_children())
+        for b in self.btns:
+            b.state(["disabled"])
+        if not self.queue:
+            self.status_var.set("queue empty — no ambiguous merge proposals "
+                               "awaiting your ruling")
+            return
+        p = self.queue[self.i]
+        ids = [p["keeper"]] + list(p["lose"])
+        marks = ",".join("?" * len(ids))
+        rows = {r["entry_id"]: r for r in self.con.execute(
+            f"SELECT entry_id, word, format, thesis, synthesis, foneticni_rez, "
+            f"ontoloski_pomen, antinoma, glyph, grade, doc_id, lineno "
+            f"FROM entries WHERE entry_id IN ({marks})", ids)}
+        for eid, role in ([(p["keeper"], "PROPOSED KEEPER")] +
+                          [(l, "loser") for l in p["lose"]]):
+            r = rows.get(eid)
+            if r is None:
+                continue
+            self.tree.insert("", "end",
+                             tags=("keeper",) if eid == p["keeper"] else (),
+                             values=(eid, role, r["word"], r["format"], r["grade"],
+                                     (r["thesis"] or r["synthesis"] or "—")[:64],
+                                     r["foneticni_rez"] or "—",
+                                     r["ontoloski_pomen"] or "—",
+                                     r["antinoma"] or "—", r["glyph"] or "—",
+                                     f"{r['doc_id']}:{r['lineno']}"))
+        self.status_var.set(f"ruling {self.i + 1} / {len(self.queue)} — "
+                            f"'{p['word']}' · {len(ids)} entries, richest is a tie")
+        for b in self.btns:
+            b.state(["!disabled"])
+
+    # ---------------------------------------------------------- rulings ----
+
+    def _rule(self, key):
+        if not (self.alive and self.queue):
+            return
+        {"k": self.rule_keep, "m": self.rule_merge,
+         "c": self.rule_conflict, "s": self.rule_skip}[key]()
+
+    def rule_keep(self):
+        p = self.queue[self.i]
+        SOUL.apply_merge(self.con, p)
+        self.load()
+        self.status_var.set(f"KEPT — {len(p['lose'])} loser(s) merged into "
+                            f"'{p['word']}' (ledger: merge)  |  "
+                            f"{len(self.queue)} left in the queue")
+
+    def rule_merge(self):
+        self._choose_keeper(self.queue[self.i])
+
+    def _choose_keeper(self, p):
+        ids = [p["keeper"]] + list(p["lose"])
+        marks = ",".join("?" * len(ids))
+        rows = [dict(r) for r in self.con.execute(
+            f"SELECT entry_id, word, format, grade, thesis, synthesis, "
+            f"foneticni_rez FROM entries WHERE entry_id IN ({marks})", ids)]
+        win = tk.Toplevel(self)
+        win.title("pick the keeper — you overrule the tie")
+        win.transient(self.winfo_toplevel())
+        lb = tk.Listbox(win, width=110, height=min(len(rows), 12))
+        for r in rows:
+            lb.insert("end", f"{r['entry_id']}  [{r['grade']}/{r['format']}]  "
+                             f"{r['word']} — "
+                             f"{(r['thesis'] or r['synthesis'] or r['foneticni_rez'] or '—')[:70]}")
+        lb.pack(padx=8, pady=8)
+        lb.selection_set(0)
+
+        def pick(_e=None):
+            sel = lb.curselection()
+            if not sel:
+                return
+            chosen = rows[sel[0]]["entry_id"]
+            win.destroy()
+            prop = dict(p)
+            prop["keeper"] = chosen
+            prop["lose"] = [e for e in ids if e != chosen]
+            SOUL.apply_merge(self.con, prop)
+            self.load()
+            self.status_var.set(f"MERGED — your keeper {chosen} won; "
+                                f"{len(prop['lose'])} loser(s) merged into "
+                                f"'{p['word']}' (ledger: merge)  |  "
+                                f"{len(self.queue)} left in the queue")
+
+        lb.bind("<Double-Button-1>", pick)
+        lb.bind("<Return>", pick)
+        ttk.Button(win, text="pick as keeper", command=pick).pack(pady=(0, 8))
+        lb.focus_set()
+        win.grab_set()
+
+    def rule_conflict(self):
+        p = self.queue[self.i]
+        SOUL.led(self.con, "verdict", p["word"], {
+            "ruling": "conflict", "fingerprint": p["fingerprint"],
+            "members": [p["keeper"]] + list(p["lose"]),
+            "note": "not duplicates: real variants — kept separate"})
+        self.con.commit()
+        self.load()
+        self.status_var.set(f"CONFLICT — '{p['word']}' entries stay separate "
+                            f"(ledger: verdict)  |  "
+                            f"{len(self.queue)} left in the queue")
+
+    def rule_skip(self):
+        self.i += 1
+        if self.i >= len(self.queue):
+            self.load()
+        else:
+            self._show()
+            self.status_var.set(self.status_var.get() + "  |  skipped stays in the queue")
+
+
+# =============================================================================
 # PARK TAB — decision records + inventory
 # =============================================================================
 
@@ -377,9 +667,13 @@ class ParkTab(ttk.Frame):
         self.tree.grid(row=0, column=0, sticky="ew")
         self.text = tk.Text(self, wrap="word", state="disabled")
         self.text.grid(row=1, column=0, sticky="nsew", pady=4)
-        for f in DECISION_RECORDS + [f for f in os.listdir(_HERE)
-                                     if f.lower().endswith(".py")]:
-            self.tree.insert("", "end", text=f, iid=f)
+        dec = self.tree.insert("", "end", text="DECISION RECORDS", open=True)
+        for f in DECISION_RECORDS:
+            self.tree.insert(dec, "end", text=f, iid=f)
+        pys = self.tree.insert("", "end", text="PYTHON FILES", open=True)
+        for f in sorted(f for f in os.listdir(_HERE)
+                        if f.lower().endswith(".py")):
+            self.tree.insert(pys, "end", text=f, iid=f)
         self.tree.bind("<Double-Button-1>", self.open_file)
         self.tree.bind("<Return>", self.open_file)
 
@@ -409,11 +703,32 @@ class Cockpit(tk.Tk):
         self.title("OBJ2 COCKPIT — review, not rule")
         self.geometry("1100x760")
         nb = ttk.Notebook(self)
+        self.nb = nb
+        self.review = ReviewTab(nb)
         nb.add(CanvasTab(nb), text="CANVAS")
         nb.add(ReceiptsTab(nb), text="RECEIPTS")
         nb.add(PerformTab(nb), text="PERFORM")
+        nb.add(self.review, text="REVIEW")
         nb.add(ParkTab(nb), text="PARK + FILES")
         nb.pack(fill="both", expand=True)
+        # k/c/m/s arrive here from anywhere; they rule ONLY when the REVIEW
+        # tab is up and the keyboard focus is not inside an input widget
+        self.bind("<Key>", self._route_key)
+        nb.bind("<<NotebookTabChanged>>", self._on_tab)
+
+    def _on_tab(self, _e=None):
+        if self.nb.select() == str(self.review) and self.review.btns:
+            self.review.btns[0].focus_set()
+
+    def _route_key(self, event):
+        if self.nb.select() != str(self.review):
+            return
+        w = self.focus_get()
+        if isinstance(w, (tk.Entry, tk.Text)):   # covers ttk.Entry/Combobox too
+            return
+        key = (event.keysym or "").lower()
+        if key in ("k", "m", "c", "s"):
+            self.review._rule(key)
 
 
 def _smoke_test():
@@ -434,6 +749,12 @@ def _smoke_test():
                    ENGINE.e_star(ENGINE.State(), ledger_has_line=False) == 0))
     else:
         ok.append(("sisters load", False))
+    ok.append(("REVIEW room constructs (spine + db)",
+               app.review.alive if SOUL is not None else False))
+    if app.review.alive:
+        ok.append((f"review queue derives from the ledger "
+                   f"({len(app.review.queue)} items)",
+                   isinstance(app.review.queue, list)))
     app.destroy()
     all_ok = all(c for _n, c in ok)
     for name, cond in ok:
