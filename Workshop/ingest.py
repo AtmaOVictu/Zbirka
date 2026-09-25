@@ -37,6 +37,14 @@ SNIFF = [
 ]
 
 
+def register_type(name, test):
+    """Graft #2, plugin-refactor: register a new corpus type WITHOUT editing
+    the core — the same evolution ceremony as soul_engine's ParserPlugin
+    (format #4 = one class + one line there; one call here). New types slot
+    in ahead of the prose default, so the honest default stays last."""
+    SNIFF.insert(len(SNIFF) - 1, (name, test))
+
+
 def classify(path: str, rel: str) -> dict:
     ext = os.path.splitext(path)[1].lower()
     entry = dict(file=rel.replace("\\", "/"), ext=ext,
@@ -92,6 +100,11 @@ def ingest():
 
 
 if __name__ == "__main__":
+    # plugin ceremony receipt: a registered type slots in ahead of the prose
+    # default — the line extends, it never forks
+    register_type("_selftest_type", lambda h, name: False)
+    assert SNIFF[-2][0] == "_selftest_type" and SNIFF[-1][0] == "prose"
+    SNIFF.pop(-2)
     manifest, errors = ingest()
     counts = {}
     for e in manifest:

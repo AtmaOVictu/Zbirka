@@ -28,6 +28,18 @@ or it is clutter.
    proposals; rulings are soul.db ledger lines (merge/verdict), queue derived
    by ledger replay. Smoke-passed; mechanics witnessed on a scratch db copy.
 2. plugin-refactor + ledger table + near-dup detector — onto ingest.py/soul_engine
+   → BUILT 25. 9. 2026. Near-dup detector = propose_near_merges() in
+   soul_engine, extends _fingerprint(): difflib on the meaning fields,
+   families by union-find, ALWAYS needs_owner (typo vs refinement is yours);
+   feeds the REVIEW merge queue beside the exact dups, ruled by the same
+   k/m/c/s. Measured: 1 family (dih, sim 0.964) — no flood, the hollow
+   filter holds. plugin-refactor = ingest.py register_type(): new corpus
+   type = one call, same ceremony as soul_engine's ParserPlugin. The "ledger
+   table" part was SUBSUMED by graft #1's ledger-replay queue — no new
+   table built, per the anti-clutter law. Bonus, same sitting: the glyph
+   payload (glyph_proposals.json) now rules in the REVIEW tab — glyph queue,
+   [k] confirm / [c] reject; verdict written to the payload, ledger line
+   witnesses in soul.db. Mechanics witnessed on scratch copies.
 3. LIBRARY browsing — a tab in the cockpit, reading soul.db
 4. export — soul_engine's export (already built) = the Godot surface, LAST
 
@@ -37,3 +49,5 @@ or it is clutter.
   if called — SQLite has no md5() (verified). Repair = delete it; the live
   line (dup_file_report) replaces it. Graft #2's near-dup detector then
   extends _fingerprint(), not this corpse.
+  → REPAIRED 25. 9. 2026: deleted; no callers existed (verified by grep);
+  the near-dup detector grafted onto _fingerprint() as planned.

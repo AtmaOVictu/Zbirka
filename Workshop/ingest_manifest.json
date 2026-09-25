@@ -1,13 +1,13 @@
 {
- "generated": "2026-09-24T18:39:25",
+ "generated": "2026-09-25T19:55:34",
  "root": "D:\\OntoProjekt\\CanvasMinstral",
- "total": 1702,
+ "total": 1715,
  "unreadable": 0,
  "files": [
   {
    "file": ".gitignore",
    "ext": "",
-   "bytes": 34,
+   "bytes": 42,
    "error": null,
    "type": "prose"
   },
@@ -10756,13 +10756,6 @@
    "type": "rez_cut"
   },
   {
-   "file": "Obj2/apd_engine-py-apd-runtime-for-love-cage-deliverable-2.py",
-   "ext": ".py",
-   "bytes": 13156,
-   "error": null,
-   "type": "code"
-  },
-  {
    "file": "Obj2/aprioritete-tla-vseh-trinajstih-zakonov (1).md",
    "ext": ".md",
    "bytes": 23875,
@@ -10833,11 +10826,11 @@
    "type": "law_register"
   },
   {
-   "file": "Obj2/ingest.py",
-   "ext": ".py",
-   "bytes": 4899,
+   "file": "Obj2/fonemska-ontomatematika-rez-iz-fonema-v-operacijo-iz-naglasa-v-dimenzijo.md",
+   "ext": ".md",
+   "bytes": 24863,
    "error": null,
-   "type": "code"
+   "type": "law_register"
   },
   {
    "file": "Obj2/koherenca-po-vezeh-zakon-o-mizi-ne-o-plesu (1).md",
@@ -10866,20 +10859,6 @@
    "bytes": 5064,
    "error": null,
    "type": "dosje_catalog"
-  },
-  {
-   "file": "Obj2/lexicon.json",
-   "ext": ".json",
-   "bytes": 39457,
-   "error": null,
-   "type": "other_binary"
-  },
-  {
-   "file": "Obj2/lexicon_core.py",
-   "ext": ".py",
-   "bytes": 14264,
-   "error": null,
-   "type": "code"
   },
   {
    "file": "Obj2/love-cage-deep-mechanics-what-the-shared-prisoner-view-becomes (1).md",
@@ -10917,32 +10896,25 @@
    "type": "rez_cut"
   },
   {
-   "file": "Obj2/obj2_cockpit.py",
-   "ext": ".py",
-   "bytes": 19712,
+   "file": "Obj2/odprta-vrašanja-popolni-∂-atlas-korpusa-v2-celoten-poizved.md",
+   "ext": ".md",
+   "bytes": 13246,
    "error": null,
-   "type": "code"
+   "type": "rez_cut"
   },
   {
-   "file": "Obj2/phonetic_coordinates-py.py",
-   "ext": ".py",
-   "bytes": 18142,
+   "file": "Obj2/ontoznanost-in-veliki-avtorji-kaj-korpus-že-drži-kaj-mu-manjka-pouk-manjkajočih (1).md",
+   "ext": ".md",
+   "bytes": 24800,
    "error": null,
-   "type": "code"
+   "type": "rez_cut"
   },
   {
-   "file": "Obj2/phonetic_coordinates_107-py-the-full-universe-extension-of-the-obj2-lattice.py",
-   "ext": ".py",
-   "bytes": 15341,
+   "file": "Obj2/ontoznanost-in-veliki-avtorji-kaj-korpus-že-drži-kaj-mu-manjka-pouk-manjkajočih.md",
+   "ext": ".md",
+   "bytes": 24800,
    "error": null,
-   "type": "code"
-  },
-  {
-   "file": "Obj2/phonetic_coordinates_full.py",
-   "ext": ".py",
-   "bytes": 64601,
-   "error": null,
-   "type": "code"
+   "type": "rez_cut"
   },
   {
    "file": "Obj2/prevajanje-kot-obra-t-vertere-ne-pomeni-kopirati-vertere-pomeni-obrniti.md",
@@ -10971,6 +10943,13 @@
    "bytes": 6379,
    "error": null,
    "type": "code"
+  },
+  {
+   "file": "Obj2/psiho-aksiomi-resnice-ki-so-jih-izmerili-drugi.md",
+   "ext": ".md",
+   "bytes": 55194,
+   "error": null,
+   "type": "law_register"
   },
   {
    "file": "Obj2/rez-l-domvs-qvae-nōn-redit-dom-v-katerega-se-ne-vračaš.md",
@@ -11254,13 +11233,6 @@
    "type": "rez_cut"
   },
   {
-   "file": "Obj2/run_reviews.bat",
-   "ext": ".bat",
-   "bytes": 1176,
-   "error": null,
-   "type": "other_binary"
-  },
-  {
    "file": "Obj2/sa-sega-sistem-ki-preverja-doklej-sega-lastna-roka (1).md",
    "ext": ".md",
    "bytes": 11063,
@@ -11308,13 +11280,6 @@
    "bytes": 23134,
    "error": null,
    "type": "rez_cut"
-  },
-  {
-   "file": "Obj2/wordlist_validator.py",
-   "ext": ".py",
-   "bytes": 14274,
-   "error": null,
-   "type": "code"
   },
   {
    "file": "Obs11/92-nujnosti-kvantna-stanja-kot-ontološki-operatorji.md",
@@ -12037,6 +12002,132 @@
    "file": "Scripts/comprehension_machine/tests/test_pipeline.py",
    "ext": ".py",
    "bytes": 2845,
+   "error": null,
+   "type": "code"
+  },
+  {
+   "file": "Workshop/INVENTORY.md",
+   "ext": ".md",
+   "bytes": 2363,
+   "error": null,
+   "type": "prose"
+  },
+  {
+   "file": "Workshop/apd_engine-py-apd-runtime-for-love-cage-deliverable-2.py",
+   "ext": ".py",
+   "bytes": 13156,
+   "error": null,
+   "type": "code"
+  },
+  {
+   "file": "Workshop/digest-py-thin-slice-one-folder-one-entity-full-pipeline-runnable.py",
+   "ext": ".py",
+   "bytes": 17088,
+   "error": null,
+   "type": "code"
+  },
+  {
+   "file": "Workshop/digest_basics.json",
+   "ext": ".json",
+   "bytes": 174724,
+   "error": null,
+   "type": "other_binary"
+  },
+  {
+   "file": "Workshop/glyph_proposals.json",
+   "ext": ".json",
+   "bytes": 6096,
+   "error": null,
+   "type": "other_binary"
+  },
+  {
+   "file": "Workshop/ingest.py",
+   "ext": ".py",
+   "bytes": 5556,
+   "error": null,
+   "type": "code"
+  },
+  {
+   "file": "Workshop/ingest_manifest.json",
+   "ext": ".json",
+   "bytes": 282162,
+   "error": null,
+   "type": "other_binary"
+  },
+  {
+   "file": "Workshop/lexicon.json",
+   "ext": ".json",
+   "bytes": 39457,
+   "error": null,
+   "type": "other_binary"
+  },
+  {
+   "file": "Workshop/lexicon_core.py",
+   "ext": ".py",
+   "bytes": 14264,
+   "error": null,
+   "type": "code"
+  },
+  {
+   "file": "Workshop/obj2_cockpit.py",
+   "ext": ".py",
+   "bytes": 39558,
+   "error": null,
+   "type": "code"
+  },
+  {
+   "file": "Workshop/phonetic_coordinates-py.py",
+   "ext": ".py",
+   "bytes": 18142,
+   "error": null,
+   "type": "code"
+  },
+  {
+   "file": "Workshop/phonetic_coordinates_107-py-the-full-universe-extension-of-the-obj2-lattice.py",
+   "ext": ".py",
+   "bytes": 15341,
+   "error": null,
+   "type": "code"
+  },
+  {
+   "file": "Workshop/phonetic_coordinates_full.py",
+   "ext": ".py",
+   "bytes": 64601,
+   "error": null,
+   "type": "code"
+  },
+  {
+   "file": "Workshop/run_reviews.bat",
+   "ext": ".bat",
+   "bytes": 1400,
+   "error": null,
+   "type": "other_binary"
+  },
+  {
+   "file": "Workshop/soul.db",
+   "ext": ".db",
+   "bytes": 6979584,
+   "error": null,
+   "type": "other_binary"
+  },
+  {
+   "file": "Workshop/soul_engine-the-evolvable-epic-ledger-spine-plugin-parsers-derived-pages.py",
+   "ext": ".py",
+   "bytes": 26467,
+   "error": null,
+   "type": "code"
+  },
+  {
+   "file": "Workshop/thin_slice.py",
+   "ext": ".py",
+   "bytes": 9474,
+   "error": null,
+   "type": "code"
+  },
+  {
+   "file": "Workshop/wordlist_validator.py",
+   "ext": ".py",
+   "bytes": 14274,
    "error": null,
    "type": "code"
   },

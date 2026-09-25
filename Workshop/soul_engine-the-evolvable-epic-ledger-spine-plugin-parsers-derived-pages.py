@@ -279,13 +279,6 @@ def _fingerprint(p: dict) -> str:
 
 GRADE_RANK = {"reported": 3, "headline": 2, "draft": 1}
 
-def find_dup_files(con) -> List[dict]:
-    return [dict(r) for r in con.execute(
-        "SELECT md5, COUNT(*) n, GROUP_CONCAT(path) paths, "
-        "MIN(doc_id) keeper FROM (SELECT doc_id, path, md5(raw) md5 FROM "
-        "(SELECT d.doc_id, d.path, (SELECT raw_size FROM docs WHERE doc_id="
-        "d.doc_id) raw FROM docs d)) GROUP BY md5 HAVING n > 1")]
-
 def propose_entry_merges(con) -> List[dict]:
     """Groups duplicate entries by (word, fingerprint). Proposes keepers.
     A proposal, not an action — nothing merges until you confirm."""
@@ -323,6 +316,85 @@ def propose_entry_merges(con) -> List[dict]:
                           "lose": [l["entry_id"] for l in losers],
                           "doc_ids": sorted({e["doc_id"] for e in entries}),
                           "needs_owner": ambiguous})
+    return proposals
+
+# ------------------------------------------------- NEAR-DUP DETECTOR -------
+# Graft #2, extends _fingerprint(), replaces nothing. The fingerprint groups
+# EXACT duplicates (byte-identical meaning fields); this catches the
+# copy-paste era's small edits — same word, near-identical fields, one word
+# different. A near-dup is ALWAYS needs_owner: the difference is either a
+# typo (merge) or a real refinement (conflict), and the machine cannot know
+# which. Same proposal shape as propose_entry_merges, so apply_merge and the
+# REVIEW ledger-replay treat both queues identically. The family fingerprint
+# is derived from the members' fingerprints (order-stable), so a ruling
+# found by replay survives rescans.
+
+NEAR_THRESHOLD = 0.85
+
+def _content_key(p: dict) -> str:
+    """The meaning-carrying fields of an entry, canonized — what a near-dup
+    is near IN. Word is excluded: candidates are compared within one word."""
+    return "|".join(canon(x or "") for x in (
+        p["thesis"], p["antithesis"], p["synthesis"],
+        p["foneticni_rez"], p["antinoma"]))
+
+def propose_near_merges(con, threshold=NEAR_THRESHOLD) -> List[dict]:
+    import difflib, hashlib
+    by_word = {}
+    for r in con.execute("SELECT entry_id, word, format, number, thesis, "
+                         "antithesis, synthesis, foneticni_rez, "
+                         "ontoloski_pomen, antinoma, glyph, grade, doc_id "
+                         "FROM entries WHERE merged_into IS NULL"):
+        p = dict(r)
+        # hollow filter: same law as the merge queue — no content, no family
+        if not (p["foneticni_rez"] or p["ontoloski_pomen"]
+                or p["synthesis"] or p["thesis"]):
+            continue
+        by_word.setdefault(canon(p["word"]), []).append(p)
+    proposals = []
+    for w, entries in by_word.items():
+        # union-find: near-identity is not transitive-proof, so chains of
+        # pairwise similarity form one family (a≈b, b≈c ⇒ one family)
+        parent = {e["entry_id"]: e["entry_id"] for e in entries}
+        def find(x):
+            while parent[x] != x:
+                parent[x] = parent[parent[x]]
+                x = parent[x]
+            return x
+        for i, a in enumerate(entries):
+            for b in entries[i + 1:]:
+                if _fingerprint(a) == _fingerprint(b):
+                    continue          # exact dup: the merge queue owns it
+                sim = difflib.SequenceMatcher(
+                    None, _content_key(a), _content_key(b)).ratio()
+                if sim < threshold:
+                    continue
+                ra, rb = find(a["entry_id"]), find(b["entry_id"])
+                if ra != rb:
+                    parent[ra] = rb
+        fams = {}
+        for e in entries:
+            fams.setdefault(find(e["entry_id"]), []).append(e)
+        for members in fams.values():
+            if len(members) < 2:
+                continue
+            def richness(e):
+                filled = sum(1 for k in ("thesis", "antithesis", "synthesis",
+                    "foneticni_rez", "ontoloski_pomen", "antinoma", "glyph")
+                    if e[k])
+                return (GRADE_RANK.get(e["grade"], 0), filled)
+            ranked = sorted(members, key=richness, reverse=True)
+            keeper, losers = ranked[0], ranked[1:]
+            gfp = "|".join(sorted(_fingerprint(e) for e in members))
+            sim = max(difflib.SequenceMatcher(
+                None, _content_key(a), _content_key(b)).ratio()
+                for i, a in enumerate(members) for b in members[i + 1:])
+            proposals.append({"word": w,
+                "fingerprint": hashlib.sha256(gfp.encode()).hexdigest()[:16],
+                "keeper": keeper["entry_id"], "keeper_grade": keeper["grade"],
+                "lose": [l["entry_id"] for l in losers],
+                "doc_ids": sorted({e["doc_id"] for e in members}),
+                "needs_owner": True, "near": True, "similarity": round(sim, 3)})
     return proposals
 
 def apply_merge(con, proposal: dict) -> None:
@@ -477,5 +549,21 @@ if __name__ == "__main__":
         assert grade_of(a[0]) == "headline"          # pomen missing → not reported
         assert b[0].thesis == "pritrditev" and grade_of(b[0]) == "headline"
         assert canon("LJUBEZEN!") == "ljubezen"
-        print("selftest: plugins A/B, grading, canon — OK (traced here, "
-              "witnessed on disk)")
+        # graft #2: near-dup detector. Same word, one word edited — the exact
+        # fingerprint splits it, the similarity test re-unites it as a family.
+        m = sqlite3.connect(":memory:")
+        m.row_factory = sqlite3.Row
+        m.executescript(SCHEMA)
+        m.execute("INSERT INTO docs(doc_id, path) VALUES (1, 'x.md')")
+        base = "INSERT INTO entries(doc_id, word, format, thesis, " \
+               "foneticni_rez, grade) VALUES (1, 'dih', 't', ?, 'd/i/h', 'reported')"
+        m.execute(base, ("dihanje kot zanka",))
+        m.execute(base, ("dihanje kot zanka v ritmu",))   # the small edit
+        m.execute(base, ("nekaj čisto drugega",))         # not near: excluded
+        near = propose_near_merges(m)
+        assert len(near) == 1 and near[0]["word"] == "dih"
+        assert near[0]["needs_owner"] and near[0]["near"]
+        assert 0.85 <= near[0]["similarity"] < 1.0
+        assert len(propose_entry_merges(m)) == 0      # exact queue stays empty
+        print("selftest: plugins A/B, grading, canon, near-dup — OK (traced "
+              "here, witnessed on disk)")

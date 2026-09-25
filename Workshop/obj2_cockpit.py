@@ -15,12 +15,16 @@ TABS
              (each run in its own thread — the window never freezes)
   PERFORM    utter a chain live: state bars vs guard thresholds, ledger
              lines, verdict (WORD/DISCOVERY/FOREIGN + PASS/MORAVA/HOLD/FALL)
-  REVIEW     graft #1: the owner's queue. soul_engine proposes merges; the
-             ambiguous ones (needs_owner) wait HERE for YOUR keypress:
-             [k] keep the proposed keeper · [m] merge with your own keeper
-             [c] conflict — not duplicates, real variants · [s] skip.
-             Every ruling is a ledger line in soul.db; the pending queue is
-             derived by replaying the ledger — the machine proposes, you rule.
+  REVIEW     graft #1+#2: the owner's queues, one toggle, two sources.
+             MERGE queue — soul_engine's proposals: ambiguous exact dups
+             (needs_owner) and near-dups (graft #2: one small edit apart —
+             typo or refinement, the machine cannot know). [k] keep the
+             proposed keeper · [m] merge with your own keeper · [c] conflict
+             — not duplicates, real variants · [s] skip.
+             GLYPH queue — glyph_proposals.json: [k] confirm, [c] reject the
+             proposed glyph→operator mapping (verdict written to the payload).
+             Every ruling is a ledger line in soul.db; the pending merge queue
+             is derived by replaying the ledger — the machine proposes, you rule.
   PARK       the decision records + inventory of the parked cube era
 
 LAWS
@@ -457,23 +461,45 @@ REVIEW_RULES = [
     ("s", "skip", "stays in the queue, next item"),
 ]
 
+GLYPH_FILE = "glyph_proposals.json"
+
+GLYPH_RULES = [
+    ("k", "confirm", "accept the proposed glyph→operator mapping"),
+    ("c", "reject", "keep the glyph, refuse the proposed operator"),
+    ("s", "skip", "stays in the queue, next item"),
+]
+
 
 class ReviewTab(ttk.Frame):
-    """soul_engine proposes entry merges; the ambiguous ones (needs_owner —
-    the machine could not pick a strictly richest keeper) wait here for the
-    owner's ruling. LAWS:
-      - every keep/merge/conflict is a LEDGER LINE in soul.db (kind merge or
-        verdict); nothing is deleted, ever
-      - the pending queue is DERIVED by replaying the ledger (a proposal
-        leaves the queue only when the ledger carries a ruling for its
+    """The owner's queues, ruled by keypress. Two queues, one tab:
+      MERGE  soul_engine's proposals — ambiguous exact duplicates (the
+             machine could not pick a strictly richest keeper) AND near-dups
+             (graft #2: same word, near-identical fields, one small edit —
+             the difference is either a typo or a refinement, always yours)
+      GLYPH  glyph_proposals.json — proposed glyph→operator mappings,
+             payload fields "verdict": "confirm/reject" await your ruling.
+    LAWS (both queues):
+      - every ruling is a LEDGER LINE in soul.db (kind merge or verdict);
+        nothing is deleted, ever. Glyph verdicts are ALSO written back into
+        the payload — the ledger witnesses, the payload records.
+      - the merge queue is DERIVED by replaying the ledger (a proposal
+        leaves only when the ledger carries a ruling for its
         (word, fingerprint)) — the spine's own architecture, not a new table
       - skip writes nothing: deferred means it stays, honestly"""
+
+    MERGE_COLS = ("id", "role", "word", "format", "grade", "thesis/synthesis",
+                  "fonetični rez", "ontološki pomen", "antinoma", "glyph", "doc:line")
+    MERGE_W = (50, 90, 130, 70, 70, 230, 130, 160, 110, 60, 80)
+    GLYPH_COLS = ("word", "glyph", "proposed operator", "warrant", "verdict", "unmapped")
+    GLYPH_W = (110, 230, 250, 250, 110, 80)
 
     def __init__(self, parent):
         super().__init__(parent, padding=8)
         self.alive = False
-        self.btns = []
-        self.queue = []
+        self.btns = {}
+        self.merge_queue = []
+        self.glyph_queue = []
+        self.mode = "merge"
         self.i = 0
         self.columnconfigure(0, weight=1)
         self.rowconfigure(2, weight=1)
@@ -493,31 +519,48 @@ class ReviewTab(ttk.Frame):
         self.status_var = tk.StringVar(value="— loading the queue —")
         ttk.Label(top, textvariable=self.status_var,
                   font=("TkDefaultFont", 10, "bold")).pack(side="left")
+        self.mode_btn = ttk.Button(top, text="…", command=self.switch_mode)
+        self.mode_btn.pack(side="right", padx=(6, 0))
         ttk.Button(top, text="reload queue", command=self.load).pack(side="right")
 
-        ttk.Label(self, text="   ·   ".join(f"[{k}] {short}"
-                  for k, short, _long in REVIEW_RULES)
-                  ).grid(row=1, column=0, sticky="w")
+        self.rules_var = tk.StringVar()
+        ttk.Label(self, textvariable=self.rules_var).grid(row=1, column=0, sticky="w")
 
-        cols = ("id", "role", "word", "format", "grade", "thesis/synthesis",
-                "fonetični rez", "ontološki pomen", "antinoma", "glyph", "doc:line")
+        self._build_tree()
+
+        bar = ttk.Frame(self)
+        bar.grid(row=3, column=0, sticky="ew")
+        for key, short in (("k", "keep"), ("m", "merge"),
+                           ("c", "conflict"), ("s", "skip")):
+            b = ttk.Button(bar, text=f"[{key}] {short}",
+                           command=lambda k=key: self._rule(k))
+            b.pack(side="left", padx=(0, 6))
+            self.btns[key] = b
+        self.load()
+
+    def _build_tree(self):
+        if hasattr(self, "tree"):
+            self.tree.destroy()
+        if self.mode == "merge":
+            cols, widths = self.MERGE_COLS, self.MERGE_W
+        else:
+            cols, widths = self.GLYPH_COLS, self.GLYPH_W
         self.tree = ttk.Treeview(self, columns=cols, show="headings")
-        for c, w in zip(cols, (50, 90, 130, 70, 70, 230, 130, 160, 110, 60, 80)):
+        for c, w in zip(cols, widths):
             self.tree.heading(c, text=c)
             self.tree.column(c, width=w, anchor="w")
         self.tree.grid(row=2, column=0, sticky="nsew", pady=4)
         self.tree.tag_configure("keeper", background="#2b3a2b")
 
-        bar = ttk.Frame(self)
-        bar.grid(row=3, column=0, sticky="ew")
-        for key, short, long_ in REVIEW_RULES:
-            b = ttk.Button(bar, text=f"[{key}] {short}",
-                           command=lambda k=key: self._rule(k))
-            b.pack(side="left", padx=(0, 6))
-            self.btns.append(b)
-        ttk.Label(bar, text="   ".join(f"[{k}]: {long_}"
-                  for k, _s, long_ in REVIEW_RULES)).pack(side="left", fill="x", expand=True)
-        self.load()
+    def queue(self):
+        return self.glyph_queue if self.mode == "glyph" else self.merge_queue
+
+    def switch_mode(self):
+        self.mode = "glyph" if self.mode == "merge" else "merge"
+        self.i = 0
+        self._build_tree()
+        self._update_chrome()
+        self._show()
 
     # ------------------------------------------------------------ queue ----
 
@@ -536,21 +579,47 @@ class ReviewTab(ttk.Frame):
 
     def load(self):
         ruled = self._ruled()
-        self.queue = [p for p in SOUL.propose_entry_merges(self.con)
-                      if p["needs_owner"] and
-                      (p["word"], p["fingerprint"]) not in ruled]
+        exact = [p for p in SOUL.propose_entry_merges(self.con)
+                 if p["needs_owner"] and
+                 (p["word"], p["fingerprint"]) not in ruled]
+        near = [p for p in SOUL.propose_near_merges(self.con)
+                if (p["word"], p["fingerprint"]) not in ruled]
+        self.merge_queue = exact + near
+        self.glyph_queue = self._glyph_pending()
         self.i = 0
+        self._update_chrome()
         self._show()
+
+    def _glyph_pending(self):
+        path = os.path.join(_HERE, GLYPH_FILE)
+        try:
+            with open(path, encoding="utf-8") as fh:
+                data = json.load(fh)
+        except (OSError, ValueError):
+            return []
+        return [(w, p) for w, p in sorted(data.items())
+                if isinstance(p, dict) and p.get("verdict") == "confirm/reject"]
+
+    def _update_chrome(self):
+        other, n = (("glyph", len(self.glyph_queue)) if self.mode == "merge"
+                    else ("merge", len(self.merge_queue)))
+        self.mode_btn.config(text=f"show {other} queue ({n} pending)")
+        rules = REVIEW_RULES if self.mode == "merge" else GLYPH_RULES
+        self.rules_var.set("   ·   ".join(f"[{k}] {short}"
+                          for k, short, _long in rules))
 
     def _show(self):
         self.tree.delete(*self.tree.get_children())
-        for b in self.btns:
+        for b in self.btns.values():
             b.state(["disabled"])
-        if not self.queue:
-            self.status_var.set("queue empty — no ambiguous merge proposals "
-                               "awaiting your ruling")
+        if self.mode == "glyph":
+            self._show_glyph()
             return
-        p = self.queue[self.i]
+        if not self.merge_queue:
+            self.status_var.set("merge queue empty — no duplicate or "
+                                "near-duplicate proposals awaiting your ruling")
+            return
+        p = self.merge_queue[self.i]
         ids = [p["keeper"]] + list(p["lose"])
         marks = ",".join("?" * len(ids))
         rows = {r["entry_id"]: r for r in self.con.execute(
@@ -570,29 +639,50 @@ class ReviewTab(ttk.Frame):
                                      r["ontoloski_pomen"] or "—",
                                      r["antinoma"] or "—", r["glyph"] or "—",
                                      f"{r['doc_id']}:{r['lineno']}"))
-        self.status_var.set(f"ruling {self.i + 1} / {len(self.queue)} — "
-                            f"'{p['word']}' · {len(ids)} entries, richest is a tie")
-        for b in self.btns:
+        tail = (f"near-dup, similarity {p['similarity']}" if p.get("near")
+                else "richest is a tie")
+        self.status_var.set(f"ruling {self.i + 1} / {len(self.merge_queue)} — "
+                            f"'{p['word']}' · {len(ids)} entries · {tail}")
+        for b in self.btns.values():
             b.state(["!disabled"])
+
+    def _show_glyph(self):
+        if not self.glyph_queue:
+            self.status_var.set(f"glyph queue empty — no {GLYPH_FILE} "
+                                "verdicts awaiting your ruling")
+            return
+        w, p = self.glyph_queue[self.i]
+        self.tree.insert("", "end", values=(w, p.get("glyph", "—"),
+            p.get("proposed_operator", "—"), p.get("warrant", "—"),
+            p.get("verdict", "—"), str(p.get("unmapped", "—"))))
+        self.status_var.set(f"ruling {self.i + 1} / {len(self.glyph_queue)} — "
+                            f"'{w}' · [k] confirm or [c] reject the mapping")
+        for k, b in self.btns.items():
+            if k != "m":
+                b.state(["!disabled"])
 
     # ---------------------------------------------------------- rulings ----
 
     def _rule(self, key):
-        if not (self.alive and self.queue):
+        if not (self.alive and self.queue()):
             return
-        {"k": self.rule_keep, "m": self.rule_merge,
-         "c": self.rule_conflict, "s": self.rule_skip}[key]()
+        if self.mode == "glyph":
+            {"k": self.rule_glyph_confirm, "c": self.rule_glyph_reject,
+             "s": self.rule_skip}.get(key, lambda: None)()
+        else:
+            {"k": self.rule_keep, "m": self.rule_merge,
+             "c": self.rule_conflict, "s": self.rule_skip}.get(key, lambda: None)()
 
     def rule_keep(self):
-        p = self.queue[self.i]
+        p = self.merge_queue[self.i]
         SOUL.apply_merge(self.con, p)
         self.load()
         self.status_var.set(f"KEPT — {len(p['lose'])} loser(s) merged into "
                             f"'{p['word']}' (ledger: merge)  |  "
-                            f"{len(self.queue)} left in the queue")
+                            f"{len(self.merge_queue)} left in the queue")
 
     def rule_merge(self):
-        self._choose_keeper(self.queue[self.i])
+        self._choose_keeper(self.merge_queue[self.i])
 
     def _choose_keeper(self, p):
         ids = [p["keeper"]] + list(p["lose"])
@@ -634,7 +724,7 @@ class ReviewTab(ttk.Frame):
         win.grab_set()
 
     def rule_conflict(self):
-        p = self.queue[self.i]
+        p = self.merge_queue[self.i]
         SOUL.led(self.con, "verdict", p["word"], {
             "ruling": "conflict", "fingerprint": p["fingerprint"],
             "members": [p["keeper"]] + list(p["lose"]),
@@ -643,11 +733,39 @@ class ReviewTab(ttk.Frame):
         self.load()
         self.status_var.set(f"CONFLICT — '{p['word']}' entries stay separate "
                             f"(ledger: verdict)  |  "
-                            f"{len(self.queue)} left in the queue")
+                            f"{len(self.merge_queue)} left in the queue")
+
+    # --------------------------------------------------- glyph rulings ----
+
+    def _rule_glyph(self, ruling):
+        """Confirm/reject the glyph→operator mapping: verdict written back
+        into the payload, ledger line witnesses the ruling in soul.db."""
+        w, p = self.glyph_queue[self.i]
+        path = os.path.join(_HERE, GLYPH_FILE)
+        with open(path, encoding="utf-8") as fh:
+            data = json.load(fh)
+        data[w]["verdict"] = ruling
+        with open(path, "w", encoding="utf-8") as fh:
+            json.dump(data, fh, ensure_ascii=False, indent=2)
+        SOUL.led(self.con, "verdict", w, {
+            "ruling": f"glyph-{ruling}", "glyph": p.get("glyph"),
+            "proposed_operator": p.get("proposed_operator"),
+            "warrant": p.get("warrant")})
+        self.con.commit()
+        self.load()
+        self.status_var.set(f"GLYPH {ruling.upper()} — '{w}' recorded in the "
+                            f"payload, witnessed (ledger: verdict)  |  "
+                            f"{len(self.glyph_queue)} left in the queue")
+
+    def rule_glyph_confirm(self):
+        self._rule_glyph("confirm")
+
+    def rule_glyph_reject(self):
+        self._rule_glyph("reject")
 
     def rule_skip(self):
         self.i += 1
-        if self.i >= len(self.queue):
+        if self.i >= len(self.queue()):
             self.load()
         else:
             self._show()
@@ -718,7 +836,7 @@ class Cockpit(tk.Tk):
 
     def _on_tab(self, _e=None):
         if self.nb.select() == str(self.review) and self.review.btns:
-            self.review.btns[0].focus_set()
+            self.review.btns["k"].focus_set()
 
     def _route_key(self, event):
         if self.nb.select() != str(self.review):
@@ -752,9 +870,11 @@ def _smoke_test():
     ok.append(("REVIEW room constructs (spine + db)",
                app.review.alive if SOUL is not None else False))
     if app.review.alive:
-        ok.append((f"review queue derives from the ledger "
-                   f"({len(app.review.queue)} items)",
-                   isinstance(app.review.queue, list)))
+        ok.append((f"review queues derive from the ledger "
+                   f"(merge {len(app.review.merge_queue)}, "
+                   f"glyph {len(app.review.glyph_queue)})",
+                   isinstance(app.review.merge_queue, list) and
+                   isinstance(app.review.glyph_queue, list)))
     app.destroy()
     all_ok = all(c for _n, c in ok)
     for name, cond in ok:
