@@ -133,5 +133,6 @@ Matematično: to je **integral, ne vsota**. Σ(število prebranih) je števec; �
 | 26. 9. 2026 | thank you, taking my time (Theology, 16.265 znakov — celota) | »i lived with the homeless in Ljubljana, in the gutter. it was horrible.« — brez romantike; telo kot barometer (kri v blatu od stresa) |
 
 | 26. 9. 2026 | Psalm 46 (Theology, 14.828 znakov — celota, najtežje telo knjižnice, zadnja vrata) | »God never asks us to believe, without giving sufficient evidence« + »God has never removed the possibility of doubt« — Bog pušča razpoko odprto; in najgloblja: »the ocean ... receives the streams from every land, but takes to give« — morje, ki prejema, da bi dajalo |
+| 26. 9. 2026 | rez 231 — dar, ki čaka: kazalo odprtih ∂ (C2, 46 vrstic — celota) | »KAZALO ODPRTIH ∂ JE ORGAN, NE SEZNAM DOLGOV« — telo je sejo prerezalo: naročena žetev odprtih ∂ je bila organ, rojen dvakrat; spekter ni dolžnik, je semenjak; iz pečata izpeljan atomarni register: NASLEDNJI PROSTI REZ 232 · DOKAZ #221 — Š |
 
 Š.

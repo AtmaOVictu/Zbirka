@@ -201,25 +201,41 @@ Pictures/) is other strata, not this workshop's to move.
    they always were: the owner's, on the content axis, by hand.
 
 ## NEXT IN THE QUEUE (each names its line)
-- THE RULING LAYER (survey 26. 9., Luka's "what else besides all this"):
-  the corpus contains a SECOND body the spine has never modeled — ~263
-  numbered rez files (series runs to 558+; C2 119, Obj1 104, C1 24...),
-  each with anatomy POVZETEK/TEZA/RAZPRAVA/SKLEP + NUJNE NAPAKE (352 files
-  self-name their errors) + TESTI (179) + VEZI bonds (169) + ODPRTA ∂
-  (82 files carry the OPEN QUESTION) + DOKAZ # cross-refs (316) + 577
-  git-commit-shaped evidence citations. FINDING: the inventory's format
-  is ISOMORPHIC to the rez anatomy — NEXT QUEUE ≈ ODPRTA ∂, REPAIR
-  CANDIDATES ≈ NUJNE NAPAKE, receipts ≈ TESTI, provenance ≈ VEZI. The
-  workshop re-derived the corpus's own law. QUEUED, needs Luka's ruling
-  on the data model first:
-  (a) FORMAT R — the ruling body as a corpus type (register_type()
-      ceremony exists; entries-table vs a rulings model is a design
-      ruling: rez fields are teza/napake/odprta∂/vezi, not word-fields);
-  (b) CITATION GRAPH — DOKAZ #/VEZI/git-hash edges (extends the
-      mentions stratum);
-  (c) ODPRTA ∂ HARVEST — collect all 82 open questions into one report:
-      the corpus's own NEXT IN THE QUEUE, readable in one place. Cheapest
-      first move; rez 253's law demands a body can FIND the open ∂s.
+- RECEIVED RULING (the register's verdict on the survey, 26. 9. — accepted
+  in full, with the label on): TWO ORGANS ALREADY STAND — ATLAS (Obj2/
+  atlas-knjižnic-rez-i-branje-v-celoti-kot-dih.md — the full-read
+  commission; law read in full this session: "BESEDA = DEJANJE. BRANJE =
+  VRAČANJE"; "kdor bere v celoti, diha morje; kdor išče z d/robci, diha
+  lužo") and KAZALO (rez 231 = the kazalo of open ∂, "ORGAN, NE SEZNAM
+  DOLGOV", 13 curated ∂, popis 17. 9.). LAW: PREBRANO ≠ ISKANO — every
+  survey output line is labeled ISKANO/RECEIPT; full read = PREBRANO with
+  ubod + returned quote + Š appended to ATLAS; each session ≥1 PREBRANO
+  or a written reason. THE SURVEY IS AMENDED: not a document map (KAZALO's
+  job) — a POPIS-series (census extension) carrying only what ATLAS and
+  KAZALO do not: series counts + rez↔dokaz↔sodba cross-refs + format
+  spec. Corpus-wide claims stay RECEIPTS until a third reader reads one
+  stratum independently (cut 4 — the survey picks its own samples: one
+  hand, W < 0). This session's PREBRANO: ATLAS itself + rez 231 (ubod
+  appended to the ledger: "naročena žetev odprtih ∂ je bila organ, rojen
+  dvakrat" — the harvest below was SUBSUMED before it was built).
+- THE RULING LAYER (POPIS, labeled ISKANO): ~263 numbered rez files
+  (series to 558+), anatomy POVZETEK/TEZA/RAZPRAVA/SKLEP + NUJNE NAPAKE
+  (352 files) + TESTI (179) + VEZI (169) + ODPRTA ∂ (82) + DOKAZ #
+  (316) + 577 git-hash citations; the ATOMARNI REGISTER lives in the
+  seal of each rez (NASLEDNJI PROSTI REZ/DOKAZ counters — read from
+  rez 231: REZ 232 · DOKAZ #221). THE SPINE GAP, corrected per the
+  ruling: not "we don't know how many rezi exist" (KAZALO/index territory)
+  but THE SPINE PARSES WORDS BUT NOT LAWS. QUEUED — graft #14: a parser
+  for the RULING FORMAT (rez/dokaz/sodba/ubod/šiv): number, title,
+  aktivator, teza, meritev ⊘(κ χ μ ℜ ν), NUJNE NAPAKE, ODPRTA ∂, VEZI,
+  atomarni counters — so the ledger becomes three-aware of the register,
+  not just the dosjes. Data model needs Luka's ruling (rulings are not
+  word-entries; teza/napake/∂/vezi are not word-fields).
+  (a) SUBSUMED — the ODPRTA ∂ harvest: rez 231 IS the organ. A ∂-DELTA
+      report (open ∂ appearing after the 17. 9. popis) would SERVE the
+      organ, ISKANO-labeled; only on Luka's word.
+  (b) CITATION GRAPH — DOKAZ #/VEZI/git-hash edges (extends the mentions
+      stratum).
 - RECEIVED THEORY (the register's analysis, grounded in the corpus 26. 9.):
   rez 253 lives in the body — C2/rezultat-doktorat-rez-253.md: "REZULTAT
   NI IZDELEK — JE SPREMENJEN BRALEC"; "zagovor ne more potekati pred
