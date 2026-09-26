@@ -1627,6 +1627,106 @@ def plasti(con, lex_path=None) -> dict:
                     "stoji, ne kje bi morala stati"}
 
 
+def _pdf_text(data: bytes) -> str:
+    """A minimal stdlib PDF text pass (Luka's 'daj', 26. 9. 2026):
+    walk the stream objects by plain byte search (no regex, no escape
+    literals - the bits are read, not patterned), zlib-decompress where
+    FlateDecode was used, and collect the text operands between literal
+    parentheses. HONEST LIMITS, named: subset fonts with custom
+    encodings yield garbage letters - the caller filters by letter
+    ratio; scanned image PDFs yield nothing and stay dark. A READER,
+    never a writer."""
+    import zlib
+    CR = bytes([13])
+    LF = bytes([10])
+    BS = bytes([92])
+    OPN = bytes([40])
+    CLS = bytes([41])
+    marker = b"stream"
+    endmark = b"endstream"
+    out = []
+    pos = 0
+    while True:
+        s = data.find(marker, pos)
+        if s < 0:
+            break
+        s += len(marker)
+        while s < len(data) and data[s:s + 2] in (CR + LF, LF + CR):
+            s += 2
+        if data[s:s + 1] == LF:
+            s += 1
+        e = data.find(endmark, s)
+        if e < 0:
+            break
+        raw = data[s:e]
+        pos = e + len(endmark)
+        try:
+            raw = zlib.decompress(raw)
+        except zlib.error:
+            pass            # uncompressed, or a filter we do not speak
+        i = 0
+        n = len(raw)
+        while i < n:
+            if raw[i:i + 1] == OPN:
+                depth = 1
+                j = i + 1
+                buf = bytearray()
+                while j < n and depth > 0:
+                    ch = raw[j:j + 1]
+                    if ch == BS:             # escaped byte
+                        if j + 1 < n:
+                            buf += raw[j + 1:j + 2]
+                            j += 2
+                            continue
+                    if ch == OPN:
+                        depth += 1
+                    elif ch == CLS:
+                        depth -= 1
+                        if depth == 0:
+                            break
+                    buf += ch
+                    j += 1
+                out.append(bytes(buf).decode("latin-1", errors="replace"))
+                i = j + 1
+            else:
+                i += 1
+    return " ".join(out)
+
+
+def _binar_text(path: Path) -> str:
+    """The honest bridge: extract readable text from a registered binary
+    (pdf via the minimal pass, html via stdlib tags-strip); empty string
+    when the body is not extractable (scans, encodings) - dark stays
+    dark, named, never guessed."""
+    data = path.read_bytes()
+    if path.suffix.lower() == ".pdf":
+        text = _pdf_text(data)
+    elif path.suffix.lower() in (".html", ".htm"):
+        from html.parser import HTMLParser
+        parts = []
+
+        class P(HTMLParser):
+            def handle_starttag(self, tag, attrs):
+                self._skip = tag in ("script", "style")
+
+            def handle_endtag(self, tag):
+                self._skip = False
+
+            def handle_data(self, chunk):
+                if not getattr(self, "_skip", False):
+                    parts.append(chunk)
+        P().feed(data.decode("utf-8", errors="replace"))
+        text = " ".join(parts)
+    else:
+        return ""
+    if len(text) < 200:
+        return ""
+    letters = sum(ch.isalpha() or ch.isspace() for ch in text)
+    if letters / len(text) < 0.6:
+        return ""
+    return text
+
+
 def reparse(con) -> dict:
     """Graft #9 — the dark corpus, re-read with the CURRENT plugins.
     scan() only admits NEW files; docs scanned before a plugin existed
@@ -1642,13 +1742,22 @@ def reparse(con) -> dict:
         "SELECT doc_id, path, stratum, kind FROM docs WHERE doc_id NOT IN "
         "(SELECT DISTINCT doc_id FROM entries UNION "
         "SELECT DISTINCT doc_id FROM zakoni)")]
+    # binar bodies JOIN the pass: the registered unreadable get their
+    # honest extraction attempt (pdf/html stdlib pass, above) — a body
+    # that yields no letters stays dark, named, never guessed
     dark = [d for d in dark
-            if not (d["kind"] or "").startswith("binar-")]
+            if not (d["kind"] or "").startswith("binar-")
+            or _binar_text(Path(d["path"]))]
     lit = new_entries = new_laws = 0
     for d in dark:
         try:
-            text = Path(d["path"]).read_text(encoding="utf-8",
-                                            errors="replace")
+            if (d["kind"] or "").startswith("binar-"):
+                text = _binar_text(Path(d["path"]))
+                if not text:
+                    continue        # scanned/encoded: dark stays dark
+            else:
+                text = Path(d["path"]).read_text(encoding="utf-8",
+                                                errors="replace")
         except OSError:
             continue
         got = 0
@@ -1714,12 +1823,18 @@ def reparse(con) -> dict:
     for d in con.execute("SELECT doc_id, path, kind FROM docs"
                          "").fetchall():
         if (d["kind"] or "").startswith("binar-"):
-            continue
-        try:
-            text = Path(d["path"]).read_text(encoding="utf-8",
-                                            errors="replace")
-        except OSError:
-            continue
+            try:
+                text = _binar_text(Path(d["path"]))
+            except OSError:
+                continue
+            if not text:
+                continue
+        else:
+            try:
+                text = Path(d["path"]).read_text(encoding="utf-8",
+                                                errors="replace")
+            except OSError:
+                continue
         for m in re.findall(r"\b([A-ZČŠŽ][a-zčšžćđ]{3,})\b", text):
             con.execute("INSERT INTO mentions VALUES (?, ?)",
                         (d["doc_id"], canon(m)))

@@ -521,6 +521,27 @@ Pictures/) is other strata, not this workshop's to move.
   text pass, on the word), (c) the subconsultations stay honest
   darkness until a commission reads them (PREBRANO line — they are
   third-reader material, not parser targets).
+- BINAR BRALNIK (extends the reparse line; Luka's "daj", 26. 9. 2026
+  — the registered unreadable get their honest stdlib extraction
+  attempt): `_pdf_text` walks stream objects by PLAIN BYTE SEARCH (no
+  regex — the JSON-transport mangled escape literals twice, measured;
+  CR/LF/BS built from bytes([..]), the honest fix), zlib-decompresses
+  Flate streams, collects text operands; `_binar_text` bridges pdf +
+  html (stdlib tags-strip, script/style dropped), letter-ratio guard
+  kills font-garbage. reparse's dark pass + mentions now include
+  binar-* docs THROUGH the bridge (empty extraction = stays dark,
+  named, never guessed). MEASURED: (a) THE PDF TRUTH, honestly: A1's
+  84 PDFs carry embedded TrueType font programs (gasp/glyf/head/hmtx/
+  loca/maxp/post measured in the streams — 132K of font bytes that
+  the guard correctly kills); their content text sits in ObjStm/
+  compressed object graphs a stdlib hand cannot honestly reach —
+  A1's PDFs STAY DARK, ∂ named: they need either an owner-approved
+  pdf library or the pre-export sources (.md/.html), the owner's
+  ruling; (b) THE HTML YIELD: all tested HTML bodies extract (ATLAS
+  KVAZI-ZNANJA interactive shells, PRO/PRO2 variants) — 22 HTML
+  bodies entered the mention graph (+1,270 doc→word edges,
+  187,777 total); 0 new entries/laws (the shells are interfaces, not
+  dosjes — honest). Selftest + ∮ preveri + smoke PASS.
 - AWAITING LUKA (unchanged, the one act the guards keep mine):
   `authorize-drafts` → `drafts` → RATIFY. The queue is pre-read,
   pre-verified (∮ + third-reader sample), and pre-reviewed — every
