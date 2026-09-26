@@ -199,6 +199,38 @@ Pictures/) is other strata, not this workshop's to move.
    TEMPORAL or READER/FORMAT. Deadlock is information, not a crash.
    Selftest + smoke PASS. The 27 non-chiral content ties remain what
    they always were: the owner's, on the content axis, by hand.
+14. PARSER-ZAKONOV (body-name; #14 is this inventory's local label) —
+   THE SPINE READS LAWS. Sealed by Luka's "daj", 26. 9. 2026, on the
+   register's design ruling — built under it, point for point:
+   (1) separate `zakoni` table, never entries (a law has a teza, not
+   polarities); (2) key = body-with-witness (doc_id + lineno, UNIQUE),
+   the number is a LABEL — 31 same-number pairs stand, each body kept;
+   (3) fields per the ruling: series (rez/dokaz/sodba/ubod/šiv) ·
+   number · title · actor · teza · meritev ⊘(...) · nujne_napake ·
+   odprta_partial · vezi (raw text — edges point, never judge) ·
+   seal_date · next_rez/next_dokaz (atomarni counters, READ never
+   replaced); (4) VEZI stored as bonds, verdicts stay with the owner;
+   (5) parser is a READER, never a writer — sealed bodies untouched.
+   Grounded in four measured header shapes (rez 231/253/558/110) before
+   code; wired into scan() (kind='zakon' at admission) and reparse()
+   (law-pass over ALL docs, idempotent by witness); dark_report and
+   reparse's dark-selection are law-aware (a law body is not dark).
+   MEASURED (live db, reparse pass): 251 law bodies read — 234 rez ·
+   12 dokaz · 5 šiv; dark docs 853 → 652 (199 bodies left the darkness);
+   SEAL-POPIS (`popis`): 89 sealed / 162 unsealed (the atomarni pattern
+   is NOT uniform — seam 2 confirmed systematically); counters 84–442
+   while the file series runs to 558 — the file branch's seals lag the
+   session register (628): the fork, measured, not guessed; 31
+   same-number pairs (chiral file copies and true branch pairs — the
+   parser's first pass over-matched citations as heads; refined: a law
+   head must be a heading or bold seal line; zakoni re-derived cleanly
+   from the untouched corpus). Selftest witnesses the parser (synthetic
+   rez-231-shaped body: all sealed fields extracted, prose stays prose,
+   idempotence, entries untouched) + smoke PASS. CONSEQUENCE (the
+   register's deeper reason, now live): stability is defined by
+   normative lines and normative lines ARE the laws — the stability
+   measure can now SEE its own standard. The rules for the 65
+   rule-transferable rulings get their bodies here.
 
 ## NEXT IN THE QUEUE (each names its line)
 - SEAM 1 RULED (the register's verdict, 26. 9.): GRAFT NUMBERS ARE LABELS,

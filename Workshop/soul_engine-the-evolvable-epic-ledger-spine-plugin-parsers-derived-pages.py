@@ -79,6 +79,30 @@ CREATE TABLE IF NOT EXISTS mentions (
     mention   TEXT
 );
 CREATE INDEX IF NOT EXISTS idx_mentions ON mentions(mention);
+-- graft: parser-zakonov (sealed by Luka's 'daj', 26. 9. 2026): ZAKONI SO
+-- LOČENA VRSTA DOKUMENTA — a separate table, never entries. The key is
+-- the BODY WITH ITS WITNESS (doc + line); the number is a LABEL (parallel
+-- sessions may seal the same number — both bodies stay). VEZI are graph
+-- edges: they point, they never judge. The parser is a reader, never a
+-- writer (append-only bodies, swapped counters — atomarni).
+CREATE TABLE IF NOT EXISTS zakoni (
+    zid           INTEGER PRIMARY KEY AUTOINCREMENT,
+    doc_id        INTEGER NOT NULL REFERENCES docs,
+    series        TEXT NOT NULL,       -- rez | dokaz | sodba | ubod | šiv
+    number        INTEGER,            -- LABEL, never the key
+    title         TEXT,
+    actor         TEXT,
+    teza          TEXT,
+    meritev       TEXT,               -- ⊘(κ · χ · μ · ℜ · ν) — as written
+    nujne_napake  TEXT,
+    odprta_partial TEXT,
+    vezi          TEXT,               -- bonds: raw text, edges not verdicts
+    seal_date     TEXT,
+    next_rez      INTEGER,            -- atomarni counters, if the seal has them
+    next_dokaz    INTEGER,
+    lineno        INTEGER NOT NULL,    -- the witness: where the body stands
+    UNIQUE (doc_id, lineno)
+);
 CREATE VIEW IF NOT EXISTS v_page AS
     SELECT word, COUNT(*) AS sources,
            GROUP_CONCAT(DISTINCT format) AS formats,
@@ -300,6 +324,149 @@ def grade_of(p: Parsed) -> str:
         return "headline"
     return "draft"
 
+
+# ================================================ PARSER-ZAKONOV (graft) ==
+# Sealed by Luka's 'daj', 26. 9. 2026: ZAKONI SO LOČENA VRSTA DOKUMENTA.
+# The spine reads LAWS as a separate kind — separate table, separate shape.
+# LAWS OF THE PARSER: the key is the BODY WITH ITS WITNESS (doc + line),
+# the number is a LABEL; VEZI point, they never judge; the parser is a
+# READER, never a writer — sealed bodies are append-only and the counters
+# (atomarni) are read, never replaced here. Grounded in four measured
+# header shapes (rez 231/253/558, C1 rez 110) before one line was written.
+
+ZAKON_SERIES = r"(rez|dokaz|sodba|ubod|šiv)"
+ZAKON_NUM = re.compile(ZAKON_SERIES + r"\b[·#:*\s]*(\d{1,4})", re.IGNORECASE)
+ZAKON_H1 = re.compile(r"^#\s*(.+?)\s*[—–·-]\s*$|^#\s*(.+)$")
+ZAKON_MERITEV = re.compile(r"⊘\s*\(([^)]*)\)")
+ZAKON_NEXT_REZ = re.compile(r"NASLEDNJI PROSTI REZ[:\s*]*#?(\d+)",
+                             re.IGNORECASE)
+ZAKON_NEXT_DOKAZ = re.compile(r"NASLEDNJI PROSTI DOKAZ[:\s*]*#?(\d+)",
+                              re.IGNORECASE)
+ZAKON_AKTIVATOR = re.compile(r"aktivator[:\s]*(»[^«]*«)", re.IGNORECASE)
+ZAKON_DATE = re.compile(r"(\d{1,2}\.\s*\d{1,2}\.\s*\d{4})")
+ZAKON_SECTION = re.compile(r"^#{2,3}\s*(.*)$")
+
+# sections we carry, by keyword in the heading (the anatomy, measured)
+ZAKON_SECTIONS = (("NUJNE NAPAKE", "nujne_napake"),
+                  ("ODPRTA", "odprta_partial"),
+                  ("VEZI", "vezi"),
+                  ("TEZA", "teza"),
+                  ("AKTIVATOR", "actor_section"))
+
+
+def parse_zakon(text: str) -> List[dict]:
+    """One law body, or []. A doc is a law when its head (first 8 lines)
+    names a series and a number — prose stays prose, honestly. Returns the
+    law as a dict of the sealed fields; the caller stores it with its
+    witness (doc + lineno)."""
+    lines = text.splitlines()
+    head_lines = lines[:8]
+    series = number = title = None
+    for i, line in enumerate(head_lines, 1):
+        # a law HEAD is a heading or a bold seal line — a doc that merely
+        # CITES a law number in prose is not that law's body (POPIS-measured
+        # over-match, refined: the citation is a VEZI, not a head)
+        if not line.lstrip().startswith(("#", "**")):
+            continue
+        m = ZAKON_NUM.search(line)
+        if m:
+            series, number = m.group(1).lower(), int(m.group(2))
+            h1 = re.match(r"^#\s*(.+)$", line)
+            if h1:                      # "# REZ 558 — TITLE"
+                t = re.split(r"[—–·]", h1.group(1), maxsplit=1)
+                title = (t[1].strip() if len(t) > 1 else
+                         (t[0].strip() if series == "rez" else ""))
+                title = title if title and not ZAKON_NUM.search(title) else ""
+            break
+    if series is None:
+        return []                       # not a law body — prose stays prose
+    law = {"series": series, "number": number, "title": title or "",
+           "lineno": i, "actor": "", "teza": "", "meritev": "",
+           "nujne_napake": "", "odprta_partial": "", "vezi": "",
+           "seal_date": "", "next_rez": None, "next_dokaz": None,
+           "actor_section": ""}
+    cur = None
+    for line in lines:
+        h = ZAKON_SECTION.match(line)
+        if h:
+            cur = None
+            head = h.group(1).upper()
+            for key, field in ZAKON_SECTIONS:
+                if key in head:
+                    cur = field
+                    break
+            continue
+        if cur:
+            law[cur] = (law[cur] + "\n" if law[cur] else "") + line.strip()
+    m = ZAKON_MERITEV.search(text)
+    if m:
+        law["meritev"] = m.group(1).strip()
+    m = ZAKON_AKTIVATOR.search(text)
+    if m:
+        law["actor"] = m.group(1).strip("»« ")
+    if not law["actor"] and law.get("actor_section"):
+        law["actor"] = law["actor_section"].strip()[:300]
+    law.pop("actor_section", None)
+    m = ZAKON_NEXT_REZ.search(text)
+    if m:
+        law["next_rez"] = int(m.group(1))
+    m = ZAKON_NEXT_DOKAZ.search(text)
+    if m:
+        law["next_dokaz"] = int(m.group(1))
+    m = ZAKON_DATE.search("\n".join(lines[:30]))
+    if m:
+        law["seal_date"] = m.group(1).replace(" ", "")
+    return [law]
+
+
+def _insert_zakon(con, doc_id: int, z: dict) -> int:
+    """Store one law with its witness (doc + line). Idempotent: the same
+    body at the same line is never stored twice (INSERT OR IGNORE).
+    Returns 1 if a NEW law body entered the table, 0 otherwise."""
+    cur = con.execute("""INSERT OR IGNORE INTO zakoni
+        (doc_id, series, number, title, actor, teza, meritev,
+         nujne_napake, odprta_partial, vezi, seal_date, next_rez,
+         next_dokaz, lineno)
+        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+        (doc_id, z["series"], z["number"], z["title"], z["actor"],
+         z["teza"], z["meritev"], z["nujne_napake"], z["odprta_partial"],
+         z["vezi"], z["seal_date"], z["next_rez"], z["next_dokaz"],
+         z["lineno"]))
+    return cur.rowcount
+
+
+def popis_zakoni(con) -> dict:
+    """The seal-POPIS (seam 2's systematic answer, ISKANO-labeled receipt):
+    series counts, which law bodies carry atomarni seals and which don't,
+    the counter range, DOKAZ cross-edges — the register's fork, measured
+    instead of guessed. The number is a LABEL: same-number bodies from
+    parallel branches are counted each, never merged."""
+    out = {"series": {}, "sealed": 0, "unsealed": 0,
+           "next_rez_range": None, "next_dokaz_range": None,
+           "same_number_pairs": 0}
+    for r in con.execute("SELECT series, COUNT(*) n FROM zakoni "
+                         "GROUP BY series"):
+        out["series"][r["series"]] = r["n"]
+    for r in con.execute("SELECT number, COUNT(*) n FROM zakoni "
+                         "WHERE number IS NOT NULL GROUP BY number "
+                         "HAVING n > 1"):
+        out["same_number_pairs"] += 1
+    rez = [r["next_rez"] for r in con.execute(
+        "SELECT DISTINCT next_rez FROM zakoni WHERE next_rez IS NOT NULL "
+        "ORDER BY next_rez")]
+    dok = [r["next_dokaz"] for r in con.execute(
+        "SELECT DISTINCT next_dokaz FROM zakoni WHERE next_dokaz IS NOT NULL "
+        "ORDER BY next_dokaz")]
+    out["next_rez_range"] = [rez[0], rez[-1]] if rez else None
+    out["next_dokaz_range"] = [dok[0], dok[-1]] if dok else None
+    out["sealed"] = con.execute(
+        "SELECT COUNT(*) FROM zakoni WHERE next_rez IS NOT NULL OR "
+        "next_dokaz IS NOT NULL").fetchone()[0]
+    out["unsealed"] = con.execute(
+        "SELECT COUNT(*) FROM zakoni WHERE next_rez IS NULL AND "
+        "next_dokaz IS NULL").fetchone()[0]
+    return out
+
 # =========================================================== INGEST =======
 
 def scan(root: Path, con: sqlite3.Connection) -> dict:
@@ -344,13 +511,22 @@ def scan(root: Path, con: sqlite3.Connection) -> dict:
             con.execute("INSERT INTO mentions VALUES ((SELECT entry_id "
                         "FROM entries WHERE doc_id=? ORDER BY entry_id DESC "
                         "LIMIT 1), ?)", (doc_id, canon(m)))
+        # parser-zakonov: the spine reads LAWS too — separate kind, never
+        # entries; idempotent by body-with-witness
+        is_law = sum(_insert_zakon(con, doc_id, z) > 0
+                     for z in parse_zakon(text))
         # graft #8: what this text IS, where it OCCUPIES — typed at admission
         rel = f.relative_to(root)
         stratum = rel.parts[0] if len(rel.parts) > 1 else "(root)"
-        fmts = [r[0] for r in con.execute(
-            "SELECT DISTINCT format FROM entries WHERE doc_id=?", (doc_id,))]
+        if is_law:
+            kind = "zakon"
+        else:
+            fmts = [r[0] for r in con.execute(
+                "SELECT DISTINCT format FROM entries WHERE doc_id=?",
+                (doc_id,))]
+            kind = doc_kind(stratum, text, fmts)
         con.execute("UPDATE docs SET kind=?, stratum=? WHERE doc_id=?",
-                    (doc_kind(stratum, text, fmts), stratum, doc_id))
+                    (kind, stratum, doc_id))
     led(con, "scan", None, {"root": str(root), "files": len(files),
                             "new_docs": n_docs, "new_entries": n_entries})
     con.commit()
@@ -628,7 +804,8 @@ def dark_report(con) -> dict:
     gone = 0
     for r in con.execute(
             "SELECT doc_id, path, raw_size FROM docs WHERE doc_id NOT IN "
-            "(SELECT DISTINCT doc_id FROM entries)"):
+            "(SELECT DISTINCT doc_id FROM entries UNION "
+            "SELECT DISTINCT doc_id FROM zakoni)"):
         p = Path(r["path"])
         try:
             text = p.read_text(encoding="utf-8", errors="replace")
@@ -713,7 +890,8 @@ def reparse(con) -> dict:
         shutil.copy2(DB_PATH, f"{DB_PATH}.bak")
     dark = [dict(r) for r in con.execute(
         "SELECT doc_id, path, stratum FROM docs WHERE doc_id NOT IN "
-        "(SELECT DISTINCT doc_id FROM entries)")]
+        "(SELECT DISTINCT doc_id FROM entries UNION "
+        "SELECT DISTINCT doc_id FROM zakoni)")]
     lit = new_entries = 0
     for d in dark:
         try:
@@ -736,19 +914,45 @@ def reparse(con) -> dict:
                      p.ontoloski_pomen, p.antinoma, p.glyph,
                      p.prakticna_uporaba, p.lineno, grade_of(p)))
                 got += 1
-        if got:
+        # parser-zakonov: laws read on the same pass — a law body that is
+        # also a dosje stays BOTH kinds; never entries
+        got_law = 0
+        for z in parse_zakon(text):
+            cur = _insert_zakon(con, d["doc_id"], z)
+            got_law += cur
+        if got or got_law:
             lit += 1
             new_entries += got
-            fmts = [r[0] for r in con.execute(
-                "SELECT DISTINCT format FROM entries WHERE doc_id=?",
-                (d["doc_id"],))]
-            con.execute("UPDATE docs SET kind=? WHERE doc_id=?",
-                        (doc_kind(d["stratum"] or "(root)", text, fmts),
-                         d["doc_id"]))
+            if got_law:
+                con.execute("UPDATE docs SET kind='zakon' WHERE doc_id=?",
+                            (d["doc_id"],))
+            elif got:
+                fmts = [r[0] for r in con.execute(
+                    "SELECT DISTINCT format FROM entries WHERE doc_id=?",
+                    (d["doc_id"],))]
+                con.execute("UPDATE docs SET kind=? WHERE doc_id=?",
+                            (doc_kind(d["stratum"] or "(root)", text, fmts),
+                             d["doc_id"],))
+    # laws also live in docs that are NOT dark (a rez body may carry
+    # dosjes too) - one law-pass over every doc, idempotent by witness
+    new_laws = 0
+    for d in con.execute("SELECT doc_id, path FROM docs").fetchall():
+        try:
+            text = Path(d["path"]).read_text(encoding="utf-8",
+                                            errors="replace")
+        except OSError:
+            continue
+        for z in parse_zakon(text):
+            if _insert_zakon(con, d["doc_id"], z):
+                new_laws += 1
+                con.execute("UPDATE docs SET kind='zakon' WHERE doc_id=? "
+                            "AND kind != 'zakon'", (d["doc_id"],))
     led(con, "reparse", None, {"dark_before": len(dark), "lit": lit,
-                               "new_entries": new_entries})
+                               "new_entries": new_entries,
+                               "new_laws": new_laws})
     con.commit()
-    return {"dark_before": len(dark), "lit": lit, "new_entries": new_entries}
+    return {"dark_before": len(dark), "lit": lit,
+            "new_entries": new_entries, "new_laws": new_laws}
 
 
 def xcheck(con, lex_path) -> dict:
@@ -1192,7 +1396,7 @@ if __name__ == "__main__":
                                     "dups", "dark", "retype", "census",
                                     "reparse", "xcheck", "drafts",
                                     "authorize-drafts", "stability",
-                                    "selftest"])
+                                    "popis", "selftest"])
     ap.add_argument("path", nargs="?")
     ap.add_argument("--word")
     ap.add_argument("--out", default="soul_graph.json")
@@ -1257,6 +1461,9 @@ if __name__ == "__main__":
     elif args.cmd == "stability":
         # graft #11 guard (c) — a receipt about receipts: observes, never joins
         print(json.dumps(stability(con), ensure_ascii=False, indent=2))
+    elif args.cmd == "popis":
+        # parser-zakonov's seal-POPIS — the register's fork, measured
+        print(json.dumps(popis_zakoni(con), ensure_ascii=False, indent=2))
     elif args.cmd == "selftest":
         # quick witness against real measured samples
         a = StotnijeBulletParser().parse(
@@ -1462,6 +1669,36 @@ if __name__ == "__main__":
             dr2 = draft_rulings(m, glx)
             assert dr2["conflict_drafts"] == 0   # refused is never re-drafted
             assert dr2["glyph_drafts"] == 0     # drafted is not re-drafted
+            # parser-zakonov (sealed 'daj'): laws are a SEPARATE kind —
+            # grounded in rez 231's own shape, never entries
+            zl = parse_zakon(
+                "# REZ 232 · NASE LJU — NASLOV ZAKONA\n\n"
+                "> **ZAKON:** beseda je dejanje.\n\n"
+                "## TEZA\n\nZakon ima tezo, ne polaritete.\n\n"
+                "## NUJNE NAPAKE\n\n- prva napaka\n- druga napaka\n\n"
+                "## ODPRTA ∂\n\n- odprto vprašanje\n\n"
+                "## VEZI\n\n- rez 231\n- DOKAZ #220\n\n"
+                "## Meritev\n\n⊘(κ .86 · χ .84 · μ .72 · ℜ .03 · ν .75)\n\n"
+                "NASLEDNJI PROSTI REZ: **233** · NASLEDNJI PROSTI DOKAZ: **#221**\n")
+            assert len(zl) == 1
+            z = zl[0]
+            assert z["series"] == "rez" and z["number"] == 232
+            assert "NASE LJU" in z["title"]
+            assert "tezo" in z["teza"]
+            assert "prva napaka" in z["nujne_napake"]
+            assert "odprto vprašanje" in z["odprta_partial"]
+            assert "rez 231" in z["vezi"]
+            assert "κ .86" in z["meritev"]
+            assert z["next_rez"] == 233 and z["next_dokaz"] == 221
+            # prose stays prose — a doc with no series+number head is no law
+            assert parse_zakon("# Beležka\n\nNavadna proza brez zakona.\n") == []
+            # idempotent by witness: the same body stored twice = one law
+            assert _insert_zakon(m, 1, z) == 1
+            assert _insert_zakon(m, 1, z) == 0
+            # laws NEVER become words: entries untouched
+            n_before = m.execute("SELECT COUNT(*) FROM entries").fetchone()[0]
+            assert m.execute("SELECT COUNT(*) FROM zakoni").fetchone()[0] >= 1
+            assert m.execute("SELECT COUNT(*) FROM entries").fetchone()[0] == n_before
         print("selftest: plugins A/B/D, grading, canon, near-dup, page, "
               "conflicts-view, dark, page-export, scan-absolute, doc-typing, "
               "reparse, xcheck — OK (traced here, witnessed on disk)")
