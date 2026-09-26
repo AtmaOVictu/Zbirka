@@ -405,6 +405,40 @@ Pictures/) is other strata, not this workshop's to move.
   text (on the word, anti-clutter: it would extend the validator line);
   its own factor #4 cites rez 253 (third reader) against self-verification
   — the corpus's law, cited by another hand, again.
+- TIPKA PRITISNJENA — "da, daj in stori kakor je kot predlagan"
+  (Luka, 26. 9. 2026 — all three proposed doors executed same sitting;
+  the authorization line is HIS normative act, executed by the Cline
+  hand on his explicit instruction, with a WITNESS LINE quoting his
+  words verbatim):
+  (1) Z-SERIJA V ENUM (the named ∂, built): the zakonik's one-line
+  sealed laws ("**Z-1 ZAKON VEJE** — teza…") are now a readable head
+  shape — series 'zakon', the rest-of-line is the teza (the whole body
+  lives on the head line, measured); prose collection stops at the
+  first heading (the '### VELJA' section never leaks into Z-5's
+  teza). MEASURED: zakoni 278 → 288 (241 rez · 12 dokaz · 19 ubod ·
+  1 sodba · 10 ZAKON · 5 šiv) — the ten UZAKONJENI laws (Z-1..Z-10,
+  sealed by Luka's "da, uzakonodaji vse to") now BREATHE in the
+  zakoni table; the session register's citation of ⊢ 573 with them.
+  (2) LE-CENZUS (extends the report line; the instrument measured out
+  of psiho-aksiomi VII): whole-corpus census of the minimizem lenses —
+  never a sample, per the law's own body ("vzorec, prikazan kot
+  celota, je sam minimizem"). Machine-honest classes: IZTOČNICA
+  (ne-le…ampak: ločuje) · MEJA (Alt named in the same sentence) ·
+  MINIMIZEM-KANDIDAT (no Alt found by pattern — a READER confirms or
+  frees; kandidat, not sodba; ŠIV not machine-resolvable, honestly
+  not counted). MEASURED: 1,202 docs · 7,508 occurrences · 463
+  iztočnica · 601 meja · 6,444 minimizem-kandidat (the honest reading
+  list — the biggest ∂ the census can hand the owner).
+  (3) AUTHORIZE → DRAFTS (graft #11's guard (a) satisfied BY THE
+  OWNER'S WORD): the authorization line written via the ceremony +
+  a witness line quoting "da, daj in stori kakor je kot predlagan"
+  with its context; `drafts` + `ipa-drafts` then ran on the LIVE db:
+  89 merge · 2 conflict · 20 glyph · 46 enrich · 230 ipa = 387
+  receipts, ALL DRAFT (ratify state), NONE canon. REVIEW/RATIFY queue
+  = 387, awaiting the owner's [k]/[c]/[m]/[s]; guard (b) drift
+  counter armed (10+ consecutive ratifications with no refusal or
+  amendment warns); refused drafts return to pending and are never
+  re-drafted. The machine accelerated; it did not rule.
 - AWAITING LUKA (unchanged, the one act the guards keep mine):
   `authorize-drafts` → `drafts` → RATIFY. The queue is pre-read,
   pre-verified (∮ + third-reader sample), and pre-reviewed — every

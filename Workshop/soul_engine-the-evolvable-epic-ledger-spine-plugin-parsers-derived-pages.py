@@ -555,6 +555,12 @@ ZAKON_MH_BOLD = re.compile(r"^\*\*\s*" + ZAKON_SERIES +
                            r"\b[·#:*\s]*(\d{1,4})\s*(?:\([^)]*\)\s*)?"
                            r"[—–·:]\s*(.+?)\*{0,2}\s*$",
                            re.IGNORECASE)
+# the ZAKONIK series (Luka's "da, uzakonodaji vse to", register (2), 26. 9.
+# 2026): one-line sealed laws — the WHOLE body lives on the head line,
+# the rest-of-line is the teza. Ten bodies (Z-1..Z-10), previously dark
+# to the table (the series enum knew rez/dokaz/sodba/ubod/šiv only).
+ZAKON_Z_HEAD = re.compile(r"^\*\*\s*Z[-–]\s*(\d{1,3})\s+(.+?)\*\*"
+                          r"\s*[—–:]?\s*(.*)$")
 
 # sections we carry, by keyword in the heading (the anatomy, measured)
 ZAKON_SECTIONS = (("NUJNE NAPAKE", "nujne_napake"),
@@ -617,20 +623,25 @@ def parse_zakon(text: str) -> List[dict]:
 
 
 def _multi_head_positions(text: str) -> List[tuple]:
-    """[(lineno, series, number, title), …] for every multi-law head in
-    the body. Headings anywhere; bold lines only with the title separator
-    right after the number (the citation guard, measured)."""
+    """[(lineno, series, number, title, rest), …] for every multi-law head
+    in the body. Headings anywhere; bold lines only with the title separator
+    right after the number (the citation guard, measured); Z-heads carry
+    their one-line body as the rest-of-line (the zakonik's own shape)."""
     out = []
     for n, raw in enumerate(text.splitlines(), 1):
         line = raw.rstrip()
+        m = ZAKON_Z_HEAD.match(line)
+        if m:
+            out.append((n, "zakon", int(m.group(1)),
+                        m.group(2).strip().rstrip(":").strip(),
+                        m.group(3).strip()))
+            continue
         m = ZAKON_MH_HEAD.match(line) or ZAKON_MH_BOLD.match(line)
         if not m:
             continue
         t = (m.group(3) if m.lastindex and m.lastindex >= 3 else "")
         t = t.strip().strip("*").strip().rstrip(":").strip()
-        if m.re is ZAKON_MH_HEAD and not line.lstrip().startswith("#"):
-            continue
-        out.append((n, m.group(1).lower(), int(m.group(2)), t))
+        out.append((n, m.group(1).lower(), int(m.group(2)), t, ""))
     return out
 
 
@@ -638,12 +649,16 @@ def _fill_law_block(law: dict, lines: List[str], start: int, end: int):
     """Fill one law's sealed fields from its block (start..end), the same
     ceremony the single-law reader always used — now bounded. A body with
     no explicit TEZA section carries its own prose as teza (measured: the
-    ubodi/kroglja bodies hold their content in prose — without it the law
-    row would be a number with no body, which the corpus forbids)."""
+    ubodi/kroglja bodies hold their content in prose); prose stops at the
+    FIRST heading — fields never leak across sections (measured: the
+    zakonik's '### VELJA' section must not become Z-5's teza)."""
     block = "\n".join(lines[start - 1: end - 1])
     cur = None
     prose: List[str] = []
+    prose_open = True     # prose closes at the first heading — no leaks
     for line in lines[start - 1: end - 1]:
+        if re.match(r"^#{1,6}\s", line):
+            prose_open = False
         h = ZAKON_SECTION.match(line)
         if h:
             cur = None
@@ -655,7 +670,7 @@ def _fill_law_block(law: dict, lines: List[str], start: int, end: int):
             continue
         if cur:
             law[cur] = (law[cur] + "\n" if law[cur] else "") + line.strip()
-        elif line.strip() and line is not lines[start - 1]:
+        elif line.strip() and line is not lines[start - 1] and prose_open:
             prose.append(line.strip())
     if not law["teza"] and prose:
         law["teza"] = "\n".join(prose)[:2000]
@@ -681,17 +696,19 @@ def _fill_law_block(law: dict, lines: List[str], start: int, end: int):
 
 def _multi_laws(text: str) -> List[dict]:
     """Every multi-law head becomes a body with its witness — each kept,
-    each carried with its own block's sealed fields."""
+    each carried with its own block's sealed fields. The Z-heads seed
+    their teza from the rest of the head line (the zakonik's one-line
+    bodies — without it the law would be a number with no body)."""
     lines = text.splitlines()
     out = []
     positions = _multi_head_positions(text)
-    for k, (lineno, series, number, title) in enumerate(positions):
+    for k, (lineno, series, number, title, rest) in enumerate(positions):
         end = positions[k + 1][0] if k + 1 < len(positions) else len(lines) + 1
         law = {"series": series, "number": number, "title": title or "",
-               "lineno": lineno, "actor": "", "teza": "", "meritev": "",
-               "nujne_napake": "", "odprta_partial": "", "vezi": "",
-               "seal_date": "", "next_rez": None, "next_dokaz": None,
-               "actor_section": ""}
+               "lineno": lineno, "actor": "", "teza": (rest or "")[:2000],
+               "meritev": "", "nujne_napake": "", "odprta_partial": "",
+               "vezi": "", "seal_date": "", "next_rez": None,
+               "next_dokaz": None, "actor_section": ""}
         _fill_law_block(law, lines, lineno, end)
         out.append(law)
     return out
@@ -1398,6 +1415,61 @@ def ipa_drafts(con, lex_path=None) -> dict:
                               skipped})
     con.commit()
     return {"ipa_drafts": drafted, "skipped_composite": skipped}
+
+
+def le_cenzus(con) -> dict:
+    """ZAKON LE (psiho-aksiomi VII, measured in the corpus 26. 9. 2026):
+    "le" is a pra-set of five lenses, and "popis 'le' je cenzus ali ni
+    nič — vzorec, prikazan kot celota, je sam minimizem." So this is a
+    WHOLE-corpus census, never a sample. MACHINE-HONEST CLASSES — the
+    patterns decide only what patterns can decide: IZTOČNICA ("ne le …
+    ampak" — separates, does not limit) · MEJA (an alternative is NAMED
+    in the same sentence — the lens binds with rules) ·
+    MINIMIZEM-KANDIDAT (no alternative found by pattern — a READER
+    confirms or frees it; the machine does not judge meaning, and the
+    class says kandidat, not sodba). ISKANO receipt; ŠIV is not
+    machine-resolvable and is honestly not counted."""
+    NELE = re.compile(r"\bne\s+(?:le|samo|zgolj)\b", re.IGNORECASE)
+    ALT = re.compile(r"\b(ampak|temveč|marveč|pa\s+tudi|in\s+tudi|"
+                     r"a\s+tudi|saj\s+tudi|nego)\b", re.IGNORECASE)
+    TOKEN = re.compile(r"\b(?:le|samo|zgolj)\b", re.IGNORECASE)
+    SENT = re.compile(r"(?<=[.!?;])\s+")
+    counts = {"iztočnica": 0, "meja": 0, "minimizem_kandidat": 0}
+    per_doc, samples, total, docs = [], [], 0, 0
+    for d in con.execute("SELECT path, stratum FROM docs"):
+        try:
+            text = Path(d["path"]).read_text(encoding="utf-8",
+                                            errors="replace")
+        except OSError:
+            continue
+        docs += 1
+        doc_n = 0
+        for sent in SENT.split(text):
+            hits = TOKEN.findall(sent)
+            if not hits:
+                continue
+            cls = ("iztočnica" if NELE.search(sent) else
+                   "meja" if ALT.search(sent) else "minimizem_kandidat")
+            for _ in hits:
+                counts[cls] += 1
+                doc_n += 1
+                total += 1
+            if cls == "minimizem_kandidat" and len(samples) < 24:
+                s = " ".join(sent.split())
+                samples.append({"doc": d["path"].split("CanvasMinstral")[-1],
+                                "context": s[:180]})
+        if doc_n:
+            per_doc.append((doc_n, d["path"].split("CanvasMinstral")[-1]))
+    per_doc.sort(reverse=True)
+    return {"docs_scanned": docs, "total_occurrences": total,
+            "classes": counts,
+            "top_docs": [{"doc": p, "occurrences": n}
+                         for n, p in per_doc[:10]],
+            "minimizem_candidates_sample": samples,
+            "NOTE": "ZAKON LE (psiho-aksiomi VII): cenzus ali ni nič. "
+                    "MINIMIZEM-KANDIDAT is not a sodba — a reader names "
+                    "the Alt or frees the lens; ŠIV is not "
+                    "machine-resolvable and honestly not counted."}
 
 
 def reparse(con) -> dict:
@@ -2158,6 +2230,7 @@ if __name__ == "__main__":
                                     "authorize-drafts", "stability",
                                     "popis", "graf", "odprta-delta",
                                     "ipa-popis", "ipa-drafts",
+                                    "le-cenzus",
                                     "retro-honesty", "preveri",
                                     "selftest"])
     ap.add_argument("path", nargs="?")
@@ -2236,6 +2309,10 @@ if __name__ == "__main__":
     elif args.cmd == "ipa-popis":
         # the honest gap: who carries the izmera, who the cut, who neither
         print(json.dumps(ipa_popis(con), ensure_ascii=False, indent=2))
+    elif args.cmd == "le-cenzus":
+        # ZAKON LE: whole-corpus census of the minimizem lenses — a
+        # receipt, never a sodba; the reader names the Alt or frees it
+        print(json.dumps(le_cenzus(con), ensure_ascii=False, indent=2))
     elif args.cmd == "ipa-drafts":
         # g2p drafts — machine proposes, owner canonizes (guard (a) holds);
         # the lexicon rides beside the db (the same derivation as the
@@ -2599,6 +2676,19 @@ if __name__ == "__main__":
             assert ml[1]["number"] == 2 and "prva napaka" not in \
                 ml[1]["nujne_napake"]          # no leak across heads
             assert all(z["number"] != 559 for z in ml)   # citation not a head
+            # the ZAKONIK series (Luka's "da, uzakonodaji vse to"): a
+            # one-line sealed law — the whole body lives on the head line;
+            # the rest-of-line is the teza; a heading between heads does
+            # not leak into the earlier body's fields
+            zz = parse_zakon(
+                "# REGISTER\n\n## ZAKONIK\n\n"
+                "**Z-1 ZAKON VEJE** — citat je množina. ⊢\n\n"
+                "**Z-2 ZAKON MEHANIZMA** — popravek izvede mehanizem. ⊢\n\n"
+                "### VELJA\n- brst, ne sad\n")
+            assert len(zz) == 2
+            assert zz[0]["series"] == "zakon" and zz[0]["number"] == 1
+            assert "citat je množina" in zz[0]["teza"]
+            assert "brst, ne sad" not in zz[1]["teza"]  # no leak past heads
             # IPA LAYER (Luka's "daj", 26. 9.): the g2p is a DRAFT machine —
             # phoneme level, no stress (unpredictable without a dictionary,
             # honestly omitted), digraphs measured (ljubezen → ʎ, nj → ɲ)
