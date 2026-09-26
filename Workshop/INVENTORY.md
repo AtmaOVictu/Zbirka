@@ -71,11 +71,27 @@ or it is clutter.
    Same sitting: scan() now backs soul.db up to soul.db.bak before writing
    (the ledger is the only thing that cannot be rebuilt from source);
    rescan 26. 9.: 1,190 files, 7 new docs, 50 new entries, backup witnessed.
+7. ruled-page export — the canon feeding itself; extends the export line
+   → BUILT 26. 9. 2026: export_page() + CLI `export-page --word X [dir]` +
+   "export ruled page" button in the LIBRARY tab. Writes a word's RULED
+   page as a derived dosje (A-bullet format, canon_ruled/ stratum):
+   originals untouched, export witnessed as a ledger line (kind export),
+   provenance in the file. The loop, WITNESSED end to end on 'Dih':
+   export (3 live entries) → rescan admits canon_ruled/dih.md → re-parsed
+   at REPORTED grade (full fields survive the round-trip) → dup detector
+   proposes the derived page against its own ancestors → REVIEW queue
+   (merge 6 → 9, 4 Dih families) → the owner rules the better version in.
+   corpus → parse → rule → better version → corpus. Selftest witnesses the
+   round-trip on a scratch db; smoke PASS.
 
 ## NEXT IN THE QUEUE (each names its line)
 - FORMAT D plugin — a new ParserPlugin (one class + one PLUGINS line) for
   the 175 marker-carrying dark docs. Until then the library misses ~3.7 MB
-  of real dosje content.
+  of real dosje content. NOTE: dark docs are already scanned, so scan()
+  skips them — the plugin needs the reparse line below with it.
+- REPARSE — a spine command to parse DARK docs with the CURRENT plugins
+  (scan() only admits new files; the already-scanned dark corpus stays
+  dark forever without this). Extends scan()'s line, ledger-witnessed.
 
 ## REPAIR CANDIDATES (scars found 25. 9. — each names its line)
 - soul_engine find_dup_files(): DEAD + BROKEN. Never called (the `dups`
@@ -101,3 +117,12 @@ or it is clutter.
   → REPAIRED 26. 9. 2026: 27 → 1 real conflict word on the live db
   (measured); selftest witnesses empty-rez ghost excluded, loser excluded,
   real variant kept.
+- soul_engine scan(): PATH-KEY FRAGILE — idempotency depended on the root
+  being written the same way every time. A rescan passing '..' made every
+  stored ABSOLUTE path look new: the whole corpus parsed twice (measured:
+  1,191 duplicate docs, 3,277 duplicate entries). Recovered from the
+  pre-scan backup (soul.db.bak — the graft #6 insurance, used the very
+  next sitting). Repair = root resolves, paths always meet absolute.
+  → REPAIRED 26. 9. 2026: scan() resolves the root; selftest witnesses
+  same-root-twice and a RELATIVE root both adding zero duplicates;
+  corrected rescan admitted only canon_ruled/dih.md (1 doc, 3 entries).

@@ -31,6 +31,7 @@ The ledger guarantees you can always replay history against a better future.
 
 import argparse
 import json
+import os
 import re
 import sqlite3
 import sys
@@ -47,7 +48,7 @@ SCHEMA = """
 CREATE TABLE IF NOT EXISTS ledger (
     id        INTEGER PRIMARY KEY AUTOINCREMENT,
     ts        TEXT NOT NULL,
-    kind      TEXT NOT NULL,   -- scan|verdict|merge|edit|grade
+    kind      TEXT NOT NULL,   -- scan|verdict|merge|edit|grade|export
     word      TEXT,
     payload   TEXT NOT NULL    -- JSON
 );
@@ -214,6 +215,11 @@ def grade_of(p: Parsed) -> str:
 # =========================================================== INGEST =======
 
 def scan(root: Path, con: sqlite3.Connection) -> dict:
+    # scar 26. 9.: a rescan passed the root as '..', so every stored
+    # ABSOLUTE path looked new and the whole corpus was parsed twice
+    # (measured: 1,191 duplicate docs — recovered from the pre-scan
+    # backup). Repair: the root resolves, paths always meet absolute.
+    root = Path(root).resolve()
     files = [p for p in root.rglob("*") if p.suffix.lower()
              in {".md", ".txt"}]
     # the ledger is the only thing that cannot be rebuilt from source —
@@ -591,13 +597,77 @@ def export(con, out: Path) -> dict:
                    encoding="utf-8")
     return {"nodes": len(nodes), "edges": len(edges)}
 
+
+# ================================================ THE RULED PAGE, OUT =====
+# Graft #7 — the canon feeding itself. export() writes the graph for OTHERS
+# to read; export_page() writes the RULED truth of one word back into the
+# corpus as a derived dosje, in the canon_ruled stratum. LAWS:
+#   - the file is DERIVED, not source: originals are never touched
+#   - it is written in the A-bullet format, so when the stratum is scanned
+#     the plugins parse it back at full grade — the loop is testable
+#   - the export is a ledger line (kind 'export'), witnessed like everything
+#   - re-entry goes through the ordinary door: scan parses it, the dup
+#     detector proposes it against its own ancestors, REVIEW rules it again
+# The loop: corpus → parse → rule → better version → corpus.
+
+def export_page(con, word: str, out_dir) -> dict:
+    def fullness(e):
+        return (GRADE_RANK.get(e["grade"], 0),
+                sum(1 for k in ("thesis", "antithesis", "synthesis",
+                                "foneticni_rez", "ontoloski_pomen",
+                                "antinoma", "glyph", "prakticna_uporaba")
+                    if (e.get(k) or "").strip()))
+    if not word:
+        return {"error": "export-page needs --word"}
+    p = page(con, word)
+    live = [e for e in p["entries"] if not e.get("merged_into")]
+    if not live:
+        return {"error": f"no live entries for '{word}'"}
+    out_dir = Path(out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    import datetime
+    ts = datetime.datetime.now().isoformat(timespec="seconds")
+    lines = [f"# DOSJE — {word} (derived stratum: canon_ruled)", "",
+             f"> Derived page, exported {ts} by soul_engine. Not source:",
+             "> the originals live where they live. This file re-enters the",
+             "> corpus through the ordinary door — scan, parse, REVIEW.",
+             "> Export witnessed as a ledger line (kind export).", ""]
+    provenance = []
+    for n, e in enumerate(sorted(live, key=fullness, reverse=True), 1):
+        lines.append(f"#### **{n}. {e['word']}**")
+        for label, key in (("Teza", "thesis"), ("Antiteza", "antithesis"),
+                           ("Sinteza", "synthesis"),
+                           ("Fonetični rez", "foneticni_rez"),
+                           ("Ontološki pomen", "ontoloski_pomen"),
+                           ("Antinoma", "antinoma"),
+                           ("Glyph", "glyph"),
+                           ("Praktična uporaba", "prakticna_uporaba")):
+            v = (e.get(key) or "").strip()
+            if v:
+                lines.append(f"- **{label}:** {v}")
+        lines.append("")
+        provenance.append(f"entry {e['entry_id']} [{e['grade']}/"
+                          f"{e['format']}] doc {e['doc_id']}:{e['lineno']}")
+    lines.append("> Sources (provenance, not parsed): "
+                 + "; ".join(provenance))
+    if p["conflicts"]:
+        lines.append("> CONFLICT standing: the fonetični rez variants above "
+                     "are real — ruled 'variants kept', or awaiting ruling.")
+    out_path = out_dir / f"{canon(word)}.md"
+    out_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    led(con, "export", word, {"file": str(out_path), "entries": len(live),
+                              "mentions": p["mentions"]})
+    con.commit()
+    return {"file": str(out_path), "entries": len(live),
+            "mentions": p["mentions"]}
+
 # ============================================================= MAIN =======
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("cmd", choices=["scan", "gui", "page", "export",
-                                    "merge", "unmerge", "dups", "dark",
-                                    "selftest"])
+                                    "export-page", "merge", "unmerge",
+                                    "dups", "dark", "selftest"])
     ap.add_argument("path", nargs="?")
     ap.add_argument("--word")
     ap.add_argument("--out", default="soul_graph.json")
@@ -611,6 +681,12 @@ if __name__ == "__main__":
         print(json.dumps(page(con, args.word), ensure_ascii=False, indent=2))
     elif args.cmd == "export":
         print(json.dumps(export(con, Path(args.out))))
+    elif args.cmd == "export-page":
+        # graft #7: the ruled page of ONE word, written as a derived dosje
+        # into the canon_ruled stratum (path = out dir, default canon_ruled)
+        out_dir = Path(args.path) if args.path else Path("canon_ruled")
+        print(json.dumps(export_page(con, args.word, out_dir),
+                         ensure_ascii=False, indent=2))
     elif args.cmd == "merge":
         # python soul_engine.py merge        → auto-merge unambiguous, list rest
         print(json.dumps(merge_auto(con), ensure_ascii=False, indent=2))
@@ -680,5 +756,47 @@ if __name__ == "__main__":
             rep = dark_report(m)
             assert rep["dark_docs"] == 1 and rep["groups"][0]["shape"] == "prose"
             assert rep["groups"][0]["dosje_markers"] is False
+        # graft #7: a ruled page exports as a derived dosje and RE-PARSES —
+        # the canon feeding itself must close the loop at full grade
+        m.execute("INSERT INTO entries(doc_id, word, format, thesis, "
+                  "synthesis, foneticni_rez, ontoloski_pomen, antinoma, "
+                  "grade) VALUES (1, 'Nujne napake', 't', 'tez', 'sint', "
+                  "'n / u', 'pomen', 'napake', 'reported')")
+        with tempfile.TemporaryDirectory() as td:
+            r = export_page(m, "NUJNE NAPAKE!", td)
+            assert "error" not in r and r["entries"] == 2   # both live pages
+            text = Path(r["file"]).read_text(encoding="utf-8")
+            back = StotnijeBulletParser().parse(text)
+            assert len(back) == 2
+            top = next(b for b in back if grade_of(b) == "reported")
+            assert top.word == "Nujne napake"
+            assert top.foneticni_rez == "n / u"
+            assert top.ontoloski_pomen == "pomen"
+            assert top.antinoma == "napake" and top.synthesis == "sint"
+            assert grade_of(top) == "reported"   # full grade survives
+            assert m.execute("SELECT COUNT(*) FROM ledger WHERE "
+                             "kind='export'").fetchone()[0] == 1
+        # scar 26. 9.: scan() must key on ABSOLUTE paths — a relative root
+        # used to re-parse the whole corpus as "new" (measured: 1,191
+        # duplicate docs, recovered from the pre-scan backup)
+        with tempfile.TemporaryDirectory() as td:
+            DB_PATH = Path(td) / "scratch.db"   # backup must not touch real
+            (Path(td) / "a.md").write_text(
+                "#### **1. Strah**\n- **Fonetični rez:** s / t / r / a / h\n",
+                encoding="utf-8")
+            m2 = sqlite3.connect(":memory:")
+            m2.row_factory = sqlite3.Row
+            m2.executescript(SCHEMA)
+            assert scan(Path(td), m2)["new_docs"] == 1
+            assert scan(Path(td), m2)["new_docs"] == 0        # idempotent
+            cwd = os.getcwd()
+            os.chdir(td)
+            try:
+                assert scan(Path("."), m2)["new_docs"] == 0   # relative: no dup
+            finally:
+                os.chdir(cwd)
+            assert m2.execute("SELECT COUNT(*) FROM docs").fetchone()[0] == 1
+            assert m2.execute("SELECT COUNT(*) FROM entries").fetchone()[0] == 1
         print("selftest: plugins A/B, grading, canon, near-dup, page, "
-              "conflicts-view, dark — OK (traced here, witnessed on disk)")
+              "conflicts-view, dark, page-export, scan-absolute — OK "
+              "(traced here, witnessed on disk)")

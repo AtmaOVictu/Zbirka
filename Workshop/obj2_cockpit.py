@@ -27,7 +27,10 @@ TABS
              is derived by replaying the ledger — the machine proposes, you rule.
   LIBRARY    graft #3: browse the spine — every live word in soul.db with
              its sources and grades; select one and its page (entries,
-             mentions, conflicts) derives by soul_engine's own page()
+             mentions, conflicts) derives by soul_engine's own page().
+             "export ruled page" = graft #7: the ruled page written OUT as
+             a derived dosje (canon_ruled stratum), ledger-witnessed;
+             a rescan admits it back through the ordinary door.
   PARK       the decision records + inventory of the parked cube era
 
 LAWS
@@ -919,10 +922,14 @@ class ReviewTab(ttk.Frame):
 
 class LibraryTab(ttk.Frame):
     """The library: every live word in soul.db with its sources, and the
-    word page beside it. READ-ONLY by law — rulings happen in REVIEW, this
-    tab only reads. The list = live entries (merged_into IS NULL) grouped
-    by word; the losers live inside their keeper's page, which derives by
-    the spine's own page(). Nothing here re-derives or re-parses anything."""
+    word page beside it. Read-only toward the TRUTH: no ruling happens
+    here (REVIEW rules), no entry is edited here. The one write is graft
+    #7's "export ruled page" — the selected page written OUT as a derived
+    dosje into the canon_ruled stratum (originals untouched, ledger
+    witnesses the export). The list = live entries (merged_into IS NULL)
+    grouped by word; the losers live inside their keeper's page, which
+    derives by the spine's own page(). Nothing here re-derives or
+    re-parses anything."""
 
     COLS = ("word", "sources", "formats", "reported", "headline")
     W = (420, 70, 130, 90, 90)
@@ -952,6 +959,8 @@ class LibraryTab(ttk.Frame):
         ent = ttk.Entry(bar, textvariable=self.filter_var)
         ent.pack(side="left", fill="x", expand=True, padx=4)
         ent.bind("<KeyRelease>", lambda _e: self.fill())
+        ttk.Button(bar, text="export ruled page",
+                   command=self.export_page).pack(side="left", padx=(6, 0))
         self.count_var = tk.StringVar(value="—")
         ttk.Label(bar, textvariable=self.count_var).pack(side="left", padx=8)
 
@@ -985,6 +994,27 @@ class LibraryTab(ttk.Frame):
                 r["word"], r["sources"], r["formats"], r["reported"], r["headline"]))
             shown += 1
         self.count_var.set(f"{shown} / {len(self.rows)} words")
+
+    def export_page(self):
+        """Graft #7 — the canon feeding itself: write the selected word's
+        RULED page as a derived dosje into the canon_ruled stratum (a
+        sibling of the corpus dirs). The export is a ledger line; a rescan
+        then admits the file through the ordinary door — parse, dup-detect
+        against its own ancestors, REVIEW again."""
+        sel = self.tree.selection()
+        if not sel:
+            self.count_var.set("select a word first — export needs a page")
+            return
+        word = sel[0]
+        out_dir = os.path.normpath(os.path.join(_HERE, "..", "canon_ruled"))
+        r = SOUL.export_page(self.con, word, out_dir)
+        if "error" in r:
+            self.count_var.set(r["error"])
+        else:
+            self.count_var.set(f"exported → {r['file']} "
+                               f"({r['entries']} entries, "
+                               f"{r['mentions']} mentions, ledger: export) — "
+                               f"rescan admits it")
 
     def open_page(self, _e=None):
         sel = self.tree.selection()
