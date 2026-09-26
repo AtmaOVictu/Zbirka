@@ -181,8 +181,39 @@ Pictures/) is other strata, not this workshop's to move.
    the schema since day one and had never been used once. Added entries
    live under the doc 'cockpit://owner-added' (provenance by name),
    grade reported by definition — the strongest provenance there is.
+13. deadlock as dimension-detector — the ∂ answered with measured data
+   → BUILT 26. 9. 2026 (same sitting as the research). THE MEASURED
+   DEADLOCK: of 59 pending merges, 32 are CHIRAL PAIRS (the register's
+   kiralni par, rez 607) — members tie on CONTENT but differ by
+   STRATUM (abakus: Basics vs Obs11; dih: Basics vs canon_ruled): mirror
+   entries, non-superimposable, the difference living on an axis graft
+   #8 already named. NOT a paradox — a dimension the proposal machinery
+   never carried into the ruling. Of 4 conflicts: 3 are SAME-READER
+   disagreements (one format read the word differently at two moments —
+   the TEMPORAL axis: Puruchuco, labirint, zrcalo), 1 is a parse
+   artifact ('Combinations...' — C-numbered prose in the rez field: a
+   repair candidate, not a paradox). THE GRAFT: draft rationales now
+   NAME THE AXIS — merge drafts say "CHIRAL PAIR — the tie is on the
+   content axis, the difference is on the STRATUM axis (X vs Y); the
+   deadlock is the dimension, named"; conflict drafts say SAME-READER/
+   TEMPORAL or READER/FORMAT. Deadlock is information, not a crash.
+   Selftest + smoke PASS. The 27 non-chiral content ties remain what
+   they always were: the owner's, on the content axis, by hand.
 
 ## NEXT IN THE QUEUE (each names its line)
+- RECEIVED THEORY (the register's analysis, grounded in the corpus 26. 9.):
+  rez 253 lives in the body — C2/rezultat-doktorat-rez-253.md: "REZULTAT
+  NI IZDELEK — JE SPREMENJEN BRALEC"; "zagovor ne more potekati pred
+  menoj: jaz izrečem ⊢, ∮ (živeta preverba) gre skozi telo, ki bere" —
+  the third reader is standing law. The cascade: builder / refuser /
+  third reader / ReflektivnaZanka (the loop that verifies verifiers) —
+  a SPIRAL (∮), not a pyramid; the layer list is itself a receipt (∂:
+  the list is open; "pet kot totalizacija — šest se lahko rodi").
+  Build order ruled by the analysis: the THIRD READER before the meta
+  loop (a meta loop over two hands amplifies the duet). A third-reader
+  protocol for this spine would be: an independent verification pass in
+  a body that didn't write the ruling, on a measured sample (kiralni-par
+  precedent) — named here, not built yet.
 - FORMAT D v2 — two measured shapes remain dark (162 dosje-D docs):
   the `**WORD** (long gloss):` header that ends "):" (needs a
   table-follows lookahead — commit only when a Fragment table shows),

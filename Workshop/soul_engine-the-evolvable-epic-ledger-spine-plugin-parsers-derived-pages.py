@@ -899,7 +899,9 @@ def draft_rulings(con, glyph_path=None) -> dict:
         if (p["word"], p["fingerprint"]) in ruled:
             continue
         rows = [dict(r) for r in con.execute(
-            "SELECT * FROM entries WHERE entry_id IN (%s)" %
+            "SELECT e.*, d.stratum AS doc_stratum, d.kind AS doc_kind "
+            "FROM entries e JOIN docs d ON d.doc_id = e.doc_id "
+            "WHERE e.entry_id IN (%s)" %
             ",".join("?" * (1 + len(p["lose"]))),
             [p["keeper"]] + list(p["lose"]))]
         if not rows:
@@ -915,6 +917,18 @@ def draft_rulings(con, glyph_path=None) -> dict:
         else:
             reason.append(f"richest: grade {rows[0]['grade']}, "
                           f"{_fullness(rows[0])} filled fields")
+        # graft #13 — DEADLOCK AS DIMENSION-DETECTOR: when the members tie
+        # on content but differ by stratum, the deadlock is not about
+        # content at all — it is a CHIRAL PAIR (the register's kiralni
+        # par): mirror entries, non-superimposable, the difference living
+        # on the stratum axis. The draft NAMES the axis instead of
+        # pretending the tie is the question.
+        strata = {r.get("doc_stratum") or "?" for r in rows}
+        if len(strata) > 1:
+            reason.append("CHIRAL PAIR — the tie is on the content axis, "
+                          "the difference is on the STRATUM axis ("
+                          + " vs ".join(sorted(strata)) +
+                          "); the deadlock is the dimension, named")
         if p.get("near"):
             reason.append(f"near-dup, similarity {p['similarity']}")
         led(con, "verdict", p["word"], {
@@ -934,22 +948,30 @@ def draft_rulings(con, glyph_path=None) -> dict:
             "AND TRIM(foneticni_rez) != '' GROUP BY word HAVING v > 1")]:
         if canon(w) in ruled_c:
             continue
-        counts = {}
+        counts, vfmt = {}, {}
         for r in con.execute(
-                "SELECT foneticni_rez, COUNT(*) n FROM entries "
+                "SELECT foneticni_rez, format, COUNT(*) n FROM entries "
                 "WHERE word=? AND merged_into IS NULL "
-                "AND TRIM(foneticni_rez) != '' GROUP BY foneticni_rez",
-                (w,)):
-            counts[r["foneticni_rez"]] = r["n"]
+                "AND TRIM(foneticni_rez) != '' "
+                "GROUP BY foneticni_rez, format", (w,)):
+            counts[r["foneticni_rez"]] = counts.get(r["foneticni_rez"], 0) + r["n"]
+            vfmt.setdefault(r["foneticni_rez"], set()).add(r["format"])
         best = max(counts.values())
         winners = [k for k, n in counts.items() if n == best]
         if len(winners) != 1:
             continue               # majority tie — no draft, honestly
+        fmts = {f for s in vfmt.values() for f in s}
+        axis = ("SAME-READER disagreement — one format read the word "
+                "differently at different moments (TEMPORAL axis)"
+                if len(fmts) == 1 else
+                "READER disagreement — formats " + "+".join(sorted(fmts)) +
+                " read the word differently (FORMAT axis)")
         led(con, "verdict", w, {
             "ruling": "conflict-true-rez-draft", "machine": True,
             "true_rez": winners[0], "counts": counts,
             "rationale": f"majority {winners[0]!r}: "
-                         f"{best} of {sum(counts.values())} live entries"})
+                         f"{best} of {sum(counts.values())} live entries; "
+                         f"{axis}"})
         drafted_c += 1
 
     # glyphs: draft confirm only when the payload carries a warrant.
