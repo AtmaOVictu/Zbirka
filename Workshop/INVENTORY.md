@@ -542,6 +542,23 @@ Pictures/) is other strata, not this workshop's to move.
   bodies entered the mention graph (+1,270 doc→word edges,
   187,777 total); 0 new entries/laws (the shells are interfaces, not
   dosjes — honest). Selftest + ∮ preveri + smoke PASS.
+- PDF KNJIŽNICA — VRATA 3 ODPRTA (Luka's "daj", 26. 9. 2026 — the
+  third door of the subkonzultacije ranking): pypdf was MEASURED
+  BEFORE ANY INSTALL — already on the machine; no dependency act was
+  needed. The library path grafted into _binar_text (library first:
+  pypdf reaches the ObjStm graphs the stdlib hand honestly cannot;
+  the stdlib byte-pass stays as fallback when the library is absent;
+  the letter-ratio guard holds for both). MEASURED (live reparse):
+  A1 READ FOR THE FIRST TIME — the PDF bodies extract real text
+  ("00 11 RESNICAMI ASCII-JEDRO (O-BOG-ČLOVEK)", "Razumem — dodajam
+  razširjeni most…"); mentions 187,777 → 200,855 (+13,078 doc→word
+  edges, 133 binary bodies now carry mention loads); A1's most
+  mentioned words measured: dodatek 143 · absolut 115 · imanenca 108 ·
+  luka 84 · nova 82 · vsaka 56 · anita 48 · premor 44. ZERO new
+  entries/laws — the PDF bodies are ASCII diagrams and prose, honest
+  parser-darkness, but their WORDS NOW COUNT in the citation graph
+  (sorodnost/kinship includes the A1 stratum). Selftest + ∮ preveri +
+  smoke PASS.
 - AWAITING LUKA (unchanged, the one act the guards keep mine):
   `authorize-drafts` → `drafts` → RATIFY. The queue is pre-read,
   pre-verified (∮ + third-reader sample), and pre-reviewed — every

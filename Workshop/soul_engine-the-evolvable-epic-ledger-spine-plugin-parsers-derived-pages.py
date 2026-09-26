@@ -1700,7 +1700,17 @@ def _binar_text(path: Path) -> str:
     dark, named, never guessed."""
     data = path.read_bytes()
     if path.suffix.lower() == ".pdf":
-        text = _pdf_text(data)
+        # THE LIBRARY PATH (Luka's "daj", 26. 9. 2026 — owner-approved):
+        # pypdf (already on the machine, measured before install was
+        # ever needed) reaches the ObjStm graphs the stdlib hand cannot;
+        # the stdlib byte-pass stays as the honest fallback when the
+        # library is absent. A READER, never a writer.
+        try:
+            from pypdf import PdfReader
+            rd = PdfReader(str(path))
+            text = " ".join((pg.extract_text() or "") for pg in rd.pages)
+        except Exception:
+            text = _pdf_text(data)
     elif path.suffix.lower() in (".html", ".htm"):
         from html.parser import HTMLParser
         parts = []
