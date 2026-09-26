@@ -1100,33 +1100,40 @@ class ReviewTab(ttk.Frame):
 # =============================================================================
 
 class LibraryTab(ttk.Frame):
-    """The library: every live word in soul.db with its sources, and the
-    word page beside it. Read-only toward the TRUTH: no ruling happens
-    here (REVIEW rules), no entry is edited here. The one write is graft
-    #7's "export ruled page" — the selected page written OUT as a derived
-    dosje into the canon_ruled stratum (originals untouched, ledger
-    witnesses the export). The list = live entries (merged_into IS NULL)
-    grouped by word; the losers live inside their keeper's page, which
-    derives by the spine's own page(). Nothing here re-derives or
-    re-parses anything."""
+    """The library, v2 (Luka's ask, 26. 9. — "prikazno okno rubrik in
+    editivni prostor"): every live word with its sources, the page as
+    RUBRIKS in a display window (click an entry to load it), and a
+    PERSISTENT EDITABLE SPACE beneath — not a popup form: a place to
+    write. Edits are canon DIRECTLY (the ruler's touch is a normative
+    act); old values survive in the ledger 'edit' line. The page
+    derives by the spine's own page(); the popup editor is SUBSUMED
+    by the edit space — the same line, now somewhere to write."""
 
-    COLS = ("word", "sources", "formats", "reported", "headline")
-    W = (420, 70, 130, 90, 90)
+    RUBRIKE = (("word", "BESEDA"), ("foneticni_rez", "FONETIČNI REZ"),
+               ("glyph", "GLYPH"), ("thesis", "TEZA"),
+               ("antithesis", "ANTITEZA"), ("synthesis", "SINTEZA"),
+               ("ontoloski_pomen", "ONTOLOŠKI POMEN"),
+               ("antinoma", "ANTINOMA"),
+               ("prakticna_uporaba", "PRAKTIČNA UPORABA"))
 
     def __init__(self, parent):
         super().__init__(parent, padding=8)
         self.alive = False
         self.rows = []
+        self._editing_id = None
+        self._view_entries = {}
         self.columnconfigure(0, weight=1)
-        self.columnconfigure(1, weight=1)
+        self.columnconfigure(1, weight=3)
         self.rowconfigure(1, weight=1)
         if SOUL is None:
             ttk.Label(self, text=f"cannot load the spine (soul_engine): "
-                                f"{_SOUL_LOAD_ERROR}").grid(row=0, column=0, sticky="w")
+                                f"{_SOUL_LOAD_ERROR}").grid(row=0, column=0,
+                                                            sticky="w")
             return
         if not os.path.exists(SOUL.DB_PATH):
-            ttk.Label(self, text=f"the spine's db is missing: {SOUL.DB_PATH} — "
-                                "run soul_engine scan first").grid(row=0, column=0, sticky="w")
+            ttk.Label(self, text=f"the spine's db is missing: "
+                                f"{SOUL.DB_PATH} — run soul_engine scan "
+                                "first").grid(row=0, column=0, sticky="w")
             return
         self.con = SOUL.db()
         self.alive = True
@@ -1140,53 +1147,243 @@ class LibraryTab(ttk.Frame):
         ent.bind("<KeyRelease>", lambda _e: self.fill())
         ttk.Button(bar, text="export ruled page",
                    command=self.export_page).pack(side="left", padx=(6, 0))
-        ttk.Button(bar, text="edit entry", command=self.edit_entry).pack(
-            side="left", padx=(6, 0))
-        ttk.Button(bar, text="add entry", command=self.add_entry).pack(
-            side="left", padx=(6, 0))
+        ttk.Button(bar, text="uredi vnos",
+                   command=self.edit_entry).pack(side="left", padx=(6, 0))
+        ttk.Button(bar, text="dodaj vnos",
+                   command=self.add_entry).pack(side="left", padx=(6, 0))
         self.count_var = tk.StringVar(value="—")
         ttk.Label(bar, textvariable=self.count_var).pack(side="left", padx=8)
 
-        self.tree = ttk.Treeview(self, columns=self.COLS, show="headings")
-        for c, w in zip(self.COLS, self.W):
-            self.tree.heading(c, text=c)
-            self.tree.column(c, width=w, anchor="w" if c == "word" else "center")
-        self.tree.grid(row=1, column=0, sticky="nsew", pady=(4, 0))
-        self.text = tk.Text(self, wrap="word", state="disabled", width=58)
-        self.text.grid(row=1, column=1, sticky="nsew", pady=(4, 0), padx=(6, 0))
-        self.tree.bind("<<TreeviewSelect>>", self.open_page)
+        self.listbox = tk.Listbox(self, width=30)
+        self.listbox.grid(row=1, column=0, sticky="nsw", pady=(4, 0))
+        self.listbox.bind("<Double-Button-1>", self.open_page)
+        self.listbox.bind("<Return>", self.open_page)
+
+        pane = ttk.PanedWindow(self, orient="vertical")
+        pane.grid(row=1, column=1, sticky="nsew", pady=(4, 0), padx=(6, 0))
+
+        # ---- prikazno okno rubrik ------------------------------------
+        self.view = tk.Text(pane, wrap="word", state="disabled",
+                            bg="#101014", fg="#cfd3dc",
+                            insertbackground="#ffffff")
+        for tag, cfg in {
+                "title": dict(font=("TkDefaultFont", 13, "bold"),
+                              foreground="#e8c76a"),
+                "meta": dict(foreground="#7788aa"),
+                "ent": dict(font=("TkDefaultFont", 10, "bold"),
+                            foreground="#4aa88f"),
+                "rub": dict(foreground="#c98f3d"),
+                "val": dict(foreground="#cfd3dc"),
+                "conf": dict(foreground="#d05a5a")}.items():
+            self.view.tag_configure(tag, **cfg)
+        pane.add(self.view, weight=3)
+
+        # ---- editivni prostor ----------------------------------------
+        box = ttk.Frame(pane, padding=4)
+        self.edit_lbl = tk.StringVar(
+            value="EDITIVNI PROSTOR — klikni vnos v oknu rubrik, piši, "
+                  "shrani; tvoja roka je kanon, stare vrednosti pričajo "
+                  "(ledger: edit)")
+        ttk.Label(box, textvariable=self.edit_lbl,
+                  foreground="#c98f3d").pack(anchor="w")
+        self.edit = tk.Text(box, wrap="word", height=8, bg="#14141a",
+                            fg="#e8e8ec", insertbackground="#ffffff")
+        self.edit.pack(fill="both", expand=True, pady=(4, 4))
+        btns = ttk.Frame(box)
+        btns.pack(fill="x")
+        ttk.Button(btns, text="shrani (ledger: edit)",
+                   command=self.save_edit).pack(side="left")
+        ttk.Button(btns, text="prekliči",
+                   command=self._clear_edit).pack(side="left", padx=6)
+        pane.add(box, weight=2)
+
         self.load()
 
     def load(self):
         self.rows = [dict(r) for r in self.con.execute(
             "SELECT word, COUNT(*) AS sources, "
             "GROUP_CONCAT(DISTINCT format) AS formats, "
-            "SUM(grade='reported') AS reported, SUM(grade='headline') AS headline "
+            "SUM(grade='reported') AS reported, "
+            "SUM(grade='headline') AS headline "
             "FROM entries WHERE merged_into IS NULL GROUP BY word "
             "ORDER BY word COLLATE NOCASE")]
         self.fill()
 
     def fill(self):
         needle = self.filter_var.get().strip().lower()
-        self.tree.delete(*self.tree.get_children())
+        self.listbox.delete(0, "end")
         shown = 0
         for r in self.rows:
             if needle and needle not in r["word"].lower():
                 continue
-            self.tree.insert("", "end", iid=r["word"], values=(
-                r["word"], r["sources"], r["formats"], r["reported"], r["headline"]))
+            self.listbox.insert("end", r["word"])
             shown += 1
         self.count_var.set(f"{shown} / {len(self.rows)} words")
 
-    def export_page(self):
-        """Graft #7 — the canon feeding itself: write the selected word's
-        RULED page as a derived dosje into the canon_ruled stratum (a
-        sibling of the corpus dirs). The export is a ledger line; a rescan
-        then admits the file through the ordinary door — parse, dup-detect
-        against its own ancestors, REVIEW again."""
-        sel = self.tree.selection()
+    def open_page(self, _e=None):
+        sel = self.listbox.curselection()
         if not sel:
-            self.count_var.set("select a word first — export needs a page")
+            return
+        word = self.listbox.get(sel[0])
+        p = SOUL.page(self.con, word)
+        v = self.view
+        v.configure(state="normal")
+        v.delete("1.0", "end")
+        self._view_entries = {}
+        v.insert("end", word + "\n", ("title",))
+        v.insert("end", f"{len(p['entries'])} vnosov · omenjeno v "
+                  f"{p['mentions']} dokumentih\n\n", ("meta",))
+        for e in p["entries"]:
+            eid = e["entry_id"]
+            self._view_entries[eid] = dict(e)
+            tag = f"e{eid}"
+            v.tag_configure(tag, background="#181820")
+            head = (f"[{e['grade']}/{e['format']}] "
+                    + (e.get("doc_stratum") or "?") + " · doc "
+                    + f"{e['doc_id']}:{e['lineno']} · vnos {eid}"
+                    + (f"  ← zlivljen v '{e['merged_into']}'"
+                       if e.get("merged_into") else "") + "\n")
+            v.insert("end", head, ("ent", tag))
+            for key, label in self.RUBRIKE:
+                if key == "word":
+                    continue
+                val = (e.get(key) or "").strip()
+                if val:
+                    v.insert("end", f"  {label}: ", ("rub", tag))
+                    v.insert("end", val + "\n", ("val", tag))
+            if not e.get("merged_into"):
+                v.tag_bind(tag, "<Button-1>",
+                           lambda ev, i=eid: self._pick_entry(i))
+            v.insert("end", "\n", (tag,))
+        if p["conflicts"]:
+            v.insert("end", "KONFLIKT: fonetični rez ima več različic — "
+                      "razsodba je v REVIEW\n", ("conf",))
+        v.configure(state="disabled")
+
+    # ------------------------------------------- editivni prostor ----
+
+    def _pick_entry(self, eid):
+        e = self._view_entries.get(eid)
+        if not e:
+            return
+        self._editing_id = eid
+        self.edit.delete("1.0", "end")
+        for key, label in self.RUBRIKE:
+            val = (e.get(key) or "").strip()
+            self.edit.insert("end", f"{label}: {val}\n")
+        self.edit_lbl.set(f"UREJAŠ vnos {eid} ('{e['word']}') — shrani: "
+                          "staro priča, novo je kanon (ledger: edit)")
+
+    def edit_entry(self):
+        """loads the FIRST live entry of the selected word into the edit
+        space — or the word's page is one click away in the view"""
+        sel = self.listbox.curselection()
+        if not sel:
+            self.count_var.set("izberi besedo — urejevalni prostor čaka")
+            return
+        word = self.listbox.get(sel[0])
+        p = SOUL.page(self.con, word)
+        live = [e for e in p["entries"] if not e.get("merged_into")]
+        if live:
+            self._pick_entry(live[0]["entry_id"])
+        else:
+            self.count_var.set(f"'{word}': ni živih vnosov")
+
+    def add_entry(self):
+        sel = self.listbox.curselection()
+        word = self.listbox.get(sel[0]) if sel else ""
+        self._editing_id = None
+        self.edit.delete("1.0", "end")
+        for _key, label in self.RUBRIKE:
+            self.edit.insert("end", f"{label}: "
+                             + (word if label == "BESEDA" else "") + "\n")
+        self.edit_lbl.set("DODAJAŠ nov vnos — shranjena vrstica postane "
+                          "kanon (ledger: edit, provenance cockpit)")
+
+    def _parse_edit(self):
+        vals, cur = {}, None
+        for line in self.edit.get("1.0", "end").splitlines():
+            for key, label in self.RUBRIKE:
+                if line.startswith(label + ":"):
+                    cur = key
+                    vals[cur] = line[len(label) + 1:].strip()
+                    break
+            else:
+                if cur:
+                    vals[cur] = (vals[cur] + " " + line.strip()).strip()
+        return vals
+
+    def save_edit(self):
+        vals = self._parse_edit()
+        if self._editing_id:
+            entry = self._view_entries.get(self._editing_id, {})
+            old = {k: (entry.get(k) or "") for k, _l in self.RUBRIKE
+                   if (entry.get(k) or "") != (vals.get(k) or "")}
+            new = {k: (vals.get(k) or "") for k in old}
+            if not old:
+                self.edit_lbl.set("ni sprememb — prostor ostaja odprt")
+                return
+            self.con.execute(
+                "UPDATE entries SET " +
+                ", ".join(f"{k}=?" for k in new) + " WHERE entry_id=?",
+                list(new.values()) + [self._editing_id])
+            SOUL.led(self.con, "edit",
+                     vals.get("word") or entry.get("word", ""),
+                     {"entry_id": self._editing_id, "old": old, "new": new})
+            self.con.commit()
+            self.edit_lbl.set(f"UREJENO vnos {self._editing_id} — "
+                              f"{len(new)} rubrik spremenjenih; stare "
+                              "vrednosti pričajo v glavni knjigi")
+        else:
+            if not (vals.get("word") or "").strip():
+                self.edit_lbl.set("vnos potrebuje BESEDA")
+                return
+            row = self.con.execute(
+                "SELECT doc_id FROM docs WHERE path=?",
+                ("cockpit://owner-added",)).fetchone()
+            doc_id = (row[0] if row else self.con.execute(
+                "INSERT INTO docs(path, stratum, kind) VALUES "
+                "('cockpit://owner-added', 'cockpit', 'owner-added')"
+                ).lastrowid)
+            cur = self.con.execute(
+                """INSERT INTO entries(doc_id, word, format, number,
+                   thesis, antithesis, synthesis, foneticni_rez,
+                   ontoloski_pomen, antinoma, glyph,
+                   prakticna_uporaba, lineno, grade)
+                   VALUES (?,?,?,?,?,?,?,?,?,?,?,?,NULL,'reported')""",
+                (doc_id, vals["word"], "owner", None,
+                 vals.get("thesis"), vals.get("antithesis"),
+                 vals.get("synthesis"), vals.get("foneticni_rez"),
+                 vals.get("ontoloski_pomen"), vals.get("antinoma"),
+                 vals.get("glyph"), vals.get("prakticna_uporaba")))
+            SOUL.led(self.con, "edit", vals["word"],
+                     {"entry_id": cur.lastrowid, "old": None, "new": vals,
+                      "note": "owner-added entry"})
+            self.con.commit()
+            self.edit_lbl.set(f"DODAN vnos {cur.lastrowid} za "
+                              f"'{vals['word']}' (ledger: edit)")
+        self.load()
+        sel_word = vals.get("word") or self.listbox.get(0)
+        for i in range(self.listbox.size()):
+            if self.listbox.get(i) == sel_word:
+                self.listbox.selection_clear(0, "end")
+                self.listbox.selection_set(i)
+                self.listbox.see(i)
+                self.open_page()
+                break
+
+    def _clear_edit(self):
+        self._editing_id = None
+        self.edit.delete("1.0", "end")
+        self.edit_lbl.set("EDITIVNI PROSTOR prazen — klikni vnos v oknu "
+                          "rubrik ali 'uredi vnos'")
+
+    def export_page(self):
+        """Graft 7 — the canon feeding itself: write the selected word's
+        RULED page as a derived dosje into the canon_ruled stratum."""
+        sel = self.listbox.curselection()
+        if not sel:
+            self.count_var.set("izberi besedo — izvoz potrebuje stran")
             return
         word = sel[0]
         out_dir = os.path.normpath(os.path.join(_HERE, "..", "canon_ruled"))
@@ -1194,180 +1391,8 @@ class LibraryTab(ttk.Frame):
         if "error" in r:
             self.count_var.set(r["error"])
         else:
-            self.count_var.set(f"exported → {r['file']} "
-                               f"({r['entries']} entries, "
-                               f"{r['mentions']} mentions, ledger: export) — "
-                               f"rescan admits it")
-
-    # ------------------------------------------- graft #12: the editor --
-    # The owner's hand INSIDE the canon: edits are canon DIRECTLY (a
-    # normative act), and the old values survive in the ledger 'edit'
-    # line — normative acts also leave causal receipts. Added entries
-    # live under the doc 'cockpit://owner-added' — provenance by name.
-
-    FIELDS = (("word", "beseda"), ("foneticni_rez", "fonetični rez"),
-              ("glyph", "glyph"), ("thesis", "teza"),
-              ("antithesis", "antiteza"), ("synthesis", "sinteza"),
-              ("ontoloski_pomen", "ontološki pomen"),
-              ("antinoma", "antinoma"),
-              ("prakticna_uporaba", "praktična uporaba"))
-    SHORT = {"word", "foneticni_rez", "glyph"}
-
-    def edit_entry(self):
-        sel = self.tree.selection()
-        if not sel:
-            self.count_var.set("select a word first — the editor needs a page")
-            return
-        live = [dict(r) for r in self.con.execute(
-            "SELECT * FROM entries WHERE word=? AND merged_into IS NULL",
-            (sel[0],))]
-        if not live:
-            self.count_var.set("no live entry for this word")
-            return
-        win = tk.Toplevel(self)
-        win.title(f"edit an entry of '{sel[0]}' — your edit is canon; "
-                  "the old value survives in the ledger")
-        lb = tk.Listbox(win, width=104, height=min(len(live), 10))
-        for e in live:
-            lb.insert("end", f"{e['entry_id']} [{e['grade']}/{e['format']}] "
-                             f"{e['word']} — "
-                             f"{(e['thesis'] or e['synthesis'] or e['foneticni_rez'] or '—')[:60]}")
-        lb.pack(padx=8, pady=8)
-        lb.selection_set(0)
-
-        def open_form(_e=None):
-            s = lb.curselection()
-            if not s:
-                return
-            win.destroy()
-            self._entry_form(live[s[0]])
-
-        lb.bind("<Double-Button-1>", open_form)
-        lb.bind("<Return>", open_form)
-        lb.focus_set()
-
-    def add_entry(self):
-        sel = self.tree.selection()
-        self._entry_form(None, pre_word=sel[0] if sel else "")
-
-    def _entry_form(self, entry, pre_word=""):
-        win = tk.Toplevel(self)
-        win.title("edit entry" if entry else "add entry — canon by your hand")
-        widgets = {}
-        for i, (key, label) in enumerate(self.FIELDS):
-            ttk.Label(win, text=label + ":").grid(
-                row=i, column=0, sticky="nw", padx=4, pady=2)
-            if key in self.SHORT:
-                var = tk.StringVar(value=(entry or {}).get(key)
-                                   or (pre_word if key == "word" else ""))
-                w = ttk.Entry(win, textvariable=var, width=90)
-                widgets[key] = var
-            else:
-                w = tk.Text(win, width=90, height=2, wrap="word")
-                w.insert("1.0", (entry or {}).get(key) or "")
-                widgets[key] = w
-            w.grid(row=i, column=1, sticky="ew", padx=4, pady=2)
-
-        def save():
-            vals = {k: (widgets[k].get().strip() if k in self.SHORT
-                        else widgets[k].get("1.0", "end").strip())
-                    for k, _l in self.FIELDS}
-            if entry:
-                old = {k: (entry.get(k) or "")
-                       for k, _l in self.FIELDS
-                       if (entry.get(k) or "") != vals[k]}
-                new = {k: vals[k] for k in old}
-                if not old:
-                    win.destroy()
-                    return
-                self.con.execute(
-                    "UPDATE entries SET " +
-                    ", ".join(f"{k}=?" for k in new) +
-                    " WHERE entry_id=?",
-                    list(new.values()) + [entry["entry_id"]])
-                SOUL.led(self.con, "edit", vals["word"] or entry["word"],
-                         {"entry_id": entry["entry_id"], "old": old,
-                          "new": new})
-                self.con.commit()
-                self.count_var.set(f"EDITED entry {entry['entry_id']} — "
-                                  f"{len(new)} field(s) changed, old values "
-                                  f"witnessed in the ledger (kind edit)")
-            else:
-                if not vals["word"]:
-                    self.count_var.set("an added entry needs a word")
-                    return
-                row = self.con.execute(
-                    "SELECT doc_id FROM docs WHERE path=?",
-                    ("cockpit://owner-added",)).fetchone()
-                doc_id = (row[0] if row else self.con.execute(
-                    "INSERT INTO docs(path, stratum, kind) VALUES "
-                    "('cockpit://owner-added', 'cockpit', 'owner-added')"
-                    ).lastrowid)
-                cur = self.con.execute(
-                    """INSERT INTO entries(doc_id, word, format, number,
-                       thesis, antithesis, synthesis, foneticni_rez,
-                       ontoloski_pomen, antinoma, glyph,
-                       prakticna_uporaba, lineno, grade)
-                       VALUES (?,?,?,?,?,?,?,?,?,?,?,?,NULL,'reported')""",
-                    (doc_id, vals["word"], "owner", None, vals["thesis"],
-                     vals["antithesis"], vals["synthesis"],
-                     vals["foneticni_rez"], vals["ontoloski_pomen"],
-                     vals["antinoma"], vals["glyph"],
-                     vals["prakticna_uporaba"]))
-                SOUL.led(self.con, "edit", vals["word"],
-                         {"entry_id": cur.lastrowid, "old": None, "new": vals,
-                          "note": "owner-added entry"})
-                self.con.commit()
-                self.count_var.set(f"ADDED entry {cur.lastrowid} for "
-                                    f"'{vals['word']}' (ledger: edit)")
-            win.destroy()
-            self.load()
-            self.fill()
-            self.tree.selection_set(vals["word"] if vals["word"] in
-                                   self.tree.get_children() else "")
-            if self.tree.selection():
-                self.open_page()
-
-        ttk.Button(win, text="save (ledger: edit)", command=save).grid(
-            row=len(self.FIELDS), column=0, columnspan=2, pady=8)
-
-    def open_page(self, _e=None):
-        sel = self.tree.selection()
-        if not sel:
-            return
-        p = SOUL.page(self.con, sel[0])
-        out = [f"=== {p['word']} — the page (derived by the spine) ===",
-               f"entries: {len(p['entries'])}   omenjeno v {p['mentions']} dokumentih",
-               ""]
-        if p["conflicts"]:
-            out.append(f"CONFLICT: {p['conflicts'][0]['variants']} fonetični rez "
-                       "variants — real difference, stays yours to rule")
-            out.append("")
-        for e in p["entries"]:
-            # graft #8: what the source text IS and where it OCCUPIES —
-            # stratum · kind before the bare doc:line
-            if e.get("doc_stratum"):
-                doc = (f"{e['doc_stratum']} · {e['doc_kind']} · "
-                       f"doc {e['doc_id']}:{e['lineno']}")
-            else:
-                doc = f"doc {e['doc_id']}:{e['lineno']}"
-            if e.get("merged_into"):
-                out.append(f"— merged into '{e['merged_into']}'  "
-                           f"[{e['grade']}/{e['format']}]  {doc}")
-                continue
-            out.append(f"[{e['grade']}/{e['format']}]  {doc}  entry {e['entry_id']}"
-                       + (f"  #{e['number']}" if e.get("number") else ""))
-            for key in ("thesis", "antithesis", "synthesis", "foneticni_rez",
-                        "ontoloski_pomen", "antinoma", "glyph", "prakticna_uporaba"):
-                v = (e.get(key) or "").strip()
-                if v:
-                    out.append(f"    {key}: {v}")
-            out.append("")
-        self.text.configure(state="normal")
-        self.text.delete("1.0", "end")
-        self.text.insert("1.0", "\n".join(out))
-        self.text.configure(state="disabled")
-
+            self.count_var.set(f"izvoz -> {r['file']} ({r['entries']} "
+                               f"vnosov, ledger: export) — rescan sprejme")
 
 # =============================================================================
 # SLIKA TAB — ⧖ the corpus as one clear apparition (Luka's ask, 26. 9.)
