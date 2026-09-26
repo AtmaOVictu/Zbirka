@@ -1093,6 +1093,18 @@ def draft_rulings(con, glyph_path=None) -> dict:
                          "must deliberately run `authorize-drafts` first; "
                          "the machine cannot authorize itself"}
     st = ruling_states(con)
+    # THE SEALED RULES — bodies in zakoni, cited by body (the number is a
+    # label): kopirno (rez 559), kiralno (rez 560), časovno (rez 561).
+    # Drafts cite the law; the law lives in the corpus, not in the code.
+    rules = {}
+    for r in con.execute("SELECT number, title FROM zakoni WHERE "
+                         "series='rez'"):
+        t = (r["title"] or "").upper()
+        key = ("kopirno" if "KOPIRNO" in t else
+               "kiralno" if "KIRALNO" in t else
+               "casovno" if "ČASOVNO" in t or "CASOVNO" in t else None)
+        if key and key not in rules:
+            rules[key] = f"REZ {r['number']} {(r['title'] or '').strip()}"
     ruled = st["human_fp"] | st["machine_fp"] | st["refused_fp"]
     drafted_m = 0
 
@@ -1133,6 +1145,27 @@ def draft_rulings(con, glyph_path=None) -> dict:
                           "the difference is on the STRATUM axis ("
                           + " vs ".join(sorted(strata)) +
                           "); the deadlock is the dimension, named")
+        # THE SEALED RULES APPLIED — a draft cites the law's body:
+        # kiralno (rez 560): derived beats raw; kopirno (rez 559):
+        # identical bodies, same stratum — any keeper is the same body
+        if rules.get("kiralno") and "canon_ruled" in strata:
+            derived = [r for r in rows
+                       if r.get("doc_stratum") == "canon_ruled"]
+            if derived:
+                keeper = derived[0]
+                losers = [r for r in rows if r is not keeper]
+                reason.append(f"po {rules['kiralno']}: izpeljava "
+                              "zmerge nad surovim — keeper iz canon_ruled")
+        elif rules.get("kopirno") and len(strata) == 1:
+            zfields = ("thesis", "antithesis", "synthesis",
+                       "foneticni_rez", "ontoloski_pomen", "antinoma",
+                       "glyph", "prakticna_uporaba")
+            vals = [tuple((r.get(k) or "").strip() for k in zfields)
+                    for r in rows]
+            if all(v == vals[0] for v in vals):
+                reason.append(f"po {rules['kopirno']}: identični telesi, "
+                              "ista stratuma — vsak keeper je isto telo; "
+                              "najnižji ID je dovolj")
         if p.get("near"):
             reason.append(f"near-dup, similarity {p['similarity']}")
         led(con, "verdict", p["word"], {
@@ -1170,23 +1203,55 @@ def draft_rulings(con, glyph_path=None) -> dict:
                 if len(fmts) == 1 else
                 "READER disagreement — formats " + "+".join(sorted(fmts)) +
                 " read the word differently (FORMAT axis)")
+        # THE SEALED RULE APPLIED — časovno (rez 561): same reader,
+        # two moments → the NEWEST reading is the candidate (a candidate,
+        # never the truth: regression can masquerade as refinement —
+        # the owner's [c] returns it). Evidence (mtime, lineno) is shown.
+        rule_note = ""
+        if len(fmts) == 1 and rules.get("casovno"):
+            latest = {}
+            for r in con.execute(
+                    "SELECT e.foneticni_rez, d.mtime, e.lineno FROM "
+                    "entries e JOIN docs d ON d.doc_id = e.doc_id "
+                    "WHERE e.word=? AND e.merged_into IS NULL AND "
+                    "TRIM(e.foneticni_rez) != ''", (w,)):
+                k = (str(r["mtime"] or ""), r["lineno"] or 0)
+                if r["foneticni_rez"] not in latest \
+                        or k > latest[r["foneticni_rez"]]:
+                    latest[r["foneticni_rez"]] = k
+            if latest:
+                winners = [max(latest, key=latest.get)]
+                rule_note = (f"po {rules['casovno']}: kandidat je "
+                             "najnovejše branje (mtime "
+                             + str(latest[winners[0]][0]) + ", lineno "
+                             + str(latest[winners[0]][1])
+                             + ") — kandidat, ne resnica; [c] vrača")
+        if rule_note:
+            rationale = f"{rule_note}; {axis}"
+        else:
+            rationale = (f"majority {winners[0]!r}: {best} of "
+                         f"{sum(counts.values())} live entries; {axis}")
         led(con, "verdict", w, {
             "ruling": "conflict-true-rez-draft", "machine": True,
             "true_rez": winners[0], "counts": counts,
-            "rationale": f"majority {winners[0]!r}: "
-                         f"{best} of {sum(counts.values())} live entries; "
-                         f"{axis}"})
+            "rationale": rationale})
         drafted_c += 1
 
     # glyphs: draft confirm only when the payload carries a warrant.
-    # SCAR 26. 9. (repaired): the default payload path was CWD-relative —
-    # a scratch-db run wrote drafts into the REAL payload. The payload
-    # belongs to the DB: its path derives from DB_PATH's directory, so a
-    # scratch db can never touch the real payload.
+    # THE PAYLOAD BELONGS TO THE DB — its path derives from the db's OWN
+    # file (PRAGMA database_list), never from CWD; an in-memory db owns
+    # no file and can never touch a disk payload. (Scar 26. 9., third
+    # occurrence of the same class — now structurally impossible: a
+    # scratch db has no file, and a db without a file owns no glyphs.)
     drafted_g = 0
-    gp = Path(glyph_path) if glyph_path else \
-        Path(DB_PATH).parent / "glyph_proposals.json"
-    if gp.exists():
+    main_file = ""
+    for r in con.execute("PRAGMA database_list"):
+        if r[1] == "main":
+            main_file = r[2] or ""
+    gp = (Path(glyph_path) if glyph_path else
+          (Path(main_file).parent / "glyph_proposals.json"
+           if main_file else None))
+    if gp and gp.exists():
         data = json.loads(gp.read_text(encoding="utf-8"))
         for w, p in sorted(data.items()):
             if (isinstance(p, dict)
@@ -1669,6 +1734,27 @@ if __name__ == "__main__":
             dr2 = draft_rulings(m, glx)
             assert dr2["conflict_drafts"] == 0   # refused is never re-drafted
             assert dr2["glyph_drafts"] == 0     # drafted is not re-drafted
+            # drafts CITE the sealed laws: a copy pair's rationale names
+            # the law's body (kopirno, rez 559) — the law lives in zakoni,
+            # the number is a label, the body is the key
+            m.execute("INSERT INTO zakoni(doc_id, series, number, title, "
+                      "lineno) VALUES (1, 'rez', 559, "
+                      "'KOPIRNO PRAVILO — TELESA, KI SO ISTO TELO', 1)")
+            m.execute("INSERT INTO entries(doc_id, word, format, thesis, "
+                      "foneticni_rez, grade) VALUES "
+                      "(1, 'KOPIRA', 't', 'ista teza', 'k / o', 'draft')")
+            m.execute("INSERT INTO entries(doc_id, word, format, thesis, "
+                      "foneticni_rez, grade) VALUES "
+                      "(1, 'KOPIRA', 't', 'ista teza', 'k / o', 'draft')")
+            m.commit()
+            dr3 = draft_rulings(m, glx)
+            assert dr3["merge_drafts"] >= 1
+            kop = [json.loads(r["payload"]) for r in m.execute(
+                "SELECT payload FROM ledger WHERE kind='verdict' AND "
+                "word=?", (canon("KOPIRA"),))]
+            assert kop and any("KOPIRNO" in (k.get("rationale") or "")
+                               and "po REZ 559" in (k.get("rationale") or "")
+                               for k in kop)
             # parser-zakonov (sealed 'daj'): laws are a SEPARATE kind —
             # grounded in rez 231's own shape, never entries
             zl = parse_zakon(
@@ -1693,8 +1779,9 @@ if __name__ == "__main__":
             # prose stays prose — a doc with no series+number head is no law
             assert parse_zakon("# Beležka\n\nNavadna proza brez zakona.\n") == []
             # idempotent by witness: the same body stored twice = one law
-            assert _insert_zakon(m, 1, z) == 1
-            assert _insert_zakon(m, 1, z) == 0
+            m.execute("INSERT INTO docs(doc_id, path) VALUES (99, 'z.md')")
+            assert _insert_zakon(m, 99, z) == 1
+            assert _insert_zakon(m, 99, z) == 0
             # laws NEVER become words: entries untouched
             n_before = m.execute("SELECT COUNT(*) FROM entries").fetchone()[0]
             assert m.execute("SELECT COUNT(*) FROM zakoni").fetchone()[0] >= 1

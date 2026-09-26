@@ -233,6 +233,30 @@ Pictures/) is other strata, not this workshop's to move.
    rule-transferable rulings get their bodies here.
 
 ## NEXT IN THE QUEUE (each names its line)
+- TRIJE ZAKONI ZAPEČATENI KOT REZ-TELESA (Luka's "daj", 26. 9. 2026;
+  written by the Cline hand, sealed by the owner's word — the rules now
+  LIVE IN THE CORPUS, not in code): Obj2/rez-559-kopirno-pravilo.md
+  (identical bodies + same stratum = copy; every keeper is the same
+  body; measured: settles 25 of the 27 "content ties" — khipu and
+  puruchuco stay the owner's) · Obj2/rez-560-kiralno-pravilo.md (content
+  tie + stratum difference: DERIVED beats RAW — canon_ruled over raw;
+  unordered strata stay honestly unruled, an open ∂) ·
+  Obj2/rez-561-casovno-pravilo.md (same reader, two moments: the NEWEST
+  reading is the CANDIDATE, never the truth — mtime+lineno shown, [c]
+  returns). Anatomy per the corpus (POVZETEK/TEZA/NUJNE NAPAKE/TESTI/
+  ODPRTA ∂/VEZI/Meritev ⊘/atomarni seal, counters chained 559→560→561→
+  562, DOKAZ counter honestly unclaimed — the dokaz series is forked,
+  named in the bodies' NUJNE NAPAKE). Rescan admitted all three;
+  parser-zakonov read them (kind='zakon'). DRAFTS NOW CITE THE LAWS:
+  draft_rulings loads the rule bodies from zakoni (by title — the
+  number is a label) and merge/conflict drafts carry "po REZ N
+  <title>" in the rationale; the chiral rule moves the keeper to the
+  canon_ruled body; the temporal rule replaces majority with the
+  newest-moment candidate (evidence shown). Selftest witnesses the
+  citation (copy pair's rationale names REZ 559); smoke PASS.
+  AWAITING LUKA, unchanged: `authorize-drafts` (the one terminal act
+  guard (a) keeps mine), then drafts → RATIFY (short, pre-reviewed),
+  and the 2 real meaning-ties (khipu, puruchuco) + glyph semantics.
 - SEAM 1 RULED (the register's verdict, 26. 9.): GRAFT NUMBERS ARE LABELS,
   NOT KEYS (TRK V8–V11: the key is body-with-witness). The register said
   "#13", this inventory says "#14" for the same body — cross-session
@@ -390,6 +414,18 @@ becomes the ruler.
   directory, and the selftest passes a temp file.
   → REPAIRED 26. 9. 2026: payload verified back at 30 pending; selftest
   and smoke PASS; scratch-db runs can no longer reach the real payload.
+- draft_rulings glyph payload path, THIRD OCCURRENCE, same class: an
+  ad-hoc debug run with a memory db + default path again reached the
+  real payload (reverted from git). The second repair (DB_PATH's
+  directory) was insufficient — DB_PATH is a module global that can
+  disagree with the connection's actual db. STRUCTURAL REPAIR: the
+  payload path now derives from the CONNECTION'S OWN FILE
+  (PRAGMA database_list); an in-memory db has no file and can never
+  touch a disk payload. The incident class is now impossible, not
+  guarded.
+  → REPAIRED 26. 9. 2026: payload verified 30 pending after selftest;
+  the citation witness runs draft_rulings on memory dbs with temp
+  payloads; selftest + smoke PASS.
 - obj2_cockpit _rule(): CONFLICT DISPATCH SILENTLY MISSING (graft #5
   scar found while building #11) — the conflict branch of the key
   dispatcher never landed; [k] in conflict mode would have called the
