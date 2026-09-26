@@ -372,6 +372,36 @@ the owner's ratification. The machine accelerates the ruling; it never
 becomes the ruler.
 
 ## REPAIR CANDIDATES (scars found 25. 9. — each names its line)
+- THE LEDGER'S OLDEST LIE (found by Luka's "delno lažeš", 26. 9.,
+  measured): 26 UNMARKED merge lines from 24. 9. — payload reads
+  "machine-ruled under Luka's 'do not relegate' instruction" — carry
+  NO machine:true flag, so the replay counts them as HUMAN (normative)
+  rulings. The system's canon contains 26 machine merges that pass as
+  canon: guard (a) fails retroactively; the receipts-vs-canon law was
+  in the bodies but not yet in the ledger when they were written.
+  Honest options (Luka's ruling): (i) retro-ratify — one normative
+  line "the 24. 9. merges are ratified" + flag them; (ii) unmark them
+  (machine:true) and let them enter RATIFY like any draft. Either way:
+  the replay must never again treat an unmarked machine line as canon.
+  → OPEN — Luka's [k]/[m]. Structural consequence either way: merges
+  written by the machine (auto or draft-ratified) MUST carry machine
+  provenance or a ratification reference.
+- COVERAGE DOUBLE-COUNT (same sitting): "594 machine-covered" was
+  340 + 254 summed — 52 docs carry BOTH words and laws: true coverage
+  542/1,194. And "notes = ATLAS's breaths" is partial: the 161 dosje-D
+  and much of notes are machine-parseable future targets (format D v2
+  + E); the honest ATLAS-only dark is smaller than stated.
+- KIRALNO RULE OVER-PROMISED (same sitting): it resolves only 4 of 32
+  chiral pairs (canon_ruled present); the other 28 wait on the stratum
+  ORDER (the law's own open ∂ — the body is honest, the summaries
+  drifted rosier). True rule-coverage of the 93: 25 (copy) + 4
+  (kiralno) + 3 (casovno) + 30 (warrant-draftable) = 62 draftable;
+  28 chiral remain the owner's until strata get an order.
+- STABILITY IS A STRUCTURAL PROXY, not normative tracing: "the
+  stability measure can now SEE its own standard" was partial —
+  stability() counts single-live-entry + no-pending; it does NOT trace
+  fields to law lines. True normative tracing is implementable NOW
+  (zakoni exist) and queued below.
 - COVERAGE POPIS (26. 9., ISKANO — Luka's "sva vse pokrili?"): WORKSHOP
   100% serving (audit stands; every new line consumed: zakoni → drafts/
   popis/citations). KORPUS: 594/1,194 docs machine-covered (340 z
