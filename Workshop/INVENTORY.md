@@ -122,21 +122,46 @@ Pictures/) is other strata, not this workshop's to move.
    dosje-D), A2/A3/A4 transcript prose; Workshop's own INVENTORY.md is
    scanned corpus typed dosje-D; 2 corpus files sit inside Pictures/.
    Selftest witnesses classifier, migration, admission-typing; smoke PASS.
+9. format D + reparse — the machine reads what it could not (Luka's "do it")
+   → BUILT 26. 9. 2026: RezFragmentParser ("D-rez", the EVOLUTION POINT's
+   first use) — grounded in the actual files first (C2/C1/Obj1 kintsugi,
+   lungta, NE-SKONČ-NOST): **WORD** (gloss) — [fonetični] rez: + fragment
+   table + Branje line, plus the **Fonetični rez besede WORD:** variant;
+   entry closes at first non-table content (rows never leak). `reparse` =
+   dark docs re-read with CURRENT plugins, only zero-entry docs (no
+   duplicates by construction), idempotent, ledger line, backup first.
+   MEASURED (two passes): 885 dark → 34 lit, +227 D-rez entries (58
+   headline / 169 draft), entries 3,277 → 3,504, live words 2,226 → 2,394,
+   REVIEW merge queue 9 → 59 (the machine proposes its new readings
+   against the old — yours to rule). Remaining 162 dosje-D dark with
+   shapes measured and queued (v2 above). Selftest witnesses parser +
+   reparse idempotence; smoke PASS.
+10. lexicon cross-witness — the two truth layers, finally compared
+   → BUILT 26. 9. 2026: `xcheck lexicon.json` — all 40 lexicon words vs
+   their soul.db pages; rez canon-meets-canon, antinoma canon-to-canon,
+   glyph by symbol head (glosses differ honestly), pomen shown never
+   machine-diffed. MEASURED: 40/40 in corpus · 31 agree · 9 disagree —
+   and ALL 9 are hollow corpus stubs (empty rez) where the lexicon IS
+   richer, not contradictions; 'nič' agrees only because graft #9's
+   D-rez entry supplied the rez minutes earlier (the loop reconciling a
+   truth pair in real time); 'drugo' lexicon rez 'd/r/u/g/oO' = g2p
+   artifact, flagged for Luka. Enrichment queued above. Selftest
+   witnesses agree/disagree/not-in-corpus; smoke PASS.
 
 ## NEXT IN THE QUEUE (each names its line)
-- FORMAT D plugin — a new ParserPlugin (one class + one PLUGINS line) for
-  the 175 dosje-D docs (census: C2 47, Obj1 42, C1 21, Obj2 19, C3 12...).
-  Until then the library misses ~3.7 MB of real dosje content. Guided by
-  kind: `SELECT path FROM docs WHERE kind='dosje-D'`.
-- REPARSE — a spine command to parse DARK docs with the CURRENT plugins
-  (scan() only admits new files; the already-scanned dark corpus stays
-  dark forever without this). Extends scan()'s line, ledger-witnessed.
-- LEXICON CROSS-WITNESS (found 26. 9., by actually reading lexicon.json —
-  the truth layer, previously unread): TWO truth layers exist and have
-  never been checked against each other — lexicon.json (40 words, each
-  with pomen/antinoma/glyph/phonemes/provenance) vs soul.db's pages for
-  the same words. Where they disagree, which is canon? Extends lexicon_core
-  + page(); findings feed REVIEW like every other proposal.
+- FORMAT D v2 — two measured shapes remain dark (162 dosje-D docs):
+  the `**WORD** (long gloss):` header that ends "):" (needs a
+  table-follows lookahead — commit only when a Fragment table shows),
+  and the latinščina word-table format (a whole dosje per ROW:
+  `| **petra** | f. | skala | PIE... | PE-TRA | tlak (P) → prehod (TRA) |`
+  — that is format E, one class + one PLUGINS line).
+- LEXICON ENRICHMENT — xcheck found 9 hollow corpus dosjes (empty rez)
+  where lexicon.json HAS the rez (drugo, glas, krivda, ne, odgovor,
+  ogenj, pot, tišina, zvestoba): the lexicon is richer; propose filling
+  via REVIEW (the owner rules which rez enters the corpus). Also flagged:
+  lexicon 'drugo' = 'd/r/u/g/oO' — g2p candidate artifact, Luka's ruling.
+
+## GRAFT QUEUE (extends existing lines, replaces nothing)
 
 ## REPAIR CANDIDATES (scars found 25. 9. — each names its line)
 - soul_engine find_dup_files(): DEAD + BROKEN. Never called (the `dups`

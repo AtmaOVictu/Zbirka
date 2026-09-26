@@ -48,7 +48,7 @@ SCHEMA = """
 CREATE TABLE IF NOT EXISTS ledger (
     id        INTEGER PRIMARY KEY AUTOINCREMENT,
     ts        TEXT NOT NULL,
-    kind      TEXT NOT NULL,   -- scan|verdict|merge|edit|grade|export|retype
+    kind      TEXT NOT NULL,   -- scan|verdict|merge|edit|grade|export|retype|reparse
     word      TEXT,
     payload   TEXT NOT NULL    -- JSON
 );
@@ -210,9 +210,88 @@ class NumberedSectionParser(ParserPlugin):
         if cur: out.append(cur)
         return out
 
+
+class RezFragmentParser(ParserPlugin):
+    """FORMAT D (measured 26. 9., grounded in the actual files across 15
+    strata — C2/C1/Obj1/Obj2/B2/Basics...): the rozetni-kamni inline dosje.
+
+        **WORD** (gloss) — [fonetični] rez:
+
+        | Fragment | Pomen |
+        |---|---|
+        | **FRAG** | meaning of the fragment |
+
+        Branje: WORD = the full reading.
+
+    Mapping: word=the bold word · thesis=the paren gloss (etymology) ·
+    foneticni_rez=fragments joined ' / ' (fragment labels, parens stripped
+    — KIN (金) → KIN) · ontoloski_pomen=the fragment meanings, '; '-joined ·
+    synthesis=the Branje line. Grade: headline when gloss+Branje exist,
+    draft when bare — honest, the format carries no antinoma."""
+    name = "D-rez"
+    HEAD = re.compile(r"^\*\*(?:(?:(.+?)\*\*\s*(\([^)]*\))?\s*[—–-]+\s*"
+                      r"(?:fonetični\s+)?rez\s*[:：]?\s*$"
+                      r"|Fonetični\s+rez\s+besede\s+(.+?)\s*[:：]?\s*\**\s*$))",
+                      re.IGNORECASE)
+    ROW = re.compile(r"^\|\s*\*\*(.+?)\*{0,2}\s*\|\s*([^|]*?)\s*\|")
+    BRANJE = re.compile(r"^\s*\**\s*Branje\b\s*\**\s*[:：]\s*\**\s*(.+?)"
+                        r"\s*\**\s*$", re.IGNORECASE)
+
+    def parse(self, text: str) -> List[Parsed]:
+        out: List[Parsed] = []
+        cur: Optional[Parsed] = None
+        gloss, frags, means, branje = "", [], [], ""
+
+        def flush():
+            nonlocal cur, gloss, frags, means, branje
+            if cur is None:
+                return
+            if frags:
+                cur.foneticni_rez = " / ".join(frags)
+            if means:
+                cur.ontoloski_pomen = "; ".join(means)
+            cur.thesis = gloss.replace("**", "")
+            cur.synthesis = branje.replace("**", "")
+            out.append(cur)
+            cur, gloss, frags, means, branje = None, "", [], [], ""
+
+        for i, line in enumerate(text.splitlines(), 1):
+            h = self.HEAD.match(line)
+            if h:
+                flush()
+                word = (h.group(1) or h.group(3) or "").strip()
+                word = word.rstrip(":：").strip("*").strip()
+                gloss = (h.group(2) or "").strip("() \t")
+                cur = Parsed(word=word, lineno=i)
+                continue
+            if cur is None:
+                continue
+            m = self.BRANJE.match(line)
+            if m:
+                branje = m.group(1).strip()
+                continue
+            r = self.ROW.match(line)
+            if r:
+                frag = re.sub(r"\s*\([^)]*\)\s*", " ",
+                              r.group(1).strip()).strip()
+                mean = r.group(2).strip()
+                if frag and mean and not set(frag) <= {"-", ":", " ", ""}:
+                    frags.append(frag)
+                    means.append(mean)
+                continue
+            # the entry CLOSES at the first content line that is neither
+            # table row nor Branje — rows never leak into unrelated tables
+            if frags and line.strip():
+                flush()
+        flush()
+        return out
+
 PLUGINS: List[ParserPlugin] = [StotnijeBulletParser(), HeadlineParser(),
-                               NumberedSectionParser()]
-# EVOLUTION POINT: append MyFormatDParser() here. Nothing else changes.
+                               NumberedSectionParser(),
+                               RezFragmentParser()]
+# EVOLUTION POINT: append MyFormatEParser() here. Nothing else changes.
+# (26. 9.: the point was used for D — measured first: **WORD** (gloss) —
+# rez: + | Fragment | Pomen | table + Branje: line, seen across 15 strata)
 
 def grade_of(p: Parsed) -> str:
     if p.foneticni_rez and p.ontoloski_pomen and p.antinoma and p.synthesis:
@@ -621,6 +700,113 @@ def census(con) -> dict:
     return out
 
 
+def reparse(con) -> dict:
+    """Graft #9 — the dark corpus, re-read with the CURRENT plugins.
+    scan() only admits NEW files; docs scanned before a plugin existed
+    stay dark forever without this. LAWS: only docs with ZERO entries are
+    parsed (a lit doc is never re-parsed — no duplicates by construction);
+    new entries inserted exactly as scan inserts them; lit docs are
+    re-typed; one summary ledger line; db backed up first, same law as
+    scan. Mentions are NOT re-derived (stratum 3 belongs to scan)."""
+    import shutil
+    if Path(DB_PATH).exists():
+        shutil.copy2(DB_PATH, f"{DB_PATH}.bak")
+    dark = [dict(r) for r in con.execute(
+        "SELECT doc_id, path, stratum FROM docs WHERE doc_id NOT IN "
+        "(SELECT DISTINCT doc_id FROM entries)")]
+    lit = new_entries = 0
+    for d in dark:
+        try:
+            text = Path(d["path"]).read_text(encoding="utf-8",
+                                            errors="replace")
+        except OSError:
+            continue
+        got = 0
+        for plugin in PLUGINS:
+            for p in plugin.parse(text):
+                if not p.word:
+                    continue
+                con.execute("""INSERT INTO entries
+                    (doc_id,word,format,number,thesis,antithesis,synthesis,
+                     foneticni_rez,ontoloski_pomen,antinoma,glyph,
+                     prakticna_uporaba,lineno,grade)
+                    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+                    (d["doc_id"], p.word, plugin.name, p.number, p.thesis,
+                     p.antithesis, p.synthesis, p.foneticni_rez,
+                     p.ontoloski_pomen, p.antinoma, p.glyph,
+                     p.prakticna_uporaba, p.lineno, grade_of(p)))
+                got += 1
+        if got:
+            lit += 1
+            new_entries += got
+            fmts = [r[0] for r in con.execute(
+                "SELECT DISTINCT format FROM entries WHERE doc_id=?",
+                (d["doc_id"],))]
+            con.execute("UPDATE docs SET kind=? WHERE doc_id=?",
+                        (doc_kind(d["stratum"] or "(root)", text, fmts),
+                         d["doc_id"]))
+    led(con, "reparse", None, {"dark_before": len(dark), "lit": lit,
+                               "new_entries": new_entries})
+    con.commit()
+    return {"dark_before": len(dark), "lit": lit, "new_entries": new_entries}
+
+
+def xcheck(con, lex_path) -> dict:
+    """Graft #10 — the two truth layers, finally checked against each
+    other: lexicon.json (the 40-word truth) vs soul.db's pages for the
+    same words. Agreement is a receipt; disagreement is YOURS to rule —
+    named here, never auto-fixed. rez is compared canon-meets-canon
+    (separators die); antinoma canon-to-canon; glyph by its symbol head
+    only ('⊘ (praznina...)' vs '⊘ (tok...)' is the SAME glyph — glosses
+    differ honestly); pomen is shown side by side, never machine-diffed.
+    Words whose live page disagrees on rez are already conflict-queue
+    material — this report names them all in one place."""
+    def norm(s):
+        return re.sub(r"[^a-z0-9čšžćđʎ]", "", (s or "").lower())
+
+    def glyph_head(s):
+        return norm((s or "").split("(")[0])
+
+    lex = json.loads(Path(lex_path).read_text(encoding="utf-8"))
+    per, agree, disagree, thin = [], 0, 0, 0
+    for key, w in sorted(lex.items()):
+        if not isinstance(w, dict):
+            continue
+        word = w.get("word") or key
+        p = page(con, word)
+        live = [e for e in p["entries"] if not e.get("merged_into")]
+        if not live:
+            per.append({"word": word, "in_corpus": False,
+                        "live_entries": 0})
+            continue
+        lex_rez = norm(w.get("source_form"))
+        rezs = {norm(e["foneticni_rez"]) for e in live
+                if (e["foneticni_rez"] or "").strip()}
+        rez_ok = (lex_rez in rezs) if lex_rez else None
+        lex_ant = norm(w.get("antinoma"))
+        ants = {norm(e["antinoma"]) for e in live
+                if (e["antinoma"] or "").strip()}
+        ant_ok = (lex_ant in ants) if lex_ant else None
+        lex_gl = glyph_head(w.get("glyph"))
+        gls = {glyph_head(e["glyph"]) for e in live
+               if (e["glyph"] or "").strip()}
+        gl_ok = (lex_gl in gls) if lex_gl else None
+        checks = [c for c in (rez_ok, ant_ok, gl_ok) if c is not None]
+        if not checks:
+            thin += 1
+        elif all(checks):
+            agree += 1
+        else:
+            disagree += 1
+        per.append({"word": word, "in_corpus": True,
+                    "live_entries": len(live),
+                    "rez": rez_ok, "antinoma": ant_ok, "glyph": gl_ok})
+    return {"lexicon_words": len(per), "agree": agree,
+            "disagree": disagree, "thin_no_overlap": thin,
+            "not_in_corpus": sum(1 for x in per if not x["in_corpus"]),
+            "per_word": per}
+
+
 
 # ========================================================== GUI (Textual) =
 
@@ -758,7 +944,7 @@ if __name__ == "__main__":
     ap.add_argument("cmd", choices=["scan", "gui", "page", "export",
                                     "export-page", "merge", "unmerge",
                                     "dups", "dark", "retype", "census",
-                                    "selftest"])
+                                    "reparse", "xcheck", "selftest"])
     ap.add_argument("path", nargs="?")
     ap.add_argument("--word")
     ap.add_argument("--out", default="soul_graph.json")
@@ -796,6 +982,14 @@ if __name__ == "__main__":
     elif args.cmd == "census":
         # graft #8's composed fact — stratum × kind × count
         print(json.dumps(census(con), ensure_ascii=False, indent=2))
+    elif args.cmd == "reparse":
+        # graft #9 — dark docs re-read with the CURRENT plugins
+        print(json.dumps(reparse(con), ensure_ascii=False))
+    elif args.cmd == "xcheck":
+        # graft #10 — lexicon.json vs soul.db, the two truth layers compared
+        print(json.dumps(xcheck(con, Path(args.path) if args.path
+                                else Path("lexicon.json")),
+                         ensure_ascii=False, indent=2))
     elif args.cmd == "selftest":
         # quick witness against real measured samples
         a = StotnijeBulletParser().parse(
@@ -808,6 +1002,16 @@ if __name__ == "__main__":
         assert grade_of(a[0]) == "headline"          # pomen missing → not reported
         assert b[0].thesis == "pritrditev" and grade_of(b[0]) == "headline"
         assert canon("LJUBEZEN!") == "ljubezen"
+        # graft #9: format D — **WORD** (gloss) — rez: + fragment table + Branje
+        d = RezFragmentParser().parse(
+            "**GEO** (gola zemlja) — rez:\n\n| Fragment | Pomen |\n|---|---|\n"
+            "| **GEO (γῆ)** | zemlja, telo sveta |\n\n"
+            "Branje: GEO = tla, ki gleda.\n")
+        assert d[0].word == "GEO" and d[0].thesis == "gola zemlja"
+        assert d[0].foneticni_rez == "GEO"
+        assert "telo sveta" in d[0].ontoloski_pomen
+        assert d[0].synthesis == "GEO = tla, ki gleda."
+        assert grade_of(d[0]) == "headline"        # gloss + Branje present
         # graft #2: near-dup detector. Same word, one word edited — the exact
         # fingerprint splits it, the similarity test re-unites it as a family.
         m = sqlite3.connect(":memory:")
@@ -919,6 +1123,36 @@ if __name__ == "__main__":
                             []) == "prose"
             assert doc_kind("A5", "# Title\n\nbody\n", []) == "notes"
             assert doc_kind("X", "\n\n", []) == "empty"
-        print("selftest: plugins A/B, grading, canon, near-dup, page, "
-              "conflicts-view, dark, page-export, scan-absolute, doc-typing "
-              "— OK (traced here, witnessed on disk)")
+            # graft #9: a dark doc lights up with the CURRENT plugins — once
+            (Path(td) / "dark_rez.md").write_text(
+                "**GEO** (gola zemlja) — rez:\n\n| Fragment | Pomen |\n"
+                "|---|---|\n| **GEO (γῆ)** | zemlja, telo sveta |\n\n"
+                "Branje: GEO = tla, ki gleda.\n", encoding="utf-8")
+            m.execute("INSERT INTO docs(path, stratum) VALUES (?, '(root)')",
+                      (str(Path(td) / "dark_rez.md"),))
+            rp = reparse(m)
+            assert rp["lit"] == 1 and rp["new_entries"] == 1
+            assert m.execute("SELECT COUNT(*) FROM entries WHERE "
+                             "format='D-rez'").fetchone()[0] == 1
+            rp2 = reparse(m)
+            assert rp2["new_entries"] == 0    # idempotent: lit stays lit
+            # graft #10: the two truth layers — agree and disagree both named
+            lx = Path(td) / "lex.json"
+            lx.write_text(json.dumps({
+                "geo": {"word": "GEO", "source_form": "g / e",
+                        "antinoma": None, "glyph": None},
+                "dih": {"word": "Dih", "source_form": "d / i / h",
+                        "antinoma": None, "glyph": None},
+                "nikoli": {"word": "Nikoli", "source_form": "n / i",
+                           "antinoma": None, "glyph": None}}),
+                encoding="utf-8")
+            xc = xcheck(m, lx)
+            assert xc["agree"] == 1 and xc["disagree"] == 1
+            assert xc["not_in_corpus"] == 1
+            geo = next(x for x in xc["per_word"] if x["word"] == "GEO")
+            assert geo["rez"] is False          # lex says g/e, corpus says GEO
+            dihx = next(x for x in xc["per_word"] if x["word"] == "Dih")
+            assert dihx["rez"] is True         # canon meets canon: d/i/h == dih
+        print("selftest: plugins A/B/D, grading, canon, near-dup, page, "
+              "conflicts-view, dark, page-export, scan-absolute, doc-typing, "
+              "reparse, xcheck — OK (traced here, witnessed on disk)")
