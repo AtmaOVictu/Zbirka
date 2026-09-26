@@ -161,7 +161,17 @@ Pictures/) is other strata, not this workshop's to move.
   via REVIEW (the owner rules which rez enters the corpus). Also flagged:
   lexicon 'drugo' = 'd/r/u/g/oO' — g2p candidate artifact, Luka's ruling.
 
-## GRAFT QUEUE (extends existing lines, replaces nothing)
+## THE LAW OF RECEIPTS vs CANON (SODBA #002, Luka's extension, 26. 9. 2026)
+A result produced by the same hand that built the machine is a RECEIPT —
+not a form of canon, not its own norm. A receipt is CAUSALITY: it records
+what was computed and why — "this happened." CANON is NORMALITY: it
+declares how it should be — "this is." Normality does not follow from
+causality, however much of it accumulates; the normative act is only ever
+the owner's ruling. CONSEQUENCE for every machine output (draft verdicts,
+reports, self-tests): it carries its rationale like a causal trace, is
+marked "machine": true in the ledger, and NEVER becomes canon without
+the owner's ratification. The machine accelerates the ruling; it never
+becomes the ruler.
 
 ## REPAIR CANDIDATES (scars found 25. 9. — each names its line)
 - soul_engine find_dup_files(): DEAD + BROKEN. Never called (the `dups`
