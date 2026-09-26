@@ -642,6 +642,11 @@ class ReviewTab(ttk.Frame):
                             "lose": list(p.get("lose") or []),
                             "rationale": p.get("rationale", ""),
                             "near": "near-dup" in (p.get("rationale") or "")})
+            elif ruling == "draft-enrich-rez":
+                out.append({"kind": "enrich", "word": r["word"],
+                            "entry_id": p.get("entry_id"),
+                            "rez": p.get("rez"),
+                            "rationale": p.get("rationale", "")})
             elif ruling.startswith("conflict") or ruling.startswith("draft-conflict"):
                 if w in st["human_conflict"] or w in st["refused_conflict"]:
                     continue
@@ -809,6 +814,8 @@ class ReviewTab(ttk.Frame):
                       f"{d['keeper']}"
         elif d["kind"] == "conflict":
             decision = f"true rez = {d['true_rez']!r}"
+        elif d["kind"] == "enrich":
+            decision = f"napolni votel rez = {d['rez']!r} (vnos {d['entry_id']})"
         else:
             decision = f"confirm glyph→{d.get('proposed_operator')}"
         self.tree.insert("", "end", values=(
@@ -1038,6 +1045,17 @@ class ReviewTab(ttk.Frame):
                               "old_rez": l["foneticni_rez"]}
                              for l in losers],
                 "ratified_from_draft": True})
+            self.con.commit()
+        elif d["kind"] == "enrich":
+            self.con.execute(
+                "UPDATE entries SET foneticni_rez=? WHERE entry_id=?",
+                (d["rez"], d["entry_id"]))
+            SOUL.led(self.con, "edit", d["word"], {
+                "entry_id": d["entry_id"],
+                "old": {"foneticni_rez": ""},
+                "new": {"foneticni_rez": d["rez"]},
+                "fingerprint": f"enrich-{d['entry_id']}",
+                "note": "ratified enrich: rez napolnjen iz leksikona"})
             self.con.commit()
         else:
             self._rule_glyph("confirm", word=d["word"])

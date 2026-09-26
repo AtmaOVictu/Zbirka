@@ -1475,12 +1475,152 @@ def draft_rulings(con, glyph_path=None) -> dict:
                 drafted_g += 1
         gp.write_text(json.dumps(data, ensure_ascii=False, indent=2),
                       encoding="utf-8")
+    # lexicon enrichment: HOLLOW corpus stubs (empty rez) where the
+    # lexicon CARRIES the rez — the lexicon is the owner's truth layer
+    # (xcheck-measured: hollow, not contradictory). The draft proposes
+    # FILLING from the lexicon, provenance cited; ratify = the owner's
+    # [k]; refused = never re-drafted (synthetic fingerprint channel).
+    drafted_e = 0
+    if main_file:
+        lex_path = Path(main_file).parent / "lexicon.json"
+        if lex_path.exists():
+            lex = json.loads(lex_path.read_text(encoding="utf-8"))
+            seen_e = st["human_fp"] | st["machine_fp"] | st["refused_fp"]
+            for e in con.execute(
+                    "SELECT entry_id, word, foneticni_rez FROM entries "
+                    "WHERE merged_into IS NULL AND "
+                    "(foneticni_rez IS NULL OR TRIM(foneticni_rez) = '')"):
+                w = canon(e["word"])
+                lx = next((v for k, v in lex.items()
+                           if isinstance(v, dict) and canon(k) == w), None)
+                if not lx or not (lx.get("source_form") or "").strip():
+                    continue
+                fp = f"enrich-{e['entry_id']}"
+                if (w, fp) in seen_e:
+                    continue
+                led(con, "verdict", e["word"], {
+                    "ruling": "draft-enrich-rez", "machine": True,
+                    "fingerprint": fp, "entry_id": e["entry_id"],
+                    "rez": lx["source_form"],
+                    "rationale": "votel dosje, leksikon nosi rez "
+                    f"(lexicon.json, {lx.get('provenance', 'owner layer')}; "
+                    "xcheck: korpus votel, ne protislovno)"})
+                drafted_e += 1
     con.commit()
     led(con, "drafts", None, {"merge": drafted_m, "conflict": drafted_c,
-                              "glyph": drafted_g})
+                              "glyph": drafted_g, "enrich": drafted_e})
     con.commit()
     return {"merge_drafts": drafted_m, "conflict_drafts": drafted_c,
-            "glyph_drafts": drafted_g}
+            "glyph_drafts": drafted_g, "enrich_drafts": drafted_e}
+
+
+def preveri(con) -> dict:
+    """∮ PREVERI — the loop that verifies the verifiers (ReflektivnaZanka
+    seed; Luka's 'predelaj še več po izvedbi in testiranju'): the FULL
+    draft→ratify pipeline run on a SCRATCH COPY of the db and returned
+    as one receipt. The live db is never touched; the owner's future
+    queue is pre-reviewed — every guard and every law-citation tested
+    before his keystrokes. TESTS: T1 guards (no authorization → no
+    drafts) · T2 drafts cite the sealed laws · T3 the chiral keeper is
+    the derived body · T4 refusal returns and never re-drafts · T5
+    idempotence (a second draft run adds nothing) · T6 the replay never
+    counts an unratified machine line as canon."""
+    import shutil, tempfile
+    ok, fails = [], []
+
+    def t(name, cond):
+        (ok if cond else fails).append(name)
+
+    main_file = ""
+    for r in con.execute("PRAGMA database_list"):
+        if r[1] == "main":
+            main_file = r[2] or ""
+    if not main_file:
+        return {"error": "preveri needs a file-backed db (the live one)"}
+    with tempfile.TemporaryDirectory() as td:
+        scratch = Path(td) / "preveri.db"
+        shutil.copy2(main_file, scratch)
+        # the payloads belong to the db: copy them beside the scratch so
+        # the preview matches what the owner's real queue will hold
+        for aux in ("lexicon.json", "glyph_proposals.json"):
+            src_aux = Path(main_file).parent / aux
+            if src_aux.exists():
+                shutil.copy2(src_aux, Path(td) / aux)
+        sc = sqlite3.connect(scratch)
+        sc.row_factory = sqlite3.Row
+        sc.execute("DROP VIEW IF EXISTS v_conflicts")
+        sc.executescript(SCHEMA)
+        # T1 — guards hold: no authorization, no drafts
+        r1 = draft_rulings(sc)
+        t("T1 brez pooblastila ni osnutkov (varovalka a)",
+          "error" in r1)
+        led(sc, "verdict", None, {
+            "ruling": "machine-drafts-authorized",
+            "by": "preveri — stand-in for the owner's deliberate act"})
+        sc.commit()
+        d1 = draft_rulings(sc)
+        # T5 idempotentnost: the SECOND run must CREATE nothing (scar of
+        # the loop's own first version: it compared return-dicts and
+        # failed a correct implementation — the test was the bug)
+        t("T5 idempotentnost: drugi zagon ne doda ničesar",
+          all(v == 0 for v in draft_rulings(sc).values()))
+        # T2 — merge drafts cite the sealed laws where they apply
+        merges = [json.loads(r["payload"]) for r in sc.execute(
+            "SELECT payload FROM ledger WHERE kind='verdict' AND payload "
+            "LIKE '%\"ruling\": \"draft-merge\"%'")]
+        citing = sum(1 for p in merges
+                     if "po REZ" in (p.get("rationale") or ""))
+        t(f"T2 osnutki citirajo zakone ({citing}/{len(merges)} spajanj)",
+          len(merges) == 0 or citing > 0)
+        # T3 — the chiral keeper is the derived body
+        chiral_ok = True
+        for p in merges:
+            if "kiralno" in (p.get("rationale") or "").lower():
+                row = sc.execute(
+                    "SELECT d.stratum FROM entries e JOIN docs d "
+                    "ON d.doc_id=e.doc_id WHERE e.entry_id=?",
+                    (p["keeper"],)).fetchone()
+                if not row or row["stratum"] != "canon_ruled":
+                    chiral_ok = False
+        t("T3 kiralni keeper je izpeljano telo", chiral_ok)
+        # T4 — refusal returns, never re-drafts
+        if merges:
+            p0 = merges[0]
+            led(sc, "verdict", p0.get("word"), {
+                "ruling": "draft-refused",
+                "fingerprint": p0.get("fingerprint")})
+            sc.commit()
+            before = sc.execute(
+                "SELECT COUNT(*) FROM ledger WHERE kind='verdict' AND "
+                "payload LIKE '%\"ruling\": \"draft-merge\"%'").fetchone()[0]
+            draft_rulings(sc)
+            after = sc.execute(
+                "SELECT COUNT(*) FROM ledger WHERE kind='verdict' AND "
+                "payload LIKE '%\"ruling\": \"draft-merge\"%'").fetchone()[0]
+            t("T4 zavrnjen se nikoli ne predlaga znova", after == before)
+        # T6 — the replay never canonizes an unratified machine line:
+        # no machine:true fingerprint may sit in human_fp
+        st = ruling_states(sc)
+        bad = 0
+        for r in sc.execute("SELECT word, payload FROM ledger "
+                            "WHERE kind IN ('merge','verdict')"):
+            p = json.loads(r["payload"])
+            if (isinstance(p, dict) and p.get("machine")
+                    and p.get("fingerprint")
+                    and not (p.get("ratified_by") or p.get("ratified"))):
+                if (canon(r["word"] or ""),
+                        p["fingerprint"]) in st["human_fp"]:
+                    bad += 1
+        t("T6 predvajalnik ne kanonizira neodobrenega osnutka", bad == 0)
+        preview = {"merge": d1.get("merge_drafts", 0),
+                   "conflict": d1.get("conflict_drafts", 0),
+                   "glyph": d1.get("glyph_drafts", 0),
+                   "enrich": d1.get("enrich_drafts", 0)}
+        sc.close()
+    return {"PASS": ok, "FAIL": fails,
+            "queue_preview (scratch)": preview,
+            "note": "∮ preveri — potrdilo o potrdilih; živa baza "
+                    "nedotaknjena; vrsta ostane Lastnikova"}
 
 
 def pending_merges(con):
@@ -1675,7 +1815,8 @@ if __name__ == "__main__":
                                     "reparse", "xcheck", "drafts",
                                     "authorize-drafts", "stability",
                                     "popis", "graf", "odprta-delta",
-                                    "retro-honesty", "selftest"])
+                                    "retro-honesty", "preveri",
+                                    "selftest"])
     ap.add_argument("path", nargs="?")
     ap.add_argument("--word")
     ap.add_argument("--out", default="soul_graph.json")
@@ -1752,6 +1893,9 @@ if __name__ == "__main__":
     elif args.cmd == "retro-honesty":
         # the ledger's oldest lie, repaired with witness, not laundered
         print(json.dumps(retro_mark(con), ensure_ascii=False))
+    elif args.cmd == "preveri":
+        # ∮ — the loop that verifies the verifiers (scratch run)
+        print(json.dumps(preveri(con), ensure_ascii=False, indent=2))
     elif args.cmd == "selftest":
         # quick witness against real measured samples
         a = StotnijeBulletParser().parse(
@@ -1962,6 +2106,37 @@ if __name__ == "__main__":
             dr2 = draft_rulings(m, glx)
             assert dr2["conflict_drafts"] == 0   # refused is never re-drafted
             assert dr2["glyph_drafts"] == 0     # drafted is not re-drafted
+            # lexicon enrichment: a hollow stub whose rez lives in the
+            # lexicon gets an enrich DRAFT (provenance cited, never silent)
+            m.execute("INSERT INTO entries(doc_id, word, format, grade, "
+                      "foneticni_rez) VALUES (1, 'HOLLOW', 't', 'draft', '')")
+            with tempfile.TemporaryDirectory() as td2:
+                lx2 = Path(td2) / "lex.json"
+                lx2.write_text(json.dumps({"hollow": {
+                    "word": "HOLLOW", "source_form": "h / o / llow",
+                    "provenance": "test"}}), encoding="utf-8")
+                # memory db has no file: enrichment needs a file-backed db
+                # (the payload-belongs-to-the-db law); witness via scratch file
+                import sqlite3 as _sq
+                sf = Path(td2) / "sc.db"
+                m2f = _sq.connect(sf); m2f.row_factory = _sq.Row
+                m2f.executescript(SCHEMA)
+                m2f.execute("INSERT INTO docs(doc_id, path) VALUES (1, 'x.md')")
+                led(m2f, "verdict", None, {"ruling": "machine-drafts-authorized"})
+                m2f.execute("INSERT INTO entries(doc_id, word, format, grade, "
+                            "foneticni_rez) VALUES (1, 'HOLLOW', 't', 'draft', '')")
+                lxcp = Path(td2) / "lexicon.json"
+                shutilcopy = __import__("shutil").copy2
+                shutilcopy(str(lx2), str(lxcp))
+                m2f.commit()
+                de = draft_rulings(m2f, str(Path(td2) / "gl.json"))
+                assert de["enrich_drafts"] == 1, de
+                en = [json.loads(r["payload"]) for r in m2f.execute(
+                    "SELECT payload FROM ledger WHERE kind='verdict' AND "
+                    "payload LIKE '%draft-enrich-rez%'")]
+                assert en and en[0]["rez"] == "h / o / llow"
+                assert "votel" in en[0]["rationale"]
+                m2f.close()
             # drafts CITE the sealed laws: a copy pair's rationale names
             # the law's body (kopirno, rez 559) — the law lives in zakoni,
             # the number is a label, the body is the key
