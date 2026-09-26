@@ -1472,6 +1472,124 @@ def le_cenzus(con) -> dict:
                     "machine-resolvable and honestly not counted."}
 
 
+# ==================== ANALYZE (Luka's "več in boljše analize?", 26. 9.) ==
+# Three receipts, each extending the report line, each built on data the
+# spine ALREADY measured — edges are counted, never judged; meaning is
+# the reader's.
+
+def sorodnost(con, word: str = None) -> dict:
+    """WORD KINSHIP (extends the mentions/graf line): two words are
+    kin when documents mention them together — a co-mention edge. With
+    a word: its measured neighborhood (top kin, shared-doc counts).
+    Without: the corpus's strongest kin pairs. HONEST LIMITS: co-mention
+    is proximity, not meaning; the SPINE'S OWN FIELD LABELS (measured
+    from the parsers' MAP dicts — the machine's vocabulary, provably
+    ours: fonetični, rez, ontološki, pomen, antinoma, sinteza, glyph,
+    praktična, uporaba) are excluded from kinship — a format label
+    printed beside every dosje is not a neighbor, it is furniture."""
+    LABELS = {"fonetični", "rez", "ontološki", "pomen", "antinoma",
+              "sinteza", "glyph", "praktična", "uporaba", "teza",
+              "napake", "šiv", "vezi"}
+    if word:
+        w = canon(word)
+        my_docs = {r["doc_id"] for r in con.execute(
+            "SELECT doc_id FROM mentions WHERE mention=?", (w,))}
+        kin = {}
+        for r in con.execute(
+                "SELECT m2.mention AS other, COUNT(*) n FROM mentions m1 "
+                "JOIN mentions m2 ON m1.doc_id = m2.doc_id "
+                "WHERE m1.mention = ? AND m2.mention != ? "
+                "GROUP BY m2.mention ORDER BY n DESC", (w, w)):
+            kin[r["other"]] = r["n"]
+        return {"word": word, "canon": w,
+                "docs_mentioning_it": len(my_docs),
+                "kin": [{"word": k, "shared_docs": n}
+                        for k, n in sorted(kin.items(),
+                                           key=lambda x: -x[1])[:20]
+                        if k not in LABELS],
+                "NOTE": "so-omemba je bližina, ne sorodnost pomena — "
+                        "povezava kaže, ne presodi"}
+    pairs = {}
+    for r in con.execute(
+            "SELECT m1.mention a, m2.mention b, COUNT(*) n "
+            "FROM mentions m1 JOIN mentions m2 "
+            "ON m1.doc_id = m2.doc_id AND m1.mention < m2.mention "
+            "GROUP BY m1.mention, m2.mention ORDER BY n DESC LIMIT 200"):
+        if r["a"] in LABELS or r["b"] in LABELS:
+            continue
+        pairs[f"{r['a']} + {r['b']}"] = r["n"]
+    top = dict(sorted(pairs.items(), key=lambda x: -x[1])[:30])
+    return {"strongest_kin_pairs": top,
+            "NOTE": "so-omemba je bližina, ne sorodnost pomena — "
+                    "povezava kaže, ne presodi; hrbtenične oznake polj "
+                    "(fonetični, rez, ontološki …) so izmerjeno "
+                    "izključene: pohištvo, ne sosedi"}
+
+
+def jezgra(con) -> dict:
+    """THE LOAD-BEARING LAWS (extends the graf line): which law bodies
+    the corpus CITES most in its VEZI — the structural hubs of the
+    register. Counted edges, never judgments: a cited law is a bond,
+    not a verdict."""
+    cited = {}
+    citing = 0
+    for z in con.execute("SELECT series, number, vezi FROM zakoni "
+                         "WHERE TRIM(vezi) != ''"):
+        citing += 1
+        for m in re.finditer(r"(?:rez|dokaz|sodba|ubod|šiv|zakon)"
+                             r"\s*[#·]?\s*(\d+)", z["vezi"],
+                             re.IGNORECASE):
+            key = m.group(0).lower().replace(" ", " ")
+            cited[key] = cited.get(key, 0) + 1
+    hubs = sorted(cited.items(), key=lambda x: -x[1])
+    total = con.execute("SELECT COUNT(*) FROM zakoni").fetchone()[0]
+    return {"laws": total, "laws_with_vezi": citing,
+            "distinct_laws_cited": len(cited),
+            "hubs": [{"law": k, "citations": n} for k, n in hubs[:15]],
+            "NOTE": "najbolj citiran zakon je vez, ne sodba — "
+                    "povezava kaže, ne presodi"}
+
+
+def plasti(con, lex_path=None) -> dict:
+    """THE CROSS-LAYER WITNESS (extends the xcheck line): for each of
+    the lexicon's 40 truth words — which layers carry it today: the CUT
+    (fonetični rez, native organ) · the IZMERA (ipa — the measured
+    pronunciation) · the DOC-GRAPH (how many documents mention it).
+    The composition shows where a word stands; it never ranks it."""
+    lex_words = []
+    if lex_path and Path(lex_path).exists():
+        lex = json.loads(Path(lex_path).read_text(encoding="utf-8"))
+        lex_words = [canon(k) for k in lex] if isinstance(lex, dict) else []
+    # one pass over entries, Python-side canon (SQLite has no canon() —
+    # the page() repair law)
+    ent = {}
+    for r in con.execute("SELECT word, foneticni_rez, ipa FROM entries "
+                         "WHERE merged_into IS NULL"):
+        cw = canon(r["word"])
+        e = ent.setdefault(cw, {"cut": False, "ipa": False})
+        if (r["foneticni_rez"] or "").strip():
+            e["cut"] = True
+        if (r["ipa"] or "").strip():
+            e["ipa"] = True
+    docn = {}
+    for r in con.execute("SELECT mention, COUNT(DISTINCT doc_id) n "
+                         "FROM mentions GROUP BY mention"):
+        docn[canon(r["mention"])] = r["n"]
+    rows = []
+    for w in sorted(set(lex_words)):
+        e = ent.get(w, {"cut": False, "ipa": False})
+        rows.append({"word": w, "cut": e["cut"], "ipa": e["ipa"],
+                     "docs_mentioning": docn.get(w, 0)})
+    comp = {"cut+ipa": sum(1 for r in rows if r["cut"] and r["ipa"]),
+            "cut_only": sum(1 for r in rows if r["cut"] and not r["ipa"]),
+            "ipa_only": sum(1 for r in rows if r["ipa"] and not r["cut"]),
+            "neither": sum(1 for r in rows if not r["cut"] and not r["ipa"])}
+    return {"lexicon_words": len(rows), "layers": rows,
+            "composition": comp,
+            "NOTE": "sestavljena priča čez plasti resnic — kje beseda "
+                    "stoji, ne kje bi morala stati"}
+
+
 def reparse(con) -> dict:
     """Graft #9 — the dark corpus, re-read with the CURRENT plugins.
     scan() only admits NEW files; docs scanned before a plugin existed
@@ -2230,7 +2348,8 @@ if __name__ == "__main__":
                                     "authorize-drafts", "stability",
                                     "popis", "graf", "odprta-delta",
                                     "ipa-popis", "ipa-drafts",
-                                    "le-cenzus",
+                                    "le-cenzus", "sorodnost", "jezgra",
+                                    "plasti",
                                     "retro-honesty", "preveri",
                                     "selftest"])
     ap.add_argument("path", nargs="?")
@@ -2313,6 +2432,20 @@ if __name__ == "__main__":
         # ZAKON LE: whole-corpus census of the minimizem lenses — a
         # receipt, never a sodba; the reader names the Alt or frees it
         print(json.dumps(le_cenzus(con), ensure_ascii=False, indent=2))
+    elif args.cmd == "sorodnost":
+        # word kinship by co-mention — proximity, never meaning
+        print(json.dumps(sorodnost(con, args.word),
+                         ensure_ascii=False, indent=2))
+    elif args.cmd == "jezgra":
+        # the load-bearing laws — citation hubs, edges never judge
+        print(json.dumps(jezgra(con), ensure_ascii=False, indent=2))
+    elif args.cmd == "plasti":
+        # the cross-layer witness: where each truth word stands
+        dbrow = con.execute("PRAGMA database_list").fetchone()
+        lex = (str(Path(dbrow["file"]).parent / "lexicon.json")
+               if dbrow and dbrow["file"] and dbrow["file"] != ":memory:"
+               else None)
+        print(json.dumps(plasti(con, lex), ensure_ascii=False, indent=2))
     elif args.cmd == "ipa-drafts":
         # g2p drafts — machine proposes, owner canonizes (guard (a) holds);
         # the lexicon rides beside the db (the same derivation as the
@@ -2733,6 +2866,33 @@ if __name__ == "__main__":
             pop = ipa_popis(m)
             assert pop["live_words"] >= 1 and pop["with_rez_cut"] >= 1
             assert pop["with_ipa"] == 0        # nothing ratified on m
+            # ANALYZE line (Luka's "več in boljše analize?"): kinship
+            # by co-mention (field labels excluded — furniture, not
+            # neighbors); law hubs by citation; cross-layer witness
+            ma = sqlite3.connect(":memory:")
+            ma.row_factory = sqlite3.Row
+            ma.executescript(SCHEMA)
+            ma.execute("INSERT INTO docs(doc_id, path) VALUES (1, 'a.md')")
+            ma.execute("INSERT INTO mentions(doc_id, mention) VALUES "
+                      "(1, 'ljubezen'), (1, 'prehod'), (1, 'fonetični')")
+            ma.execute("INSERT INTO mentions(doc_id, mention) VALUES "
+                      "(2, 'ljubezen'), (2, 'dvom')")
+            so = sorodnost(ma, "ljubezen")
+            assert so["docs_mentioning_it"] == 2
+            kin = [k["word"] for k in so["kin"]]
+            assert "prehod" in kin and "dvom" in kin
+            assert "fonetični" not in kin   # field label: furniture
+            so2 = sorodnost(ma)
+            assert all("fonetični" not in p for p in so2)
+            ma.execute("INSERT INTO zakoni(doc_id, series, number, "
+                       "title, vezi, lineno) VALUES "
+                      "(1, 'rez', 5, 'ZAKON VEZI', 'vez: rez 6; rez 6', 1), "
+                      "(1, 'rez', 6, 'OSNOVA', '', 2)")
+            jz = jezgra(ma)
+            assert jz["hubs"][0]["law"] == "rez 6"
+            assert jz["hubs"][0]["citations"] == 2
+            pl = plasti(ma)                # no lexicon: empty, honest
+            assert pl["lexicon_words"] == 0
             # retro-honesty: an unmarked machine merge becomes canon
             # THROUGH its ratification line, never silently
             m.execute("INSERT INTO ledger(ts, kind, word, payload) "
@@ -2764,5 +2924,6 @@ if __name__ == "__main__":
               "conflicts-view, dark, page-export, scan-absolute, doc-typing, "
               "doc-level mentions, laws (parser-zakonov, multi-head), "
               "drafts + guards (cite/retro/refuse/idempotence), enrichment, "
-              "ipa layer (g2p/popis/guard/ratify/never-re-drafted), graf, "
+              "ipa layer (g2p/popis/guard/ratify/never-re-drafted), "
+              "analyze (kinship/hubs/layers), graf, "
               "odprta-delta — OK (traced here, witnessed on disk)")

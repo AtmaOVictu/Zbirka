@@ -463,6 +463,33 @@ Pictures/) is other strata, not this workshop's to move.
   1 sodba · 10 ZAKON · 5 šiv); K1 now carries all four of its rezi
   (#29–#32); every true seal (231, 253, 559–562) re-verified standing.
   Selftest + retype PASS.
+- ANALIZA VRSTICA — TRI NOVA POTRDILA (Luka's "več in boljše analize?",
+  26. 9. 2026 — each extends the report line, each built on data the
+  spine already measured; edges counted, never judged):
+  (1) `sorodnost [--word X]` (extends mentions/graf): word kinship by
+  CO-MENTION — two words are kin when documents mention them together.
+  MEASURED (live db): ljubezen (55 docs) — its true neighbors after the
+  repair: prehod · operator · zven · enačba · razlika · beseda · rezi ·
+  gnosis · resnica; dvom (55 docs): beseda · telo · razlika · gnosis.
+  SCAR FOUND BY THE FIRST OUTPUT, REPAIRED: the raw kin list was
+  dominated by the SPINE'S OWN FIELD LABELS (glyph, ontološki,
+  fonetični — furniture printed beside every dosje, not neighbors);
+  the field-label tokens (measured from the parsers' own MAP dicts —
+  the machine's vocabulary, provably ours) are excluded from kinship,
+  the exclusion named in every receipt.
+  (2) `jezgra` (extends graf): the LOAD-BEARING LAWS — which law bodies
+  the corpus cites most in its VEZI. MEASURED: 308 laws · 110 carry
+  vezi · 108 distinct laws cited; the hubs: rez 6 (15 citations) ·
+  rez 122 · rez 519 · rez 406 · rez 523 · rez 81 · rez 270 · rez 231 ·
+  rez 68 · rez 125 — the citation skeleton of the register, measured,
+  never judged.
+  (3) `plasti` (extends xcheck): the CROSS-LAYER WITNESS — for each of
+  the lexicon's 40 truth words: which layers carry it (the CUT · the
+  IZMERA · the doc-graph). MEASURED: 40 words — 32 carry the cut · 8
+  carry neither · 0 carry the izmera (awaiting your [k]s — the 230 ipa
+  drafts sit in RATIFY); composition named, words never ranked.
+  Selftest witnesses all three (kinship excludes furniture; hubs count
+  citations; layers compose honestly). Selftest + ∮ preveri + smoke PASS.
 - AWAITING LUKA (unchanged, the one act the guards keep mine):
   `authorize-drafts` → `drafts` → RATIFY. The queue is pre-read,
   pre-verified (∮ + third-reader sample), and pre-reviewed — every
