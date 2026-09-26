@@ -32,5 +32,15 @@ echo BONUS: the ljubezen page (Act 2's dossier)
 echo ============================================
 python thin_slice.py ljubezen
 echo.
+echo ============================================
+echo RECEIPT 6/7: the spine selftest
+echo ============================================
+python soul_engine-the-evolvable-epic-ledger-spine-plugin-parsers-derived-pages.py selftest
+echo.
+echo ============================================
+echo RECEIPT 7/7: the loop that verifies the verifiers (preveri - scratch, db untouched)
+echo ============================================
+python soul_engine-the-evolvable-epic-ledger-spine-plugin-parsers-derived-pages.py preveri
+echo.
 echo Reviews complete. Any FAIL above is a scar, not a surprise.
 pause

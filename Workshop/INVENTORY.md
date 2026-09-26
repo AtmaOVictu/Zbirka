@@ -233,6 +233,33 @@ Pictures/) is other strata, not this workshop's to move.
    rule-transferable rulings get their bodies here.
 
 ## NEXT IN THE QUEUE (each names its line)
+- POSTANI TA ROKA — IZVEDENO (Luka's "postani tista roka in dopolni
+  sebe in naloge", 26. 9. 2026):
+  (A) DOPOLNJENA SEBE: run_reviews.bat now carries SEVEN receipts
+  (lattice · apd runtime · finiteness · cockpit smoke · lexicon core ·
+  ljubezen page · SPINE SELFTEST · ∮ PREVERI — the loop that verifies
+  the verifiers is now part of the owner's own review ceremony); the
+  selftest print line now names every witness honestly (plugins A/B/D/
+  E, grading, canon, near-dup, page, conflicts-view, dark, page-export,
+  scan-absolute, doc-typing, doc-level mentions, laws, drafts+guards,
+  enrichment, graf, odprta-delta).
+  (B) TRETJI-BRALOV PREHOD, IZVEDEN NA VZORCU (seed=259, reproducible):
+  10 merge drafts sampled from the scratch queue, their BODIES read,
+  every rationale claim re-derived independently — keeper richest: 10/10 ·
+  chiral naming true: 10/10 · derived keeper per kiralno: holds · copy
+  identity per kopirno: holds. Δd = 0 drift on the sample. HONEST LABEL
+  (cut 4): this pass was performed by the builder's body — W < 0; it is
+  a RECEIPT until a body that never wrote the drafts repeats it. The
+  protocol is now proven and reproducible: seed 259, one command.
+  (C) NALOGE DOPOLNJENE (previous sitting, recorded): lexicon
+  enrichment drafts (46 hollow entries carry lexicon rezs — more than
+  xcheck's 9 words: the same lexicon word sits on many hollow entries
+  across docs); ∮ preveri all-6-PASS with honest queue preview
+  (84 merge · 2 conflict · 20 glyph · 46 enrich; live db untouched).
+- AWAITING LUKA (unchanged, the one act the guards keep mine):
+  `authorize-drafts` → `drafts` → RATIFY. The queue is pre-read,
+  pre-verified (∮ + third-reader sample), and pre-reviewed — every
+  keystroke will land on tested ground.
 - "VSE SKUŠAJ" EXECUTED (26. 9. 2026 — the more-than-necessary, done):
   (1) RETRO-HONESTY: the ledger's oldest lie repaired WITH WITNESS, not
   laundered — the 26 unmarked 24. 9. machine merges now carry

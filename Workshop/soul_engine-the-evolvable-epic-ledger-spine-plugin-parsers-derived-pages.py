@@ -2230,6 +2230,8 @@ if __name__ == "__main__":
             n_before = m.execute("SELECT COUNT(*) FROM entries").fetchone()[0]
             assert m.execute("SELECT COUNT(*) FROM zakoni").fetchone()[0] >= 1
             assert m.execute("SELECT COUNT(*) FROM entries").fetchone()[0] == n_before
-        print("selftest: plugins A/B/D, grading, canon, near-dup, page, "
+        print("selftest: plugins A/B/D/E, grading, canon, near-dup, page, "
               "conflicts-view, dark, page-export, scan-absolute, doc-typing, "
-              "reparse, xcheck — OK (traced here, witnessed on disk)")
+              "doc-level mentions, laws (parser-zakonov), drafts + guards "
+              "(cite/retro/refuse/idempotence), enrichment, graf, "
+              "odprta-delta — OK (traced here, witnessed on disk)")
