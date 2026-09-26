@@ -48,7 +48,7 @@ SCHEMA = """
 CREATE TABLE IF NOT EXISTS ledger (
     id        INTEGER PRIMARY KEY AUTOINCREMENT,
     ts        TEXT NOT NULL,
-    kind      TEXT NOT NULL,   -- scan|verdict|merge|edit|grade|export
+    kind      TEXT NOT NULL,   -- scan|verdict|merge|edit|grade|export|retype
     word      TEXT,
     payload   TEXT NOT NULL    -- JSON
 );
@@ -56,7 +56,9 @@ CREATE TABLE IF NOT EXISTS docs (
     doc_id    INTEGER PRIMARY KEY,
     path      TEXT UNIQUE NOT NULL,
     mtime     TEXT,
-    raw_size  INTEGER
+    raw_size  INTEGER,
+    kind      TEXT,                   -- graft #8: what this text IS
+    stratum   TEXT                    -- graft #8: where it OCCUPIES
 );
 CREATE TABLE IF NOT EXISTS entries (
     entry_id  INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -97,6 +99,13 @@ def db() -> sqlite3.Connection:
     # alone would keep the ghost view forever, so the view is dropped first
     con.execute("DROP VIEW IF EXISTS v_conflicts")
     con.executescript(SCHEMA)
+    # graft #8: existing dbs get the kind/stratum columns — CREATE TABLE
+    # IF NOT EXISTS alone would leave them untyped forever
+    cols = {r["name"] for r in con.execute("PRAGMA table_info(docs)")}
+    if "kind" not in cols:
+        con.execute("ALTER TABLE docs ADD COLUMN kind TEXT")
+    if "stratum" not in cols:
+        con.execute("ALTER TABLE docs ADD COLUMN stratum TEXT")
     return con
 
 def led(con, kind: str, word: str, payload: dict) -> None:
@@ -256,6 +265,13 @@ def scan(root: Path, con: sqlite3.Connection) -> dict:
             con.execute("INSERT INTO mentions VALUES ((SELECT entry_id "
                         "FROM entries WHERE doc_id=? ORDER BY entry_id DESC "
                         "LIMIT 1), ?)", (doc_id, canon(m)))
+        # graft #8: what this text IS, where it OCCUPIES — typed at admission
+        rel = f.relative_to(root)
+        stratum = rel.parts[0] if len(rel.parts) > 1 else "(root)"
+        fmts = [r[0] for r in con.execute(
+            "SELECT DISTINCT format FROM entries WHERE doc_id=?", (doc_id,))]
+        con.execute("UPDATE docs SET kind=?, stratum=? WHERE doc_id=?",
+                    (doc_kind(stratum, text, fmts), stratum, doc_id))
     led(con, "scan", None, {"root": str(root), "files": len(files),
                             "new_docs": n_docs, "new_entries": n_entries})
     con.commit()
@@ -269,7 +285,9 @@ def page(con, word: str) -> dict:
     # of 2176 live words) returned an empty page. Canon must meet canon;
     # SQLite has no canon(), so the comparison lives here in Python.
     w = canon(word)
-    entries = [dict(r) for r in con.execute("SELECT * FROM entries")
+    entries = [dict(r) for r in con.execute(
+        "SELECT e.*, d.kind AS doc_kind, d.stratum AS doc_stratum "
+        "FROM entries e JOIN docs d ON d.doc_id = e.doc_id")
               if canon(r["word"]) == w or canon(r["merged_into"] or "") == w]
     mentions = con.execute("SELECT COUNT(*) FROM mentions WHERE mention=?",
                           (w,)).fetchone()[0]
@@ -503,6 +521,29 @@ def _dark_shape(text: str) -> str:
     return "empty"
 
 
+def doc_kind(stratum: str, text: str, formats) -> str:
+    """Graft #8 — WHAT a text IS. Content-based, honest, cheap:
+       derived     the canon_ruled stratum — the canon feeding itself
+       dosje-A/B/C a dosje, parsed by that plugin (+ when formats mix)
+       dosje-D     dark but carrying dosje markers — the parser gap
+       empty       nothing but whitespace
+       notes/prose dark without markers — theory, transcripts, letters;
+                   prose is prose: honestly dark until a plugin learns it
+    WHERE a text occupies is its stratum (top dir under the scan root) —
+    computed by the caller, visible everywhere a doc is named."""
+    if stratum == "canon_ruled":
+        return "derived"
+    if formats:
+        return "dosje-" + "+".join(sorted({f.split("-")[0] for f in formats}))
+    if any(m in text.lower() for m in DOSJE_MARKERS):
+        return "dosje-D"
+    if _dark_shape(text) == "empty":
+        return "empty"
+    if _dark_shape(text) in ("heading", "numbered-heading"):
+        return "notes"
+    return "prose"
+
+
 def dark_report(con) -> dict:
     groups = {}
     gone = 0
@@ -531,6 +572,53 @@ def dark_report(con) -> dict:
     return {"dark_docs": sum(g["count"] for g in groups.values()),
             "deleted_since_scan": gone,
             "groups": sorted(groups.values(), key=lambda g: -g["count"])}
+
+
+def retype(con, root: Path) -> dict:
+    """Graft #8 backfill: type the docs already scanned (scan types at
+    admission; everything admitted before graft #8 was never typed).
+    Idempotent — re-running re-derives the same facts. One summary ledger
+    line, not one per doc; the db is backed up first, same law as scan."""
+    import shutil
+    if Path(DB_PATH).exists():
+        shutil.copy2(DB_PATH, f"{DB_PATH}.bak")
+    root = Path(root).resolve()
+    typed = gone = outside = 0
+    for r in con.execute("SELECT doc_id, path FROM docs").fetchall():
+        p = Path(r["path"])
+        try:
+            text = p.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            gone += 1
+            continue
+        try:
+            rel = p.relative_to(root)
+        except ValueError:
+            outside += 1
+            continue
+        stratum = rel.parts[0] if len(rel.parts) > 1 else "(root)"
+        fmts = [x[0] for x in con.execute(
+            "SELECT DISTINCT format FROM entries WHERE doc_id=?",
+            (r["doc_id"],))]
+        con.execute("UPDATE docs SET kind=?, stratum=? WHERE doc_id=?",
+                    (doc_kind(stratum, text, fmts), stratum, r["doc_id"]))
+        typed += 1
+    led(con, "retype", None, {"root": str(root), "typed": typed,
+                              "unreadable": gone, "outside_root": outside})
+    con.commit()
+    return {"typed": typed, "unreadable": gone, "outside_root": outside}
+
+
+def census(con) -> dict:
+    """Graft #8's composed fact: what the corpus IS, at a glance —
+    stratum × kind × count, plus the dark share per stratum."""
+    out = {}
+    for r in con.execute(
+            "SELECT stratum, kind, COUNT(*) n FROM docs "
+            "WHERE kind IS NOT NULL GROUP BY stratum, kind "
+            "ORDER BY stratum, kind"):
+        out.setdefault(r["stratum"] or "(untyped)", {})[r["kind"]] = r["n"]
+    return out
 
 
 
@@ -646,8 +734,10 @@ def export_page(con, word: str, out_dir) -> dict:
             if v:
                 lines.append(f"- **{label}:** {v}")
         lines.append("")
-        provenance.append(f"entry {e['entry_id']} [{e['grade']}/"
-                          f"{e['format']}] doc {e['doc_id']}:{e['lineno']}")
+        provenance.append(f"entry {e['entry_id']} [{e['grade']}/{e['format']}"
+                          + (f" · {e['doc_stratum']}/{e['doc_kind']}"
+                             if e.get("doc_stratum") else "")
+                          + f"] doc {e['doc_id']}:{e['lineno']}")
     lines.append("> Sources (provenance, not parsed): "
                  + "; ".join(provenance))
     if p["conflicts"]:
@@ -667,7 +757,8 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("cmd", choices=["scan", "gui", "page", "export",
                                     "export-page", "merge", "unmerge",
-                                    "dups", "dark", "selftest"])
+                                    "dups", "dark", "retype", "census",
+                                    "selftest"])
     ap.add_argument("path", nargs="?")
     ap.add_argument("--word")
     ap.add_argument("--out", default="soul_graph.json")
@@ -698,6 +789,13 @@ if __name__ == "__main__":
     elif args.cmd == "dark":
         # dark docs report — which formats the plugins have not learned yet
         print(json.dumps(dark_report(con), ensure_ascii=False, indent=2))
+    elif args.cmd == "retype":
+        # graft #8 backfill — classify every scanned doc; idempotent
+        print(json.dumps(retype(con, Path(args.path) if args.path
+                                else Path.cwd()), ensure_ascii=False))
+    elif args.cmd == "census":
+        # graft #8's composed fact — stratum × kind × count
+        print(json.dumps(census(con), ensure_ascii=False, indent=2))
     elif args.cmd == "selftest":
         # quick witness against real measured samples
         a = StotnijeBulletParser().parse(
@@ -797,6 +895,30 @@ if __name__ == "__main__":
                 os.chdir(cwd)
             assert m2.execute("SELECT COUNT(*) FROM docs").fetchone()[0] == 1
             assert m2.execute("SELECT COUNT(*) FROM entries").fetchone()[0] == 1
+            # graft #8: typed at admission — what it is, where it occupies
+            row = m2.execute("SELECT kind, stratum FROM docs").fetchone()
+            assert row["kind"] == "dosje-A" and row["stratum"] == "(root)"
+            # graft #8: existing dbs migrate — old docs table gains the columns
+            old = sqlite3.connect(str(DB_PATH))
+            old.execute("CREATE TABLE IF NOT EXISTS docs (doc_id INTEGER "
+                        "PRIMARY KEY, path TEXT UNIQUE NOT NULL, mtime TEXT, "
+                        "raw_size INTEGER)")
+            old.commit()
+            old.close()
+            con2 = db()
+            mcols = {r["name"] for r in con2.execute("PRAGMA table_info(docs)")}
+            assert {"kind", "stratum"} <= mcols
+            con2.close()   # Windows: an open sqlite file cannot be deleted
+            # graft #8: the classifier — what a text IS
+            assert doc_kind("canon_ruled", "x", []) == "derived"
+            assert doc_kind("A2", "#### **1. Strah**\n", ["A-bullet"]) == "dosje-A"
+            assert doc_kind("A2", "x", ["A-bullet", "C-numbered"]) == "dosje-A+C"
+            assert doc_kind("B2", "**X** — fonetični rez:\n| a |\n|---|\n| b |",
+                            []) == "dosje-D"
+            assert doc_kind("Rohonc", "plain words, no markers at all\n",
+                            []) == "prose"
+            assert doc_kind("A5", "# Title\n\nbody\n", []) == "notes"
+            assert doc_kind("X", "\n\n", []) == "empty"
         print("selftest: plugins A/B, grading, canon, near-dup, page, "
-              "conflicts-view, dark, page-export, scan-absolute — OK "
-              "(traced here, witnessed on disk)")
+              "conflicts-view, dark, page-export, scan-absolute, doc-typing "
+              "— OK (traced here, witnessed on disk)")

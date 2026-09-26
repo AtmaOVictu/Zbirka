@@ -673,14 +673,20 @@ class ReviewTab(ttk.Frame):
         ids = [p["keeper"]] + list(p["lose"])
         marks = ",".join("?" * len(ids))
         rows = {r["entry_id"]: r for r in self.con.execute(
-            f"SELECT entry_id, word, format, thesis, synthesis, foneticni_rez, "
-            f"ontoloski_pomen, antinoma, glyph, grade, doc_id, lineno "
-            f"FROM entries WHERE entry_id IN ({marks})", ids)}
+            f"SELECT e.entry_id, e.word, e.format, e.thesis, e.synthesis, "
+            f"e.foneticni_rez, e.ontoloski_pomen, e.antinoma, e.glyph, "
+            f"e.grade, e.doc_id, e.lineno, d.kind AS doc_kind, "
+            f"d.stratum AS doc_stratum FROM entries e "
+            f"JOIN docs d ON d.doc_id = e.doc_id "
+            f"WHERE e.entry_id IN ({marks})", ids)}
         for eid, role in ([(p["keeper"], "PROPOSED KEEPER")] +
                           [(l, "loser") for l in p["lose"]]):
             r = rows.get(eid)
             if r is None:
                 continue
+            where = (f"{r['doc_id']}:{r['lineno']}"
+                      + (f" · {r['doc_stratum']}/{r['doc_kind']}"
+                         if r["doc_stratum"] else ""))
             self.tree.insert("", "end",
                              tags=("keeper",) if eid == p["keeper"] else (),
                              values=(eid, role, r["word"], r["format"], r["grade"],
@@ -688,7 +694,7 @@ class ReviewTab(ttk.Frame):
                                      r["foneticni_rez"] or "—",
                                      r["ontoloski_pomen"] or "—",
                                      r["antinoma"] or "—", r["glyph"] or "—",
-                                     f"{r['doc_id']}:{r['lineno']}"))
+                                     where))
         tail = (f"near-dup, similarity {p['similarity']}" if p.get("near")
                 else "richest is a tie")
         self.status_var.set(f"ruling {self.i + 1} / {len(self.merge_queue)} — "
@@ -718,14 +724,19 @@ class ReviewTab(ttk.Frame):
             return
         w = self.conflict_queue[self.i]["word"]
         rows = list(self.con.execute(
-            "SELECT entry_id, word, foneticni_rez, grade, format, doc_id, "
-            "lineno, thesis, synthesis FROM entries "
-            "WHERE word=? AND merged_into IS NULL AND TRIM(foneticni_rez) != ''",
-            (w,)))
+            "SELECT e.entry_id, e.word, e.foneticni_rez, e.grade, e.format, "
+            "e.doc_id, e.lineno, e.thesis, e.synthesis, "
+            "d.kind AS doc_kind, d.stratum AS doc_stratum "
+            "FROM entries e JOIN docs d ON d.doc_id = e.doc_id "
+            "WHERE e.word=? AND e.merged_into IS NULL "
+            "AND TRIM(e.foneticni_rez) != ''", (w,)))
         for r in rows:
+            where = (f"{r['doc_id']}:{r['lineno']}"
+                     + (f" · {r['doc_stratum']}/{r['doc_kind']}"
+                        if r["doc_stratum"] else ""))
             self.tree.insert("", "end", values=(
                 r["word"], r["foneticni_rez"], r["grade"], r["format"],
-                f"{r['doc_id']}:{r['lineno']}",
+                where,
                 (r["thesis"] or r["synthesis"] or "—")[:64]))
         self.status_var.set(f"ruling {self.i + 1} / {len(self.conflict_queue)} — "
                             f"'{w}' · {len(rows)} live entries · "
@@ -1029,7 +1040,13 @@ class LibraryTab(ttk.Frame):
                        "variants — real difference, stays yours to rule")
             out.append("")
         for e in p["entries"]:
-            doc = f"doc {e['doc_id']}:{e['lineno']}"
+            # graft #8: what the source text IS and where it OCCUPIES —
+            # stratum · kind before the bare doc:line
+            if e.get("doc_stratum"):
+                doc = (f"{e['doc_stratum']} · {e['doc_kind']} · "
+                       f"doc {e['doc_id']}:{e['lineno']}")
+            else:
+                doc = f"doc {e['doc_id']}:{e['lineno']}"
             if e.get("merged_into"):
                 out.append(f"— merged into '{e['merged_into']}'  "
                            f"[{e['grade']}/{e['format']}]  {doc}")

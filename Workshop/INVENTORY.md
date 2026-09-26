@@ -107,11 +107,27 @@ Pictures/) is other strata, not this workshop's to move.
    corpus → parse → rule → better version → corpus. Selftest witnesses the
    round-trip on a scratch db; smoke PASS.
 
+8. doc typing — what a text IS, where it OCCUPIES (Luka's ask, 26. 9.)
+   → BUILT 26. 9. 2026: docs table + kind + stratum (migration in db(),
+   existing dbs get the columns). doc_kind() classifier: derived
+   (canon_ruled) | dosje-A/B/C (+ when formats mix) | dosje-D (dark,
+   markers — the parser gap) | notes | prose | empty. Typed at scan
+   admission; `retype` = idempotent backfill (1,191 typed, 0 unreadable,
+   0 outside; one summary ledger line, db backed up first); `census` =
+   the composed fact. page()/LIBRARY/REVIEW rows/export provenance now
+   show "stratum · kind · doc:line" — source vs DERIVED visible at
+   ruling time. MEASURED (census): 175 dosje-D (cross-witnesses the dark
+   report's 175 exactly — two independent paths agree); biggest strata:
+   Obj1 268 docs (145 notes + 42 dosje-D), C2 275 (111 dosje-A + 47
+   dosje-D), A2/A3/A4 transcript prose; Workshop's own INVENTORY.md is
+   scanned corpus typed dosje-D; 2 corpus files sit inside Pictures/.
+   Selftest witnesses classifier, migration, admission-typing; smoke PASS.
+
 ## NEXT IN THE QUEUE (each names its line)
 - FORMAT D plugin — a new ParserPlugin (one class + one PLUGINS line) for
-  the 175 marker-carrying dark docs. Until then the library misses ~3.7 MB
-  of real dosje content. NOTE: dark docs are already scanned, so scan()
-  skips them — the plugin needs the reparse line below with it.
+  the 175 dosje-D docs (census: C2 47, Obj1 42, C1 21, Obj2 19, C3 12...).
+  Until then the library misses ~3.7 MB of real dosje content. Guided by
+  kind: `SELECT path FROM docs WHERE kind='dosje-D'`.
 - REPARSE — a spine command to parse DARK docs with the CURRENT plugins
   (scan() only admits new files; the already-scanned dark corpus stays
   dark forever without this). Extends scan()'s line, ledger-witnessed.
