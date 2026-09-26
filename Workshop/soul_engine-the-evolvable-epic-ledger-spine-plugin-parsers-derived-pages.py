@@ -830,14 +830,21 @@ def dark_report(con) -> dict:
             "groups": sorted(groups.values(), key=lambda g: -g["count"])}
 
 
-def retype(con, root: Path) -> dict:
+def retype(con, root=None) -> dict:
     """Graft #8 backfill: type the docs already scanned (scan types at
     admission; everything admitted before graft #8 was never typed).
     Idempotent — re-running re-derives the same facts. One summary ledger
-    line, not one per doc; the db is backed up first, same law as scan."""
+    line, not one per doc; the db is backed up first, same law as scan.
+    root=None: the root is DERIVED FROM THE DOCS (commonpath) — a caller
+    guessing the wrong root (scar 26. 9.: the CLI defaulted to cwd=Workshop
+    and 1,193 docs read as 'outside_root', typing nothing while the
+    receipt claimed success) can no longer shrink the pass."""
     import shutil
     if Path(DB_PATH).exists():
         shutil.copy2(DB_PATH, f"{DB_PATH}.bak")
+    if root is None:
+        paths = [r["path"] for r in con.execute("SELECT path FROM docs")]
+        root = (Path(os.path.commonpath(paths)) if paths else Path.cwd())
     root = Path(root).resolve()
     typed = gone = outside = 0
     for r in con.execute("SELECT doc_id, path FROM docs").fetchall():
@@ -853,11 +860,19 @@ def retype(con, root: Path) -> dict:
             outside += 1
             continue
         stratum = rel.parts[0] if len(rel.parts) > 1 else "(root)"
-        fmts = [x[0] for x in con.execute(
-            "SELECT DISTINCT format FROM entries WHERE doc_id=?",
-            (r["doc_id"],))]
+        # law-aware: a doc that carries law bodies is 'zakon' — retype
+        # may not clobber it back to 'notes' (scar 26. 9., found by the
+        # coverage POPIS's own re-run)
+        if con.execute("SELECT COUNT(*) FROM zakoni WHERE doc_id=?",
+                       (r["doc_id"],)).fetchone()[0]:
+            kind = "zakon"
+        else:
+            fmts = [x[0] for x in con.execute(
+                "SELECT DISTINCT format FROM entries WHERE doc_id=?",
+                (r["doc_id"],))]
+            kind = doc_kind(stratum, text, fmts)
         con.execute("UPDATE docs SET kind=?, stratum=? WHERE doc_id=?",
-                    (doc_kind(stratum, text, fmts), stratum, r["doc_id"]))
+                    (kind, stratum, r["doc_id"]))
         typed += 1
     led(con, "retype", None, {"root": str(root), "typed": typed,
                               "unreadable": gone, "outside_root": outside})
@@ -1495,7 +1510,7 @@ if __name__ == "__main__":
     elif args.cmd == "retype":
         # graft #8 backfill — classify every scanned doc; idempotent
         print(json.dumps(retype(con, Path(args.path) if args.path
-                                else Path.cwd()), ensure_ascii=False))
+                                else None), ensure_ascii=False))
     elif args.cmd == "census":
         # graft #8's composed fact — stratum × kind × count
         print(json.dumps(census(con), ensure_ascii=False, indent=2))

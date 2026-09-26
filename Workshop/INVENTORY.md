@@ -380,10 +380,20 @@ becomes the ruler.
   (format D v2 + E tarče) + 33 temni-nevpisani. STORED-BUT-UNCONSUMED:
   VEZI (106 zakonov nosi vezi — citation graph queued) · ODPRTA ∂
   (60 zakonov — ∂-delta queued, serves rez 231).
-- docs.kind: 124 UNTYPED — docs admitted through passes that skip
-  typing (reparse word-pass types only what it touches; the rest stay
-  NULL). Repair = run `retype` (idempotent, one command, backups first).
-  → REPAIR CANDIDATE (one command; run at next sitting start).
+- docs.kind: 124 UNTYPED + RETYPE ROOT BUG (found and repaired same
+  sitting, with a FALSE RECEIPT caught in flight): the coverage POPIS
+  found 124 untyped docs; the first `retype` run typed ONE — the CLI
+  defaulted the root to cwd (Workshop), so 1,193 docs read as
+  "outside_root" and were skipped, while the sitting's commit message
+  claimed "kind NULL now 0" — it was 124. The false claim was caught by
+  the next measurement before the sitting closed. Repairs: (1) the root
+  is DERIVED FROM THE DOCS (commonpath) — a wrong guess can no longer
+  shrink the pass; (2) retype is LAW-AWARE — the first successful pass
+  clobbered 254 zakon docs back to 'notes' (retype knew only word
+  readers); now a doc carrying law bodies keeps kind='zakon'.
+  → REPAIRED 26. 9. 2026: typed 1,194/1,194, outside_root 0, kind NULL
+  0; final census: prose 289 · zakon 254 · dosje-A 247 · notes 236 ·
+  dosje-D 161 · mixed 6 · derived 1. Selftest + smoke PASS.
 - mentions stratum: STRUCTURALLY MIS-TAGGED (found by the coverage
   POPIS) — 96k of 184k rows point at NULL (dark docs' mentions stored
   toward nothing); the rest pile ALL of a doc's mentions onto its LAST
