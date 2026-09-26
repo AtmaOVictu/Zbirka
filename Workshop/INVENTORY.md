@@ -372,6 +372,30 @@ the owner's ratification. The machine accelerates the ruling; it never
 becomes the ruler.
 
 ## REPAIR CANDIDATES (scars found 25. 9. — each names its line)
+- COVERAGE POPIS (26. 9., ISKANO — Luka's "sva vse pokrili?"): WORKSHOP
+  100% serving (audit stands; every new line consumed: zakoni → drafts/
+  popis/citations). KORPUS: 594/1,194 docs machine-covered (340 z
+  besedami + 254 z zakoni, ~50%); dark 652 = 289 proza + 215 zapiski
+  (poštena tema — ATLAS-ovo dihanje, ne strojevo) + 115 dosje-D
+  (format D v2 + E tarče) + 33 temni-nevpisani. STORED-BUT-UNCONSUMED:
+  VEZI (106 zakonov nosi vezi — citation graph queued) · ODPRTA ∂
+  (60 zakonov — ∂-delta queued, serves rez 231).
+- docs.kind: 124 UNTYPED — docs admitted through passes that skip
+  typing (reparse word-pass types only what it touches; the rest stay
+  NULL). Repair = run `retype` (idempotent, one command, backups first).
+  → REPAIR CANDIDATE (one command; run at next sitting start).
+- mentions stratum: STRUCTURALLY MIS-TAGGED (found by the coverage
+  POPIS) — 96k of 184k rows point at NULL (dark docs' mentions stored
+  toward nothing); the rest pile ALL of a doc's mentions onto its LAST
+  entry ("🔮 OPEN QUESTIONS & CANON" carries 6,754 mentions — a mangled
+  word wearing a document's whole mention-load). The tag-to-last-entry
+  choice (scan's "stratum 3, cheap") makes the mention graph mostly
+  noise. Consume-only use today: page()'s count. Repair options (Luka's
+  ruling): (a) re-derive mentions as DOC-LEVEL edges (mention belongs to
+  the document, not to its last entry — honest and cheap, one reparse
+  pass); (b) admit the stratum is noise and drop it from page(). The
+  citation graph (VEZI-based) is the trustworthy edge line either way.
+  → OPEN — named, not repaired; Luka's [k]/[m] on (a) or (b).
 - soul_engine find_dup_files(): DEAD + BROKEN. Never called (the `dups`
   command uses dup_file_report, which hashes in Python), and it would crash
   if called — SQLite has no md5() (verified). Repair = delete it; the live
