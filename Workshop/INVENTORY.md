@@ -22,6 +22,29 @@ or it is clutter.
 - cockpit_gui.py proposal — third+ duplicate of obj2_cockpit.py + soul_engine gui
 - any new engine/scanner/DB — spine is ingest.py + soul.db; nothing parallel
 
+## WORKSHOP AUDIT — 26. 9. 2026 (the law applied to the workshop itself)
+LAW (Luka, 26. 9.): the workspace contains only items that SERVE — are
+used, compose a useful fact, and act if able. Nothing inert. Measured by
+grep (who consumes what), not by opinion.
+SERVES (consumer named): obj2_cockpit (THE GUI) · soul_engine + soul.db +
+.bak (the spine, the ledger, the insurance) · ingest.py + ingest_manifest
+(read by thin_slice) · lexicon_core + lexicon.json (read by ingest +
+thin_slice; receipt 5) · thin_slice (receipt 6 in run_reviews.bat) ·
+phonetic_coordinates_full (receipt 1; loaded by validator) · apd_engine
+(receipt 2; loaded by validator) · wordlist_validator (receipt 3; loads all
+three) · phonetic_coordinates_107 — LOAD-BEARING DESPITE ITS CRASH: the
+validator imports it as PASS3 (apd_op score sheet); its standalone
+selftest is the scar the RECEIPTS tab shows, its data is live ·
+glyph_proposals.json (ruled in REVIEW) · run_reviews.bat · this inventory.
+MOVED TO strata/ (nothing deleted — the law holds): digest-py-thin-slice
+(referenced by 0; SUBSUMED by soul_engine, now literally in strata) ·
+digest_basics.json (referenced by 0, not even by its own producer) ·
+phonetic_coordinates-py.py (referenced by docstrings only; full.py itself
+declares it "stays as STRATA, untouched").
+Receipts after the moves: finiteness layer PASS, spine selftest PASS,
+cockpit smoke PASS. The wider workspace (Obj1/build, Scripts/, C3,
+Pictures/) is other strata, not this workshop's to move.
+
 ## GRAFT QUEUE (extends existing lines, replaces nothing)
 1. REVIEW room: keypress rulings (k/c/m/s) INSIDE obj2_cockpit.py — the one GUI
    → BUILT 25. 9. 2026: REVIEW tab. Queue = soul_engine's ambiguous merge
