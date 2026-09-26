@@ -632,7 +632,28 @@ class ReviewTab(ttk.Frame):
                 continue
             w = SOUL.canon(r["word"] or "")
             ruling = str(p.get("ruling", ""))
-            if p.get("fingerprint"):
+            # routing by RULING, not by fingerprint-presence (scar found
+            # 26. 9. while grafting the ipa layer: enrich drafts carry
+            # fingerprints too — the fingerprint catch-all would display
+            # them as MERGE drafts and [k] would fire the merge handler
+            # on an enrichment; now every draft kind reaches its own apply)
+            if ruling == "draft-enrich-rez":
+                if (w, p.get("fingerprint")) in st["human_fp"] \
+                        or (w, p.get("fingerprint")) in st["refused_fp"]:
+                    continue
+                out.append({"kind": "enrich", "word": r["word"],
+                            "entry_id": p.get("entry_id"),
+                            "rez": p.get("rez"),
+                            "rationale": p.get("rationale", "")})
+            elif ruling == "draft-ipa":
+                if (w, p.get("fingerprint")) in st["human_fp"] \
+                        or (w, p.get("fingerprint")) in st["refused_fp"]:
+                    continue
+                out.append({"kind": "ipa", "word": r["word"],
+                            "entry_id": p.get("entry_id"),
+                            "ipa": p.get("ipa"),
+                            "rationale": p.get("rationale", "")})
+            elif p.get("fingerprint"):
                 if (w, p["fingerprint"]) in st["human_fp"] \
                         or (w, p["fingerprint"]) in st["refused_fp"]:
                     continue
@@ -642,11 +663,6 @@ class ReviewTab(ttk.Frame):
                             "lose": list(p.get("lose") or []),
                             "rationale": p.get("rationale", ""),
                             "near": "near-dup" in (p.get("rationale") or "")})
-            elif ruling == "draft-enrich-rez":
-                out.append({"kind": "enrich", "word": r["word"],
-                            "entry_id": p.get("entry_id"),
-                            "rez": p.get("rez"),
-                            "rationale": p.get("rationale", "")})
             elif ruling.startswith("conflict") or ruling.startswith("draft-conflict"):
                 if w in st["human_conflict"] or w in st["refused_conflict"]:
                     continue
@@ -816,6 +832,8 @@ class ReviewTab(ttk.Frame):
             decision = f"true rez = {d['true_rez']!r}"
         elif d["kind"] == "enrich":
             decision = f"napolni votel rez = {d['rez']!r} (vnos {d['entry_id']})"
+        elif d["kind"] == "ipa":
+            decision = f"izmera IPO = {d['ipa']!r} (vnos {d['entry_id']}) — ⚠ g2p"
         else:
             decision = f"confirm glyph→{d.get('proposed_operator')}"
         self.tree.insert("", "end", values=(
@@ -1057,6 +1075,19 @@ class ReviewTab(ttk.Frame):
                 "fingerprint": f"enrich-{d['entry_id']}",
                 "note": "ratified enrich: rez napolnjen iz leksikona"})
             self.con.commit()
+        elif d["kind"] == "ipa":
+            self.con.execute(
+                "UPDATE entries SET ipa=? WHERE entry_id=?",
+                (d["ipa"], d["entry_id"]))
+            SOUL.led(self.con, "edit", d["word"], {
+                "entry_id": d["entry_id"],
+                "old": {"ipa": ""},
+                "new": {"ipa": d["ipa"]},
+                "fingerprint": f"ipa-{d['entry_id']}",
+                "note": "ratified ipa: g2p osnutek postal izmera s tvojim "
+                        "žigom — preverba proti viru je tvoje dejanje "
+                        "(ZAKON IPA)"})
+            self.con.commit()
         else:
             self._rule_glyph("confirm", word=d["word"])
         self._k_streak += 1
@@ -1076,6 +1107,13 @@ class ReviewTab(ttk.Frame):
         elif d["kind"] == "conflict":
             SOUL.led(self.con, "verdict", d["word"], {
                 "ruling": "draft-refused", "conflict": d["word"]})
+        elif d["kind"] in ("enrich", "ipa"):
+            # the same refusal channel as merges: the fingerprint is the
+            # thing the replay never re-drafts (scar: these kinds used to
+            # fall into the glyph branch and rewrite the glyph payload)
+            SOUL.led(self.con, "verdict", d["word"], {
+                "ruling": "draft-refused",
+                "fingerprint": f"{d['kind']}-{d['entry_id']}"})
         else:
             data = self._glyph_all()
             data[d["word"]]["verdict"] = "confirm/reject"

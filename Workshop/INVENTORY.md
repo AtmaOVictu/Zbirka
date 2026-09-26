@@ -342,6 +342,45 @@ Pictures/) is other strata, not this workshop's to move.
   (5) Kompaktizacija temnote: dark 641 · stability 2,496 words ·
   1,835 stable · 661 multi/kept · 84 pending · glyph 30/30 ·
   0 authorize lines. Selftest + ∮ preveri PASS.
+- IPA PLAST (body-name: ipa-plast; Luka's "daj", 26. 9. 2026 — "v celoti
+  v IPA jeziku in uporabi", built layers 1+2 of the measured plan; the
+  ontological ruling built under: fonetični REZ = the CUT (native organ,
+  d/i/h, stays forever) · IPA = the MEASURED PRONUNCIATION (a second
+  organ BESIDE it — two organs, two fields, never one):
+  (1) SCHEMA: `ipa TEXT` on entries (migration in db(), existing dbs
+  get the column);
+  (2) `slo_g2p()` — the rule-based Slovenian grapheme→IPA DRAFT machine:
+  phoneme level, digraphs measured (ljubezen→/ʎubɛzɛn/, njuja→/ɲuja/),
+  NO stress (unpredictable without a dictionary — honestly omitted,
+  named in every rationale), no assimilation (phonemic, not phonetic);
+  (3) `ipa-popis` (extends census): MEASURED the honest gap — 2,462 live
+  words · 270 carry the cut · 2,192 carry nothing · 0 carry the izmera
+  (0.0% coverage — the gap is now a number, not a feeling);
+  (4) `ipa-drafts` (extends the drafts line, guard (a) intact): targets
+  = lexicon 40 + cut-bearing words; the RAW-word guard (canon()
+  LAUNDERS mangled words into bare letters — 'Combinations transform…'
+  would have been transcribed with a straight face, 203 such skipped,
+  measured on the first witness); every candidate carries machine:true
+  + ⚠ + the ZAKON IPA rationale ("spomin ni izmera — preveri proti viru
+  ali komisiji izvajalko"); SCRATCH WITNESS (auth stand-in, live db
+  untouched): 230 drafts (Abakus→/abakus/, Beseda→/bɛsɛda/,
+  Dvom→/dʋɔm/, Resnica→/ɾɛsnit͡sa/…), refused → never re-drafted
+  (fingerprint channel, same replay);
+  (5) REVIEW/RATIFY gains the ipa kind: [k] writes entries.ipa + an
+  'edit' ledger line (canon through the keystroke), [c] refuses by
+  fingerprint, the ⚠ rationale displayed before [k] (guard (b));
+  (6) SAME SITTING, GUI SCAR FOUND AND REPAIRED: _ratify_pending routed
+  drafts by FINGERPRINT-PRESENCE — enrich drafts carry fingerprints
+  too, so they DISPLAYED as merge drafts and [k] would have fired the
+  merge handler on an enrichment; refusal of enrich/ipa fell into the
+  glyph branch and rewrote the glyph payload. Now every draft kind
+  routes by its RULING to its own apply/refuse. Selftest + smoke PASS
+  (merge 89 · glyph 30 · conflict 5 · ratify 0 on the live db).
+  NEXT IN THIS LINE (named, on the word): ⊢ sources (you or the
+  izvajalka commission — fran.si/SSKJ²/Wiktionary, ZAKON IPA is her
+  standing law too) · layer 4 UPORABA: ipa → 107-cube lattice
+  coordinates → apd_engine chains (the consumers already speak IPA,
+  they await word-level input).
 - AWAITING LUKA (unchanged, the one act the guards keep mine):
   `authorize-drafts` → `drafts` → RATIFY. The queue is pre-read,
   pre-verified (∮ + third-reader sample), and pre-reviewed — every

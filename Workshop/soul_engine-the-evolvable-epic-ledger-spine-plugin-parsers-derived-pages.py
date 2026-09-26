@@ -69,6 +69,11 @@ CREATE TABLE IF NOT EXISTS entries (
     thesis    TEXT, antithesis TEXT, synthesis TEXT,
     foneticni_rez TEXT, ontoloski_pomen TEXT,
     antinoma  TEXT, glyph TEXT, prakticna_uporaba TEXT,
+    ipa       TEXT,                   -- the MEASURED pronunciation (Luka's
+                                     -- "v celoti v IPA", 26. 9.): a SECOND
+                                     -- organ beside foneticni_rez (the CUT
+                                     -- stays native — d/i/h is the rez, /diː/
+                                     -- is the izmera; two organs, two fields)
     lineno    INTEGER,                 -- provenance: find it again
     grade     TEXT NOT NULL DEFAULT 'reported',
     merged_into TEXT                   -- loser points at the keeper's word
@@ -140,6 +145,12 @@ def db() -> sqlite3.Connection:
     mcols = {r["name"] for r in con.execute("PRAGMA table_info(mentions)")}
     if "entry_id" in mcols and "doc_id" not in mcols:
         con.execute("ALTER TABLE mentions RENAME COLUMN entry_id TO doc_id")
+    # ipa layer (Luka's "daj", 26. 9. 2026): existing dbs get the column —
+    # the measured pronunciation lives BESIDE the rez (the cut), never
+    # replacing it
+    ecols = {r["name"] for r in con.execute("PRAGMA table_info(entries)")}
+    if "ipa" not in ecols:
+        con.execute("ALTER TABLE entries ADD COLUMN ipa TEXT")
     return con
 
 def led(con, kind: str, word: str, payload: dict) -> None:
@@ -1255,6 +1266,140 @@ def census(con) -> dict:
     return out
 
 
+# ============================== IPA LAYER (Luka's "daj", 26. 9. 2026) ===
+# ZAKON IPA (sealed on Luka's own ukaz, Obj3 register): "nikoli ne
+# preskoči IPA — poišči na spletu izvor in izgovor" + "spomin ni izmera".
+# CONSEQUENCE for this machine (no web): a rule-based g2p is BY
+# DEFINITION izmera iz glave (the register's rod 1) — it can propose
+# only DRAFTS (machine:true, ⚠, never ⊢); canon enters through the
+# owner's ratification, ideally after checking a source (fran.si /
+# SSKJ² / Wiktionary) or commissioning the izvajalka (ZAKON IPA is
+# HER standing law too, measured in her own register).
+
+G2P_MAP = {
+    "a": "a", "b": "b", "c": "t͡s", "č": "t͡ʃ", "d": "d", "e": "ɛ",
+    "f": "f", "g": "ɡ", "h": "x", "i": "i", "j": "j", "k": "k",
+    "l": "l", "m": "m", "n": "n", "o": "ɔ", "p": "p", "r": "ɾ",
+    "s": "s", "š": "ʃ", "t": "t", "u": "u", "v": "ʋ", "z": "z",
+    "ž": "ʒ", "ć": "t͡ɕ", "đ": "d͡ʑ", "w": "w", "q": "q", "x": "ks",
+    "y": "i",
+}
+G2P_DIGRAPHS = {"lj": "ʎ", "nj": "ɲ", "dž": "d͡ʒ"}
+
+
+def slo_g2p(word: str) -> str:
+    """Rule-based Slovenian grapheme→IPA (phoneme level, no stress —
+    Slovenian stress is unpredictable without a dictionary, so it is
+    HONESTLY omitted; no assimilation — phonemic, not phonetic). A DRAFT
+    MACHINE, never an izmera: ZAKON IPA forbids ⊢ from this hand."""
+    w = unicodedata.normalize("NFC", word.strip().lower())
+    out, i = [], 0
+    while i < len(w):
+        two = w[i:i + 2]
+        if two in G2P_DIGRAPHS:
+            out.append(G2P_DIGRAPHS[two])
+            i += 2
+            continue
+        if w[i] in G2P_MAP:
+            out.append(G2P_MAP[w[i]])
+        i += 1
+    return "/" + "".join(out) + "/"
+
+
+def ipa_popis(con) -> dict:
+    """The honest gap, measured on demand (extends the census line):
+    how many live words carry the MEASURED pronunciation (ipa), how
+    many carry the CUT (foneticni_rez — the fragment organ, native,
+    never replaced), how many carry neither. ISKANO receipt."""
+    rez_words, ipa_words, empty = set(), set(), set()
+    for r in con.execute("SELECT word, foneticni_rez, ipa FROM entries "
+                         "WHERE merged_into IS NULL"):
+        if (r["ipa"] or "").strip():
+            ipa_words.add(canon(r["word"]))
+        if (r["foneticni_rez"] or "").strip():
+            rez_words.add(canon(r["word"]))
+        if not (r["ipa"] or "").strip():
+            empty.add(canon(r["word"]))
+    live = rez_words | ipa_words | empty
+    return {"live_words": len(live),
+            "with_ipa": len(ipa_words),
+            "with_rez_cut": len(rez_words - ipa_words),
+            "with_nothing": len(empty - rez_words - ipa_words),
+            "ipa_coverage":
+                round(len(ipa_words) / len(live), 4) if live else 0.0,
+            "NOTE": "rez = the CUT (native organ, stays); ipa = the "
+                    "MEASURED pronunciation (a second organ, beside it)"}
+
+
+def ipa_drafts(con, lex_path=None) -> dict:
+    """G2P DRAFTS — the machine proposes, the owner canonizes (the same
+    ceremony as merge/conflict/glyph/enrich drafts). GUARD (a): the
+    normative 'machine-drafts-authorized' line must stand in the ledger
+    first — the machine cannot authorize itself. Targets (honest scope,
+    no 2,242-word flood): live entries of words that MATTER first — the
+    lexicon's 40 + every word that already carries a cut (fragment rez);
+    composite words ( / + etc.) are skipped honestly (g2p reads single
+    words). Every candidate carries the ⚠ of its own kind: izmera iz
+    glave, ZAKON IPA forbids ⊢; stress omitted (unpredictable without
+    a dictionary — named, not hidden)."""
+    auth = con.execute(
+        "SELECT COUNT(*) FROM ledger WHERE kind='verdict' AND "
+        "payload LIKE '%machine-drafts-authorized%'").fetchone()[0]
+    if not auth:
+        return {"error": "no normative authorization line — the owner "
+                         "must deliberately run `authorize-drafts` first; "
+                         "the machine cannot authorize itself"}
+    st = ruling_states(con)
+    seen = st["human_fp"] | st["machine_fp"] | st["refused_fp"]
+    # honest target set: lexicon words + words that carry a cut
+    targets = set()
+    for r in con.execute("SELECT word, foneticni_rez FROM entries "
+                         "WHERE merged_into IS NULL"):
+        if (r["foneticni_rez"] or "").strip():
+            targets.add(canon(r["word"]))
+    if lex_path and Path(lex_path).exists():
+        lex = json.loads(Path(lex_path).read_text(encoding="utf-8"))
+        targets |= {canon(k) for k in lex
+                    if isinstance(lex[k], dict) or True}
+    drafted, skipped = 0, 0
+    for e in con.execute(
+            "SELECT entry_id, word, foneticni_rez, ipa FROM entries "
+            "WHERE merged_into IS NULL ORDER BY entry_id"):
+        if (e["ipa"] or "").strip():
+            continue
+        w = canon(e["word"])
+        if w not in targets:
+            continue
+        # the guard measured on the first witness: canon() launders a
+        # mangled word ('Combinations transform, ... — [ThoughtCo]') into
+        # bare letters and g2p would transcribe garbage with a straight
+        # face. The RAW word must be one plain word — letters only.
+        if not re.fullmatch(r"[A-Za-zČčŠšŽžĆćĐđ]{1,20}",
+                            (e["word"] or "").strip()):
+            skipped += 1
+            continue
+        fp = f"ipa-{e['entry_id']}"
+        if (canon(e["word"]), fp) in seen:
+            continue
+        led(con, "verdict", e["word"], {
+            "ruling": "draft-ipa", "machine": True,
+            "fingerprint": fp, "entry_id": e["entry_id"],
+            "ipa": slo_g2p(e["word"]),
+            "rationale": "g2p pravilen — IZMERA IZ GLAVE (ZAKON IPA: "
+                         "spomin ni izmera): ⚠ dokler ne preveriš proti "
+                         "viru (fran.si / SSKJ² / Wiktionary) ali "
+                         "komisijiš izvajalko; naglas pošteno izpuščen "
+                         "(brez slovarja nepredvidljiv); fonemsko, brez "
+                         "asimilacij. Rez (rez) ostane domači organ — "
+                         "ta plast je izmera ob njem."})
+        drafted += 1
+    con.commit()
+    led(con, "drafts", None, {"ipa": drafted, "ipa_skipped_composite":
+                              skipped})
+    con.commit()
+    return {"ipa_drafts": drafted, "skipped_composite": skipped}
+
+
 def reparse(con) -> dict:
     """Graft #9 — the dark corpus, re-read with the CURRENT plugins.
     scan() only admits NEW files; docs scanned before a plugin existed
@@ -2012,6 +2157,7 @@ if __name__ == "__main__":
                                     "reparse", "xcheck", "drafts",
                                     "authorize-drafts", "stability",
                                     "popis", "graf", "odprta-delta",
+                                    "ipa-popis", "ipa-drafts",
                                     "retro-honesty", "preveri",
                                     "selftest"])
     ap.add_argument("path", nargs="?")
@@ -2087,6 +2233,19 @@ if __name__ == "__main__":
     elif args.cmd == "odprta-delta":
         # serves rez 231 — the organ's next popis reads here
         print(json.dumps(odprta_delta(con), ensure_ascii=False, indent=2))
+    elif args.cmd == "ipa-popis":
+        # the honest gap: who carries the izmera, who the cut, who neither
+        print(json.dumps(ipa_popis(con), ensure_ascii=False, indent=2))
+    elif args.cmd == "ipa-drafts":
+        # g2p drafts — machine proposes, owner canonizes (guard (a) holds);
+        # the lexicon rides beside the db (the same derivation as the
+        # enrich drafts use — PRAGMA, never cwd)
+        dbrow = con.execute("PRAGMA database_list").fetchone()
+        lex = (str(Path(dbrow["file"]).parent / "lexicon.json")
+               if dbrow and dbrow["file"] and dbrow["file"] != ":memory:"
+               else None)
+        print(json.dumps(ipa_drafts(con, lex), ensure_ascii=False,
+                         indent=2))
     elif args.cmd == "retro-honesty":
         # the ledger's oldest lie, repaired with witness, not laundered
         print(json.dumps(retro_mark(con), ensure_ascii=False))
@@ -2440,6 +2599,50 @@ if __name__ == "__main__":
             assert ml[1]["number"] == 2 and "prva napaka" not in \
                 ml[1]["nujne_napake"]          # no leak across heads
             assert all(z["number"] != 559 for z in ml)   # citation not a head
+            # IPA LAYER (Luka's "daj", 26. 9.): the g2p is a DRAFT machine —
+            # phoneme level, no stress (unpredictable without a dictionary,
+            # honestly omitted), digraphs measured (ljubezen → ʎ, nj → ɲ)
+            assert slo_g2p("ne") == "/nɛ/"
+            assert slo_g2p("dih") == "/dix/"
+            assert slo_g2p("ljubezen") == "/ʎubɛzɛn/"
+            assert slo_g2p("njuja") == "/ɲuja/"
+            # GUARD (a): no authorization line, no ipa drafts (a FRESH
+            # db — the main scratch db already carries the stand-in line
+            # from the earlier drafts witnesses)
+            mf = sqlite3.connect(":memory:")
+            mf.row_factory = sqlite3.Row
+            mf.executescript(SCHEMA)
+            mf.execute("INSERT INTO docs(doc_id, path) VALUES (1, 'f.md')")
+            mf.execute("INSERT INTO entries(doc_id, word, format, "
+                       "foneticni_rez, grade) VALUES (1, 'Fih', 't', "
+                       "'f / i / h', 'draft')")
+            r = ipa_drafts(mf)
+            assert "error" in r                 # the machine cannot self-start
+            led(mf, "verdict", None, {"ruling": "machine-drafts-authorized",
+                                      "note": "selftest stand-in"})
+            r = ipa_drafts(mf)
+            assert r["ipa_drafts"] == 1         # the cut-bearing word drafted
+            drafted = mf.execute("SELECT word, payload FROM ledger WHERE "
+                                 "payload LIKE '%\"ruling\": \"draft-ipa\"%'"
+                                 ).fetchall()
+            assert drafted and "⚠" in drafted[0]["payload"]
+            # ratify through the ledger: the edit line carries the
+            # fingerprint — the replay counts it canon through reference
+            p0 = json.loads(drafted[0]["payload"])
+            mf.execute("UPDATE entries SET ipa=? WHERE entry_id=?",
+                       (p0["ipa"], p0["entry_id"]))
+            led(mf, "edit", drafted[0]["word"], {
+                "entry_id": p0["entry_id"], "ipa": p0["ipa"],
+                "fingerprint": f"ipa-{p0['entry_id']}",
+                "note": "ratified ipa (selftest witness)"})
+            stf = ruling_states(mf)
+            fp = (canon(drafted[0]["word"]), f"ipa-{p0['entry_id']}")
+            assert fp in stf["human_fp"] or fp in stf["machine_fp"]
+            assert ipa_drafts(mf)["ipa_drafts"] == 0   # never re-drafted
+            # the popis measures the honest gap: cut ≠ izmera ≠ nothing
+            pop = ipa_popis(m)
+            assert pop["live_words"] >= 1 and pop["with_rez_cut"] >= 1
+            assert pop["with_ipa"] == 0        # nothing ratified on m
             # retro-honesty: an unmarked machine merge becomes canon
             # THROUGH its ratification line, never silently
             m.execute("INSERT INTO ledger(ts, kind, word, payload) "
@@ -2469,6 +2672,7 @@ if __name__ == "__main__":
             assert m.execute("SELECT COUNT(*) FROM entries").fetchone()[0] == n_before
         print("selftest: plugins A/B/D/E/F, grading, canon, near-dup, page, "
               "conflicts-view, dark, page-export, scan-absolute, doc-typing, "
-              "doc-level mentions, laws (parser-zakonov), drafts + guards "
-              "(cite/retro/refuse/idempotence), enrichment, graf, "
+              "doc-level mentions, laws (parser-zakonov, multi-head), "
+              "drafts + guards (cite/retro/refuse/idempotence), enrichment, "
+              "ipa layer (g2p/popis/guard/ratify/never-re-drafted), graf, "
               "odprta-delta — OK (traced here, witnessed on disk)")
