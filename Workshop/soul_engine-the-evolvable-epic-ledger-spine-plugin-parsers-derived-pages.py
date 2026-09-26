@@ -864,8 +864,16 @@ def scan(root: Path, con: sqlite3.Connection) -> dict:
     # (measured: 1,191 duplicate docs — recovered from the pre-scan
     # backup). Repair: the root resolves, paths always meet absolute.
     root = Path(root).resolve()
+    # readable bodies (.md/.txt) PLUS the honest registration of what
+    # exists but cannot be read yet (Luka's "neregistrirane
+    # subkonzultacije", 26. 9. 2026): .pdf/.html files are ADMITTED as
+    # docs — presence, size, mtime, stratum recorded; the body stays
+    # dark (no entries, no laws) until a reader exists for it. The
+    # spine must at least KNOW what it cannot read.
     files = [p for p in root.rglob("*") if p.suffix.lower()
              in {".md", ".txt"}]
+    binaries = [p for p in root.rglob("*") if p.suffix.lower()
+                in {".pdf", ".html"}]
     # the ledger is the only thing that cannot be rebuilt from source —
     # back the db up before any scan writes to it
     import shutil
@@ -916,10 +924,29 @@ def scan(root: Path, con: sqlite3.Connection) -> dict:
             kind = doc_kind(stratum, text, fmts)
         con.execute("UPDATE docs SET kind=?, stratum=? WHERE doc_id=?",
                     (kind, stratum, doc_id))
+    # THE UNREADABLE, REGISTERED (honest presence): pdfs/htmls are
+    # admitted as docs, typed by extension, dark until a reader exists —
+    # idempotent by path, exactly like the readable bodies
+    n_bin = 0
+    for f in binaries:
+        cur = con.execute("SELECT doc_id FROM docs WHERE path=?", (str(f),))
+        if cur.fetchone():
+            continue
+        rel = f.relative_to(root)
+        stratum = rel.parts[0] if len(rel.parts) > 1 else "(root)"
+        con.execute("INSERT INTO docs(path, mtime, raw_size, kind, "
+                    "stratum) VALUES (?,?,?,?,?)",
+                    (str(f), None, f.stat().st_size,
+                     "binar-" + f.suffix.lower().lstrip("."), stratum))
+        n_bin += 1
     led(con, "scan", None, {"root": str(root), "files": len(files),
+                            "binaries": len(binaries),
+                            "new_binaries": n_bin,
                             "new_docs": n_docs, "new_entries": n_entries})
     con.commit()
-    return {"files": len(files), "new_docs": n_docs, "new_entries": n_entries}
+    return {"files": len(files), "new_docs": n_docs,
+            "new_entries": n_entries, "binaries": len(binaries),
+            "new_binaries": n_bin}
 
 # ========================================================== THE PAGE ======
 
@@ -1193,10 +1220,14 @@ def doc_kind(stratum: str, text: str, formats) -> str:
 def dark_report(con) -> dict:
     groups = {}
     gone = 0
+    binar = 0
     for r in con.execute(
-            "SELECT doc_id, path, raw_size FROM docs WHERE doc_id NOT IN "
+            "SELECT doc_id, path, raw_size, kind FROM docs WHERE doc_id NOT IN "
             "(SELECT DISTINCT doc_id FROM entries UNION "
             "SELECT DISTINCT doc_id FROM zakoni)"):
+        if (r["kind"] or "").startswith("binar-"):
+            binar += 1          # registered presence, no readable body
+            continue
         p = Path(r["path"])
         try:
             text = p.read_text(encoding="utf-8", errors="replace")
@@ -1217,6 +1248,7 @@ def dark_report(con) -> dict:
             g["first_line"] = next((l.strip() for l in text.splitlines()
                                     if l.strip()), "")[:100]
     return {"dark_docs": sum(g["count"] for g in groups.values()),
+            "binar_registered": binar,
             "deleted_since_scan": gone,
             "groups": sorted(groups.values(), key=lambda g: -g["count"])}
 
@@ -1238,7 +1270,10 @@ def retype(con, root=None) -> dict:
         root = (Path(os.path.commonpath(paths)) if paths else Path.cwd())
     root = Path(root).resolve()
     typed = gone = outside = 0
-    for r in con.execute("SELECT doc_id, path FROM docs").fetchall():
+    for r in con.execute("SELECT doc_id, path, kind FROM docs"
+                         "").fetchall():
+        if (r["kind"] or "").startswith("binar-"):
+            continue
         p = Path(r["path"])
         try:
             text = p.read_text(encoding="utf-8", errors="replace")
@@ -1436,7 +1471,9 @@ def le_cenzus(con) -> dict:
     SENT = re.compile(r"(?<=[.!?;])\s+")
     counts = {"iztočnica": 0, "meja": 0, "minimizem_kandidat": 0}
     per_doc, samples, total, docs = [], [], 0, 0
-    for d in con.execute("SELECT path, stratum FROM docs"):
+    for d in con.execute("SELECT path, kind FROM docs"):
+        if (d["kind"] or "").startswith("binar-"):
+            continue
         try:
             text = Path(d["path"]).read_text(encoding="utf-8",
                                             errors="replace")
@@ -1602,9 +1639,11 @@ def reparse(con) -> dict:
     if Path(DB_PATH).exists():
         shutil.copy2(DB_PATH, f"{DB_PATH}.bak")
     dark = [dict(r) for r in con.execute(
-        "SELECT doc_id, path, stratum FROM docs WHERE doc_id NOT IN "
+        "SELECT doc_id, path, stratum, kind FROM docs WHERE doc_id NOT IN "
         "(SELECT DISTINCT doc_id FROM entries UNION "
         "SELECT DISTINCT doc_id FROM zakoni)")]
+    dark = [d for d in dark
+            if not (d["kind"] or "").startswith("binar-")]
     lit = new_entries = new_laws = 0
     for d in dark:
         try:
@@ -1652,7 +1691,10 @@ def reparse(con) -> dict:
     # (new_laws carries the dark pass's laws too — a law admitted in the
     # dark loop must not vanish from the receipt; found by rez 562's
     # delete+re-derive, measured: row existed, counter said 0)
-    for d in con.execute("SELECT doc_id, path FROM docs").fetchall():
+    for d in con.execute("SELECT doc_id, path, kind FROM docs"
+                         "").fetchall():
+        if (d["kind"] or "").startswith("binar-"):
+            continue
         try:
             text = Path(d["path"]).read_text(encoding="utf-8",
                                             errors="replace")
@@ -1669,7 +1711,10 @@ def reparse(con) -> dict:
     # becomes honest (docs mentioning the word)
     con.execute("DELETE FROM mentions")
     new_mentions = 0
-    for d in con.execute("SELECT doc_id, path FROM docs").fetchall():
+    for d in con.execute("SELECT doc_id, path, kind FROM docs"
+                         "").fetchall():
+        if (d["kind"] or "").startswith("binar-"):
+            continue
         try:
             text = Path(d["path"]).read_text(encoding="utf-8",
                                             errors="replace")

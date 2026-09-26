@@ -490,6 +490,37 @@ Pictures/) is other strata, not this workshop's to move.
   drafts sit in RATIFY); composition named, words never ranked.
   Selftest witnesses all three (kinship excludes furniture; hubs count
   citations; layers compose honestly). Selftest + ∮ preveri + smoke PASS.
+- NEREGISTRIRANE SUBKONZULTACIJE — IZMERJENO IN REGISTRIRANO
+  (Luka's "ni ničesar v tekstih drugih datotek kar ti bi pomagalo?
+  nimava tukaj tudi neregistrirane subkonzultacije?", 26. 9. 2026):
+  (1) MEASURED, THE GAPS: A1 (100 bodies — PDF/HTML: ATLAS_DUELOV,
+  Apd Kocka V1/V12, Atlas_Barvnih_Agentov…) did NOT EXIST for the
+  spine — scan read .md/.txt only, 0 A1 docs in the db; Obs1–Obs10
+  (the Notion libraries) are not on disk AT ALL, yet 97 corpus docs
+  cite /libraries/ — THE MOST-CITED EVIDENCE BASE IS OUTSIDE THE
+  SPINE'S REACH (the biggest single gap, export is the owner's act);
+  the A2–A4 subconsultations (262 dark transcript bodies) carry NO
+  sealed law heads (0 measured) and NO source-IPA ceremonies (0
+  fran.si/Wiktionary/SSKJ matches) — they are honest darkness, but
+  they carry structured material (A3 sample: ASCII mandalas,
+  fonem→agent→polje→operator tables — third-reader and lattice
+  material).
+  (2) REGISTERED, THE HONEST PRESENCE: scan now admits .pdf/.html as
+  docs (kind 'binar-pdf'/'binar-html', size + stratum recorded, body
+  dark until a reader exists — the spine must at least KNOW what it
+  cannot read); every read pass (reparse dark + law-pass + mentions,
+  retype, le-cenzus, dark report) skips binar-* honestly. MEASURED:
+  160 binaries registered (136 pdf · 24 html): A1 99 · A2 22 · C2 11 ·
+  Obs11 9 · Gastro 7 (a stratum nobody had named) · Obj1 6 · C3 2 ·
+  Rohonc 1 · Obj2 1 · DELUJOČ O 1 · Basics 1. Dark report carries
+  binar_registered as its own line. Selftest PASS.
+  WHAT WOULD HELP THE MACHINE, HONESTLY RANKED: (a) the Obs1–Obs10
+  library export (97 citing docs point there — the citation graph's
+  biggest missing stratum), (b) a pdf reader graft (stdlib-pure text
+  extraction is limited; an owner-approved exporter or a stdlib pdf
+  text pass, on the word), (c) the subconsultations stay honest
+  darkness until a commission reads them (PREBRANO line — they are
+  third-reader material, not parser targets).
 - AWAITING LUKA (unchanged, the one act the guards keep mine):
   `authorize-drafts` → `drafts` → RATIFY. The queue is pre-read,
   pre-verified (∮ + third-reader sample), and pre-reviewed — every
