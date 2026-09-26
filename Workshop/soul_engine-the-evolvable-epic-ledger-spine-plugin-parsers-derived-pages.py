@@ -1076,7 +1076,7 @@ def reparse(con) -> dict:
         "SELECT doc_id, path, stratum FROM docs WHERE doc_id NOT IN "
         "(SELECT DISTINCT doc_id FROM entries UNION "
         "SELECT DISTINCT doc_id FROM zakoni)")]
-    lit = new_entries = 0
+    lit = new_entries = new_laws = 0
     for d in dark:
         try:
             text = Path(d["path"]).read_text(encoding="utf-8",
@@ -1104,6 +1104,7 @@ def reparse(con) -> dict:
         for z in parse_zakon(text):
             cur = _insert_zakon(con, d["doc_id"], z)
             got_law += cur
+            new_laws += cur
         if got or got_law:
             lit += 1
             new_entries += got
@@ -1119,7 +1120,9 @@ def reparse(con) -> dict:
                              d["doc_id"],))
     # laws also live in docs that are NOT dark (a rez body may carry
     # dosjes too) - one law-pass over every doc, idempotent by witness
-    new_laws = 0
+    # (new_laws carries the dark pass's laws too — a law admitted in the
+    # dark loop must not vanish from the receipt; found by rez 562's
+    # delete+re-derive, measured: row existed, counter said 0)
     for d in con.execute("SELECT doc_id, path FROM docs").fetchall():
         try:
             text = Path(d["path"]).read_text(encoding="utf-8",
