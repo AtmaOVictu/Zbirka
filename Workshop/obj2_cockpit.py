@@ -645,6 +645,14 @@ class ReviewTab(ttk.Frame):
                             "entry_id": p.get("entry_id"),
                             "rez": p.get("rez"),
                             "rationale": p.get("rationale", "")})
+            elif ruling == "draft-sinteza":
+                if (w, p.get("fingerprint")) in st["human_fp"] \
+                        or (w, p.get("fingerprint")) in st["refused_fp"]:
+                    continue
+                out.append({"kind": "sinteza", "word": r["word"],
+                            "body_md": p.get("body_md"),
+                            "provenance_md": p.get("provenance_md"),
+                            "rationale": p.get("rationale", "")})
             elif ruling == "draft-ipa":
                 if (w, p.get("fingerprint")) in st["human_fp"] \
                         or (w, p.get("fingerprint")) in st["refused_fp"]:
@@ -832,8 +840,31 @@ class ReviewTab(ttk.Frame):
             decision = f"true rez = {d['true_rez']!r}"
         elif d["kind"] == "enrich":
             decision = f"napolni votel rez = {d['rez']!r} (vnos {d['entry_id']})"
+        elif d["kind"] == "sinteza":
+            canon_name = SOUL.canon(d["word"]) or "beseda"
+            out_dir = os.path.join(_HERE, os.pardir, "canon_ruled")
+            os.makedirs(out_dir, exist_ok=True)
+            fpath = os.path.join(out_dir, canon_name + "-sinteza.md")
+            NL = chr(10)
+            header = NL.join([
+                "# Sinteza: " + d["word"] + " - kanon primer", "",
+                "> IZVOR: sestavljeno iz izmerjenih plasti (osnutek",
+                "> " + d.get("rationale", "")[:120],
+                "> ZAPESCENO z lastnikovim [k] v RATIFY.",
+                "", ""])
+            with open(fpath, "w", encoding="utf-8") as fh:
+                fh.write(header + d["body_md"] + NL + NL + "---"
+                         + NL + NL + d.get("provenance_md", "") + NL)
+            SOUL.led(self.con, "verdict", d["word"], {
+                "ruling": "sinteza-canonized",
+                "fingerprint": "sint2-" + canon_name,
+                "file": fpath,
+                "note": "ratified sinteza: kanon primer v canon_ruled/ - korpus se hrani sam (rez 562)"})
+            self.con.commit()
         elif d["kind"] == "ipa":
             decision = f"izmera IPO = {d['ipa']!r} (vnos {d['entry_id']}) — ⚠ g2p"
+        elif d["kind"] == "sinteza":
+            decision = ("KANON PRIMER - sestavljena sinteza (vsaka vrstica sledi bazi; [k] zapece v canon_ruled/)")
         else:
             decision = f"confirm glyph→{d.get('proposed_operator')}"
         self.tree.insert("", "end", values=(
@@ -1107,7 +1138,7 @@ class ReviewTab(ttk.Frame):
         elif d["kind"] == "conflict":
             SOUL.led(self.con, "verdict", d["word"], {
                 "ruling": "draft-refused", "conflict": d["word"]})
-        elif d["kind"] in ("enrich", "ipa"):
+        elif d["kind"] in ("enrich", "ipa", "sinteza"):
             # the same refusal channel as merges: the fingerprint is the
             # thing the replay never re-drafts (scar: these kinds used to
             # fall into the glyph branch and rewrite the glyph payload)

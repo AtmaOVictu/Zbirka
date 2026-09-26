@@ -1509,6 +1509,125 @@ def le_cenzus(con) -> dict:
                     "machine-resolvable and honestly not counted."}
 
 
+def sintezo(con, word: str) -> dict:
+    """THE SYNTHESIS COMPOSER (Luka's "nimava dovolj da sama
+    sintetizirava gotove vsebine?", 26. 9. 2026): composes a word's
+    DISTILLED PAGE from MEASURED layers only — the richest live entry
+    carries the meaning fields, laws whose VEZI cite the word carry the
+    bonds, co-mentions carry the kin, the docs carry the weight.
+    COMPOSED, NEVER INVENTED: every line traces to the db; what a layer
+    lacks, the body honestly lacks (a missing field is omitted, not
+    filled). The body is A-bullet shaped so a ratified [k] writes a
+    RE-PARSABLE canon example — the corpus feeding itself, rez 562."""
+    w = canon(word)
+    rows = []
+    for r in con.execute(
+        "SELECT e.*, d.stratum AS doc_stratum, d.kind AS doc_kind "
+        "FROM entries e JOIN docs d ON e.doc_id = d.doc_id "
+        "WHERE e.merged_into IS NULL"):
+        rw = canon(r["word"])
+        if rw == w:
+            rows.append(dict(r))
+    if not rows:
+        return {"error": "word not in the live canon — nothing to "
+                         "compose from; synthesis never invents"}
+    rows.sort(key=lambda r: (GRADE_RANK.get(r["grade"], 0),
+                             _fullness(r), -r["entry_id"]),
+              reverse=True)
+    top = rows[0]
+    rezs, ipas, sources = [], set(), {}
+    for r in rows:
+        rz = (r["foneticni_rez"] or "").strip()
+        if rz and rz not in rezs:
+            rezs.append(rz)
+        ip = (r["ipa"] or "").strip()
+        if ip:
+            ipas.add(ip)
+        key = (r["doc_stratum"] or "(root)") + " / " +               (r["doc_kind"] or "?")
+        sources[key] = sources.get(key, 0) + 1
+    laws = []
+    for z in con.execute("SELECT series, number, title, vezi FROM zakoni"):
+        blob = " ".join(str(x or "") for x in
+                        (z["title"], z["vezi"])).lower()
+        if w in blob:
+            laws.append(f"{z['series']} {z['number']} "
+                        f"{(z['title'] or '')[:40]}".strip())
+    kin = sorodnost(con, word)["kin"][:5]
+    docs_n = con.execute(
+        "SELECT COUNT(DISTINCT doc_id) FROM mentions WHERE mention=?",
+        (w,)).fetchone()[0]
+    # the composed body — A-bullet shaped, re-parsable after [k]
+    lines = [f"#### **1. {top['word']}** — sinteza (kanon primer)"]
+    if rezs:
+        lines.append(f"- **Fonetični rez:** " + " ; ".join(rezs))
+    if ipas:
+        lines.append("- **Izmera (IPA):** " + " ; ".join(sorted(ipas)))
+    if (top["ontoloski_pomen"] or "").strip():
+        lines.append(f"- **Ontološki pomen:** {top['ontoloski_pomen'].strip()}")
+    if (top["antinoma"] or "").strip():
+        lines.append(f"- **Antinoma:** {top['antinoma'].strip()}")
+    if (top["thesis"] or "").strip():
+        lines.append(f"- **Teza:** {top['thesis'].strip()}")
+    if (top["synthesis"] or "").strip():
+        lines.append(f"- **Sinteza:** {top['synthesis'].strip()}")
+    if (top["glyph"] or "").strip():
+        lines.append(f"- **Glyph:** {top['glyph'].strip()}")
+    body = chr(10).join(lines)
+    meta = [
+        "Viri (izmerjeno): " + " ; ".join(
+            f"{k} x{n}" for k, n in sorted(sources.items())),
+        f"Omenjena v {docs_n} telesih (doc-level robovi)",
+        "Sorodnost (so-omemba, robovi kažejo): " + " ; ".join(
+            f"{k['word']} ({k['shared_docs']})" for k in kin),
+        "Vezani zakoni (VEZI): " + (" ; ".join(laws) if laws else
+                                    "ni neposredne vezi izmerjene"),
+        f"Plasti sestavljene: {len(rows)} vnosov; nosilec polj = "
+        f"vnos {top['entry_id']} ({top['grade']})",
+    ]
+    return {"word": top["word"], "canon": w, "body_md": body,
+            "provenance_md": chr(10).join("- " + m for m in meta),
+            "layers": {"entries": len(rows), "laws": len(laws),
+                       "docs_mentioning": docs_n,
+                       "kin": [k["word"] for k in kin]}}
+
+
+def sinteza_draft(con, word: str) -> dict:
+    """A synthesis DRAFT — the same ceremony as merge/enrich/ipa: the
+    composed body goes to RATIFY as a receipt (machine, guard (a));
+    the owner's [k] writes it to canon_ruled/ as a RE-PARSABLE canon
+    example; refused drafts are never re-composed."""
+    auth = con.execute(
+        "SELECT COUNT(*) FROM ledger WHERE kind='verdict' AND "
+        "payload LIKE '%machine-drafts-authorized%'").fetchone()[0]
+    if not auth:
+        return {"error": "no normative authorization line — the owner "
+                         "must run `authorize-drafts` first"}
+    s = sintezo(con, word)
+    if "error" in s:
+        return s
+    w = canon(word)
+    st = ruling_states(con)
+    fp = f"sint2-{w}"   # sint- was the broken first channel (the
+                       # comprehension anomaly, refused with witness);
+                       # a refused channel stays dead by law
+    if (w, fp) in st["human_fp"] or (w, fp) in st["machine_fp"]             or (w, fp) in st["refused_fp"]:
+        return {"word": s["word"], "already":
+                "ruled, drafted, or refused — idempotent"}
+    led(con, "verdict", s["word"], {
+        "ruling": "draft-sinteza", "machine": True,
+        "fingerprint": fp,
+        "body_md": s["body_md"], "provenance_md": s["provenance_md"],
+        "rationale": "sinteza SESTAVLJENA iz izmerjenih plasti ("
+                     f"{s['layers']['entries']} vnosov, "
+                     f"{s['layers']['docs_mentioning']} teles omemb, "
+                     f"{s['layers']['laws']} vezanih zakonov) — "
+                     "vsaka vrstica sledi bazi, pomen nikoli izmišljen; "
+                     "kanon primer zapiše lastnikov [k] v canon_ruled/"})
+    con.commit()
+    return {"word": s["word"], "drafted": True,
+            "layers": s["layers"]}
+
+
 # ==================== ANALYZE (Luka's "več in boljše analize?", 26. 9.) ==
 # Three receipts, each extending the report line, each built on data the
 # spine ALREADY measured — edges are counted, never judged; meaning is
@@ -2517,7 +2636,7 @@ if __name__ == "__main__":
                                     "reparse", "xcheck", "drafts",
                                     "authorize-drafts", "stability",
                                     "popis", "graf", "odprta-delta",
-                                    "ipa-popis", "ipa-drafts",
+                                    "ipa-popis", "ipa-drafts", "sinteza",
                                     "le-cenzus", "sorodnost", "jezgra",
                                     "plasti",
                                     "retro-honesty", "preveri",
@@ -2606,6 +2725,16 @@ if __name__ == "__main__":
         # word kinship by co-mention — proximity, never meaning
         print(json.dumps(sorodnost(con, args.word),
                          ensure_ascii=False, indent=2))
+    elif args.cmd == "sinteza":
+        # the synthesis draft: composed from measured layers, canonized
+        # by the owner's [k] — the corpus feeding itself (rez 562)
+        if not args.word:
+            print(json.dumps({"error": "pass --word X"}, ensure_ascii=False))
+        else:
+            s = sintezo(con, args.word)
+            d = sinteza_draft(con, args.word)
+            out = {"compose": s, "draft": d}
+            print(json.dumps(out, ensure_ascii=False, indent=2))
     elif args.cmd == "jezgra":
         # the load-bearing laws — citation hubs, edges never judge
         print(json.dumps(jezgra(con), ensure_ascii=False, indent=2))
@@ -3061,6 +3190,30 @@ if __name__ == "__main__":
             jz = jezgra(ma)
             assert jz["hubs"][0]["law"] == "rez 6"
             assert jz["hubs"][0]["citations"] == 2
+            # the SYNTHESIS COMPOSER (Luka's "sintetizirava gotove
+            # vsebine"): composed from measured layers only — the
+            # plain-loop filter (the comprehension anomaly measured:
+            # an inline list-comp filter matched EVERYTHING while the
+            # identical loop matches 2 — unexplained, refused with
+            # witness, the loop is the repair and the more honest
+            # shape); draft + guard + refused-channel law
+            ma.execute("INSERT INTO entries(doc_id, word, format, "
+                       "foneticni_rez, ontoloski_pomen, antinoma, "
+                       "synthesis, glyph, grade) VALUES "
+                       "(1, 'Sintel', 't', 's / i', 'povezava', "
+                       "'nasprotje', 'spoj', 'X', 'reported')")
+            ma.execute("INSERT INTO entries(doc_id, word, format, grade) "
+                       "VALUES (1, 'Drugo', 't', 'draft')")
+            sz = sintezo(ma, "SINTEL!")
+            assert sz["layers"]["entries"] == 1      # canon-filtered
+            assert "s / i" in sz["body_md"] and "povezava" in sz["body_md"]
+            assert "Drugo" not in sz["body_md"]      # never invented
+            assert "error" in sintezo(ma, "neobstojeca")
+            led(ma, "verdict", None, {"ruling": "machine-drafts-authorized",
+                                      "note": "stand-in"})
+            dz = sinteza_draft(ma, "Sintel")
+            assert dz["drafted"] is True
+            assert sinteza_draft(ma, "Sintel")["already"]  # idempotent
             pl = plasti(ma)                # no lexicon: empty, honest
             assert pl["lexicon_words"] == 0
             # retro-honesty: an unmarked machine merge becomes canon
