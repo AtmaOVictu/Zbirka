@@ -248,9 +248,13 @@ def scan(root: Path, con: sqlite3.Connection) -> dict:
 # ========================================================== THE PAGE ======
 
 def page(con, word: str) -> dict:
+    # scar 26. 9. (found by graft #3): the old lookup matched canon(word)
+    # against lower(word) — any word carrying a space or punctuation (2047
+    # of 2176 live words) returned an empty page. Canon must meet canon;
+    # SQLite has no canon(), so the comparison lives here in Python.
     w = canon(word)
-    entries = [dict(r) for r in con.execute(
-        "SELECT * FROM entries WHERE lower(word)=? OR merged_into=?", (w, w))]
+    entries = [dict(r) for r in con.execute("SELECT * FROM entries")
+              if canon(r["word"]) == w or canon(r["merged_into"] or "") == w]
     mentions = con.execute("SELECT COUNT(*) FROM mentions WHERE mention=?",
                           (w,)).fetchone()[0]
     return {"word": word, "entries": entries, "mentions": mentions,
@@ -565,5 +569,10 @@ if __name__ == "__main__":
         assert near[0]["needs_owner"] and near[0]["near"]
         assert 0.85 <= near[0]["similarity"] < 1.0
         assert len(propose_entry_merges(m)) == 0      # exact queue stays empty
-        print("selftest: plugins A/B, grading, canon, near-dup — OK (traced "
-              "here, witnessed on disk)")
+        # scar 26. 9.: page() must find words that canon() changes — a word
+        # with spaces/punctuation used to return an empty page
+        m.execute("INSERT INTO entries(doc_id, word, format, thesis, grade) "
+                  "VALUES (1, 'NUJNE NAPAKE!', 't', 'x', 'reported')")
+        assert len(page(m, "nujne napake")["entries"]) == 1
+        print("selftest: plugins A/B, grading, canon, near-dup, page — OK "
+              "(traced here, witnessed on disk)")

@@ -25,6 +25,9 @@ TABS
              proposed glyph→operator mapping (verdict written to the payload).
              Every ruling is a ledger line in soul.db; the pending merge queue
              is derived by replaying the ledger — the machine proposes, you rule.
+  LIBRARY    graft #3: browse the spine — every live word in soul.db with
+             its sources and grades; select one and its page (entries,
+             mentions, conflicts) derives by soul_engine's own page()
   PARK       the decision records + inventory of the parked cube era
 
 LAWS
@@ -773,6 +776,111 @@ class ReviewTab(ttk.Frame):
 
 
 # =============================================================================
+# LIBRARY TAB — graft #3: browse the spine's words, read their pages
+# =============================================================================
+
+class LibraryTab(ttk.Frame):
+    """The library: every live word in soul.db with its sources, and the
+    word page beside it. READ-ONLY by law — rulings happen in REVIEW, this
+    tab only reads. The list = live entries (merged_into IS NULL) grouped
+    by word; the losers live inside their keeper's page, which derives by
+    the spine's own page(). Nothing here re-derives or re-parses anything."""
+
+    COLS = ("word", "sources", "formats", "reported", "headline")
+    W = (420, 70, 130, 90, 90)
+
+    def __init__(self, parent):
+        super().__init__(parent, padding=8)
+        self.alive = False
+        self.rows = []
+        self.columnconfigure(0, weight=1)
+        self.columnconfigure(1, weight=1)
+        self.rowconfigure(1, weight=1)
+        if SOUL is None:
+            ttk.Label(self, text=f"cannot load the spine (soul_engine): "
+                                f"{_SOUL_LOAD_ERROR}").grid(row=0, column=0, sticky="w")
+            return
+        if not os.path.exists(SOUL.DB_PATH):
+            ttk.Label(self, text=f"the spine's db is missing: {SOUL.DB_PATH} — "
+                                "run soul_engine scan first").grid(row=0, column=0, sticky="w")
+            return
+        self.con = SOUL.db()
+        self.alive = True
+
+        bar = ttk.Frame(self)
+        bar.grid(row=0, column=0, columnspan=2, sticky="ew")
+        ttk.Label(bar, text="filter:").pack(side="left")
+        self.filter_var = tk.StringVar()
+        ent = ttk.Entry(bar, textvariable=self.filter_var)
+        ent.pack(side="left", fill="x", expand=True, padx=4)
+        ent.bind("<KeyRelease>", lambda _e: self.fill())
+        self.count_var = tk.StringVar(value="—")
+        ttk.Label(bar, textvariable=self.count_var).pack(side="left", padx=8)
+
+        self.tree = ttk.Treeview(self, columns=self.COLS, show="headings")
+        for c, w in zip(self.COLS, self.W):
+            self.tree.heading(c, text=c)
+            self.tree.column(c, width=w, anchor="w" if c == "word" else "center")
+        self.tree.grid(row=1, column=0, sticky="nsew", pady=(4, 0))
+        self.text = tk.Text(self, wrap="word", state="disabled", width=58)
+        self.text.grid(row=1, column=1, sticky="nsew", pady=(4, 0), padx=(6, 0))
+        self.tree.bind("<<TreeviewSelect>>", self.open_page)
+        self.load()
+
+    def load(self):
+        self.rows = [dict(r) for r in self.con.execute(
+            "SELECT word, COUNT(*) AS sources, "
+            "GROUP_CONCAT(DISTINCT format) AS formats, "
+            "SUM(grade='reported') AS reported, SUM(grade='headline') AS headline "
+            "FROM entries WHERE merged_into IS NULL GROUP BY word "
+            "ORDER BY word COLLATE NOCASE")]
+        self.fill()
+
+    def fill(self):
+        needle = self.filter_var.get().strip().lower()
+        self.tree.delete(*self.tree.get_children())
+        shown = 0
+        for r in self.rows:
+            if needle and needle not in r["word"].lower():
+                continue
+            self.tree.insert("", "end", iid=r["word"], values=(
+                r["word"], r["sources"], r["formats"], r["reported"], r["headline"]))
+            shown += 1
+        self.count_var.set(f"{shown} / {len(self.rows)} words")
+
+    def open_page(self, _e=None):
+        sel = self.tree.selection()
+        if not sel:
+            return
+        p = SOUL.page(self.con, sel[0])
+        out = [f"=== {p['word']} — the page (derived by the spine) ===",
+               f"entries: {len(p['entries'])}   mentions elsewhere: {p['mentions']}",
+               ""]
+        if p["conflicts"]:
+            out.append(f"CONFLICT: {p['conflicts'][0]['variants']} fonetični rez "
+                       "variants — real difference, stays yours to rule")
+            out.append("")
+        for e in p["entries"]:
+            doc = f"doc {e['doc_id']}:{e['lineno']}"
+            if e.get("merged_into"):
+                out.append(f"— merged into '{e['merged_into']}'  "
+                           f"[{e['grade']}/{e['format']}]  {doc}")
+                continue
+            out.append(f"[{e['grade']}/{e['format']}]  {doc}  entry {e['entry_id']}"
+                       + (f"  #{e['number']}" if e.get("number") else ""))
+            for key in ("thesis", "antithesis", "synthesis", "foneticni_rez",
+                        "ontoloski_pomen", "antinoma", "glyph", "prakticna_uporaba"):
+                v = (e.get(key) or "").strip()
+                if v:
+                    out.append(f"    {key}: {v}")
+            out.append("")
+        self.text.configure(state="normal")
+        self.text.delete("1.0", "end")
+        self.text.insert("1.0", "\n".join(out))
+        self.text.configure(state="disabled")
+
+
+# =============================================================================
 # PARK TAB — decision records + inventory
 # =============================================================================
 
@@ -827,6 +935,8 @@ class Cockpit(tk.Tk):
         nb.add(ReceiptsTab(nb), text="RECEIPTS")
         nb.add(PerformTab(nb), text="PERFORM")
         nb.add(self.review, text="REVIEW")
+        self.library = LibraryTab(nb)
+        nb.add(self.library, text="LIBRARY")
         nb.add(ParkTab(nb), text="PARK + FILES")
         nb.pack(fill="both", expand=True)
         # k/c/m/s arrive here from anywhere; they rule ONLY when the REVIEW
@@ -875,6 +985,14 @@ def _smoke_test():
                    f"glyph {len(app.review.glyph_queue)})",
                    isinstance(app.review.merge_queue, list) and
                    isinstance(app.review.glyph_queue, list)))
+    ok.append(("LIBRARY constructs (spine + db, words listed)",
+               app.library.alive and len(app.library.rows) > 0))
+    if app.library.alive:
+        w0 = app.library.rows[0]["word"]
+        p0 = SOUL.page(app.library.con, w0)
+        ok.append((f"library page derives by the spine "
+                   f"(page for '{w0[:24]}': {len(p0['entries'])} entries)",
+                   len(p0["entries"]) > 0))
     app.destroy()
     all_ok = all(c for _n, c in ok)
     for name, cond in ok:

@@ -41,6 +41,15 @@ or it is clutter.
    [k] confirm / [c] reject; verdict written to the payload, ledger line
    witnesses in soul.db. Mechanics witnessed on scratch copies.
 3. LIBRARY browsing — a tab in the cockpit, reading soul.db
+   → BUILT 26. 9. 2026: LIBRARY tab in obj2_cockpit.py. List = live entries
+   (merged_into IS NULL) grouped by word — word, sources, formats, reported,
+   headline — with a live filter box; selecting a word derives its page
+   (entries with every field, mentions count, conflict warning) by the
+   spine's OWN page(). Read-only by law: rulings happen in REVIEW, the
+   library only reads. Not a duplicate of soul_engine's Textual gui() —
+   that stays the spine's own surface; this is the same browse/page line
+   grafted into THE GUI, as the queue pre-ruled. Smoke-passed; measured
+   2,176 live words, 0 empty pages after the repair below.
 4. export — soul_engine's export (already built) = the Godot surface, LAST
 
 ## REPAIR CANDIDATES (scars found 25. 9. — each names its line)
@@ -51,3 +60,10 @@ or it is clutter.
   extends _fingerprint(), not this corpse.
   → REPAIRED 25. 9. 2026: deleted; no callers existed (verified by grep);
   the near-dup detector grafted onto _fingerprint() as planned.
+- soul_engine page(): BROKEN — matched canon(word) against lower(word), so
+  any word carrying a space or punctuation (measured: 2,047 of 2,176 live
+  words) returned an empty page. Found by graft #3 (a library is useless if
+  most pages are blank). Repair = canon meets canon, comparison in Python
+  (SQLite has no canon()); the spine's selftest now witnesses it.
+  → REPAIRED 26. 9. 2026: all 2,176 live words return their page (measured);
+  selftest asserts a canon-changed word pages; cockpit smoke PASS.
