@@ -1420,13 +1420,13 @@ class Cockpit(tk.Tk):
         nb = ttk.Notebook(self)
         self.nb = nb
         self.review = ReviewTab(nb)
-        nb.add(CanvasTab(nb), text="CANVAS")
-        nb.add(ReceiptsTab(nb), text="RECEIPTS")
-        nb.add(PerformTab(nb), text="PERFORM")
-        nb.add(self.review, text="REVIEW")
+        nb.add(CanvasTab(nb), text="⟡ CANVAS")
+        nb.add(ReceiptsTab(nb), text="⊢ RECEIPTS")
+        nb.add(PerformTab(nb), text="∂ PERFORM")
+        nb.add(self.review, text="⊘ REVIEW")
         self.library = LibraryTab(nb)
-        nb.add(self.library, text="LIBRARY")
-        nb.add(ParkTab(nb), text="PARK + FILES")
+        nb.add(self.library, text="∮ LIBRARY")
+        nb.add(ParkTab(nb), text="∅ PARK + FILES")
         nb.pack(fill="both", expand=True)
         # k/c/m/s arrive here from anywhere; they rule ONLY when the REVIEW
         # tab is up and the keyboard focus is not inside an input widget

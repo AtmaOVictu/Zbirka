@@ -233,6 +233,36 @@ Pictures/) is other strata, not this workshop's to move.
    rule-transferable rulings get their bodies here.
 
 ## NEXT IN THE QUEUE (each names its line)
+- "VSE SKUŠAJ" EXECUTED (26. 9. 2026 — the more-than-necessary, done):
+  (1) RETRO-HONESTY: the ledger's oldest lie repaired WITH WITNESS, not
+  laundered — the 26 unmarked 24. 9. machine merges now carry
+  machine:true + ratified_by → ledger#42 (a normative line naming BOTH
+  acts: the 24. 9. 'do not relegate' instruction + the 26. 9. 'vse
+  skušaj'); 0 unmarked machine lines remain; ruling_states v2 counts a
+  RATIFIED machine line as canon THROUGH its reference, unratified as
+  draft — the replay can no longer be lied to by an unmarked line.
+  (2) STABILITY v2 = provenance-honest: measured on the live db —
+  2,471 words · 1,815 stable · 0 open-drafts (the retro-marked merges
+  count as canon only through line #42) · 656 multi/kept · 79 pending.
+  (3) FORMAT D v2 (the "):" head, table-lookahead committed —
+  dar-kula: 0 → 2 bodies) + FORMAT E (latinščina word-tables, one dosje
+  per row, columns by header: Beseda/Pomen/Etimologija/Fonetični rez/
+  Ontološki pomen; grounded in C1 latinščina I–VII): reparse pass lit
+  25 more docs, +109 entries (80 E-tabela · 29 D-rez), dark 652 → 627.
+  (4) CITATION GRAPH (`graf`): 91,019 doc→word edges · 6,938 citing live
+  words · 186 law→law edges from VEZI (the stored-unconsumed line,
+  consumed) · 114 commit-evidence hashes in law bodies. Edges point,
+  they never judge.
+  (5) ODPRTA-DELTA (`odprta-delta`): 60 laws carry 263 open ∂ — serves
+  rez 231; the organ's next popis reads here (the kazalo stays Luka's).
+  (6) CONSCIOUS AESTHETICS, down payment: the cockpit tabs now carry
+  the corpus's own operators — ⟡ CANVAS · ⊢ RECEIPTS · ∂ PERFORM ·
+  ⊘ REVIEW · ∮ LIBRARY · ∅ PARK. The language the body already speaks,
+  finally spoken by the machine.
+  REMAINING (the honest rest): lexicon-enrichment drafts (9 hollow) ·
+  stratum-order proposal (measured mtime order, drafted as rez for
+  Luka's seal) · third reader · ReflektivnaZanka · export (LAST) ·
+  627 still-dark docs (honest prose + remaining parser targets).
 - TRIJE ZAKONI ZAPEČATENI KOT REZ-TELESA (Luka's "daj", 26. 9. 2026;
   written by the Cline hand, sealed by the owner's word — the rules now
   LIVE IN THE CORPUS, not in code): Obj2/rez-559-kopirno-pravilo.md

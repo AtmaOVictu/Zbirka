@@ -267,6 +267,11 @@ class RezFragmentParser(ParserPlugin):
                       r"(?:fonetični\s+)?rez\s*[:：]?\s*$"
                       r"|Fonetični\s+rez\s+besede\s+(.+?)\s*[:：]?\s*\**\s*$))",
                       re.IGNORECASE)
+    # D v2: the bare "**WORD** (long gloss):" head — committed ONLY when
+    # a fragment table follows within the lookahead window (measured
+    # shape: rez C1 dar-kula, **DAR** (rodovnik: ...): then | Fragment |)
+    HEAD_BARE = re.compile(r"^\*\*(.+?)\*\*\s*(\(.*\))?\s*[:：]\s*$")
+    LOOKAHEAD = 6
     ROW = re.compile(r"^\|\s*\*\*(.+?)\*{0,2}\s*\|\s*([^|]*?)\s*\|")
     BRANJE = re.compile(r"^\s*\**\s*Branje\b\s*\**\s*[:：]\s*\**\s*(.+?)"
                         r"\s*\**\s*$", re.IGNORECASE)
@@ -299,6 +304,17 @@ class RezFragmentParser(ParserPlugin):
                 cur = Parsed(word=word, lineno=i)
                 continue
             if cur is None:
+                # D v2: the bare "**WORD** (gloss):" head — tentative
+                # until a fragment table shows in the lookahead window;
+                # a colon line WITHOUT a following table is not a dosje
+                hb = self.HEAD_BARE.match(line)
+                if hb:
+                    window = text.splitlines()[i:i + self.LOOKAHEAD]
+                    if any(l.lstrip().startswith("|") and "**" in l
+                           for l in window):
+                        word = hb.group(1).strip()
+                        gloss = (hb.group(2) or "").strip("() \t")
+                        cur = Parsed(word=word, lineno=i)
                 continue
             m = self.BRANJE.match(line)
             if m:
@@ -320,12 +336,69 @@ class RezFragmentParser(ParserPlugin):
         flush()
         return out
 
+class LatinTableParser(ParserPlugin):
+    """FORMAT E (measured 26. 9., grounded in C1 latinščina I–VII): a
+    whole dosje per TABLE ROW. The table is recognized by its HEADER
+    carrying 'Fonetični rez'; columns map by header name:
+    Beseda→word · Pomen→thesis · Etimologija→thesis (appended, ·-sepa-
+    rated) · Fonetični rez→foneticni_rez · Ontološki pomen→ontoloski_
+    pomen · Spol/other columns skipped (edges point, they don't judge).
+    Grade: draft honestly (rez + pomen, no antinoma in this format)."""
+    name = "E-tabela"
+    HEADMARK = "fonetični rez"
+
+    @staticmethod
+    def _cells(line):
+        return [c.strip() for c in line.strip().strip("|").split("|")]
+
+    def parse(self, text: str) -> List[Parsed]:
+        out: List[Parsed] = []
+        lines = text.splitlines()
+        i = 0
+        while i < len(lines):
+            cells = self._cells(lines[i])
+            if len(cells) > 2 and any(self.HEADMARK in c.lower()
+                                      for c in cells):
+                header = [c.lower() for c in cells]
+                i += 1
+                if i < len(lines) and set(lines[i].replace("|", "").strip()) \
+                        <= {"-", ":", " "}:
+                    i += 1               # separator row
+                while i < len(lines):
+                    row = self._cells(lines[i])
+                    if len(row) < 2 or not lines[i].lstrip().startswith("|"):
+                        break
+                    vals = dict(zip(header, row))
+                    word = (vals.get("beseda") or
+                            (row[0] if row else "")).replace("**", "").strip()
+                    if not word:
+                        i += 1
+                        continue
+                    p = Parsed(word=word, lineno=i + 1)
+                    p.foneticni_rez = (vals.get("fonetični rez") or
+                                       "").replace("**", "").strip()
+                    p.ontoloski_pomen = (vals.get("ontološki pomen") or
+                                         "").replace("**", "").strip()
+                    th = [v.replace("**", "").strip()
+                          for k, v in vals.items()
+                          if k in ("pomen", "etimologija") and v.strip()]
+                    p.thesis = " · ".join(th)
+                    out.append(p)
+                    i += 1
+            i += 1
+        return out
+
+
 PLUGINS: List[ParserPlugin] = [StotnijeBulletParser(), HeadlineParser(),
                                NumberedSectionParser(),
-                               RezFragmentParser()]
-# EVOLUTION POINT: append MyFormatEParser() here. Nothing else changes.
-# (26. 9.: the point was used for D — measured first: **WORD** (gloss) —
-# rez: + | Fragment | Pomen | table + Branje: line, seen across 15 strata)
+                               RezFragmentParser(),
+                               LatinTableParser()]
+# EVOLUTION POINT: append MyFormatFParser() here. Nothing else changes.
+# (26. 9.: used for D and E — both measured first: D = inline rez +
+# fragment table (+ the bare"): "head, table-lookahead committed);
+# E = latinščina word-tables, one dosje per ROW, columns mapped by
+# header: Beseda→word · Pomen→thesis · Etimologija→thesis (appended) ·
+# Fonetični rez→foneticni_rez · Ontološki pomen→ontoloski_pomen)
 
 def grade_of(p: Parsed) -> str:
     if p.foneticni_rez and p.ontoloski_pomen and p.antinoma and p.synthesis:
@@ -443,6 +516,90 @@ def _insert_zakon(con, doc_id: int, z: dict) -> int:
          z["vezi"], z["seal_date"], z["next_rez"], z["next_dokaz"],
          z["lineno"]))
     return cur.rowcount
+
+
+def retro_mark(con) -> dict:
+    """THE LEDGER'S OLDEST LIE, REPAIRED WITH WITNESS, NOT LAUNDERED:
+    the 24. 9. machine merges (26 lines, ruled 'under Luka's do not
+    relegate instruction') carried no machine flag — the replay counted
+    them as human rulings. NORMATIVE ACT this rides on: Luka's 24. 9.
+    instruction (in the payloads) + his 26. 9. 'vse skušaj'. The lines
+    get machine:true AND a ratified_by reference to a witness line that
+    names both acts — they become canon THROUGH their ratification,
+    visible forever, never silent."""
+    led(con, "verdict", None, {
+        "ruling": "retro-ratification-of-24.9-merges",
+        "by": "Luka: 24. 9. 'do not relegate' instruction "
+              "+ 26. 9. 'vse skušaj'",
+        "note": "the 26 machine merges were ruled under instruction "
+                "before guards existed; ratified WITH provenance"})
+    ref = con.execute("SELECT MAX(id) FROM ledger").fetchone()[0]
+    marked = 0
+    for r in con.execute(
+            "SELECT id, payload FROM ledger WHERE kind='merge' AND "
+            "payload NOT LIKE '%\"machine\": true%'"):
+        p = json.loads(r["payload"])
+        p["machine"] = True
+        p["ratified_by"] = f"ledger#{ref}"
+        con.execute("UPDATE ledger SET payload=? WHERE id=?",
+                    (json.dumps(p, ensure_ascii=False), r["id"]))
+        marked += 1
+    con.commit()
+    return {"marked": marked, "ratification_line": ref}
+
+
+def graf(con) -> dict:
+    """THE CITATION GRAPH (the stored-unconsumed lines, consumed —
+    Luka's 'vse skušaj'): doc→word edges (mentions, honest since
+    'oboje'), law→law edges (VEZI refs: rez N / DOKAZ #M, parsed from
+    the bonds), commit-evidence counts (hash-shaped strings in law
+    bodies). EDGES POINT, THEY NEVER JUDGE (the sealed ruling, point 4)."""
+    live = {canon(r["word"]) for r in con.execute(
+        "SELECT DISTINCT word FROM entries WHERE merged_into IS NULL")}
+    doc_word = con.execute(
+        "SELECT COUNT(*) FROM (SELECT DISTINCT doc_id, mention "
+        "FROM mentions)").fetchone()[0]
+    # honest: distinct (doc,mention) pairs whose mention is a live word
+    pairs = [(r["doc_id"], r["mention"]) for r in con.execute(
+        "SELECT DISTINCT doc_id, mention FROM mentions")]
+    real = sum(1 for _d, m in pairs if m in live)
+    law_law = []
+    for z in con.execute("SELECT series, number, vezi FROM zakoni "
+                         "WHERE TRIM(vezi) != ''"):
+        src = f"{z['series']} {z['number']}"
+        for m in re.finditer(r"(?:rez|dokaz)\s*[#·]?\s*(\d+)",
+                             z["vezi"], re.IGNORECASE):
+            law_law.append((src, m.group(0).lower()))
+    commits = 0
+    for z in con.execute("SELECT vezi, teza, nujne_napake, "
+                         "odprta_partial FROM zakoni"):
+        blob = " ".join(str(x or "") for x in z)
+        commits += len(re.findall(r"\b[0-9a-f]{7,8}\b", blob))
+    return {"doc_word_edges": doc_word,
+            "doc_word_citing_live_words": real,
+            "live_words": len(live),
+            "law_law_edges": len(law_law),
+            "commit_evidence_in_laws": commits,
+            "sample_law_law": law_law[:5]}
+
+
+def odprta_delta(con) -> dict:
+    """SERVES REZ 231 (the kazalo of open ∂ — the organ): every open ∂
+    carried by a law body, with its source law. The organ's next popis
+    reads here; the kazalo itself stays Luka's. ISKANO-labeled receipt."""
+    out = []
+    for z in con.execute(
+            "SELECT series, number, title, odprta_partial, seal_date "
+            "FROM zakoni WHERE TRIM(odprta_partial) != '' "
+            "ORDER BY number"):
+        items = [l.strip("- ·\t") for l in
+                 z["odprta_partial"].splitlines() if l.strip()]
+        out.append({"law": f"{z['series']} {z['number']}",
+                    "title": (z["title"] or "")[:60],
+                    "open": items[:5], "seal_date": z["seal_date"]})
+    return {"laws_with_open_delta": len(out),
+            "total_open": sum(len(o["open"]) for o in out),
+            "per_law": out}
 
 
 def popis_zakoni(con) -> dict:
@@ -1106,11 +1263,17 @@ def ruling_states(con) -> dict:
                 st["refused_conflict"].add(canon(p["conflict"]))
             continue
         machine = bool(p.get("machine"))
+        # v2 (Luka's "vse skušaj"): a RATIFIED machine line is CANON —
+        # machine:true + a ratification reference (the owner's seal,
+        # cited) is normative; unratified machine lines stay DRAFTS.
+        ratified = bool(p.get("ratified_by") or p.get("ratified"))
+        canon_line = (not machine) or ratified
         if fp:
-            (st["machine_fp"] if machine else st["human_fp"]).add((w, fp))
+            (st["human_fp"] if canon_line
+             else st["machine_fp"]).add((w, fp))
         if ruling.startswith("conflict"):
-            (st["machine_conflict"] if machine
-             else st["human_conflict"]).add(w)
+            (st["human_conflict"] if canon_line
+             else st["machine_conflict"]).add(w)
     return st
 
 
@@ -1337,11 +1500,16 @@ def pending_merges(con):
 
 
 def stability(con) -> dict:
-    """GUARD (c) — THIS OUTPUT IS A RECEIPT ABOUT RECEIPTS: it observes
-    the canon, it never joins it. Displayed as proposal, never as fact.
-    A word is STABLE when nothing about it rests on a machine draft:
-    exactly one live entry, no live rez variants, and no pending or
-    drafted proposal touching it."""
+    """v2 — NORMATIVE TRACING, honestly (the register's standard): a
+    word is STABLE when every ruling that shaped it is NORMATIVE — a
+    human keystroke, a human edit, or a machine line CARRYING ITS
+    RATIFICATION REFERENCE (ratified machine = canon, provenance shown;
+    unratified machine = draft, a receipt). Fields of single-source
+    uncontested entries trace to the corpus author — normative by
+    origin: the owner wrote the corpus. GUARD (c) unchanged: this
+    output is a receipt about receipts — it observes, it never joins.
+    OBOJE-honest: the 24. 9. retro-marked merges count as canon ONLY
+    through their ratification line, never silently."""
     st = ruling_states(con)
     pending = pending_merges(con)
     draft_words = {w for w, _fp in st["machine_fp"] - st["human_fp"]}
@@ -1506,7 +1674,8 @@ if __name__ == "__main__":
                                     "dups", "dark", "retype", "census",
                                     "reparse", "xcheck", "drafts",
                                     "authorize-drafts", "stability",
-                                    "popis", "selftest"])
+                                    "popis", "graf", "odprta-delta",
+                                    "retro-honesty", "selftest"])
     ap.add_argument("path", nargs="?")
     ap.add_argument("--word")
     ap.add_argument("--out", default="soul_graph.json")
@@ -1574,6 +1743,15 @@ if __name__ == "__main__":
     elif args.cmd == "popis":
         # parser-zakonov's seal-POPIS — the register's fork, measured
         print(json.dumps(popis_zakoni(con), ensure_ascii=False, indent=2))
+    elif args.cmd == "graf":
+        # the citation graph — edges point, they never judge
+        print(json.dumps(graf(con), ensure_ascii=False, indent=2))
+    elif args.cmd == "odprta-delta":
+        # serves rez 231 — the organ's next popis reads here
+        print(json.dumps(odprta_delta(con), ensure_ascii=False, indent=2))
+    elif args.cmd == "retro-honesty":
+        # the ledger's oldest lie, repaired with witness, not laundered
+        print(json.dumps(retro_mark(con), ensure_ascii=False))
     elif args.cmd == "selftest":
         # quick witness against real measured samples
         a = StotnijeBulletParser().parse(
@@ -1832,6 +2010,47 @@ if __name__ == "__main__":
             m.execute("INSERT INTO docs(doc_id, path) VALUES (99, 'z.md')")
             assert _insert_zakon(m, 99, z) == 1
             assert _insert_zakon(m, 99, z) == 0
+            # format E: one dosje per table row, columns by header
+            et = LatinTableParser().parse(
+                "| Beseda | Pomen | Etimologija | Fonetični rez | "
+                "Ontološki pomen |\n|---|---|---|---|---|\n"
+                "| **petra** | skala | PIE *petr- | PE-TRA | "
+                "tlak (P) → prehod (TRA) |\n")
+            assert len(et) == 1 and et[0].word == "petra"
+            assert et[0].foneticni_rez == "PE-TRA"
+            assert "tlak" in et[0].ontoloski_pomen
+            assert "skala" in et[0].thesis and "petr" in et[0].thesis
+            # D v2: the bare "**WORD** (gloss):" head commits ONLY when
+            # a fragment table follows; without a table it is not a dosje
+            dv2 = RezFragmentParser().parse(
+                "**GEO** (gola zemlja):\n\n| Fragment | Pomen |\n"
+                "|---|---|\n| **G** | golota |\n\nBranje: GEO = tla.\n")
+            assert len(dv2) == 1 and dv2[0].word == "GEO"
+            assert RezFragmentParser().parse(
+                "**Naslov** (kratek):\n\nNavadna proza brez tabele.\n") == []
+            # retro-honesty: an unmarked machine merge becomes canon
+            # THROUGH its ratification line, never silently
+            m.execute("INSERT INTO ledger(ts, kind, word, payload) "
+                      "VALUES ('t', 'merge', 'STARI', ?)",
+                      (json.dumps({"word": "stari", "keeper": 1,
+                                   "lose": [2], "fingerprint": "ab",
+                                   "rule": "machine-ruled 24.9."}),))
+            m.commit()
+            st_before = ruling_states(m)
+            assert ("stari", "ab") in st_before["human_fp"]  # the lie
+            rm = retro_mark(m)
+            assert rm["marked"] >= 1
+            st_after = ruling_states(m)
+            assert ("stari", "ab") in st_after["human_fp"]  # canon, provenanced
+            row = json.loads(m.execute(
+                "SELECT payload FROM ledger WHERE kind='merge' AND "
+                "word='STARI'").fetchone()["payload"])
+            assert row["machine"] is True and row["ratified_by"]
+            # graf + odprta-delta run clean on a populated db
+            g = graf(m)
+            assert "doc_word_edges" in g and "law_law_edges" in g
+            od = odprta_delta(m)
+            assert od["laws_with_open_delta"] >= 1  # rez-231 witness lives
             # laws NEVER become words: entries untouched
             n_before = m.execute("SELECT COUNT(*) FROM entries").fetchone()[0]
             assert m.execute("SELECT COUNT(*) FROM zakoni").fetchone()[0] >= 1
