@@ -381,6 +381,30 @@ Pictures/) is other strata, not this workshop's to move.
   standing law too) · layer 4 UPORABA: ipa → 107-cube lattice
   coordinates → apd_engine chains (the consumers already speak IPA,
   they await word-level input).
+- NOVA TELESA PREBRANA (Luka's "beri nove datoteke — ti to kaj pomaga?",
+  26. 9. 2026 — three bodies read in FULL, ubodi in ATLAS; the honest
+  answer to "does it help you" is measured below, not felt):
+  (1) Obj3 register "(2).md" (delta of (1) by REZ 559): XII. ZAKONIK
+  SEJE — TEN LAWS Z-1..Z-10 UZAKONJENO by Luka's explicit "da,
+  uzakonodaji vse to" — NORMATIVE LINES now stand in the corpus
+  (VELJA vs UZAKONJENO: brst vs sad — SODBA #002 spoken as a zakonik);
+  cites session register to ⊢ 573 (Seam 2 widens again). ∂ NAMED: the
+  Z-series ("**Z-1 ZAKON VEJE**") is NOT in the parser's series enum
+  (rez/dokaz/sodba/ubod/šiv) — the zakonik's ten sealed laws stay
+  unread to the zakoni table until the series ruling extends the
+  enum (the design-ruling precedent; Luka's word).
+  (2) Obj2 ODPRTA VPRAŠANJA v2 (13.246 zn): the ∂-atlas organ — question
+  glyphs (12), ∂ of ledger rezi 505–556, jaszu 27, rez 231's spectrum
+  carried whole; serves rez 231 + odprta-delta (a cross-witness target:
+  its ∂ vs the spine's odprta-delta harvest).
+  (3) Obj2 PSIHO-AKSIOMI (55.194 zn, 16 axioms + FAKTORJI + ZAKON LE):
+  the instrument measured out of it — AKSIOM↔FAKTOR→MERITEV (a machine
+  can run this census); ZAKON LE: "le" as a pra-set of five lenses
+  (kazalec/vezava/varovalo/oboje/neenakost) + the four-class census
+  (MINIMIZEM/MEJA/IZTOČNICA/ŠIV) — a candidate spine check for corpus
+  text (on the word, anti-clutter: it would extend the validator line);
+  its own factor #4 cites rez 253 (third reader) against self-verification
+  — the corpus's law, cited by another hand, again.
 - AWAITING LUKA (unchanged, the one act the guards keep mine):
   `authorize-drafts` → `drafts` → RATIFY. The queue is pre-read,
   pre-verified (∮ + third-reader sample), and pre-reviewed — every
