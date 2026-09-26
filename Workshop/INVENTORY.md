@@ -559,6 +559,32 @@ Pictures/) is other strata, not this workshop's to move.
   parser-darkness, but their WORDS NOW COUNT in the citation graph
   (sorodnost/kinship includes the A1 stratum). Selftest + ∮ preveri +
   smoke PASS.
+- MISTRAL UPLOAD IZVOZ — PRVA CETRT PRINESENA (Luka's "daj", 26. 9. 2026
+  — the third door opened BY MACHINE: the Notion connector reached the
+  Mistral Upload libraries; the honest scope measured FIRST): the
+  workspace holds "Mistral Upload Version1/Version2" (30 topic files,
+  122.1MB each — THE subconsultations with another hand: ChatGPT/
+  Codex exports, 54+14 conversations); the two DISTILLED SYNTHESES
+  (~20KB each, the only small bodies) exported through the pipe to
+  CanvasMinstral/MistralUpload/ (a NEW stratum, provenance in every
+  file header): (1) topic_01_patch_js_proof — the BIRTHPLACE of the
+  proof-loop measured: "stanje → REZ → dokazna vrzel → odločitev →
+  sled → naslednji REZ"; JEWIK_TRUTHBASE_STUDIO, Modul A (LOCKED),
+  EGO LOOP ENGINE, and the first written appearance of FIND → CHOOSE
+  → PATCH → PROVE → REPLAY (ODL-0001) — the origin of the working
+  cycle the workshop itself runs; ROKA MOČNEGO (agents 143-184, the
+  enterprise mythologies); (2) topic_04 — bolečina, paradoks, oče:
+  the heaviest body (Priročnik Jaszu, the word-splitting technique
+  d/rek, c/eno, s/loba/nja — the generative method measured as the
+  corpus's own pra-metod's sibling), read with the layer-of-text law
+  (secirava reže plast zapisa, ne plast avtorja). MEASURED: 2 bodies
+  admitted (dosje-A 4 entries — the section headings as parsed
+  sections, honest), mentions derived; the REMAINING 28 topic files
+  (0.09-20.16MB, total ~244MB) + 6 dictionary batches + media.pdf
+  NAMED for the campaign — they are too large for this session's
+  context; the pipe is PROVEN (fetch → write → scan), the campaign
+  continues on the word (batch-per-sitting or a Notion-side bulk
+  export by the owner — his act would be faster). Selftest PASS.
 - AWAITING LUKA (unchanged, the one act the guards keep mine):
   `authorize-drafts` → `drafts` → RATIFY. The queue is pre-read,
   pre-verified (∮ + third-reader sample), and pre-reviewed — every
