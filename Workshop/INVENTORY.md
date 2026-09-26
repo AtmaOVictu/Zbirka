@@ -405,7 +405,16 @@ becomes the ruler.
   the document, not to its last entry — honest and cheap, one reparse
   pass); (b) admit the stratum is noise and drop it from page(). The
   citation graph (VEZI-based) is the trustworthy edge line either way.
-  → OPEN — named, not repaired; Luka's [k]/[m] on (a) or (b).
+  → RULED "OBOJE" AND REPAIRED 26. 9. 2026: BOTH — (a) the mentions
+  table migrated to doc-level edges (column entry_id→doc_id, db()
+  migrates existing dbs; scan writes (doc_id, mention); reparse
+  re-derives all rows, ledger-witnessed) AND (b) page() now counts
+  DISTINCT DOCS mentioning the word ("omenjeno v N dokumentih" in the
+  LIBRARY) — the noise number is gone. MEASURED after re-derivation:
+  184,031 edges, 0 toward nothing, 21,207 distinct words; "luka"
+  mentioned in 627 docs; ljubezen in 54 — the mention graph is now the
+  citation-graph foundation (doc→word edges; VEZI adds law→law).
+  Selftest witnesses the doc-level edge at scan admission; smoke PASS.
 - soul_engine find_dup_files(): DEAD + BROKEN. Never called (the `dups`
   command uses dup_file_report, which hashes in Python), and it would crash
   if called — SQLite has no md5() (verified). Repair = delete it; the live

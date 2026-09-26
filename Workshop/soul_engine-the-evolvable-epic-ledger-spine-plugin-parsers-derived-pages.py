@@ -74,8 +74,13 @@ CREATE TABLE IF NOT EXISTS entries (
     merged_into TEXT                   -- loser points at the keeper's word
 );
 CREATE INDEX IF NOT EXISTS idx_entries_word ON entries(word);
+-- mentions: DOC-LEVEL edges (Luka's "oboje", 26. 9. 2026 — the old
+-- entry-tagging piled a doc's whole mention-load onto its LAST entry,
+-- 96k rows pointed at nothing: noise). A mention belongs to the
+-- DOCUMENT; page() counts docs mentioning the word. Edges point, they
+-- never judge — the citation-graph foundation.
 CREATE TABLE IF NOT EXISTS mentions (
-    entry_id  INTEGER,                 -- mention-of link (stratum 3, cheap)
+    doc_id    INTEGER,               -- the document that mentions
     mention   TEXT
 );
 CREATE INDEX IF NOT EXISTS idx_mentions ON mentions(mention);
@@ -130,6 +135,11 @@ def db() -> sqlite3.Connection:
         con.execute("ALTER TABLE docs ADD COLUMN kind TEXT")
     if "stratum" not in cols:
         con.execute("ALTER TABLE docs ADD COLUMN stratum TEXT")
+    # mentions migration ("oboje"): existing dbs carry the old entry_id
+    # column — rename to doc_id; reparse re-derives the rows honestly
+    mcols = {r["name"] for r in con.execute("PRAGMA table_info(mentions)")}
+    if "entry_id" in mcols and "doc_id" not in mcols:
+        con.execute("ALTER TABLE mentions RENAME COLUMN entry_id TO doc_id")
     return con
 
 def led(con, kind: str, word: str, payload: dict) -> None:
@@ -506,11 +516,11 @@ def scan(root: Path, con: sqlite3.Connection) -> dict:
                      p.ontoloski_pomen, p.antinoma, p.glyph,
                      p.prakticna_uporaba, p.lineno, grade_of(p)))
                 n_entries += 1
-        # stratum 3, cheap: every capitalized word mentions something
+        # stratum 3, honest since "oboje": doc-level mention edges — the
+        # document mentions the word; the edge points, it never judges
         for m in re.findall(r"\b([A-ZČŠŽ][a-zčšžćđ]{3,})\b", text):
-            con.execute("INSERT INTO mentions VALUES ((SELECT entry_id "
-                        "FROM entries WHERE doc_id=? ORDER BY entry_id DESC "
-                        "LIMIT 1), ?)", (doc_id, canon(m)))
+            con.execute("INSERT INTO mentions VALUES (?, ?)",
+                        (doc_id, canon(m)))
         # parser-zakonov: the spine reads LAWS too — separate kind, never
         # entries; idempotent by body-with-witness
         is_law = sum(_insert_zakon(con, doc_id, z) > 0
@@ -544,8 +554,10 @@ def page(con, word: str) -> dict:
         "SELECT e.*, d.kind AS doc_kind, d.stratum AS doc_stratum "
         "FROM entries e JOIN docs d ON d.doc_id = e.doc_id")
               if canon(r["word"]) == w or canon(r["merged_into"] or "") == w]
-    mentions = con.execute("SELECT COUNT(*) FROM mentions WHERE mention=?",
-                          (w,)).fetchone()[0]
+    mentions = con.execute("SELECT COUNT(DISTINCT doc_id) FROM mentions "
+                          "WHERE mention=?",
+                          (w,)).fetchone()[0]   # DOCS mentioning (honest
+                                                # since "oboje"; was noise)
     return {"word": word, "entries": entries, "mentions": mentions,
             "conflicts": [dict(r) for r in con.execute(
                 "SELECT * FROM v_conflicts WHERE word=?" , (word,))]}
@@ -962,12 +974,30 @@ def reparse(con) -> dict:
                 new_laws += 1
                 con.execute("UPDATE docs SET kind='zakon' WHERE doc_id=? "
                             "AND kind != 'zakon'", (d["doc_id"],))
+    # mentions re-derivation ("oboje"): the old rows were noise (a doc's
+    # whole load piled on its last entry, 96k rows toward nothing) —
+    # delete and re-derive as DOC-LEVEL edges; the count in page()
+    # becomes honest (docs mentioning the word)
+    con.execute("DELETE FROM mentions")
+    new_mentions = 0
+    for d in con.execute("SELECT doc_id, path FROM docs").fetchall():
+        try:
+            text = Path(d["path"]).read_text(encoding="utf-8",
+                                            errors="replace")
+        except OSError:
+            continue
+        for m in re.findall(r"\b([A-ZČŠŽ][a-zčšžćđ]{3,})\b", text):
+            con.execute("INSERT INTO mentions VALUES (?, ?)",
+                        (d["doc_id"], canon(m)))
+            new_mentions += 1
     led(con, "reparse", None, {"dark_before": len(dark), "lit": lit,
                                "new_entries": new_entries,
-                               "new_laws": new_laws})
+                               "new_laws": new_laws,
+                               "mentions_rederived": new_mentions})
     con.commit()
     return {"dark_before": len(dark), "lit": lit,
-            "new_entries": new_entries, "new_laws": new_laws}
+            "new_entries": new_entries, "new_laws": new_laws,
+            "mentions_rederived": new_mentions}
 
 
 def xcheck(con, lex_path) -> dict:
@@ -1656,6 +1686,11 @@ if __name__ == "__main__":
             # graft #8: typed at admission — what it is, where it occupies
             row = m2.execute("SELECT kind, stratum FROM docs").fetchone()
             assert row["kind"] == "dosje-A" and row["stratum"] == "(root)"
+            # mentions ("oboje"): doc-level edges — the document mentions;
+            # no more piling onto the last entry
+            mrows = {(r["doc_id"], r["mention"]) for r in m2.execute(
+                "SELECT doc_id, mention FROM mentions")}
+            assert (1, "strah") in mrows and (1, "fonetični") in mrows
             # graft #8: existing dbs migrate — old docs table gains the columns
             old = sqlite3.connect(str(DB_PATH))
             old.execute("CREATE TABLE IF NOT EXISTS docs (doc_id INTEGER "

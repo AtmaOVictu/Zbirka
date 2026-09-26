@@ -1337,7 +1337,7 @@ class LibraryTab(ttk.Frame):
             return
         p = SOUL.page(self.con, sel[0])
         out = [f"=== {p['word']} — the page (derived by the spine) ===",
-               f"entries: {len(p['entries'])}   mentions elsewhere: {p['mentions']}",
+               f"entries: {len(p['entries'])}   omenjeno v {p['mentions']} dokumentih",
                ""]
         if p["conflicts"]:
             out.append(f"CONFLICT: {p['conflicts'][0]['variants']} fonetični rez "
