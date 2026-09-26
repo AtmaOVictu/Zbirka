@@ -131,6 +131,12 @@ Pictures/) is other strata, not this workshop's to move.
 - REPARSE — a spine command to parse DARK docs with the CURRENT plugins
   (scan() only admits new files; the already-scanned dark corpus stays
   dark forever without this). Extends scan()'s line, ledger-witnessed.
+- LEXICON CROSS-WITNESS (found 26. 9., by actually reading lexicon.json —
+  the truth layer, previously unread): TWO truth layers exist and have
+  never been checked against each other — lexicon.json (40 words, each
+  with pomen/antinoma/glyph/phonemes/provenance) vs soul.db's pages for
+  the same words. Where they disagree, which is canon? Extends lexicon_core
+  + page(); findings feed REVIEW like every other proposal.
 
 ## REPAIR CANDIDATES (scars found 25. 9. — each names its line)
 - soul_engine find_dup_files(): DEAD + BROKEN. Never called (the `dups`
