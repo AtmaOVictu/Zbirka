@@ -1370,6 +1370,139 @@ class LibraryTab(ttk.Frame):
 
 
 # =============================================================================
+# SLIKA TAB — ⧖ the corpus as one clear apparition (Luka's ask, 26. 9.)
+# =============================================================================
+
+SLIKA_COLORS = {
+    "zakon": "#d4a017", "dosje-A": "#4aa88f", "dosje-A+B+C": "#4aa88f",
+    "dosje-B+C": "#4aa88f", "dosje-D": "#c97a33", "notes": "#7788aa",
+    "prose": "#445566", "derived": "#00ccff", "empty": "#333333",
+}
+
+
+class SlikaTab(ttk.Frame):
+    """The corpus as ONE PICTURE — a POPIS rendered visually (ISKANO,
+    a receipt about receipts; truth stays in REVIEW, this only SHOWS
+    the measured). LAWS OF THE VIEW: every dot is a body (hover: its
+    name) · every color a kind · every sector a stratum ordered by
+    MEASURED TIME (mean mtime, ascending clockwise — the visual IS the
+    stratum-order proposal, seen before it is ruled) · time flows
+    OUTWARD (inner = old, outer = new) · gold = sealed law bodies ·
+    orange = parser targets still dark · cyan = derived (the loop) ·
+    lines = law→law citations (VEZI edges — they point, never judge)."""
+
+    def __init__(self, parent):
+        super().__init__(parent, padding=4)
+        if SOUL is None:
+            ttk.Label(self, text=f"cannot load the spine: "
+                                f"{_SOUL_LOAD_ERROR}").grid(row=0, column=0)
+            return
+        self.con = SOUL.db()
+        bar = ttk.Frame(self)
+        bar.grid(row=0, column=0, sticky="ew")
+        ttk.Button(bar, text="⊕ ponari", command=self.draw).pack(side="left")
+        self.info = tk.StringVar(value="hover a dot — every dot is a body")
+        ttk.Label(bar, textvariable=self.info).pack(side="left", padx=10)
+        self.canvas = tk.Canvas(self, bg="#0d0d12", highlightthickness=0)
+        self.canvas.grid(row=1, column=0, sticky="nsew", pady=(4, 0))
+        self.rowconfigure(1, weight=1)
+        self.columnconfigure(0, weight=1)
+        self.pos = {}
+        self.draw()
+
+    def draw(self):
+        c = self.canvas
+        c.delete("all")
+        w = int(c.winfo_width()) or 980
+        h = int(c.winfo_height()) or 920
+        cx, cy = w // 2, h // 2
+        R = min(w, h) // 2 - 70
+        c.create_text(cx, 18, fill="#d4a017", font=("TkDefaultFont", 12, "bold"),
+                      text="⧖ POJAVNA SLIKA KORPUSA — pika = telo · barva = "
+                           "vrsta · sektor = stratuma (merjen čas, ura) · "
+                           "čas teče navzven · črte = VEZI")
+        # strata ordered by measured time (mean mtime)
+        stats = [(r["s"] or "(root)", r["m"] or 0, r["n"])
+                 for r in self.con.execute(
+                 "SELECT d.stratum s, AVG(d.mtime) m, COUNT(*) n FROM docs d "
+                 "GROUP BY d.stratum ORDER BY m")]
+        total = sum(s[2] for s in stats) or 1
+        mtimes = [float(r["mtime"]) for r in self.con.execute(
+            "SELECT mtime FROM docs WHERE mtime IS NOT NULL")]
+        lo, hi = (min(mtimes), max(mtimes)) if mtimes else (0, 1)
+        import math
+        angle = -90.0
+        for s, m, n in stats:
+            span = 360.0 * n / total
+            for i in range(len(stats)):   # sector label
+                pass
+            c.create_arc(cx - R - 8, cy - R - 8, cx + R + 8, cy + R + 8,
+                         start=angle, extent=span, outline="#1c2333",
+                         style="arc", width=22)
+            mid = angle + span / 2
+            lx, ly = cx + (R + 34) * math.cos(math.radians(mid)), \
+                     cy + (R + 34) * math.sin(math.radians(mid))
+            c.create_text(lx, ly, fill="#5a6a8a",
+                          font=("TkDefaultFont", 8),
+                          text=f"{s[:14]} ({n})")
+            # docs in this stratum: time flows outward
+            rows = self.con.execute(
+                "SELECT doc_id, path, kind, mtime FROM docs WHERE stratum=? "
+                "ORDER BY mtime", (s,)).fetchall()
+            for j, d in enumerate(rows):
+                a = math.radians(angle + span * (j + 0.5) / max(n, 1))
+                t = 0.0 if hi == lo else \
+                    (float(d["mtime"] or lo) - lo) / (hi - lo)
+                r = 60 + (R - 90) * t
+                x, y = cx + r * math.cos(a), cy + r * math.sin(a)
+                col = SLIKA_COLORS.get(d["kind"] or "empty", "#333333")
+                dot = c.create_oval(x - 2.2, y - 2.2, x + 2.2, y + 2.2,
+                                    fill=col, outline="", tags=("dot",))
+                name = os.path.basename(d["path"])[:44]
+                c.tag_bind(dot, "<Enter>", lambda e, nm=name, dk=d["kind"]:
+                    self.info.set(f"{nm} · {dk}"))
+                self.pos[(s, j)] = (x, y, d["doc_id"])
+            angle += span
+        # law→law citation edges (they point, they never judge)
+        law_pos = {}
+        for z in self.con.execute(
+                "SELECT z.series, z.number, z.doc_id FROM zakoni z "
+                "JOIN docs d ON d.doc_id = z.doc_id"):
+            for (s, j), (x, y, did) in self.pos.items():
+                if did == z["doc_id"]:
+                    law_pos[(z["series"], z["number"])] = (x, y)
+                    break
+        import re as _re
+        edges = 0
+        for z in self.con.execute(
+                "SELECT series, number, vezi FROM zakoni "
+                "WHERE TRIM(vezi) != ''"):
+            src = law_pos.get((z["series"], z["number"]))
+            if not src:
+                continue
+            for mm in _re.finditer(r"(?:rez|dokaz)\s*[#·]?\s*(\d+)",
+                                   z["vezi"], _re.IGNORECASE):
+                tgt = law_pos.get(("rez", int(mm.group(1)))) or \
+                      law_pos.get(("dokaz", int(mm.group(1))))
+                if tgt:
+                    c.create_line(src[0], src[1], tgt[0], tgt[1],
+                                  fill="#2a3a55", width=1)
+                    edges += 1
+        # legend + center
+        lx = 14
+        ly = h - 20 - 12 * len(SLIKA_COLORS)
+        for kind, col in SLIKA_COLORS.items():
+            c.create_oval(lx, ly, lx + 8, ly + 8, fill=col, outline="")
+            c.create_text(lx + 14, ly + 4, anchor="w", fill="#889",
+                          font=("TkDefaultFont", 8), text=kind)
+            ly += 12
+        c.create_text(cx, cy, fill="#d4a017",
+                       font=("TkDefaultFont", 16), text="⧖")
+        self.info.set(f"1,194 teles · {edges} VEZI črt · ISKANO — slika "
+                      f"potrdila, ne resnica; resnica je v ⊘ REVIEW")
+
+
+# =============================================================================
 # PARK TAB — decision records + inventory
 # =============================================================================
 
@@ -1426,6 +1559,8 @@ class Cockpit(tk.Tk):
         nb.add(self.review, text="⊘ REVIEW")
         self.library = LibraryTab(nb)
         nb.add(self.library, text="∮ LIBRARY")
+        self.slika = SlikaTab(nb)
+        nb.add(self.slika, text="⧖ SLIKA")
         nb.add(ParkTab(nb), text="∅ PARK + FILES")
         nb.pack(fill="both", expand=True)
         # k/c/m/s arrive here from anywhere; they rule ONLY when the REVIEW
