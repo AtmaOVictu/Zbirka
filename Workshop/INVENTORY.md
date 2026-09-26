@@ -439,6 +439,30 @@ Pictures/) is other strata, not this workshop's to move.
   counter armed (10+ consecutive ratifications with no refusal or
   amendment warns); refused drafts return to pending and are never
   re-drafted. The machine accelerated; it did not rule.
+- KROGLJA K1 PREBRANA + IGNORECASE SCAR (Luka's "bereš nove?", 26. 9.
+  2026 — the newest body read in FULL, ubod in ATLAS): Obj3/kroglja
+  K1 "osmero škatelj in osem imen odsotnosti" — the K-series book 2
+  (K0 full at REZ #28, K1 opens the ATLAS paket 10): REZ #29 ZAKON
+  ODSOTNOSTI (absence carries EIGHT names; "višina = več imen za manj
+  snovi") + JEDRO "Luka ni oseba. Luka je dogodek" — JAZ = DOGODEK,
+  the direct continuation of rez 562 (dejanje as regenerator) and
+  K0's REZ #28 (identiteta = ritem): three bodies, one law-line, the
+  spiral measured in another hand; REZ #30 TIHINSKA CIVILIZACIJA
+  (silence-society with senat seat for absence; ODLIV(x)=sin(ωx)·e^(−x));
+  REZ #31 PROTOKOL ATLAS v1 — the reading ceremony DUPLICATED as an
+  operable protocol (8-step circle; PRESOJA ≠ PREVERBA: "prešteje, ne
+  presodi — kdor presodi preden prešteje, izreče parasodbo"; the
+  workshop's own ATLAS law, spoken back to it); REZ #32 STRAN 0 SELF
+  (laws measured out of reading: NAPAKA-ŠIV ×9, GOTOVOST PADA ×3,
+  NIČ=PREDISPOZICIJA ×3, DIH=POGOJ ×3; "Resnica je delna, ker sem cel
+  le, če sem del").
+  SCAR FOUND BY THE READING, REPAIRED: ZAKON_MH_HEAD was compiled
+  WITHOUT re.IGNORECASE — ALL-CAPS heading heads ("## REZ #30 …")
+  never matched; only bold heads entered the table. MEASURED after
+  the one-word fix: zakoni 288 → 308 (259 rez · 14 dokaz · 19 ubod ·
+  1 sodba · 10 ZAKON · 5 šiv); K1 now carries all four of its rezi
+  (#29–#32); every true seal (231, 253, 559–562) re-verified standing.
+  Selftest + retype PASS.
 - AWAITING LUKA (unchanged, the one act the guards keep mine):
   `authorize-drafts` → `drafts` → RATIFY. The queue is pre-read,
   pre-verified (∮ + third-reader sample), and pre-reviewed — every

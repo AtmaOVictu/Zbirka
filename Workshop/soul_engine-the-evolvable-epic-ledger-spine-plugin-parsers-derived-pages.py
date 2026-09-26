@@ -550,7 +550,7 @@ ZAKON_SECTION = re.compile(r"^#{2,3}\s*(.*)$")
 # pravi…" citation has no separator — it stays a VEZI, measured)
 ZAKON_MH_HEAD = re.compile(r"^#{1,6}\s*\**\s*" + ZAKON_SERIES +
                            r"\b[·#:*\s]*(\d{1,4})\b\s*(?:\([^)]*\)\s*)?"
-                           r"[—–·:]*\s*(.*)$")
+                           r"[—–·:]*\s*(.*)$", re.IGNORECASE)
 ZAKON_MH_BOLD = re.compile(r"^\*\*\s*" + ZAKON_SERIES +
                            r"\b[·#:*\s]*(\d{1,4})\s*(?:\([^)]*\)\s*)?"
                            r"[—–·:]\s*(.+?)\*{0,2}\s*$",
