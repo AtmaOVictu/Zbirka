@@ -256,6 +256,22 @@ Pictures/) is other strata, not this workshop's to move.
   xcheck's 9 words: the same lexicon word sits on many hollow entries
   across docs); ∮ preveri all-6-PASS with honest queue preview
   (84 merge · 2 conflict · 20 glyph · 46 enrich; live db untouched).
+- REZ 562 ZAPEČATEN (Luka's "daj", 26. 9. 2026 — the dejanje analysis
+  sealed as a body; written by the Cline hand, sealed by the owner's
+  word): Obj2/rez-562-dejanje-kot-regenerator.md — DEJANJE KOT
+  REGENERATOR: dejanje = gibanje, ki ga jaz vodi, dopolni se v
+  sprejemniku; rezultat je spremenjen bralec (rez 253); spremenjen
+  bralec rodi naslednjo sintezo, sinteza dobi telo, telo poganja
+  naslednjo duplikacijo — SPIRALA, ne algoritem. The residue R > 0
+  (khipu, puruchuco — measured) is the GUARD: a cycle that closes
+  is a rubber stamp; the keystroke is the fuel of every turn. Anatomy
+  per the corpus (POVZETEK/TEZA/NUJNE NAPAKE/TESTI/ODPRTA ∂/VEZI/
+  Meritev ⊘/atomarni seal, NASLEDNJI PROSTI REZ 563). Rescan admitted
+  it; parser-zakonov read it (kind='zakon', all fields derived — one
+  fresh-typo repair before commit: ODPERTA→ODPRTA, the parser keyed
+  the section word honestly, the derived row was deleted and re-derived
+  from the corrected body, ledger untouched). VEZI: rez 253 · 559 · 560 ·
+  561 · 231 · SODBA #002 · ATLAS.
 - AWAITING LUKA (unchanged, the one act the guards keep mine):
   `authorize-drafts` → `drafts` → RATIFY. The queue is pre-read,
   pre-verified (∮ + third-reader sample), and pre-reviewed — every
@@ -563,3 +579,15 @@ becomes the ruler.
   (called the methods directly), so nothing caught it until now.
   → REPAIRED 26. 9. 2026: four-way dispatch (merge/glyph/conflict/
   ratify) verified in place; smoke PASS.
+- reparse new_laws counter: DARK-PASS LAWS NOT COUNTED (found while
+  sealing rez 562 — the delete+re-derive witness measured it: the
+  zakoni row existed, the reparse receipt said "new_laws": 0). The
+  dark-selection loop (graft #9) inserts laws via _insert_zakon but
+  adds them to got_law/lit only; the counter was reset to 0 before
+  the all-docs law-pass (graft #14), so a law admitted in the dark
+  pass vanished from the receipt. The receipt lied while the db was
+  honest — the inverse of the usual scar.
+  → REPAIRED 26. 9. 2026: new_laws initialized before the dark pass,
+  dark-pass insertions counted, the reset removed; witnessed on rez
+  562 (delete → reparse → new_laws: 1, row derived, odprta 253 chars).
+  Selftest + ∮ preveri PASS.
