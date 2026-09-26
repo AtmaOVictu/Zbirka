@@ -481,6 +481,13 @@ CONFLICT_RULES = [
     ("s", "skip", "stays in the queue, next item"),
 ]
 
+RATIFY_RULES = [
+    ("k", "ratify", "accept the DRAFT — its receipt becomes canon"),
+    ("c", "refuse", "reject the draft — back to pending, never re-drafted"),
+    ("m", "amend", "rule it your way — a chooser opens"),
+    ("s", "skip", "stays in the queue, next item"),
+]
+
 
 class ReviewTab(ttk.Frame):
     """The owner's queues, ruled by keypress. Two queues, one tab:
@@ -513,7 +520,10 @@ class ReviewTab(ttk.Frame):
     CONFLICT_COLS = ("word", "fonetični rez", "grade", "format", "doc:line",
                      "thesis/synthesis")
     CONFLICT_W = (130, 230, 70, 90, 80, 260)
-    MODE_CYCLE = {"merge": "glyph", "glyph": "conflict", "conflict": "merge"}
+    RATIFY_COLS = ("queue", "word", "draft decision", "rationale (read before [k])")
+    RATIFY_W = (80, 130, 260, 520)
+    MODE_CYCLE = {"merge": "glyph", "glyph": "conflict", "conflict": "ratify",
+                  "ratify": "merge"}
 
     def __init__(self, parent):
         super().__init__(parent, padding=8)
@@ -522,6 +532,8 @@ class ReviewTab(ttk.Frame):
         self.merge_queue = []
         self.glyph_queue = []
         self.conflict_queue = []
+        self.ratify_queue = []
+        self._k_streak = 0     # guard (b): ratifications without amendment
         self.mode = "merge"
         self.i = 0
         self.columnconfigure(0, weight=1)
@@ -568,6 +580,8 @@ class ReviewTab(ttk.Frame):
             cols, widths = self.MERGE_COLS, self.MERGE_W
         elif self.mode == "conflict":
             cols, widths = self.CONFLICT_COLS, self.CONFLICT_W
+        elif self.mode == "ratify":
+            cols, widths = self.RATIFY_COLS, self.RATIFY_W
         else:
             cols, widths = self.GLYPH_COLS, self.GLYPH_W
         self.tree = ttk.Treeview(self, columns=cols, show="headings")
@@ -589,49 +603,80 @@ class ReviewTab(ttk.Frame):
 
     # ------------------------------------------------------------ queue ----
 
-    def _ruled(self):
-        """(word, fingerprint) pairs the ledger already carries a ruling for."""
-        ruled = set()
-        for r in self.con.execute("SELECT word, payload FROM ledger "
-                                  "WHERE kind IN ('merge','verdict')"):
-            try:
-                p = json.loads(r["payload"])
-            except (ValueError, TypeError):
-                continue
-            if isinstance(p, dict) and p.get("fingerprint"):
-                ruled.add((SOUL.canon(r["word"] or ""), p["fingerprint"]))
-        return ruled
-
-    def _conflict_pending(self):
-        """Words whose live entries carry more than one fonetični rez, minus
-        the words the ledger already carries a conflict ruling for. Mirrors
-        the repaired v_conflicts: empty rez and merged losers are ghosts."""
-        ruled = set()
-        for r in self.con.execute("SELECT word, payload FROM ledger "
-                                  "WHERE kind='verdict'"):
-            try:
-                p = json.loads(r["payload"])
-            except (ValueError, TypeError):
-                continue
-            if (isinstance(p, dict)
-                    and str(p.get("ruling", "")).startswith("conflict")):
-                ruled.add(SOUL.canon(r["word"] or ""))
+    def _conflict_pending(self, st):
+        """Words whose live entries carry more than one fonetični rez,
+        minus human-ruled, minus machine-drafted (those are in RATIFY).
+        Mirrors the repaired v_conflicts: empty rez and losers are ghosts."""
+        ruled = st["human_conflict"] | st["machine_conflict"]
         return [{"word": r["word"]} for r in self.con.execute(
             "SELECT word, COUNT(DISTINCT foneticni_rez) AS v FROM entries "
             "WHERE merged_into IS NULL AND foneticni_rez IS NOT NULL "
             "AND TRIM(foneticni_rez) != '' GROUP BY word HAVING v > 1")
             if SOUL.canon(r["word"]) not in ruled]
 
+    def _ratify_pending(self, st):
+        """The machine's DRAFTS awaiting the owner's keystroke — derived
+        by replaying machine:true ledger lines (merge, conflict) and the
+        glyph payload's draft: verdicts. Guard (b): each carries its
+        rationale; the ratify display READS it before [k] can mean
+        anything."""
+        out = []
+        for r in self.con.execute("SELECT word, payload FROM ledger "
+                                  "WHERE kind='verdict' AND payload "
+                                  "LIKE '%\"machine\": true%'"):
+            try:
+                p = json.loads(r["payload"])
+            except (ValueError, TypeError):
+                continue
+            if not isinstance(p, dict) or not p.get("machine"):
+                continue
+            w = SOUL.canon(r["word"] or "")
+            ruling = str(p.get("ruling", ""))
+            if p.get("fingerprint"):
+                if (w, p["fingerprint"]) in st["human_fp"] \
+                        or (w, p["fingerprint"]) in st["refused_fp"]:
+                    continue
+                out.append({"kind": "merge", "word": r["word"],
+                            "fingerprint": p["fingerprint"],
+                            "keeper": p.get("keeper"),
+                            "lose": list(p.get("lose") or []),
+                            "rationale": p.get("rationale", ""),
+                            "near": "near-dup" in (p.get("rationale") or "")})
+            elif ruling.startswith("conflict") or ruling.startswith("draft-conflict"):
+                if w in st["human_conflict"] or w in st["refused_conflict"]:
+                    continue
+                out.append({"kind": "conflict", "word": r["word"],
+                            "true_rez": p.get("true_rez"),
+                            "rationale": p.get("rationale", ""),
+                            "counts": p.get("counts", {})})
+        for w, p in sorted(self._glyph_all().items()):
+            if isinstance(p, dict) and str(p.get("verdict", "")).startswith("draft:"):
+                out.append({"kind": "glyph", "word": w,
+                            "rationale": f"warrant: {p.get('warrant', '')}",
+                            "proposed_operator": p.get("proposed_operator"),
+                            "glyph": p.get("glyph")})
+        return out
+
+    def _glyph_all(self):
+        path = os.path.join(_HERE, GLYPH_FILE)
+        try:
+            with open(path, encoding="utf-8") as fh:
+                return json.load(fh)
+        except (OSError, ValueError):
+            return {}
+
     def load(self):
-        ruled = self._ruled()
+        st = SOUL.ruling_states(self.con)      # THE replay — spine-owned
+        seen = st["human_fp"] | st["machine_fp"]
         exact = [p for p in SOUL.propose_entry_merges(self.con)
                  if p["needs_owner"] and
-                 (p["word"], p["fingerprint"]) not in ruled]
+                 (p["word"], p["fingerprint"]) not in seen]
         near = [p for p in SOUL.propose_near_merges(self.con)
-                if (p["word"], p["fingerprint"]) not in ruled]
-        self.merge_queue = exact + near
+                if (p["word"], p["fingerprint"]) not in seen]
+        self.merge_queue = exact + near        # refused drafts stay pending
         self.glyph_queue = self._glyph_pending()
-        self.conflict_queue = self._conflict_pending()
+        self.conflict_queue = self._conflict_pending(st)
+        self.ratify_queue = self._ratify_pending(st)
         self.i = 0
         self._update_chrome()
         self._show()
@@ -651,7 +696,8 @@ class ReviewTab(ttk.Frame):
         self.mode_btn.config(text=f"show {nxt} queue "
                                   f"({len(getattr(self, nxt + '_queue'))} pending)")
         rules = {"merge": REVIEW_RULES, "glyph": GLYPH_RULES,
-                 "conflict": CONFLICT_RULES}[self.mode]
+                 "conflict": CONFLICT_RULES,
+                 "ratify": RATIFY_RULES}[self.mode]
         self.rules_var.set("   ·   ".join(f"[{k}] {short}"
                           for k, short, _long in rules))
 
@@ -664,6 +710,9 @@ class ReviewTab(ttk.Frame):
             return
         if self.mode == "conflict":
             self._show_conflict()
+            return
+        if self.mode == "ratify":
+            self._show_ratify()
             return
         if not self.merge_queue:
             self.status_var.set("merge queue empty — no duplicate or "
@@ -745,6 +794,37 @@ class ReviewTab(ttk.Frame):
             if k != "m":
                 b.state(["!disabled"])
 
+    def _show_ratify(self):
+        """GUARD (b): the rationale is DISPLAYED — a receipt must be read
+        before it is ruled. [k] ratifies the displayed draft; [c] refuses
+        it back to pending; [m] rules your own way."""
+        if not self.ratify_queue:
+            self.status_var.set("ratify queue empty — no machine drafts "
+                               "awaiting your keystroke (run `drafts` "
+                               "after `authorize-drafts` to make some)")
+            return
+        d = self.ratify_queue[self.i]
+        if d["kind"] == "merge":
+            decision = f"merge {len(d['lose'])} loser(s) into keeper " \
+                      f"{d['keeper']}"
+        elif d["kind"] == "conflict":
+            decision = f"true rez = {d['true_rez']!r}"
+        else:
+            decision = f"confirm glyph→{d.get('proposed_operator')}"
+        self.tree.insert("", "end", values=(
+            d["kind"], d["word"], decision, d.get("rationale", "")))
+        drift = ""
+        if self._k_streak >= 10:
+            drift = (f"  |  DRIFT WARN: {self._k_streak} drafts ratified "
+                     f"with no refusal or amendment — read the rationales; "
+                     f"a ruler who never amends is a rubber stamp wearing "
+                     f"a crown")
+        self.status_var.set(f"ratifying {self.i + 1} / {len(self.ratify_queue)} "
+                            f"— '{d['word']}' · a DRAFT (receipt, not canon) "
+                            f"· read the rationale, then [k]/[c]/[m]{drift}")
+        for b in self.btns.values():
+            b.state(["!disabled"])
+
     # ---------------------------------------------------------- rulings ----
 
     def _rule(self, key):
@@ -752,6 +832,13 @@ class ReviewTab(ttk.Frame):
             return
         if self.mode == "glyph":
             {"k": self.rule_glyph_confirm, "c": self.rule_glyph_reject,
+             "s": self.rule_skip}.get(key, lambda: None)()
+        elif self.mode == "conflict":
+            {"k": self.rule_conflict_true, "c": self.rule_conflict_variants,
+             "s": self.rule_skip}.get(key, lambda: None)()
+        elif self.mode == "ratify":
+            {"k": self.ratify_accept, "c": self.ratify_refuse,
+             "m": self.ratify_amend,
              "s": self.rule_skip}.get(key, lambda: None)()
         else:
             {"k": self.rule_keep, "m": self.rule_merge,
@@ -821,10 +908,12 @@ class ReviewTab(ttk.Frame):
 
     # --------------------------------------------------- glyph rulings ----
 
-    def _rule_glyph(self, ruling):
+    def _rule_glyph(self, ruling, word=None):
         """Confirm/reject the glyph→operator mapping: verdict written back
-        into the payload, ledger line witnesses the ruling in soul.db."""
-        w, p = self.glyph_queue[self.i]
+        into the payload, ledger line witnesses the ruling in soul.db.
+        word given = the ratify queue's draft; none = the glyph queue."""
+        w = word or self.glyph_queue[self.i][0]
+        p = self._glyph_all().get(w) or {}
         path = os.path.join(_HERE, GLYPH_FILE)
         with open(path, encoding="utf-8") as fh:
             data = json.load(fh)
@@ -854,7 +943,9 @@ class ReviewTab(ttk.Frame):
         written onto the other live entries, and the old values survive in
         the ledger — nothing is lost, the conflict is resolved by the
         owner's ruling, not by the machine."""
-        w = self.conflict_queue[self.i]["word"]
+        self._conflict_chooser(self.conflict_queue[self.i]["word"])
+
+    def _conflict_chooser(self, w):
         rows = [dict(r) for r in self.con.execute(
             "SELECT foneticni_rez, COUNT(*) AS n FROM entries "
             "WHERE word=? AND merged_into IS NULL AND TRIM(foneticni_rez) != '' "
@@ -918,6 +1009,83 @@ class ReviewTab(ttk.Frame):
                             f"variants; both stay (ledger: verdict)  |  "
                             f"{len(self.conflict_queue)} left in the queue")
 
+    # ------------------------------------------------- ratify actions ----
+    # Graft #11 — the draft→canon keystrokes. The DRAFT is a receipt; these
+    # are the NORMATIVE acts. GUARD (b): the drift counter resets on every
+    # refusal or amendment — a ruler who never amends is a rubber stamp
+    # wearing a crown.
+
+    def ratify_accept(self):
+        d = self.ratify_queue[self.i]
+        if d["kind"] == "merge":
+            SOUL.apply_merge(self.con, {
+                "word": d["word"], "keeper": d["keeper"], "lose": d["lose"],
+                "fingerprint": d["fingerprint"], "near": d.get("near", False),
+                "ratified_from_draft": True})
+        elif d["kind"] == "conflict":
+            losers = [dict(r) for r in self.con.execute(
+                "SELECT entry_id, foneticni_rez FROM entries "
+                "WHERE word=? AND merged_into IS NULL AND foneticni_rez "
+                "IS NOT NULL AND TRIM(foneticni_rez) != '' "
+                "AND foneticni_rez != ?", (d["word"], d["true_rez"]))]
+            for l in losers:
+                self.con.execute("UPDATE entries SET foneticni_rez=? "
+                                 "WHERE entry_id=?",
+                                 (d["true_rez"], l["entry_id"]))
+            SOUL.led(self.con, "verdict", d["word"], {
+                "ruling": "conflict-true-rez", "true_rez": d["true_rez"],
+                "replaced": [{"entry_id": l["entry_id"],
+                              "old_rez": l["foneticni_rez"]}
+                             for l in losers],
+                "ratified_from_draft": True})
+            self.con.commit()
+        else:
+            self._rule_glyph("confirm", word=d["word"])
+        self._k_streak += 1
+        self.load()
+        self.status_var.set(f"RATIFIED — '{d['word']}' {d['kind']} draft "
+                            f"became canon by your keystroke  |  "
+                            f"{len(self.ratify_queue)} drafts left")
+
+    def ratify_refuse(self):
+        """[c] — the draft is refused: its item returns to PENDING and the
+        machine never re-drafts it. The receipt stays in the ledger."""
+        d = self.ratify_queue[self.i]
+        self._k_streak = 0
+        if d["kind"] == "merge":
+            SOUL.led(self.con, "verdict", d["word"], {
+                "ruling": "draft-refused", "fingerprint": d["fingerprint"]})
+        elif d["kind"] == "conflict":
+            SOUL.led(self.con, "verdict", d["word"], {
+                "ruling": "draft-refused", "conflict": d["word"]})
+        else:
+            data = self._glyph_all()
+            data[d["word"]]["verdict"] = "confirm/reject"
+            with open(os.path.join(_HERE, GLYPH_FILE), "w",
+                      encoding="utf-8") as fh:
+                json.dump(data, fh, ensure_ascii=False, indent=2)
+            SOUL.led(self.con, "verdict", d["word"], {
+                "ruling": "draft-refused", "glyph": d["word"]})
+        self.con.commit()
+        self.load()
+        self.status_var.set(f"REFUSED — '{d['word']}' draft rejected; the "
+                            f"item returns to pending, never re-drafted  |  "
+                            f"{len(self.ratify_queue)} drafts left")
+
+    def ratify_amend(self):
+        """[m] — rule it your way: the chooser opens (merge/conflict); the
+        draft's rationale informed you, your ruling canonizes."""
+        d = self.ratify_queue[self.i]
+        if d["kind"] == "merge":
+            self._k_streak = 0
+            self._choose_keeper({"word": d["word"], "keeper": d["keeper"],
+                                 "lose": d["lose"],
+                                 "fingerprint": d["fingerprint"]})
+        elif d["kind"] == "conflict":
+            self._k_streak = 0
+            self._conflict_chooser(d["word"])
+        # glyph drafts have nothing to amend — [k] or [c] only
+
     def rule_skip(self):
         self.i += 1
         if self.i >= len(self.queue()):
@@ -972,6 +1140,10 @@ class LibraryTab(ttk.Frame):
         ent.bind("<KeyRelease>", lambda _e: self.fill())
         ttk.Button(bar, text="export ruled page",
                    command=self.export_page).pack(side="left", padx=(6, 0))
+        ttk.Button(bar, text="edit entry", command=self.edit_entry).pack(
+            side="left", padx=(6, 0))
+        ttk.Button(bar, text="add entry", command=self.add_entry).pack(
+            side="left", padx=(6, 0))
         self.count_var = tk.StringVar(value="—")
         ttk.Label(bar, textvariable=self.count_var).pack(side="left", padx=8)
 
@@ -1026,6 +1198,138 @@ class LibraryTab(ttk.Frame):
                                f"({r['entries']} entries, "
                                f"{r['mentions']} mentions, ledger: export) — "
                                f"rescan admits it")
+
+    # ------------------------------------------- graft #12: the editor --
+    # The owner's hand INSIDE the canon: edits are canon DIRECTLY (a
+    # normative act), and the old values survive in the ledger 'edit'
+    # line — normative acts also leave causal receipts. Added entries
+    # live under the doc 'cockpit://owner-added' — provenance by name.
+
+    FIELDS = (("word", "beseda"), ("foneticni_rez", "fonetični rez"),
+              ("glyph", "glyph"), ("thesis", "teza"),
+              ("antithesis", "antiteza"), ("synthesis", "sinteza"),
+              ("ontoloski_pomen", "ontološki pomen"),
+              ("antinoma", "antinoma"),
+              ("prakticna_uporaba", "praktična uporaba"))
+    SHORT = {"word", "foneticni_rez", "glyph"}
+
+    def edit_entry(self):
+        sel = self.tree.selection()
+        if not sel:
+            self.count_var.set("select a word first — the editor needs a page")
+            return
+        live = [dict(r) for r in self.con.execute(
+            "SELECT * FROM entries WHERE word=? AND merged_into IS NULL",
+            (sel[0],))]
+        if not live:
+            self.count_var.set("no live entry for this word")
+            return
+        win = tk.Toplevel(self)
+        win.title(f"edit an entry of '{sel[0]}' — your edit is canon; "
+                  "the old value survives in the ledger")
+        lb = tk.Listbox(win, width=104, height=min(len(live), 10))
+        for e in live:
+            lb.insert("end", f"{e['entry_id']} [{e['grade']}/{e['format']}] "
+                             f"{e['word']} — "
+                             f"{(e['thesis'] or e['synthesis'] or e['foneticni_rez'] or '—')[:60]}")
+        lb.pack(padx=8, pady=8)
+        lb.selection_set(0)
+
+        def open_form(_e=None):
+            s = lb.curselection()
+            if not s:
+                return
+            win.destroy()
+            self._entry_form(live[s[0]])
+
+        lb.bind("<Double-Button-1>", open_form)
+        lb.bind("<Return>", open_form)
+        lb.focus_set()
+
+    def add_entry(self):
+        sel = self.tree.selection()
+        self._entry_form(None, pre_word=sel[0] if sel else "")
+
+    def _entry_form(self, entry, pre_word=""):
+        win = tk.Toplevel(self)
+        win.title("edit entry" if entry else "add entry — canon by your hand")
+        widgets = {}
+        for i, (key, label) in enumerate(self.FIELDS):
+            ttk.Label(win, text=label + ":").grid(
+                row=i, column=0, sticky="nw", padx=4, pady=2)
+            if key in self.SHORT:
+                var = tk.StringVar(value=(entry or {}).get(key)
+                                   or (pre_word if key == "word" else ""))
+                w = ttk.Entry(win, textvariable=var, width=90)
+                widgets[key] = var
+            else:
+                w = tk.Text(win, width=90, height=2, wrap="word")
+                w.insert("1.0", (entry or {}).get(key) or "")
+                widgets[key] = w
+            w.grid(row=i, column=1, sticky="ew", padx=4, pady=2)
+
+        def save():
+            vals = {k: (widgets[k].get().strip() if k in self.SHORT
+                        else widgets[k].get("1.0", "end").strip())
+                    for k, _l in self.FIELDS}
+            if entry:
+                old = {k: (entry.get(k) or "")
+                       for k, _l in self.FIELDS
+                       if (entry.get(k) or "") != vals[k]}
+                new = {k: vals[k] for k in old}
+                if not old:
+                    win.destroy()
+                    return
+                self.con.execute(
+                    "UPDATE entries SET " +
+                    ", ".join(f"{k}=?" for k in new) +
+                    " WHERE entry_id=?",
+                    list(new.values()) + [entry["entry_id"]])
+                SOUL.led(self.con, "edit", vals["word"] or entry["word"],
+                         {"entry_id": entry["entry_id"], "old": old,
+                          "new": new})
+                self.con.commit()
+                self.count_var.set(f"EDITED entry {entry['entry_id']} — "
+                                  f"{len(new)} field(s) changed, old values "
+                                  f"witnessed in the ledger (kind edit)")
+            else:
+                if not vals["word"]:
+                    self.count_var.set("an added entry needs a word")
+                    return
+                row = self.con.execute(
+                    "SELECT doc_id FROM docs WHERE path=?",
+                    ("cockpit://owner-added",)).fetchone()
+                doc_id = (row[0] if row else self.con.execute(
+                    "INSERT INTO docs(path, stratum, kind) VALUES "
+                    "('cockpit://owner-added', 'cockpit', 'owner-added')"
+                    ).lastrowid)
+                cur = self.con.execute(
+                    """INSERT INTO entries(doc_id, word, format, number,
+                       thesis, antithesis, synthesis, foneticni_rez,
+                       ontoloski_pomen, antinoma, glyph,
+                       prakticna_uporaba, lineno, grade)
+                       VALUES (?,?,?,?,?,?,?,?,?,?,?,?,NULL,'reported')""",
+                    (doc_id, vals["word"], "owner", None, vals["thesis"],
+                     vals["antithesis"], vals["synthesis"],
+                     vals["foneticni_rez"], vals["ontoloski_pomen"],
+                     vals["antinoma"], vals["glyph"],
+                     vals["prakticna_uporaba"]))
+                SOUL.led(self.con, "edit", vals["word"],
+                         {"entry_id": cur.lastrowid, "old": None, "new": vals,
+                          "note": "owner-added entry"})
+                self.con.commit()
+                self.count_var.set(f"ADDED entry {cur.lastrowid} for "
+                                    f"'{vals['word']}' (ledger: edit)")
+            win.destroy()
+            self.load()
+            self.fill()
+            self.tree.selection_set(vals["word"] if vals["word"] in
+                                   self.tree.get_children() else "")
+            if self.tree.selection():
+                self.open_page()
+
+        ttk.Button(win, text="save (ledger: edit)", command=save).grid(
+            row=len(self.FIELDS), column=0, columnspan=2, pady=8)
 
     def open_page(self, _e=None):
         sel = self.tree.selection()
@@ -1168,10 +1472,12 @@ def _smoke_test():
         ok.append((f"review queues derive from the ledger "
                    f"(merge {len(app.review.merge_queue)}, "
                    f"glyph {len(app.review.glyph_queue)}, "
-                   f"conflict {len(app.review.conflict_queue)})",
+                   f"conflict {len(app.review.conflict_queue)}, "
+                   f"ratify {len(app.review.ratify_queue)})",
                    isinstance(app.review.merge_queue, list) and
                    isinstance(app.review.glyph_queue, list) and
-                   isinstance(app.review.conflict_queue, list)))
+                   isinstance(app.review.conflict_queue, list) and
+                   isinstance(app.review.ratify_queue, list)))
     ok.append(("LIBRARY constructs (spine + db, words listed)",
                app.library.alive and len(app.library.rows) > 0))
     if app.library.alive:

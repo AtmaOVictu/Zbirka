@@ -48,7 +48,7 @@ SCHEMA = """
 CREATE TABLE IF NOT EXISTS ledger (
     id        INTEGER PRIMARY KEY AUTOINCREMENT,
     ts        TEXT NOT NULL,
-    kind      TEXT NOT NULL,   -- scan|verdict|merge|edit|grade|export|retype|reparse
+    kind      TEXT NOT NULL,   -- scan|verdict|merge|edit|grade|export|retype|reparse|drafts
     word      TEXT,
     payload   TEXT NOT NULL    -- JSON
 );
@@ -807,6 +807,230 @@ def xcheck(con, lex_path) -> dict:
             "per_word": per}
 
 
+# ============================================ THE REPLAY + MACHINE DRAFTS ==
+# Graft #11 — machine DRAFT rulings, under the law of receipts vs canon
+# (SODBA #002, Luka's extension): a receipt records causality (what was
+# computed and why); canon declares normality (how it should be). Normality
+# never follows from causality — so a machine draft NEVER rules. States:
+#   PENDING ──machine──▶ DRAFT (receipt, rationale attached, machine:true)
+#                          └─[k]─▶ CANON   (owner ratifies)
+#                          └─[c]─▶ PENDING  (draft refused; never re-drafted)
+#                          └─[m]─▶ CANON, the owner's way
+# GUARD (a) — FLAG PROVENANCE: "machine": true is itself machine-written.
+# The replay trusts it ONLY if the ledger carries the owner's NORMATIVE
+# authorization line (ruling 'machine-drafts-authorized', created solely
+# by the owner deliberately running `authorize-drafts`). Drafts written
+# before that line are ⚠ and the replay ignores them — a receipt may not
+# forge its own birth certificate.
+# GUARD (c) — the stability measure (below) is a receipt about receipts:
+# it observes the canon, it never joins it.
+
+def ruling_states(con) -> dict:
+    """THE replay — one line for queues and drafts alike (the spine owns
+    it; the cockpit reads it). Classifies every ledger merge/verdict line:
+    human lines RULE, machine lines DRAFT (ratify state), refusals return
+    the draft's subject to pending while forbidding re-drafting."""
+    st = {"human_fp": set(), "machine_fp": set(), "refused_fp": set(),
+          "human_conflict": set(), "machine_conflict": set(),
+          "refused_conflict": set()}
+    auth = con.execute(
+        "SELECT MIN(id) FROM ledger WHERE kind='verdict' AND "
+        "payload LIKE '%machine-drafts-authorized%'").fetchone()[0]
+    for r in con.execute("SELECT id, word, payload FROM ledger "
+                         "WHERE kind IN ('merge','verdict')"):
+        try:
+            p = json.loads(r["payload"])
+        except (ValueError, TypeError):
+            continue
+        if not isinstance(p, dict):
+            continue
+        if auth is not None and r["id"] is not None and r["id"] < auth:
+            continue          # GUARD (a): pre-authorization machine lines
+                              # are untrusted — no birth certificate
+        w = canon(r["word"] or "")
+        fp = p.get("fingerprint")
+        ruling = str(p.get("ruling", ""))
+        if ruling == "draft-refused":
+            if fp:
+                st["refused_fp"].add((w, fp))
+            elif p.get("conflict"):
+                st["refused_conflict"].add(canon(p["conflict"]))
+            continue
+        machine = bool(p.get("machine"))
+        if fp:
+            (st["machine_fp"] if machine else st["human_fp"]).add((w, fp))
+        if ruling.startswith("conflict"):
+            (st["machine_conflict"] if machine
+             else st["human_conflict"]).add(w)
+    return st
+
+
+def _fullness(e: dict) -> int:
+    return sum(1 for k in ("thesis", "antithesis", "synthesis",
+                          "foneticni_rez", "ontoloski_pomen", "antinoma",
+                          "glyph", "prakticna_uporaba")
+               if (e.get(k) or "").strip())
+
+
+def draft_rulings(con, glyph_path=None) -> dict:
+    """The machine drafts its rulings for every PENDING item — receipts
+    with rationale, never rulings. Merge: richest keeper by grade rank,
+    then field fullness, then lowest entry_id (deterministic default —
+    the weakest criterion, named as such). Conflict: majority rez among
+    live entries; a tie is honestly NOT drafted. Glyph: confirm only when
+    the payload carries a warrant. Refused drafts are never re-drafted."""
+    # GUARD (a) — flag provenance: no normative authorization line, no
+    # drafts. The machine cannot authorize itself.
+    auth = con.execute(
+        "SELECT COUNT(*) FROM ledger WHERE kind='verdict' AND "
+        "payload LIKE '%machine-drafts-authorized%'").fetchone()[0]
+    if not auth:
+        return {"error": "no normative authorization line — the owner "
+                         "must deliberately run `authorize-drafts` first; "
+                         "the machine cannot authorize itself"}
+    st = ruling_states(con)
+    ruled = st["human_fp"] | st["machine_fp"] | st["refused_fp"]
+    drafted_m = 0
+
+    def full_key(e):
+        return (GRADE_RANK.get(e["grade"], 0), _fullness(e), -e["entry_id"])
+
+    for p in pending_merges(con):
+        if (p["word"], p["fingerprint"]) in ruled:
+            continue
+        rows = [dict(r) for r in con.execute(
+            "SELECT * FROM entries WHERE entry_id IN (%s)" %
+            ",".join("?" * (1 + len(p["lose"]))),
+            [p["keeper"]] + list(p["lose"]))]
+        if not rows:
+            continue
+        rows.sort(key=full_key, reverse=True)
+        keeper, losers = rows[0], rows[1:]
+        reason = []
+        top = full_key(rows[0])
+        nxt = full_key(rows[1]) if len(rows) > 1 else None
+        if nxt and top[:2] == nxt[:2]:
+            reason.append("richest is a TIE — broken by lowest entry_id, "
+                          "the weakest criterion, named as such")
+        else:
+            reason.append(f"richest: grade {rows[0]['grade']}, "
+                          f"{_fullness(rows[0])} filled fields")
+        if p.get("near"):
+            reason.append(f"near-dup, similarity {p['similarity']}")
+        led(con, "verdict", p["word"], {
+            "ruling": "draft-merge", "machine": True,
+            "fingerprint": p["fingerprint"],
+            "keeper": keeper["entry_id"],
+            "lose": [l["entry_id"] for l in losers],
+            "rationale": "; ".join(reason)})
+        drafted_m += 1
+    # conflicts: majority rez; a tie is honestly not drafted
+    ruled_c = st["human_conflict"] | st["machine_conflict"] | \
+        st["refused_conflict"]
+    drafted_c = 0
+    for w in [r["word"] for r in con.execute(
+            "SELECT word, COUNT(DISTINCT foneticni_rez) v FROM entries "
+            "WHERE merged_into IS NULL AND foneticni_rez IS NOT NULL "
+            "AND TRIM(foneticni_rez) != '' GROUP BY word HAVING v > 1")]:
+        if canon(w) in ruled_c:
+            continue
+        counts = {}
+        for r in con.execute(
+                "SELECT foneticni_rez, COUNT(*) n FROM entries "
+                "WHERE word=? AND merged_into IS NULL "
+                "AND TRIM(foneticni_rez) != '' GROUP BY foneticni_rez",
+                (w,)):
+            counts[r["foneticni_rez"]] = r["n"]
+        best = max(counts.values())
+        winners = [k for k, n in counts.items() if n == best]
+        if len(winners) != 1:
+            continue               # majority tie — no draft, honestly
+        led(con, "verdict", w, {
+            "ruling": "conflict-true-rez-draft", "machine": True,
+            "true_rez": winners[0], "counts": counts,
+            "rationale": f"majority {winners[0]!r}: "
+                         f"{best} of {sum(counts.values())} live entries"})
+        drafted_c += 1
+
+    # glyphs: draft confirm only when the payload carries a warrant.
+    # SCAR 26. 9. (repaired): the default payload path was CWD-relative —
+    # a scratch-db run wrote drafts into the REAL payload. The payload
+    # belongs to the DB: its path derives from DB_PATH's directory, so a
+    # scratch db can never touch the real payload.
+    drafted_g = 0
+    gp = Path(glyph_path) if glyph_path else \
+        Path(DB_PATH).parent / "glyph_proposals.json"
+    if gp.exists():
+        data = json.loads(gp.read_text(encoding="utf-8"))
+        for w, p in sorted(data.items()):
+            if (isinstance(p, dict)
+                    and p.get("verdict") == "confirm/reject"):
+                if not (p.get("warrant") or "").strip():
+                    continue         # nothing to stand on — no draft
+                data[w]["verdict"] = "draft: confirm"
+                led(con, "verdict", w, {
+                    "ruling": "draft-glyph-confirm", "machine": True,
+                    "glyph": p.get("glyph"),
+                    "proposed_operator": p.get("proposed_operator"),
+                    "rationale": f"warrant present: {p['warrant'][:120]}"})
+                drafted_g += 1
+        gp.write_text(json.dumps(data, ensure_ascii=False, indent=2),
+                      encoding="utf-8")
+    con.commit()
+    led(con, "drafts", None, {"merge": drafted_m, "conflict": drafted_c,
+                              "glyph": drafted_g})
+    con.commit()
+    return {"merge_drafts": drafted_m, "conflict_drafts": drafted_c,
+            "glyph_drafts": drafted_g}
+
+
+def pending_merges(con):
+    """Pending = proposed but neither human-ruled nor machine-drafted.
+    A REFUSED draft returns here (the owner may still rule it by hand);
+    the machine simply never re-drafts it."""
+    st = ruling_states(con)
+    seen = st["human_fp"] | st["machine_fp"]
+    out = []
+    for p in propose_entry_merges(con):
+        if p["needs_owner"] and (p["word"], p["fingerprint"]) not in seen:
+            out.append(p)
+    for p in propose_near_merges(con):
+        if (p["word"], p["fingerprint"]) not in seen:
+            out.append(p)
+    return out
+
+
+def stability(con) -> dict:
+    """GUARD (c) — THIS OUTPUT IS A RECEIPT ABOUT RECEIPTS: it observes
+    the canon, it never joins it. Displayed as proposal, never as fact.
+    A word is STABLE when nothing about it rests on a machine draft:
+    exactly one live entry, no live rez variants, and no pending or
+    drafted proposal touching it."""
+    st = ruling_states(con)
+    pending = pending_merges(con)
+    draft_words = {w for w, _fp in st["machine_fp"] - st["human_fp"]}
+    pend_words = {p["word"] for p in pending}
+    stable = open_w = variants = 0
+    words = con.execute(
+        "SELECT word, COUNT(*) n FROM entries WHERE merged_into IS NULL "
+        "GROUP BY word").fetchall()
+    for w in words:
+        word = w["word"]
+        if canon(word) in st["machine_conflict"] - st["human_conflict"] \
+                or word in draft_words:
+            open_w += 1        # a draft rests on it — not stable
+        elif w["n"] == 1 and word not in pend_words and \
+                canon(word) not in (st["human_conflict"] |
+                                    st["machine_conflict"]):
+            stable += 1
+        else:
+            variants += 1      # multi-entry or ruled-kept — neither raw
+    return {"words": len(words), "stable": stable, "open_awaiting_drafts":
+            open_w, "multi_entry_or_kept": variants,
+            "pending_proposal_words": len(pend_words),
+            "NOTE": "receipt about receipts — observes canon, never joins it"}
+
+
 
 # ========================================================== GUI (Textual) =
 
@@ -944,7 +1168,9 @@ if __name__ == "__main__":
     ap.add_argument("cmd", choices=["scan", "gui", "page", "export",
                                     "export-page", "merge", "unmerge",
                                     "dups", "dark", "retype", "census",
-                                    "reparse", "xcheck", "selftest"])
+                                    "reparse", "xcheck", "drafts",
+                                    "authorize-drafts", "stability",
+                                    "selftest"])
     ap.add_argument("path", nargs="?")
     ap.add_argument("--word")
     ap.add_argument("--out", default="soul_graph.json")
@@ -990,6 +1216,25 @@ if __name__ == "__main__":
         print(json.dumps(xcheck(con, Path(args.path) if args.path
                                 else Path("lexicon.json")),
                          ensure_ascii=False, indent=2))
+    elif args.cmd == "authorize-drafts":
+        # the NORMATIVE act (graft #11, guard a): only the owner's
+        # deliberate keystroke creates this line — the machine never
+        # authorizes itself. Run this yourself, by hand, on purpose.
+        led(con, "verdict", None, {
+            "ruling": "machine-drafts-authorized",
+            "by": "the owner's deliberate act",
+            "note": "receipts may be drafted; they never rule"})
+        con.commit()
+        print(json.dumps({"authorized": True,
+                          "note": "machine drafts may now be written — "
+                                  "they remain receipts until ratified"}))
+    elif args.cmd == "drafts":
+        # graft #11 — machine DRAFT rulings (receipts with rationale)
+        print(json.dumps(draft_rulings(con, Path(args.path) if args.path
+                                       else None), ensure_ascii=False))
+    elif args.cmd == "stability":
+        # graft #11 guard (c) — a receipt about receipts: observes, never joins
+        print(json.dumps(stability(con), ensure_ascii=False, indent=2))
     elif args.cmd == "selftest":
         # quick witness against real measured samples
         a = StotnijeBulletParser().parse(
@@ -1153,6 +1398,48 @@ if __name__ == "__main__":
             assert geo["rez"] is False          # lex says g/e, corpus says GEO
             dihx = next(x for x in xc["per_word"] if x["word"] == "Dih")
             assert dihx["rez"] is True         # canon meets canon: d/i/h == dih
+            # graft #11: machine drafts — receipts, never rulings.
+            # GUARD (a): without the owner's authorization line, no drafts
+            assert "error" in draft_rulings(m)
+            led(m, "verdict", None, {
+                "ruling": "machine-drafts-authorized",
+                "by": "selftest stand-in for the owner's deliberate act"})
+            m.commit()
+            # glyph drafts: only the WARRANTED item drafts; the bare one
+            # stays pending. The glyph file is a TEMP one — a test must
+            # never touch the real payload (scar 26. 9.: it did, reverted)
+            glx = Path(td) / "gl.json"
+            glx.write_text(json.dumps({
+                "omega": {"glyph": "Ω", "proposed_operator": "closure",
+                          "warrant": "the lattice says closure",
+                          "verdict": "confirm/reject"},
+                "bare": {"glyph": "∅", "proposed_operator": "void",
+                         "warrant": "", "verdict": "confirm/reject"}}),
+                encoding="utf-8")
+            # majority conflict draft: Y gets a 2:1 majority; X is not a
+            # conflict anymore (one non-empty rez) — only Y drafts, with
+            # the majority tie honestly absent
+            m.execute("INSERT INTO entries(doc_id, word, format, "
+                      "foneticni_rez, grade) VALUES "
+                      "(1, 'Y', 't', 'a / a', 'reported')")
+            m.commit()
+            dr = draft_rulings(m, glx)
+            assert dr["conflict_drafts"] == 1
+            assert dr["glyph_drafts"] == 1
+            gdata = json.loads(glx.read_text(encoding="utf-8"))
+            assert gdata["omega"]["verdict"] == "draft: confirm"
+            assert gdata["bare"]["verdict"] == "confirm/reject"
+            st = ruling_states(m)
+            assert "y" in st["machine_conflict"] and "y" not in st["human_conflict"]
+            # refusal: back to pending, never re-drafted
+            led(m, "verdict", "Y", {"ruling": "draft-refused",
+                                   "conflict": "Y"})
+            m.commit()
+            st = ruling_states(m)
+            assert "y" in st["refused_conflict"]
+            dr2 = draft_rulings(m, glx)
+            assert dr2["conflict_drafts"] == 0   # refused is never re-drafted
+            assert dr2["glyph_drafts"] == 0     # drafted is not re-drafted
         print("selftest: plugins A/B/D, grading, canon, near-dup, page, "
               "conflicts-view, dark, page-export, scan-absolute, doc-typing, "
               "reparse, xcheck — OK (traced here, witnessed on disk)")

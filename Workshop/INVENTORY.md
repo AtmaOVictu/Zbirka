@@ -148,6 +148,40 @@ Pictures/) is other strata, not this workshop's to move.
    artifact, flagged for Luka. Enrichment queued above. Selftest
    witnesses agree/disagree/not-in-corpus; smoke PASS.
 
+11. machine DRAFT rulings + the ratify flow — the machine proposes its own
+   rulings; the owner canonizes by keystroke (Luka's ask; the analysis's
+   three guards built in BEFORE the first line of code)
+   → BUILT 26. 9. 2026: `drafts` writes DRAFT verdicts — receipts with
+   rationale (merge: richest by grade/fullness, tie broken by lowest
+   entry_id — the weakest criterion, named as such; conflict: majority
+   rez, a TIE is honestly not drafted; glyph: confirm only when the
+   payload carries a warrant). The spine owns ONE replay (ruling_states):
+   human lines RULE, machine lines DRAFT (ratify state), refusals return
+   to pending and are never re-drafted. REVIEW gains RATIFY mode ([k]
+   ratify · [c] refuse · [m] amend · [s] skip). THE THREE GUARDS:
+   (a) FLAG PROVENANCE — the machine writes drafts ONLY if the ledger
+   carries the owner's normative 'machine-drafts-authorized' line
+   (`authorize-drafts` — deliberately NOT run by the builder; drafts are
+   impossible on the live db until Luka performs it); replay ignores
+   machine lines predating the line. (b) ANTI-RUBBER-STAMP — the
+   rationale is displayed before [k]; a drift counter warns at 10+
+   consecutive ratifications with no refusal or amendment ("a ruler who
+   never amends is a rubber stamp wearing a crown"). (c) STABILITY IS A
+   RECEIPT ABOUT RECEIPTS — `stability` observes the canon, never joins
+   it. MEASURED (witnessed on a scratch copy): 59 merge + 1 conflict +
+   20 glyph drafts; pending → 0, ratify = 80; [k] canonized (merge line
+   by keystroke), [c] refused (re-draft run produced 0). Live db:
+   ratify 0 — no drafts exist, as the law demands. Stability receipt
+   (real db): 2,394 words — 1,762 stable · 632 multi-entry/kept · 55
+   pending-proposal words · 0 drafts. Selftest + smoke PASS.
+12. the entry editor — the owner's hand inside the canon
+   → BUILT 26. 9. 2026: "edit entry" / "add entry" in the LIBRARY tab.
+   Edits are canon DIRECTLY (the ruler's touch is a normative act); old
+   values survive in the ledger 'edit' line — the kind that existed in
+   the schema since day one and had never been used once. Added entries
+   live under the doc 'cockpit://owner-added' (provenance by name),
+   grade reported by definition — the strongest provenance there is.
+
 ## NEXT IN THE QUEUE (each names its line)
 - FORMAT D v2 — two measured shapes remain dark (162 dosje-D docs):
   the `**WORD** (long gloss):` header that ends "):" (needs a
@@ -206,3 +240,20 @@ becomes the ruler.
   → REPAIRED 26. 9. 2026: scan() resolves the root; selftest witnesses
   same-root-twice and a RELATIVE root both adding zero duplicates;
   corrected rescan admitted only canon_ruled/dih.md (1 doc, 3 entries).
+- draft_rulings glyph payload path: CWD-RELATIVE — the default payload
+  path resolved against the working directory, not the db, so TWO
+  scratch-db runs (selftest, then a witness script) wrote "draft:"
+  verdicts into the REAL glyph_proposals.json (20 items, twice). No
+  drafts ever entered the real LEDGER (no authorization line exists
+  there — guard (a) would ignore them anyway); the payload was reverted
+  both times from git. Repair = the payload path derives from DB_PATH's
+  directory, and the selftest passes a temp file.
+  → REPAIRED 26. 9. 2026: payload verified back at 30 pending; selftest
+  and smoke PASS; scratch-db runs can no longer reach the real payload.
+- obj2_cockpit _rule(): CONFLICT DISPATCH SILENTLY MISSING (graft #5
+  scar found while building #11) — the conflict branch of the key
+  dispatcher never landed; [k] in conflict mode would have called the
+  MERGE handler on the live GUI. The scratch witnesses bypassed _rule
+  (called the methods directly), so nothing caught it until now.
+  → REPAIRED 26. 9. 2026: four-way dispatch (merge/glyph/conflict/
+  ratify) verified in place; smoke PASS.
