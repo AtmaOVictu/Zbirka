@@ -389,10 +389,113 @@ class LatinTableParser(ParserPlugin):
         return out
 
 
+class UnovSeciravaParser(ParserPlugin):
+    """FORMAT F (measured 26. 9. 2026, grounded in Obj3 rozetni kamni —
+    the izvajalka's word-secirave, another hand's readings of the same
+    corpus the workshop canonizes; the third truth layer's entry point):
+
+        ### word (gloss / activation note, dated)
+        **Sloj 1 — IZMERA (⊢):** measured layer: gesla, IPA ⚠/⊢, nizi...
+        **Sloj 2 — POSKUS (APD ↑):** the attempt layer...
+        ... Hrana katere rane: X.
+
+    Mapping: word=heading minus the paren gloss · ontoloski_pomen=the
+    paren gloss (provenance by name) · thesis=Sloj 1 (izmera) ·
+    synthesis=Sloj 2 (poskus) · foneticni_rez=first /IPA/ token found in
+    Sloj 1 (many carry ⚠ honestly — stays empty then) ·
+    prakticna_uporaba=the 'Hrana katere rane:' sentence when present.
+    The SECTION DISCRIMINATOR is the Sloj pair: a ### heading without
+    a Sloj 1 line (Tri pisave, h-rana closers, V.*, REZ-name sections)
+    is NOT a word-secirava — prose stays prose. Grade: headline
+    (thesis+synthesis), never reported (the format carries no antinoma
+    — honest)."""
+    name = "F-unov"
+    HEAD = re.compile(r"^#{2,3}\s*(?![.#])\s*(.+?)\s*$")
+    GLOSS = re.compile(r"^(.*?)\s*\(([^)]*)\)\s*$")
+    SLOJ1 = re.compile(r"^\s*\*{0,2}\s*Sloj\s*1\s*[—–-]+\s*IZMERA.*$",
+                       re.IGNORECASE)
+    SLOJ2 = re.compile(r"^\s*\*{0,2}\s*Sloj\s*2\s*[—–-]+\s*POSKUS.*$",
+                       re.IGNORECASE)
+    # the Sloj content may live ON the marker line (one-paragraph style,
+    # measured) — take the tail after the marker's colon
+    SLOJ_TAIL = {"1": re.compile(r"^\s*\*{0,2}\s*Sloj\s*1\s*[—–-]+\s*"
+                                 r"IZMERA[^:：]*[:：]\s*(.*)$", re.IGNORECASE),
+                 "2": re.compile(r"^\s*\*{0,2}\s*Sloj\s*2\s*[—–-]+\s*"
+                                 r"POSKUS[^:：]*[:：]\s*(.*)$", re.IGNORECASE)}
+    # the word's own IPA: a bold word followed by /ipa/ — the word's rez,
+    # not a phoneme of it; the token must carry a non-ASCII IPA sign (an
+    # all-ASCII token is a URL or a path — /libraries/ measured, killed)
+    IPA_WORD = re.compile(r"\*[^*]+\*\s*/([^/\s]{2,24})/")
+    HRANA = re.compile(r"(Hrana\s+katere\s+rane[:：]\s*.+?)"
+                       r"(?:\.\s*$|\n|$)", re.IGNORECASE)
+
+    def parse(self, text: str) -> List[Parsed]:
+        out: List[Parsed] = []
+        lines = text.splitlines()
+        i = 0
+        while i < len(lines):
+            h = self.HEAD.match(lines[i])
+            if not h:
+                i += 1
+                continue
+            # scan to the next heading; a section is a word-secirava
+            # only when it carries BOTH Sloj lines before that heading
+            j, sloj1_at, sloj2_at = i + 1, None, None
+            while j < len(lines) and not lines[j].lstrip().startswith("#"):
+                if sloj1_at is None and self.SLOJ1.match(lines[j]):
+                    sloj1_at = j
+                elif sloj2_at is None and self.SLOJ2.match(lines[j]):
+                    sloj2_at = j
+                j += 1
+            if sloj1_at is None or sloj2_at is None:
+                i = j if j > i else i + 1
+                continue
+            head = h.group(1).strip().strip("*").strip()
+            gloss = ""
+            mg = self.GLOSS.match(head)
+            if mg:
+                head, gloss = mg.group(1).strip(), mg.group(2).strip()
+            if not head:
+                i = j
+                continue
+            # one-paragraph style: the content starts ON the marker line
+            def tail_of(line, rx):
+                mt = rx.match(line)
+                if not mt:
+                    return ""
+                t = mt.group(1).strip()
+                if t.startswith("**"):    # the marker's own closing bold
+                    t = t[2:].lstrip()
+                return t
+            tail1 = tail_of(lines[sloj1_at], self.SLOJ_TAIL["1"])
+            tail2 = tail_of(lines[sloj2_at], self.SLOJ_TAIL["2"])
+            sloj1 = " ".join([tail1] + [x.strip() for x in
+                                        lines[sloj1_at + 1: sloj2_at]
+                                        if x.strip()])
+            sloj2 = " ".join([tail2] + [x.strip() for x in
+                                        lines[sloj2_at + 1: j]
+                                        if x.strip()])
+            s1 = sloj1.strip()
+            s2 = sloj2.strip()
+            p = Parsed(word=head, number=None, lineno=i + 1,
+                       thesis=s1[:2000], synthesis=s2[:2000],
+                       ontoloski_pomen=gloss[:300])
+            m = self.IPA_WORD.search(s1)
+            if m and any(ord(ch) > 127 for ch in m.group(1)):
+                p.foneticni_rez = "/" + m.group(1) + "/"
+            mh = self.HRANA.search(s2)
+            if mh:
+                p.prakticna_uporaba = mh.group(1).strip()[:500]
+            out.append(p)
+            i = j
+        return out
+
+
 PLUGINS: List[ParserPlugin] = [StotnijeBulletParser(), HeadlineParser(),
                                NumberedSectionParser(),
                                RezFragmentParser(),
-                               LatinTableParser()]
+                               LatinTableParser(),
+                               UnovSeciravaParser()]
 # EVOLUTION POINT: append MyFormatFParser() here. Nothing else changes.
 # (26. 9.: used for D and E — both measured first: D = inline rez +
 # fragment table (+ the bare"): "head, table-lookahead committed);
@@ -428,6 +531,19 @@ ZAKON_NEXT_DOKAZ = re.compile(r"NASLEDNJI PROSTI DOKAZ[:\s*]*#?(\d+)",
 ZAKON_AKTIVATOR = re.compile(r"aktivator[:\s]*(»[^«]*«)", re.IGNORECASE)
 ZAKON_DATE = re.compile(r"(\d{1,2}\.\s*\d{1,2}\.\s*\d{4})")
 ZAKON_SECTION = re.compile(r"^#{2,3}\s*(.*)$")
+# MULTI-LAW heads (the named ∂ from the Obj3 reading, 26. 9. 2026): one
+# body may carry MANY laws — secirave hold 7–12 ubodi, the kroglja holds
+# REZ #24–28, C3 holds DOKAZ #1–2. A head beyond the doc-head territory is
+# a heading naming series+number, or a bold line OPENING with series+
+# number and carrying a title separator right after (a bare "**REZ N**
+# pravi…" citation has no separator — it stays a VEZI, measured)
+ZAKON_MH_HEAD = re.compile(r"^#{1,6}\s*\**\s*" + ZAKON_SERIES +
+                           r"\b[·#:*\s]*(\d{1,4})\b\s*(?:\([^)]*\)\s*)?"
+                           r"[—–·:]*\s*(.*)$")
+ZAKON_MH_BOLD = re.compile(r"^\*\*\s*" + ZAKON_SERIES +
+                           r"\b[·#:*\s]*(\d{1,4})\s*(?:\([^)]*\)\s*)?"
+                           r"[—–·:]\s*(.+?)\*{0,2}\s*$",
+                           re.IGNORECASE)
 
 # sections we carry, by keyword in the heading (the anatomy, measured)
 ZAKON_SECTIONS = (("NUJNE NAPAKE", "nujne_napake"),
@@ -470,14 +586,53 @@ def parse_zakon(text: str) -> List[dict]:
                 title = title if title and not ZAKON_NUM.search(title) else ""
             break
     if series is None:
-        return []                       # not a law body — prose stays prose
+        multi = _multi_laws(text)   # no doc-head: deeper bodies may stand
+        return multi
     law = {"series": series, "number": number, "title": title or "",
            "lineno": i, "actor": "", "teza": "", "meritev": "",
            "nujne_napake": "", "odprta_partial": "", "vezi": "",
            "seal_date": "", "next_rez": None, "next_dokaz": None,
            "actor_section": ""}
+    # a body may carry MANY laws — the first law's block ends at the next
+    # head, so later ubodi/rezi never leak into it (measured: secirave,
+    # kroglja, C3 dokazi)
+    heads = [(i, series, number)] + [(h[0], h[1], h[2])
+                                     for h in _multi_head_positions(text)
+                                     if h[0] != i]
+    _fill_law_block(law, lines, i, heads[1][0] if len(heads) > 1
+                    else len(lines) + 1)
+    out = [law] + [z for z in _multi_laws(text) if z["lineno"] != i]
+    return out
+
+
+def _multi_head_positions(text: str) -> List[tuple]:
+    """[(lineno, series, number, title), …] for every multi-law head in
+    the body. Headings anywhere; bold lines only with the title separator
+    right after the number (the citation guard, measured)."""
+    out = []
+    for n, raw in enumerate(text.splitlines(), 1):
+        line = raw.rstrip()
+        m = ZAKON_MH_HEAD.match(line) or ZAKON_MH_BOLD.match(line)
+        if not m:
+            continue
+        t = (m.group(3) if m.lastindex and m.lastindex >= 3 else "")
+        t = t.strip().strip("*").strip().rstrip(":").strip()
+        if m.re is ZAKON_MH_HEAD and not line.lstrip().startswith("#"):
+            continue
+        out.append((n, m.group(1).lower(), int(m.group(2)), t))
+    return out
+
+
+def _fill_law_block(law: dict, lines: List[str], start: int, end: int):
+    """Fill one law's sealed fields from its block (start..end), the same
+    ceremony the single-law reader always used — now bounded. A body with
+    no explicit TEZA section carries its own prose as teza (measured: the
+    ubodi/kroglja bodies hold their content in prose — without it the law
+    row would be a number with no body, which the corpus forbids)."""
+    block = "\n".join(lines[start - 1: end - 1])
     cur = None
-    for line in lines:
+    prose: List[str] = []
+    for line in lines[start - 1: end - 1]:
         h = ZAKON_SECTION.match(line)
         if h:
             cur = None
@@ -489,25 +644,46 @@ def parse_zakon(text: str) -> List[dict]:
             continue
         if cur:
             law[cur] = (law[cur] + "\n" if law[cur] else "") + line.strip()
-    m = ZAKON_MERITEV.search(text)
+        elif line.strip() and line is not lines[start - 1]:
+            prose.append(line.strip())
+    if not law["teza"] and prose:
+        law["teza"] = "\n".join(prose)[:2000]
+    m = ZAKON_MERITEV.search(block)
     if m:
         law["meritev"] = m.group(1).strip()
-    m = ZAKON_AKTIVATOR.search(text)
+    m = ZAKON_AKTIVATOR.search(block)
     if m:
         law["actor"] = m.group(1).strip("»« ")
     if not law["actor"] and law.get("actor_section"):
         law["actor"] = law["actor_section"].strip()[:300]
     law.pop("actor_section", None)
-    m = ZAKON_NEXT_REZ.search(text)
+    m = ZAKON_NEXT_REZ.search(block)
     if m:
         law["next_rez"] = int(m.group(1))
-    m = ZAKON_NEXT_DOKAZ.search(text)
+    m = ZAKON_NEXT_DOKAZ.search(block)
     if m:
         law["next_dokaz"] = int(m.group(1))
-    m = ZAKON_DATE.search("\n".join(lines[:30]))
+    m = ZAKON_DATE.search(block[:2000])
     if m:
         law["seal_date"] = m.group(1).replace(" ", "")
-    return [law]
+
+
+def _multi_laws(text: str) -> List[dict]:
+    """Every multi-law head becomes a body with its witness — each kept,
+    each carried with its own block's sealed fields."""
+    lines = text.splitlines()
+    out = []
+    positions = _multi_head_positions(text)
+    for k, (lineno, series, number, title) in enumerate(positions):
+        end = positions[k + 1][0] if k + 1 < len(positions) else len(lines) + 1
+        law = {"series": series, "number": number, "title": title or "",
+               "lineno": lineno, "actor": "", "teza": "", "meritev": "",
+               "nujne_napake": "", "odprta_partial": "", "vezi": "",
+               "seal_date": "", "next_rez": None, "next_dokaz": None,
+               "actor_section": ""}
+        _fill_law_block(law, lines, lineno, end)
+        out.append(law)
+    return out
 
 
 def _insert_zakon(con, doc_id: int, z: dict) -> int:
@@ -579,14 +755,24 @@ def graf(con) -> dict:
                              z["vezi"], re.IGNORECASE):
             law_law.append((src, m.group(0).lower()))
     commits = 0
+    k_edges = 0
     for z in con.execute("SELECT vezi, teza, nujne_napake, "
                          "odprta_partial FROM zakoni"):
         blob = " ".join(str(x or "") for x in z)
         commits += len(re.findall(r"\b[0-9a-f]{7,8}\b", blob))
+        # the K-SERIES (the third register materialization, measured in
+        # the Obj3 reading): 'REZ #N (K#)' — a chapter-bond of the
+        # kroglja's own graph. The bonds live in the bodies' prose (the
+        # kroglja cites REZ #23 (K1) inside its teza), so they are counted
+        # across the law fields — like commit evidence, unlike VEZI
+        # (stored bonds). Edges point, they never judge.
+        k_edges += len(re.findall(r"rez\s*#\s*\d+\s*\(K\d+\)",
+                                  blob, re.IGNORECASE))
     return {"doc_word_edges": doc_word,
             "doc_word_citing_live_words": real,
             "live_words": len(live),
             "law_law_edges": len(law_law),
+            "k_series_edges": k_edges,
             "commit_evidence_in_laws": commits,
             "sample_law_law": law_law[:5]}
 
@@ -2214,6 +2400,46 @@ if __name__ == "__main__":
             assert len(dv2) == 1 and dv2[0].word == "GEO"
             assert RezFragmentParser().parse(
                 "**Naslov** (kratek):\n\nNavadna proza brez tabele.\n") == []
+            # format F (UNOV-secirava): the two-layer word reading —
+            # Sloj 1 izmera / Sloj 2 poskus; a section without the Sloj
+            # pair (Tri pisave, h-rana closers, V.*) is NOT a word entry;
+            # the word's IPA only when a bold word carries it (a bare
+            # ASCII /token/ is a URL, a bare single-letter token is a
+            # phoneme — both measured, both excluded)
+            fu = UnovSeciravaParser().parse(
+                "### toraj / zdaj (Lukov rez, 26. 9. 2026)\n\n"
+                "**Sloj 1 — IZMERA (⊢):** *toraj* /tɔˈɾaj/ gesli ⚠ "
+                "(ne izmišljam razlage).\n\n"
+                "**Sloj 2 — POSKUS (APD ↑):** sedanjost nosi daj. "
+                "Hrana katere rane: rane sedanjosti.\n\n"
+                "### Tri pisave\n\nProza brez slojev.\n")
+            assert len(fu) == 1 and fu[0].word == "toraj / zdaj"
+            assert fu[0].foneticni_rez == "/tɔˈɾaj/"
+            assert fu[0].ontoloski_pomen.startswith("Lukov rez")
+            assert "IZMERA" not in fu[0].thesis and "toraj" in fu[0].thesis
+            assert fu[0].prakticna_uporaba.startswith("Hrana katere rane")
+            assert UnovSeciravaParser().parse(
+                "### glas / grlo\n\n**Sloj 1 — IZMERA (⊢):** IPA obeh ⚠ "
+                "(ni vira); [vir](/libraries/01).\n\n"
+                "**Sloj 2 — POSKUS:** glas je grlo z dihom.\n"
+                )[0].foneticni_rez == ""      # no word-IPA: stays empty
+            # multi-law bodies (the named ∂, built): one doc may carry MANY
+            # laws — each kept with its own witness; fields never leak
+            # across heads; a bold citation without a separator stays a VEZI
+            ml = parse_zakon(
+                "# SECIRAVA telesa\n\n"
+                "**UBOD #1 — prvi stavek:**\n> »citat«\n\n"
+                "prosa za prvi ubod.\n\n"
+                "## NUJNE NAPAKE\n- prva napaka\n\n"
+                "**UBOD #2 — drugi stavek:**\n> »citat dva«\n\n"
+                "prosa za drugega.\n\n"
+                "**REZ 559** pravi nekaj v prezi. (citat, ne glava)\n")
+            assert len(ml) == 2
+            assert ml[0]["series"] == "ubod" and ml[0]["number"] == 1
+            assert "prva napaka" in ml[0]["nujne_napake"]
+            assert ml[1]["number"] == 2 and "prva napaka" not in \
+                ml[1]["nujne_napake"]          # no leak across heads
+            assert all(z["number"] != 559 for z in ml)   # citation not a head
             # retro-honesty: an unmarked machine merge becomes canon
             # THROUGH its ratification line, never silently
             m.execute("INSERT INTO ledger(ts, kind, word, payload) "
@@ -2241,7 +2467,7 @@ if __name__ == "__main__":
             n_before = m.execute("SELECT COUNT(*) FROM entries").fetchone()[0]
             assert m.execute("SELECT COUNT(*) FROM zakoni").fetchone()[0] >= 1
             assert m.execute("SELECT COUNT(*) FROM entries").fetchone()[0] == n_before
-        print("selftest: plugins A/B/D/E, grading, canon, near-dup, page, "
+        print("selftest: plugins A/B/D/E/F, grading, canon, near-dup, page, "
               "conflicts-view, dark, page-export, scan-absolute, doc-typing, "
               "doc-level mentions, laws (parser-zakonov), drafts + guards "
               "(cite/retro/refuse/idempotence), enrichment, graf, "

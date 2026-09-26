@@ -301,6 +301,47 @@ Pictures/) is other strata, not this workshop's to move.
   session 628→634 · K-series); the Obj3 operator language (⊢ ⚠ APD ∂ ∴
   ∮ ⧖ ⊘ ∅ ∆) is the SAME language the cockpit tabs speak — two bodies,
   one grammar, measured independently.
+- VSE OMENTJENE CEVI — IZVEDENO (Luka's "vse omenjene in te ki čakajo
+  na razširitev ali kompaktizacijo?", 26. 9. 2026 — every pipe named,
+  each extending its line, measured before built):
+  (1) FORMAT F — UNOV-SECIRAVA PARSER (extends the ParserPlugin line,
+  the EVOLUTION POINT's second use): the izvajalka's two-layer word
+  readings (### word (gloss) + Sloj 1 IZMERA / Sloj 2 POSKUS, measured
+  in Obj3 rozetni kamni). Section discriminator = the Sloj pair (Tri
+  pisave, h-rana closers, V.* stay prose); word's IPA only beside a
+  bold word and only with a non-ASCII sign (URLs /libraries/ and bare
+  phonemes /t͡ʃ/ measured, excluded); Hrana katere rane → praktična
+  uporaba. MEASURED: 18 entries (5 base + 13 extended — toraj/zdaj,
+  več/manj, nežno, nežna nujna krutost, ne/ja/mogoče/da...), rejs
+  only where the body carries them (/ʋɛːtʃ/ /tɔˈɾaj/ /ˈneːʒnɔ/ /nɛ/),
+  5 chiral rozetni families → REVIEW queue (84 merge pending +5);
+  THE THIRD TRUTH LAYER MET THE SPINE: another hand's readings of
+  'ne', 'glas' now live in the same canon they read.
+  (2) VEČ-GLAVI PARSER-ZAKONOV (the named ∂, built): one body may
+  carry MANY laws — first head keeps the doc-head ceremony, every
+  deeper head (heading, or bold opening with series+number+separator
+  — the citation guard) becomes a body with its own witness and its
+  own block (fields never leak across heads; prose becomes teza when
+  the body carries no TEZA section — a number without a body is
+  forbidden). MEASURED: zakoni 234 → 278 (241 rez · 12 dokaz · 19
+  ubod · 1 sodba · 5 šiv): 19 ubodi (secirave 7+12), kroglja REZ
+  #24-28, C2 rez-26x files carry DOKAZ 258-266, C3 DOKAZ #1-2, Obj1
+  Dokaz 1-3, REZ 505 in Luka's new odprta-vrašanja doc.
+  CORRECTION of this sitting's earlier claim: the FILE branch DOES
+  carry dokaz bodies — as DEEP heads, not doc-heads; the "0 dokaz"
+  was true only of the doc-head pass. Honest, measured twice.
+  (3) K-SERIJA V GRAF (extends graf): 'REZ #N (K#)' chapter-bonds
+  counted across law fields (they live in prose): k_series_edges 4;
+  commit evidence 114 → 265 (prose now carried). Edges point.
+  (4) STRATUM-RED, IZMERJEN IN OSNUTEK ZA PEČAT (extends rez 560's
+  open ∂ — the 28 chiral pairs waiting on an order): median mtime
+  order, measured: A2 (25-07-13) → A4 → A5 → A3 → Obs11 → Basics →
+  B2 → C3 → DELUJOČ O → C1 → C2 → Scripts → Obj1 → Obj2 → Obj3
+  (26-09-26). DRAFTED as rez-563 candidate, AWAITING LUKA'S SEAL —
+  the draft reads in the sitting's message, the body on his word.
+  (5) Kompaktizacija temnote: dark 641 · stability 2,496 words ·
+  1,835 stable · 661 multi/kept · 84 pending · glyph 30/30 ·
+  0 authorize lines. Selftest + ∮ preveri PASS.
 - AWAITING LUKA (unchanged, the one act the guards keep mine):
   `authorize-drafts` → `drafts` → RATIFY. The queue is pre-read,
   pre-verified (∮ + third-reader sample), and pre-reviewed — every
