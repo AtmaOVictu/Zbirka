@@ -83,13 +83,18 @@ CREATE VIEW IF NOT EXISTS v_page AS
     FROM entries GROUP BY word;
 CREATE VIEW IF NOT EXISTS v_conflicts AS
     SELECT word, foneticni_rez, COUNT(DISTINCT foneticni_rez) AS variants
-    FROM entries WHERE foneticni_rez IS NOT NULL
+    FROM entries
+    WHERE foneticni_rez IS NOT NULL AND TRIM(foneticni_rez) != ''
+      AND merged_into IS NULL
     GROUP BY word HAVING variants > 1;
 """
 
 def db() -> sqlite3.Connection:
     con = sqlite3.connect(DB_PATH)
     con.row_factory = sqlite3.Row
+    # the repaired v_conflicts must reach EXISTING dbs too — IF NOT EXISTS
+    # alone would keep the ghost view forever, so the view is dropped first
+    con.execute("DROP VIEW IF EXISTS v_conflicts")
     con.executescript(SCHEMA)
     return con
 
@@ -211,6 +216,11 @@ def grade_of(p: Parsed) -> str:
 def scan(root: Path, con: sqlite3.Connection) -> dict:
     files = [p for p in root.rglob("*") if p.suffix.lower()
              in {".md", ".txt"}]
+    # the ledger is the only thing that cannot be rebuilt from source —
+    # back the db up before any scan writes to it
+    import shutil
+    if Path(DB_PATH).exists():
+        shutil.copy2(DB_PATH, f"{DB_PATH}.bak")
     n_docs = n_entries = 0
     for f in files:
         cur = con.execute("SELECT doc_id FROM docs WHERE path=?", (str(f),))
@@ -451,6 +461,73 @@ def dup_file_report(con) -> List[dict]:
             if len(paths) > 1]
 
 
+# ==================================================== DARK DOCS REPORT ======
+# A doc is DARK when no plugin recognized any entry in it (measured 26. 9.:
+# 880 of 1,183 docs — three quarters of the corpus). The report splits the
+# darkness in two, because the cure differs:
+#   markers, no entries  → PARSER GAP: the doc carries dosje fields but no
+#                          plugin caught them — repair the existing line
+#   no markers           → NEW FORMAT: a different kind of corpus (transcripts,
+#                          prose, letters) — a new ParserPlugin, or it stays
+#                          honestly dark: prose is prose
+# Groups by (extension, first-line shape, markers) so the owner reads
+# counts and examples, not 880 paths.
+
+DOSJE_MARKERS = ("fonetični rez", "ontološki pomen", "antinoma", "glyph",
+                 "sinteza", "afirmacija", "praktična uporaba")
+
+
+def _dark_shape(text: str) -> str:
+    """Cheap structural signature: what the first non-empty line looks like."""
+    for line in text.splitlines():
+        s = line.strip()
+        if not s:
+            continue
+        if s.startswith("|"):
+            return "table"
+        if re.match(r"^#{1,6}\s*\**\d+\.", s):
+            return "numbered-heading"
+        if re.match(r"^#{1,6}\s", s):
+            return "heading"
+        if re.match(r"^\d+[\.\)]\s", s):
+            return "numbered-line"
+        if s.startswith(("- ", "* ", "•")):
+            return "bullet"
+        return "prose"
+    return "empty"
+
+
+def dark_report(con) -> dict:
+    groups = {}
+    gone = 0
+    for r in con.execute(
+            "SELECT doc_id, path, raw_size FROM docs WHERE doc_id NOT IN "
+            "(SELECT DISTINCT doc_id FROM entries)"):
+        p = Path(r["path"])
+        try:
+            text = p.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            gone += 1
+            continue
+        low = text.lower()
+        markers = [m for m in DOSJE_MARKERS if m in low]
+        key = (p.suffix.lower(), _dark_shape(text), bool(markers))
+        g = groups.setdefault(key, {
+            "ext": key[0], "shape": key[1],
+            "dosje_markers": key[2], "count": 0, "bytes": 0,
+            "example": None, "first_line": ""})
+        g["count"] += 1
+        g["bytes"] += (r["raw_size"] or 0)
+        if g["example"] is None:
+            g["example"] = str(p)
+            g["first_line"] = next((l.strip() for l in text.splitlines()
+                                    if l.strip()), "")[:100]
+    return {"dark_docs": sum(g["count"] for g in groups.values()),
+            "deleted_since_scan": gone,
+            "groups": sorted(groups.values(), key=lambda g: -g["count"])}
+
+
+
 # ========================================================== GUI (Textual) =
 
 def gui() -> None:
@@ -519,7 +596,8 @@ def export(con, out: Path) -> dict:
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("cmd", choices=["scan", "gui", "page", "export",
-                                    "merge", "unmerge", "dups", "selftest"])
+                                    "merge", "unmerge", "dups", "dark",
+                                    "selftest"])
     ap.add_argument("path", nargs="?")
     ap.add_argument("--word")
     ap.add_argument("--out", default="soul_graph.json")
@@ -541,6 +619,9 @@ if __name__ == "__main__":
     elif args.cmd == "dups":
         # duplicate FILES report — you delete, the engine only names them
         print(json.dumps(dup_file_report(con), ensure_ascii=False, indent=2))
+    elif args.cmd == "dark":
+        # dark docs report — which formats the plugins have not learned yet
+        print(json.dumps(dark_report(con), ensure_ascii=False, indent=2))
     elif args.cmd == "selftest":
         # quick witness against real measured samples
         a = StotnijeBulletParser().parse(
@@ -574,5 +655,30 @@ if __name__ == "__main__":
         m.execute("INSERT INTO entries(doc_id, word, format, thesis, grade) "
                   "VALUES (1, 'NUJNE NAPAKE!', 't', 'x', 'reported')")
         assert len(page(m, "nujne napake")["entries"]) == 1
-        print("selftest: plugins A/B, grading, canon, near-dup, page — OK "
-              "(traced here, witnessed on disk)")
+        # scar 26. 9.: v_conflicts counted empty-string rez (and merged
+        # losers) as variants — 26 of 27 "conflicts" were ghosts
+        m.execute("INSERT INTO entries(doc_id, word, format, foneticni_rez, grade) "
+                  "VALUES (1, 'X', 't', '', 'draft')")
+        m.execute("INSERT INTO entries(doc_id, word, format, foneticni_rez, grade) "
+                  "VALUES (1, 'X', 't', 'x / x', 'reported')")
+        assert m.execute("SELECT COUNT(*) FROM v_conflicts WHERE word='X'"
+                         ).fetchone()[0] == 0
+        m.execute("INSERT INTO entries(doc_id, word, format, foneticni_rez, grade) "
+                  "VALUES (1, 'Y', 't', 'a / a', 'reported')")
+        m.execute("INSERT INTO entries(doc_id, word, format, foneticni_rez, grade) "
+                  "VALUES (1, 'Y', 't', 'b / b', 'draft')")
+        m.execute("INSERT INTO entries(doc_id, word, format, foneticni_rez, grade, "
+                  "merged_into) VALUES (1, 'Y', 't', 'c / c', 'draft', 'y')")
+        assert m.execute("SELECT COUNT(*) FROM v_conflicts WHERE word='Y'"
+                         ).fetchone()[0] == 1   # live truth only, loser ignored
+        # dark report: a prose file with no dosje markers is honestly dark
+        import tempfile
+        with tempfile.TemporaryDirectory() as td:
+            fp = Path(td) / "dark.txt"
+            fp.write_text("hello darkness, my old friend\n", encoding="utf-8")
+            m.execute("INSERT INTO docs(path) VALUES (?)", (str(fp),))
+            rep = dark_report(m)
+            assert rep["dark_docs"] == 1 and rep["groups"][0]["shape"] == "prose"
+            assert rep["groups"][0]["dosje_markers"] is False
+        print("selftest: plugins A/B, grading, canon, near-dup, page, "
+              "conflicts-view, dark — OK (traced here, witnessed on disk)")

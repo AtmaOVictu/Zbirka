@@ -51,6 +51,31 @@ or it is clutter.
    grafted into THE GUI, as the queue pre-ruled. Smoke-passed; measured
    2,176 live words, 0 empty pages after the repair below.
 4. export — soul_engine's export (already built) = the Godot surface, LAST
+5. CONFLICT queue — third source in the REVIEW tab, same ledger replay
+   → BUILT 26. 9. 2026: queue = words whose LIVE entries carry >1 fonetični
+   rez, minus words the ledger already ruled (payload ruling
+   "conflict-*"). [k] a chooser opens, you pick the TRUE rez, it is written
+   onto the other live entries, old values survive in the ledger payload ·
+   [c] both are real variants, they stay · [s] skip. Mechanics witnessed on
+   a scratch db copy (both rulings driven, queue re-derived each time);
+   smoke PASS (merge 6, glyph 30, conflict 1 pending).
+6. dark-docs report — extends the spine's report line (the `dups` ceremony)
+   → BUILT 26. 9. 2026: `soul_engine ... dark` — every scanned doc that
+   produced NO entry, grouped by (extension, first-line shape, dosje
+   markers): markers-without-entries = PARSER GAP (repair the plugin line),
+   no-markers = new corpus format (a new ParserPlugin, or honestly dark:
+   prose is prose). MEASURED: 885 dark docs; 175 carry dosje markers the
+   plugins missed (the big one: 159+ .md heading files, ~3.7 MB — format
+   "D", inline **WORD** ... fonetični rez: + fragment tables, seen in B2/)
+   = the next graft's target; ~710 are transcripts/prose, honestly dark.
+   Same sitting: scan() now backs soul.db up to soul.db.bak before writing
+   (the ledger is the only thing that cannot be rebuilt from source);
+   rescan 26. 9.: 1,190 files, 7 new docs, 50 new entries, backup witnessed.
+
+## NEXT IN THE QUEUE (each names its line)
+- FORMAT D plugin — a new ParserPlugin (one class + one PLUGINS line) for
+  the 175 marker-carrying dark docs. Until then the library misses ~3.7 MB
+  of real dosje content.
 
 ## REPAIR CANDIDATES (scars found 25. 9. — each names its line)
 - soul_engine find_dup_files(): DEAD + BROKEN. Never called (the `dups`
@@ -67,3 +92,12 @@ or it is clutter.
   (SQLite has no canon()); the spine's selftest now witnesses it.
   → REPAIRED 26. 9. 2026: all 2,176 live words return their page (measured);
   selftest asserts a canon-changed word pages; cockpit smoke PASS.
+- soul_engine v_conflicts: GHOST CONFLICTS — the view counted EMPTY-STRING
+  foneticni_rez (IS NOT NULL passes '') and merged losers as variants, so
+  26 of 27 "conflicts" were ghosts (one real rez + hollow stubs; found by
+  graft #5's queue derivation). Repair = TRIM(rez) != '' AND
+  merged_into IS NULL in the view; db() drops the view first so EXISTING
+  dbs get the repair (IF NOT EXISTS alone would keep the ghost forever).
+  → REPAIRED 26. 9. 2026: 27 → 1 real conflict word on the live db
+  (measured); selftest witnesses empty-rez ghost excluded, loser excluded,
+  real variant kept.

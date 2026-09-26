@@ -472,6 +472,12 @@ GLYPH_RULES = [
     ("s", "skip", "stays in the queue, next item"),
 ]
 
+CONFLICT_RULES = [
+    ("k", "true rez", "pick which fonetični rez is the true one — a chooser opens"),
+    ("c", "variants", "both are real variants — no single truth, they stay"),
+    ("s", "skip", "stays in the queue, next item"),
+]
+
 
 class ReviewTab(ttk.Frame):
     """The owner's queues, ruled by keypress. Two queues, one tab:
@@ -481,6 +487,12 @@ class ReviewTab(ttk.Frame):
              the difference is either a typo or a refinement, always yours)
       GLYPH  glyph_proposals.json — proposed glyph→operator mappings,
              payload fields "verdict": "confirm/reject" await your ruling.
+      CONFLICT words whose LIVE entries carry more than one fonetični rez
+             (graft #5; the ghosts — empty rez, merged losers — are
+             filtered out by the repaired v_conflicts). [k] a chooser
+             opens, you pick the TRUE rez, it is written onto the other
+             entries, the old values survive in the ledger · [c] both
+             are real variants, they stay · [s] skip.
     LAWS (both queues):
       - every ruling is a LEDGER LINE in soul.db (kind merge or verdict);
         nothing is deleted, ever. Glyph verdicts are ALSO written back into
@@ -495,6 +507,10 @@ class ReviewTab(ttk.Frame):
     MERGE_W = (50, 90, 130, 70, 70, 230, 130, 160, 110, 60, 80)
     GLYPH_COLS = ("word", "glyph", "proposed operator", "warrant", "verdict", "unmapped")
     GLYPH_W = (110, 230, 250, 250, 110, 80)
+    CONFLICT_COLS = ("word", "fonetični rez", "grade", "format", "doc:line",
+                     "thesis/synthesis")
+    CONFLICT_W = (130, 230, 70, 90, 80, 260)
+    MODE_CYCLE = {"merge": "glyph", "glyph": "conflict", "conflict": "merge"}
 
     def __init__(self, parent):
         super().__init__(parent, padding=8)
@@ -502,6 +518,7 @@ class ReviewTab(ttk.Frame):
         self.btns = {}
         self.merge_queue = []
         self.glyph_queue = []
+        self.conflict_queue = []
         self.mode = "merge"
         self.i = 0
         self.columnconfigure(0, weight=1)
@@ -546,6 +563,8 @@ class ReviewTab(ttk.Frame):
             self.tree.destroy()
         if self.mode == "merge":
             cols, widths = self.MERGE_COLS, self.MERGE_W
+        elif self.mode == "conflict":
+            cols, widths = self.CONFLICT_COLS, self.CONFLICT_W
         else:
             cols, widths = self.GLYPH_COLS, self.GLYPH_W
         self.tree = ttk.Treeview(self, columns=cols, show="headings")
@@ -556,10 +575,10 @@ class ReviewTab(ttk.Frame):
         self.tree.tag_configure("keeper", background="#2b3a2b")
 
     def queue(self):
-        return self.glyph_queue if self.mode == "glyph" else self.merge_queue
+        return getattr(self, f"{self.mode}_queue")
 
     def switch_mode(self):
-        self.mode = "glyph" if self.mode == "merge" else "merge"
+        self.mode = self.MODE_CYCLE[self.mode]
         self.i = 0
         self._build_tree()
         self._update_chrome()
@@ -580,6 +599,26 @@ class ReviewTab(ttk.Frame):
                 ruled.add((SOUL.canon(r["word"] or ""), p["fingerprint"]))
         return ruled
 
+    def _conflict_pending(self):
+        """Words whose live entries carry more than one fonetični rez, minus
+        the words the ledger already carries a conflict ruling for. Mirrors
+        the repaired v_conflicts: empty rez and merged losers are ghosts."""
+        ruled = set()
+        for r in self.con.execute("SELECT word, payload FROM ledger "
+                                  "WHERE kind='verdict'"):
+            try:
+                p = json.loads(r["payload"])
+            except (ValueError, TypeError):
+                continue
+            if (isinstance(p, dict)
+                    and str(p.get("ruling", "")).startswith("conflict")):
+                ruled.add(SOUL.canon(r["word"] or ""))
+        return [{"word": r["word"]} for r in self.con.execute(
+            "SELECT word, COUNT(DISTINCT foneticni_rez) AS v FROM entries "
+            "WHERE merged_into IS NULL AND foneticni_rez IS NOT NULL "
+            "AND TRIM(foneticni_rez) != '' GROUP BY word HAVING v > 1")
+            if SOUL.canon(r["word"]) not in ruled]
+
     def load(self):
         ruled = self._ruled()
         exact = [p for p in SOUL.propose_entry_merges(self.con)
@@ -589,6 +628,7 @@ class ReviewTab(ttk.Frame):
                 if (p["word"], p["fingerprint"]) not in ruled]
         self.merge_queue = exact + near
         self.glyph_queue = self._glyph_pending()
+        self.conflict_queue = self._conflict_pending()
         self.i = 0
         self._update_chrome()
         self._show()
@@ -604,10 +644,11 @@ class ReviewTab(ttk.Frame):
                 if isinstance(p, dict) and p.get("verdict") == "confirm/reject"]
 
     def _update_chrome(self):
-        other, n = (("glyph", len(self.glyph_queue)) if self.mode == "merge"
-                    else ("merge", len(self.merge_queue)))
-        self.mode_btn.config(text=f"show {other} queue ({n} pending)")
-        rules = REVIEW_RULES if self.mode == "merge" else GLYPH_RULES
+        nxt = self.MODE_CYCLE[self.mode]
+        self.mode_btn.config(text=f"show {nxt} queue "
+                                  f"({len(getattr(self, nxt + '_queue'))} pending)")
+        rules = {"merge": REVIEW_RULES, "glyph": GLYPH_RULES,
+                 "conflict": CONFLICT_RULES}[self.mode]
         self.rules_var.set("   ·   ".join(f"[{k}] {short}"
                           for k, short, _long in rules))
 
@@ -617,6 +658,9 @@ class ReviewTab(ttk.Frame):
             b.state(["disabled"])
         if self.mode == "glyph":
             self._show_glyph()
+            return
+        if self.mode == "conflict":
+            self._show_conflict()
             return
         if not self.merge_queue:
             self.status_var.set("merge queue empty — no duplicate or "
@@ -660,6 +704,29 @@ class ReviewTab(ttk.Frame):
             p.get("verdict", "—"), str(p.get("unmapped", "—"))))
         self.status_var.set(f"ruling {self.i + 1} / {len(self.glyph_queue)} — "
                             f"'{w}' · [k] confirm or [c] reject the mapping")
+        for k, b in self.btns.items():
+            if k != "m":
+                b.state(["!disabled"])
+
+    def _show_conflict(self):
+        if not self.conflict_queue:
+            self.status_var.set("conflict queue empty — no live word carries "
+                                "two fonetični rez variants awaiting your ruling")
+            return
+        w = self.conflict_queue[self.i]["word"]
+        rows = list(self.con.execute(
+            "SELECT entry_id, word, foneticni_rez, grade, format, doc_id, "
+            "lineno, thesis, synthesis FROM entries "
+            "WHERE word=? AND merged_into IS NULL AND TRIM(foneticni_rez) != ''",
+            (w,)))
+        for r in rows:
+            self.tree.insert("", "end", values=(
+                r["word"], r["foneticni_rez"], r["grade"], r["format"],
+                f"{r['doc_id']}:{r['lineno']}",
+                (r["thesis"] or r["synthesis"] or "—")[:64]))
+        self.status_var.set(f"ruling {self.i + 1} / {len(self.conflict_queue)} — "
+                            f"'{w}' · {len(rows)} live entries · "
+                            f"[k] pick the true rez, [c] both are real variants")
         for k, b in self.btns.items():
             if k != "m":
                 b.state(["!disabled"])
@@ -765,6 +832,77 @@ class ReviewTab(ttk.Frame):
 
     def rule_glyph_reject(self):
         self._rule_glyph("reject")
+
+    # ------------------------------------------------- conflict rulings ----
+
+    def rule_conflict_true(self):
+        """[k] pick the TRUE fonetični rez: a chooser opens, the true rez is
+        written onto the other live entries, and the old values survive in
+        the ledger — nothing is lost, the conflict is resolved by the
+        owner's ruling, not by the machine."""
+        w = self.conflict_queue[self.i]["word"]
+        rows = [dict(r) for r in self.con.execute(
+            "SELECT foneticni_rez, COUNT(*) AS n FROM entries "
+            "WHERE word=? AND merged_into IS NULL AND TRIM(foneticni_rez) != '' "
+            "GROUP BY foneticni_rez", (w,))]
+        win = tk.Toplevel(self)
+        win.title(f"pick the TRUE fonetični rez for '{w}'")
+        win.transient(self.winfo_toplevel())
+        lb = tk.Listbox(win, width=90, height=min(len(rows), 12))
+        for r in rows:
+            lb.insert("end", f"{r['foneticni_rez']}   ({r['n']} "
+                             f"entr{'y' if r['n'] == 1 else 'ies'})")
+        lb.pack(padx=8, pady=8)
+        lb.selection_set(0)
+
+        def pick(_e=None):
+            sel = lb.curselection()
+            if not sel:
+                return
+            true_rez = rows[sel[0]]["foneticni_rez"]
+            win.destroy()
+            losers = [dict(r) for r in self.con.execute(
+                "SELECT entry_id, foneticni_rez FROM entries "
+                "WHERE word=? AND merged_into IS NULL AND foneticni_rez IS NOT NULL "
+                "AND TRIM(foneticni_rez) != '' AND foneticni_rez != ?",
+                (w, true_rez))]
+            for l in losers:
+                self.con.execute("UPDATE entries SET foneticni_rez=? "
+                                 "WHERE entry_id=?", (true_rez, l["entry_id"]))
+            SOUL.led(self.con, "verdict", w, {
+                "ruling": "conflict-true-rez", "true_rez": true_rez,
+                "replaced": [{"entry_id": l["entry_id"],
+                              "old_rez": l["foneticni_rez"]} for l in losers]})
+            self.con.commit()
+            self.load()
+            self.status_var.set(f"CONFLICT RULED — '{w}': true rez '{true_rez}' "
+                                f"written onto {len(losers)} entr"
+                                f"{'y' if len(losers) == 1 else 'ies'}; old values "
+                                f"witnessed in the ledger  |  "
+                                f"{len(self.conflict_queue)} left in the queue")
+
+        lb.bind("<Double-Button-1>", pick)
+        lb.bind("<Return>", pick)
+        ttk.Button(win, text="rule this the true rez", command=pick).pack(
+            pady=(0, 8))
+        lb.focus_set()
+        win.grab_set()
+
+    def rule_conflict_variants(self):
+        """[c] both rezs are real variants — no single truth, both stay."""
+        w = self.conflict_queue[self.i]["word"]
+        variants = [r[0] for r in self.con.execute(
+            "SELECT DISTINCT foneticni_rez FROM entries "
+            "WHERE word=? AND merged_into IS NULL AND TRIM(foneticni_rez) != ''",
+            (w,))]
+        SOUL.led(self.con, "verdict", w, {
+            "ruling": "conflict-variants-kept", "variants": variants,
+            "note": "real variants: no single truth, both stay"})
+        self.con.commit()
+        self.load()
+        self.status_var.set(f"CONFLICT KEPT — '{w}' has {len(variants)} real "
+                            f"variants; both stay (ledger: verdict)  |  "
+                            f"{len(self.conflict_queue)} left in the queue")
 
     def rule_skip(self):
         self.i += 1
@@ -982,9 +1120,11 @@ def _smoke_test():
     if app.review.alive:
         ok.append((f"review queues derive from the ledger "
                    f"(merge {len(app.review.merge_queue)}, "
-                   f"glyph {len(app.review.glyph_queue)})",
+                   f"glyph {len(app.review.glyph_queue)}, "
+                   f"conflict {len(app.review.conflict_queue)})",
                    isinstance(app.review.merge_queue, list) and
-                   isinstance(app.review.glyph_queue, list)))
+                   isinstance(app.review.glyph_queue, list) and
+                   isinstance(app.review.conflict_queue, list)))
     ok.append(("LIBRARY constructs (spine + db, words listed)",
                app.library.alive and len(app.library.rows) > 0))
     if app.library.alive:
