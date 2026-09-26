@@ -272,6 +272,35 @@ Pictures/) is other strata, not this workshop's to move.
   the section word honestly, the derived row was deleted and re-derived
   from the corrected body, ledger untouched). VEZI: rez 253 · 559 · 560 ·
   561 · 231 · SODBA #002 · ATLAS.
+- OBJ3 PREBRANO — VSA OSEM TELIŠ (Luka's ask, 26. 9. 2026: "to in vse
+  kar vsebuje bereš in analiziraš?" — read in FULL, every body, this
+  sitting; the reading hand is the builder's, W < 0, ubodi appended to
+  ATLAS, 5 ledger rows): Obj3 is a NEW STRATUM — the secirava/kroglja
+  line, the corpus's own third register: (1) KROGLJA (povezovalni organ
+  chapteranja; tipkarska krogla REZ #24; DROGO KROGEL — isti znak ≠
+  ista operacija, hermenevtični ključ = izbira krogle pred udarcem);
+  (2) register seje "rezi resnice — laž, naslovnik, luč" ×3 različice
+  (jutranja osnovna + večerna razširjena "(1)" — po REZ 561 je večerna
+  kandidat; razširitev: TORAJ — sklep, ki sklene v odprtje, VEJE —
+  citat je množina, † mrtva veja ostaja v telesu, izmerba seje ⊢:⚠ =
+  3:2, OD-ER, NIT 21-30; meta-struktura izvajalke: štirje šivi, pot
+  izhoda šešt korakov, "pečat si izvajalka ne nadene sama" — SODBA
+  #002 izrečena v Obj3 neodvisno od workshopa); (3) SECIRAVA izvornega
+  telesa osi ⟁ ×2 (kiralni par po REZ 561: 7-ubodna večerna "…20261.md"
+  — NAPAČNO IME DATOTEKE, vsebina je secirava, ne register — vs 12-
+  ubodna proto-besedilo različica; nosilec: diagonalni rez / kot
+  pra-metoda korpusa, izvor osi P/Č/G/D izrečen pred sistemom);
+  (4) SECIRAVA preverba.txt (437.831 zn velikan, repdosežen; katedrala
+  DAJ; ŠKATLANJE kot organ s tremi telesi pred imenom); (5) rozetni
+  kamni CII–CXII (94.645 zn + razširjena različica istega dne, +195
+  vrstic po REZ 559: identično telo že prebrano, samo delta prebrana —
+  12 prič ∅→∆ v 24 stoletjih; sanitarna razznačba izmišljenih imenskih
+  rezov, ⚠ fosili ostajajo). CONSEQUENCES, measured: Obj3 carries a
+  THIRD rez series (K0/K1 chapter-rezi #20–28) + cites the session
+  register to 634 — Seam 2 now has THREE materializations (file 558 ·
+  session 628→634 · K-series); the Obj3 operator language (⊢ ⚠ APD ∂ ∴
+  ∮ ⧖ ⊘ ∅ ∆) is the SAME language the cockpit tabs speak — two bodies,
+  one grammar, measured independently.
 - AWAITING LUKA (unchanged, the one act the guards keep mine):
   `authorize-drafts` → `drafts` → RATIFY. The queue is pre-read,
   pre-verified (∮ + third-reader sample), and pre-reviewed — every
@@ -591,3 +620,30 @@ becomes the ruler.
   dark-pass insertions counted, the reset removed; witnessed on rez
   562 (delete → reparse → new_laws: 1, row derived, odprta 253 chars).
   Selftest + ∮ preveri PASS.
+- parser-zakonov head rule, SECOND over-match class: BOLD CITATIONS
+  WEARING SEALS (found while reading Obj3, 26. 9. 2026): the first
+  refinement (head = heading or bold seal line) still admitted bold
+  body lines that merely CITE a law number — measured: the secirava
+  "…20261.md" carried "(ubod #4 v polni teži…)" inside a "**Telo:**"
+  line; the parser stored a GHOST law (ubod 4) from the citation while
+  the body's SEVEN real ubodi (bold heads, but not first-8-lines heads)
+  stayed unread. Full corpus sweep after the refinement: 56 dead heads,
+  ALL citations wearing bold ("**Pečat:** DOKAZ #104–#110", "**Najbližji
+  rezi (anti-PREPIS):** rez 81…", "**SMISEL…:** rez 112…") — the 12
+  "dokaz" rows and 5 "rez" rows that died were ALL ghosts; every true
+  seal (231, 253, 559–562) survived. Consequence, measured: the FILE
+  branch of the corpus carries NO dokaz-headed bodies — the dokaz
+  series is forked (session register only), exactly as the bodies'
+  NUJNE NAPAKE already claimed.
+  → REPAIRED 26. 9. 2026: a bold line counts as a head only when the
+  series OPENS it ("**REZ 231 …**" is a head; "**Telo:** … (ubod #4 …)"
+  is a citation — a VEZI, not a head). zakoni re-derived from the
+  untouched corpus: 257 → 234 (229 rez · 5 šiv · 0 dokaz · 0 ubod),
+  ghost ubod-4 gone; retype re-typed the body honestly; 2 first-time
+  entries admitted by the law-pass side effect (docs that were law-
+  ghost-"lit" before). Selftest + ∮ preveri PASS; glyph 30/30 pending.
+  REMAINING ∂ (named, not built): parse_zakon reads ONE law per doc —
+  the secirave carry 7–12 ubodi each, the kroglja carries REZ #24–28;
+  the multi-law bodies stay dark to the zakoni table until parser-
+  zakonov learns to yield many heads per body (a graft on the parser
+  line, on Luka's word — the corpus's own organs demand it).

@@ -448,10 +448,18 @@ def parse_zakon(text: str) -> List[dict]:
     for i, line in enumerate(head_lines, 1):
         # a law HEAD is a heading or a bold seal line — a doc that merely
         # CITES a law number in prose is not that law's body (POPIS-measured
-        # over-match, refined: the citation is a VEZI, not a head)
+        # over-match, refined twice: a bold line counts as a seal only when
+        # the series opens it — "**REZ 231 · ...**" is a head, "**Telo:**
+        # ... (ubod #4 ...)" is a citation wearing bold; found by Obj3's
+        # secirava, measured: ghost ubod-4 from line 4 of a body whose
+        # seven real ubodi stayed unread — the citation is a VEZI, not a head)
         if not line.lstrip().startswith(("#", "**")):
             continue
-        m = ZAKON_NUM.search(line)
+        if line.lstrip().startswith("**"):
+            m = re.match(r"\*\*\s*" + ZAKON_SERIES +
+                         r"\b[·#:*\s]*(\d{1,4})", line, re.IGNORECASE)
+        else:
+            m = ZAKON_NUM.search(line)
         if m:
             series, number = m.group(1).lower(), int(m.group(2))
             h1 = re.match(r"^#\s*(.+)$", line)
