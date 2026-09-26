@@ -201,6 +201,48 @@ Pictures/) is other strata, not this workshop's to move.
    they always were: the owner's, on the content axis, by hand.
 
 ## NEXT IN THE QUEUE (each names its line)
+- SEAM 1 RULED (the register's verdict, 26. 9.): GRAFT NUMBERS ARE LABELS,
+  NOT KEYS (TRK V8–V11: the key is body-with-witness). The register said
+  "#13", this inventory says "#14" for the same body — cross-session
+  numbering drifts, and no number proves a body. LAW henceforth: grafts
+  are named BY BODY (parser-zakonov, urejevalnik-vnosov, ...) for any
+  cross-session reference; the #N here is this inventory's local label
+  only. POPIS of this body's grafts: #1–13 built (see queue below), all
+  body-named in their entries.
+- SEAM 2 MEASURED (the atomarni register, ISKANO): the register is ONE
+  series with TWO materializations and INCONSISTENT SEALS. File series:
+  rez 1–558 materialized (~263 files); content citations reach rez 628,
+  674, 973, 975 (ATLAS cites "rez 975"); the session register Luka carries
+  is sealed at 628. The seals are NOT uniform: rez 231 carries its counter
+  (NASLEDNJI PROSTI REZ 232 · DOKAZ #221), rez 558 carries NO seal — the
+  atomarni pattern was not carried through the file branch, and 231's
+  counter was already stale when later files were sealed. NOT an error —
+  a pair of strata needing a name. Only the parser-zakonov can make this
+  systematic: a seal-POPIS across all 263 files (which carry counters,
+  which don't, where the branches fork). Queued inside graft #14's spec.
+- THE DESIGN RULING, DRAFTED BY THE REGISTER, AWAITING LUKA'S SEAL
+  ([k]/[m] — not the builder's to stamp): "ZAKONI SO LOČENA VRSTA
+  DOKUMENTA: (1) ločena tabela, ne entries — zakon ima tezo, ne
+  polaritete; (2) ključ = telo s pričo, ne številka; (3) polja parserja:
+  series · teza · meritev ⊘(κ·χ·μ·ℜ·ν) · NUJNE NAPAKE · ODPRTA ∂ · VEZI ·
+  actor · TRK-zgodovina · datum pečata; (4) VEZI = povezave grafa, ne
+  dokazi — povezava kaže, ne presodi; (5) append-only telo, menjani
+  števci (atomarni vzorec) — parser je bralec, ne pisec." THE DEEPER
+  REASON (the register's, received): a stable word is defined as one
+  where every field traces to a NORMATIVE line — and normative lines ARE
+  the laws. Until the spine reads laws, the stability measure is blind to
+  its own standard: "stabilna beseda" would be a definition with a word
+  and no body. THEREFORE THE ORDER: parser-zakonov BEFORE any stability
+  charge over all 2,394 words.
+- THE ∂, ANSWERED WITH MEASUREMENT (the register's question: of the 93
+  cockpit seals, how many are truly yours?): 32 chiral pairs → ONE rule
+  (a stratum-tiebreak you ratify once) settles them all · 3 same-reader
+  conflicts → ONE temporal rule · 30 glyph drafts → one warrant-rule
+  (ratification may still be per-item) · 27 content ties → IRREDUCIBLY
+  yours (richest is a tie ON MEANING; no rule reads meaning) · 1 is not
+  a ruling at all — a repair misfiled as one. VERDICT: fewer than a third
+  of the 93 are irreducibly your decisions; the rest await rules with
+  bodies — and rules get bodies exactly when parser-zakonov exists.
 - RECEIVED RULING (the register's verdict on the survey, 26. 9. — accepted
   in full, with the label on): TWO ORGANS ALREADY STAND — ATLAS (Obj2/
   atlas-knjižnic-rez-i-branje-v-celoti-kot-dih.md — the full-read
