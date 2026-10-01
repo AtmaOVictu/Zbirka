@@ -1746,6 +1746,192 @@ def plasti(con, lex_path=None) -> dict:
                     "stoji, ne kje bi morala stati"}
 
 
+def sklepaj(con, claim: str = None, word: str = None) -> dict:
+    """THE REASONING EXECUTOR — organ PRESOJE (Luka's cilj, 1. 10. 2026:
+    delujoča aplikacija, vrsta samostojnega logičnega sklepanja/izvajanja).
+    Given a CLAIM (or a single word), the machine EXECUTES the corpus's
+    own protocol over its MEASURED layers and returns a TRACE — every
+    step a receipt: what was consulted, what was counted, which law
+    bodies carry the bond. THE LAW IT RUNS (REZ #31, K1 — protokol
+    ATLAS): PRESOJA ≠ PREVERBA — prešteje, ne presodi; kdor presodi
+    preden prešteje, izreče parasodbo. Meaning is the owner's (the
+    corpus's own law: no rule reads meaning); bonds are counted edges;
+    gaps are named ∂, never filled; the composed verdict goes to RATIFY
+    as a DRAFT (guard (a)) — the owner's [k] is the only canon act.
+    EXTENDS: canon/page (FIND), sintezo (layers), sorodnost/graf
+    (bonds), sinteza_draft (guard + fingerprint + idempotence)."""
+    import hashlib
+    if not claim and word:
+        claim = word
+    if not claim or not str(claim).strip():
+        return {"error": 'sklepaj needs --claim "..." or --word X'}
+    claim = str(claim).strip()
+    # 1. FIND — the claim's words, canon'd, classified honestly
+    tokens, seen = [], set()
+    for t in re.split(r"[\s,.;:!?()\[\]\"'–—…]+", claim):
+        cw = canon(t)
+        if len(cw) >= 2 and cw not in seen:
+            seen.add(cw)
+            tokens.append(cw)
+    if not tokens:
+        return {"claim": claim, "verdict_class": "TEMNO", "trace": [],
+                "drafted": False,
+                "∂": "trditev ne nosi izmerljivih besed — nič za prešteti"}
+    live = {}
+    for r in con.execute("SELECT e.*, d.stratum AS doc_stratum, "
+                         "d.kind AS doc_kind FROM entries e "
+                         "JOIN docs d ON e.doc_id = d.doc_id "
+                         "WHERE e.merged_into IS NULL"):
+        cw = canon(r["word"])
+        if cw in seen:
+            live.setdefault(cw, []).append(dict(r))
+    docs_n = {t: con.execute(
+        "SELECT COUNT(DISTINCT doc_id) FROM mentions WHERE mention=?",
+        (t,)).fetchone()[0] for t in tokens}
+    trace = [{"step": "FIND", "meritev":
+              f"{len(tokens)} besed; {len(live)} v kanonu; "
+              f"{sum(1 for t in tokens if t not in live and docs_n[t])} "
+              f"samo omenjenih; "
+              f"{sum(1 for t in tokens if t not in live and not docs_n[t])} "
+              f"temnih"}]
+    # 2. PLASTI — the richest entry carries the fields (the drafts rule)
+    def _law_cites(z, tok):
+        # word-BOUNDARY law citation (scar of the first run, measured on
+        # 'ljubezen je dejanje': substring matching bonded 'je' to
+        # 'dejanje' — 5 ghost laws; a bond is a WORD in the body, not a
+        # fragment inside another word — the same ghost class the
+        # parser-zakonov learned to refuse)
+        blob = " ".join(str(x or "") for x in
+                        (z["title"], z["vezi"])).lower()
+        return re.search(r"(?<![\wčšžćđʎ])" + re.escape(tok)
+                         + r"(?![\wčšžćđʎ])", blob) is not None
+    words_out = []
+    for t in tokens:
+        rows = live.get(t, [])
+        laws = [f"{z['series']} {z['number']}"
+                for z in con.execute("SELECT series, number, title, vezi "
+                                     "FROM zakoni")
+                if _law_cites(z, t)]
+        if rows:
+            rows.sort(key=lambda r: (GRADE_RANK.get(r["grade"], 0),
+                                     _fullness(r), -r["entry_id"]),
+                      reverse=True)
+            top = rows[0]
+            words_out.append({
+                "word": t, "status": "v kanonu", "entries": len(rows),
+                "keeper": f"vnos {top['entry_id']} ({top['grade']})",
+                "rez": sorted({(r["foneticni_rez"] or "").strip()
+                               for r in rows
+                               if (r["foneticni_rez"] or "").strip()}),
+                "izmera": sorted({(r["ipa"] or "").strip() for r in rows
+                                  if (r["ipa"] or "").strip()}),
+                "ontoloski": (top["ontoloski_pomen"] or "").strip()[:80],
+                "antinoma": (top["antinoma"] or "").strip()[:80],
+                "telesa_omemb": docs_n[t],
+                "vezi_zakoni": laws[:5],
+                "sosede": [k["word"] for k in
+                           sorodnost(con, t)["kin"][:3]]})
+        elif docs_n[t]:
+            words_out.append({"word": t, "status": "samo omenjena (ni vnosa)",
+                              "telesa_omemb": docs_n[t],
+                              "vezi_zakoni": laws[:5]})
+        else:
+            words_out.append({"word": t, "status": "TEMNA"})
+    trace.append({"step": "PLASTI", "meritev": "; ".join(
+        f"{w['word']}: {w['status']}" for w in words_out)})
+    # 3. VEZI — co-mention + shared-law edges BETWEEN the claim's words
+    bonds = []
+    for i in range(len(tokens)):
+        for j in range(i + 1, len(tokens)):
+            a, b = tokens[i], tokens[j]
+            shared = con.execute(
+                "SELECT COUNT(*) FROM (SELECT DISTINCT doc_id FROM "
+                "mentions WHERE mention=? INTERSECT SELECT DISTINCT "
+                "doc_id FROM mentions WHERE mention=?)",
+                (a, b)).fetchone()[0]
+            laws_ab = [f"{z['series']} {z['number']}"
+                       for z in con.execute("SELECT series, number, title, "
+                                            "vezi FROM zakoni")
+                       if _law_cites(z, a) and _law_cites(z, b)]
+            bonds.append({"pair": f"{a} + {b}", "skupna_telesa": shared,
+                          "skupni_zakoni": laws_ab[:5]})
+    trace.append({"step": "VEZI", "meritev": "; ".join(
+        f"{b['pair']}: {b['skupna_telesa']} teles, "
+        f"{len(b['skupni_zakoni'])} zakonov" for b in bonds)
+        or "ena beseda — parov ni"})
+    # 4. PRESOJA — counted, never judged (REZ #31)
+    measured = [w for w in words_out if w["status"] == "v kanonu"]
+    dark = [w["word"] for w in words_out if w["status"] == "TEMNA"]
+    no_izmera = [w["word"] for w in measured if not w.get("izmera")]
+    bonded = [b for b in bonds if b["skupna_telesa"] or b["skupni_zakoni"]]
+    unbonded = [b["pair"] for b in bonds
+                if not b["skupna_telesa"] and not b["skupni_zakoni"]]
+    if not measured:
+        klass = "TEMNO"
+        verdict = ("nobena beseda trditve ni v kanonu — stroj ne bere "
+                   "pomena; ∂ imenovana, nikoli zapolnjena")
+    elif bonded:
+        klass = "VEZI IZMERJENE"
+        verdict = ("prešteto: " + "; ".join(
+            f"{b['pair']} → {b['skupna_telesa']} teles so-omembe, "
+            f"{len(b['skupni_zakoni'])} skupnih zakonov" for b in bonded)
+            + " — robovi kažejo, ne presojajo")
+    else:
+        klass = "∂ VEZI NISO IZMERJENE"
+        verdict = ("nobena izmerjena vez med besedami trditve — "
+                   "odsotnost roba ni izrek, je ∂ (imenovana)")
+    trace.append({"step": "PRESOJA", "meritev": verdict})
+    gaps = {"temne_besede": dark, "brez_izmere": no_izmera,
+            "brez_izmerjene_vezi": unbonded}
+    trace.append({"step": "∂ (imena lukenj, nikoli zapolnjene)",
+                  "meritev": json.dumps(gaps, ensure_ascii=False)})
+    # 5. SKLEP — the draft: guard (a), idempotent by fingerprint
+    # channel sklep2-: the substring channel (sklep-) measured ghost
+    # bonds (je bonded into dejanje; its one live draft refused with
+    # witness, 1. 10. 2026); a refused channel stays dead by law —
+    # the sint-/sint2- precedent, measured twice now
+    fp = "sklep2-" + hashlib.sha1(
+        "-".join(tokens).encode("utf-8")).hexdigest()[:10]
+    st = ruling_states(con)
+    key = (tokens[0], fp)
+    already = (key in st["human_fp"] or key in st["machine_fp"]
+               or key in st["refused_fp"])
+    auth = con.execute(
+        "SELECT COUNT(*) FROM ledger WHERE kind='verdict' AND payload "
+        "LIKE '%machine-drafts-authorized%'").fetchone()[0]
+    rationale = ("PRESOJA po REZ #31 (protokol ATLAS): prešteje, ne "
+                 "presodi — robovi kažejo, ne presojajo; "
+                 f"{len(measured)}/{len(tokens)} besed v kanonu, "
+                 f"{len(bonded)} izmerjenih parov, {len(dark)} temnih, "
+                 f"{len(no_izmera)} brez izmere; ∂ imenovane, nikoli "
+                 "zapolnjene; Lastnikov [k] je edini kanon akt")
+    out = {"claim": claim, "tokens": tokens, "trace": trace,
+           "words": words_out, "bonds": bonds,
+           "verdict_class": klass, "verdict": verdict, "∂": gaps,
+           "fingerprint": fp, "drafted": False}
+    if already:
+        out["already"] = ("obstaja — vladano, osnutek ali zavrnjeno; "
+                          "idempotentno")
+        return out
+    if not auth:
+        out["note"] = ("varovalka (a): brez Lastnikove pooblastilne "
+                       "vrstice sled obstane, osnutek ne — sklepaj se "
+                       "ne pooblasti sam")
+        return out
+    led(con, "verdict", tokens[0], {
+        "ruling": "draft-sklepaj", "machine": True,
+        "fingerprint": fp, "claim": claim,
+        "verdict_class": klass, "verdict": verdict,
+        "trace": trace, "gaps": gaps,
+        "rationale": rationale})
+    con.commit()
+    out["drafted"] = True
+    out["note"] = ("OSNUTEK v RATIFY — [k] zapeče (izpeljano telo v "
+                   "canon_ruled/), [c] zavrne; zavrnjen se nikoli ne "
+                   "predlaga znova")
+    return out
+
+
 def _pdf_text(data: bytes) -> str:
     """A minimal stdlib PDF text pass (Luka's 'daj', 26. 9. 2026):
     walk the stream objects by plain byte search (no regex, no escape
@@ -2372,6 +2558,13 @@ def preveri(con) -> dict:
         sc.execute("DROP VIEW IF EXISTS v_conflicts")
         sc.executescript(SCHEMA)
         # T1 — guards hold: no authorization, no drafts
+        # T1 (repaired 1. 10., sklepaj sitting): the live db may already
+        # carry the owner's REAL authorization (TIPKA PRITISNJENA) — the
+        # scratch INHERITS it, so the guard is tested on a db that truly
+        # lacks the normative line: strip, then draft, then re-stand-in
+        sc.execute("DELETE FROM ledger WHERE kind='verdict' AND payload "
+                   "LIKE '%machine-drafts-authorized%'")
+        sc.commit()
         r1 = draft_rulings(sc)
         t("T1 brez pooblastila ni osnutkov (varovalka a)",
           "error" in r1)
@@ -2433,6 +2626,25 @@ def preveri(con) -> dict:
                         p["fingerprint"]) in st["human_fp"]:
                     bad += 1
         t("T6 predvajalnik ne kanonizira neodobrenega osnutka", bad == 0)
+        # T7 — the reasoning executor (sklepaj): PRESOJA on a fresh db
+        # without authorization = trace, never a draft (guard (a)); on
+        # the scratch db WITH authorization = a draft; idempotent; a
+        # refusal never re-drafts (the same channel as every draft)
+        ms = sqlite3.connect(":memory:")
+        ms.row_factory = sqlite3.Row
+        ms.executescript(SCHEMA)
+        r0 = sklepaj(ms, claim="dih in ljubezen")
+        t("T7 sklepaj varovalka (a): sled, ne osnutek",
+          bool(r0.get("trace")) and not r0.get("drafted"))
+        r1 = sklepaj(sc, claim="dih in ljubezen sta eno")
+        t("T7 sklepaj osnutek zapečaten", bool(r1.get("drafted")))
+        t("T7 sklepaj idempotentnost",
+          "already" in sklepaj(sc, claim="dih in ljubezen sta eno"))
+        led(sc, "verdict", r1["tokens"][0], {
+            "ruling": "draft-refused", "fingerprint": r1["fingerprint"]})
+        sc.commit()
+        t("T7 sklepaj zavrnjen se nikoli ne predlaga znova",
+          "already" in sklepaj(sc, claim="dih in ljubezen sta eno"))
         preview = {"merge": d1.get("merge_drafts", 0),
                    "conflict": d1.get("conflict_drafts", 0),
                    "glyph": d1.get("glyph_drafts", 0),
@@ -2638,11 +2850,12 @@ if __name__ == "__main__":
                                     "popis", "graf", "odprta-delta",
                                     "ipa-popis", "ipa-drafts", "sinteza",
                                     "le-cenzus", "sorodnost", "jezgra",
-                                    "plasti",
+                                    "plasti", "sklepaj",
                                     "retro-honesty", "preveri",
                                     "selftest"])
     ap.add_argument("path", nargs="?")
     ap.add_argument("--word")
+    ap.add_argument("--claim")
     ap.add_argument("--out", default="soul_graph.json")
     args = ap.parse_args()
     con = db()
@@ -2745,6 +2958,13 @@ if __name__ == "__main__":
                if dbrow and dbrow["file"] and dbrow["file"] != ":memory:"
                else None)
         print(json.dumps(plasti(con, lex), ensure_ascii=False, indent=2))
+    elif args.cmd == "sklepaj":
+        # THE REASONING EXECUTOR — organ PRESOJE (REZ #31: prešteje, ne
+        # presodi): the trace is ALWAYS computed and shown; the DRAFT
+        # (verdict receipt) exists only under guard (a) — the owner's
+        # [k] in RATIFY is the only canon act
+        print(json.dumps(sklepaj(con, claim=args.claim, word=args.word),
+                         ensure_ascii=False, indent=2))
     elif args.cmd == "ipa-drafts":
         # g2p drafts — machine proposes, owner canonizes (guard (a) holds);
         # the lexicon rides beside the db (the same derivation as the
@@ -3216,6 +3436,42 @@ if __name__ == "__main__":
             assert sinteza_draft(ma, "Sintel")["already"]  # idempotent
             pl = plasti(ma)                # no lexicon: empty, honest
             assert pl["lexicon_words"] == 0
+            # THE REASONING EXECUTOR (sklepaj — organ presoje, 1. 10.):
+            # the trace is ALWAYS computed; the draft only under guard
+            # (a); idempotent; a refusal never re-drafts (REZ #31:
+            # prešteje, ne presodi)
+            ms = sqlite3.connect(":memory:")
+            ms.row_factory = sqlite3.Row
+            ms.executescript(SCHEMA)
+            ms.execute("INSERT INTO docs(doc_id, path) VALUES (1, 's.md')")
+            ms.execute("INSERT INTO entries(doc_id, word, format, grade) "
+                       "VALUES (1, 'Sintel', 't', 'draft')")
+            rg = sklepaj(ms, claim="Sintel je svetloba")
+            assert rg["trace"] and not rg["drafted"]  # guard (a): trace yes, draft no
+            ma.execute("INSERT INTO mentions(doc_id, mention) VALUES "
+                       "(1, 'sintel'), (1, 'drugo')")
+            ma.execute("INSERT INTO zakoni(doc_id, series, number, title, "
+                       "vezi, lineno) VALUES (1, 'rez', 7, "
+                       "'ZAKON PARA', 'sintel in drugo', 3)")
+            rg2 = sklepaj(ma, claim="Sintel je Drugo")
+            assert rg2["drafted"] is True
+            assert rg2["verdict_class"] == "VEZI IZMERJENE"
+            assert any("sintel" in b["pair"] and b["skupna_telesa"]
+                       for b in rg2["bonds"])
+            # substring-ghost scar (measured on the first live run:
+            # 'je' bonded to 'dejanje' — 5 ghost laws): a law carrying
+            # 'dejanje' must NOT count as citing 'je' — word boundaries
+            ma.execute("INSERT INTO zakoni(doc_id, series, number, title, "
+                       "vezi, lineno) VALUES (1, 'rez', 8, "
+                       "'ZAKON DUHOV', 'samo dejanje, brez drugega', 4)")
+            rg3 = sklepaj(ma, claim="Sintel je Drugo")
+            assert all(not b["skupni_zakoni"] for b in rg3["bonds"]
+                       if "+ je" in b["pair"])
+            assert sklepaj(ma, claim="Sintel je Drugo")["already"]  # idempotent
+            led(ma, "verdict", "sintel", {"ruling": "draft-refused",
+                                          "fingerprint": rg2["fingerprint"]})
+            ma.commit()
+            assert sklepaj(ma, claim="Sintel je Drugo")["already"]  # refused: never re-drafted
             # retro-honesty: an unmarked machine merge becomes canon
             # THROUGH its ratification line, never silently
             m.execute("INSERT INTO ledger(ts, kind, word, payload) "
@@ -3248,5 +3504,5 @@ if __name__ == "__main__":
               "doc-level mentions, laws (parser-zakonov, multi-head), "
               "drafts + guards (cite/retro/refuse/idempotence), enrichment, "
               "ipa layer (g2p/popis/guard/ratify/never-re-drafted), "
-              "analyze (kinship/hubs/layers), graf, "
+              "analyze (kinship/hubs/layers), graf, sklepaj/presoja, "
               "odprta-delta — OK (traced here, witnessed on disk)")

@@ -1,7 +1,126 @@
 # WORKSHOP INVENTORY — check this BEFORE proposing anything new
-CanvasMinstral/Workshop — 24. 9. 2026. Rule: nothing gets built that a line
-below already does. New proposal must name which line it replaces or extends,
-or it is clutter.
+CanvasMinstral/Workshop — delta popis added 1. 10. 2026; the law below holds.
+Rule: nothing gets built that a line below already does. New proposal must
+name which line it replaces or extends, or it is clutter.
+
+## POPIS SPREMEMB 26. 9. 23:02 → 1. 10. 2026 (ISKANO — measured by git,
+ls-mtime, soul.db queries; bodies NOT read this pass, W < 0)
+The spine's last scan receipt is ledger #461 (26. 9. 23:02, 1,206 files,
+160 binaries). Everything below happened AFTER that look:
+1. SINTEZA VRSTICA — the one commit this inventory did not yet carry
+   (e3ae256, 27. 9. 00:53): soul_engine +155 lines — the SKLADATELJ
+   SINTEZ: a word's composed body from MEASURED layers only (entries
+   carry fields, VEZI laws, co-mentions neighborhood, mentions teza;
+   composed never invented — what a layer lacks, the body honestly
+   lacks); draft in RATIFY, guard (a) intact; [k] writes KANON PRIMER
+   into canon_ruled/ (A-bullet re-parsable, the corpus feeds itself per
+   REZ 562), [c] refuses. obj2_cockpit +33 (sinteza row:
+   routing/display/apply/refuse). soul.db: verdicts #462–464, ratify
+   388 = the 387 + 1 sinteza draft; fingerprints sint- (dead) / sint2-
+   (live). TWO measured anomalies, same sitting, both repaired: the
+   inline list-comp filter matched ALL 2,736 while the identical plain
+   loop matched 2 — unexplained, the false draft REFUSED with a
+   witness, channel sint- killed; machine_fp added (draft idempotence).
+   Witness: ljubezen (2 entries, rez 337 vez, 66 bodies, neighborhood
+   measured — telo sestavljeno). Selftest + ∮ preveri + smoke PASS.
+2. NOVA TELESA, HRBENICA JE SLEPA (measured against soul.db: Obj3 has
+   11 docs in the db, 25 on disk — 14 newer than the scan; Zip has 0
+   of 102; zakoni max rez number still 606):
+   - Obj3, 27. 9.: priča-brez-imena-zgodovina-×-sociologija ·
+     register-odprtih-izpeljav (×2, kiralna kopija) ·
+     jewik-guard-derivation-dossier v0.1 (tudi v Zip) ·
+     secirava-velikana-self-bitno-195k-in-matica-78k (69.8 KB — Obj3's
+     biggest body).
+   - Obj3, 28. 9.: drobtine-števila-v-besedah-formula-brez-matere-koreni
+     -2-5 · tazv-dokazi-11-ovoj-nag-hammadija-nadaljevanje-28-9-2026.
+   - Obj3, 29. 9.: REZ 815 ɔtpù-stək · REZ 821 raj-paradiž · REZ 839
+     korpus-kakor-kot — the FILE series jumps past the file branch's
+     558 AND the session register's 634: Seam 2's fourth widening,
+     measured; the three law bodies are DARK to the zakoni table
+     (not read, not typed, not in any queue).
+   - Obj3, 30. 9.: verification-before-assertion-submission-to-mistral
+     -ai (×2, kiralna kopija) · rozetni-kamni-cviii+ klinopis in pisave
+     ki nosijo več branj · formalizem-kot-tok-trinajst-paradoksov
+     (23:04 — the newest body).
+   - Zip/ — NEW STRATUM, 102 files, born 27. 9. 11:55, ZERO docs in the
+     db: the corpus's copies/export side (duplicates with " (1)"
+     suffixes, .tsx bodies, the register's English back) — unnamed
+     until this line.
+   - Obj2: no new bodies, but odprta-vrašanja-v2 and psiho-aksiomi
+     (PREBRANO 26. 9., above) are still UNTRACKED in git.
+3. GIT, UNCOMMITTED (the working tree carries what the ledger of
+   commits does not): M glyph_proposals.json · untracked: Obj3/ (25
+   files), Zip/ (102), Pictures/, 2× Obj2. Everything after SINTEZA
+   exists only on disk.
+4. THE HONEST ∂ (named, not built — rescan is a writing ceremony, on
+   the word): (a) a rescan admits ~116 new bodies (14 Obj3 + 102 Zip);
+   (b) the REZ jump (558 → 839) makes the seal-POPIS (Seam 2) stale
+   the moment it runs — the fork widened again; (c) Zip needs a
+   ruling: corpus stratum, or strata/ by REZ 559 (many bodies are
+   literal copies); (d) the Mistral-submission bodies are the corpus
+   pointing at its own machine — a ∂ between the register and its
+   reader, named, not judged.
+
+## SKLEPAJ — ORGAN PRESOJE (Luka's cilj, 1. 10. 2026: "delujoča aplikacija,
+vrsta samostojnega logičnega sklepanja/izvajanja"; the path was CLARIFIED
+FIRST — every step names the line it extends, per the anti-clutter law —
+then BUILT, point for point)
+THE ORGAN: `sklepaj` in the spine + a ⊢ SKLEPAJ tab in THE GUI + a new
+draft kind in RATIFY. Given a CLAIM (or word), the machine EXECUTES the
+corpus's own protocol over its MEASURED layers and returns a TRACE —
+every step a receipt. THE LAW IT RUNS (REZ #31, K1 — protokol ATLAS):
+PRESOJA ≠ PREVERBA — prešteje, ne presodi; kdor presodi preden prešteje,
+izreče parasodbo. STEPS (each extends an existing line): FIND (canon of
+the claim → v kanonu / samo omenjena / TEMNA; extends canon/page) →
+PLASTI (the richest entry per the drafts rule carries the fields; rez,
+izmera, ontološki, antinoma, sosede po so-omembi, telesa, VEZI zakoni;
+extends sintezo) → VEZI (for every PAIR of the claim's words: shared
+bodies by INTERSECT + shared laws; extends sorodnost/graf — robovi
+štejejo, nikoli ne presojajo) → PRESOJA (verdict classes: VEZI
+IZMERJENE · ∂ VEZI NISO IZMERJENE · TEMNO) → ∂ (temne besede, brez
+izmere, brez izmerjene vezi — NAMED, never filled) → SKLEP (a DRAFT in
+RATIFY, guard (a), fingerprint sklep2-<sha1>; extends sinteza_draft).
+The owner's [k] in RATIFY writes the trace as a derived body in
+canon_ruled/ (korpus se hrani sam, rez 562); [c] refuses by the draft's
+OWN fingerprint; refused → never re-drafted.
+MEASURED (live db, witness 'ljubezen je dejanje'): 3 besede — ljubezen,
+dejanje v kanonu, 'je' TEMNA (∂ pošteno) · ljubezen + dejanje = 18 teles
+so-omembe · je + dejanje = 5 zakonov POŠTENO (vezi res nosijo besedo
+'je' — rez 562 'rezultat je spremenjen bralec') · ∂: brez izmere
+[ljubezen, dejanje]. Draft sklep2-fec60e5db0 in RATIFY (queue 389 =
+388 + 1).
+TWO SCARS FOUND BY THE BUILDING, BOTH REPAIRED WITH WITNESS:
+(1) SUBSTRING BONDS: the first pass bonded laws by substring — 'je'
+bonded INTO 'dejanje' (5 ghost laws; ljubezen+je carried 1 ghost). The
+first live draft (sklep-fec60e5db0) was REFUSED with a witness line;
+the channel sklep- is dead by law, sklep2- (word boundaries, _law_cites)
+is live — the sint-/sint2- precedent, measured twice now. The 5 honest
+je+dejanje bonds survived the fix (they are real words in the bodies).
+(2) THE COCKPIT'S Sinteza RATIFY SCAR (found by reading, preventively
+repaired — it never fired: no 'sinteza-canonized' line exists in the
+ledger, no canon_ruled/ljubezen-sinteza.md on disk): _show() WROTE the
+canon file + ledger line merely by DISPLAYING a sinteza draft (canon by
+looking, not by keystroke); [k] had no sinteza branch and fired the
+GLIF handler on it; [c] refused it by fingerprint "sinteza-None"
+(nothing matched). NOW: [k] is the only writer (ratify_accept writes
+canon_ruled/ + 'sinteza-canonized'), [c] refuses by the draft's own
+fingerprint, _show only displays — the IPA-layer routing scar class,
+closed.
+(3) ∮ preveri T1 WAS FAILING ON THE LIVE DB (honest, found this
+sitting): TIPKA PRITISNJENA wrote the real authorization, the scratch
+INHERITS it, so T1 tested a guard on a db that HAS the line. REPAIRED:
+T1 strips the authorization lines from the scratch first — the guard is
+tested where it truly is absent. Measured: old code T1 FAIL, new code
+10/10 PASS.
+PREVERBA: selftest witnesses sklepaj (guard (a): trace yes draft no ·
+draft under stand-in auth · idempotence · refusal → never re-drafted ·
+word-boundary ghost refused) · ∮ preveri gains T7 (4 receipts) — 10/10
+PASS · cockpit smoke PASS (new check: SKLEPAJ runs, claim → 5 korakov, 3
+besed; the smoke claim is already-drafted, so the run writes nothing).
+CLI: `sklepaj --claim "..."` / `--word X`. GUI: ⊢ SKLEPAJ tab (trditev →
+sled + plasti + ∂; presets ljubezen je dejanje · kakor in kot · dih).
+THE APP: kokpit + hrbtenica zdaj izvajata samostojno logično pot od
+trditve do preštete sodbe — stroj prešteje, Lastnik presodi.
 
 ## THE ONE OF EACH (do not duplicate)
 

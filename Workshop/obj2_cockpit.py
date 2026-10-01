@@ -652,6 +652,19 @@ class ReviewTab(ttk.Frame):
                 out.append({"kind": "sinteza", "word": r["word"],
                             "body_md": p.get("body_md"),
                             "provenance_md": p.get("provenance_md"),
+                            "fingerprint": p.get("fingerprint"),
+                            "rationale": p.get("rationale", "")})
+            elif ruling == "draft-sklepaj":
+                if (w, p.get("fingerprint")) in st["human_fp"] \
+                        or (w, p.get("fingerprint")) in st["refused_fp"]:
+                    continue
+                out.append({"kind": "sklepaj", "word": r["word"],
+                            "claim": p.get("claim"),
+                            "verdict": p.get("verdict"),
+                            "verdict_class": p.get("verdict_class"),
+                            "trace": p.get("trace", []),
+                            "gaps": p.get("gaps", {}),
+                            "fingerprint": p.get("fingerprint"),
                             "rationale": p.get("rationale", "")})
             elif ruling == "draft-ipa":
                 if (w, p.get("fingerprint")) in st["human_fp"] \
@@ -841,30 +854,18 @@ class ReviewTab(ttk.Frame):
         elif d["kind"] == "enrich":
             decision = f"napolni votel rez = {d['rez']!r} (vnos {d['entry_id']})"
         elif d["kind"] == "sinteza":
-            canon_name = SOUL.canon(d["word"]) or "beseda"
-            out_dir = os.path.join(_HERE, os.pardir, "canon_ruled")
-            os.makedirs(out_dir, exist_ok=True)
-            fpath = os.path.join(out_dir, canon_name + "-sinteza.md")
-            NL = chr(10)
-            header = NL.join([
-                "# Sinteza: " + d["word"] + " - kanon primer", "",
-                "> IZVOR: sestavljeno iz izmerjenih plasti (osnutek",
-                "> " + d.get("rationale", "")[:120],
-                "> ZAPESCENO z lastnikovim [k] v RATIFY.",
-                "", ""])
-            with open(fpath, "w", encoding="utf-8") as fh:
-                fh.write(header + d["body_md"] + NL + NL + "---"
-                         + NL + NL + d.get("provenance_md", "") + NL)
-            SOUL.led(self.con, "verdict", d["word"], {
-                "ruling": "sinteza-canonized",
-                "fingerprint": "sint2-" + canon_name,
-                "file": fpath,
-                "note": "ratified sinteza: kanon primer v canon_ruled/ - korpus se hrani sam (rez 562)"})
-            self.con.commit()
+            # scar repair (1. 10., sklepaj sitting): the canon file was
+            # written by the DISPLAY (canon by looking, not by
+            # keystroke) and [k] fell into the glyph handler — now
+            # [k] is the only writer, in ratify_accept, exactly as
+            # the receipt claims
+            decision = ("KANON PRIMER - sestavljena sinteza (vsaka "
+                        "vrstica sledi bazi; [k] zapece v canon_ruled/)")
         elif d["kind"] == "ipa":
             decision = f"izmera IPO = {d['ipa']!r} (vnos {d['entry_id']}) — ⚠ g2p"
-        elif d["kind"] == "sinteza":
-            decision = ("KANON PRIMER - sestavljena sinteza (vsaka vrstica sledi bazi; [k] zapece v canon_ruled/)")
+        elif d["kind"] == "sklepaj":
+            decision = (f"PRESOJA {d.get('verdict_class')}: "
+                        + (d.get("verdict") or "")[:100])
         else:
             decision = f"confirm glyph→{d.get('proposed_operator')}"
         self.tree.insert("", "end", values=(
@@ -1119,6 +1120,57 @@ class ReviewTab(ttk.Frame):
                         "žigom — preverba proti viru je tvoje dejanje "
                         "(ZAKON IPA)"})
             self.con.commit()
+        elif d["kind"] == "sinteza":
+            # scar repair (1. 10., sklepaj sitting): the canon file
+            # was written by the DISPLAY; [k] fell into the glyph
+            # handler — the keystroke is now the only writer
+            # (rez 562: korpus se hrani sam, zapece Lastnikova roka)
+            canon_name = SOUL.canon(d["word"]) or "beseda"
+            out_dir = os.path.join(_HERE, os.pardir, "canon_ruled")
+            os.makedirs(out_dir, exist_ok=True)
+            fpath = os.path.join(out_dir, canon_name + "-sinteza.md")
+            NL = chr(10)
+            header = NL.join([
+                "# Sinteza: " + d["word"] + " - kanon primer", "",
+                "> IZVOR: sestavljeno iz izmerjenih plasti (osnutek",
+                "> " + d.get("rationale", "")[:120],
+                "> ZAPESCENO z lastnikovim [k] v RATIFY.",
+                "", ""])
+            with open(fpath, "w", encoding="utf-8") as fh:
+                fh.write(header + d["body_md"] + NL + NL + "---"
+                         + NL + NL + d.get("provenance_md", "") + NL)
+            SOUL.led(self.con, "verdict", d["word"], {
+                "ruling": "sinteza-canonized",
+                "fingerprint": d.get("fingerprint") or ("sint2-" + canon_name),
+                "file": fpath,
+                "note": "ratified sinteza: kanon primer v canon_ruled/ - korpus se hrani sam (rez 562)"})
+            self.con.commit()
+        elif d["kind"] == "sklepaj":
+            # [k] on a PRESOJA: the counted trace becomes a derived
+            # body in canon_ruled/ (the corpus feeding itself, rez
+            # 562) — the canon act is the keystroke, never display
+            canon_name = SOUL.canon(d["word"]) or "sklep"
+            out_dir = os.path.join(_HERE, os.pardir, "canon_ruled")
+            os.makedirs(out_dir, exist_ok=True)
+            fpath = os.path.join(out_dir, canon_name + "-sklep.md")
+            NL = chr(10)
+            lines = ["# Sklep: " + (d.get("claim") or d["word"]), "",
+                     "> IZVOR: PRESOJA po izmerjenih plasteh (organ",
+                     "> sklepaj; REZ #31: presteje, ne presodi).",
+                     "> ZAPESCENO z lastnikovim [k] v RATIFY.", ""]
+            for s in d.get("trace") or []:
+                lines.append(f"- **{s['step']}:** {s['meritev']}")
+            lines += ["", "---", "",
+                      "SODBA (presteta): " + (d.get("verdict") or ""), "",
+                      "∂: " + json.dumps(d.get("gaps") or {}, ensure_ascii=False), ""]
+            with open(fpath, "w", encoding="utf-8") as fh:
+                fh.write(NL.join(lines) + NL)
+            SOUL.led(self.con, "verdict", d["word"], {
+                "ruling": "sklep-canonized",
+                "fingerprint": d.get("fingerprint"),
+                "file": fpath,
+                "note": "ratified presoja: sled presteta, zapecena z [k]"})
+            self.con.commit()
         else:
             self._rule_glyph("confirm", word=d["word"])
         self._k_streak += 1
@@ -1138,13 +1190,22 @@ class ReviewTab(ttk.Frame):
         elif d["kind"] == "conflict":
             SOUL.led(self.con, "verdict", d["word"], {
                 "ruling": "draft-refused", "conflict": d["word"]})
-        elif d["kind"] in ("enrich", "ipa", "sinteza"):
+        elif d["kind"] in ("enrich", "ipa"):
             # the same refusal channel as merges: the fingerprint is the
             # thing the replay never re-drafts (scar: these kinds used to
             # fall into the glyph branch and rewrite the glyph payload)
             SOUL.led(self.con, "verdict", d["word"], {
                 "ruling": "draft-refused",
                 "fingerprint": f"{d['kind']}-{d['entry_id']}"})
+        elif d["kind"] in ("sinteza", "sklepaj"):
+            # scar repair (1. 10.): these drafts carry no entry_id —
+            # the old channel refused them by fingerprint
+            # "sinteza-None", which never matched the draft; the
+            # draft's OWN fingerprint is what the replay must never
+            # re-draft
+            SOUL.led(self.con, "verdict", d["word"], {
+                "ruling": "draft-refused",
+                "fingerprint": d.get("fingerprint")})
         else:
             data = self._glyph_all()
             data[d["word"]]["verdict"] = "confirm/reject"
@@ -1654,6 +1715,101 @@ class ParkTab(ttk.Frame):
 
 
 # =============================================================================
+# SKLEPAJ TAB — the reasoning executor: a claim in, a counted trace out
+# =============================================================================
+
+class SklepajTab(ttk.Frame):
+    """The PRESOJA surface (organ sklepaj, REZ #31: prešteje, ne presodi —
+    kdor presodi preden prešteje, izreče parasodbo): pose a claim, the
+    machine executes the corpus's protocol over its measured layers and
+    shows the TRACE — every step a receipt. The DRAFT lands in RATIFY;
+    the canon acts ([k]/[c]) happen THERE, never here."""
+
+    def __init__(self, parent):
+        super().__init__(parent, padding=8)
+        self.columnconfigure(0, weight=1)
+        if SOUL is None:
+            ttk.Label(self, text=f"cannot load the spine (soul_engine): "
+                                f"{_SOUL_LOAD_ERROR}").grid(row=0, column=0)
+            return
+        self.con = SOUL.db()
+
+        top = ttk.Frame(self)
+        top.grid(row=0, column=0, sticky="ew")
+        ttk.Label(top, text="trditev:").pack(side="left")
+        self.claim_var = tk.StringVar()
+        ttk.Entry(top, textvariable=self.claim_var, width=52).pack(
+            side="left", padx=4)
+        ttk.Button(top, text="SKLEPAJ", command=self.run).pack(side="left")
+        ttk.Label(top, text="  predloge:").pack(side="left")
+        for label, claim in (
+                ("ljubezen je dejanje", "ljubezen je dejanje"),
+                ("kakor in kot", "kakor in kot sta dve telesi z eno mero"),
+                ("dih", "dih")):
+            ttk.Button(top, text=label,
+                       command=lambda c=claim: self.preset(c)).pack(
+                           side="left", padx=1)
+
+        self.verdict_var = tk.StringVar(
+            value="— napiši trditev; stroj prešteje, ne presodi (REZ #31) —")
+        ttk.Label(self, textvariable=self.verdict_var,
+                  font=("TkDefaultFont", 11, "bold")).grid(
+                      row=1, column=0, sticky="w", pady=4)
+
+        cols = ("step", "meritev")
+        self.tree = ttk.Treeview(self, columns=cols, show="headings",
+                                 height=6)
+        self.tree.heading("step", text="korak")
+        self.tree.column("step", width=150, anchor="w")
+        self.tree.heading("meritev", text="meritev (priča)")
+        self.tree.column("meritev", width=850, anchor="w")
+        self.tree.grid(row=2, column=0, sticky="ew", pady=4)
+
+        wcols = ("beseda", "stanje", "vnosi", "keeper", "rez", "izmera",
+                 "telesa", "vezi", "sosede")
+        self.wtree = ttk.Treeview(self, columns=wcols, show="headings",
+                                  height=6)
+        for c, w in zip(wcols, (110, 150, 60, 130, 140, 110, 60, 140, 170)):
+            self.wtree.heading(c, text=c)
+            self.wtree.column(c, width=w, anchor="w")
+        self.wtree.grid(row=3, column=0, sticky="ew", pady=4)
+
+        self.delta_var = tk.StringVar(value="∂: —")
+        ttk.Label(self, textvariable=self.delta_var,
+                  foreground="#a80").grid(row=4, column=0, sticky="w")
+
+    def preset(self, claim):
+        self.claim_var.set(claim)
+        self.run()
+
+    def run(self):
+        claim = self.claim_var.get().strip()
+        if not claim:
+            return
+        r = SOUL.sklepaj(self.con, claim=claim)
+        if "error" in r:
+            self.verdict_var.set(f"ERROR: {r['error']}")
+            return
+        for t in (self.tree, self.wtree):
+            t.delete(*t.get_children())
+        for s in r["trace"]:
+            self.tree.insert("", "end", values=(s["step"], s["meritev"]))
+        for wd in r["words"]:
+            self.wtree.insert("", "end", values=(
+                wd["word"], wd["status"], wd.get("entries", ""),
+                wd.get("keeper", ""),
+                "; ".join(wd.get("rez", [])) or "—",
+                "; ".join(wd.get("izmera", [])) or "—",
+                wd.get("telesa_omemb", ""),
+                "; ".join(wd.get("vezi_zakoni", [])) or "—",
+                "; ".join(wd.get("sosede", [])) or "—"))
+        gaps = r.get("∂", {})
+        self.delta_var.set("∂: " + json.dumps(gaps, ensure_ascii=False))
+        note = r.get("note") or r.get("already") or ""
+        self.verdict_var.set(
+            f"{r['verdict_class']} — {r['verdict'][:150]}  |  {note}")
+
+
 # MAIN
 # =============================================================================
 
@@ -1668,6 +1824,8 @@ class Cockpit(tk.Tk):
         nb.add(CanvasTab(nb), text="⟡ CANVAS")
         nb.add(ReceiptsTab(nb), text="⊢ RECEIPTS")
         nb.add(PerformTab(nb), text="∂ PERFORM")
+        self.sklepaj = SklepajTab(nb)
+        nb.add(self.sklepaj, text="⊢ SKLEPAJ")
         nb.add(self.review, text="⊘ REVIEW")
         self.library = LibraryTab(nb)
         nb.add(self.library, text="∮ LIBRARY")
@@ -1733,6 +1891,21 @@ def _smoke_test():
         ok.append((f"library page derives by the spine "
                    f"(page for '{w0[:24]}': {len(p0['entries'])} entries)",
                    len(p0["entries"]) > 0))
+    # SKLEPAJ (1. 10.): the reasoning executor's surface — a claim in,
+    # a counted trace out. The smoke claim is ALREADY drafted on the
+    # live db (witnessed 1. 10.), so the run exercises the idempotent
+    # path and writes nothing.
+    sk = getattr(app, "sklepaj", None)
+    if sk is not None and hasattr(sk, "con"):
+        sk.claim_var.set("ljubezen je dejanje")
+        sk.run()
+        ok.append((f"SKLEPAJ runs (claim -> trace: "
+                   f"{len(sk.tree.get_children())} korakov, "
+                   f"{len(sk.wtree.get_children())} besed)",
+                   len(sk.tree.get_children()) > 0 and
+                   len(sk.wtree.get_children()) > 0))
+    else:
+        ok.append(("SKLEPAJ constructs (spine + db)", False))
     app.destroy()
     all_ok = all(c for _n, c in ok)
     for name, cond in ok:
