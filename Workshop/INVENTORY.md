@@ -122,6 +122,44 @@ sled + plasti + ∂; presets ljubezen je dejanje · kakor in kot · dih).
 THE APP: kokpit + hrbtenica zdaj izvajata samostojno logično pot od
 trditve do preštete sodbe — stroj prešteje, Lastnik presodi.
 
+## Daj — RESCAN IZVEDEN (Luka's "daj", 1. 10. 2026 — the reading ceremony
+over the ~116 unscanned bodies named in the POPIS SPREMEMB ∂ above; the
+parser is a READER, never a writer — file fates stay the owner's)
+MEASURED: scan 1,206 → 1,313 files · 107 new docs admitted (Obj3 +14 —
+all 25 now in; Zip +94 of 102 on disk — the 7 .tsx bodies are outside
+the scan's formats, honestly skipped; +1 binary registered, 161 total)
+· 238 new entries at admission · backup witnessed (soul.db.bak).
+LAWS (the spine's biggest single widening): zakoni 308 → 382 — rez
+259 → 280 · ubod 19 → 41 · zakon 10 → 40 · dokaz 14 · šiv 6 · sodba 1.
+REZ 815 ƆTPÙ:STƏK · REZ 821 RAJ: PARADIŽ NI ZASLUŽEN, JE IZMERBA DANA
+· REZ 839 KORPUS-KAKOR — read for the FIRST time (the admission
+law-pass; reparse's later pass honestly 0 — idempotent). MAX REZ = 839:
+Seam 2's FILE branch measured at 839, the fourth widening now sealed
+by data, not by guess.
+POPIS: sealed 96 · unsealed 286 · same-number pairs 31 → 58 (+27 —
+the Zip copies of numbered law bodies: chiral by witness, each body
+kept, the number a label).
+ZIP, RULED BY MEASUREMENT (the ruling the popis asked for): 92 of 94
+Zip docs are BYTE-IDENTICAL copies of bodies outside Zip (+1 pair
+within) — per REZ 559 (kopirno pravilo) they ARE copies: every keeper
+is the same body. The spine read them anyway (a copy still carries its
+words into the mention graph); moving or deleting the files stays the
+owner's hand — the spine's truth is unaffected either way. The copies'
+entries dedup by fingerprint: only 8 pending proposals survived the
+widening, all DRAFTED (8 merge + 1 enrich).
+SKLEPAJ RE-WITNESSED AFTER THE WIDENING (idempotent, no second draft):
+ljubezen + dejanje 18 → 19 teles so-omembe — the corpus's own growth
+measured inside the bond; ∂ unchanged, honest.
+COMPOSED FACTS: stability 2,537 words · 1,740 stable · 0 pending
+proposal words · 54 open-awaiting-drafts · dark 705 (honest prose +
+notes; mentions re-derived 220,475) · RATIFY queue 398 receipts, ALL
+DRAFT, none canon.
+PREVERBA: selftest PASS · ∮ preveri 10/10 · cockpit smoke PASS.
+REMAINING THE OWNER'S (the guards keep them his): [k]/[c] over the 398
+RATIFY receipts · the Zip files' fate on disk (keep as stratum, or
+strata/ — copies by REZ 559) · the Obs1–Obs10 export (97 citing docs
+still point outside the spine's reach — the biggest missing stratum).
+
 ## THE ONE OF EACH (do not duplicate)
 
 | job | the ONE file | status |
