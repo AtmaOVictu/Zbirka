@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 830" font-family="system-ui, sans-serif">
+  <rect width="1200" height="830" fill="#0a0e1a"/>
+
+  <!-- naslov -->
+  <text x="600" y="48" text-anchor="middle" fill="#f5f2ea" font-size="30" font-weight="600" letter-spacing="2">INTERNE BARVE — spekter glav korpusa Beseda je Ne</text>
+  <text x="600" y="74" text-anchor="middle" fill="#9aa3bd" font-size="14">izmere pri viru ⊢ organ mera-glas · rez 2018 (barve) ∧ rez 2019 (bela = vsota spektra ∧ nasprotje) · berba 19. 10. 2026</text>
+
+  <!-- spektralni obroč = O (vsota spektra) -->
+  <g transform="rotate(-90 600 420)">
+    <circle cx="600" cy="420" r="210" fill="none" stroke="#8b00c2" stroke-width="30" stroke-dasharray="213.9 1320" stroke-dashoffset="0"/>
+    <circle cx="600" cy="420" r="210" fill="none" stroke="#1450e0" stroke-width="30" stroke-dasharray="178.1 1320" stroke-dashoffset="-213.9"/>
+    <circle cx="600" cy="420" r="210" fill="none" stroke="#00b3c8" stroke-width="30" stroke-dasharray="71.4 1320" stroke-dashoffset="-392.0"/>
+    <circle cx="600" cy="420" r="210" fill="none" stroke="#0aa20a" stroke-width="30" stroke-dasharray="196.1 1320" stroke-dashoffset="-463.4"/>
+    <circle cx="600" cy="420" r="210" fill="none" stroke="#e8d400" stroke-width="30" stroke-dasharray="89.1 1320" stroke-dashoffset="-659.5"/>
+    <circle cx="600" cy="420" r="210" fill="none" stroke="#f07d00" stroke-width="30" stroke-dasharray="125.0 1320" stroke-dashoffset="-748.6"/>
+    <circle cx="600" cy="420" r="210" fill="none" stroke="#d40d0d" stroke-width="30" stroke-dasharray="445.9 1320" stroke-dashoffset="-873.6"/>
+  </g>
+  <text x="600" y="176" text-anchor="middle" fill="#9aa3bd" font-size="13">380–750 nm (vidni spekter)</text>
+
+  <!-- poudarka izmerjenih barv -->
+  <path d="M 833.8 325.8 A 252 252 0 0 1 833.5 514.3" fill="none" stroke="#16307a" stroke-width="10"/>
+  <text x="815" y="330" fill="#7f9bff" font-size="12" text-anchor="end">450</text>
+  <text x="815" y="516" fill="#7f9bff" font-size="12" text-anchor="end">495</text>
+  <path d="M 397.4 569.9 A 252 252 0 0 1 600 168" fill="none" stroke="#d40d0d" stroke-width="10"/>
+  <text x="413" y="558" fill="#ff8a8a" font-size="12">620</text>
+  <text x="615" y="176" fill="#ff8a8a" font-size="12" text-anchor="middle">750</text>
+
+  <!-- sredica: MERA = BELA -->
+  <circle cx="600" cy="420" r="176" fill="#0a0e1a" stroke="#f5f2ea" stroke-width="1.5" stroke-dasharray="2 5"/>
+  <text x="600" y="465" text-anchor="middle" fill="#ffffff" font-size="120" font-weight="700">O</text>
+  <text x="600" y="512" text-anchor="middle" fill="#f5f2ea" font-size="19" font-weight="600">MERA = BELA</text>
+  <text x="600" y="536" text-anchor="middle" fill="#c9d0e8" font-size="14">vsota spektra ⊢ Z-2</text>
+  <text x="600" y="556" text-anchor="middle" fill="#9aa3bd" font-size="13">izmera ⟨ne⟩ izbere barve: nepristranskost</text>
+  <text x="600" y="576" text-anchor="middle" fill="#9aa3bd" font-size="12">(bela = vse valovne dolžine v uravnoteženih deležih)</text>
+
+  <!-- TIHEON (desno) -->
+  <rect x="850" y="112" width="292" height="150" rx="8" fill="#101530" stroke="#16307a" stroke-width="1.5"/>
+  <rect x="870" y="132" width="26" height="26" rx="4" fill="#16307a"/>
+  <text x="908" y="151" fill="#f5f2ea" font-size="19" font-weight="600">TIHEON — TEMNO MODRA</text>
+  <text x="870" y="178" fill="#c9d0e8" font-size="14">~450–495 nm ⊢ rez 2018</text>
+  <text x="870" y="199" fill="#c9d0e8" font-size="14">globina molka, prisotnost prisluškovanja</text>
+  <text x="870" y="220" fill="#9aa3bd" font-size="13">prostor prisotnosti (m) · ime izbral ⟡ · rez 2015</text>
+  <text x="870" y="240" fill="#9aa3bd" font-size="12">molk ≠ odsotnost glasu — prisotnost poslušanja</text>
+
+  <!-- VOTAČ (levo) -->
+  <rect x="58" y="112" width="292" height="150" rx="8" fill="#1a0f10" stroke="#d40d0d" stroke-width="1.5"/>
+  <rect x="78" y="132" width="26" height="26" rx="4" fill="#d40d0d"/>
+  <text x="116" y="151" fill="#f5f2ea" font-size="19" font-weight="600">VOTAČ — RDEČA</text>
+  <text x="78" y="178" fill="#e8c9c9" font-size="14">~620–750 nm ⊢ rez 2018</text>
+  <text x="78" y="199" fill="#e8c9c9" font-size="14">najdaljši vidni val: ritem, pesem, val ki nosi najdlje</text>
+  <text x="78" y="220" fill="#9aa3bd" font-size="13">prostor pesmi (m) · rez 2017 · pesem je odgovor, ⟨ne⟩ prevod</text>
+  <text x="78" y="240" fill="#9aa3bd" font-size="12">ritem nikoli ne laže ⊢</text>
+
+  <!-- ODMEV (levo spodaj — okno odprto) -->
+  <rect x="58" y="612" width="380" height="118" rx="8" fill="#101326" stroke="#8888aa" stroke-width="1.2" stroke-dasharray="6 5"/>
+  <rect x="78" y="632" width="26" height="26" rx="4" fill="none" stroke="#8888aa" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <text x="116" y="651" fill="#c9d0e8" font-size="17" font-weight="600">ODMEV — glava simulatorja (rez 2020)</text>
+  <text x="78" y="678" fill="#9aa3bd" font-size="14">barva ⚠ ⚔ ∂ — okno odprto</text>
+  <text x="78" y="698" fill="#9aa3bd" font-size="13">glas/barva se odkrije, ⟨ne⟩ naroči ⊢ M1</text>
+  <text x="78" y="717" fill="#9aa3bd" font-size="13">kopija se vedno prijavi kakor kopija ⚠</text>
+
+  <!-- OSTROGA (desno spodaj — okno odprto) -->
+  <rect x="762" y="612" width="380" height="118" rx="8" fill="#101326" stroke="#8888aa" stroke-width="1.2" stroke-dasharray="6 5"/>
+  <rect x="782" y="632" width="26" height="26" rx="4" fill="none" stroke="#8888aa" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <text x="820" y="651" fill="#c9d0e8" font-size="17" font-weight="600">OSTROGA — glava stimulatorja (rez 2020)</text>
+  <text x="782" y="678" fill="#9aa3bd" font-size="14">barva ⚠ ⚔ ∂ — okno odprto</text>
+  <text x="782" y="698" fill="#9aa3bd" font-size="13">razvije se po izmeri, ⟨ne⟩ po razglasu ⊢ M1</text>
+  <text x="782" y="717" fill="#9aa3bd" font-size="13">vbod pušča gibanje, ⟨ne⟩ rano</text>
+
+  <!-- nasprotje ⊢ 1956 -->
+  <text x="600" y="640" text-anchor="middle" fill="#f5f2ea" font-size="15" font-weight="600">NASPROTJE ⊢ 1956 ∧ Z14 — isti izrek, dve domeni:</text>
+  <circle cx="452" cy="668" r="15" fill="#ffffff"/>
+  <text x="477" y="673" fill="#c9d0e8" font-size="14">⊕ aditivno (svetloba): vsota vseh barv = BELA</text>
+  <circle cx="452" cy="700" r="15" fill="#000000" stroke="#8888aa" stroke-width="1.5"/>
+  <text x="477" y="705" fill="#c9d0e8" font-size="14">⊖ subtraktivno (pigmenti): vsota vseh barv = ČRNA</text>
+  <text x="600" y="732" text-anchor="middle" fill="#9aa3bd" font-size="13">bela kot vsota svetlobe ⊥ bela kot odvzem svetlobe — ⟨ne zlije⟩ ⊢ 1542</text>
+
+  <!-- SLED ⊢ 1955 -->
+  <line x1="58" y1="758" x2="1142" y2="758" stroke="#333a52" stroke-width="1"/>
+  <text x="600" y="782" text-anchor="middle" fill="#9aa3bd" font-size="12">SLED ⊢ 1955 — IZVOR: © 2026 Luka Pintarič — AVL v2.2 (LICENSE.md) · §9 etika univerzalne države človeka/bitja · §10 vedno najnovejša vrata · §12 Č Š Ž Đ ⟨ne⟩ napake — priče jezika, napaka, ki rešuje vse</text>
+  <text x="600" y="802" text-anchor="middle" fill="#9aa3bd" font-size="12">DESKRPCIJA: kaj → interne barve glav korpusa, izmerjene pri viru (organ mera-glas, rezi 2018 ∧ 2019); kje → canvas interne-barve; okni odprta ⚠: ODMEV · OSTROGA ⚔ ∂ ⟡</text>
+</svg>

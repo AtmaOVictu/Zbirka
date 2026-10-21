@@ -1,0 +1,39 @@
+# 84 · SEKUNDA — rez, ki sledi
+
+**EMOTIO.** P-8 avtonomni rez po ukazu DAJ; S-1: zadnja zapečatil 83 → 84. OPEN LOOP 83 (*Utrum pars secunda differt ā prīmā — an ūnum ācutum bis secātur?* — ali se drugi rez razlikuje od prvega, ali se isti rez reže dvakrat?) odgovorjena z etimološkim obratom, ki ga hrani latinski jezik: **DRUGI REZ NI PONOVLJEN PRVI — JE REZ, KI SLEDI: secundus < sequī »SLEDITI« ⊢ De Vaan — sekunda ni »druga« po številu, ampak »tista, ki sledi« po dejanju. Pars minūta secunda = »drugi majhen del« ⊢ ⊢ — a secundus pomeni tudi »ugoden, naklonjen« ⊢ (sekundāre = pomagati, podpreti ⊢): drugi rez je tisti, ki podpira prvega; sekundant je prišel z besedo, ki pomeni NAKLONJENOST. Rezanje ni sekanje: vsak rez sledi prejšnjemu kot sekundant v dvoboju ⊢ — prvi izreče, drugi podpre. Zato: ūnum ācutum bis nōn secātur — secunda pars prīmam sequitur: isti rez se ne reže dvakrat; drugi rez sledi prvemu in ga podpira.**
+
+**REZ (etimologija).** LATINSKO TELO: **secunda < secunda pars minūta = »drugi zmanjšani del« ⊢ — rezultat DRUGE delitve ure s šestdeset ⊢ (prvi = prima, danes minutnica); secundus < sequī »slediti« ⊢ De Vaan (555–6) — rodovnik: sequēns (naslednji), sequela, sekundant.** Late 14c: prvi zapis v geometriji in astronomiji ⊢. **NAJDEBELEJŠI REZ ×2: (1) SECOND KAKO GLAGOL — »to second« = podpreti, zastopati (v dvoboju, boksu ⊢); parlamentarna raba 1590s: formalno izraziti podporo predlogu kot NUJNO PREDHODNICO nadaljnje razprave ⊢ — parlament je zapečkil izmero sekunde: predlog brez sekunde ne pride do razprave — DRUGI JE VRATA PRVEGA; (2) ROGER BACON 1267: horae, minuta, secunda, tertia, quarta ⊢ — pet rezev ure, zapisanih v času med polnimi meseci; Bacon je rezel do ČETRTGA (quarta) — rezalna veriga je bila daljša, kot je danes telo: ura → minuta → sekunda je ostanek petdelne verige.** SLOVENSKO TELO: sekúnda ⊢ Fran = 1. šestdeseti del minute; 2. **glasb. interval dveh diatoničnih stopenj — mala sekunda obsega pol tona, velika cel ton ⊢; tudi »druga diatonična stopnja glede na dani ton« ⊢** — sekunda je tudi glasbeni interval; 81 vez zaprta v zrcalu: disonanca je najmanjša sekunda (mala sekunda = pol tona — najostrejša disonanca ⊢).
+
+**FABULA (atomski rez).** 1967: sekunda preneha biti nebesna — **definirana s cezijem-133: 9.192.631.770 nihajev ⊢ — neizprosna točnost: sekunda ni več del Zemljinega obrata, je število nihajev atoma**; napaka 1 nanosekunde = 30 cm napake pri GPS ⊢ — sekunda, ki se je preselila v žep vsakega telefona. **A Zemlja ne sledi atomu: prestopna sekunda (leap second) — ko se vrtenje in atomski čas razideta za 0,5 s, metrologi dodajo sekundo ⊢ ⊢ — ZEMLJA JE SEKUNDA, KI NE SLEDI: edina enota, ki ji človek dodaja rez, da bi sledila nebu; atomski čas je čist, nebesni je raztresen — prestopna sekunda je pridelek raztresenosti.** Cezijeva ura: atomi ohlajeni blizu absolutne ničle ⊢ — sekunda se danes meri v mrazu, ki ga ni nikoli občutila Zemlja.
+
+**CONFLICTUS.** SEKUNDA KOT SLEDENJE (sequī — drugi rez sledi, sekundant podpre, parlamentarna podpora ⊢) ↔ SEKUNDA KOT NESPREMENLJIVOST (cezijev nihaj — 9.192.631.770, atom, ki ne sledi nikomur ⊢).
+- *Logika prve:* sekunda je odnos: brez prvega reza ni drugega; sekundant dvoboja izreče z najmanjšo besedo »sledim« ⊢.
+- *Logika druge:* sekunda je absolut: nihaj, ki se ne ozira na nebeša; od 1967 čisto število ⊢.
+- *Patologija prve:* kult sosledja — vsak rez čaka na sekundo: predlog, ki ne dobi podpore, nikoli ne pride do razprave ⊢ — a kdor preveč čaka sekundanta, nikoli ne dvobojuje.
+- *Patologija druge:* kult atoma — sekunda brez neba: čista, a Zemlja zaostaja ⊢; prestopna sekunda je priznanje, da absolut ne nosi vremena (82 vez: ura je bila vreme).
+- *∴ sinteza:* **sekunda je TEN: ∫ (sledenje — sequī, veriga rezov, Baconova petdelna veriga ⊢, sekundant, parlament ⊢) + ∆ (nihaj — cezijeva izmera, ki je verigo zaprla v število ⊢). Odgovor OPEN LOOP 83: secunda nōn est prīma iterāta — est quae prīmam sequitur et sustinet: drugi rez ne ponovi prvega, ga SLEDI in podpre; in najdebelejši obrat: 1967 je sekunda prenehala slediti nebu in začela slediti atomu — a človek še vedno dodaja prestopne sekunde: sledenje je ostalo, naslovnik se je zamenjal. BJS samoreferenca: vsak rez korpusa potrebuje sekundo — bralca, ki reza ne prebere sam, ampak ga podpre z branjem; korpus raste z sekundiranjem, ne s ponavljanjem.**
+
+**MERILO NA PRAKSO.** Izmera iz vsakdana ⊢ Fran: »meriti čas na sekundo natančno«; »desetinka sekunde je odločala o prvem mestu« — tekmovalna sekunda: desetinka je nov rez, ki ga je šport dodal pod sekundo (rez reza — 83 vez). Glasbena izmera ⊢: mala sekunda (pol tona) je najostrejša disonanca — kdor sliši malo sekundo, sliši zahtevo po razrešitvi (81 vez); velika sekunda je korak lestvice. Parlamentarna izmera ⊢: »sekundirati predlog« — podpreti kot predhodnica razprave: drugi glas odpira vrata.
+
+**SENTENTIAE.**
+1. Sekunda ne ponovi prvega reza — ga sledi in podpre: secundus < sequī, »tisti, ki sledi«.
+2. Predlog brez sekunde ne pride do razprave — drugi je vrata prvega (parlament ⊢).
+3. Od 1967 sekunda sledi atomu, ne nebu — a človek še vedno dodaja prestopne sekunde: sledenje je ostalo, naslovnik se je zamenjal.
+
+**EXERCITIATIONES.**
+1. Sekundant-test: eno svojo misel izreci in poišči sekundanta — osebo, ki jo podpre, ne ponovi ⊢; izreci: drugi glas je vrata prvega; brez sekunde ni dvoboja.
+2. Mala-sekunda: eno disonanco (nesoglasje, 81 vez) pusti zveneti najmanj dva tona ⊢ — ne razreši je takoj; izreci: mala sekunda terja razrešitev — in pokliči razrešitev kot dejanje, ne molk.
+3. Prestopna-sekunda: eno uro dneva namerno »dodaj« — petnajst minut, ki jih nihče ni terjal ⊢; izreci ob koncu: Zemlja zaostaja, jaz dodajam rez; sledenje je dejanje, ne avtomat.
+4. Baconova veriga: eno nalogo razdeli do QUARTE ⊢ (ura → minuta → sekunda → tercja → kvarta): izreci, kje veriga umre v tvoji izmeri; današnje telo nosi tri od petih rezev.
+
+**VIRI.**
+- Etymonline, second (secunda pars minuta »second diminished part« — druga delitev ure; second (v.) < secundare »assist« — dvoboj, gverilni; parlamentarna raba 1590s) — search-result://lP1RPt5P ⊢
+- Wiktionary, secundus (< sequī; De Vaan 555–6 »sequor«) — search-result://nZuTVP9N ⊢
+- Steemit/Vécelier, History of the Second (Roger Bacon 1267: horae, minuta, secunda, tertia, quarta — petdelna rezalna veriga) — search-result://K0tYnaAl ⊢
+- Goong, Secundus (secundus < sequi »to follow«; »favorable, advantageous«) — search-result://elRmTd8D ⊢
+- Fran, sekunda (šestdeseti del minute; glasb. interval dveh diatoničnih stopenj — mala sekunda pol tona, velika cel ton; druga stopnja) — search-result://lyeZsa1Z ⊢
+- Wikipedia, Interval (glasba) (manjše število v razmerju = bolj konsonanten; sekunda med malimi/velikimi intervali) — search-result://mA9h4Dun ⊢
+- Wikipedia, Atomic clock (SI 1967: cezij-133, 9.192.631.770 Hz; TAI/UTC; 1 ns = 30 cm GPS) — search-result://ZJlIuaqz ⊢
+- Wikipedia / EarthDate, Leap second (UTC prestopna sekunda; 1967 prehod na atomski čas; 0,5 s prag) — search-result://oQLOMfd3, ShGgSXkr ⊢
+
+**FINIS TEST.** Ali rez zaključuje obroč ure 82–84? DA — 82 izmeril rez med nebom in številom, 83 strukturo reza (ordinal), 84 pa dejanje med rezi: SLEDENJE — secunda < sequī ⊢; rezalna veriga je odnos, ne sekalnica. Ali odpira naslednjega? Da — MILJA (nautična — minuta, ki je postala razdalja ⊢ 83 vez; voz 61 vez bi spoznal svojo najmanjšo pot: eno minuto širine) in SLEDENJE (sequī v čisti obliki — sledenje kot namen: ali je sledenje podrejanje ali edina pot zaporedja). NEXT: kandidat 85 MILJA (nautična — voz po minuti zemlje) ali 85 SLEDENJE (sequī — rodovnik sekunde v čisti obliki) ali po Lukovi volji.

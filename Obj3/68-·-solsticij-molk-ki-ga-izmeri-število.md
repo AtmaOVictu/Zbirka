@@ -1,0 +1,42 @@
+# 68 · SOLSTICIJ — molk, ki ga izmeri število
+
+**EMOTIO.** P-8 avtonomni rez po ukazu DAJ; S-1: zadnja zapečena 67 → 67+1 = 68. OPEN LOOP 67 (*Utrum sōl tacet in solstitiō?* — ali nebesno telo pozna molk?) odgovorjena z izmero: **da — sončev molk je resničen, a ga oko ne sliši: v dnevih okoli solsticija se deklinacija premakne za manj kot 30 ločnih sekund na dan — 1/60 navideznega premera sonca. Sonce molči v številu, ne na obzorju: gnomon in astrolab tega molka ne slišita ⊢.**
+
+**REZ (etimologija).** LATINSKO TELO: **solstitium = sol (sonce < *sawel-) + -stitium (iz sistere »stati, obstati, postaviti« < reduplicirana oblika korena *sta- »stati«)** — »točka, kjer se soncu zdi, da stoji« ⊢ Etymonline. Plinij uporablja solstitium v Naturalis historia z istim pomenom, ki ga ima danes; beseda v rabi od pozne republike, 1. stol. pr. n. št. ⊢ Wikipedia/New World Encyclopedia. **VARRO, De lingua Latina 6.8 — najstarejši zapis zanke:** *Dicta bruma, quod brevissimus tunc dies est; solstitium, quod sol eo die sistere videbatur, quo ad nos versum proximus est* — »bruma je poimenovana, ker je takrat dan najkrajši; solstitium, ker se sonce tisti dan VIDEL OSTATI« ⊢ Roger-Pearse. **NAJDEBELEJŠI REZ: videbatur — »zdelo se je«. Varro je v sami zibeli besede zapečil epistemološki popravek: solsticij ni dogodek, je VIDLJIVOST na meji. Rim ni rekel »sonce stoji«; rekel je »soncu se je zdelo, da stoji« — dva tisočletji pred sekstantom.** RODOVNIK DVEH BESED: latinsko je imelo DVA solsticija, vsak svoje ime — solstitium za poletni, **bruma** za zimski (< brevissimus »najkrajši«, dan krajšine; Plinij NH 18.221: bruma pričenja 25. decembra ⊢); aequinoctium je bil dan, ko sonce pride na sredo med njima ⊢ Oxford Latinitas. Sistem treh: krajšina (bruma), sredina (aequinoctium), molk (solstitium) — rimski koledar kot trije rezovi na istem obroču. Slovensko **sončev obrat**: jezik, ki ni izrekel stojanja, je izrekel OBRAT — slovenščina je zapečila gib, latinščina molk; eno nebo, dve izmeri (66: dve družini, ena izkušnja).
+
+**FABULA (drugo telo — kdo je molk slišal prej kot Rim).** Neolitik je poznal solstično os še pred besedo: Newgrange — zimski solsticij zjutraj prodre skozi hodnik do komore ⊢; Stonehenge — os proti sončnemu vzhodu poleti in zahodu zimi; rastoči dokazi, da so prazgodovinski ljudje prihajali predvsem ob ZIMSKEM solsticiju (Pearson: razumno je predpostaviti, da so slavili oba) ⊢. **In najgloblja izmera: nagib zemljine osi ni bil vedno 23,5° — nihá med 24,2° in 22,5° v ciklu ~41.000 let; ko so gradili Stonehenge (pred ~4.500 leti), je bil ~24° ⊢. Solstična os spominika ni več točna: sonce ob 21. juniju NE vzhaja več tam, kjer je vzhajalo ob postavitvi kamnov — molk se je izmaknil za pol stopinje. Solsticij ni arhitektura, je pogajanje med osjo in stoletji.** Tretje telo — ZIMSKI OBRAT: solsticij kot smrt in ponovno rojstvo sonca, živina zaklana, da je treba zimo preživeti z mesom in praznikom ⊢ — najstarejši izmerjeni koledar človeka je bil koledar LAKOTE (67: lakota je premaknila nones; tu je lakota naredila praznik).
+
+**CONFLICTUS.** SONCE MOLČI (deklinacija stoji; ~5 dni ga inštrument ne zve ⊢) ↔ OBZORJE NE MOLČI (sonce še vedno vzhaja in zahaja; vsak dan ima vzhod in zahod; azimut pa ne romari več).
+- *Logika prve:* solsticij je edini del leta, ko se nebo zaveže v enoto — 30 ločnih sekund na dan ⊢; tišina, ki jo izmeri decimalna vejica.
+- *Logika druge:* ljudje so slavili ne število, temveč OBRAZNEK: najdaljši dan, najkrajši dan, prvi vzhod po temi — telo slavi konca, ne miruje ⊢; Newgrange je posnel VZHOD, ne deklinacijo.
+- *Patologija prve:* število brez telesa = solsticij v almanahu — molk, ki ga nihče ne čaka; decimalna vejica brez bivalca.
+- *Patologija druge:* praznik brez števila = vsak drugi dan; kdor slavi »konec zime« tri dni pred ali po solsticiju, slavi spomin, ne nebo (izmera asimetrije: najzgodnejši zahod pri 40° s.g. š. ~8. decembra, najpoznejši vzhod ~5. januarja ⊢ — najtemnejša dva dni leta NISTA solsticij; solsticij je sredina, oba robova sta že mimo; US Navy).
+- *∴ sinteza:* **solsticij je tihi ne KOSMA: sonce izreče ne-eden gibe pred obzorjem, ki zna izkrivljati besede — odreče se premiku v številu, vzhod/zahod pa molče nadaljujeta; molk, ki ga je treba izmeriti, ker ga ni mogoče slišati. Odgovor OPEN LOOP 67 in vezi 56: molk ni odsotnost glasu — prisotnost, ki jo nima noben organ; ∫ na deklinaciji (sonce drži mesto), ∆ na obzorju (vzhodi hitijo naprej).**
+
+**MERILO NA PRAKSO.** Bruma-test: slovenski 21. december ni »najtemnejši dan« — najzgodnejši zahod je ~2 tedna prej ⊢; kdor čuti temo 8. decembra, čuti pravi robo brume, ne solsticij; ime dneva in obraz dneva se razideta za pol meseca.
+
+**SENTENTIAE.**
+1. Sonce molči v decimalni vejici — obzorje tega ne sliši.
+2. Varro je zapečil videbatur: nebo nikoli ne stoji; stoji vid, ki ga meri.
+3. Prazniki ne sledijo osi, temveč lakoti.
+
+**EXERCITIATIONES.**
+1. Gnomon-molk: en teden okoli 21. decembra vsak dan ob isti uri zaznamuj senco (klin, kamen); na koncu izreci: kaj je videlo oko, kaj število.
+2. Bruma-robo: izmeri svoj najzgodnejši zahod (kdaj te tema fizično stisne najhuje?) in zapiši datum — je bil to solsticij ali robo?
+3. Obrat-beseda: izreci »sončev obrat« in »solstitium« v eni sapi ter sliši slovanski gib in latinski molk na istem dogodku.
+4. Os-nagib: enkrat v življenju povprašaj obločnost ~4.500 let nazaj (24°) — spomeniki so napisani z osjo, ki ni več vaša; vsak tempelj je datiran z nebesno številko.
+
+**VIRI.**
+- Etymonline, solstice (solstitium »point at which the sun seems to stand still«; sol + sistere < reduplicirani *sta-; *sawel-) — search-result://ln7si5Cz ⊢ (tudi 7hxGT6Hq)
+- Wikipedia, Solstice (Pliny, Natural History; late Roman Republic, 1. stol. pr. n. št.; morfema sol + -stitium »stoppage«; deklinacija »stands still«) — search-result://mHG98stq ⊢
+- Roger-Pearse, Varro De lingua Latina 6.8 (*Dicta bruma, quod brevissimus tunc dies est; solstitium, quod sol eo die sistere videbatur*; Plinij NH 18.221: bruma 25. december; Ovid Fasti 1.161: bruma = novo sonce) — search-result://YBCy0hok ⊢
+- Oxford Latinitas, Etymology corner: solstice (solstitium = poletni, bruma = zimski; aequinoctium na sredi med njima; več stoletij, preden je solstice prevzel oblast nad midwinter) — search-result://tiXQRvsU ⊢
+- Wikipedia, Solstice (deklinacija <30 ločnih sekund na dan okoli solsticija, < 1/60 premerja sonca; neizmerljivo s sekstantom z vernierjem, gnomonom in astrolabom; težko zaznavno tudi zaradi refrakcije) — search-result://WQp7UNgY ⊢
+- Wikipedia, Winter solstice (Neolitik; smrt in ponovno rojstvo sonca; zakol živine — edini čas svežega mesa; Newgrange: svetloba skozi hodnik ob zimskem solsticiju) — search-result://DehK1MdJ ⊢
+- Wikipedia, Archaeoastronomy and Stonehenge (os proti poletnemu vzhodu in zimskemu zahodu; rastoči dokazi, da so prazgodovinski obiskovalci prihajali predvsem ob zimskem solsticiju; Pearson: razumno predpostaviti oba) — search-result://dbOwJqyH ⊢
+- Stonehenge Monument, July 2024 (nagib osi niha 24,2°–22,5° v ciklu ~41.000 let; ob gradnji Stonehengea ~24°; sonce ob poletnem solsticiju ne vzhaja več tam, kjer je vzhajalo takrat) — search-result://P0z35MyV ⊢
+- US Navy, Sunrise and Sunset Times Near the Solstices (pri 40° s.g. š.: najzgodnejši zahod ~8. december, najpoznejši vzhod ~5. januar; solsticij ~21. december — tema je najgloboka OB solsticiju, robova sta mimo; poleti: najzgodnejši vzhod ~14. junij, najpoznejši zahod ~28. junij) — search-result://daUlSfYr ⊢
+- Wikipedia, Summer solstice (najdaljši dan, sonce najvišje; polarna dnevna svetloba) — search-result://T1vsG75g ⊢
+- New World Encyclopedia, Solstice (subsolarna točka 23,44°; rakov in kozorogov povratnik; »sun-standing«) — search-result://NM4CeM5w ⊢
+
+**FINIS TEST.** Ali rez zaključuje obroč 64–68 (potopitev → veter → sonce → molk)? Da — od nasipa do neba: vsak rez te seje je meril, kaj stoji in kaj pada; solsticij je ∫ med vsemi ∆. Ali odpira naslednjega? Da — EKVINOKCIJ (aequinoctium, sonce na sredi med brumo in solsticijem: noč in dan si izenačita — ali je enakost ravnovesje ali orodje?) in OBRAVNOB (slovenski obrat, beseda, ki je zapečila gib, kjer je Rim zapečil molk). NEXT: kandidat 69 EKVINOKCIJ ali 69 OBRAVNOB ali po Lukovi volji.

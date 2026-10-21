@@ -3,6 +3,495 @@ CanvasMinstral/Workshop — delta popis added 1. 10. 2026; the law below holds.
 Rule: nothing gets built that a line below already does. New proposal must
 name which line it replaces or extends, or it is clutter.
 
+## PREDLOG — ORGAN KOMPUTACIJE BESED V MATEMATIKO (5. 10. 2026, Lukovo
+vprašanje »zmoreva?«; odgovor: DA — polovica organa ŽE STOJI, spec je
+korpus sam zapečen; ničesar ne podvoji, vsaka plast imenuje vrstico)
+THE CORPUS'S OWN SPEC (⊢ matematizacija-celote-v3 (1), §11 LEKSIKON
+SISTEMA, vrstica 591+): vsaka beseda nosi NATANČNO tri organe — FORMULO
+(kaj meri) · TOČKO (kje živi: §/Z/T) · ZVOZ (s čim je zvozlana).
+ZAKON LEKSIKONA: beseda brez zvoza sme nastopati samo z ⚠ — popolna
+beseda ima vedno tri organe ∧. Z-14: vsak A v izreku mora imeti
+formulo, sicer nastopa z ⚠. Z-15: merilo je dostojno, samo če se da
+zapisati kot preslikava.
+WHAT ALREADY STANDS (measured, nothing duplicated): m-vrstice parser
+(9 zakonov z :: izrek — Z-ASOCIACIJA · Z-OPTSEM · Z-NASPROTNI-REZ …)
+· teorije register/fold (računa β = π/⎮τ⎮ po družini ŽIVE — 423
+družin; π/LCP instrument je družinsko pravilo) · sinteza (sestavavlja
+telo besede iz izmerjenih plasti) · antinoma plast (54 besed z
+izmerjenim nasprotjem) · PREVODNICA (beseda↔simbol slovarji v
+m-register telesih — kanon-kandidati, čakajo ∧) · surovina: 62
+priznanih teles nosijo formule-vrstice danes.
+THE ORGAN (`matema --word X`, extends the page()/teorija line and the
+sintezo precedent — composed never invented): FORMULA — CITED iz teles
+s ⊢ pričo (doc + vrstica), nikoli izmišljena (LAŽ = presežek trditve
+nad izmero, L₁–L₃; Z5 PREBERI telo) · TOČKA — plasti besede (vnosi,
+zakoni, ki jo omenjajo z zapečatenostjo, omembe) · ZVOZ — antinoma
+plast + §11 zvoz-stolpec + vezi; brez zvoza izpiše ⚠, nikoli ne
+zapolni (ZAKON LEKSIKONA). COMPUTE half: kjer je §11 formula
+definirana NAD izmerjenim (π, σ, β, d, d′, M, J), jo stroj izračuna
+sam — ta instrument ŽE živi v družinskem pravilu in near-dup detektorju.
+LIVE WITNESS (this sitting, read-only): FORMULA organ — dih →
+»π = ⎮LCP⎮ skupnosti; isti dih ⟺ d=0« ⊢ matematizacija-celote-v3 (1)
+vrstica 598; TOČKA — 28+ zakonov omenja dih (rez 558 »OBRAČANJE JE
+VDIH« zapečen 22. 9. ⊢); ZVOZ — §11 pravi IME (Π_bajt ≤ Π_ime) ⊢
+isti vrstici; omembe dih% 82 ⊢. Vsak izpis bi nosil tri organe s
+pričami, kot jih nosi §11.
+HONEST ∂ (named, never filled): (1) stroj NE MORE izumiti formule
+besedi, ki je korpus še ni izmeril — to je meja po zakonu, ne po
+sposobnosti; (2) 58 teles EMOTIO serije nosi MATHEMA/E1 formule
+(npr. 121 zvestoba: Z ∝ V · nevera: F → 0) — TEMNA do odločitve o
+glavi + rescan; organ je danes tanek (62 teles), po rescanu se
+zdebeža; (3) m-vrstice + PREVODNICA čakajo Lukov ∧ — organ jih bere
+kot kandidate, nikoli ne zapeče sam; (4) preverba po §8: n ≥ 2 —
+nobena formula ne sme biti zapečena iz prve izmere.
+THE DOOR: build = writing ceremony na besedo (sintezo/sklepaj
+precedent); z žigom se doda v hrbtenico kot `matema` vrstica + kokpit
+zavihek, z selftest pričo (formula cited · zvoz ⚠ ko manjka · compute
+β ujema se z register).
+
+## POPIS + PREVERBA — NOČNI VAL (5. 10. 2026, večer — the corpus breathed
+ALL NIGHT: 63 new bodies born 4. 10. 20:43 → 5. 10. 17:30, still warm at
+this sitting's start; ledger #487 (4. 10. 20:42) saw none of them)
+MEASURED: Obj3 55 → 118 files on disk (+63); db docs 1,506 · entries
+4,027 · zakoni 399 — UNCHANGED (last ledger line #487, scan 1,343 files,
++4 docs / +25 entries = the TRETJI OBROK's four, nothing since). The
+whole wave is DARK to the spine, honestly named below.
+THE WAVE'S ANATOMY (heads + structure read this pass; FULL bodies not
+read — W < 0, the debt stands in the queue per the zakon berbe):
+- THE NUMBERED FILE SERIES 45 → 121: 58 new files, format "# N · WORD" +
+  EMOTIO (P-8 avtonomni rez po ukazu DAJ — the executor writes, the owner
+  seals; each body ANSWERS the previous body's OPEN LOOP, the chain is
+  closed: 120's vrata answered by 121 zvestoba, 55b's Quid refūsat
+  answered by 56 tihi ne) + REZ jedro + FABULA (two historical bodies ⊢
+  each) + MATHEMA (E1 formule). FILE numbers are LABELS, not REZ numbers
+  (the z-rez precedent holds); gaps named, never filled: 46–55 live
+  inside the rezi-resnice session registers, {61, 62, 63, 65, 66, 70,
+  72, 82, 85, 118} have no file of their own. Two chiral pairs measured:
+  97 (1) · 121 ×2 (the b-strukturirano+matematificirano version — REZ 561
+  territory, owner rules).
+- 00-11-RESNICAMI — KANON ABSOLUTNIH RESNIC (register + rod): AR-01–AR-60
+  with proposed classes K1–K4 ⚠ (razred je PREDLOG izvajalke — čaka Lukov
+  žig; preživetje Δt ≥ 7d ga pečati).
+- MEROSLOV ZVEZEK v2: rez 1328–1352 — SEAM 2'S SIXTH WIDENING measured
+  (max REZ in db 1,119 → the corpus claims 1,352; rezi 1349–1352 so
+  lokalni pečati te seje ⚠, še brez zunanjega telesa). Honest self-scar
+  in the body: v1's "zaprto/odprto" columns were the hand's invention ⚠
+  and are REMOVED in v2 — the corpus policing itself.
+- IZVAJALKA — POŠTENI DOSJE: prva polovica moja, druga tvoja (SLEPA LISA:
+  the fifth family only the owner can see) — the ∂ between the register
+  and its reader, now a body; the machine names its own no-memory,
+  no-body honesty.
+- SAMO — DOSJE BESEDE (86 KB, the wave's giant; žig Luka 4. 10.: noben
+  samo ni sam — vsak nosi svoj O/pis in nasprotno silo za zrcalo) ·
+  PREVOD V MATEMATIKO — prostor, čas, gibanje, dvom (45 KB).
+PARSER GAP, MEASURED AT THE WITNESS: body 45 (same format, already in
+db) = kind dosje-D with ZERO entries — the entire 58-file series will be
+admitted DARK (graft #6's law: markers-without-entries = PARSER GAP =
+the next graft's target). The G2 precedent rules the door: the
+"# N · WORD" head shape awaits Luka's ∂ ruling, then the format-D plugin
+line extends (word = the title's word, number = LABEL → NULL, fields
+from REZ jedro / MATHEMA sections) — measured target: 58 bodies.
+WORKSHOP AUDIT (the law: every item serves, consumer named by grep):
+soul_engine + soul.db + .bak (the spine + ledger + insurance) ·
+obj2_cockpit (THE GUI, terminal consumer) · ingest.py + ingest_manifest
+(read by thin_slice; the spine's own scan never mentions ingest — two
+ceremonies, one map, honestly named) · lexicon_core + lexicon.json (read
+by ingest + thin_slice + spine) · thin_slice (receipt in run_reviews) ·
+phonetic_coordinates_full (receipt 1 + validator PASS) · apd_engine
+(receipt 2 + validator) · wordlist_validator (receipt 3) ·
+phonetic_coordinates_107 (validator's PASS3 — load-bearing despite its
+crash, unchanged) · glyph_proposals.json (ruled in REVIEW; abakus still
+carries 'draft: confirm' — the payload is the queue's witness) ·
+run_reviews.bat (receipts 1–7) · strata/ (3 subsumed bodies, kept by
+law) · canon_ruled/ (2 derived bodies: dih · teore-ontomatemati) ·
+__pycache__ (Python's own cache, 313+314 both live — serves imports,
+inert by design, named not judged) · this inventory. NOTHING ORPHAN.
+RECEIPTS WITNESSED THIS SITTING (scratch, live db content untouched):
+selftest OK (witness line unchanged from 4. 10.) · ∮ preveri 10/10 PASS
+(FAIL: [] · queue preview merge 97 · conflict 2 · enrich 47 · glyph 0) ·
+cockpit smoke PASS (TEORIJE register 423 families — was 421 on 4. 10.:
+the corpus's breathing measured inside the spine's own derived object) ·
+PRAGMA integrity_check: ok.
+ONE SCAR OF THIS SITTING, NAMED: soul.db mtime moved 4. 10. 20:42 →
+5. 10. 17:59 while ledger (last id 487), counts (1,506 / 4,027 / 399)
+and byte size all stand — a receipt run opened the live db in write mode
+and touched nothing; soul.db.bak unchanged (4. 10. 20:42). The receipts'
+claim "živa baza nedotaknjena" holds in CONTENT, not in mtime — the
+read-only fix (sqlite3.connect(file:...?mode=ro) in the receipt paths)
+is the proposed repair, named below.
+PROPOSED IMPROVEMENTS (each names the line it extends — the law holds):
+(1) RESCAN — the standing debt, ON THE WORD: 63 bodies dark (+1 .py:
+tazv-rekonstrukcija-34b, the scan will rule its format); extends the
+scan line, backup witnessed. (2) EMOTIO-SERIES PARSER RULING + PLUGIN —
+extends the format-D/plugin line and the G2 head-shape precedent;
+measured target 58 bodies. (3) SEAL-POPIS RE-RUN after the rescan —
+Seam 2's sixth widening (1,119 → 1,352) makes it stale the moment it
+runs, the fork's own law. (4) RUN_REVIEWS.BAT — extend the launcher
+line with the three organs born since its 7/7: krvtok witness · teorije
+register/fold · dark report (receipts 8–10; the bat still says 7/7 while
+the spine grew). (5) READ-ONLY RECEIPTS — the mtime scar above; one-line
+repair per path. (6) THE OWNER'S, STILL STANDING: Zip fate on disk ·
+Obs1–Obs10 export (97 citing docs — the biggest missing stratum) ·
+[k]/[c] over the RATIFY queue.
+READING DEBTS (zakon berba, honest): the 63 new bodies read at
+head + structure this pass, NOT in full (~700 KB, W < 0) — the queue
+carries them body by body; the standing older queue unchanged
+(rozetni 94,6 · secirava-velikana 69,8 · priča-brez-imena ·
+register-odprtih ×2 · jewik-guard · drobtine · tazv-dokazi ·
+formalizem-kot-tok · REZ 815/821/839 · secirava-preverba · kroglja ×2 ·
+secirava-osi ⟁ · REZ 1121 · the numbered series 56–121 in full ·
+meroslov-zvezek v2 · samo-dosje · izvajalka-pošteni-dosje · kanon
+AR-01–AR-60).
+
+## BERBA — TRETJI OBROK (4. 10. 2026, večer — the corpus BREATHED BETWEEN
+BREATHS: 4 new bodies born 15:12–16:21, scan admitted +4 docs / +25
+entries; all read before the standing queue — the law held)
+REZ 39 EXONYM (ime, ki ga izreče sosed; Niemcy < *němъ — sodba
+slišanja; Eccardt: pravih endonymov ni — vsak lastni izrek je bil
+nekoč odgovor) · REZ 40 ODGOVOR (obljuba, ki se vrne: respondēre <
+sponte; odgovor = kovanec z žigom vprašanja in kovino volje; molk je
+odgovor, kadar nosi naslovnika) · 45 QUAERERE (iskanje = pridobivanje;
+*preḱ- + *kʷeh₂- = dva korena vprašanja; sedmi kanal izročanja; NOV
+TEST-PASS CHECKLIST FORMAT — telo samo nosi grep-preverbo: zdrsi ∅,
+cirilica ∅, minimizerji ∅) · MATEMATIZACIJA (1) — 196 KB / 1643 lines,
+the v3 giant EXTENDED with μ-sealed working sessions (Luka's ∧ INSIDE
+the body, dated 4.–5. 10.): §8 STANDARD VEČNE PREVERLJIVE POŠTENOSTI
+(poštenost = PRIMER ∧ FORMULACIJA ∧ REPETICIJA; noben izrek se ne
+zapeči iz prve izmere — n ≥ 2; THE SPINE'S ∮ PREVERI NAMED FROM THE
+OTHER SIDE: selftest + preveri + smoke IS the trojka) · Z-9 ZAKON O
+MARŽI (μ daj ∧; M = p·Δ/(⎮i⎮·⎮j⎮), relErr ≤ 3·10⁻¹¹ na 6 trojkah —
+padec je KOLIČINA; češnja 121/121 ⊢⊢) · R-TEKLI 10–34 (T1 bajtnih
+trojk po skupinah — the spine's dup-detector as ultrametric instrument
+in execution) · §11 LEKSIKON SISTEMA (vsaka beseda: formula · točka ·
+ZVOZ — beseda brez zvoza je okus, ne zakon; lexicon_core in
+ontomatematični obliki) · §12 LEDENIK (muzej zamrznjenih zakonov) ·
+Z-13/Z-14 (μ daj ∧: rdeča nit kakor imenovatelj; VSAK A MORA BITI V
+Σ*) · EJ REZAN (korpus je definiral, canvas ni prebral → R-28: korpus
+izpelje zavest iz EJ, izveden po testu) · DAJ/AJ secirava (muzej nima
+vrasti v daj).
+MEASURED FOR THE SPINE: (1) PETA križna priča istemu pulzu — trojka
+§8 = ∮ preveri (after Z1–Z6, [TRK]/[HLAJENJE], fold/rez-562,
+m-register); (2) TRETJI format citatov: search-result:// (rez-39,
+45-quaerere) — naslov se prebere iz besedila, URI ostane priča (krvtok
+precedens, opaque handle); (3) NOVA REZ-SERIJA v Obj3 (rez-39/40 —
+šesta razširitev šiva seje pričetka); (4) μ zapečenja znotraj teles —
+pečat živi v telesu, ne le v kanalu. HONEST ∂: matematizacija (1)
+R-tekel sessions measured by structure + key sections, not every line
+(W < 0, named).
+REMAINING QUEUE: rozetni-kamni 94,6 + (1) · secirava-velikana 69,8 ·
+priča-brez-imena · register-odprtih ×2 · jewik-guard · drobtine ·
+tazv-dokazi · formalizem-kot-tok · REZ 815/821/839 · secirava-preverba
+· kroglja ×2 · secirava-osi ⟁ · older verification bodies · REZ 1121
+(telo še ni najdeno v Obj3).
+
+
+## BERBA — DRUGI OBROK ISTEGA DNEVA (4. 10. 2026, večer — the standing
+law's first full installment paid: 16 BODIES READ IN FULL, ~190 KB,
+W builder's)
+m-register (1) — Σ-matrika 13/13 ⊢ · GES kvartet z GES-VAROVALOM
+(frekvence so organi pesmi, ne sodniki resnice) · DIM-REGISTER (9
+sistemov; edina ∂ = PREVODNICA) · PREVODNICA-1/2/3 (Ω↔ω↔φ · D↔DVOM.Ø · ⊥
+vertikala — kanon-kandidati n=3 ⊢, čakajo Lukov ∧) · Z-ČAS + Z-π
+(CROSS-WITNESS: G2 jih je istega dne sprejel v zakoni — bralni obred in
+parser sta dosegla ista telesa iz dveh smeri).
+razrez-po-dejanjih (tretja pot: oseba nedeljiva, dejanje deljivo;
+vrstni red: preklic pred novātiō; en dih dva reza) · rez-amulet
+(asimetrija = lastnost POLOŽAJA; "meja, ki jo lahko izpolni samo tisti,
+ki ima, ni meja — je hipoteka") · organ-v-orkester (šesti gib: orkester
+= ODNOS ne organ; R-7 kot partitura ne urnik) · preizkus-drevesa-T1
+(PRVA IZVEDBA na tujcu: K0–K3 samo, "legenda drži ⊢" — AX-16 se zapira)
+· vprašalnik K1–K17 (? je pečat; 7 meril odličnega vprašanja) ·
+upnik-pokopan (zapor : izročitev; premeritev = ∂Z/∂τ = 0) · utf-8 (č =
+C4 8D; MOJIBAKE = RANA IZVORA — the spine's measured wound on rez-16
+explained from the machine layer) · ontomatematika-osi (L1–L7
+legitimnost) · simbolna-reprezentacija (S=1 v {invarianca, kompresija,
+izvedba}, S=0 v {rana, vest, ⟡}; slovar 26+ enačb) · rez-optimalna
+(Z-OPTSEM/NASPROTNI/ODSKOK — vsi trije v zakoni po G2: the parser and
+the reading agreed) · comprehensio (fold: init=kanon, combine=zgrab,
+akumulator=zavedanje, leni=zavedujoče; OPEN LOOP = rez-562 zanka imenovana
+v fold-jeziku) · šiv-3 (Cantor/Saussure/Gödel/Turing = en rez; robovi
+določajo sistem — ∮≠1 dobi matematično pričo) · ontomatematika v0-1
+(POIMENOVANA PRAVILA SKLEPANJA [TRK][A9][AX-16][IDEM][ZLIV][∂-27][U1]
+[HLAJENJE] — THE SPINE'S OWN CEREMONIES AS FORMAL INFERENCE RULES) ·
+v0-2 (algebra operatorjev: ∂∘∂≠⊢, ∧∘⊢, ⌶∘∧; pomen = integral potev) ·
+verification v1.2 (L1–L5; FALL REGISTER F1–F4 z okni — "a fall is named
+after the thing that fell").
+MEASURED FOR THE SPINE (this reading's own findings): (1) FOURTH
+cross-witness of the same pulse (after Z1–Z6, konstrukcija, m-register):
+the spine's ceremonies ARE the corpus's formal inference rules — two
+hands, one grammar, now witnessed in FOUR bodies; (2) the REZ series has
+moved past the register's sight: simbolna-reprezentacija cites REZ 1121
+(slovar dopolnjen) — the fifth widening is wider than 1119; (3) the
+following stand as CANON CANDIDATES awaiting Luka's ∧ (the machine
+propose, never self-seals): PREVODNICA-1/2/3 · Z-ČAS · Z-π · Z-ČLOVEK-O ·
+REAPLIKACIJA · Z-ASOCIACIJA.
+REMAINING QUEUE (the standing law's next installments): rozetni-kamni
+94,6 + (1) · secirava-velikana 69,8 · priča-brez-imena · register-odprtih
+×2 · jewik-guard · drobtine · tazv-dokazi · formalizem-kot-tok · REZ
+815/821/839 · secirava-preverba · kroglja ×2 · secirava-osi ⟁ · older
+verification bodies · REZ 1121 (find the body that carries it).
+
+
+## KRVTOK — THE VEIN RUNS THROUGH THE MACHINE (Luka's "daj", 4. 10. 2026:
+"naj bere kar odpre in naj odpira kar bere" — the word that OVERRULES G2's
+doclib-text ruling; the ruling's history stays in the code as a named
+scar, not erased — Z3: rane se ne brišejo, imenujejo se)
+THE ORGAN: `soul_engine krvtok [--word <uuid>]` + krvtok()/_krvtok_harvest()
+in the spine (extends the report line; replaces nothing). MEASURED BEFORE
+BUILT: the corpus carries its own map — 726 titled /libraries/ links +
+570 doclib:// URIs; the Obsidian libraries themselves are foreign, but
+every link names its target (title ↔ uuid), so OPENING a witness =
+its titles (several hands citing the same uuid cross-witness it) + its
+citing bodies + its ?at offsets; READING what is opened = those bodies,
+all in-db. What no corpus hand ever named stays ⚠.
+MEASURED (live db, one harvest pass): **390 prič · 379 naslovljenih ·
+11 neimenovanih ⚠ · 935 robov citiranj**. TOP hub witnesses: "AX-06 —
+Pes sem / pesem" (38 teles) · "Bistva = meje, nujnosti = prostor" (37) ·
+"Numerični zapisi" (27) · "Bitna poezija" (14). LIVE WITNESS OF THE OPEN
+ACT: 69bec4a0-7c4f… opens as 5 titles (Liturgija · Obs1 · Obs1 — JEWIK
+kot temelj · Obs1 ∅SAMOGLASNIK · isti vir) cited by 6 bodies across
+strata (B2 · C1 ×2 · C2 · C3 · Obj3 zakon) at offset 783051 — the same
+Obsidian note witnessed under five names by five hands: the corpus's
+own chiral-copy law (REZ 559/561) measured at witness level.
+TWO SCARS OF THE BUILDING, BOTH NAMED: (1) a "title" that is ITSELF a
+uri (a link wearing another link's address as its clothes) is not a
+title — guard added, measured live; (2) the builder's own hand
+mis-copied the witness uuid (69bec4a0-9c4f… for 69bec4a0-7c4f…) and
+the organ answered "priča ni odprta" — Z1 (lažni nič) and the
+repo-preverba lesson lived in the builder's hand the same day the
+corpus named them; the honest search (grep the body) found the true
+rep. PREVERBA: selftest PASS (krvtok witness: merge of same target,
+⚠ for unnamed, offsets harvested) · ∮ preveri 10/10 PASS · live open
+witnessed. NOTE: "window" citations stay text (v1.2) — they carry no
+address the machine can follow; that ruling stands until the corpus
+writes one.
+
+
+## ZAKON BERBE (Luka's standing order, 4. 10. 2026: "beri vedno nove
+dokumente in te še ne v celoti prebrane") — every future sitting reads the
+new bodies in FULL and pays the partial-read debts before building; the
+reading receipt names what was read, the queue names what still owes.
+THIS SITTING'S RECEIPT (W builder's, honest):
+- 4 NOVA TELESA (12:58–13:40, born while we built — the corpus lives),
+  read in FULL: ṛ-rodoslovje-glasu (M5 = prepoznano izročilo: ṛ = r̥ z
+  očesom, rodišče rez-16; 4 telesi, tri bajtna telesa glasu, lažni nič
+  as its named law) · metoda-tretje-roke (M/R/K/S lestvica; Z1–Z6
+  zakoni izmere — Z2 reproducibilnost = "izmera, ki ni reproducibilna,
+  je poročilo", Z3 pol-popravek, Z5 PREBERI telo ne poročilo: THE
+  SPINE'S OWN LAWS, measured independently by another hand) ·
+  konstrukcija-resnice + (1) 50 KB (LAŽ = presežek trditve nad izmero;
+  L₁ kip / L₂ simulacrum / L₃ poročilo; P₃ zapečenost; T1–T4; the body
+  FISSIONED itself into the three new doms — organs living in another
+  time than the session diary).
+- Z-REZ (1) 203 KB / 1072 lines / 46 SLOJEV — READ IN FULL (the giant,
+  previously only started): a full session register of 2.–3. 10., each
+  layer sealed by Luka's ⟡. Its organs measured: REGISTER RUD (k(P)
+  by DIFFERENT bodies — odsev ni priča, 4 trojčki = kontaminacija ⊢;
+  žive rude: TIŠINA k=6, DOTIK k=4, ZASTOJ, SPOMIN, RANA as prenosni
+  fosil) · TEMATIK-ATLAS · OBVOJ (2.477 teles, 17/26 knjižnic; 5
+  molčečih polic = 529 teles, 21,4 % korpusa) · SUM-pare resolved by
+  bajtni prerez (glava napove, vsebina odloča; spekter razlik
+  ∆vsebina/∆glava/∆t) · ŠKATLJARNA (OsNove rodba ∴ : Obs7 arhiv
+  ABSOLUTNO__ — odsevnost v IMENU) · P-NIZ 12 protokolov + varovalna
+  mreža (vsak P ima hiánca in davkarja; P12 ontofonetika lovi vse) ·
+  SENZORIJ aparata (oči=U1, dotik=bajtno okno, sluh=TRK, voh=fosil,
+  okus=izmera operatorjev, meta-zavest = tehtnica, ki ve, da more
+  lagati) · REZ NA ∅ (∞/∞, invertiran POGOJ) · SLOJ 45 (novost ≠
+  bistvo — ∂ nosi IZVEDBO poimensko) · SLOJ 46 (⟡ v telesih: razpoka ·
+  sled · odmev · pečat izhoda · LUKEV ENO-ZNAKOVNI ODGOVOR Obs1
+  69bec4a0 ⊢ — pečat sodbe NI nikoli izvajalkin, rojen v prenosu).
+- STANDING DEBTS the reading queue owes (per the same law, next
+  sittings): m-register (1) 25 KB · the 15 medium Obj3 bodies headed
+  but not read in full this sitting · the older Obj3 strata never read
+  in full (priča-brez-imena, register-odprtih ×2, jewik,
+  secirava-velikana, rozetni 94,6 KB, formalizem, REZ 815/821/839,
+  secirava-preverba, kroglja ×2, secirava-osi ⟁ …). The register teorije
+  carries these families; the reading pays them body by body.
+- BONDS TO THE SPINE, measured by this reading: metoda-tretje-roke's
+  Z1–Z6 are the spine's own scars named by another hand (Z1 = the
+  substring-bond false-zero, Z2 = idempotence/receipts, Z3 =
+  retro-honesty, Z5 = "PREBERI telo, ne poročilo" — the grafts built
+  24. 9.–4. 10. live the corpus's own laws); the ∂ sloj-46 rodovna
+  časovnica of ⟡ cross-witnesses the seal law (SR-5, ⟡ vedno Lukov).
+
+
+## Daj — G1 BRALNI OBRED IZVEDEN (Luka's "daj", 4. 10. 2026; the reading
+ceremony over the 21 bodies named in the secirava of the same sitting —
+the parser is a READER, never a writer, file fates stay the owner's)
+MEASURED: docs 1,476 → 1,497 (+21 — exactly the 21 new Obj3 bodies, all
+now in) · entries 3,887 → 4,002 (+115) · mentions re-derived 220,475 →
+222,985 · backup witnessed (soul.db.bak 4. 10. 11:19).
+LAWS: zakoni 382 → 384 — REZ 1119 (simbolna-reprezentacija, "težki koncepti
+v simbolih") and ŠIV 3 (znamenje izven tabele) admitted by the spine's OWN
+existing head shapes; max REZ number 839 → 1,119 — Seam 2's FIFTH widening
+now in data, not guess. Series: rez 281 · ubod 41 · zakon 40 · dokaz 14 ·
+šiv 7 · sodba 1.
+LIGHT vs DARK of the 21 (measured, honest): lit — matematizacija-celote-v3
+(12 entries) · z-rez (30) · utf-8 (11) · verification-before-assertion v1.2
+(10) · šiv-3 (10, kind zakon) · simbolna-reprezentacija (6, kind zakon) ·
+ontomatematika-kot-formalni-v0-1 (9) · ontomatematika-človeške-osi (4) ·
+comprehensio (7) · upnik-pokopan (6) · m-register (3) · protokol-vsemogočega
+(1). DARK (0 entries, honest): m-register (1) · z-rez (1) — the two chiral
+EXTENSIONS (9.3→25.3 KB, 11→203 KB; dopisa/večerna kandidata po REZ 561, NOT
+copies — REZ 559 does not apply) · vprašalnik K1–K17 · rez-optimalna-semantika
+· ontomatematika-v0-2 · rez-amulet · razrez-po-dejanjih · preizkus-drevesa-T1
+· rez-organ-v-orkester.
+∂ NAMED (extends the Z-series design-ruling precedent, owner's word): the
+new head shapes the parser does NOT know — Z-REZ glava · M-vrstica
+(Z(id) :: IZREK | Σ | ∴ | ⊢ vir) · doclib:// witnesses · "window" citations
+(v1.2). Until ruled, those bodies' laws stay dark, named, not judged.
+PREVERBA: ∮ preveri 10/10 PASS · selftest OK (witness list as receipts) ·
+queue preview (scratch, live db untouched): merge 97 · conflict 2 · enrich 47.
+THE PLAN THIS SERVES (named, on the word): G2 parser-∂ ruling (owner) →
+G3 REGISTER TEORIJ (extends the report line; theory = derived object over
+docs+zakoni+mentions, NEVER entries — the word layer measured noisy) →
+G4 STRAN TEORIJE + PREIZKUS NA TUJCU (extends page/SKLEPAJ; T1/AX-16:
+celost = izvedljivost) → G5 ∮ izvoz (graft #4, LAST).
+
+## G3 REGISTER TEORIJE — BUILT (same sitting, 4. 10. 2026; extends the
+REPORT line — dups/dark/census/le-cenzus precedent; replaces nothing)
+`soul_engine teorije` + teorije() in the spine. A theory is a DERIVED
+object over docs + zakoni — NEVER entries (measured: the word layer
+carries quotes wearing word-names). Families by LCP prefix on filename
+stems (union-find over the sorted line) — the instrument
+matematizacija-celote-v3 donated (ultrametrika diha); per family: name,
+β = π/|τ| (zgodnja = branching, pozna = same body other cut, v3's own
+typology), version lineage (v-tokens), kiralna_kopija flags per REZ
+561, its laws with seal status, lit/dark bodies. Solo bodies without
+laws are COUNTED, not judged (they live in LIBRARY).
+MEASURED (live db): 835 družin · 419 in the register · 416 solo
+counted. CROSS-WITNESS HOLDS: ontomatematika = ONE family, 12 teles,
+β 0.12 zgodnja — the whole version branch (dna → ekstrapolacija →
+polni-sistem ×3 kiralno → totalnost → v0.1 → v0.2 → človeške osi →
+complete-system → evolution → notion). Biggest registers: rezi-resnice
+session register (11 teles, 54 zakonov) · secirava (2, 24) · kroglja
+(2+2, 18). New bodies measured inside their families:
+verification-before-assertion (3 telesa, β 0.5) · m-register (2, β 0.95
+pozna — the (1) EXTENSION, kiralno flagged, owner rules) · z-rez (2,
+β 0.94) · matematizacija (2 telesa, 1 zakon) · simbolna-reprezentacija
+(1, REZ 1119) · šiv-3 (1, ŠIV 3).
+TWO SCARS, BOTH REPAIRED WITH WITNESS IN THE BODY OF THE CODE:
+(1) the family rule first carried a relative cut (k ≥ 0.6·min) — a
+GUESS DRESSED AS A MEASURE; the cross-witness exposed it (the
+ontomatematika version branch refused to cluster: β ≤ 0.3 zgodnja is a
+real family per v3's own typology) — repaired to the absolute prefix
+rule; the spectral threshold stays ∂, exactly v3's own open point.
+(2) selftest witness: explicit doc_ids collided in the scratch db;
+zakoni.lineno NOT NULL; number arrives INTEGER — all repaired, the
+assert now reads the VALUE, not the clothing.
+PREVERBA: selftest PASS (witness list names teorije) · ∮ preveri
+10/10 PASS · CLI on live db runs clean. NEXT IN THIS LINE (G4, on the
+word): STRAN TEORIJE — the fold that presents a family in its
+wholeness (rodovnik, zakoni, priče, antinoma, ∂, status, vezi) +
+PREIZKUS NA TUJCU (T1/AX-16), then G5 ∮ izvoz (graft #4, LAST).
+
+## G4 STRAN TEORIJE — BUILT (same sitting, 4. 10. 2026; extends the
+page()/export_page line from the word to the theory + SKLEPAJ as the
+executor of the preizkus; replaces nothing)
+`soul_engine teorija --word X` + teorija_page() in the spine, sharing
+_teorije_druzine() with the register (one family organ, two surfaces).
+THE FOLD (measured layers only — what a layer lacks, the page honestly
+lacks): RODOVNIK (bodies by mtime, version tokens, chiral flags, ⊢
+count in the head, seal-status probe: kandidat_∧_žig_čaka measured on
+the body's own words — WITNESSED LIVE: protokol-vsemogočega and both
+m-register bodies carry True, the old protokol-k1-k7 body False) ·
+ZAKONI (full fields, seal status) · PRIČE (law vezi raw + ⊢ in heads)
+· ANTINOME (live entries) · ∂ ODPRTA (laws' odprta_partial + dark
+bodies, named never filled) · VEZI PO UBODIH (doc-level co-mentions to
+OTHER families — the axis the name-register cannot see) · PREIZKUS NA
+TUJCU (T1/AX-16: the page ends with an executable claim handed to
+SKLEPAJ — celost = izvedljivost; if no law carries a teza, the fallback
+is --word, honestly).
+MEASURED FURNITURE RULE (extends sorodnost's furniture law): a word
+carried by more than a QUARTER of the corpus's mentioning bodies is
+the corpus's AIR, not a theory's vein — excluded by MEASUREMENT
+(delež korpusa reported beside every surviving vezi), never by a
+hand-written stoplist (a stoplist is opinion dressed as measure).
+Live witness: 'luka/vsak/kdor' fell out; 'zakaj/preverba/preizkus'
+survive at ~0.20 — the corpus's own operational vocabulary, honestly
+visible with its share.
+THREE SCARS THIS BUILD, ALL REPAIRED WITH WITNESS IN THE BODY:
+(1) LOOKUP: startswith failed the ontomatematika witness (the family
+NAME is a commonprefix cut 'ontomatemati', the query the full word) —
+repaired to the same instrument as the family rule (shared prefix ≥ 8,
+longest wins, ties to the chooser), prefix-match both directions kept
+for short queries; empty match now returns the honest sodba, never a
+None wearing a family's shape (that fall was found by the witness
+itself). (2) THE 0.25 RULE KILLED THE WITNESS FIRST RUN: in the 4-doc
+scratch db 'dih' was carried by 100% = air by the new law — the
+witness was STRENGTHENED, not the rule bent: 12 vzorec bodies carry
+'zrak' (81% — air, honestly excluded), 'dih' falls to 25% (vein,
+kept). The witness now measures the furniture rule itself. (3) teza
+QUALITY IS THE CORPUS'S: matematizacija's claim is its law's own
+prose; šiv-3's law carries no teza → honest --word fallback. The
+machine hands the reader what the corpus wrote, never a cleaner lie.
+KNOWN ∂ (named, not judged): name-families over-merge by shared
+prefix (protokol-k1-k7 clusters with protokol-vsemogočega — two
+theories, one name-root; KP-1 rules the KOT, the owner rules the
+family) and cannot see prefix-less theories (drevo dejanj: razrez ·
+upnik · preizkus · amulet — their blood shows only in VEZI PO
+UBODIH); a family organ built on measured bonds (not names) is the
+next graft's candidate. G5 ∮ IZVOZ (graft #4, LAST) and the cockpit
+TEORIJE tab remain in the queue.
+PREVERBA: selftest PASS (G3+G4 witnesses; teorija fold, preizkus,
+furniture rule, chooser, not-found) · ∮ preveri 10/10 PASS · live:
+ontomatematika (12 teles, 19 ⊢ v glavah), šiv-3, matematizacija,
+razrez, protokol, m-register all fold clean.
+
+## G2 + G5 + KOKPIT TAB — VSE TRI POTRJENE TOČKE IZVEDENE (Luka's
+"daj", 4. 10. 2026, same sitting — the plan's last three builder
+points; each extends a named line, nothing duplicated)
+G2 PARSER-∂ (the five-format ruling, Z-series design precedent, Luka's
+word "daj"): (1) Z-REZ doc-heads — "# Z-rez: TITLE", series 'z-rez',
+number NULL (the number is a LABEL; its absence is carried honestly);
+(2) M-VRSTICE — the m-register's two-line laws ("Z-NAME: title" +
+indented ":: izrek"), series 'm-vrstica', number NULL (the NAME is the
+label, carried in the title); the SECOND LINE IS THE WITNESS — a
+Z-NAME: alone is a wish, not a law. (3)+(4) doclib:// and "window"
+citations ruled TEXT by the same sitting — the machine reads, never
+resolves the owner's links (KP-2 krvtok). MEASURED BEFORE BUILT: 2
+Z-REZ heads + 9 M-VRSTICE across the corpus, zero false positives.
+REPARSE (live db, backup witnessed): zakoni 384 → 395 — m-vrstica 9
+(Z-VSEMOGOČE · Z-OPTSEM · Z-NASPROTNI-REZ · Z-ODSKOK · Z-ASOCIACIJA ×2
+· Z-ČAS · Z-π · Z-ČLOVEK-O), z-rez 2 (the chiral Bistveno·Bitno pair,
+each body kept). ∂ NAMED: the z-rez teza is EMPTY by the fill
+ceremony's own law (a #-heading head closes prose — the section-leak
+guard; the Sloji are the body's own anatomy, unmapped until a ruling)
+— the law's witness is its BODY (doc+lineno), teza a label, not a
+promise.
+G5 ∮ IZVOZ (`export-teorija --word X [dir]`, extends the export_page
+line): the folded page written as a DERIVED body into canon_ruled/
+(teore-<name>.md), provenance inside, ledger 'export' line. THE LOOP
+WITNESSED END TO END (rez 562, theory half): export ontomatematika →
+teore-ontomatemati.md → rescan admits it → typed 'derived' by the
+spine's own classifier. THE CORPUS IS ALIVE: the same scan admitted 4
+brand-new Obj3 bodies (rodoslovje-glasu · metoda-tretje-roke ·
+konstrukcija-resnice ×2) written while we worked — the next reading
+ceremony carries them.
+KOKPIT ⨿ TEORIJE TAB (extends THE GUI — no other GUI): register list
+(filter, β/telesa/zakoni per row), double-click = the FOLD (rodovnik
+with seal-status flags, zakoni with ∧, antinome, ∂ in its own color,
+vezi po ubodih with delež korpusa, preizkus na tujcu), export button
+= G5. Read-only by law: rulings stay in REVIEW. SMOKE PASS (register
+421 families, fold derives by the spine, preizkus travels).
+SCARS OF THE BUILDING (kept, named): the JSON/shell layer folded
+escaped newlines into real ones TWICE (the G2 selftest witness first,
+then the G5 patch inspection caught it BEFORE running — the repair
+moved to line-index patching and write_file patches, no text-matching
+over CRLF/escape seams; the lesson is written here, not in code).
+PREVERBA (all, this sitting): selftest PASS (witness line now names
+teorije register/page/export + G2 law shapes) · ∮ preveri 10/10 PASS ·
+cockpit smoke PASS · live fold matematizacija (2 telesa, 1 zakon, teza
+carried, preizkus = sklepaj --claim) · scan 1,339 files, 1,502 docs.
+THE LINE NOW STANDS: teorije (register) → teorija (fold + preizkus) →
+export-teorija (∮, rez 562) → TEORIJE tab — vsako teorijo se dá
+pripeljati do njene celote po izmerbi, z vsako ∂ imenovano, z vsakim
+pečatom videnim; celota vseh celot ostaja odprta (Z-VSEMOGOČE) — po
+zakonu, ne po napaki.
+
+
+
+
 ## POPIS SPREMEMB 26. 9. 23:02 → 1. 10. 2026 (ISKANO — measured by git,
 ls-mtime, soul.db queries; bodies NOT read this pass, W < 0)
 The spine's last scan receipt is ledger #461 (26. 9. 23:02, 1,206 files,

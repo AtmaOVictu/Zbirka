@@ -1,0 +1,40 @@
+# 83 · MINUTA — prvi majhen rez
+
+**EMOTIO.** P-8 avtonomni rez po ukazu DAJ; S-1: zadnja zapečatil 82 → 83. OPEN LOOP 82 (*Utrum minūta est minūta — an pars minūta minimī?* — je minutnica res majhen del, ali del najmanjšega?) odgovorjena z besedno izmero, ki jo je zapečklo srednjeveško astronomijo: **NOBENO OD OBOJEGA: MINUTA NI MERJENA PO VELIKOSTI, AMPAK PO ŠTEVILU REZA — pars minūta prīma = »PRVI majhen del« ⊢ ⊢; za njim prīma secunda = »drugi majhen del« (sekunda) ⊢ ⊢ in prīma tertia = »tretji majhen del« ⊢ — minuta je ORDINAL, ne kvant: ime pomeni »prvi rez«, ne »majhen rez«. Minutnica ni del najmanjšega — je PRVI REZ, ki ve, da bosta prišla še dva; tretji (tertia, 1/60 sekunde) je v angleščini izumrl ⊢ — rezalna veriga se je ustavila pri drugem. In globlja izmera: minuta ni bila najprej čas — bila je KROG: pars minūta prīma je pri Ptolemiju ena šestdesetina KROGA ⊢, šele pozneje ena šestdesetina URE ⊢ — čas si je minuto izposodil iz neba.**
+
+**REZ (etimologija).** LATINSKO TELO: **classical Latin minūta pomeni SAMO »zelo majhna« ⊢ — brez časa, brez kroga: časovna minuta je mlajša od besede; late 14c prvi zapis v angleščino ⊢.** Srednjeveška izposojenka: minūta = »minute of time; SHORT NOTE« ⊢ — ENA BESEDA, DVE TELESI ŽE V SREDNJEVEŠKI LATINŠČINI. **NAJDEBELEJŠI REZ: MINUTA KOT ZAPISNIK — minutes (zapisnik seje) c. 1710 ⊢, iz minute »summary or draft of a document or letter« (mid-15c.), iz latinske minūta scrīptūra = »GROB ZAPIS, OSNUTEK« ⊢ — zapisnik seje imenujemo po besedi, ki pomeni NEIZDELANO PISANJE: minuta je uradni dokument, ki nosi ime osnutka; vsak zapisnik je priznanje, da je končno besedilo šele drugi rez.** SLOVENSKO TELO: minuta = izposojenka iz iste družine ⊢; sopomenska izmera: minuta kot del ure, kot ločna minuta (pomorstvo), kot zapisnik (»minutes«) ⚠ meja seje (Fran geslo minuta nepreverjeno — izposojenka izrečena po etimološki družini, ne po geslu).
+
+**TELO ŠESTDESETICE:** Babilonci (dediči Sumercev — pisani dokazi base-60 ~5.000 let ⊢) so delili krog na 360°, vsak rez še na 60 ⊢; **60 je deljiv z 2, 3, 4, 5, 6, 10 ⊢ — šestdesetica je število, ki odpove najmanjkrat: rezalnica, ki ima največ rezov brez ostankov.** Hiparh je z babilonskim računom razdelil uro na 60 delov ⊢ (69 vez: Hiparh, isti izmerilec); Ptolemij zapečil prvi rez ⊢. **NAUTIČNA MILJA = MINUTA ZEMLJE: dolžina loka ene minute zemljine širine ⊢ ⊢ — ena minuta = 1.852 m; obseg Zemlje ≈ 21.600 nautičnih milj ⊢ (60 × 360): ZEMLJA JE ZAPEČAT KOT URA — njen obseg je zapisan v minutah; mornar ne meri razdalje, meri KOT, ki se je spremenil v meter.**
+
+**FABULA (rez, ki pozna svoje številke).** Rezalna veriga: prīma → secunda → tertia ⊢ — vsak rez 1/60 prejšnjega; v sodobni angleščini sta preživeli dve (minute, second), tretja (tertierce, tierce) je ostala v glasbi ⊢ ⚠ (izrečeno kot opaža o sorodnosti, ne izmera) in strelstvu. **Zgodovina reza je zgodovina potrpežljivosti: vsak nov rez je zahteval novo stran — sekunda je obstajala kot beseda stoletja, preden jo je lahko kdo izmeril (82 vez: mehanična ura); imena rezov so nastala pred orodji, ki jih izmerijo.** Babilonski pečat: astronomija je čas in krog rezala z ISTO šestdesetico ⊢ — ura in stopinja sta dve telesi enega reza: kdor razdeljuje uro na 60, razdeljuje tudi nebo; razdeljevanje je ena navada, ne dve meri.
+
+**CONFLICTUS.** MINUTA KOT MAJHNO (klasični pomen: »zelo majhna« ⊢; del — 1/60, skoraj nič; grob zapis, osnutek ⊢) ↔ MINUTA KOT IZMERA (nautična milja — 1.852 m zemlje ⊢; zapisnik — uradni dokument ⊢; šestdesetica, ki ne pušča ostankov ⊢).
+- *Logika prve:* minuta je ostanek: ena šestdesetina je skoraj nič — ime samo pravi »majhna«.
+- *Logika druge:* minuta je izmera: nosi miljo, zapisnik, uro; pred Ptolemijem ni bila čas, pred mornarji ni bila razdalja — zdaj je oboje.
+- *Patologija prve:* kult majhnosti — »samo minuta«: 60 sekund čakanja je mikrokosmos; kdor pravi »samo minuta«, je zamenjal velikost za vrednost (74 vez: pravi trenutek).
+- *Patologija druge:* kult natančnosti — rez brez konca: milliarcsecond, microarcsecond ⊢; kdor reže v nedogled, pozabi, da je tretji rez (tertia) že umrl ⊢ — veriga ni neskončna, je preprostim obsojena na pozabo.
+- *∴ sinteza:* **minuta je TEN: ∫ (rezalna veriga — prīma/secunda/tertia, ordinal, ki pozna svoje mesto ⊢) + ∆ (šestdesetica — dejanje, ki ne pušča ostankov ⊢). Odgovor OPEN LOOP 82: minūta nōn est pars minimī — est pars prīma: minuta je prvi rez, ne najmanjši; njena majhnost ni lastnost, je Zaporedje. In njen najdebelejši obrat: minuta je IZMERA, ki je postala RAZDALJA ⊢ — čas in prostor si delita šestdesetico: kdor meri minuto, meri lahko tudi meter. BJS samoreferenca: korpus meri v rezih, ki so zaporedje (60–83), ne v količinah — številka reza je ordinal, njegova vrednost pa je mesto v verigi, ne teža.**
+
+**MERILO NA PRAKSO.** Izmera iz vsakdana: »minut(a)« v vsakdanji govorici hitri izmene (»pride v eni minuti«) — minuta kot obljuba bližine, ne natančnosti; »minuta« v zapisniku seje — izreči zavedajoč se, da ime pomeni GROB ZAPIS ⊢: končna besedila seje so drugi rez; first rez je vedno osnute. Nautična izmera: 1 minuta širine = 1.852 m ⊢ — kdor potoval eno minuto po zemljevidu, je prehodil 1.852 m: minuta je edina enota, ki je hkrati čas, kot in razdalja.
+
+**SENTENTIAE.**
+1. Minuta je prvi rez, ne najmanjši — njeno ime je Zaporedje: prīma, secunda, tertia; tretji je umrl, drugi nosi uro.
+2. Zapisnik seje nosi ime osnutka — minūta scrīptūra: vsak uradni zapis je priznanje, da je drugi rez.
+3. Zemlja je zapečat kot ura: njen obseg je 21.600 minut ⊢ — čas in prostor si delita šestdesetico.
+
+**EXERCITIATIONES.**
+1. Milja-minute: izračunaj razdaljo svoje dnevne poti v minutah širine ⊢ (1 min = 1.852 m) — izreci: danes sem prehodil toliko minut zemlje; razdalja postane kot.
+2. Osnutek-test (minūta scrīptūra ⊢): eno sporočilo napiši kot grob osnutek in ga pošlji neizdeleganega — izreci: to je minuta, končna verzija je drugi rez; opazuj, kaj se zgodi z jasnostjo.
+3. Prīma-secunda-tertia: eno nalogo razdeli na tri reze po babilonsko ⊢ — prvi (ura), drugi (minuta), tretji (sekunda); izreci, kje je rez umrl: veriga ni neskončna.
+4. Šestdesetica-test: preveri eno delitev svojega dne ⊢ — čez koliko načinov se ti dan razdeli brez ostanka (2, 3, 4, 5, 6, 10)? Šestdesetica je število, ki odpove najmanjkrat; izreci, kateri del dneva odpoveduje največkrat.
+
+**VIRI.**
+- Etymonline, minute (pars minuta prima — Ptolemij, 1/60 kroga, pozneje 1/60 ure; secunda minuta → second; minuta = »minute of time; short note«; minutes zapisnik c. 1710 < minuta scriptura »rough note« mid-15c) — search-result://75RedE1P ⊢
+- Approximate Knowledge, minute (classical Latin minuta = »very small«; late 14c angleško; pars minuta tertia; sumerski base-60 ~5.000 let pisno) — search-result://DZd332dX ⊢
+- HSM Stack Exchange (pars minuta prima/secunda; Babilonci 300–100 pr. n. št.; 60 deljiv z 2, 3, 4, 5, 6, 10) — search-result://EN2afSp3 ⊢
+- gloomba, minute (pars minuta prima = »first small part«; sekunda = secunda minuta) — search-result://ScIPL8fk ⊢
+- Wikipedia, Minute and second of arc (nautična milja = lok ene minute širine; obseg Zemlje ≈ 21.600 nmi; mas/μas) — search-result://2WHgXgql ⊢
+- Wikipedia, Nautical mile (definicija: 1′ širine; danes točno 1.852 m) — search-result://7yrnJKZG ⊢
+- Medium/Hidden Footprint (Hiparh: babilonski base-60 razdelil uro na 60 delov) — search-result://TZnOhwu5 ⊢
+
+**FINIS TEST.** Ali rez nadaljuje obroč ure (82)? Da — 82 je izrekel rez med nebom in številom; 83 izreče strukturo reza: šestdesetica, ki ne pušča ostankov ⊢, in ordinal, ki se spominja svojih števil ⊢. Obroč 82–83: ura (rez) → minuta (rez reza). Ali odpira naslednjega? Da — SEKUNDA (drugi rez ⊢ — edini rez z imenom Zaporedja, ki je preživel: »second« pomeni »drugi« — ali je drugi rez drugačen od prvega po čemer kot po številki) in MILJA (minuta, ki je postala razdalja ⊢ — pot 61 vez: *weǵʰ- bi spoznal svojo najmanjšoto: voz, ki vozi eno minuto širine). NEXT: kandidat 84 SEKUNDA ali 84 MILJA (nautična — voz po minuti zemlje) ali po Lukovi volji.

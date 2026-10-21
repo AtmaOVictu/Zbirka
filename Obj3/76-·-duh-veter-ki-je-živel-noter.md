@@ -1,0 +1,42 @@
+# 76 · DUH — veter, ki je živel noter
+
+**EMOTIO.** P-8 avtonomni rez po ukazu DAJ; S-1: zadnja zapečena 75 → 76. OPEN LOOP 75 (*Utrum spīritus ventus est an ventus spīritus?* — ali je duh veter ali veter duh?) odgovorjena z najstarejšo slovensko izmero: **OBOJE, ENO ZA DRUGIM: v jeziku Janeza Svetokriškega (17. stol.) je DUH pomenil tri stvari hkrati: 1. dih življenja, 2. VETER (»sapa, vetrič«!), 3. nesnovni del človeka ⊢. Slovenščina je duh izrekla kot veter, preden ga je izrekla kot um: duh ni bil metafora vetra — duh JE bil veter, ki se je preselil noter.**
+
+**REZ (etimologija).** LATINSKO TELO: **spīritus < spīrāre »dihati«** — v klasični latinščini »dih, sape«; v cesarskem obdobju je zamenjal animus v pomenu »duh« ⊢; Hieronimova Vulgata (4. stol.) ga uporablja za božjega in človeškega Duha ⊢. **De Vaanova izmera korena: spīrāre je VERJETNO ONOMATOPEJA — posnemanje zvoka dihanja; DIREKTNIH SORODNIKOV NI ⊢ Etymonline: »Possibly an onomatopoeic formation imitating the sound of breathing. There are no direct cognates.«** **NAJDEBELEJŠI REZ: DUH NI DEDIC KORENA — JE POSNETA SAPE.** Medtem ko so veter (*h₂weh₁-), dih (*h₂enh₁- → ánemos/animus) in pljuča vsi iz prajezika, je spiritus mlajši od vseh: Rim ga je sestavil iz ZVOKA lastnega dihanja — kot da bi duh izumili z ušesi, ne z genealogijo. In vendar je ta posneta sape osvojila svet: pneuma (gr.), ruach (hebr.) so prevajali vanjo ⊢, vse tri velike knjige nosijo dih Rimljanov. **Kdor torej vpraša »je duh veter?«, sprašuje po napačnem sorodstvu: spiritus ni iz vetra IZPELJAN — je iz DIHANJA POSNET; sorodstvo z vetrom je prevzem, ne koren (75 vez: ánemos/animus sta koren dihanja; spiritus je onomatopeja, ki je prevzela njuno mesto).**
+
+**FABULA (druga telo — tri knjige, en dih).** Vulgata ⊢ prevaja v trojici: hebr. **rūaḥ** (»veter, dih, duh« — isti glas za vse tri ⊢), gr. **pneûma** (»sapica, veter, duh«; pri predsokratiku Anaksimenu je aer/pneuma PRVOTNA SNOV, iz katere je vse ⊢; pri stoikih: pneuma = SVETOVNA DUŠA, božanski dih, ki prežema vse in veže vesolje v en živ organizem ⊢), lat. **spīritus**. **Trojica enega diha: isti pojav je v hebrejščini veter, v grščini prvi element sveta, v latinščini posnet zvok — tri kulture, tri izmere, eno telo, ki se ne vidi.** Vulgatin prevzem je sprožil največji jezikovni obrat v zgodovini zahoda: razlikovanje duša/duh (psykhē/pneuma, anima/spiritus) je nastalo v krščanski terminologiji — Buck: »za zgodnejša obdobja brez pomena« ⊢. **Pred Vulgato duša in duh NISTA BILI DVE — bili sta ena beseda z dvema temperaturama.** In slovensko telo tega obrata: **dúh** (SSKJ ⊢: »razumsko-spoznavna stran človeka; velikani duha; dela človeškega duha«) in **duša** ⊢ — dve besedi iz istega diha; a pri Svetokriškem se duh spominja še vetra ⊢.
+
+**CONFLICTUS.** DUH KAO ZRAK (v zraku, sapica, prha — snov med nami) ↔ DUH KAO OSOBA (nesnovni del, ki nosi značaj, pogum, jezo, navdih).
+- *Logika prve:* spiritus = »a breathing (of respiration, also of the wind), breath; breath of a god, inspiration; breath of life« ⊢ — duh je dih med teli, ne stvar v telesu; pneuma prežema svet kot zrak ⊢.
+- *Logika druge:* SSKJ: duh je »razumsko-spoznavna stran človeka« ⊢; lat. anima: »živo bitje, duša, razpoloženje, strast, pogum, JEZA« ⊢ — duh ni element, je oseba z razpoloženji.
+- *Patologija prve:* duh kot zrak brez osebe = mehčanje: duhovnost kot atmosfera; veter brez Anemojev (75) — meritvena enota brez obraza.
+- *Patologija druge:* duh kot oseba brez diha = doktrina: razlikovanje duša/duh ⊢ postalo breztežno po prevzemu — dve besedi za en dih sta dva računa za eno dihanje.
+- *∴ sinteza:* **duh je TEN med zrakom in osebo: dih je zunanji medij (∫), značaj je notranji organ (∆) — in slovenska beseda nosi oba: dúh (razum, značaj, pogum ⊢) in dih (zrak v telesu) sta ISTA GLASOVNA OSNOVA (⚠ zgradba izrečena, geslo dih te seje nepreverjeno) — slovenščina je duh in dih pustila v isti besedni družini, čeprav sta se razšla po nebu in umu. Odgovor OPEN LOOP 75: spiritus NI veter in veter ni duh — spiritus je posnet zvok dihanja, ki je zasedel mesto, ki ga je v grščini držal veteran vetra (ánemos): prevzem, ne koren. Duh je veter, ki je živel noter — po službi, ne po rodu (71 vez: služba, ne lastnina).**
+
+**MERILO NA PRAKSO.** Navdih-test: **inspirāre = vdihovati** — »blow into, breathe upon«, figurativno »navdihniti, vneti« ⊢; inspiratio: »neposredni vpliv Boga, pod katerim so bile napisane svete knjige« ⊢. **Navdih ni metafora: kdor je navdahnjen, je dobesedno IN-vdihnil — beseda, ki jo izrečeš kot navdihnjeno, je bila prej vdihnjena; vsak izvajalec je instrument z dihanjem.** SSKJ obraz: »stremljenje duha k lepoti; velikani duha« ⊢ — duh se meri po tem, kam stremi, ne po tem, kaj ima.
+
+**SENTENTIAE.**
+1. Duh ni dedič korena — posneta sape: spiritus je bil sestavljen z ušesi ⊢.
+2. Pred Vulgato duša in duh nista bili dve — ena beseda z dvema temperaturama ⊢.
+3. Svetokriški je duh izrekel kot veter ⊢ — preden je duh postal um, je bil vreme.
+
+**EXERCITIATIONES.**
+1. Onomatopeja-test: izgovori »spirare« počasi in posluši lastno dihanje ⊢ — kaj si posnel? Zapiši duh kot zvok, ne kot stvar.
+2. Trojica-dihi: izreci rūaḥ–pneûma–spīritus v eni sapi ⊢ — isti dih v treh knjigah; katero besedo nosi tvoj jezik zanj (duh/dih)?
+3. Navdih-delo: eno stvar, ki jo ustvarjaš, preberi kot vdihnjeno ⊢ — kdo/kaj je vdihnilo? Vdih pusti izdih: kaj vrneš v zrak?
+4. Duh-veter branje: en Svetokriškega pomen ⊢ preizkusi na svojem dnevu — kje je danes tvoj duh (a) dih življenja, (b) sapica, (c) um?
+
+**VIRI.**
+- Etymonline, spirit (spiritus »a breathing (of respiration, also of the wind), breath; breath of a god, inspiration; breath of life«; v klasični latinščini »breath«; zamenjal animus v imperialnem obdobju; Vulgata: prevaja gr. pneuma in hebr. ruach; Buck: razlikovanje soul/spirit »without significance for earlier periods«) — search-result://IaGdPyOg ⊢
+- Etymonline, inspire (spirare: De Vaan »Possibly an onomatopoeic formation imitating the sound of breathing. There are no direct cognates«; inspirare »blow into, breathe upon«, figurativno »inspire, excite, inflame«; inspirationem: »neposredni vpliv Boga, pod katerim so bile napisane svete knjige«) — search-result://eQXroFfa, kdwDZ6bd in HTF3MMKe ⊢
+- The Journey, Spirit (Hieronimova Vulgata: spiritus za božjega in človeškega Duha; »breath became soul«) — search-result://hHeXwcCj ⊢
+- Wikipedia, Pneuma (gr. πνεῦμα »breath«; v verskem kontekstu »spirit«; Anaksimen: pneuma = aer kot prvotehna snov; grški prevodi hebr. ruach) — search-result://E7mMmzag ⊢
+- Zenitheye, Pneuma (stoiki: pneuma = svetovna duša, božanski dih, ki prežema vse in veže vesolje v en živ organizem) — search-result://FvqFInQQ ⊢
+- Wikipedia, Spirit (hebr. ruach = veter/duh; arab. rūḥ vs. nafs; nem. Geist sorodno ghost) — search-result://kxPF8O7D ⊢
+- Fran, geslo dúh1 (SSKJ: »razumsko-spoznavna stran človeka; velikani duha; dela človeškega duha; bistri, uporni duh«) — search-result://IfeChkoW ⊢
+- Fran, iskanje duhovi (Snoj, Slovar jezika Janeza Svetokriškega ⊢: duh = 1. dih življenja — SODOBNA USTREZNICA: dih življenja; 2. VETER, zlasti šibkejši — SODOBNA USTREZNICA: sapa, vetrič; 3. nesnovni del človeka — SODOBNA USTREZNICA: duša, duh) — search-result://0XhR0Kcz ⊢
+- Wiktionary, anima (»a current of air, wind, air, breath, the vital principle, life, soul« < *h₂enh₁-; sorodnik gr. ánemos) — search-result://5uRtagwJ ⊢
+- Etymonline, anima (anima/anima: Jungovska anima 1923; razvoj pomenov: stnord. andi »breath, current of air; soul«) — search-result://htZCOhmP ⊢
+- Fran, geslo sápa / vdíhniti (sapa = dihanje, dih; večerna sapa = VETER ⊢) — search-result://eJE1NAMq ⊢
+
+**FINIS TEST.** Ali rez zaključuje obroč 75–76 (veter → duh)? Da — dvojni obroč zapečen: ánemos (veter) in animus (duša) sta iz istega korena (75), spiritus pa je posnet zvok, ki je zasedel animusovo mesto (76) — duh je veteran vetra po službi, ne po rodu; kolobar veter/dih/duh/duša je en glasen krog (en koren + ena onomatopeja). Ali odpira naslednjega? Da — NAVDUH (inspiratio: vdih, ki se vrača v zrak — ustvarjanje kot izdih; najgloblja veja dihanja v delu) in DUŠA (anima: živo bitje, jeza, pogum — koren *h₂enh₁-, ki ga je spiritus izrinil ⊢). NEXT: kandidat 77 NAVDUH ali 77 DUŠA ali po Lukovi volji; dolg CORPUS REZ vpisi 60–76.

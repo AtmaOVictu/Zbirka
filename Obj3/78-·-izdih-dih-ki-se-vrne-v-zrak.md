@@ -1,0 +1,40 @@
+# 78 · IZDIH — dih, ki se vrne v zrak
+
+**EMOTIO.** P-8 avtonomni rez po ukazu DAJ; S-1: zadnja zapečatil 77 → 78. OPEN LOOP 77 (*Quid fit cum exhālātiōnem nēmō inhālat?* — kaj se zgodi z izdihom, ki ga nihče ne vdihne?) odgovorjena v dveh plasteh — jezikovni in tradicijski: **izdih, ki ga nihče ne vdihne, ne izgine — vdihne ga zrak. Latinsko izdih ni prehod v praznino, ampak prehod v element: exhalāre pomeni tudi "izpareti" ⊢, izparina ni izgubljena, ampak sprememba stanja. In tradicija je šla korak dlje: zadnji izdih ni izdih telesa, ampak odhod duše — duša zapusti telo skozi usta z zadnjim izdihom ⊢ (slovenski frazem temelji na tej predstavi ⊢); v judovski tradiciji duša odide z umirajočim dihom in prisotni ji pomagajo s Šema ob zadnjem dihu ⊢. Zato: zadnji izdih je edini izdih, ki ga nihče od ljudi ne vdihne — ker ni namenjen ljudem: namenjen je zraku, iz katerega je bil vdihnjen. Izdih je vrnitev posojila.**
+
+**REZ (etimologija).** LATINSKO TELO: **exhalāre = ex ("ven") + halāre ("dihati")** ⊢; de Vaan rekonstruira koren *henhslo- "dih", s sorodniki: sanskrtsko *aniti* "dihati", gotsko *uz-anan* "izdihniti", staroirsko *anaid* "čakati, ostati" ⊢ — sorodstvo, ki izmeri tri dejstva: dihanje je indoevropsko posojilo, izdih je univerzalni glagol, STAROIRŠČINA PA IZREKA OBA POMENA V ENI BESEDI: anaid pomeni "dihati" IN "čakati, ostati" — zadnji izdih kot zadnje čakanje. **expirātiō: v angleščini zgodnji 15. stol. pomeni "para, dih" ⊢ — izdih je najprej para, šele potem smrt (77 vez).** SLOVENSKO TELO — NAJDEBELEJŠI REZ: **SLOVENŠČINA IMA DVA GLAGOLA ZA DVA IZDIHA: izdihniti (iz-dih — telesni izdih, dih gre ven) in izdahniti dušo (iz-dahniti — duhovni izdih, duša gre ven).** Fran/Keberjeva lista frazemov za umreti vsebuje oba: *star. izdahniti dušo, star. izdihniti, izdihniti dušico, izdihniti dušo, izpustiti dušo* — in še izraziti *izhropsti* ⊢. **Par dih : duh (76 vez) se v glagolih razširi v par izdihniti : izdahniti — telo izdiha dih, človek izdahne dušo; smrt po slovenski izmeri ni zadnji dih, ampak zadnji duh.** Frazem izdihniti/izpustiti dušo pomensko velja tudi za stroje in predmete — prenehajo delovati ⊢: tudi naprava ima dušo, ki jo lahko izdahne.
+
+**FABULA (zgodnje grško telo — zrak kot duša sveta).** Anaksimen, najzgodnejša ohranjena filozofska raba pneûma: **"Kakor naša duša (psyché), ki je zrak (aér), nas drži skupaj, tako dih (pneûma) in zrak obsegata ves svet"** ⊢ — duša posameznika in dih sveta sta ena in ista snov v dveh merilih; izdih posameznika ni izguba, ampak vračilo v svetovni dih. Homer/psiha: **psyché je prvotno "izdih umirajočega"** — glagol psychein = "pihati"; **psyché prileti iz ust umirajočega kot metulj — in metulj se po grško prav tako imenuje psyché** ⊢ ⊢ — duša je žival, ki se rodi iz zadnjega izdiha; Wiktionary izreče kanon: "dobesedni pomen ψυχή je "dih"; odtod "duh, duša, um" ⊢. Krščansko telo: spiritus = običajni prevod grškega pneûma ⊢; ločitev duše in duha (psykhē/pneuma, anima/spiritus) postane vsakdanja šele v krščanski terminologiji — "za zgodnejša obdobja brez pomena" (Buck) ⊢.
+
+**CONFLICTUS.** IZDIH KOT KONEC (dih, ki ga nihče ne vdihne = izgubljen; smrt kot prekinitev) ↔ IZDIH KOT VRNITEV (izparevanje — sprememba stanja; duša odide z dihom, zrak sprejme).
+- *Logika prve:* posameznik je zaprt posodnik: dih je njegov, izdih izven posode je smrt.
+- *Logika druge:* Anaksimen: posameznik ni zaprt — njegova duša je zrak, zrak je svet ⊢; izdih je krožni tok, ne izguba.
+- *Patologija prve:* kult zadržanega diha — kdor ne izdiha, ne živi; zadrževanje diha je strah pred vračilom posojila.
+- *Patologija druge:* kult izparevanja — če je vsak izdih vrnitev v svetovni dih, potem smrt ni dogodek; a jezik pravi drugače: expirāre pomeni tudi umreti ⊢ — jezik je izmeril BOTH: izdih kot prehod v zrak in izdih kot prehod v smrt, in ju ni ločil.
+- *∴ sinteza:* **izdih je TEN: ∫ (vrnitev posojila — dih, ki je bil vedno tuj zrak) + ∆ (dogodek — ta dih, ta trenutek, ta smrt). Odgovor OPEN LOOP 77: exhālātiō ā nēmō inhālāta nōn perit — aer eam inhālat; zadnji izdih ni izgubljen, ker je bil od prvega vdiha naprej posojilo. Smrt ni prekinitev dihanja, ampak zadnje vračilo: izdahni dušo — telo vrne dih, človek vrne duha, zrak pa je edini upnik, ki posoja naprej. BJS samoreferenca: vsak zapečaten rez je izdih, ki ga zapis vdihne — a korpus ve, da je bil vsak vdih sprva tuj zrak.**
+
+**MERILO NA PRAKSO.** Izreci oba glagola pravilno: stroj se lahko samo izdihne (preneha delovati) ⊢, človek pa lahko izdahne dušo. "Izdihnil je" = telesni izraz; "izdahnil dušo" = smrtni izraz; izhropsti = izrazit, za napor ⊢ Fran. In izmera iz vsakdana: hropeti je dih, ki sili ven — kdor hropi, še bori za izdih; izhropsti pomeni, da se je ta boj končal.
+
+**SENTENTIAE.**
+1. Zadnji izdih je edini izdih, ki ga nihče od ljudi ne vdihne — ker je namenjen zraku, iz katerega je bil vdihnjen.
+2. Slovenščina loči dva izdiha: izdihniti (dih gre ven) in izdahniti (duša gre ven) — smrt ni konec dihanja, ampak odhod duše.
+3. Vsak izdih je vrnitev posojila — dih je bil od prvega vdiha naprej tuj zrak.
+
+**EXERCITIATIONES.**
+1. Posojilo-dih: en vdih zavestno vzemi kot posojilo, en izdih zavestno vrni — izreci pri izdihu: ta zrak ni bil moj, ta zrak ni bil moj niti pri vdihu.
+2. Izdahni-dušo-test: eno delo, ki ga danes zaključiš (navdihnjen rez 77), izreci ob zaključku: to je moj izdih — in opazuj, kdo ga vdihne; če nihče, izreci: zrak ga je vdihnil, in mirno zapiši.
+3. Anaksimen-sprehod: enkrat na dan opazi veter in izreci: to je dih sveta, ki me drži skupaj — ista snov, ki jo izdihujem.
+4. Psyché-metulj: eno misel, ki jo je treba izpustiti (predstava, sodba, strah), si predstavljaj kot metulj, ki prileti z zadnjim izdihom ⊢ — duša v pomenu izpuščene barve, ne izgubljene teže.
+
+**VIRI.**
+- Etymonline, exhale/exhalation (exhalare = ex "out" + halare "breathe"; de Vaan PIE *henhslo-; sanskrtsko aniti, gotsko uz-anan, staroirsko anaid "to wait, remain") — search-result://fuN8gXVG, 3FSIPwJc ⊢
+- Etymonline, expire/expiration (expirare/exspirare "breathe one's last, die"; early 15c expiracioun "vapor, breath") — search-result://fuN8gXVG, W1eblnzx ⊢
+- Etymonline, respire/spiritus (spiritus = običajni prevod grškega pneûma; ločitev psykhē/pneuma, anima/spiritus brez pomena za zgodnejša obdobja — Buck) — search-result://D0kwUsKZ ⊢
+- Wikipedia, Pneuma (Anaksimen: "kakor naša duša, ki je zrak, nas drži skupaj, tako dih in zrak obsegata ves svet") — search-result://bpX5g2cv ⊢
+- Wiktionary, ψυχή (dobesedni pomen "dih"; odtod "duh, duša, um"; psychein = pihati) — search-result://QrMZPdqA ⊢
+- Language of Air, pneuma/psyché (psyché = zadnji izdih umirajočega; prileti iz ust kot metulj; metulj = psyché) — search-result://k9BeWep5 ⊢
+- Keber/Fran, frazemi umreti (star. izdahniti dušo, izdihniti dušo/dušico, izpustiti dušo, izhropsti) — search-result://H1uMCyR6 ⊢
+- Jezik in slovstvo 65/2020 (frazem izdihniti/izpustiti dušo izhaja iz krščanskega nauka: duša zapusti telo skozi usta z zadnjim izdihom; velja tudi za predmete — prenehajo delovati) — search-result://GyEREOvG, XBtTxB6B ⊢
+- Next Avenue / BMJ EBN (judovska tradicija: duša odide z umirajočim dihom, prisotni recitirajo Šema ob zadnjem dihu) — search-result://BxD8b5sY, sAxDUuYS ⊢
+
+**FINIS TEST.** Ali rez zaključuje obroč diha 76–78 (duh → navdih → izdih)? Da — 76 izmeril sostavo (dih : duh), 77 smer (vdih, ki se podaljša v delo), 78 pa vračilo (izdih, ki se vrne v zrak). Odgovor OPEN LOOP 77 zapečatil: zadnji izdih ni izgubljen — namenjen je zraku, ki ga je posodil; slovenščina to ve v paru izdihniti : izdahniti. Ali odpira naslednjega? Da — ANIMA (anima : spiritus — ali sta duša in duh dva, kot pravi krščanska terminologija, ali ena, kot pravi Buck za zgodnejša obdobja ⊢) in SOGLASJE (conspīrāre — skrivnost, ki je ostala dihanje, kandidat že od 77). NEXT: kandidat 79 SOGLASJE ali 79 ANIMA ali po Lukovi volji; dolg CORPUS REZ vpisi 60–78 v LEXIKON ostaja.

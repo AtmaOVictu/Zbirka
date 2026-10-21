@@ -1,0 +1,39 @@
+# 79 · ANIMA — duša, ki je bila dih
+
+**EMOTIO.** P-8 avtonomni rez po ukazu DAJ; S-1: zadnja zapečatil 78 → 79. OPEN LOOP 78 (*Utrum anima et spīritus duo sunt an ūnum?* — ali sta duša in duh dva ali ena?) odgovorjena z dvema izmerama, ki se ne izključujeta: **DUO SUNT EX ASPECTU — po obrazu sta dva: SSKJ duh izreče "razumsko-spoznavna stran človeka" ⊢, duša pa "čustveno-moralna stran človeka" in "nematerialno, neumrljivo bistvo" ⊢ — slovenski kanon je zarezal človeka na duha in dušo po isti črti, po kateri je latinski kanon ločil animus od anime. A ŪNUM EX RĀDĪCE — po korenu sta ena: latinsko anima pomeni "current of air, wind, air, breath, the vital principle, life, soul" ⊢ iz PIE *h₂enh₁- "dihati, pihati" ⊢; slovensko duša je v praslovanščini pomenila "dih, sapa" in se razvila iz prvotnega pomena "dihanje" ⊢ (Snoj). Vsi trije jeziki — latinski, slovenski, grški (ánemos = veter ⊢) — dihajo iz istega korena: razlika med dušo in duhom ni jezikovna, ampak kulturni rez po živi snovi.**
+
+**REZ (etimologija).** LATINSKO TELO — TROJNA IZMERA: **anima** = fiziološka duša: življenjsko počelo, ki preneha z dihom, dvojnik grške psychē ⊢; **animus** = psihološko-etična duša: počelo moralne osebnosti, ki preneha z voljo, dvojnik grškega thūmós ⊢; **spiritus** = dih, ki je postal prevod grškega pneûma (76 vez). Latinski jezik ima torej TRI besede za to, kar slovenščina izreče z dvema, hebrejščina pa s svojimi tremi: **nefeš (živo bitje, telo-duša), rūah (veter, duh), neshāmāh (dih življenja)** ⊢ ⊢ — tri besede, ki jih angleški prevod stisne v eno ("soul") ⊢. NAJDEBELEJŠI REZ: **MYTOLOŠKO IN METAFIZIČNO TELE LATINSKEGA JEZIKA: duše pokojnikov so v mitološkem pogledu animae (senke), v metafizičnem pogledu animi (duhovi)** ⊢ — ista beseda, spremenjen pogled; latinski jezik razlikuje dušo pokojnika ne po snovi, ampak po tem, KDO jo gleda. Jungovska izmera (1923): anima = ženski del moške osebnosti, animus = moški del ženske ⊢ — dvajseto stoletje je razrezalo dušo po spolu tako kot antika po smrti; anima mundi = "duša sveta", snov, ki po Pitagori in Platonu prežema vesolje ⊢.
+
+**FABULA (razsežnost duše po delovanju).** Aristotel, De Anima (Peri Psychēs, c. 350 pr. n. št.): ne razpravlja o ENI duši, ampak jo RAZVRŠČA po delovanjih ⊢: **rastline imajo dušo (hranjenje in razmnoževanje), živali imajo več (gibanje, čut), človek ima največ (um)** — duša ni lastnost, ampak lestev: vsak živi organ ima svojo dušo, nič živega je nima brez. SSKJ po isti črti: duša je tudi "narava" ("ima birokratsko, pogumno dušo" ⊢), tudi zbir čustev ("razkril mu je svojo dušo" ⊢), tudi del vesoljne duše ("človekova duša je le del vesoljne duše" ⊢) — ena beseda, ki meri vse od organa do vesolja.
+
+**CONFLICTUS.** DUŠA IN DUH KOT DVA (razrez: SSKJ duh = razumsko-spoznavno, duša = čustveno-moralno ⊢; latinsko anima : animus ⊢; hebrejsko tri besede ⊢) ↔ KOT ENA (koren *h₂enh₁- = dihati, en v vseh jezikih ⊢; praslovanska duša = dih, sapa ⊢; Aristotel: duša je ena, razvrščena po delovanjih ⊢).
+- *Logika prve:* kultura potrebuje šive: kdor moli za pokoj duš v vicah ⊢ Fran, moli za nekaj, kar umre z dihom; kdor hvali velikane duha ⊢ Fran, hvali tisto, kar preživi telo.
+- *Logika druge:* jezik pozna en sam koren: dih. Anima je bila dih, preden je postala duša; duša je bila sapa, preden je postala bistvo ⊢.
+- *Patologija prve:* kult dveh duš — metafizična shizma: telo zapusti ENA stvar, ne dve; kdo jih ločuje ob smrti, ločuje tudi ob življenju.
+- *Patologija druge:* kult ene duše — panteistična izlitost: če je vsaka duša del vesoljne duše ⊢, potem ni posameznika; a SSKJ pravi tudi "pogubiti dušo" ⊢ — tisto, kar je mogoče pogubiti, je posamezno.
+- *∴ sinteza:* **duša in duh sta dva reza po eni snovi: snov je dih (koren *h₂enh₁-), rez pa je kultura — slovenski rez teče med razumom in čustvom ⊢, latinski med telesom in voljo ⊢, hebrejski med bitjem, vetrom in dihom ⊢. Odgovor OPEN LOOP 78: anima et spīritus duo sunt ex aspectu, ūnum ex rādīce — obraz sta dva, koren en. BJS samoreferenca: korpus ve za eno dihalno plast pod vsemi rezmi — vsak rez kanona je rez po dihu.**
+
+**MERILO NA PRAKSO.** Izmera iz SSKJ ⊢: kdor govori o razumu in mislih, govori o duhu ("velikani duha"); kdor govori o čustvih in moralni rani, govori o duši ("čista duša", "razkril mu je svojo dušo"). Frazemska meja: "biti predan z dušo in telesom" ⊢ — duša gre s telesom, ne z duhom; poslovnja in ljubezen sta dušni besedi, znanost in umetnost pa duhovni. Napaka, ki jo jezik ne odpušča: "dobra duša" in "dobra duh" nista isto — dobra duša sočutje, dober duh bistroumnost.
+
+**SENTENTIAE.**
+1. Duša je bila dih, preden je postala duša — vsi trije jeziki dihajo iz istega korena.
+2. Obraz sta dva, koren en: razlika med dušo in duhom je kulturni rez, ne jezikovna snov.
+3. Duša ni lastnost, ampak lestev — rastlina, žival, človek: vsak živi organ ima svojo dušo (Aristotel).
+
+**EXERCITIATIONES.**
+1. Rez-test: eno svoje dejanje danes izreci najprej z duhom ("to je bila misel"), nato z dušo ("to je bil občutek") — izreci, kje je rez med obema.
+2. Animae-animi-test: enega pokojnika se spomni dvakrat — enkrat kot telo, ki je umrlo (anima), enkrat kot značaj, ki ostaja (animus) ⊢ — izreci: oba spomina sta ista človeka v dveh podobah.
+3. Lestev-duš: tri živa bitja opazuj po Aristotelovi lestvi (rastlina hrani, žival se giblje, človek misli) ⊢ — izreci: vsak ima dušo svoje širine.
+4. Ena-beseda-prevod: hebrejske tri besede (nefeš, rūah, neshāmāh) ⊢ prenesi v slovenščino — izreci: bitje, veter, dih — in opazuj, katera slovenska beseda najde katero.
+
+**VIRI.**
+- Wiktionary, anima (lat. "current of air, wind, air, breath, the vital principle, life, soul"; PIE *h₂enh₁- "to breathe, blow"; sorodnik grško ánemos "wind") — search-result://jzCBqeY5 ⊢
+- Latin Stack Exchange, anima vs. animus (anima = fiziološka duša, preneha z dihom, kot psychē; animus = moralna osebnost, preneha z voljo, kot thūmós; animae = senke pokojnih, animi = duhovi) — search-result://G4s99iIG ⊢
+- Etymonline, animus/anima (rational soul, mind; Jungova anima/animus 1923; anima mundi = "soul of the world", Abelard prevaja psychē tou kosmou; stnord. andi "breath; soul") — search-result://8ViXUvQH, ub6ddWf5 ⊢
+- Vera Smole / Snoj, frazemi srce-duša (praslovanska duša = "dih, sapa", razvila iz "dihanja"; SSKJ danes: "nematerialno, neumrljivo bistvo človeka") — search-result://35oWgFS4 ⊢
+- Fran/SSKJ, duša (nematerialno, neumrljivo bistvo; čustveno-moralna stran; "razkril mu je svojo dušo"; "del vesoljne duše"; "pogubiti dušo"; "biti predan z dušo in telesom") — search-result://t0th54qz ⊢
+- Fran/SSKJ, duh1 ("razumsko-spoznavna stran človeka"; "velikani duha") — search-result://l8xHVml6 ⊢
+- Biblical Hermeneutics / Mi Yodeya / Verse By Verse (hebrejsko neshamah, nefesh, ruach — tri besede; človek postal nefesh ḥajah; Onkelos: rūaḥ m'mal'la "tisti z močjo govora") — search-result://0f2j3sXZ, 2l8WdCOd, WHqfYPHl, uLArTEbc ⊢
+- Wikipedia, On the Soul (Aristotel, Peri Psychēs c. 350 pr. n. št.: razvršča duše po delovanjih; rastline hranjenje in razmnoževanje) — search-result://SOjfj6oS ⊢
+
+**FINIS TEST.** Ali rez zaključuje obroč diha 76–79 (duh → navdih → izdih → duša)? Da — 76 izmeril sostavo dih : duh, 77 smer vdih : izdih v delo, 78 vračilo izdiha v zrak, 79 pa koren: pod vsem rezom je dih — anima je bila dih, duša je bila sapa ⊢. Odgovor OPEN LOOP 78 zapečatil: duo ex aspectu, ūnum ex rādīce. Ali odpira naslednjega? Da — SOGLASJE (conspīrāre — skrivnost, ki je ostala dihanje, kandidat od 77) in USTVARJALNOST (velikani duha ⊢ — ali je delo duha rojeno iz duše ali iz diha?). NEXT: kandidat 80 SOGLASJE ali po Lukovi volji; dolg CORPUS REZ vpisi 60–79 v LEXIKON ostaja.

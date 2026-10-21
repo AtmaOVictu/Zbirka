@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kolo čustev in potreb</title>
+<style>
+  :root { font-family: Inter, system-ui, sans-serif; color: #111827; background: #f8fafc; }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 24px; }
+  header { text-align: center; margin-bottom: 12px; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  header p { margin: 0; color: #6b7280; font-size: 14px; }
+  #hint { text-align: center; color: #9ca3af; font-size: 13px; margin: 6px 0 14px; min-height: 18px; }
+  #hint b { color: #374151; }
+  .layout { display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap; justify-content: center; }
+  #wheelwrap { flex: 0 0 auto; }
+  svg text { user-select: none; cursor: pointer; }
+  .seg { cursor: pointer; transition: opacity .15s; }
+  .seg:hover { opacity: .82; }
+  #panel { flex: 1 1 320px; max-width: 420px; background: #fff; border: 1px solid #e5e7eb; border-radius: 14px; padding: 18px 20px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+  #panel h2 { margin: 0 0 4px; font-size: 18px; }
+  #panel .sub { color: #6b7280; font-size: 13px; margin-bottom: 12px; }
+  .need { margin: 10px 0; padding-left: 14px; border-left: 3px solid #d1d5db; }
+  .need h3 { margin: 0; font-size: 14px; }
+  .need p { margin: 2px 0 0; font-size: 13px; color: #4b5563; }
+  .feeling { cursor: pointer; padding: 2px 4px; border-radius: 6px; }
+  .feeling:hover { background: #f3f4f6; }
+  .feeling.active { background: #eef2ff; }
+  button#back { margin-top: 10px; background: #111827; color: #fff; border: 0; border-radius: 8px; padding: 7px 14px; font-size: 13px; cursor: pointer; }
+  button#back:disabled { opacity: .35; cursor: default; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Kolo čustev in potreb</h1>
+  <p>Klikni jedrsko čustvo → povečava. Klikni čustvo → pokaže se potreba.</p>
+</header>
+<div id="hint"><b>Namig:</b> vsako čustvo je kazalec potrebe, ki stoji za njim.</div>
+<div class="layout">
+  <div id="wheelwrap"><svg id="wheel" width="560" height="560" viewBox="-280 -280 560 560"></svg></div>
+  <div id="panel"></div>
+</div>
+<script>
+const DATA = [
+  { core: "Anger / Jeza", color: "#ef4444", slo: "jeza", feelings: [
+    ["frustrated / frustriran", "napredek, sodelovanje"],
+    ["irritated / razdražen", "prostor, mir"],
+    ["resentful / zagrenjen", "pravičnost, priznanje"],
+    ["furious / besen", "upoštevanje meja"]]},
+  { core: "Fear / Strah", color: "#8b5cf6", slo: "strah", feelings: [
+    ["anxious / tesnoben", "varnost, gotovost"],
+    ["worried / zaskrbljen", "predvidljivost"],
+    ["overwhelmed / preplavljen", "počitek, enostavnost"],
+    ["insecure / negotov", "sprejetost, opora"]]},
+  { core: "Grief / Žalost", color: "#0ea5e9", slo: "žalost", feelings: [
+    ["hurt / ranjen", "toplota, povezanost"],
+    ["disappointed / razočaran", "upanje, izpolnjene parole"],
+    ["lonely / osamljen", "blizina, skupnost"]]},
+  { core: "Shame / Sram", color: "#f59e0b", slo: "sram", feelings: [
+    ["embarrassed / v zadregi", "dostojanstvo"],
+    ["guilty / kriv", "usklajenost z lastnimi vrednotami"],
+    ["worthless / nevreden", "vrednost, pripadnost"]]},
+  { core: "Sadness / Bridkost", color: "#3b82f6", slo: "bridkost", feelings: [
+    ["depressed / potrten", "smisel, gibanje"],
+    ["heavy / tečno", "olajšanje, izraz"],
+    ["helpless / nemočen", "moč, izbira"]]},
+  { core: "Disgust / Gnus", color: "#10b981", slo: "gnus", feelings: [
+    ["repulsed / zavrnil", "čistost, integriteta"],
+    ["sceptical / skeptičen", "iskrenost"],
+    ["contemptuous / prezirljiv", "spoštovanje"]]}
+];
+const svg = document.getElementById("wheel");
+const panel = document.getElementById("panel");
+const NS = "http://www.w3.org/2000/svg";
+function el(n, a){ const e = document.createElementNS(NS,n); for(const k in a) e.setAttribute(k,a[k]); return e; }
+let selected = null;
+function polar(r, a){ return [r*Math.cos(a), r*Math.sin(a)]; }
+function wedge(r0, r1, a0, a1){
+  const [x0,y0]=polar(r0,a0),[x1,y1]=polar(r1,a0),[x2,y2]=polar(r1,a1),[x3,y3]=polar(r0,a1);
+  return `M${x0},${y0} L${x1},${y1} A${r1},${r1} 0 ${(a1-a0)>Math.PI?1:0} 1 ${x2},${y2} L${x3},${y3} A${r0},${r0} 0 ${(a1-a0)>Math.PI?1:0} 0 ${x0},${y0} Z`;
+}
+function draw(){
+  svg.innerHTML = "";
+  const n = DATA.length, gap = 0.02;
+  const rOuter = selected ? 255 : 210, rCore = selected ? 200 : 120;
+  DATA.forEach((d,i)=>{
+    const a0 = -Math.PI/2 + i*2*Math.PI/n + gap/2;
+    const a1 = -Math.PI/2 + (i+1)*2*Math.PI/n - gap/2;
+    const mid = (a0+a1)/2;
+    const dim = selected !== null && selected !== i;
+    const g = el("g",{class:"seg", opacity: dim ? .25 : 1});
+    const p = el("path",{d: wedge(rCore, rOuter, a0, a1), fill: d.color});
+    p.addEventListener("click", ()=> select(i));
+    g.appendChild(p);
+    if (!selected){
+      const t = el("text",{x: (rCore+rOuter)/2*Math.cos(mid), y: (rCore+rOuter)/2*Math.sin(mid),
+        "text-anchor":"middle","dominant-baseline":"middle", fill:"#fff","font-size":"15","font-weight":"600"});
+      t.textContent = d.core;
+      t.addEventListener("click", ()=> select(i));
+      g.appendChild(t);
+    } else {
+      // inner feelings ring labels
+      const [fr0, fr1] = selected===i ? [rCore+6, rCore+66] : [rCore,rCore];
+      d.feelings.forEach((f,j)=>{
+        const m = d.feelings.length;
+        const b0 = a0 + (a1-a0)*j/m, b1 = a0 + (a1-a0)*(j+1)/m, bm=(b0+b1)/2;
+        const s = el("text",{x:(fr0+fr1)/2*Math.cos(bm), y:(fr0+fr1)/2*Math.sin(bm),
+          "text-anchor":"middle","dominant-baseline":"middle", fill:"#fff","font-size":"12.5","font-weight":"600",
+          class:"feeling"});
+        s.textContent = f[0];
+        s.addEventListener("click",(e)=>{ e.stopPropagation(); showNeed(i,j); });
+        g.appendChild(s);
+      });
+    }
+    svg.appendChild(g);
+  });
+  if (!selected){
+    const c = el("circle",{r:112, fill:"#fff", stroke:"#e5e7eb"});
+    svg.appendChild(c);
+    const t1 = el("text",{"text-anchor":"middle", y:-6,"font-size":"15","font-weight":"700", fill:"#111827"});
+    t1.textContent = "ČUSTVA";
+    const t2 = el("text",{"text-anchor":"middle", y:14,"font-size":"12", fill:"#6b7280"});
+    t2.textContent = "→ potrebe";
+    svg.appendChild(t1); svg.appendChild(t2);
+  }
+}
+function showNeed(i,j){
+  const d = DATA[i], f = d.feelings[j];
+  document.querySelectorAll(".feeling.active").forEach(x=>x.classList.remove("active"));
+  const all = svg.querySelectorAll(".feeling");
+  all.forEach(x=>{ if(x.textContent===f[0]) x.classList.add("active"); });
+  panel.innerHTML = `<h2 style="color:${d.color}">${f[0]}</h2>
+    <div class="sub">jedro: ${d.core}</div>
+    <div class="need"><h3>Potreba: ${f[1]}</h3>
+    <p>To čustvo ti pove, da ta potreba trenutno ni izpolnjena. Vprašaj: kaj bi pomagalo, da bo?</p></div>`;
+}
+function select(i){
+  selected = (selected === i) ? null : (i ?? null);
+  if (selected === null) panel.innerHTML = "";
+  draw();
+  if (selected !== null){
+    const d = DATA[selected];
+    panel.innerHTML = `<h2 style="color:${d.color}">${d.core}</h2>
+      <div class="sub">Klikni posamezno čustvo v obroču za potrebo, ki stoji za njim.</div>
+      ${d.feelings.map((f,j)=>`<div class="need" style="border-color:${d.color}"><h3>${f[0]}</h3><p>potreba: ${f[1]}</p></div>`).join("")}
+      <button id="back">← nazaj na celoten krog</button>`;
+    document.getElementById("back").onclick = ()=>{ selected=null; panel.innerHTML=""; draw(); };
+  }
+}
+draw();
+</script>
+</body>
+</html>

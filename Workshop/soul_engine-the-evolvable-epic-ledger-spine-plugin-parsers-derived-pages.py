@@ -99,6 +99,7 @@ CREATE TABLE IF NOT EXISTS zakoni (
     zid           INTEGER PRIMARY KEY AUTOINCREMENT,
     doc_id        INTEGER NOT NULL REFERENCES docs,
     series        TEXT NOT NULL,       -- rez | dokaz | sodba | ubod | šiv
+                                       -- | zakon | z-rez | m-vrstica (G2)
     number        INTEGER,            -- LABEL, never the key
     title         TEXT,
     actor         TEXT,
@@ -562,6 +563,26 @@ ZAKON_MH_BOLD = re.compile(r"^\*\*\s*" + ZAKON_SERIES +
 ZAKON_Z_HEAD = re.compile(r"^\*\*\s*Z[-–]\s*(\d{1,3})\s+(.+?)\*\*"
                           r"\s*[—–:]?\s*(.*)$")
 
+# G2 (Luka's "daj", 4. 10. 2026 — the five-format ruling, the Z-series
+# design precedent): (1) Z-REZ doc-heads — "# Z-rez: TITLE" — series
+# 'z-rez', NO number (the number is a LABEL; its absence is carried
+# honestly as NULL). (2) M-VRSTICE — the m-register's two-line laws:
+# "Z-NAME: title" + an indented ":: izrek" — the SECOND LINE IS THE
+# WITNESS (a Z-NAME: line alone is a wish, not a law); series
+# 'm-vrstica', number NULL (the NAME is the label, carried in the
+# title). The remaining two rulings of the five: doclib:// priče and
+# "window" citations stay TEXT — the machine reads, never resolves the
+# owner's links (KP-2 krvtok: the way back to the source stays his).
+# OVERRULED 4. 10. 2026, Luka: "naj bere kar odpre in naj odpira
+# kar bere" — the vein now runs through the machine (KRVTOK); this
+# comment stays as the ruling's history, not its truth (Z3: rane
+# se ne brišejo, imenujejo se).
+ZAKON_ZREZ_HEAD = re.compile(r"^#{1,6}\s*\**\s*Z[-–]REZ\b\s*[—–·:]*\s*(.*)$",
+                             re.IGNORECASE)
+ZAKON_M_NAME = re.compile(r"^Z[-–]([A-ZČŠŽ0-9πΩØ]+(?:[-–][A-ZČŠŽ0-9πΩØ]+)*)"
+                          r"\s*:\s*(.*)$")
+ZAKON_M_TEZA = re.compile(r"^\s*::\s*(.*)$")
+
 # sections we carry, by keyword in the heading (the anatomy, measured)
 ZAKON_SECTIONS = (("NUJNE NAPAKE", "nujne_napake"),
                   ("ODPRTA", "odprta_partial"),
@@ -592,6 +613,10 @@ def parse_zakon(text: str) -> List[dict]:
             m = re.match(r"\*\*\s*" + ZAKON_SERIES +
                          r"\b[·#:*\s]*(\d{1,4})", line, re.IGNORECASE)
         else:
+            mz = ZAKON_ZREZ_HEAD.match(line.strip())
+            if mz:      # "# Z-rez: TITLE" — a law with no number, honestly
+                series, number, title = "z-rez", None, mz.group(1).strip()
+                break
             m = ZAKON_NUM.search(line)
         if m:
             series, number = m.group(1).lower(), int(m.group(2))
@@ -628,7 +653,8 @@ def _multi_head_positions(text: str) -> List[tuple]:
     right after the number (the citation guard, measured); Z-heads carry
     their one-line body as the rest-of-line (the zakonik's own shape)."""
     out = []
-    for n, raw in enumerate(text.splitlines(), 1):
+    lines = text.splitlines()
+    for n, raw in enumerate(lines, 1):
         line = raw.rstrip()
         m = ZAKON_Z_HEAD.match(line)
         if m:
@@ -636,6 +662,16 @@ def _multi_head_positions(text: str) -> List[tuple]:
                         m.group(2).strip().rstrip(":").strip(),
                         m.group(3).strip()))
             continue
+        mM = ZAKON_M_NAME.match(line)
+        if mM and n < len(lines):
+            mT = ZAKON_M_TEZA.match(lines[n])
+            if mT:      # the two-line witness: :: izrek on the next line
+                ime = "Z-" + mM.group(1)
+                rest = mM.group(2).strip()
+                out.append((n, "m-vrstica", None,
+                            (ime + " · " + rest) if rest else ime,
+                            mT.group(1).strip()))
+                continue
         m = ZAKON_MH_HEAD.match(line) or ZAKON_MH_BOLD.match(line)
         if not m:
             continue
@@ -1316,6 +1352,373 @@ def census(con) -> dict:
             "ORDER BY stratum, kind"):
         out.setdefault(r["stratum"] or "(untyped)", {})[r["kind"]] = r["n"]
     return out
+
+
+# ============== G3 REGISTER TEORIJ (Luka's "daj", 4. 10. 2026) ==========
+# Extends the REPORT line (dups/dark/census/le-cenzus precedent; replaces
+# nothing). A theory is a DERIVED object over docs + zakoni + mentions —
+# NEVER entries (the word layer measured noisy: quotes wearing word-names).
+# Families by LCP prefix on filename stems — the instrument the corpus
+# donated in matematizacija-celote-v3 (ultrametrika diha: β = π/|τ|; early
+# branching = version bodies of one theory, β→1 = the same body, other
+# cut). The register observes, never rules; solo bodies without laws are
+# counted, not judged (they already live in LIBRARY). The fold that
+# presents a theory in its wholeness is G4's page; this is the census.
+
+VER_RE = re.compile(r"\bv\d+(?:[.-]\d+)*\b")
+
+
+def _teorije_druzine(con) -> list:
+    """The G3/G4 shared organ: every name-family over typed docs.
+    One family per shared deep prefix (union-find over the sorted line).
+    SCAR (4. 10., repaired same sitting): the first pass added a
+    relative cut (k >= 0.6*min) — a guess dressed as a measure; v3's own
+    typology forbids it (DRUŽINA-ZGODNJA: β <= 0.3 is a real family, the
+    version bodies of one theory branch EARLY). The absolute rule stands;
+    the spectral threshold stays ∂, exactly as v3's own open point."""
+    rows = list(con.execute(
+        "SELECT doc_id, path, mtime, stratum, kind FROM docs "
+        "WHERE kind IS NOT NULL AND kind != 'binar-pdf'"))
+    stems = [(Path(d["path"]).stem.lower(), d) for d in rows]
+    stems.sort(key=lambda x: x[0])
+    n = len(stems)
+    parent = list(range(n))
+
+    def find(i):
+        while parent[i] != i:
+            parent[i] = parent[parent[i]]
+            i = parent[i]
+        return i
+
+    def lcp(a, b):
+        k = 0
+        for x, y in zip(a, b):
+            if x != y:
+                break
+            k += 1
+        return k
+
+    for i in range(n - 1):
+        if lcp(stems[i][0], stems[i + 1][0]) >= 8:
+            parent[find(i)] = find(i + 1)
+
+    fams = {}
+    for i in range(n):
+        fams.setdefault(find(i), []).append(stems[i])
+
+    out = []
+    for members in fams.values():
+        name = os.path.commonprefix([m[0] for m in members])
+        name = name.rstrip("-_·. ") or members[0][0]
+        beta = round(len(name) / max(len(s) for s, _ in members), 2) \
+            if members else 0.0
+        out.append({
+            "name": name, "beta": beta, "members": members,
+            "tip": ("pozna-družina (rez/razvejanje po v3)" if beta >= 0.86
+                    else "zgodnja-družina (razvejanje po v3)"),
+        })
+    return out
+
+
+def teorije(con) -> dict:
+    """G3: the theory register — every theory as a measured family:
+    name, branching depth β, version lineage, chiral (n)-copies flagged
+    per REZ 561, its laws with seal status, lit/dark bodies."""
+    register, solo = [], 0
+    for fam in _teorije_druzine(con):
+        members = fam["members"]
+        ids = [m[1]["doc_id"] for m in members]
+        laws = list(con.execute(
+            "SELECT series, number, title, seal_date FROM zakoni "
+            "WHERE doc_id IN (%s) ORDER BY series, CAST(number AS INTEGER)"
+            % ",".join("?" * len(ids)), ids))
+        if len(members) < 2 and not laws:
+            solo += 1
+            continue
+        bodies = []
+        for s, d in sorted(members, key=lambda m: m[1]["path"]):
+            raw = Path(d["path"]).stem
+            vm = VER_RE.search(raw)
+            ent = con.execute(
+                "SELECT COUNT(*) c FROM entries WHERE doc_id=? AND "
+                "merged_into IS NULL", (d["doc_id"],)).fetchone()["c"]
+            bodies.append({
+                "telo": raw, "stratum": d["stratum"], "kind": d["kind"],
+                "vnosi": ent, "verzija": vm.group(0) if vm else None,
+                "kiralna_kopija": bool(re.search(r"\(\d+\)$", raw)),
+            })
+        register.append({
+            "teorija": fam["name"], "beta": fam["beta"],
+            "telesa": len(members), "tip": fam["tip"],
+            "zakoni": [{"serija": l["series"], "st": l["number"],
+                        "naslov": l["title"],
+                        "pecat": bool((l["seal_date"] or "").strip())}
+                       for l in laws],
+            "družina": bodies,
+        })
+    register.sort(key=lambda t: (-len(t["zakoni"]), -t["telesa"], t["teorija"]))
+    return {
+        "družine_skupaj": len(register) + solo,
+        "v_registru": len(register),
+        "solo_brez_zakonov": solo,
+        "register": register,
+    }
+
+
+def teorija_page(con, name: str) -> dict:
+    """G4 — STRAN TEORIJE: the fold that presents one theory in its
+    wholeness from MEASURED layers only (the sinteza law: what a layer
+    lacks, the page honestly lacks). Extends the page()/export_page
+    line from the word to the theory. Layers: RODOVNIK (bodies by mtime,
+    version tokens, chiral copies, seal-status probe in the body head),
+    ZAKONI (full fields), PRIČE (law vezi raw + ⊢ in body heads),
+    ANTINOME (live entries), ∂ ODPRTA (laws' odprta_partial + dark
+    bodies, named never filled), VEZI PO UBODIH (doc-level co-mentions
+    to OTHER families — the axis the name-register cannot see: theories
+    whose bodies share no prefix still bleed together here), and the
+    PREIZKUS NA TUJCU (T1/AX-16: celost = izvedljivost — the page ends
+    with an executable test, the claim handed to SKLEPAJ; the machine
+    counts, the owner rules)."""
+    q = name.strip().lower()
+    fams = _teorije_druzine(con)
+    # lookup by the SAME instrument as the family rule (shared prefix >= 8;
+    # SCAR: startswith failed on the ontomatematika witness — the family
+    # NAME is a commonprefix cut, the query is the full word; the longest
+    # shared prefix wins, ties go to the chooser)
+    def _lcp(a, b):
+        k = 0
+        for x, y in zip(a, b):
+            if x != y:
+                break
+            k += 1
+        return k
+    def _match(f):
+        n = f["name"]
+        return (n.startswith(q) or q.startswith(n) or _lcp(n, q) >= 8)
+    scored = [(_lcp(f["name"], q), f) for f in fams if _match(f)]
+    if not scored:
+        return {"napaka": "družina ni najdena", "iskano": name,
+                "predlog": "soul_engine teorije — register vseh družin"}
+    scored.sort(key=lambda t: -t[0])
+    best = scored[0][0]
+    hits = [f for k, f in scored if k == best]
+    if len(hits) > 1:
+        return {"izbira": [{"teorija": f["name"], "beta": f["beta"],
+                            "telesa": len(f["members"])} for f in hits],
+                "napaka": "več družin nosi to predpono — izberi polno ime"}
+    fam = hits[0]
+    members = fam["members"]
+    ids = [m[1]["doc_id"] for m in members]
+    idq = ",".join("?" * len(ids))
+
+    rodovnik, dark_bodies, price_glave = [], [], 0
+    for s, d in sorted(members, key=lambda m: (m[1]["mtime"] or "")):
+        raw = Path(d["path"]).stem
+        vm = VER_RE.search(raw)
+        ent = con.execute(
+            "SELECT COUNT(*) c FROM entries WHERE doc_id=? AND "
+            "merged_into IS NULL", (d["doc_id"],)).fetchone()["c"]
+        head = ""
+        try:
+            head = Path(d["path"]).read_text(encoding="utf-8",
+                                             errors="replace")[:2500]
+        except OSError:
+            head = ""                      # unreadable: honest, stays empty
+        price_glave += head.count("⊢")
+        if ent == 0:
+            dark_bodies.append(raw)
+        rodovnik.append({
+            "telo": raw, "stratum": d["stratum"], "kind": d["kind"],
+            "mtime": d["mtime"], "vnosi": ent,
+            "verzija": vm.group(0) if vm else None,
+            "kiralna_kopija": bool(re.search(r"\(\d+\)$", raw)),
+            "⊢_v_glavi": head.count("⊢"),
+            "kandidat_∧_žig_čaka": ("žig" in head and "čaka" in head),
+        })
+
+    laws = list(con.execute(
+        "SELECT series, number, title, actor, teza, meritev, nujne_napake, "
+        "odprta_partial, vezi, seal_date FROM zakoni "
+        "WHERE doc_id IN (%s) ORDER BY series, CAST(number AS INTEGER)"
+        % idq, ids))
+
+    antinome = [{"beseda": r["word"], "antinoma": r["antinoma"]}
+                for r in con.execute(
+        "SELECT word, antinoma FROM entries WHERE doc_id IN (%s) "
+        "AND merged_into IS NULL "
+        "AND antinoma IS NOT NULL AND antinoma != '' ORDER BY word" % idq,
+        ids)]
+
+    delta = [{"serija": l["series"], "st": l["number"],
+              "∂": (l["odprta_partial"] or "").strip()}
+             for l in laws if (l["odprta_partial"] or "").strip()]
+
+    fam_ids = set(ids)
+    fam_words = {r["mention"] for r in con.execute(
+        "SELECT DISTINCT mention FROM mentions WHERE doc_id IN (%s)" % idq,
+        ids)}
+    # measured furniture rule: a word carried by more than a QUARTER of
+    # the corpus's mentioning bodies is the corpus's AIR, not a theory's
+    # vein (extends sorodnost's furniture law — field labels excluded
+    # there; ubiquitous words excluded here, by MEASUREMENT, never by a
+    # hand-written stoplist — a stoplist is opinion dressed as measure)
+    total_docs = con.execute(
+        "SELECT COUNT(DISTINCT doc_id) c FROM mentions").fetchone()["c"] or 1
+    vezi, nosilci, words = {}, {}, list(fam_words)
+    for i in range(0, len(words), 500):
+        chunk = words[i:i + 500]
+        for r in con.execute(
+                "SELECT mention, doc_id FROM mentions WHERE mention IN (%s)"
+                % ",".join("?" * len(chunk)), chunk):
+            nosilci.setdefault(r["mention"], set()).add(r["doc_id"])
+            if r["doc_id"] not in fam_ids:
+                vezi.setdefault(r["mention"], set()).add(r["doc_id"])
+    vezi_ubodi = [{"beseda": w, "tujih_telem": len(ds),
+                   "delez_korpusa": round(len(nosilci[w]) / total_docs, 3)}
+                  for w, ds in sorted(vezi.items(),
+                                      key=lambda kv: -len(kv[1]))
+                  if len(nosilci[w]) <= 0.25 * total_docs][:16]
+
+    claim = None
+    for l in laws:
+        if (l["teza"] or "").strip():
+            claim = (l["teza"].strip().split(". ")[0])[:200]
+            break
+    if claim:
+        zahtevek = ("sklepaj --claim " + json.dumps(claim, ensure_ascii=False))
+    else:
+        zahtevek = ("sklepaj --word " + json.dumps(
+            fam["name"].split("-")[0], ensure_ascii=False))
+    preizkus = {
+        "zakon": "T1 / AX-16: celost brez izvedbe je violina brez prstov — "
+                 "daj telo bralcu, ki stroja ne pozna; če izvede preizkus "
+                 "na svojem stavku, legenda drži; če sprašuje, kje so "
+                 "vrata, je kratica, ne pot.",
+        "zahtevek": zahtevek,
+        "sodba": "stroj prešteje (sled + razredi VEZI IZMERJENE · ∂ VEZI "
+                 "NISO IZMERJENE · TEMNO); Lastnik presodi ([k]/[c] v RATIFY).",
+    }
+
+    return {
+        "teorija": fam["name"], "beta": fam["beta"], "tip": fam["tip"],
+        "telesa": len(members),
+        "rodovnik": rodovnik,
+        "zakoni": [{"serija": l["series"], "st": l["number"],
+                    "naslov": l["title"], "aktor": l["actor"],
+                    "teza": l["teza"], "meritev": l["meritev"],
+                    "nujne_napake": l["nujne_napake"],
+                    "pecat": bool((l["seal_date"] or "").strip())}
+                   for l in laws],
+        "priče": {"vezi_zakonov": [l["vezi"] for l in laws
+                                   if (l["vezi"] or "").strip()],
+                  "⊢_v_glavah_telem": price_glave},
+        "antinome": antinome,
+        "∂_odprto": {"iz_zakonov": delta, "temna_telesa": dark_bodies},
+        "vezi_po_ubodih": vezi_ubodi,
+        "preizkus": preizkus,
+    }
+
+
+# ================== KRVTOK (Luka's "daj", 4. 10. 2026) ===================
+# "NAJ BERE KAR ODPERA IN NAJ ODPIRA KAR BERE" — the owner's word that
+# OVERRULES G2's text-only ruling (KP-2 krvtok: the way back to the
+# source now runs THROUGH the machine). The Obsidian libraries are a
+# foreign system, but the corpus ITSELF carries the map: every
+# [title](/libraries/<lib>?document=<uuid>) link names its target, and
+# every doclib://<lib>/<uuid>[?at=N] cites one. OPENING a witness =
+# resolving its uuid to the titles the corpus hands it (several hands
+# citing the same uuid cross-witness the target) + the citing bodies;
+# READING what is opened = those bodies, all in-db. What no corpus hand
+# ever named stays honestly warn (target foreign, unopened).
+
+KRVTOK_LINK = re.compile(
+    r"\[([^\]]+)\]\((?:/libraries/([0-9a-f]{8}-[0-9a-f-]{27,36})"
+    r"\?document=([0-9a-f-]{36})"
+    r"|doclib://([0-9a-f]{8}-[0-9a-f-]{27,36})/([0-9a-f-]{36})"
+    r"(?:\?at=(\d+))?)\)")
+KRVTOK_URI = re.compile(
+    r"doclib://([0-9a-f]{8}-[0-9a-f-]{27,36})/([0-9a-f-]{36})"
+    r"(?:\?at=(\d+))?")
+
+
+def _krvtok_harvest(con) -> dict:
+    """One pass over every typed doc's body: uuid -> {titles, citers,
+    libraries, offsets}. Citers are doc_ids — all in-db, all read by
+    the ordinary scan ceremony (the machine reads what it opens)."""
+    index = {}
+    rows = list(con.execute(
+        "SELECT doc_id, path FROM docs WHERE kind IS NOT NULL "
+        "AND kind NOT IN ('binar-pdf')"))
+    for r in rows:
+        try:
+            text = Path(r["path"]).read_text(encoding="utf-8",
+                                             errors="replace")
+        except OSError:
+            continue
+        hits = [(m.group(3) or m.group(5), (m.group(1) or "").strip(),
+                 (m.group(2) or m.group(4) or ""), m.group(6))
+                for m in KRVTOK_LINK.finditer(text)]
+        for m in KRVTOK_URI.finditer(text):
+            hits.append((m.group(2), "", m.group(1), m.group(3)))
+        for uuid, title, lib, at in hits:
+            e = index.setdefault(uuid, {"titles": set(), "citers": set(),
+                                        "libs": set(), "ats": set()})
+            # SCAR: a title that is ITSELF a uri (a link wearing another
+            # link's address as its clothes) is not a title — measured on
+            # the live harvest; dropped, the uuid keeps its honest names
+            if title and "doclib://" not in title                     and not title.startswith("/libraries/"):
+                e["titles"].add(title)
+            e["citers"].add(r["doc_id"])
+            if lib:
+                e["libs"].add(lib)
+            if at:
+                e["ats"].add(int(at))
+    return index
+
+
+def krvtok(con, uuid: str = None) -> dict:
+    """THE KRVTOK REPORT (extends the report line): every witness the
+    corpus can open, ranked by how many bodies cite it (the corpus's
+    own hub organs); with a uuid: ONE witness opened — titles, citing
+    bodies (stratum/kind/name), offsets. Untitled targets are named
+    warn, never guessed."""
+    index = _krvtok_harvest(con)
+    if uuid:
+        q = uuid.strip().lower()
+        e = index.get(q)
+        if not e:
+            return {"napaka": "prica ni odprta — uuid ni v korpusu",
+                    "iskano": uuid}
+        doc_rows = {d["doc_id"]: d for d in con.execute(
+            "SELECT doc_id, path, stratum, kind FROM docs")}
+        out = {"uuid": q,
+               "naslovi": sorted(e["titles"]),
+               "knjiznice": sorted(e["libs"]),
+               "odseki_at": sorted(e["ats"]),
+               "citajoca_telesa": [
+                   {"telo": Path(doc_rows[c]["path"]).stem,
+                    "stratum": doc_rows[c]["stratum"],
+                    "kind": doc_rows[c]["kind"], "doc_id": c}
+                   for c in sorted(e["citers"])]}
+        out["stanje"] = ("ODPRTA (naslovljena, citirana)" if e["titles"]
+                         else "ODPRTA warn (citirana, brez naslova)")
+        return out
+    entries = []
+    for uuid, e in index.items():
+        entries.append({"uuid": uuid,
+                        "naslov": sorted(e["titles"])[0] if e["titles"] else None,
+                        "naslovov": len(e["titles"]),
+                        "citajocih_teles": len(e["citers"]),
+                        "knjiznic": len(e["libs"]),
+                        "odsekov": len(e["ats"])})
+    entries.sort(key=lambda x: (-x["citajocih_teles"], -x["naslovov"]))
+    return {
+        "pric_skupaj": len(entries),
+        "naslovljenih": sum(1 for x in entries if x["naslov"]),
+        "neimenovanih_warn": sum(1 for x in entries if not x["naslov"]),
+        "robov_citiranj": sum(x["citajocih_teles"] for x in entries),
+        "top_price": entries[:25],
+    }
 
 
 # ============================== IPA LAYER (Luka's "daj", 26. 9. 2026) ===
@@ -2838,19 +3241,106 @@ def export_page(con, word: str, out_dir) -> dict:
     return {"file": str(out_path), "entries": len(live),
             "mentions": p["mentions"]}
 
+def export_teorija(con, name: str, out_dir) -> dict:
+    """G5 — ∮ IZVOZ STRANI TEORIJE (extends the export_page line; the
+    rez-562 loop's theory half): the FOLDED page written as a DERIVED
+    body into canon_ruled/ — originals untouched, provenance inside,
+    export witnessed as a ledger line (kind export). The derived body
+    re-enters the corpus through the ordinary door — scan, parse,
+    REVIEW; the corpus feeds itself, theory included."""
+    if not name:
+        return {"error": "export-teorija needs --word (ime teorije)"}
+    pg = teorija_page(con, name)
+    if "napaka" in pg:
+        return pg
+    out_dir = Path(out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    import datetime
+    ts = datetime.datetime.now().isoformat(timespec="seconds")
+    L = [f"# STRAN TEORIJE — {pg['teorija']} (derived stratum: canon_ruled)",
+         "",
+         f"> Derived theory page, exported {ts} by soul_engine (G5, the",
+         "> ∮ fold). Not source: the originals live where they live.",
+         "> This body re-enters the corpus through the ordinary door —",
+         "> scan, parse, REVIEW. Export witnessed as a ledger line.",
+         "",
+         f"**β:** {pg['beta']} · **tip:** {pg['tip']} · "
+         f"**telesa:** {pg['telesa']}", ""]
+    L.append("## RODOVNIK")
+    for b in pg["rodovnik"]:
+        bits = [f"**{b['telo']}** — {b['stratum'] or '?'}/{b['kind']}",
+                f"vnosi: {b['vnosi']}"]
+        if b["verzija"]:
+            bits.append(f"verzija: {b['verzija']}")
+        if b["kiralna_kopija"]:
+            bits.append("kiralna kopija (REZ 561)")
+        if b["kandidat_∧_žig_čaka"]:
+            bits.append("kandidat — ∧ žig čaka")
+        L.append("- " + " · ".join(bits))
+    L.append("")
+    if pg["zakoni"]:
+        L.append("## ZAKONI")
+        for z in pg["zakoni"]:
+            L.append(f"- **{z['serija']} {z['st']} — {z['naslov']}**"
+                     + (" ∧ pečat" if z["pecat"] else " (nepečat)"))
+            if (z.get("teza") or "").strip():
+                L.append(f"  - teza: {z['teza']}")
+            if (z.get("meritev") or "").strip():
+                L.append(f"  - meritev: {z['meritev']}")
+            if (z.get("nujne_napake") or "").strip():
+                L.append(f"  - nujne napake: {z['nujne_napake']}")
+        L.append("")
+    if pg["priče"]["vezi_zakonov"] or pg["priče"]["⊢_v_glavah_telem"]:
+        L.append("## PRIČE")
+        L.append(f"- ⊢ v glavah teles: {pg['priče']['⊢_v_glavah_telem']}")
+        for v in pg["priče"]["vezi_zakonov"]:
+            L.append(f"- vezi: {v}")
+        L.append("")
+    if pg["antinome"]:
+        L.append("## ANTINOME")
+        for a in pg["antinome"]:
+            L.append(f"- **{a['beseda']}:** {a['antinoma']}")
+        L.append("")
+    if pg["∂_odprto"]["iz_zakonov"] or pg["∂_odprto"]["temna_telesa"]:
+        L.append("## ∂ ODPRTA (imena, ne sodbe)")
+        for d in pg["∂_odprto"]["iz_zakonov"]:
+            L.append(f"- {d['serija']} {d['st']}: {d['∂']}")
+        for t in pg["∂_odprto"]["temna_telesa"]:
+            L.append(f"- temno telo (brez vnosov): {t}")
+        L.append("")
+    if pg["vezi_po_ubodih"]:
+        L.append("## VEZI PO UBODIH (ubodi, ne izrezi)")
+        for v in pg["vezi_po_ubodih"]:
+            L.append(f"- {v['beseda']} — {v['tujih_telem']} tujih teles "
+                     f"(delež korpusa {v['delez_korpusa']})")
+        L.append("")
+    L.append("## PREIZKUS NA TUJCU (T1 / AX-16)")
+    L.append(f"- zakon: {pg['preizkus']['zakon']}")
+    L.append(f"- zahtevek: `soul_engine {pg['preizkus']['zahtevek']}`")
+    L.append(f"- sodba: {pg['preizkus']['sodba']}")
+    out_path = out_dir / f"teore-{canon(pg['teorija'])}.md"
+    out_path.write_text("\n".join(L) + "\n", encoding="utf-8")
+    led(con, "export", name, {"file": str(out_path),
+                              "telesa": pg["telesa"],
+                              "zakoni": len(pg["zakoni"])})
+    con.commit()
+    return {"file": str(out_path), "telesa": pg["telesa"],
+            "zakoni": len(pg["zakoni"])}
+
+
 # ============================================================= MAIN =======
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("cmd", choices=["scan", "gui", "page", "export",
-                                    "export-page", "merge", "unmerge",
+                                    "export-page", "export-teorija", "merge", "unmerge",
                                     "dups", "dark", "retype", "census",
                                     "reparse", "xcheck", "drafts",
                                     "authorize-drafts", "stability",
                                     "popis", "graf", "odprta-delta",
                                     "ipa-popis", "ipa-drafts", "sinteza",
                                     "le-cenzus", "sorodnost", "jezgra",
-                                    "plasti", "sklepaj",
+                                    "plasti", "teorije", "teorija", "krvtok", "sklepaj",
                                     "retro-honesty", "preveri",
                                     "selftest"])
     ap.add_argument("path", nargs="?")
@@ -2927,6 +3417,30 @@ if __name__ == "__main__":
     elif args.cmd == "odprta-delta":
         # serves rez 231 — the organ's next popis reads here
         print(json.dumps(odprta_delta(con), ensure_ascii=False, indent=2))
+    elif args.cmd == "teorije":
+        # G3 - register teorij: name families, beta, version lineage, laws;
+        # the register observes, never rules (extends the report line)
+        print(json.dumps(teorije(con), ensure_ascii=False, indent=2))
+    elif args.cmd == "teorija":
+        # G4 — stran teorije: the fold (rodovnik, zakoni, priče, ∂, vezi
+        # po ubodih) + preizkus na tujcu; --word = ime teorije
+        if not args.word:
+            print(json.dumps({"error": "pass --word X (ime teorije, "
+                                       "glej teorije)"}, ensure_ascii=False))
+        else:
+            print(json.dumps(teorija_page(con, args.word),
+                             ensure_ascii=False, indent=2))
+    elif args.cmd == "krvtok":
+        # the vein runs THROUGH the machine: open one witness (--word =
+        # uuid), or the whole map without
+        print(json.dumps(krvtok(con, args.word),
+                         ensure_ascii=False, indent=2))
+    elif args.cmd == "export-teorija":
+        # G5 — the folded theory page as a derived body (rez 562 loop);
+        # path = out dir, default canon_ruled
+        out_dir = Path(args.path) if args.path else Path("canon_ruled")
+        print(json.dumps(export_teorija(con, args.word, out_dir),
+                         ensure_ascii=False, indent=2))
     elif args.cmd == "ipa-popis":
         # the honest gap: who carries the izmera, who the cut, who neither
         print(json.dumps(ipa_popis(con), ensure_ascii=False, indent=2))
@@ -3490,6 +4004,132 @@ if __name__ == "__main__":
                 "SELECT payload FROM ledger WHERE kind='merge' AND "
                 "word='STARI'").fetchone()["payload"])
             assert row["machine"] is True and row["ratified_by"]
+            # G3: register teorij — LCP name families, version lineage,
+            # chiral copies, laws carried; solo bodies counted, not judged
+            m.executescript(
+                "INSERT INTO docs(path, kind) VALUES "
+                "('teore-a-v1-delo.md', 'notes'),"
+                "('teore-a-v2-delo.md', 'notes'),"
+                "('teore-a-v2-delo (1).md', 'notes'),"
+                "('solo-brez-zakonov.md', 'notes')")
+            tids = {r["path"]: r["doc_id"] for r in m.execute(
+                "SELECT doc_id, path FROM docs WHERE path LIKE 'teore%'")}
+            m.execute("INSERT INTO zakoni(doc_id, series, number, "
+                      "title, teza, seal_date, lineno) "
+                      "VALUES (?, 'rez', '700', 'prika teorije', 't', "
+                      "'2026-10-04', 1)",
+                      (tids["teore-a-v1-delo.md"],))
+            reg = teorije(m)
+            teore = [t for t in reg["register"]
+                     if t["teorija"].startswith("teore-a")]
+            assert len(teore) == 1 and teore[0]["telesa"] == 3
+            assert teore[0]["tip"].startswith("zgodnja")
+            assert int(teore[0]["zakoni"][0]["st"]) == 700                 and teore[0]["zakoni"][0]["pecat"]
+            vers = [b["verzija"] for b in teore[0]["družina"]]
+            assert sorted(v for v in vers if v) == ["v1", "v2", "v2"]
+            assert any(b["kiralna_kopija"] for b in teore[0]["družina"])
+            assert reg["solo_brez_zakonov"] >= 1   # counted, not listed
+            # G4: stran teorije — the fold + preizkus na tujcu;
+            # co-mention vezi measured ACROSS families (the axis the
+            # name-register cannot see); chooser + not-found honest
+            m.execute("INSERT INTO docs(path, kind) VALUES "
+                      "('tujec-telo.md', 'notes')")
+            tuj = m.execute("SELECT doc_id d FROM docs "
+                            "WHERE path='tujec-telo.md'").fetchone()["d"]
+            for did in tids.values():
+                m.execute("INSERT INTO mentions(doc_id, mention) "
+                          "VALUES (?, 'dih')", (did,))
+            m.execute("INSERT INTO mentions(doc_id, mention) "
+                      "VALUES (?, 'dih')", (tuj,))
+            # the measured furniture rule: 'dih' falls to 4/16 = 25% of
+            # mentioning bodies (kept, a vein), 'zrak' is carried by 13
+            # (air, honestly excluded — never a hand-written stoplist)
+            for k in range(12):
+                m.execute("INSERT INTO docs(path, kind) VALUES (?, 'notes')",
+                          (f"vzorec-{k:02d}.md",))
+                did = m.execute("SELECT doc_id d FROM docs WHERE path=?",
+                                (f"vzorec-{k:02d}.md",)).fetchone()["d"]
+                m.execute("INSERT INTO mentions(doc_id, mention) "
+                          "VALUES (?, 'zrak')", (did,))
+            m.execute("INSERT INTO mentions(doc_id, mention) "
+                      "VALUES (?, 'zrak')", (tuj,))
+            pg = teorija_page(m, "teore-a")
+            assert pg["telesa"] == 3 and len(pg["zakoni"]) == 1
+            assert pg["zakoni"][0]["teza"] == "t" and pg["zakoni"][0]["pecat"]
+            assert "sklepaj --claim" in pg["preizkus"]["zahtevek"]
+            ubodi = {v["beseda"]: v["tujih_telem"]
+                     for v in pg["vezi_po_ubodih"]}
+            assert ubodi.get("dih") == 1     # the foreign body bleeds in
+            assert "zrak" not in ubodi        # air: measured, excluded
+            # G2 (Luka's "daj", 4. 10.): the two new law head shapes —
+            # Z-REZ doc-head (no number: NULL, the label is absent) and
+            # M-VRSTICE (two-line witness: "Z-NAME:" + ":: izrek"; a
+            # Z-NAME: alone is a wish, not a law). doclib:// and window
+            # citations stay TEXT by the same ruling — doclib OVERRULED
+            # 4. 10. by Luka's "naj bere kar odpre": see KRVTOK.
+            gz = parse_zakon(
+                "# Z-rez: Prica oblike\n\nProza telesa.\n\n"
+                "## VEZI\n- rez 1\n")
+            assert gz and gz[0]["series"] == "z-rez"
+            assert gz[0]["number"] is None            # no label, honest
+            assert gz[0]["title"] == "Prica oblike"
+            gz2 = parse_zakon(
+                "M-vrstica:\n\n"
+                "Z-CAS:  OS C — edino telo\n"
+                "  :: cas = stevilo gibanja\n"
+                "Z-SAM:\n"
+                "  :: brez stevilke\n"
+                "Z-ONEL:\n")
+            assert len(gz2) == 2          # Z-ONEL: no :: witness — prose
+            assert gz2[0]["series"] == "m-vrstica"
+            assert gz2[0]["number"] is None
+            assert "Z-CAS" in gz2[0]["title"]
+            assert "stevilo gibanja" in gz2[0]["teza"]
+            assert gz2[1]["title"] == "Z-SAM"
+            # KRVTOK (Luka's "daj", 4. 10.): open what you read —
+            # titled links + bare doclib URIs harvest into an index;
+            # citers are body-level bonds; unnamed targets stay warn
+            import tempfile as _tf
+            with _tf.TemporaryDirectory() as _td:
+                kt_docs = [
+                    ("kvt-a.md", "Prica [Prvo telo](doclib://"
+                     "11111111-2222-3333-4444-555555555555/"
+                     "99999999-8888-7777-6666-555555555555) in [druga]"
+                     "(/libraries/11111111-2222-3333-4444-555555555555"
+                     "?document=99999999-8888-7777-6666-555555555555)"),
+                    ("kvt-b.md", "isti cilj doclib://"
+                     "11111111-2222-3333-4444-555555555555/"
+                     "99999999-8888-7777-6666-555555555555?at=120 citiran"),
+                    ("kvt-c.md", "tujec doclib://"
+                     "11111111-2222-3333-4444-555555555555/"
+                     "abcdefab-cdef-abcd-efab-cdefabcdefab"),
+                ]
+                for path, body in kt_docs:
+                    Path(_td, path).write_text(body, encoding="utf-8")
+                    m.execute("INSERT INTO docs(path, kind) VALUES "
+                              "(?, 'notes')", (str(Path(_td, path)),))
+                kr = krvtok(m)
+                assert kr["pric_skupaj"] == 2   # same target merged + tujec
+                assert kr["neimenovanih_warn"] == 1
+                odprta = krvtok(m,
+                                "99999999-8888-7777-6666-555555555555")
+                assert sorted(odprta["naslovi"]) == ["Prvo telo", "druga"]
+                assert len(odprta["citajoca_telesa"]) == 2
+                assert odprta["odseki_at"] == [120]
+            # G5: export-teorija — the fold written as a derived body,
+            # the export witnessed as a ledger line (rez 562's half)
+            import tempfile
+            with tempfile.TemporaryDirectory() as td:
+                ex = export_teorija(m, "teore-a", td)
+                assert "file" in ex, ex
+                body = Path(ex["file"]).read_text(encoding="utf-8")
+                assert "STRAN TEORIJE" in body
+                assert "sklepaj" in body            # the preizkus travels
+                assert m.execute(
+                    "SELECT COUNT(*) c FROM ledger WHERE kind='export'"
+                ).fetchone()["c"] >= 1
+            assert "napaka" in teorija_page(m, "xyz-ni-najdena")
+            assert teorija_page(m, "teore")["telesa"] == 3
             # graf + odprta-delta run clean on a populated db
             g = graf(m)
             assert "doc_word_edges" in g and "law_law_edges" in g
@@ -3504,5 +4144,6 @@ if __name__ == "__main__":
               "doc-level mentions, laws (parser-zakonov, multi-head), "
               "drafts + guards (cite/retro/refuse/idempotence), enrichment, "
               "ipa layer (g2p/popis/guard/ratify/never-re-drafted), "
-              "analyze (kinship/hubs/layers), graf, sklepaj/presoja, "
+              "analyze (kinship/hubs/layers), graf, teorije "
+              "(register/page/export), G2 law shapes (z-rez/m-vrstica), "
               "odprta-delta — OK (traced here, witnessed on disk)")

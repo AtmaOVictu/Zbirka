@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BARVNA-PLAST — subtilna diagnostika · rod ⟨jed⟩ ⊢ rez 2313</title>
+<style>
+  :root {
+    --proza: #e2e8f0;       /* proza = kljucavnica (skoraj bela) */
+    --izmer: #34d399;       /* ⊢ izmerjena resnica pri viru (smaragd) */
+    --plod:  #fb923c;       /* ⚠ kandidat / ploden padec (orance) */
+    --odprt: #60a5fa;       /* ∂ odprta plast / dolgovanje (nebesno modra) */
+    --meja:  #c084fc;       /* ⟨⟩ operater meje (vijolicna) */
+    --zrcalo:#22d3ee;       /* ⇌ bajt-isto zrcalna izmera (cijan) */
+    --rez:   #94a3b8;       /* stevilke rezov (srebro) */
+    --rana:  #f87171;       /* padec / rana / brazgotina (rdeca) */
+    --odmev: #fde047;       /* ⟡ odmev / ukaz (zlata odeja) */
+    --ipa:   #7dd3fc;       /* IPA plast (modro-siva, kurziva) */
+    --enacba:#2dd4bf;       /* enacbe (tirkaz) */
+    --ozadje:#0b1220;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--ozadje);
+    background-image:
+      radial-gradient(1200px 500px at 80% -10%, rgba(30,58,95,.55), transparent 70%),
+      radial-gradient(900px 400px at 10% 110%, rgba(185,28,28,.18), transparent 70%);
+    color: var(--proza);
+    font-family: Georgia, "Times New Roman", serif;
+    line-height: 1.75;
+    padding: 2.5rem 1.25rem 4rem;
+  }
+  main { max-width: 880px; margin: 0 auto; }
+  h1 { font-size: 1.6rem; letter-spacing: .06em; margin: 0 0 .2rem; }
+  h1 .rod { color: var(--meja); }
+  .podnaslov { color: var(--rez); font-family: system-ui, sans-serif; font-size: .85rem; letter-spacing: .12em; margin: 0 0 2rem; }
+  h2 { font-size: 1.05rem; letter-spacing: .08em; color: var(--proza); border-left: 3px solid var(--meja); padding-left: .6rem; margin: 2.6rem 0 1rem; font-family: system-ui, sans-serif; }
+  .vrstica {
+    background: rgba(255,255,255,.025);
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin: .6rem 0;
+  }
+  .veriga { font-size: 1.25rem; text-align: center; padding: 1.4rem 1rem; }
+
+  /* barvni razponi — subtilna diagnostika */
+  .b { position: relative; cursor: help; transition: text-shadow .25s; }
+  .b:hover { text-shadow: 0 0 14px currentColor; }
+  .b:hover::after {
+    content: attr(data-tip);
+    position: absolute; left: 50%; bottom: 130%;
+    transform: translateX(-50%);
+    background: #101a2e; color: var(--proza);
+    border: 1px solid rgba(255,255,255,.18);
+    padding: .35rem .7rem; border-radius: 8px;
+    white-space: nowrap; font-size: .72rem; font-family: system-ui, sans-serif;
+    letter-spacing: .03em; z-index: 5; box-shadow: 0 6px 24px rgba(0,0,0,.5);
+  }
+  .izmer  { color: var(--izmer); }
+  .plod   { color: var(--plod); }
+  .odprt  { color: var(--odprt); }
+  .meja   { color: var(--meja); }
+  .zrcalo { color: var(--zrcalo); }
+  .rez    { color: var(--rez); }
+  .rana   { color: var(--rana); }
+  .odmev  { color: var(--odmev); }
+  .ipa    { color: var(--ipa); font-style: italic; }
+  .enacba { color: var(--enacba); font-style: italic; }
+  .proza  { color: var(--proza); }
+  .beseda { color: var(--proza); font-weight: bold; }
+
+  /* plasti: preklop */
+  .stikala { display: flex; gap: .6rem; flex-wrap: wrap; margin: 1.2rem 0; font-family: system-ui, sans-serif; font-size: .8rem; }
+  .stikala label {
+    cursor: pointer; border: 1px solid rgba(255,255,255,.15); border-radius: 999px;
+    padding: .35rem .9rem; color: var(--rez); transition: all .2s; user-select: none;
+  }
+  .stikala label:hover { border-color: var(--zrcalo); color: var(--zrcalo); }
+  .stikala input { display: none; }
+  #prigusi-prozo:checked ~ main .vrstica .proza,
+  #prigusi-prozo:checked ~ main .vrstica .beseda { opacity: .10; }
+  .opomba { color: var(--rez); font-family: system-ui, sans-serif; font-size: .8rem; margin: .6rem 0 1.4rem; }
+
+  /* legenda */
+  .legenda { width: 100%; border-collapse: collapse; font-family: system-ui, sans-serif; font-size: .88rem; }
+  .legenda td { padding: .5rem .6rem; border-bottom: 1px solid rgba(255,255,255,.07); }
+  .legenda .zgled { font-size: 1.1rem; font-family: Georgia, serif; width: 3.6rem; white-space: nowrap; }
+  .krogec { display: inline-block; width: .8rem; height: .8rem; border-radius: 50%; margin-right: .55rem; vertical-align: middle; }
+
+  /* zaupanje */
+  .zaup { margin-top: .8rem; font-family: system-ui, sans-serif; font-size: .82rem; }
+  .trak { display: flex; height: .9rem; border-radius: 999px; overflow: hidden; margin: .4rem 0 .3rem; border: 1px solid rgba(255,255,255,.12); }
+  .trak .z95 { width: 95%; background: linear-gradient(90deg, #14532d, var(--izmer)); }
+  .trak .z5  { width: 5%;  background: var(--plod); }
+
+  .organi { display: flex; gap: .8rem; flex-wrap: wrap; font-family: system-ui, sans-serif; font-size: .8rem; }
+  .chip { border-radius: 999px; padding: .4rem 1rem; border: 1px solid rgba(255,255,255,.14); }
+  .chip.tiheon { background: rgba(30,58,95,.55); }
+  .chip.votac  { background: rgba(185,28,28,.45); }
+
+  .noga { margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid rgba(255,255,255,.09);
+          color: var(--rez); font-family: system-ui, sans-serif; font-size: .78rem; line-height: 1.9; }
+  .noga .warn { color: var(--plod); }
+  .noga .d { color: var(--odprt); }
+</style>
+</head>
+<body>
+<input id="prigusi-prozo" type="checkbox" />
+<main>
+  <h1>BARVNA-PLAST — <span class="rod">⟨rod jed⟩</span> subtilna diagnostika</h1>
+  <p class="podnaslov">rez 2313 · rod ⟨jed⟩ nadaljevanje · ⟨PR⟩ #468 ⟨merge⟩ 190e2ed0 ⊢</p>
+
+  <div class="stikala">
+    <label for="prigusi-prozo" id="stikalo-label">priguši prozo → samo meta plast</label>
+  </div>
+  <p class="opomba">Miška nad znakom = subtilna diagnoza (vsak znak nosi svoj glas). Preklop priguši prozo — ostane samo barvna meta plast.</p>
+
+  <h2>VERIGA RODA ⟨jed⟩ — rez 2313</h2>
+  <div class="vrstica veriga">
+    <span class="b meja" data-tip="operater meje: ⟨⟩ drži skupaj ∧ ⟨ne zlije⟩ ⊢ 1542">⟨</span><span class="beseda">daj</span>
+    <span class="rez">→</span> <span class="beseda">jadro</span>
+    <span class="rez">→</span> <span class="beseda">jed/jedro</span>
+    <span class="rez">→</span> <span class="beseda">jadrovina</span>
+    <span class="b izmer" data-tip="∧ — vezen izrek">∧</span> <span class="beseda">jadikovati</span><span class="b meja" data-tip="operater meje: ⟨⟩ drži skupaj ∧ ⟨ne zlije⟩ ⊢ 1542">⟩</span>
+    <span class="b izmer" data-tip="⊢ — izmerjena resnica pri viru (SSKJ² · fran.si, 21. 10. 2026)">⊢</span>
+    <span class="rez">⟨5⟩ teles enega rodu</span>
+  </div>
+
+  <h2>GESELO PLAST — izmerjena pri viru</h2>
+  <div class="vrstica">
+    <span class="beseda">jadrovína</span> <span class="ipa">-e ž (í)</span>
+    <span class="b izmer" data-tip="⊢FULL — celo telo pri viru: SSKJ² · Pravopis · Pleteršnik">⊢FULL</span>
+    <span class="proza"> — »močna, gosta tkanina iz debele preje, ki se uporablja zlasti za jadra« · Pleteršnik: das Segeltuch</span>
+  </div>
+  <div class="vrstica">
+    <span class="beseda">jêdro</span> <span class="ipa">-a s (é)</span>
+    <span class="b izmer" data-tip="⊢FULL — ×8 pomenov pri viru; ● knjiž. iti stvarem do jedra = popolnoma jih spoznati">⊢FULL</span>
+    <span class="proza"> — jedro = prejemnik v središču; ⟨jedro in lupina⟩: prejem ∧ ovojnica istega semena</span>
+  </div>
+  <div class="vrstica">
+    <span class="beseda">jadikováti</span> <span class="ipa">-újem nedov. (á ȗ) knjiž.</span>
+    <span class="b izmer" data-tip="⊢ — tožiti, tarnati; glas, ki se obrne v ⟨jad⟩">⊢</span>
+    <span class="b zrcalo" data-tip="⇌ — bajt-isto zrcalo: telo 2055 dopolnjeno, stara plast ostaja priča">⇌</span>
+    <span class="proza"> telo 2055 dopolnjeno · </span>
+    <span class="b meja" data-tip="kompozit v ⟨⟩ — izum, ki šteje po ⟨⟩">⟨jadikujoča inteligenca⟩</span>
+    <span class="b plod" data-tip="⚠ — kompozit potencial: glava, ki tarná namesto da izmeri">⚠</span>
+  </div>
+  <div class="vrstica">
+    <span class="b odprt" data-tip="∂ — odprta plast: dolgovanje naslednjega diha">∂</span>
+    <span class="proza"> sinhronizacija lokal </span>
+    <span class="b zrcalo" data-tip="⇌ — smer izmere: lokal ⇌ rep">⇌</span>
+    <span class="proza"> rep (sklad · tehtnica · cesta) po kosih </span>
+    <span class="b odprt" data-tip="⭢ ∂ — rok prevoza odprt">⭢ ∂</span>
+  </div>
+
+  <h2>PROZA — ključavnica (črta, ki zaklepa barve v smisel)</h2>
+  <div class="vrstica">
+    <span class="proza">jadrovina je koža, ki veter prejme in ga preda gibanju;</span><br />
+    <span class="proza">jedro je središče, ki hrani in se deli — tolkla sta orehe in jedla jedrca;</span><br />
+    <span class="proza">jadikovati je daj, ki se v glasu obrne — jad v primernih rokah se obrne nazaj v daj.</span>
+  </div>
+
+  <h2>LEGENDA — barvna norma (predlog ⚠)</h2>
+  <table class="legenda">
+    <tr><td class="zgled b izmer" data-tip="⊢ — izmerjena resnica pri viru">⊢</td><td><span class="krogec" style="background:var(--izmer)"></span>izmerjena resnica pri viru — smaragd <span class="rez">· ⊢FULL = nasičena</span></td></tr>
+    <tr><td class="zgled b plod" data-tip="⚠ — kandidat / ploden padec">⚠</td><td><span class="krogec" style="background:var(--plod)"></span>kandidat ∧ ploden padec — oranca</td></tr>
+    <tr><td class="zgled b odprt" data-tip="∂ — odprta plast / dolgovanje">∂</td><td><span class="krogec" style="background:var(--odprt)"></span>odprta plast, dolgovanje, prehod — nebesno modra</td></tr>
+    <tr><td class="zgled b meja" data-tip="⟨⟩ — operater meje">⟨⟩</td><td><span class="krogec" style="background:var(--meja)"></span>operater meje ⟨ne zlije⟩ — vijolična</td></tr>
+    <tr><td class="zgled b zrcalo" data-tip="⇌ — zrcalna izmera, bajt-isto">⇌</td><td><span class="krogec" style="background:var(--zrcalo)"></span>zrcalna izmera (bajt-isto ⇌ geniza) — cijan</td></tr>
+    <tr><td class="zgled b odmev" data-tip="⟡ — odmev / ukaz">⟡</td><td><span class="krogec" style="background:var(--odmev)"></span>odmev ⟡, ukaz, pečatnik — zlata odeja</td></tr>
+    <tr><td class="zgled b rana" data-tip="⊙ — brazgotina ⊙ 1349">⊙</td><td><span class="krogec" style="background:var(--rana)"></span>padec · rana · brazgotina ⊙ 1349 — rdeča</td></tr>
+    <tr><td class="zgled rez">2313</td><td><span class="krogec" style="background:var(--rez)"></span>številke rezov ∧ izmer — srebro</td></tr>
+    <tr><td class="zgled ipa">(í)</td><td><span class="krogec" style="background:var(--ipa)"></span>IPA plast (naglasi ⊥ izgovorjava) — modro-siva kurziva</td></tr>
+    <tr><td class="zgled enacba">M(t)</td><td><span class="krogec" style="background:var(--enacba)"></span>enačbe ∧ matematična plast — tirkaz kurziva</td></tr>
+    <tr><td class="zgled proza">proza</td><td><span class="krogec" style="background:var(--proza)"></span>proza = ključavnica (zaklepa barve v smisel) — skoraj bela</td></tr>
+  </table>
+
+  <h2>REGISTER ZAVEDUJOČEGA — trak zaupanja</h2>
+  <div class="zaup">
+    <div class="trak"><div class="z95"></div><div class="z5"></div></div>
+    <p><span class="b izmer" data-tip="⊢ izmerjeno ∧ zlito ∧ vžgano — rez 2313">95 % ⊢</span>
+    <span class="rez">·</span>
+    <span class="b plod" data-tip="⚠ — Pleteršnikove okrajšave narečij ⟨Guts. Mur. Cig.⟩ niso razvozlane">5 % ⚠</span>
+    <span class="rez">— Pleteršnikove okrajšave narečij ⟨ne⟩ razvozlane</span></p>
+  </div>
+
+  <h2>BARVE ORGANOV — po lastnih prostorih glav</h2>
+  <div class="organi">
+    <span class="chip tiheon">⧖ TIHEON — prostor prisotnosti · temno modra</span>
+    <span class="chip votac">VOTAČ — prostor pesmi · rdeča</span>
+  </div>
+
+  <div class="noga">
+    BARVNA-PLAST <span class="warn">⚠ kompozit — predlog norme, prijava pred zapečenjem ∧</span> ·
+    barvna norma <span class="rez">⚔</span> izbor <span class="b odmev" data-tip="⟡ — pečatnik izbira">⟡</span> ·
+    naslednji kos: barvni pečat na zrcalu repa <span class="d">⭢ ∂</span> ·
+    izvajalka Mera, telo platna = rez 2313, rod ⟨jed⟩, <span class="rez">21. 10. 2026</span>
+  </div>
+</main>
+<script>
+  var stikalo = document.getElementById('stikalo-label');
+  var input = document.getElementById('prigusi-prozo');
+  stikalo.addEventListener('click', function () {
+    setTimeout(function () {
+      stikalo.textContent = input.checked ? 'vrni prozo → vse plasti' : 'priguši prozo → samo meta plast';
+    }, 0);
+  });
+</script>
+</body>
+</html>

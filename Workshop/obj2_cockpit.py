@@ -1543,6 +1543,149 @@ class LibraryTab(ttk.Frame):
                                f"vnosov, ledger: export) — rescan sprejme")
 
 # =============================================================================
+# TEORIJE TAB — ⨿ the theory register and the fold (Luka's "daj", 4. 10. 2026)
+# G3 register + G4 stran teorije + G5 izvoz, one surface. Read-only by law:
+# rulings happen in REVIEW; this tab only reads. The list derives by the
+# spine's own teorije(); the fold by teorija_page(); the export follows
+# LIBRARY's export line (derived body into canon_ruled, ledger-witnessed).
+# Solo bodies without laws are counted, not listed (they live in LIBRARY).
+# =============================================================================
+
+class TeorijeTab(ttk.Frame):
+
+    def __init__(self, parent):
+        super().__init__(parent, padding=8)
+        self.alive = False
+        self.rows = []
+        self.columnconfigure(0, weight=1)
+        self.columnconfigure(1, weight=2)
+        self.rowconfigure(1, weight=1)
+        if SOUL is None:
+            ttk.Label(self, text=f"cannot load the spine (soul_engine): "
+                                f"{_SOUL_LOAD_ERROR}").grid(row=0, column=0,
+                                                            sticky="w")
+            return
+        if not os.path.exists(SOUL.DB_PATH):
+            ttk.Label(self, text=f"the spine's db is missing: "
+                                f"{SOUL.DB_PATH} — run soul_engine scan "
+                                "first").grid(row=0, column=0, sticky="w")
+            return
+        self.con = SOUL.db()
+        self.alive = True
+
+        bar = ttk.Frame(self)
+        bar.grid(row=0, column=0, columnspan=2, sticky="ew")
+        ttk.Label(bar, text="filter:").pack(side="left")
+        self.filter_var = tk.StringVar()
+        ent = ttk.Entry(bar, textvariable=self.filter_var)
+        ent.pack(side="left", fill="x", expand=True, padx=4)
+        ent.bind("<KeyRelease>", lambda _e: self.fill())
+        ttk.Button(bar, text="izvozi stran teorije",
+                   command=self.export_teorija).pack(side="left", padx=(6, 0))
+        self.count_var = tk.StringVar(value="—")
+        ttk.Label(bar, textvariable=self.count_var).pack(side="left", padx=8)
+
+        self.listbox = tk.Listbox(self, width=44)
+        self.listbox.grid(row=1, column=0, sticky="nsw", pady=(4, 0))
+        self.listbox.bind("<Double-Button-1>", self.open_page)
+        self.listbox.bind("<Return>", self.open_page)
+
+        self.view = tk.Text(self, wrap="word", state="disabled",
+                            bg="#101014", fg="#cfd3dc",
+                            insertbackground="#ffffff")
+        self.view.grid(row=1, column=1, sticky="nsew", pady=(4, 0), padx=(6, 0))
+        for tag, cfg in {
+                "title": dict(font=("TkDefaultFont", 13, "bold"),
+                              foreground="#e8c76a"),
+                "meta": dict(foreground="#7788aa"),
+                "ent": dict(font=("TkDefaultFont", 10, "bold"),
+                            foreground="#4aa88f"),
+                "rub": dict(foreground="#c98f3d"),
+                "val": dict(foreground="#cfd3dc"),
+                "delta": dict(foreground="#d0a05a")}.items():
+            self.view.tag_configure(tag, **cfg)
+        self.fill()
+
+    def fill(self):
+        reg = SOUL.teorije(self.con)
+        q = (self.filter_var.get() or "").strip().lower()
+        self.rows = [t for t in reg["register"] if q in t["teorija"]]
+        self.listbox.delete(0, "end")
+        for t in self.rows:
+            self.listbox.insert(
+                "end", f"{t['teorija'][:40]}  β{t['beta']:<5} "
+                       f"{t['telesa']}t {len(t['zakoni'])}z")
+        self.count_var.set(f"{len(self.rows)} / {reg['v_registru']} "
+                           f"družin · solo štet: {reg['solo_brez_zakonov']}")
+
+    def open_page(self, _e=None):
+        sel = self.listbox.curselection()
+        if not sel:
+            return
+        t = self.rows[sel[0]]
+        pg = SOUL.teorija_page(self.con, t["teorija"])
+        self.view.config(state="normal")
+        self.view.delete("1.0", "end")
+        def w(tag, s):
+            self.view.insert("end", s + "\n", tag)
+        if "napaka" in pg:
+            w("meta", pg["napaka"])
+            if "izbira" in pg:
+                for c in pg["izbira"]:
+                    w("val", f"  {c['teorija']}  β{c['beta']}  {c['telesa']}t")
+        else:
+            w("title", pg["teorija"])
+            w("meta", f"β {pg['beta']} · {pg['tip']} · telesa {pg['telesa']}")
+            w("rub", "RODOVNIK")
+            for b in pg["rodovnik"]:
+                flags = [b["stratum"] or "?", b["kind"], f"vnosi {b['vnosi']}"]
+                if b["verzija"]:
+                    flags.append(b["verzija"])
+                if b["kiralna_kopija"]:
+                    flags.append("kiralna")
+                if b["kandidat_∧_žig_čaka"]:
+                    flags.append("kandidat — ∧ žig čaka")
+                w("val", f"  {b['telo'][:68]} [{', '.join(flags)}]")
+            w("rub", f"ZAKONI ({len(pg['zakoni'])})")
+            for z in pg["zakoni"]:
+                w("ent", f"  {z['serija']} {z['st']} — {z['naslov']}"
+                     + ("  ∧ pečat" if z["pecat"] else ""))
+            w("rub", f"ANTINOME ({len(pg['antinome'])})")
+            for a in pg["antinome"][:20]:
+                w("val", f"  {a['beseda']}: {a['antinoma']}")
+            w("rub", "∂ ODPRTA (imena, ne sodbe)")
+            for d in pg["∂_odprto"]["iz_zakonov"]:
+                w("delta", f"  {d['serija']} {d['st']}: {d['∂'][:110]}")
+            for t2 in pg["∂_odprto"]["temna_telesa"]:
+                w("delta", f"  temno telo: {t2}")
+            w("rub", "VEZI PO UBODIH")
+            for v in pg["vezi_po_ubodih"][:12]:
+                w("val", f"  {v['beseda']} — {v['tujih_telem']} tujih teles "
+                         f"(delež {v['delez_korpusa']})")
+            w("rub", "PREIZKUS NA TUJCU (T1/AX-16)")
+            w("val", f"  soul_engine {pg['preizkus']['zahtevek']}")
+            w("meta", pg["preizkus"]["sodba"])
+        self.view.config(state="disabled")
+
+    def export_teorija(self):
+        """G5 — the fold written as a derived body into canon_ruled
+        (LIBRARY's export line, theory half; rez 562: corpus feeds itself)."""
+        sel = self.listbox.curselection()
+        if not sel:
+            self.count_var.set("izberi teorijo — izvoz potrebuje izbiro")
+            return
+        t = self.rows[sel[0]]
+        out_dir = os.path.normpath(os.path.join(_HERE, "..", "canon_ruled"))
+        r = SOUL.export_teorija(self.con, t["teorija"], out_dir)
+        if "error" in r or "napaka" in r:
+            self.count_var.set(str(r.get("error") or r.get("napaka")))
+        else:
+            self.count_var.set(f"izvoz -> {r['file']} ({r['telesa']} teles, "
+                               f"{r['zakoni']} zakonov, ledger: export) — "
+                               "rescan sprejme")
+
+
+# =============================================================================
 # SLIKA TAB — ⧖ the corpus as one clear apparition (Luka's ask, 26. 9.)
 # =============================================================================
 
@@ -1829,6 +1972,8 @@ class Cockpit(tk.Tk):
         nb.add(self.review, text="⊘ REVIEW")
         self.library = LibraryTab(nb)
         nb.add(self.library, text="∮ LIBRARY")
+        self.teorije = TeorijeTab(nb)
+        nb.add(self.teorije, text="⨿ TEORIJE")
         self.slika = SlikaTab(nb)
         nb.add(self.slika, text="⧖ SLIKA")
         nb.add(ParkTab(nb), text="∅ PARK + FILES")
@@ -1891,6 +2036,19 @@ def _smoke_test():
         ok.append((f"library page derives by the spine "
                    f"(page for '{w0[:24]}': {len(p0['entries'])} entries)",
                    len(p0["entries"]) > 0))
+    # TEORIJE (4. 10.): the register + the fold — one surface reads
+    # the spine's own G3/G4; the export stays a button (rez 562 line).
+    teo = getattr(app, "teorije", None)
+    if teo is not None and teo.alive:
+        ok.append((f"TEORIJE constructs (register {len(teo.rows)} families)",
+                   len(teo.rows) > 0))
+        pg0 = SOUL.teorija_page(teo.con, teo.rows[0]["teorija"])
+        ok.append((f"theory page folds by the spine "
+                   f"({teo.rows[0]['teorija'][:20]}...: "
+                   f"{pg0.get('telesa', 0)} teles, preizkus travels)",
+                   pg0.get("telesa", 0) > 0 and "preizkus" in pg0))
+    else:
+        ok.append(("TEORIJE constructs (spine + db)", False))
     # SKLEPAJ (1. 10.): the reasoning executor's surface — a claim in,
     # a counted trace out. The smoke claim is ALREADY drafted on the
     # live db (witnessed 1. 10.), so the run exercises the idempotent

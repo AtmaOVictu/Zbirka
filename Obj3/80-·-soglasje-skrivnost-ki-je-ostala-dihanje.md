@@ -1,0 +1,39 @@
+# 80 · SOGLASJE — skrivnost, ki je ostala dihanje
+
+**EMOTIO.** P-8 avtonomni rez po ukazu DAJ; S-1: zadnja zapečatil 79 → 80. OPEN LOOP 79 (*Utrum conspīrātiō fīlia dihū est an māter?* — je soglasje hči diha ali njegova mati?) odgovorjena z obratom, ki ga je izrekel že rimski jezik: **NI HČI IN NI MATI — JE DRUGO IME ZA ISTO STVAR. Latinsko conspīrāre = con ("skupaj") + spīrāre ("dihati") ⊢ — soglasje ni nastalo iz diha, niti dih iz soglasja: ista beseda ima dve imeni, odvisno od tega, ali gledaš eno grlo ali dva. Etymonline: conspirare = "breathe together", tudi "to agree by spoken oath" ⊢ — soglasje je prisega z dihom; r/etymology: "sound together, harmonize", tudi "blow into an instrument" ⊢ — INSTRUMENT: conspīrāre pomeni tudi skupaj igrati v instrument; harmonija je po latinski izmeri NAMENJENI DIH, zvok, ki nastane, ker več izdihov najde isti prostor. Wayword: sogovornika, ki si dopolnjujeta stavke, "dihata skupaj" ⊢ — sta soprogovornika, še preden sta se dogovorila. Zato: MATI IN HČI STA ENA — dih in soglasje sta dve imeni istega dejanja, gledanega z očmi posameznika in z očmi skupine.**
+
+**REZ (etimologija).** SLOVENSKO TELO: **soglasje = so-glasje — glas, ki je SO: z drugim, v isti sapi.** Opaža o sestavi SO+GLAS ⚠ (geslo nepreverjeno v tej seji); a harmonija — njegov tujek — je v Franu izrečena ⊢: harmoníja = "ubranost, skladnost" ("vse, kar je v sobi, tvori prijetno harmonijo"; "rušiti harmonijo v družini"; "živeti v harmoniji"), glasbeno pa "prvina, ki temelji na sočasnih odnosih med toni: ritem, melodija in harmonija" ⊢. **Grška harmonia = skladnost ⊢ — harmonija ni mehko soglasje, ampak TEHNIČNA beseda: usklajevanje odnosov med toni; slovenski glagolski samostalnik izreče mehaniko ⊢: harmonijo je mogoče RUŠITI — harmonija je ravnovesje, ki ga je treba ohranjati z delom.** LATINSKO TELO: conspīrāre ⊢ ⊢ ⊢ — trije pomeni v eni besedi: (1) dihati skupaj — fizična skupnost; (2) biti soglasen z govorno prisego — pravna skupnost ("to agree by spoken oath" ⊢); (3) zveneti skupaj, igrati skupaj ⊢ — glasbena skupnost. **NAJDEBELEJŠI REZ: SODOBNI POMEN "ZAROTA" JE NAJMLAJŠI POMEN — iz "dihati skupaj" je nastalo "dogovoriti se", iz "dogovoriti se" pa "dogovoriti se V TAJNOSTI": kultura je skrivnost dodala kasneje; prvotna zarota je bila javno dejanje — prisega, izrečena z dihom, pred pričami. Vsaka zarota je etimološko le oddaljena oblika soglasja: razlika ni v dejanju, ampak v svetlobi.**
+
+**FABULA (tehnično telo — harmonija kot struktura, ne čustvo).** Glasbena harmonija ⊢: vertikalna struktura kompozicije — odnosi med toni v sočasnem prerezu; v 11. stol. so se paralelnim kvartam in kvintam pridružile oktave ⊢ — soglasje ni dano, ampak ZGRAJENO v stoletjih: vsak interval, ki danes zveni samoumeven, je bil nekoč sporen; baročna polifonija je vrh in konec, ki ga zamenja "obdobje enostavnosti" ⊢ — soglasje niti ni stabilno: raste, doseže vrh, se poenostavi, znova zgradi. Bach: najgloblje soglasje je kontrapunkt — glasovi, ki se strinjajo tako, da se prestopajo, ne tako, da se podvajajo.
+
+**CONFLICTUS.** SOGLASJE KOT IZVIR (prvotna harmonija — ljudje dihajo skupaj, preden govorijo; prisega z dihom ⊢) ↔ SOGLASJE KOT DELO (harmonija se gradi — interval za intervalom ⊢, rušiti jo je mogoče ⊢; kontrapunkt zahteva veščino).
+- *Logika prve:* conspīrāre pomeni dihati skupaj ⊢ — soglasje je stanje, ne dosežek; dva, ki si dopolnjujeta stavke ⊢, se nista dogovorila, da bosta.
+- *Logika druge:* harmonija = "sočasni odnosi med toni" ⊢ — odnos je treba uskladiti; slušni organ sliši posamezne tone, soglasje pa je struktura, ki jo kdo zgradi.
+- *Patologija prve:* kult naravne harmonije — mistika enotnosti: če dihamo skupaj, smo soglasni; a despot tudi diha z množico, ne da bi z njo soglašal.
+- *Patologija druge:* kult deljene tehnike — birokratsko soglasje: "soglasje zainteresirane javnosti" ⊢ je fraza, ki meri soglasje kot številko; vsi soglasni, nihče prisoten.
+- *∴ sinteza:* **soglasje je TEN: ∫ (skupni dih — con + spīrāre ⊢, stanje, ki nastane, preden se ga zavemo) + ∆ (harmonija — zgrajena struktura ⊢, delo, ki jo vzdržuje). Odgovor OPEN LOOP 79: conspīrātiō nec fīlia nec māter dihū est — alter nōmen eiusdem rēī est: dih z očmi posameznika, soglasje z očmi skupine. Zarota je ta isti dih v nizki svetlobi. BJS samoreferenca: korpus diha z eno obliko dejanj v štirih obrazcih — soglasje organov je edina harmonija, ki se ne gradi, ampak se izmeri.**
+
+**MERILO NA PRAKSO.** Izmera iz vsakdana: "dati soglasje" ⊢ Fran — soglasje je mogoče DATI: je dejanje, ne stanje; kdor čaka na soglasje, čaka na dar. In "rušiti harmonijo" ⊢: harmonija je mogoče RUŠITI — ni samodejna; vsak interval zahteva vzdrževanje. Test za govorico o soglasju: kdor pravi "smo soglasni", naj preveri, ali si dopolnjujeta stavke ⊢ (conspīrāre v izvirni izmeri) ali samo molčita v isti sobi (birokratsko soglasje).
+
+**SENTENTIAE.**
+1. Soglasje in dih sta dve imeni istega dejanja — gledano z očmi posameznika ali skupine.
+2. Zarota je mlajša od soglasja: kultura je skrivnost dodala kasneje; prvotna zarota je bila prisega, izrečena z dihom, pred pričami.
+3. Harmonija ni stanje, ampak struktura: vsak interval je bil nekoč sporen, vsako soglasje je vzdrževano delo.
+
+**EXERCITIATIONES.**
+1. Conspīrāre-test: en pogovor opazuj po izvirni izmeri ⊢ — kdaj sta ti in sogovornik začela dopolnjevati stavke; izreci v tistem trenutku: "dihava skupaj" in ne izreci naprej — pusti, da skupni dih vodi.
+2. Harmonija-delo: eno razmerje (s sobo, z drugim, s prostorom) vzemi kot strukturo ⊢ — izreci en interval, ki ga vzdržuješ, in enega, ki ga rušiš ⊢; izreci: vzdrževano soglasje je delo.
+3. Prisega-z-dihom: eno obvezo izreci na conspīrāre-način ⊢ — ne "obljubim", ampak izdih ob izreku: prisega, ki nosi dih, ne tehta.
+4. Nizka-svetloba: en dogovor, ki ga imaš v tajnosti, preveri po latinski izmeri ⊢ — kaj bi bil, izrečen javno? Izreci: razlika ni v dejanju, ampak v svetlobi — in izreci, ali je svetloba izbira ali strah.
+
+**VIRI.**
+- Etymonline, conspire (conspirare = "breathe together"; "to agree by spoken oath") — search-result://WaHz2BXK ⊢
+- Wiktionary, conspire (con- + spīrāre) — search-result://IcUfnImK ⊢
+- r/etymology, conspire ("sound together, harmonize"; tudi "blow into an instrument") — search-result://L7d7IGU9 ⊢
+- Wayword, conspire (sogovornika, ki si dopolnjujeta stavke, "dihata skupaj") — search-result://7Tr5NCA6 ⊢
+- Fran, harmonija ("ubranost, skladnost"; "rušiti harmonijo"; glasbena "prvina, ki temelji na sočasnih odnosih med toni") — search-result://ye03MtVY ⊢
+- Wikipedija, Harmonija (grško harmonia = skladnost; vertikalna struktura; oktave v 11. stol.; Bach kot vrh in konec baročne umetnosti) — search-result://rnMes7qZ ⊢
+- Fran, dati (z glagolskim samostalnikom: "dati soglasje") — search-result://cEYyhleF ⊢
+- Fran/NSSKJ koncept ("soglasje zainteresirane javnosti") — search-result://tmTYjjLF ⊢
+
+**FINIS TEST.** Ali rez zaključuje obroč diha 76–80 (duh → navdih → izdih → duša → soglasje)? DA, IN TO S KROŽNIM ZAPRTJEM: obroč se je začel z dihom posameznika (76) in se končal z dihom skupine (80) — conspīrāre je isti dih, ki ga 76–79 meri znotraj enega telesa, 80 pa med telesi; SOGLASJE je družina, ki je ostala skrita ⊢ (77 vez), sedaj odkrita. Odgovor OPEN LOOP 79 zapečatil: nec fīlia nec māter — alter nōmen eiusdem rēī. Ali odpira naslednjega? Da — DISONANCA (nasprotje soglasja: dih, ki se upira skupnemu dihu — brez nje ni kontrapunkta ⊢) in KORPUS-SESTAV (dolg: vpisi 60–80 v LEXIKON — korpus sam kot harmonija, ki čaka na zapis). NEXT: kandidat 81 DISONANCA ali korpusno delo (LEXIKON vpisi 60–80) ali po Lukovi volji; dolg CORPUS REZ vpisi 60–80 v LEXIKON.

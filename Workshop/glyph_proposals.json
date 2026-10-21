@@ -1,212 +1,212 @@
 {
- "abakus": {
-  "glyph": "⊘ (praznina, kjer se rodi red)",
-  "proposed_operator": "⊘ boundary / ¬ negation+1 seal",
-  "warrant": "protective boundary (strah's glyph)",
-  "verdict": "confirm/reject",
-  "unmapped": false
- },
- "abortus": {
-  "glyph": "∆ (preobrazba skozi prekinitev)",
-  "proposed_operator": "∆ Difference / boundary_event",
-  "warrant": "movement, change — the rez itself",
-  "verdict": "confirm/reject",
-  "unmapped": false
- },
- "absurd": {
-  "glyph": "⟡ (odmev, ki povezuje nasprotja)",
-  "proposed_operator": null,
-  "warrant": null,
-  "verdict": "confirm/reject",
-  "unmapped": true
- },
- "akcija": {
-  "glyph": "1 (dejanje, ki zapečati resničnost)",
-  "proposed_operator": "1 Unity / seal",
-  "warrant": "singularity, seal",
-  "verdict": "confirm/reject",
-  "unmapped": false
- },
- "aksiom": {
-  "glyph": "∴ (povezava med temeljem in vprašanjem)",
-  "proposed_operator": "∴ therefore / Φ merger",
-  "warrant": "connection between states — ljubezen's own glyph",
-  "verdict": "confirm/reject",
-  "unmapped": false
- },
- "beseda": {
-  "glyph": "∴ (povezava med dejanjem in pomenom)",
-  "proposed_operator": "∴ therefore / Φ merger",
-  "warrant": "connection between states — ljubezen's own glyph",
-  "verdict": "confirm/reject",
-  "unmapped": false
- },
- "dejanje": {
-  "glyph": "1 (dejanje, ki zapečati spremembo)",
-  "proposed_operator": "1 Unity / seal",
-  "warrant": "singularity, seal",
-  "verdict": "confirm/reject",
-  "unmapped": false
- },
- "dih": {
-  "glyph": "∫ (tok, ki nosi življenje)",
-  "proposed_operator": null,
-  "warrant": null,
-  "verdict": "confirm/reject",
-  "unmapped": true
- },
- "dvom": {
-  "glyph": "⧖ (črta tišine, kjer se rodi resnica)",
-  "proposed_operator": "⧖ Sacred Silence / ς cesura",
-  "warrant": "stillness, pause",
-  "verdict": "confirm/reject",
-  "unmapped": false
- },
- "ego": {
-  "glyph": "⊘ (meja, ki loči jaz od drugega)",
-  "proposed_operator": "⊘ boundary / ¬ negation+1 seal",
-  "warrant": "protective boundary (strah's glyph)",
-  "verdict": "confirm/reject",
-  "unmapped": false
- },
- "gibanje": {
-  "glyph": "∆ (preobrazba skozi gibanje)",
-  "proposed_operator": "∆ Difference / boundary_event",
-  "warrant": "movement, change — the rez itself",
-  "verdict": "confirm/reject",
-  "unmapped": false
- },
- "intuicija": {
-  "glyph": "⟡ (notranji odmev)",
-  "proposed_operator": null,
-  "warrant": null,
-  "verdict": "confirm/reject",
-  "unmapped": true
- },
- "jaz": {
-  "glyph": "∂ (prehod med stanji)",
-  "proposed_operator": "∂ the open mark",
-  "warrant": "assertion that stays revocable",
-  "verdict": "confirm/reject",
-  "unmapped": false
- },
- "ljubezen": {
-  "glyph": "∴ (povezava med stanji)",
-  "proposed_operator": "∴ therefore / Φ merger",
-  "warrant": "connection between states — ljubezen's own glyph",
-  "verdict": "confirm/reject",
-  "unmapped": false
- },
- "misel": {
-  "glyph": "φ (frekvenca misli)",
-  "proposed_operator": null,
-  "warrant": null,
-  "verdict": "confirm/reject",
-  "unmapped": true
- },
- "modrost": {
-  "glyph": "∮ (spirala modrosti)",
-  "proposed_operator": "∮ Circulation / ⇌ exchange",
-  "warrant": "return, cycle, learning",
-  "verdict": "confirm/reject",
-  "unmapped": false
- },
- "molitev": {
-  "glyph": "⧖ (črta tišine, kjer se rodi povezava)",
-  "proposed_operator": "⧖ Sacred Silence / ς cesura",
-  "warrant": "stillness, pause",
-  "verdict": "confirm/reject",
-  "unmapped": false
- },
- "odnos": {
-  "glyph": "∮ (spirala odnosa)",
-  "proposed_operator": "∮ Circulation / ⇌ exchange",
-  "warrant": "return, cycle, learning",
-  "verdict": "confirm/reject",
-  "unmapped": false
- },
- "razumevanje": {
-  "glyph": "φ (frekvenca razumevanja)",
-  "proposed_operator": null,
-  "warrant": null,
-  "verdict": "confirm/reject",
-  "unmapped": true
- },
- "resnica": {
-  "glyph": "∮ (spiralna pot k razumevanju)",
-  "proposed_operator": "∮ Circulation / ⇌ exchange",
-  "warrant": "return, cycle, learning",
-  "verdict": "confirm/reject",
-  "unmapped": false
- },
- "sinteza": {
-  "glyph": "∴ (povezava med nasprotji)",
-  "proposed_operator": "∴ therefore / Φ merger",
-  "warrant": "connection between states — ljubezen's own glyph",
-  "verdict": "confirm/reject",
-  "unmapped": false
- },
- "smeh": {
-  "glyph": "⟡ (odmev, ki regenerira)",
-  "proposed_operator": null,
-  "warrant": null,
-  "verdict": "confirm/reject",
-  "unmapped": true
- },
- "spomin": {
-  "glyph": "π (spomin kot zanka)",
-  "proposed_operator": null,
-  "warrant": null,
-  "verdict": "confirm/reject",
-  "unmapped": true
- },
- "strah": {
-  "glyph": "⊘ (varovalna meja)",
-  "proposed_operator": "⊘ boundary / ¬ negation+1 seal",
-  "warrant": "protective boundary (strah's glyph)",
-  "verdict": "confirm/reject",
-  "unmapped": false
- },
- "telo": {
-  "glyph": "∫ (nosilec, ki vsebuje življenje)",
-  "proposed_operator": null,
-  "warrant": null,
-  "verdict": "confirm/reject",
-  "unmapped": true
- },
- "tok": {
-  "glyph": "∆ (gibanje, ki preoblikuje)",
-  "proposed_operator": "∆ Difference / boundary_event",
-  "warrant": "movement, change — the rez itself",
-  "verdict": "confirm/reject",
-  "unmapped": false
- },
- "upanje": {
-  "glyph": "φ (frekvenca upanja)",
-  "proposed_operator": null,
-  "warrant": null,
-  "verdict": "confirm/reject",
-  "unmapped": true
- },
- "volja": {
-  "glyph": "∆ (gibanje, ki ustvarja)",
-  "proposed_operator": "∆ Difference / boundary_event",
-  "warrant": "movement, change — the rez itself",
-  "verdict": "confirm/reject",
-  "unmapped": false
- },
- "čas": {
-  "glyph": "⧖ (črta časa)",
-  "proposed_operator": "⧖ Sacred Silence / ς cesura",
-  "warrant": "stillness, pause",
-  "verdict": "confirm/reject",
-  "unmapped": false
- },
- "žalost": {
-  "glyph": "∫ (globina, kjer se rodi modrost)",
-  "proposed_operator": null,
-  "warrant": null,
-  "verdict": "confirm/reject",
-  "unmapped": true
- }
+  "abakus": {
+    "glyph": "⊘ (praznina, kjer se rodi red)",
+    "proposed_operator": "⊘ boundary / ¬ negation+1 seal",
+    "warrant": "protective boundary (strah's glyph)",
+    "verdict": "draft: confirm",
+    "unmapped": false
+  },
+  "abortus": {
+    "glyph": "∆ (preobrazba skozi prekinitev)",
+    "proposed_operator": "∆ Difference / boundary_event",
+    "warrant": "movement, change — the rez itself",
+    "verdict": "draft: confirm",
+    "unmapped": false
+  },
+  "absurd": {
+    "glyph": "⟡ (odmev, ki povezuje nasprotja)",
+    "proposed_operator": null,
+    "warrant": null,
+    "verdict": "confirm/reject",
+    "unmapped": true
+  },
+  "akcija": {
+    "glyph": "1 (dejanje, ki zapečati resničnost)",
+    "proposed_operator": "1 Unity / seal",
+    "warrant": "singularity, seal",
+    "verdict": "draft: confirm",
+    "unmapped": false
+  },
+  "aksiom": {
+    "glyph": "∴ (povezava med temeljem in vprašanjem)",
+    "proposed_operator": "∴ therefore / Φ merger",
+    "warrant": "connection between states — ljubezen's own glyph",
+    "verdict": "draft: confirm",
+    "unmapped": false
+  },
+  "beseda": {
+    "glyph": "∴ (povezava med dejanjem in pomenom)",
+    "proposed_operator": "∴ therefore / Φ merger",
+    "warrant": "connection between states — ljubezen's own glyph",
+    "verdict": "draft: confirm",
+    "unmapped": false
+  },
+  "dejanje": {
+    "glyph": "1 (dejanje, ki zapečati spremembo)",
+    "proposed_operator": "1 Unity / seal",
+    "warrant": "singularity, seal",
+    "verdict": "draft: confirm",
+    "unmapped": false
+  },
+  "dih": {
+    "glyph": "∫ (tok, ki nosi življenje)",
+    "proposed_operator": null,
+    "warrant": null,
+    "verdict": "confirm/reject",
+    "unmapped": true
+  },
+  "dvom": {
+    "glyph": "⧖ (črta tišine, kjer se rodi resnica)",
+    "proposed_operator": "⧖ Sacred Silence / ς cesura",
+    "warrant": "stillness, pause",
+    "verdict": "draft: confirm",
+    "unmapped": false
+  },
+  "ego": {
+    "glyph": "⊘ (meja, ki loči jaz od drugega)",
+    "proposed_operator": "⊘ boundary / ¬ negation+1 seal",
+    "warrant": "protective boundary (strah's glyph)",
+    "verdict": "draft: confirm",
+    "unmapped": false
+  },
+  "gibanje": {
+    "glyph": "∆ (preobrazba skozi gibanje)",
+    "proposed_operator": "∆ Difference / boundary_event",
+    "warrant": "movement, change — the rez itself",
+    "verdict": "draft: confirm",
+    "unmapped": false
+  },
+  "intuicija": {
+    "glyph": "⟡ (notranji odmev)",
+    "proposed_operator": null,
+    "warrant": null,
+    "verdict": "confirm/reject",
+    "unmapped": true
+  },
+  "jaz": {
+    "glyph": "∂ (prehod med stanji)",
+    "proposed_operator": "∂ the open mark",
+    "warrant": "assertion that stays revocable",
+    "verdict": "draft: confirm",
+    "unmapped": false
+  },
+  "ljubezen": {
+    "glyph": "∴ (povezava med stanji)",
+    "proposed_operator": "∴ therefore / Φ merger",
+    "warrant": "connection between states — ljubezen's own glyph",
+    "verdict": "draft: confirm",
+    "unmapped": false
+  },
+  "misel": {
+    "glyph": "φ (frekvenca misli)",
+    "proposed_operator": null,
+    "warrant": null,
+    "verdict": "confirm/reject",
+    "unmapped": true
+  },
+  "modrost": {
+    "glyph": "∮ (spirala modrosti)",
+    "proposed_operator": "∮ Circulation / ⇌ exchange",
+    "warrant": "return, cycle, learning",
+    "verdict": "draft: confirm",
+    "unmapped": false
+  },
+  "molitev": {
+    "glyph": "⧖ (črta tišine, kjer se rodi povezava)",
+    "proposed_operator": "⧖ Sacred Silence / ς cesura",
+    "warrant": "stillness, pause",
+    "verdict": "draft: confirm",
+    "unmapped": false
+  },
+  "odnos": {
+    "glyph": "∮ (spirala odnosa)",
+    "proposed_operator": "∮ Circulation / ⇌ exchange",
+    "warrant": "return, cycle, learning",
+    "verdict": "draft: confirm",
+    "unmapped": false
+  },
+  "razumevanje": {
+    "glyph": "φ (frekvenca razumevanja)",
+    "proposed_operator": null,
+    "warrant": null,
+    "verdict": "confirm/reject",
+    "unmapped": true
+  },
+  "resnica": {
+    "glyph": "∮ (spiralna pot k razumevanju)",
+    "proposed_operator": "∮ Circulation / ⇌ exchange",
+    "warrant": "return, cycle, learning",
+    "verdict": "draft: confirm",
+    "unmapped": false
+  },
+  "sinteza": {
+    "glyph": "∴ (povezava med nasprotji)",
+    "proposed_operator": "∴ therefore / Φ merger",
+    "warrant": "connection between states — ljubezen's own glyph",
+    "verdict": "draft: confirm",
+    "unmapped": false
+  },
+  "smeh": {
+    "glyph": "⟡ (odmev, ki regenerira)",
+    "proposed_operator": null,
+    "warrant": null,
+    "verdict": "confirm/reject",
+    "unmapped": true
+  },
+  "spomin": {
+    "glyph": "π (spomin kot zanka)",
+    "proposed_operator": null,
+    "warrant": null,
+    "verdict": "confirm/reject",
+    "unmapped": true
+  },
+  "strah": {
+    "glyph": "⊘ (varovalna meja)",
+    "proposed_operator": "⊘ boundary / ¬ negation+1 seal",
+    "warrant": "protective boundary (strah's glyph)",
+    "verdict": "draft: confirm",
+    "unmapped": false
+  },
+  "telo": {
+    "glyph": "∫ (nosilec, ki vsebuje življenje)",
+    "proposed_operator": null,
+    "warrant": null,
+    "verdict": "confirm/reject",
+    "unmapped": true
+  },
+  "tok": {
+    "glyph": "∆ (gibanje, ki preoblikuje)",
+    "proposed_operator": "∆ Difference / boundary_event",
+    "warrant": "movement, change — the rez itself",
+    "verdict": "draft: confirm",
+    "unmapped": false
+  },
+  "upanje": {
+    "glyph": "φ (frekvenca upanja)",
+    "proposed_operator": null,
+    "warrant": null,
+    "verdict": "confirm/reject",
+    "unmapped": true
+  },
+  "volja": {
+    "glyph": "∆ (gibanje, ki ustvarja)",
+    "proposed_operator": "∆ Difference / boundary_event",
+    "warrant": "movement, change — the rez itself",
+    "verdict": "draft: confirm",
+    "unmapped": false
+  },
+  "čas": {
+    "glyph": "⧖ (črta časa)",
+    "proposed_operator": "⧖ Sacred Silence / ς cesura",
+    "warrant": "stillness, pause",
+    "verdict": "draft: confirm",
+    "unmapped": false
+  },
+  "žalost": {
+    "glyph": "∫ (globina, kjer se rodi modrost)",
+    "proposed_operator": null,
+    "warrant": null,
+    "verdict": "confirm/reject",
+    "unmapped": true
+  }
 }

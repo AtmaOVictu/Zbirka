@@ -1,3 +1,6 @@
+Obj1/build/
+Obj1/dist/
+*.zip
 __pycache__/
 *.pyc
 .pytest_cache/
