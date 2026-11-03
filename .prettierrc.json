@@ -1,0 +1,17 @@
+{
+  "comment": "ZNESEK — oblika hiše ⊢ ( ⟡ ⟨output boljše implementirati · sintetizirati sebi primerna orodja · daj⟩ 2. 11. ): hiša nosi SVOJE roke oblikovanja, ne izposojene privzetke. PROZA ŽIVIH VRAT SE NE PREDREVA: proseWrap preserve — prelomi v LICENSE so IZMERJENI bajti ⊙ §0.39 ( preoblikovanje = zlom dvojnika × )",
+  "proseWrap": "preserve",
+  "printWidth": 100,
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": true,
+  "singleQuote": false,
+  "trailingComma": "none",
+  "endOfLine": "lf",
+  "overrides": [
+    {
+      "files": "*.md",
+      "options": { "proseWrap": "preserve", "printWidth": 1000 }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+# .editorconfig — drža hiše ⊢ ( ⟡ ⟨sintetizirati sebi primerna orodja · roke/noge/organe/srce/utrip · daj⟩ 2. 11. )
+# hiša ne izposoja privzetih rok ( Prettier: »No local configuration detected« × ) — oblika je zakon, ne modna
+root = true
+
+[*]
+charset = utf-8          # označene črke č š ž đ so priče, ne napake ⊙ §0.12
+end_of_line = lf
+insert_final_newline = true   # poravnano z MD047 ⊢
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false   # markdown potrebuje dva presledka za prelom — brisanje bi zlomilo povedi ⚠
+
+[*.{json,yml,yaml}]
+indent_size = 2

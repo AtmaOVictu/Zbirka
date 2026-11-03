@@ -1,0 +1,11 @@
+# .prettierignore — PEČAT-BAJTOV ⊢ ( 2. 11. ): živa vrata so bajtno izmerjena ( §0.39 VRATA-BAJTOV · dvojnik b64 · md5 d3d3b517365a )
+# preoblikovanje zapečenega telesa = bajtna sprememba = rojstvo ( §0.10 ) — NE na vsak shranjevalec ×
+# oblikovalec oblikuje hišo, ne vrata ⊙ vrata se rodijo, hiša se ureja
+LICENSE.md
+LICENSE-SLO.md
+LICENSE-SPREHOD.md
+LICENSE-LINEAGE.md
+LICENSE-*.bin
+*.b64
+zhiva-vrata*
+zhiva-vrata-*.b64
