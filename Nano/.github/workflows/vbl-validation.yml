@@ -1,0 +1,36 @@
+name: VBL validation
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preflight-tests:
+    name: Release-gate regression tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install schema validator
+        run: python -m pip install -r requirements-dev.txt
+      - name: Compile release tools
+        run: python -m compileall -q check_release.py prepare_release.py tests
+      - name: Run release-gate regression tests
+        run: python -m unittest discover --start-directory tests --verbose
+      - name: Confirm working packet is blocked for the expected missing artifacts
+        run: |
+          set +e
+          python check_release.py . > preflight-output.txt 2>&1
+          status=$?
+          set -e
+          test "$status" -eq 2
+          grep -F 'VBL-PRE-001: missing: LICENSE.md, REGISTER-NEIMENOVANIH.jsonl, REGISTER-PADCEV.jsonl, release-manifest.json, independent-review.json' preflight-output.txt
+          echo 'Expected block confirmed: this working packet is not a populated canonical release.'

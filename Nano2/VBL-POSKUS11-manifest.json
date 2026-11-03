@@ -1,0 +1,32 @@
+{
+  "package": "VBL POSKUS 11 — razširjeni lokalni delovni paket",
+  "status": "DRAFT_NOT_CANONICAL_NOT_PUBLISHED",
+  "created_utc_claim": null,
+  "source": {
+    "path": "licenca-v-zvok-poskus9-sva-vec.wav",
+    "bytes": 16776948,
+    "sha256": "2a4ca09572c46e5298d268c31fb3de7d3a4c8d01516901146d98ab587a0a46f1"
+  },
+  "artifacts": [
+    {
+      "path": "VBL-POSKUS11-SVA-VEC-remaster.wav",
+      "bytes": 16776948,
+      "sha256": "9116609507f2e9eb96e9881a6369ce36cad33cdeb2f92a790b5d7442bc746567",
+      "type": "audio/wav",
+      "processing": "DC offset removal; 15ms fade-in; 1.8s fade-out; peak normalization to approx -1 dBFS"
+    },
+    {
+      "path": "VBL-POSKUS11-razsirjeni-pregled.md",
+      "bytes": 4937,
+      "sha256": "53637267863bbbb21192057d14b7b97c2905b44cc69f73d420b5b4b7cfe4913a",
+      "type": "text/markdown"
+    }
+  ],
+  "limitations": [
+    "No POSKUS 8 comparison WAV supplied",
+    "No external playback confirmation",
+    "No legal opinion",
+    "No independently witnessed repository publication history",
+    "This package does not establish canonical version lineage"
+  ]
+}

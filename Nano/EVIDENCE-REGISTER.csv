@@ -1,0 +1,10 @@
+﻿evidence_id,claim_or_item,source_type,status,limitations
+E-001,User-provided transcript,conversation text,Observed,Original audio/source file absent; transcript may contain recognition noise.
+E-002,Claim that GitHub comment was published,prior assistant statement and URL,Unconfirmed,Current connected GitHub API and search did not corroborate it.
+E-003,GitHub issue lookup,connected GitHub tool response,Confirmed tool response only,HTTP 404; cause unknown; does not prove nonexistence.
+E-004,Repository search for Atmavictu,connected GitHub repository search,No match in accessible results,Not proof the repo never existed or is absent globally.
+E-005,Exact public web search for comment ID,web search results,No indexed result observed,Search indexing can be incomplete; direct fetch failed with cache miss.
+E-006,Meaning of IMH 12 / ZPV / code string,raw transcript,Unknown,No decoding or assignment to person/project without provenance.
+E-007,New external publication or contact,available actions in this run,Not performed,No new GitHub writes; no recipients contacted.
+E-008,Search code in accessible owner repositories,connected GitHub code search,No match for exact VBL terms,Only accessible repositories/default branch covered; not global proof of absence.
+E-009,Global search for short acronym VBL,connected GitHub issue search,Ambiguous/unrelated results,Acronym collision is not evidence about Verification Before Assertion License.

@@ -1,0 +1,44 @@
+{
+  "manifest_type": "VBL package manifest",
+  "package": "VBL-INTEGRATED-INCIDENT-02",
+  "status": "WORKING_ANALYSIS_NOT_CANON",
+  "algorithm": "SHA-256",
+  "scope": "Package members only; manifest is intentionally not self-hashed.",
+  "entries": [
+    {
+      "path": "CLAIM-LEDGER.jsonl",
+      "size_bytes": 3217,
+      "sha256": "10e503ec21074ae6d1a020535072f91ec8239cc10dd4a70ea4d2968c70ecee2a"
+    },
+    {
+      "path": "INCIDENT-ANALYSIS-SL.md",
+      "size_bytes": 6619,
+      "sha256": "a3ff8b1256baf061e54fb1b5dfa4022fc360a100eb832e7c34da7e6df3dbae60"
+    },
+    {
+      "path": "MACHINE-RECORD.json",
+      "size_bytes": 851,
+      "sha256": "4e065273cf746c3ef869574564ab16022a1f3e381ec54b8773da9cde9316c9f3"
+    },
+    {
+      "path": "README-SL.md",
+      "size_bytes": 2777,
+      "sha256": "456ccdb3f08ac7f8d41b9c2ad59016c98627ab63648eeab3e617a1299f780d87"
+    },
+    {
+      "path": "WORKFLOW-POWERSHELL.md",
+      "size_bytes": 2194,
+      "sha256": "9170098e3b6dc1d2d978ef2afefd2d1ecd726fdf4c840632a3a1e894c379aa11"
+    },
+    {
+      "path": "tools/Compare-VblFiles.READONLY.ps1",
+      "size_bytes": 1970,
+      "sha256": "4a6574c104907272f76f2d2c9da3670fcdb3fe376e5651527c79532f64e60670"
+    },
+    {
+      "path": "tools/Inspect-VblLocalState.READONLY.ps1",
+      "size_bytes": 1301,
+      "sha256": "ca968ba84566af829bbf027857ad53585b06a85cb1a9b3210f8eb5c72099b648"
+    }
+  ]
+}

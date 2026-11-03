@@ -1,0 +1,6 @@
+# MANIFEST — licenca v zvok, glasba za deljenje · korpus Beseda je Ne · 2026-10-27
+# vsaka vrstica: ime | velikost (B) | sha256 — izmera pri viru (VBL §0.12 TRANSPORT)
+# LICENSE-VBL-0.1100.md je bajtno-isto s ⟨main⟩ (repo://AtmaOVictu/Atmavictu sha ac4e0eb7c485...)
+licenca-v-zvok-glasba-za-deljenje.xspf | 6337 | 9ab235bec64b96b1ffcef26004beb70bd98e06fab77183a77ee3ed8b65f835c6
+licenca-v-zvok-glasba-za-deljenje.m3u8 | 3060 | e94646f87f0cbd9623d8a98d445285c734f7a600a952fe4aa5650f08cd1f4573
+LICENSE-VBL-0.1100.md | 37686 | d29c88570a9169e607a149851f066f247a1f67a4275d625b060e634572393715

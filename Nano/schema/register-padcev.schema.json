@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/vbl/register-padcev.schema.json",
+  "title": "VBL named-falls register record",
+  "description": "Structural checks only. A record does not prove the event or its claims.",
+  "type": "object",
+  "required": ["record_type"],
+  "properties": {
+    "record_type": {"enum": ["register", "fall"]},
+    "schema_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "record_id": {"type": "string", "minLength": 1},
+    "status": {"enum": ["OPEN", "IN_REVIEW", "CORRECTED", "CLOSED", "TEMPLATE"]},
+    "created_at": {"type": "string", "format": "date-time"},
+    "artifact": {"type": "string", "minLength": 1},
+    "artifact_version": {"type": ["string", "null"]},
+    "claim_or_expectation": {"type": "string", "minLength": 1},
+    "observation": {"type": "string", "minLength": 1},
+    "impact": {"enum": ["UNKNOWN", "LOW", "MEDIUM", "HIGH", "CRITICAL"]},
+    "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}},
+    "corrective_action": {"$ref": "#/$defs/action"},
+    "retest": {"$ref": "#/$defs/retest"},
+    "independent_review": {"$ref": "#/$defs/review"},
+    "links": {"type": "object", "properties": {"prior_record_ids": {"type": "array", "items": {"type": "string"}}, "follow_up_record_ids": {"type": "array", "items": {"type": "string"}}}, "additionalProperties": true},
+    "corrects_record_id": {"type": "string", "minLength": 1},
+    "correction_reason": {"type": "string", "minLength": 1},
+    "privacy_note": {"type": "string"}
+  },
+  "allOf": [
+    {"if": {"properties": {"record_type": {"const": "register"}}, "required": ["record_type"]}, "then": {"required": ["entries_recorded"], "properties": {"entries_recorded": {"type": "integer", "minimum": 0}}}},
+    {"if": {"properties": {"record_type": {"const": "fall"}}, "required": ["record_type"]}, "then": {"required": ["schema_version", "record_id", "status", "created_at", "evidence", "artifact", "claim_or_expectation", "observation", "impact"]}},
+    {"if": {"properties": {"status": {"const": "CORRECTED"}}, "required": ["status"]}, "then": {"required": ["corrects_record_id", "correction_reason"]}}
+  ],
+  "$defs": {
+    "evidence": {
+      "type": "object",
+      "required": ["source", "sha256", "observed_at"],
+      "properties": {
+        "source": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "observed_at": {"type": "string", "format": "date-time"},
+        "quote": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "action": {
+      "type": "object",
+      "required": ["status"],
+      "properties": {"status": {"enum": ["NOT_SET", "PLANNED", "IN_PROGRESS", "DONE", "BLOCKED"]}, "description": {"type": ["string", "null"]}},
+      "additionalProperties": true
+    },
+    "retest": {
+      "type": "object",
+      "required": ["status"],
+      "properties": {"status": {"enum": ["NOT_RUN", "PASS", "FAIL", "BLOCKED"]}, "test_id": {"type": ["string", "null"]}, "environment": {"type": ["string", "null"]}, "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}}},
+      "additionalProperties": true
+    },
+    "review": {
+      "type": "object",
+      "required": ["status"],
+      "properties": {"status": {"enum": ["NOT_PERFORMED", "PASS", "FAIL", "CONFLICTED"]}, "reviewer": {"type": ["string", "null"]}, "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}}},
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/vbl/release-manifest.schema.json",
+  "title": "VBL candidate release manifest",
+  "description": "Inventory of exact release payload bytes. Never treat a placeholder as publication evidence.",
+  "type": "object",
+  "required": ["schema_version", "release_status", "version", "date", "predecessor", "source_commit", "files"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "release_status": {"const": "CANDIDATE_NOT_RELEASED"},
+    "version": {"type": "string", "minLength": 1},
+    "date": {"type": ["string", "null"], "format": "date"},
+    "predecessor": {"type": ["string", "null"]},
+    "source_commit": {"type": ["string", "null"]},
+    "files": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["path", "size", "sha256"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "size": {"type": "integer", "minimum": 0},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

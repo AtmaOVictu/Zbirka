@@ -1,0 +1,110 @@
+{
+  "report_version": "VBL-2.6-protocol-v3-preflight-1.0.0",
+  "status": "PASS_LOCAL_PREFLIGHT_ONLY",
+  "checks_total": 12,
+  "checks_passed": 12,
+  "unverified_or_nonrelease_gates": {
+    "canonical_provenance": "UNVERIFIED",
+    "legal_review": "NOT_PERFORMED",
+    "independent_review": "NOT_PERFORMED",
+    "remote_branch_commit_pr": "NOT_CREATED",
+    "production_behavior": "NOT_PERFORMED"
+  },
+  "errors": [],
+  "checks": [
+    {
+      "name": "source_sha256_matches_record",
+      "status": "PASS",
+      "detail": "actual=3026adcb7d30ab577693d6fbe41a8ccf0dc1e20d248fd43ce3d838d6aed2b7aa expected=3026adcb7d30ab577693d6fbe41a8ccf0dc1e20d248fd43ce3d838d6aed2b7aa"
+    },
+    {
+      "name": "source_size_matches_record",
+      "status": "PASS",
+      "detail": "actual=44865 expected=44865"
+    },
+    {
+      "name": "source_line_count_matches_record",
+      "status": "PASS",
+      "detail": "actual=786 expected=786"
+    },
+    {
+      "name": "source_starts_with_original_frame",
+      "status": "PASS",
+      "detail": "first_line=10.0.0"
+    },
+    {
+      "name": "embedded_license_version_2_6_preserved",
+      "status": "PASS",
+      "detail": "The license header remains 2.6 in original and derivative."
+    },
+    {
+      "name": "excerpt_is_source_prefix_261_lines",
+      "status": "PASS",
+      "detail": "excerpt_sha256=e510160d9697dd6c0e13af880cb4704961a00c17d2aad4493007b435e6e8e3a3"
+    },
+    {
+      "name": "frame_derivative_changes_only_first_line",
+      "status": "PASS",
+      "detail": "original_frame=10.0.0; proposed_frame=10.1.0; tails_identical=True"
+    },
+    {
+      "name": "protocol_version_distinct",
+      "status": "PASS",
+      "detail": "Protocol version kept separate from licence version."
+    },
+    {
+      "name": "branch_label_not_claimed_created",
+      "status": "PASS",
+      "detail": "v3 is a proposed local/remote workstream label only; no remote branch was created."
+    },
+    {
+      "name": "unicode_source_strict_utf8_and_fixture_complete",
+      "status": "PASS",
+      "detail": "Source and fixture both decode with strict UTF-8; complete code-point set checked in dedicated fixture: Č, Š, Ž, Đ, č, š, ž, đ, ⊨, ⊢, ⚠, ×, ∴"
+    },
+    {
+      "name": "unknown_statuses_remain_unverified",
+      "status": "PASS",
+      "detail": "Independent review is NOT_PERFORMED; remote change is NOT_CREATED."
+    },
+    {
+      "name": "not_canonical_label_present",
+      "status": "PASS",
+      "detail": "Proposed derivative is labelled as draft, not canonical, not released."
+    }
+  ],
+  "limits": [
+    "Only local files in this package were checked.",
+    "No authorship, legal effect, canonical publication, or independent review is proven.",
+    "Frame label 10.1.0 remains a proposal until authorized."
+  ],
+  "unit_tests": {
+    "status": "PASS",
+    "tests_run": 7,
+    "output": "test_all_local_preflight_checks_pass (test_protocol_preflight.TestVBLProtocolPreflight.test_all_local_preflight_checks_pass) ... ok\ntest_canonical_lineage_is_not_invented (test_protocol_preflight.TestVBLProtocolPreflight.test_canonical_lineage_is_not_invented) ... ok\ntest_derivative_preserves_body_byte_for_byte (test_protocol_preflight.TestVBLProtocolPreflight.test_derivative_preserves_body_byte_for_byte) ... ok\ntest_license_version_is_not_relabelled (test_protocol_preflight.TestVBLProtocolPreflight.test_license_version_is_not_relabelled) ... ok\ntest_original_export_is_preserved (test_protocol_preflight.TestVBLProtocolPreflight.test_original_export_is_preserved) ... ok\ntest_protocol_does_not_claim_independence (test_protocol_preflight.TestVBLProtocolPreflight.test_protocol_does_not_claim_independence) ... ok\ntest_unicode_source_is_strict_utf8 (test_protocol_preflight.TestVBLProtocolPreflight.test_unicode_source_is_strict_utf8) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.003s\n\nOK"
+  },
+  "hashes": {
+    "README.md": "55629fb21b3bff0639b414149ed5d9ef0a19ec8dfbb52212a189c3933ab712b5",
+    "VBL-2.6-Verification-Checklist-v1.0.csv": "b6d4d97f640ad16e17d154de0b2fba6a0bf23979e9df32cf06f2494cdbf37c27",
+    "evidence/PROPOSED-BRANCH-v3.json": "11620b00de34e710330c4aa2e029e50727a4c028687d0bea88ac4e9b86a99670",
+    "evidence/VBL-2.6-source-intake-and-version-boundary-v7.json": "7aa2b64c5a6fd7d25035edf84d36024c6348224519f40bbd401ea6663af3fa24",
+    "fixtures/marked-letters.txt": "53922978fd882836f3dc69b13b2a35058c6a7feab4bbf825ca88214897b17239",
+    "proposed/VBL-2.6-frame-10.1.0-DRAFT-NOT-CANONICAL.md": "832d8ea06ca9f7d2bab62f0b1ea24477aa3d31a251a8256b6334ae2e432254b5",
+    "protocol/VBL-2.6-Verification-Checklist-v1.0.csv": "b6d4d97f640ad16e17d154de0b2fba6a0bf23979e9df32cf06f2494cdbf37c27",
+    "protocol/VBL-2.6-Verification-Protocol-1.0.0-DRAFT-NOT-RELEASED.md": "5e572452889857c79b8b759dfc2b83dfc1e807b6963bc784d0daace2a98d91c3",
+    "reports/test-correction-history.jsonl": "c6dfdc26f2d602824d6c242a4695bfaa006ffe698303c767d1347ab079b52904",
+    "source/VBL-2.6-export-segment-NONCANONICAL.md": "e510160d9697dd6c0e13af880cb4704961a00c17d2aad4493007b435e6e8e3a3",
+    "source/VERSION-original-10.0.0-export.txt": "3026adcb7d30ab577693d6fbe41a8ccf0dc1e20d248fd43ce3d838d6aed2b7aa",
+    "tests/test_protocol_preflight.py": "22bc74d9a12464312341260b3157cd46d8a949e50cfc59ae6f479aaa2a686812",
+    "verify_protocol_preflight.py": "1d1e18607d2c0a9ad40c43d86d4c9400d13ee80f7e7cd79c1af40bea8b1ead0b"
+  },
+  "source_intake": {
+    "source_bytes": 44865,
+    "source_lines": 786,
+    "source_sha256": "3026adcb7d30ab577693d6fbe41a8ccf0dc1e20d248fd43ce3d838d6aed2b7aa",
+    "excerpt_sha256": "e510160d9697dd6c0e13af880cb4704961a00c17d2aad4493007b435e6e8e3a3",
+    "proposed_frame_sha256": "832d8ea06ca9f7d2bab62f0b1ea24477aa3d31a251a8256b6334ae2e432254b5",
+    "proposed_branch": "vbl/2.6-verification-v3",
+    "remote_branch_created": false
+  }
+}

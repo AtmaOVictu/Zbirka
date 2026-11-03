@@ -1,0 +1,29 @@
+{
+  "audit_date": "2026-10-25",
+  "mode": "read-only external trace plus local record",
+  "claimed_publication": {
+    "url": "https://github.com/AtmaOVictu/Atmavictu/issues/753#issuecomment-6397386784",
+    "comment_id": 6397386784,
+    "repository_lookup": "HTTP_404_OR_INACCESSIBLE",
+    "issue_lookup": "HTTP_404_OR_INACCESSIBLE",
+    "issue_comments_lookup": "HTTP_404_OR_INACCESSIBLE",
+    "comment_lookup": "HTTP_404_OR_INACCESSIBLE",
+    "search_result": "NO_MATCH",
+    "status": "UNVERIFIED",
+    "interpretation": "Not proof of publication; 404 does not prove it never existed."
+  },
+  "verified_pr_comments": [
+    {"comment_id": 6397087493, "url": "https://github.com/rpritr/todo-app/pull/1#issuecomment-6397087493", "purpose": "independent review request", "status": "FETCHED"},
+    {"comment_id": 6397144510, "url": "https://github.com/rpritr/todo-app/pull/1#issuecomment-6397144510", "purpose": "proposed common-good covenant", "status": "FETCHED"},
+    {"comment_id": 6397243909, "url": "https://github.com/rpritr/todo-app/pull/1#issuecomment-6397243909", "purpose": "38-language invitation", "status": "FETCHED"},
+    {"comment_id": 6397275217, "url": "https://github.com/rpritr/todo-app/pull/1#issuecomment-6397275217", "purpose": "registry audit summary", "status": "FETCHED"},
+    {"comment_id": 6397331131, "url": "https://github.com/rpritr/todo-app/pull/1#issuecomment-6397331131", "purpose": "witness liveness protocol", "status": "FETCHED"},
+    {"comment_id": 6397406993, "url": "https://github.com/rpritr/todo-app/pull/1#issuecomment-6397406993", "purpose": "traceability correction / unresolved labels", "status": "FETCHED"}
+  ],
+  "ambiguous_labels": ["IMH 12", "5 BF D 633-8 D 8 2100", "ZPV", "result VBL 1.0", "NENEHNO-POSLUSA"],
+  "label_status": "UNRESOLVED",
+  "unknown_code_executed": false,
+  "m12_status": "BLOCKED",
+  "independent_review": "PENDING",
+  "global_delivery_or_consent_claim": false
+}

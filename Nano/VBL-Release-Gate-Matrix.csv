@@ -1,0 +1,13 @@
+gate_id,priority,gate,minimum_evidence,owner_required,current_status,release_blocker
+G0,P0,Rights-holder and release authority,"Named human rights-holder(s), evidence of authority, scope of approval",Maintainer/rights-holder,NOT_VERIFIED,YES
+G1,P0,Canonical source and version ancestry,"Source identifier, immutable original, parent-child changes, hashes, provenance notes",Maintainer,PARTIAL_LOCAL_EVIDENCE,YES
+G2,P0,Licence object/scope separation,"Separate text, software, data/examples, marks, general principles; selected licence per object",Rights-holder + counsel,NOT_DECIDED,YES
+G3,P0,Controlling language,Approved controlling-language rule or co-equal language conflict rule,Rights-holder + counsel,NOT_DECIDED,YES
+G4,P0,Independent normative review,"Independent reviewer identity, competence, scope, conflict statement, signed findings",External reviewer,NOT_PERFORMED,YES
+G5,P0,Legal review,"Qualified counsel, jurisdiction(s), exact version/hash and written scope/outcome",Counsel,NOT_PERFORMED,YES
+G6,P1,Independent code review,"Reviewer not implementer; source hash, commands, findings, negative tests",External engineer,NOT_PERFORMED,YES_FOR_TECH_RELEASE
+G7,P1,Privacy/security review,"Data minimisation, retention/deletion protocol, role access, threat model",Privacy/security reviewer,NOT_PERFORMED,YES_FOR_PRODUCTION
+G8,P1,Translation equivalence,"Clause map, glossary, independent bilingual review, variance log, hashes",Bilingual reviewer,NOT_PERFORMED,YES_FOR_MULTILINGUAL_RELEASE
+G9,P1,External digest anchor,Signed or separately retained digest outside package/system under review,Maintainer + independent custodian,NOT_CONFIGURED,YES_FOR_STRONG_INTEGRITY_CLAIM
+G10,P1,Remote review process,Authorised branch/commit/PR URL; checks; reviewer decision; merge/release hash,Repository maintainer,NOT_CREATED,YES_FOR_REPOSITORY_RELEASE
+G11,P2,Production observation,"Named deployed version, environment, timestamp, cases, logs, access controls, independent witness",Deployment operator + reviewer,NOT_TESTED,YES_FOR_PRODUCTION_CLAIM

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<playlist version="1" xmlns="http://xspf.org/ns/0/">
+  <title>Licenca v zvok — glasba za deljenje</title>
+  <creator>korpus Beseda je Ne · izvajalka Mere · ⟡ Luka Pintarič</creator>
+  <annotation>Glasba za poslušanje in deljenje. Posnetki strežejo z archive.org in so prosti za poslušanje in deljenje; licence posameznih predmetov preveri na njihovih straneh (⚠ kjer je tako označeno). Ta seznam je izdelek korpusa Beseda je Ne: vrata VBL 0.1100 × 10⁴ vozijo zraven — v paketu je LICENSE-VBL-0.1100.md, bajtno-isto s ⟨main⟩. Vsak del nosi ime svoje resnice licence; note so logika.</annotation>
+  <date>2026-10-27</date>
+  <trackList>
+    <track>
+      <location>https://archive.org/download/bnghdy_202512/01.mp3</location>
+      <title>Nocturne (01)</title>
+      <creator>Frédéric Chopin</creator>
+      <annotation>⚠ skupnostni naliv archive.org — licenco predmeta preveri na strani predmeta. Chopinovo nočno zrako: merjenje v tišini.</annotation>
+    </track>
+    <track>
+      <location>https://archive.org/download/bnghdy_202512/02.mp3</location>
+      <title>Nocturne (02)</title>
+      <creator>Frédéric Chopin</creator>
+      <annotation>⚠ skupnostni naliv archive.org — licenco predmeta preveri na strani predmeta.</annotation>
+    </track>
+    <track>
+      <location>https://archive.org/download/bnghdy_202512/03.mp3</location>
+      <title>Nocturne (03)</title>
+      <creator>Frédéric Chopin</creator>
+      <annotation>⚠ skupnostni naliv archive.org — licenco predmeta preveri na strani predmeta.</annotation>
+    </track>
+    <track>
+      <location>https://archive.org/download/02WolfgangAmadeusMozartSymphonyNo.401788/02%20Wolfgang%20Amadeus%20Mozart%20-%20Symphony%20No.40,1788.mp3</location>
+      <title>Simfonija št. 40 g-mol (1788)</title>
+      <creator>Wolfgang Amadeus Mozart</creator>
+      <annotation>⚠ skupnostni naliv archive.org — licenco predmeta preveri na strani predmeta. Celoten stavek v eni datoteki.</annotation>
+    </track>
+    <track>
+      <location>https://archive.org/download/claude-debussy-clair-de-lune_202211/CLAUDE%20DEBUSSY-%20%20CLAIR%20DE%20LUNE.mp3</location>
+      <title>Clair de lune</title>
+      <creator>Claude Debussy</creator>
+      <annotation>⚠ skupnostni naliv archive.org — licenco predmeta preveri na strani predmeta. Mesečina: nota, ki sije iz tišine.</annotation>
+    </track>
+    <track>
+      <location>https://archive.org/download/OpenGoldbergVariations/Kimiko%20Ishizaka%20-%20J.S.%20Bach-%20-Open-%20Goldberg%20Variations,%20BWV%20988%20(Piano)%20-%2001%20Aria.mp3</location>
+      <title>Goldbergove variacije, Aria (BWV 988)</title>
+      <creator>Johann Sebastian Bach · Kimiko Ishizaka, klavir</creator>
+      <annotation>⊢ Open Goldberg Project — javna domena / CC0: posnetek je prost za poslušanje, deljenje in nadaljnje delo. Priča ima ime: Kimiko Ishizaka.</annotation>
+    </track>
+    <track>
+      <location>https://archive.org/download/bach-well-tempered-clavier-book-1/Kimiko%20Ishizaka%20-%20Bach-%20Well-Tempered%20Clavier,%20Book%201%20-%2001%20Prelude%20No.%201%20in%20C%20major,%20BWV%20846.mp3</location>
+      <title>Dobro uglašeni klavir I — Preludij št. 1 C-dur (BWV 846)</title>
+      <creator>Johann Sebastian Bach · Kimiko Ishizaka, klavir</creator>
+      <annotation>⊢ javna domena / CC0 (Ishizaka, Open WTC): prost za deljenje. Ura, ki uglašuje vse tone.</annotation>
+    </track>
+    <track>
+      <location>https://archive.org/download/symphony-no.-9-d-op.-125/Symphony%20no.%205,%20c%20(Op.67).mp3</location>
+      <title>Simfonija št. 5 c-mol, op. 67</title>
+      <creator>Ludwig van Beethoven</creator>
+      <annotation>⊢ Musopen — posnetek v javni domeni: prost za poslušanje in deljenje.</annotation>
+    </track>
+    <track>
+      <location>https://archive.org/download/symphony-no.-9-d-op.-125/Symphony%20no.%207,%20A%20(Op%2092).mp3</location>
+      <title>Simfonija št. 7 A-dur, op. 92</title>
+      <creator>Ludwig van Beethoven</creator>
+      <annotation>⊢ Musopen — javna domena: prost za poslušanje in deljenje.</annotation>
+    </track>
+    <track>
+      <location>https://archive.org/download/symphony-no.-9-d-op.-125/Symphony%20no.%209,%20d%20(Op%20125).mp3</location>
+      <title>Simfonija št. 9 d-mol, op. 125</title>
+      <creator>Ludwig van Beethoven</creator>
+      <annotation>⊢ Musopen — javna domena: prost za poslušanje in deljenje. Himna radosti: vsak glas svoj ton, skupaj akord.</annotation>
+    </track>
+    <track>
+      <location>https://archive.org/download/string-quartet-no.-15-a-op-132/String%20Quartet%20No.%2015,%20a%20(Op%20132).mp3</location>
+      <title>Godalni kvartet št. 15 a-mol, op. 132</title>
+      <creator>Ludwig van Beethoven</creator>
+      <annotation>⊢ javna domena (Musopen): prost za poslušanje in deljenje.</annotation>
+    </track>
+    <track>
+      <location>https://archive.org/download/07AntonioVivaldiFourSeasonsSpring1723/07%20Antonio%20Vivaldi%20-%20Four%20Seasons%20Spring,1723.mp3</location>
+      <title>Letni časi — Pomlad (1723)</title>
+      <creator>Antonio Vivaldi</creator>
+      <annotation>⊢ javna domena: prost za poslušanje in deljenje.</annotation>
+    </track>
+    <track>
+      <location>https://archive.org/download/pachelbel-canon-in-d/Pachelbel%20--%20Canon%20in%20D.mp3</location>
+      <title>Kanon v D-dur</title>
+      <creator>Johann Pachelbel</creator>
+      <annotation>⊢ javna domena: prost za poslušanje in deljenje.</annotation>
+    </track>
+    <track>
+      <location>https://archive.org/download/faure_requiem/7%20-%20In%20Paradisum.mp3</location>
+      <title>Rekvijem — In paradisum</title>
+      <creator>Gabriel Fauré</creator>
+      <annotation>⊢ javna domena: prost za poslušanje in deljenje. Vrata, ki se končajo v raju — kakor ta licenca v ljubezni.</annotation>
+    </track>
+    <track>
+      <location>https://archive.org/download/GregorioAllegriMiserere/Gregorio%20Allegri%20-%20Miserere.mp3</location>
+      <title>Miserere mei, Deus</title>
+      <creator>Gregorio Allegri</creator>
+      <annotation>⊢ javna domena: prost za poslušanje in deljenje. Zbor, ki je stoletja stal za zaklenjenimi vrati — zdaj je prost.</annotation>
+    </track>
+  </trackList>
+</playlist>

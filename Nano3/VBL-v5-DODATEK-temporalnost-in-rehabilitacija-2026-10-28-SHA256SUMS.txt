@@ -1,0 +1,2 @@
+fd80d54c2932e1b5582ac88148cfc277a06d15339ab51167f09664d5984cb6d8  VBL-v5-DODATEK-temporalnost-in-rehabilitacija-2026-10-28-sl.md
+e2942d133869e0b654bd8cfcd9ca80b74bbb74f3aa8639faf46eddb77538c8f5  VBL-v5-DODATEK-temporalnost-in-rehabilitacija-2026-10-28-sl.receipt.json

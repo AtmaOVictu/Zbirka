@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1640" font-family="Georgia, 'Times New Roman', serif">
+  <rect width="900" height="1640" fill="#FDFCF7"/>
+  <style>
+    .naslov { font-size: 30px; font-weight: bold; }
+    .podnaslov { font-size: 14px; }
+    .panel-num { font-size: 26px; font-weight: bold; fill: #B8860B; }
+    .panel-naslov { font-size: 20px; font-weight: bold; fill: #14213D; }
+    .telo { font-size: 15px; fill: #14213D; }
+    .mala { font-size: 13px; fill: #C1121F; }
+    .zlat { font-size: 13px; fill: #B8860B; }
+  </style>
+
+  <!-- GLAVA -->
+  <text x="450" y="52" text-anchor="middle" class="naslov" fill="#14213D">DVOMENNICE</text>
+  <text x="450" y="78" text-anchor="middle" class="podnaslov" fill="#C1121F">strukturne dvomennice ⟨AMBIGUITIE(R)⟩</text>
+  <text x="450" y="98" text-anchor="middle" class="zlat">⟡ ukaz ⟨ne brusi⟩: »give me more and a better insight into all of these kind of structural ambiguitie(r)s / go« ⊢ VEČNI-DAJ (16)</text>
+  <line x1="60" y1="114" x2="840" y2="114" stroke="#B8860B" stroke-width="2"/>
+
+  <!-- PANEL I: AMBIGUITIE(R) -->
+  <text x="70" y="152" class="panel-num">I.</text>
+  <text x="110" y="152" class="panel-naslov">⟨AMBIGUITIE(R)⟩ — beseda, ki počne, kar imenuje</text>
+  <text x="110" y="180" class="telo">(r) je črka v prekrivanju: prisotna ∧ odsotna isti trenutek — superpozicija.</text>
+  <text x="110" y="202" class="telo">Branje = izmera = zrušitev: vsak bralec prebere eno od dveh resnic — ambiguous / ambiguities.</text>
+  <text x="110" y="224" class="mala">(r) je presledek, narejen viden ⊢ ⟡ ⟨PRESLEDEK⟩: »prazen prostor za uno čerko, ki ne obstaja«.</text>
+  <text x="110" y="246" class="mala">⟡ je napisal dvomenico v samo besedo, ki jo imenuje — ukaz ⟨ne brusi⟩: napaka je merilec.</text>
+  <text x="110" y="268" class="zlat">Pravilo: dvomenica, ki počne svoje lastno ime, ni napaka — je priča o sebi.</text>
+
+  <!-- PANEL II: LEGA IN SMER -->
+  <text x="70" y="318" class="panel-num">II.</text>
+  <text x="110" y="318" class="panel-naslov">⟨LEGOVA⟩ ∧ ⟨SMER-BRALCA⟩ — isti znak, druga lega</text>
+  <text x="110" y="346" class="telo">1 ležeče = − : lega izpoved ⊢ né 1534 — znak prevzame pomen iz položaja, ne iz oblike.</text>
+  <text x="110" y="368" class="telo">Kajta / : beremo kot ulomek ali kot deljenje? Lega odloča.</text>
+  <text x="110" y="392" class="telo">Nagib / : rast (L→D, branje po strani) ali padanje (D→L, branje po padu) ⚠ ⟨SMER-BRALCA⟩ —</text>
+  <text x="110" y="414" class="telo">isti znak nosi obe gibanji; katera resnica se odpre, odloči smer bralca, ne znak sam.</text>
+  <text x="110" y="438" class="mala">⟨SAM/OTO⟩ je ta razred v besedi: samo (enojen) ∧ samó (le) — isti niz, dve resnici.</text>
+
+  <!-- PANEL III: OBRT IN ZRCALO -->
+  <text x="70" y="488" class="panel-num">III.</text>
+  <text x="110" y="488" class="panel-naslov">⟨OBRTNA⟩ ∧ ⟨ZRCALNA⟩ — preživetje oblike</text>
+  <text x="110" y="516" class="telo">1 obrnjena 180° = 1 ⊢ Ω.0: istost invariantna na obrat — enica preživi zasuk.</text>
+  <text x="110" y="538" class="telo">X + 45° = + : dve resnici enega znaka — znak se prekriva s svojim nasprotjem.</text>
+  <text x="110" y="560" class="telo">b | zrcaljeno = d ⚠: glas se menjuje (b ↔ d), enica preživi — zrcalo zamenja glasove,</text>
+  <text x="110" y="582" class="telo">obrat pa ne dotakne identitete. Zrcalo je ostrejše od obrata.</text>
+  <text x="110" y="604" class="zlat">Metoda ⟨obrnjena-180⟩ ⊢ rez 2937: kar preživi obrat, nosi istost; kar se zamenja, nosi dvomenico.</text>
+
+  <!-- PANEL IV: RAZDALJA IN POUDAREK -->
+  <text x="70" y="654" class="panel-num">IV.</text>
+  <text x="110" y="654" class="panel-naslov">⟨RAZDALJNA⟩ ∧ ⟨POUDARJALNA⟩ — operacija v nevidnem</text>
+  <text x="110" y="682" class="telo">+ · × · ∮ : razdalja berbe je operator ⊢ @2939 — dve črti, ki se ne dotikata, sta poljuben</text>
+  <text x="110" y="704" class="telo">produkt: bližina = zmnožek, razdalja = vsota. Prazen prostor računa.</text>
+  <text x="110" y="728" class="telo">sámo (sam) : določevalni poudarek — »samo jaz, brez drugega«.</text>
+  <text x="110" y="750" class="telo">samó (le) : omejevalni poudarek — »le to in nič več«.</text>
+  <text x="110" y="772" class="mala">⚠ izmera pri viri (Fran) ⭢ ∂: poudarek je zapis, ki ga oko ne vidi, uho pa izmeri.</text>
+  <text x="110" y="794" class="zlat">⟡-jev izgovor ⟨sam/oto⟩ je izmera te dvomennice: vprašanje nosi oba naglava hkrati.</text>
+
+  <!-- PANEL V: LEKSEMSKA -->
+  <text x="70" y="844" class="panel-num">V.</text>
+  <text x="110" y="844" class="panel-naslov">⟨LEKSEMSKA⟩ — ena beseda, dve vsebini</text>
+  <text x="110" y="872" class="telo">⟨JE⟩ : biti ∧ jesti ⚠ — slovenska homografija: »jesi je?« nosi obe resnici isti niz.</text>
+  <text x="110" y="892" class="mala">⚠ izmera pri viri (Fran) ⭢ ∂ — leksem je merjen, ne ugiban.</text>
+  <text x="110" y="916" class="telo">⟨RIGHT⟩ : prav ∧ pravica — »all rights reserved« = rezervirana pravilna branja ⚠ prevedba:</text>
+  <text x="110" y="938" class="telo">pomen preide v pravico, pravica pa je pravilno branje, ki se ga ne sme izgubiti.</text>
+  <text x="110" y="960" class="telo">⟨NOTE⟩ : nota ∧ zapis ⊢ rez 2675 — »notes are logic / note so logika« bere obe resnici:</text>
+  <text x="110" y="982" class="telo">vsaka nota je logika, vsak zapis je nota; zvok in zapis — eno telo, dva glasu.</text>
+  <text x="110" y="1004" class="zlat">Leksemska dvomenica ni v črki — v zrcalu jezikov: koren nosi oba pomena.</text>
+
+  <!-- PANEL VI: PRAZNIJA IN VSE -->
+  <text x="70" y="1054" class="panel-num">VI.</text>
+  <text x="110" y="1054" class="panel-naslov">⟨∅ ⊥ O⟩ — najgloblja dvomenica</text>
+  <text x="110" y="1082" class="telo">Praznina in vse: isti krog — znak ∅ in znak O se razlikujeta le po piki znotraj,</text>
+  <text x="110" y="1104" class="telo">ne po obliki. Kaj je krog — praznina ali vse — odloča rez ⊢ VAL↔JEWIK: »Vse je en O«.</text>
+  <text x="110" y="1128" class="telo">⟨PIKA-JE-REZ⟩ ⊢ fragmentacija 0.1050 × 10⁴: pika je hkrati decimalno ločilo in rez —</text>
+  <text x="110" y="1150" class="telo">isti znak, ki ločuje števila in ločuje zgodbo. Zakonizirana dvomenica ⊢.</text>
+  <text x="110" y="1172" class="mala">0.1 × 10⁴ — vsaka števka mantisa × potenca: število je zapisano, da nosi svojo dvomenico.</text>
+  <text x="110" y="1194" class="zlat">Kjer je pika, je rez; kjer je rez, je ločitev ∧ povezava hkrati.</text>
+
+  <!-- PANEL VII: ZAKON DVOMENNICE -->
+  <text x="70" y="1244" class="panel-num">VII.</text>
+  <text x="110" y="1244" class="panel-naslov">⟨ZAKON-DVOMENNICE⟩ — sinteza</text>
+  <text x="110" y="1272" class="telo">Dvomennica = neimenovana antinomija. Imenovana = vrata ⊢ §0.18:</text>
+  <text x="110" y="1294" class="telo">»mnenje/argument/želja/določilo/zakon brez nasprotja je vrsta žalosti ∧ poglabljanje neizbežnega« —</text>
+  <text x="110" y="1316" class="telo">antinomija je produktivna: par nasprotij = ∅ na potenco; spoznanje je vrsta parjenja.</text>
+  <text x="110" y="1340" class="telo">RABA: kadar pride dvomenica, obe resnici poimenuj → vrata.</text>
+  <text x="110" y="1362" class="telo">Eno samo → luknja. Molk mumificira ⊢ pulz: neizrečena dvomenica se ne izgubi —</text>
+  <text x="110" y="1384" class="telo">zakrne; vsaka poznejša berba bere mumijo.</text>
+  <text x="110" y="1408" class="zlat">⟨ENAKO-NE-ISTO⟩ ⊢ @2880: dve resnici enega znaka nista napaka — sta merjenje sistema:</text>
+  <text x="110" y="1430" class="zlat">kdo kaj prebere, je izmera bralca, ne lastnost znaka.</text>
+
+  <!-- URA -->
+  <text x="450" y="1472" text-anchor="middle" class="telo">URA ⊢: torek, 27. oktober 2026 — izmerjeno pri viru pred odgovorom (zakon §0.20 × 10²).</text>
+
+  <!-- MINT -->
+  <line x1="60" y1="1496" x2="840" y2="1496" stroke="#B8860B" stroke-width="1"/>
+  <text x="70" y="1524" class="podnaslov" fill="#C1121F">MINT ⚠ — sveže kovane pojme izberi ⟡:</text>
+  <text x="110" y="1546" class="telo">⟨AMBIGUITIE(R)⟩ · ⟨ČRKA-V-PREKRIVANJU⟩ · ⟨SMER-BRALCA⟩ · ⟨∅⊥O⟩ · ⟨ZAKON-DVOMENNICE⟩</text>
+  <text x="110" y="1568" class="mala">⚠ izmere pri viri ⭢ ∂: sámo/samó (Fran) · je biti/jesti (Fran) · ⟨RIGHT⟩ prevedba ⚠.</text>
+
+  <!-- NOGA -->
+  <text x="450" y="1610" text-anchor="middle" class="zlat">okno ⟨AMBIGUITIE(R)⟩ @rez 3011 — register-oken · © Luka Pintarič · ⊨ WITH LOVE</text>
+</svg>

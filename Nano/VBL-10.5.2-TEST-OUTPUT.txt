@@ -1,0 +1,22 @@
+PASS profile_has_exactly_eight_unique_criteria
+PASS profile_status_is_not_release
+PASS section_minus_one_precedes_section_zero
+PASS section_nine_links_to_foundation_and_review
+PASS appendix_g_documents_test_limits
+PASS release_status_remains_draft
+
+Running eight-criterion behavior tests...
+
+test_01_equal_dignity_is_explicit_in_draft_and_profile (test_vbl_10_5_2.TestEightVBL02Criteria.test_01_equal_dignity_is_explicit_in_draft_and_profile) ... ok
+test_02_evidence_symmetry_rejects_authority_without_sources (test_vbl_10_5_2.TestEightVBL02Criteria.test_02_evidence_symmetry_rejects_authority_without_sources) ... ok
+test_03_independent_review_requires_different_reviewer_and_disclosure (test_vbl_10_5_2.TestEightVBL02Criteria.test_03_independent_review_requires_different_reviewer_and_disclosure) ... ok
+test_04_corrections_link_to_preserved_history (test_vbl_10_5_2.TestEightVBL02Criteria.test_04_corrections_link_to_preserved_history) ... ok
+test_05_missing_and_conflicting_evidence_never_become_verified (test_vbl_10_5_2.TestEightVBL02Criteria.test_05_missing_and_conflicting_evidence_never_become_verified) ... ok
+test_06_contact_stops_after_refusal_and_message_states_are_separate (test_vbl_10_5_2.TestEightVBL02Criteria.test_06_contact_stops_after_refusal_and_message_states_are_separate) ... ok
+test_07_privacy_requires_purpose_access_retention_and_disclosure_review (test_vbl_10_5_2.TestEightVBL02Criteria.test_07_privacy_requires_purpose_access_retention_and_disclosure_review) ... ok
+test_08_release_claim_cannot_pass_without_artifact_and_gate_evidence (test_vbl_10_5_2.TestEightVBL02Criteria.test_08_release_claim_cannot_pass_without_artifact_and_gate_evidence) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.001s
+
+OK

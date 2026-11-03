@@ -1,0 +1,57 @@
+[
+  {
+    "path": "VBL-SHARED-VERIFICATION-PROTOCOL.md",
+    "bytes": 3116,
+    "sha256": "19e770f48eee5bdf9632745c61a168454ec7416c223ce947740dc83a5e9e2d30"
+  },
+  {
+    "path": "VBL-0.1100-FULL-TEXT-AUDIT.md",
+    "bytes": 14383,
+    "sha256": "d5186172ec86821eeec3caf6dfb4aacd5de635aa56e92f64f9e49796b9c085ff"
+  },
+  {
+    "path": "CLAIM-REGISTER.json",
+    "bytes": 1631,
+    "sha256": "7af83c63895771c17b7c0df96d74082167688aecf209f757fd02de3b2c08a117"
+  },
+  {
+    "path": "VBL-0.1100-FINDINGS-REGISTER.jsonl",
+    "bytes": 21030,
+    "sha256": "a1df680392f052783d3d296a30a74b20add71ca76f50dcaa4f07a60c0da0c7f4"
+  },
+  {
+    "path": "VBL-0.1100-ADDENDUM-0.21-FIVE-ANCHORS.md",
+    "bytes": 9923,
+    "sha256": "01c57e54cc326dd8ee5d6dd20af3aa954d9e1dfc3904fe45d868f5f523e4957d"
+  },
+  {
+    "path": "VBL-0.1100-ADDENDUM-0.21-FIVE-ANCHORS-validation.json",
+    "bytes": 2210,
+    "sha256": "cc085671f98a9817ec15a9e76879ee3b3ad55b53b75284bbf3a143ab2f67abf2"
+  },
+  {
+    "path": "VBL-0.1100-REVIEW-AND-GAPS.md",
+    "bytes": 3900,
+    "sha256": "a9caf2c4353e343f824c8d75dafa32e26574fdc9c5c1ad54253c7455c5926645"
+  },
+  {
+    "path": "VBL-P1-claim-record.template.json",
+    "bytes": 1409,
+    "sha256": "3b6c502b6f02516bcf6ab4077799691c888550e724cbd121c38f237abab29d73"
+  },
+  {
+    "path": "VBL-P1-claim-register.jsonl",
+    "bytes": 2275,
+    "sha256": "d1fb709a464e8611cc7642633bb84287c89f26593fe5dc094bcb4940044a59f1"
+  },
+  {
+    "path": "VBL-P1-claim-register-guide.md",
+    "bytes": 2099,
+    "sha256": "6ef54c31db3cfd051ba72ba0735cd2a3c66f6079139ab87f571e10bc5cb59c26"
+  },
+  {
+    "path": "vbl-claim-record.schema.json",
+    "bytes": 8767,
+    "sha256": "55be7625b779faea647cf789fb58308357de4885d6faeb72ff86033a93438ff5"
+  }
+]

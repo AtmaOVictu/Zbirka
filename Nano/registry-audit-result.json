@@ -1,0 +1,101 @@
+{
+  "audit": "VBL registry read-only audit",
+  "audit_date": "2026-10-25",
+  "scope": "Captured GitHub file snapshots only; no remote changes, application tests, or ZPV execution.",
+  "summary": {
+    "PASS": 9,
+    "WARN": 2,
+    "BLOCKED": 1,
+    "REVIEW": 0,
+    "FAIL": 0
+  },
+  "results": [
+    {
+      "check": "manifest:REGISTER-NEIMENOVANIH.jsonl",
+      "status": "PASS",
+      "detail": "Captured bytes match manifest",
+      "bytes": 94,
+      "sha256": "0129c3c3344163248f6d389f497b6edfc0ad1381423defefd4bbbbeaaec2fa0f",
+      "expected_bytes": 94,
+      "expected_sha256": "0129c3c3344163248f6d389f497b6edfc0ad1381423defefd4bbbbeaaec2fa0f"
+    },
+    {
+      "check": "manifest:REGISTER-PADCEV.jsonl",
+      "status": "PASS",
+      "detail": "Captured bytes match manifest",
+      "bytes": 85,
+      "sha256": "768ea7b0bb6325dc2f4c3f8696cf4eecff0c63296548eeec5b8e0cbaaedb2418",
+      "expected_bytes": 85,
+      "expected_sha256": "768ea7b0bb6325dc2f4c3f8696cf4eecff0c63296548eeec5b8e0cbaaedb2418"
+    },
+    {
+      "check": "manifest:canon/DOVOLJENJA.md",
+      "status": "PASS",
+      "detail": "Captured bytes match manifest",
+      "bytes": 659,
+      "sha256": "3054d55e520a382e510d096ac5e1a524a0649b1cedc089578a42a7c328a35e70",
+      "expected_bytes": 659,
+      "expected_sha256": "3054d55e520a382e510d096ac5e1a524a0649b1cedc089578a42a7c328a35e70"
+    },
+    {
+      "check": "todo-app:LICENSE-MANIFEST",
+      "status": "PASS",
+      "detail": "All 3 manifest entries match captured byte sizes and SHA-256 values."
+    },
+    {
+      "check": "todo-app:REGISTER-NEIMENOVANIH.jsonl:count",
+      "status": "PASS",
+      "detail": "Header declares 0; structurally present non-template entries: 0.",
+      "header_records": 1,
+      "actual_entries": 0
+    },
+    {
+      "check": "todo-app:REGISTER-PADCEV.jsonl:count",
+      "status": "PASS",
+      "detail": "Header declares 0; structurally present non-template entries: 0.",
+      "header_records": 1,
+      "actual_entries": 0
+    },
+    {
+      "check": "todo-app:permissions",
+      "status": "PASS",
+      "detail": "Recorded permission entries in captured file: 0; text says no permissions are recorded yet.",
+      "actual_permission_entries": 0
+    },
+    {
+      "check": "todo-app:record-id-uniqueness",
+      "status": "PASS",
+      "detail": "Checked actual entries only; 0 actual entry IDs, 0 duplicates.",
+      "duplicate_ids": []
+    },
+    {
+      "check": "cookbook:REGISTER-NEIMENOVANIH.jsonl:template",
+      "status": "WARN",
+      "detail": "Rows: 1; template rows: 1; actual evidence rows: 0. Template rows are not evidence.",
+      "rows": 1,
+      "templates": 1,
+      "actual_entries": 0
+    },
+    {
+      "check": "cookbook:REGISTER-PADCEV.jsonl:template",
+      "status": "WARN",
+      "detail": "Rows: 1; template rows: 1; actual evidence rows: 0. Template rows are not evidence.",
+      "rows": 1,
+      "templates": 1,
+      "actual_entries": 0
+    },
+    {
+      "check": "cookbook:SHA256SUMS",
+      "status": "BLOCKED",
+      "detail": "Digest entries: 9; literal UNVERIFIED placeholders: 9; actual digest entries: 0.",
+      "unverified_placeholders": 9,
+      "actual_digest_entries": 0
+    },
+    {
+      "check": "cookbook:record-id-uniqueness",
+      "status": "PASS",
+      "detail": "Checked actual evidence rows only; 0 actual entry IDs, 0 duplicates.",
+      "duplicate_ids": []
+    }
+  ]
+}

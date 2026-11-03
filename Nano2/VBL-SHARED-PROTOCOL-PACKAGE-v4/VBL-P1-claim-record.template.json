@@ -1,0 +1,54 @@
+{
+  "record_id": "REPLACE-WITH-UNIQUE-ID",
+  "claim": "REPLACE-WITH-ONE-SPECIFIC-CLAIM",
+  "claim_type": "other",
+  "claim_status": "UNVERIFIED",
+  "structure_status": "NOT_RUN",
+  "source": {
+    "verbatim_or_reference": null,
+    "source_uri_or_location": null,
+    "artifact_sha256": null,
+    "source_state": "UNKNOWN",
+    "unknown_reason": "Replace with source details or explain why unavailable."
+  },
+  "evidence": [],
+  "scope": "State exactly what this record covers.",
+  "limitations": [
+    "State what the available evidence does not establish."
+  ],
+  "counterevidence": [],
+  "responsibility": {
+    "process_or_role": null,
+    "executor": null,
+    "conflict_of_interest": "NOT_ASSESSED"
+  },
+  "challenge_route": {
+    "available": false,
+    "route": null,
+    "status": "UNKNOWN"
+  },
+  "correction": {
+    "prior_record_ref": null,
+    "reason": null,
+    "event_status": "NONE"
+  },
+  "test_results": [],
+  "publication": {
+    "status": "NOT_PUBLISHED",
+    "uri": null,
+    "immutable_id": null
+  },
+  "independent_review": {
+    "status": "NOT_REQUESTED",
+    "reviewer": null,
+    "scope": null,
+    "conflict_of_interest": "NOT_ASSESSED"
+  },
+  "legal_review": {
+    "status": "NOT_REQUESTED",
+    "reviewer_or_basis": null,
+    "scope": null
+  },
+  "created_at": "REPLACE-WITH-ISO-8601-TIMESTAMP",
+  "record_status": "DRAFT"
+}

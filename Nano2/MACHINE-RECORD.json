@@ -1,0 +1,22 @@
+{
+  "record_type": "verification_event",
+  "artifact_scope": "VBL-INTEGRATED-INCIDENT-02 package creation",
+  "clock_read": {
+    "utc": "2026-10-27T12:20:31Z",
+    "local": "2026-10-27T13:20:31+01:00",
+    "timezone": "Europe/Ljubljana",
+    "source": "current execution environment system clock read with date/time runtime",
+    "status": "READ_RECORDED",
+    "trusted_timestamp_status": "UNVERIFIED",
+    "independent_token": null
+  },
+  "identity_relation": "package-member byte integrity vs manifest",
+  "independent_review": "PENDING",
+  "legal_status": "UNVERIFIED",
+  "canonical_vbl_status": "UNVERIFIED",
+  "limitations": [
+    "The full chat message was not supplied as a separate original-byte file.",
+    "User Windows filesystem and Git tree are unavailable in this runtime.",
+    "No external signed timestamp token was obtained."
+  ]
+}

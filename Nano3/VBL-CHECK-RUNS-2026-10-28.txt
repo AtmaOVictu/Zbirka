@@ -1,0 +1,61 @@
+VBL checker runs - clock reading (sandbox, unverified): 2026-10-28T02:23:02Z
+command: python3 vbl_check.py <file> [--manifest MANIFEST-ZRCALO.txt] [--xref]
+
+=== ORIGINAL (uploads/LICENSE-VBL-0_1100.md) ===
+file: uploads/LICENSE-VBL-0_1100.md  bytes: 37686  sha256: d29c88570a9169e607a149851f066f247a1f67a4275d625b060e634572393715
+PASS       encoding                 UTF-8 ok; U+FFFD count 0; marked letters C/S/Z/D: [4, 3, 1, 1]
+FAIL       refs resolve             88 section refs, 22 sections; dangling: {'0.161': 1, '0.165': 1, '0.163': 1, '0.164': 1, '0.162': 1}
+PASS       exponent labels          mismatches: none
+PASS       KORENINA refs            21 refs; out of range: none
+WARN       label collision          clause items numbered like KORENINA (0.N × 10¹.): [('0.16', 5)]
+FAIL       algorithm name           'SHA-0.256 x 10^3' x5, 'SHA-256' x0
+FAIL       machine date             date='0.2026 × 10⁴-0.10 × 10²-0.26 × 10²' ISO 8601: False
+WARN       version order            predecessor date == current date: True; commit id recorded: False
+WARN       number spelling          248 fragmented numbers; plain number words: ['thirty']
+WARN       one definition of 'evil' 2 definitions found
+WARN       'carrier' defined        3 uses; definition line present: False
+INFO       lineage                  15 entries; 6 dated 26 Oct; never on main: 2
+PASS       manifest                 size 37686/37686, sha256 match: True
+NOT_RUN    not checked              authorship, publication history, legal effect, commit chain, whether text is right
+
+xref map (section | cites -> | <- cited by)
+§0     | 0.4,0.6,0.7 | 0.17,0.18,0.20
+§0a    | - | -
+§0.1   | - | -
+§0.2   | - | 0.14,0.20
+§0.3   | 0.4 | 0.12,0.19,0.20,0.4
+§0.4   | 0.3,0.9 | 0,0.12,0.13,0.16,0.17,0.18,0.20,0.3,0.9
+§0.5   | - | 0.20
+§0.6   | - | 0
+§0.7   | - | 0,0.17,0.9
+§0.8   | - | 0.11,0.13,0.16
+§0.9   | 0.4,0.7 | 0.11,0.12,0.13,0.16,0.17,0.20,0.4
+§0.10  | - | 0.11,0.12,0.13,0.14,0.15,0.16,0.20
+§0.11  | 0.10,0.8,0.9 | -
+§0.12  | 0.10,0.3,0.4,0.9 | 0.15,0.19,0.20
+§0.13  | 0.10,0.4,0.8,0.9 | 0.15,0.16,0.17,0.18,0.19,0.20
+§0.14  | 0.10,0.2 | 0.20
+§0.15  | 0.10,0.12,0.13,0.16,0.17,0.18,0.19,0.20 | -
+§0.16  | 0.10,0.13,0.4,0.8,0.9 | 0.15,0.17
+§0.17  | 0,0.13,0.16,0.4,0.7,0.9 | 0.15
+§0.18  | 0,0.13,0.4 | 0.15
+§0.19  | 0.12,0.13,0.3 | 0.15
+§0.20  | 0,0.10,0.12,0.13,0.14,0.2,0.3,0.4,0.5,0.9 | 0.15
+never cited by another section: ['0a', '0.1', '0.11', '0.15']
+
+=== A-CORRECTED PROPOSAL ===
+file: outputs/LICENSE-VBL-0_1100-A-CORRECTED-PROPOSAL.md  bytes: 38029  sha256: 6fda15e56481be2e90adf1a1f13404cb07ad8a8f1850dfc4b2e3389b320f4ef0
+PASS       encoding                 UTF-8 ok; U+FFFD count 0; marked letters C/S/Z/D: [4, 3, 1, 1]
+PASS       refs resolve             88 section refs, 22 sections; dangling: none
+PASS       exponent labels          mismatches: none
+PASS       KORENINA refs            21 refs; out of range: none
+PASS       label collision          clause items numbered like KORENINA (0.N × 10¹.): none
+PASS       algorithm name           'SHA-0.256 x 10^3' x0, 'SHA-256' x6
+PASS       machine date             date='2026-10-26' ISO 8601: True
+WARN       version order            predecessor date == current date: True; commit id recorded: False
+PASS       number spelling          235 fragmented numbers; plain number words: none
+WARN       one definition of 'evil' 2 definitions found
+WARN       'carrier' defined        3 uses; definition line present: False
+INFO       lineage                  15 entries; 6 dated 26 Oct; never on main: 2
+NOT_RUN    manifest                 no --manifest given
+NOT_RUN    not checked              authorship, publication history, legal effect, commit chain, whether text is right

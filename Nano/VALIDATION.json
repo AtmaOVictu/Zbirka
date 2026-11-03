@@ -1,0 +1,21 @@
+{
+  "status": "PASS_LOCAL_PACKAGE_VALIDATION",
+  "package": "VBL-unification-gap-analysis-r1",
+  "date": "2026-10-25",
+  "gap_records": 24,
+  "unique_gap_ids": 24,
+  "priorities": {
+    "P0": 13,
+    "P1": 11,
+    "P2": 0
+  },
+  "validation_checks": [
+    "CSV parses",
+    "24 unique gap IDs",
+    "required decision fields non-empty",
+    "required reports exist and non-empty",
+    "ZIP CRC verified after build",
+    "external sidecar SHA-256 verified after build"
+  ],
+  "scope_limit": "Local package/schema/integrity checks only; no stakeholders contacted, decisions adopted, external systems changed, or independent/legal review performed."
+}

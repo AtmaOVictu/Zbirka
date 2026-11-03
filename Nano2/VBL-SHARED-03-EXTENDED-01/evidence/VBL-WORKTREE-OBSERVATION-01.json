@@ -1,0 +1,38 @@
+{
+  "record_type": "VBL_WORKTREE_STATE_OBSERVATION",
+  "record_version": "1",
+  "observation_scope": "Exact path and files explicitly checked below",
+  "observed_at_utc": "2026-10-27T10:38:34Z",
+  "observation_clock_source": "Codex clock tool",
+  "clock_independent_accuracy": "UNVERIFIED",
+  "checked_path": "C:\\Users\\Luka\\copilot-worktrees\\Atmavictu\\atmaovictu-refactored-goggles\\isti",
+  "path_state": "PRESENT",
+  "item_type": "FILE",
+  "size_bytes": 0,
+  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "filesystem_creation_time_local": "2026-10-27T11:35:17",
+  "filesystem_last_write_time_local": "2026-10-27T11:35:17",
+  "filesystem_clock_accuracy": "UNVERIFIED",
+  "other_exact_paths_checked": [
+    {
+      "path": "C:\\Users\\Luka\\copilot-worktrees\\Atmavictu\\atmaovictu-refactored-goggles\\scripts\\Open-VBLTranscript.ps1",
+      "state": "NOT_FOUND"
+    },
+    {
+      "path": "D:\\OntoProjekt\\CanvasMinstral\\Nano2\\scripts\\Open-VBLTranscript.ps1",
+      "state": "NOT_FOUND"
+    },
+    {
+      "path": "D:\\OntoProjekt\\CanvasMinstral\\Nano2\\VBL-SHARED-03-EXPANDED.zip",
+      "state": "NOT_FOUND"
+    }
+  ],
+  "git_status_short": "EMPTY_AT_OBSERVATION",
+  "git_scope": "git status --short output was empty; generated intake area follows repository ignore-all allowlist",
+  "causal_attribution": "UNVERIFIED",
+  "limits": [
+    "Existence, length, digest, and reported filesystem timestamps do not establish who created the item or which command created it.",
+    "NOT_FOUND applies only to the exact paths listed.",
+    "No file was modified or deleted by this observation."
+  ]
+}

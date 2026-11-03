@@ -1,0 +1,25 @@
+{
+  "validator": "VBL proposed witness-liveness checks",
+  "status": "BLOCKED_OR_WARN",
+  "summary": {
+    "PASS": 0,
+    "WARN": 0,
+    "BLOCKED": 1,
+    "FAIL": 0
+  },
+  "exit_code": 2,
+  "findings": [
+    {
+      "case_id": "M12",
+      "status": "BLOCKED",
+      "check": "case-blocked",
+      "detail": "Case is recorded but remains blocked; a nonzero result is intentional until the blocker is resolved or formally handed off."
+    }
+  ],
+  "limitations": [
+    "Does not contact anyone or send requests.",
+    "Does not prove a referenced URL exists or that a request was delivered.",
+    "Does not independently establish that an assertion is true.",
+    "Example/test cases are not real-world evidence."
+  ]
+}

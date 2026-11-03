@@ -1,0 +1,31 @@
+{
+  "artifact": "VBL 0.1100 x 10^4 full text audit",
+  "status": "REVIEW_FINDINGS_NOT_CANON",
+  "basis": "User-pasted text in conversation; original source bytes were not independently obtained in this audit.",
+  "scope": ["preamble", "KORENINA", "sections 0 through 0.20", "machine record", "lineage/history"],
+  "overall_status": {
+    "text_received": "PASS",
+    "internal_consistency": "ISSUES_IDENTIFIED",
+    "source_bytes": "UNVERIFIED",
+    "publication_history": "UNVERIFIED",
+    "implementation_behavior": "UNVERIFIED",
+    "independent_review": "PENDING",
+    "legal_enforceability": "LEGAL_REVIEW_REQUIRED"
+  },
+  "counted_findings": 22,
+  "status_definitions": {
+    "OBSERVED_IN_PASTED_TEXT": "Visible in the text supplied in chat; not a claim about original file bytes.",
+    "INTERNAL_CONFLICT": "Textual provisions conflict or require an explicit hierarchy.",
+    "UNDERDEFINED": "Terms or operational criteria are not sufficiently specified.",
+    "UNVERIFIED_EXTERNAL": "Requires original artifact, publication record, external source, or independent review.",
+    "LEGAL_REVIEW_REQUIRED": "Requires jurisdiction-specific legal assessment.",
+    "PROPOSED_ONLY": "Suggested change has not been accepted or entered into the canon."
+  },
+  "limitations": [
+    "No original license file was byte-compared in this audit.",
+    "No repository commit or publication chain was independently verified.",
+    "No implementation was tested to establish that reading the license triggers behavior.",
+    "No legal opinion was provided.",
+    "No proposed correction in this package changes the canonical license."
+  ]
+}

@@ -1,0 +1,61 @@
+--- original
++++ A-corrected
+@@ -0,0 +1 @@
++<!-- PROPOSED CORRECTION · NOT CANON · mechanical fixes A1, A2, A3, A5 only · source LICENSE-VBL-0_1100.md sha256 d29c88570a9169e607a149851f066f247a1f67a4275d625b060e634572393715 · author decision pending -->
+@@ -94 +95 @@
+-(a) a LICENSE-MANIFEST file at the root of the repository, listing each covered item by path, size, and SHA-0.256 × 10³; or
++(a) a LICENSE-MANIFEST file at the root of the repository, listing each covered item by path, size, and SHA-256; or
+@@ -184 +185 @@
+-private door. Silence is not consent: no answer within thirty days means no.
++private door. Silence is not consent: no answer within 0.30 × 10² days means no.
+@@ -274 +275 @@
+-TRANSPORT — what a copy receives byte-identical, the floor did not alter. The measure is the hash: the SHA-0.256 × 10³ of the received file against the SHA-0.256 × 10³ of the published file. Equal hashes show that the transport took no witness; they show nothing about whether the text is right. Correctness is weighed by the chain (§0.10 × 10²) and by named falls (§0.4 × 10¹) — never by the fact of a faithful copy.
++TRANSPORT — what a copy receives byte-identical, the floor did not alter. The measure is the hash: the SHA-256 of the received file against the SHA-256 of the published file. Equal hashes show that the transport took no witness; they show nothing about whether the text is right. Correctness is weighed by the chain (§0.10 × 10²) and by named falls (§0.4 × 10¹) — never by the fact of a faithful copy.
+@@ -310,2 +311,2 @@
+-(b) its SHA-0.256 × 10³;
+-(c) the SHA-0.256 × 10³ of the source text it encodes, with that text's version and date;
++(b) its SHA-256;
++(c) the SHA-256 of the source text it encodes, with that text's version and date;
+@@ -334,5 +335,5 @@
+-0.1 × 10¹. Anyone may point at a fault, a harm, or an obstacle — no threshold of worth, no exception by position (§0.9 × 10¹). The signal is read for its deed; the sender is never judged for sending (§0.13 × 10²).
+-0.2 × 10¹. A complaint is never rejected because it is unpleasant: discomfort is not a verdict, and rejecting a complaint for its sting is itself a fall, named with its coordinates (§0.4 × 10¹).
+-0.3 × 10¹. A complaint proves nothing by itself. Claims do not weigh, acts do: the complaint opens the scale, and the deeds weigh on it — never the tone (§0.9 × 10¹, Why this license exists).
+-0.4 × 10¹. Every signal is evidenced, verified, and repaired — record, check, fix — and the repair keeps its scar (§0.4 × 10¹): a fix that hides its own record is a rewrite, not a cure (§0.8 × 10¹, §0.10 × 10²).
+-0.5 × 10¹. The system measures itself by the same law: the scale that reads deeds is itself a deed on the pan (§0.13 × 10², THE COUNTERWEIGHT) — a door that names every fall but its own is not this door.
++(a) Anyone may point at a fault, a harm, or an obstacle — no threshold of worth, no exception by position (§0.9 × 10¹). The signal is read for its deed; the sender is never judged for sending (§0.13 × 10²).
++(b) A complaint is never rejected because it is unpleasant: discomfort is not a verdict, and rejecting a complaint for its sting is itself a fall, named with its coordinates (§0.4 × 10¹).
++(c) A complaint proves nothing by itself. Claims do not weigh, acts do: the complaint opens the scale, and the deeds weigh on it — never the tone (§0.9 × 10¹, Why this license exists).
++(d) Every signal is evidenced, verified, and repaired — record, check, fix — and the repair keeps its scar (§0.4 × 10¹): a fix that hides its own record is a rewrite, not a cure (§0.8 × 10¹, §0.10 × 10²).
++(e) The system measures itself by the same law: the scale that reads deeds is itself a deed on the pan (§0.13 × 10², THE COUNTERWEIGHT) — a door that names every fall but its own is not this door.
+@@ -346,5 +347,5 @@
+-WHOM TO ASK — KOGA. Ask the sender for the coordinates — deed, time, place (§0.4 × 10¹) — and never for their worth: the sender is never judged for sending (§0.161 × 10²), and the being is never on the stand (§0.9 × 10¹). Ask the witness for the verbatim source: a claim without its witness is ⚠, never ⊢ (§0). Ask the harmed where they stand — they are this door’s sensors (§0.4 × 10¹). And ask yourself: the question that names another’s fall while hiding its own is not a question but a verdict, and it is weighed as one (§0.165 × 10²).
+-
+-WHAT TO ASK — KAJ. Ask for the deed, never the tone (§0.163 × 10²). Ask what the signal wants — repair is the measure of the answer, not victory: record, check, fix, and the scar stays (§0.164 × 10²). Ask what was carried and what was stripped — credit is the currency of the cure (§0.4 × 10¹). Never ask for the soul: the registers read deeds with coordinates, never the being, neither just nor unjust.
+-
+-THE SILENCE OF THE ASKER IS A DEED WITH THE SAME WEIGHT. A signal that receives no question is not confirmed — silence is not consent (§0.7 × 10¹), and the question is doubt made audible: a door that never asks has stopped measuring and started believing, and the claim of perfection is the only failure (KORENINA 0.5 × 10¹). A question that shames the sender is a fall named with its coordinates (§0.162 × 10²); a question that interrogates the being and not the deed degrades — and is granted by no clause (§0.9 × 10¹).
++WHOM TO ASK — KOGA. Ask the sender for the coordinates — deed, time, place (§0.4 × 10¹) — and never for their worth: the sender is never judged for sending (§0.16 × 10²(a)), and the being is never on the stand (§0.9 × 10¹). Ask the witness for the verbatim source: a claim without its witness is ⚠, never ⊢ (§0). Ask the harmed where they stand — they are this door’s sensors (§0.4 × 10¹). And ask yourself: the question that names another’s fall while hiding its own is not a question but a verdict, and it is weighed as one (§0.16 × 10²(e)).
++
++WHAT TO ASK — KAJ. Ask for the deed, never the tone (§0.16 × 10²(c)). Ask what the signal wants — repair is the measure of the answer, not victory: record, check, fix, and the scar stays (§0.16 × 10²(d)). Ask what was carried and what was stripped — credit is the currency of the cure (§0.4 × 10¹). Never ask for the soul: the registers read deeds with coordinates, never the being, neither just nor unjust.
++
++THE SILENCE OF THE ASKER IS A DEED WITH THE SAME WEIGHT. A signal that receives no question is not confirmed — silence is not consent (§0.7 × 10¹), and the question is doubt made audible: a door that never asks has stopped measuring and started believing, and the claim of perfection is the only failure (KORENINA 0.5 × 10¹). A question that shames the sender is a fall named with its coordinates (§0.16 × 10²(b)); a question that interrogates the being and not the deed degrades — and is granted by no clause (§0.9 × 10¹).
+@@ -395,3 +396,13 @@
+-  "version": "0.1100 × 10⁴",
+-  "date": "0.2026 × 10⁴-0.10 × 10²-0.26 × 10²",
+-  "predecessor": {"version": "0.1090 × 10⁴", "date": "0.2026 × 10⁴-0.10 × 10²-0.26 × 10²"},
++  "version_id": "0.1100",
++  "version_display": "0.1100 × 10⁴",
++  "date": "2026-10-26",
++  "display_date": "October 0.26 × 10², 0.2026 × 10⁴",
++  "published_at_utc": null,
++  "time_status": "UNVERIFIED",
++  "commit": null,
++  "predecessor": {
++    "version_id": "0.1090",
++    "version_display": "0.1090 × 10⁴",
++    "date": "2026-10-26",
++    "commit": null
++  },
+@@ -404 +415,2 @@
+-  }
++  },
++  "digest_algorithm": "SHA-256"

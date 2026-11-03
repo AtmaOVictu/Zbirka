@@ -1,0 +1,39 @@
+{
+  "protocol": "VBL — Verification Before Assertion",
+  "version_display": "0.1100 × 10⁴",
+  "record_type": "TEMPLATE_NOT_A_TEST_RESULT",
+  "artifact": {
+    "path": null,
+    "byte_length": null,
+    "sha256": null,
+    "source": "NOT_RECORDED",
+    "status": "UNVERIFIED"
+  },
+  "clock": {
+    "local_iso8601": null,
+    "utc_iso8601": null,
+    "source": "NOT_RECORDED",
+    "trusted_timestamp_token": null,
+    "verification_method": null,
+    "status": "UNVERIFIED"
+  },
+  "test": {
+    "method": null,
+    "environment": null,
+    "result": "NOT_RUN"
+  },
+  "independent_review": {
+    "reviewer": null,
+    "source_artifact_sha256": null,
+    "method": null,
+    "result": "PENDING"
+  },
+  "canonical_status": "UNVERIFIED",
+  "publication_lineage": "UNVERIFIED",
+  "legal_status": "UNVERIFIED",
+  "limitations": [
+    "A digest does not establish authorship or publication history.",
+    "A local clock reading is not an independently trusted timestamp.",
+    "The template itself is not evidence that a test was run."
+  ]
+}

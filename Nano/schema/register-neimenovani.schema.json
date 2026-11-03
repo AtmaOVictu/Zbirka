@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/vbl/register-neimenovani.schema.json",
+  "title": "VBL unnamed-contributor register record",
+  "description": "Structural checks only. TEMPLATE examples are prohibited in live registers.",
+  "type": "object",
+  "required": ["record_type"],
+  "properties": {
+    "record_type": {"enum": ["register", "contributor"]},
+    "schema_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "record_id": {"type": "string", "minLength": 1},
+    "status": {"enum": ["ACTIVE", "CORRECTED", "WITHDRAWN", "TEMPLATE"]},
+    "created_at": {"type": "string", "format": "date-time"},
+    "display_name": {"type": ["string", "null"]},
+    "pseudonym": {"type": ["string", "null"]},
+    "identity_status": {"enum": ["NAMED", "PSEUDONYM", "UNKNOWN", "WITHHELD"]},
+    "consent_basis": {"type": ["string", "null"]},
+    "attribution": {"type": "string", "minLength": 1},
+    "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}},
+    "corrects_record_id": {"type": "string", "minLength": 1},
+    "correction_reason": {"type": "string", "minLength": 1}
+  },
+  "allOf": [
+    {"if": {"properties": {"record_type": {"const": "register"}}, "required": ["record_type"]}, "then": {"required": ["entries_recorded"], "properties": {"entries_recorded": {"type": "integer", "minimum": 0}}}},
+    {"if": {"properties": {"record_type": {"const": "contributor"}}, "required": ["record_type"]}, "then": {"required": ["schema_version", "record_id", "status", "created_at", "evidence", "identity_status", "attribution"]}},
+    {"if": {"properties": {"status": {"const": "CORRECTED"}}, "required": ["status"]}, "then": {"required": ["corrects_record_id", "correction_reason"]}}
+  ],
+  "$defs": {
+    "evidence": {
+      "type": "object",
+      "required": ["source", "sha256", "observed_at"],
+      "properties": {
+        "source": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "observed_at": {"type": "string", "format": "date-time"},
+        "quote": {"type": "string"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": true
+}

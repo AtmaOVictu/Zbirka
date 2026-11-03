@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KAČA, KI POJE — igra ∧ licenca</title>
+<style>
+  :root { font-family: Georgia, "Times New Roman", serif; }
+  body { margin: 0; padding: 16px; background: #0D1420; color: #C9CDD4; }
+  .glava { text-align: center; }
+  h1 { font-size: 21px; letter-spacing: 2px; color: #E8C878; font-weight: normal; margin: 0; }
+  .dimenzija { font-size: 12px; color: #7EC8E3; margin-top: 5px; }
+  .meni { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 12px 0 10px; }
+  button { background: #16233A; color: #C9CDD4; border: 1px solid #2A3B5A; border-radius: 6px; padding: 6px 12px; cursor: pointer; font-family: inherit; font-size: 13px; }
+  button.izbrano { border-color: #E8C878; color: #E8C878; }
+  button:hover { border-color: #E8C878; color: #E8C878; }
+  .plat { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; }
+  .okvir { background: #111A2B; border: 1px solid #22304A; border-radius: 10px; padding: 10px; text-align: center; }
+  .okvir h2 { font-size: 12px; letter-spacing: 3px; color: #8A93A6; font-weight: normal; margin: 2px 0 8px; }
+  canvas { background: #0A0F18; border-radius: 6px; touch-action: none; }
+  .namig { font-size: 11px; color: #6E7788; margin-top: 6px; }
+  .telo { background: #111A2B; border: 1px solid #22304A; border-radius: 10px; padding: 10px 14px; min-width: 220px; text-align: left; }
+  .telo h3 { font-size: 12px; letter-spacing: 2px; color: #8A93A6; font-weight: normal; margin: 6px 0 4px; }
+  #naslednjiZnak { font-size: 26px; color: #E8C878; text-align: center; min-height: 34px; }
+  #naslednjiIme { font-size: 11px; color: #8A93A6; text-align: center; min-height: 15px; margin-bottom: 6px; }
+  #teloVrstica { font-size: 15px; line-height: 1.9; letter-spacing: 2px; color: #2A3B5A; min-height: 60px; word-break: break-all; }
+  #teloVrstica .pojeden { color: #4EC98A; }
+  #teloVrstica .kuhar { color: #E8C878; font-weight: bold; }
+  .stanje { text-align: center; font-size: 13px; color: #4EC98A; min-height: 18px; margin-top: 8px; }
+  #padci { font-size: 12px; color: #E86A6A; line-height: 1.7; }
+  .postopek { margin: 14px auto 0; max-width: 1060px; background: #111A2B; border: 1px solid #22304A; border-radius: 10px; padding: 10px; text-align: center; }
+  .postopek .tok { font-size: 15px; letter-spacing: 1px; }
+  .postopek .kataster { font-size: 11px; color: #8A93A6; margin-top: 7px; }
+  .noga { text-align: center; font-size: 12px; color: #6E7788; margin: 12px 0 4px; }
+</style>
+</head>
+<body>
+<div class="glava">
+  <h1>KAČA, KI POJE — igra ∧ licenca</h1>
+  <div class="dimenzija">kača poje telo ∧ poje ga: vsak grižaj je ton ⊢ tonalna abeceda poskusa 4 · ouroboros se vrača ⊨ WITH LOVE</div>
+</div>
+
+<div class="meni" id="meni"></div>
+
+<div class="plat">
+  <div class="okvir">
+    <h2 id="naslovPlosce">⟨2D⟩ POLJE — 21 × 21</h2>
+    <canvas id="polje" width="546" height="546"></canvas>
+    <div class="namig">PUŠČICE / WASD — kača · R prerezi ∧ nadaljuje · M molk · prst vleče (dodir)</div>
+  </div>
+  <div class="telo">
+    <h3>NASLEDNJI GRIŽAJ</h3>
+    <div id="naslednjiZnak"></div>
+    <div id="naslednjiIme"></div>
+    <h3>TELO, KI GA KAČA JE — ⟨NE-BRIŠI⟩ ⊢ 24</h3>
+    <div id="teloVrstica"></div>
+    <h3>REGISTER PADCEV ⊙ 1419 — brazgotine ostanejo</h3>
+    <div id="padci">— še nič padlo —</div>
+    <h3>IZMERE</h3>
+    <div id="izmere" style="font-size:12px;color:#8A93A6;line-height:1.7"></div>
+  </div>
+</div>
+<div class="stanje" id="stanje">izberi kačo — vsaka poje drugo telo ∧ vsaka poje svoj rep</div>
+
+<div class="postopek">
+  <div class="tok">⟡ UTRIP <span style="color:#E8C878">zláta</span> → ⊢ ZAKON <span style="color:#4EC98A">smaragd</span> → REZ <span style="color:#C9CDD4">srebro</span> → ∂ DOLG <span style="color:#7EC8E3">nebesno modra</span> <span style="color:#6FD8D8">⇌</span> AKORD <span style="color:#A587D6">§13</span></div>
+  <div class="kataster">padec se imenuje javno ∧ popravi isti dih ⊢ 1419 · priča ostaja ⊢ 24 · rez = 1 + najvišja dejansko izmerjena ⊢ Z-2 · isto središče ⟨daj⟩, nikoli ista točka ⊢ 2349</div>
+</div>
+
+<div class="noga">KAČA, KI POJE ⊢ poskus 5 (igra) · NORMA-BARV ⊢ 2314 · REZ 221 (kača se vrača) · © Luka Pintarič, VBL §12 transport</div>
+
+<script>
+"use strict";
+// ============ ZVOKOVNI STROJ — tonalna abeceda licence (⊢ platva/ouroboros-ki-poje.html poskus 4) ============
+var C = new (window.AudioContext || window.webkitAudioContext)();
+var ovoj = C.createGain(); ovoj.gain.value = 0.5;
+var strop = C.createBiquadFilter(); strop.type = "lowpass"; strop.frequency.value = 5200;
+ovoj.connect(strop); strop.connect(C.destination);
+[0.12, 0.17, 0.31].forEach(function (d) {
+  var dl = C.createDelay(1); dl.delayTime.value = d;
+  var g = C.createGain(); g.gain.value = 0.25;
+  ovoj.connect(dl); dl.connect(g); g.connect(ovoj);
+});
+var sum = C.createBuffer(1, Math.floor(C.sampleRate * 1.4), C.sampleRate);
+var sd = sum.getChannelData(0);
+for (var si = 0; si < sd.length; si++) sd[si] = Math.random() * 2 - 1;
+var molk = false;
+
+function ton(f, dur, opt) {
+  opt = opt || {};
+  if (molk) return;
+  if (C.resume) C.resume();
+  var t = C.currentTime, d = dur || 0.4;
+  if (f < 60) f = 60; if (f > 1900) f = f / 2;
+  var g = C.createGain();
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.exponentialRampToValueAtTime(opt.glas || 0.3, t + 0.02);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + d);
+  g.connect(ovoj);
+  var centi = opt.solo ? [0] : [-3.7, 0, 3.7];
+  for (var ci = 0; ci < centi.length; ci++) {
+    var o = C.createOscillator(); o.type = "sine"; o.frequency.value = f; o.detune.value = centi[ci];
+    if (opt.glis) { o.frequency.setValueAtTime(f, t); o.frequency.exponentialRampToValueAtTime(opt.glis, t + d * 0.9); }
+    o.connect(g); o.start(t); o.stop(t + d + 0.05);
+    if (opt.vibrato) {
+      var lf = C.createOscillator(); lf.frequency.value = 5.3;
+      var lg = C.createGain();
+      lg.gain.setValueAtTime(0, t);
+      lg.gain.linearRampToValueAtTime(7, t + 0.22);
+      lf.connect(lg); lg.connect(o.detune);
+      lf.start(t); lf.stop(t + d + 0.05);
+    }
+  }
+}
+function akord() {
+  if (C.resume) C.resume();
+  [220, 440, 660, 880].forEach(function (f) { ton(f, 1.5, { glas: 0.2 }); });
+}
+var penta = [220, 247.5, 275, 330, 412.5, 440, 495, 550, 660, 825, 880];
+var SHIFT = [0, 2, 4, -3, 5, -5, 7, -7, 9, -9, 12, -12, 3, -3, 6, -6, 8, -8, 10, -10, 1, -1, 11];
+function trans(k) { return Math.pow(2, SHIFT[k % SHIFT.length] / 12); }
+function barvaJezika(k) { var h = (k * 137.508) % 360; return "hsl(" + h.toFixed(1) + ", 62%, 62%)"; }
+
+// ============ ŠTIRI KAČE — štiri telesi, ki jih kača poje ============
+var KAČE = {
+  abeceda: {
+    ime: "KAČA ABECEDA",
+    opis: "poje slovensko abecedo po vrsti — vsaka črka poje svoj ton",
+    telo: "ABCČDEFGHIJKLMNOPRSŠTUVZŽ".split(""),
+    imeGrižaja: function (i) { return (i + 1) + ". črka slovenske abecede ⊢ SSKJ vrsta"; },
+    tonGrižaja: function (i, zn) { return { f: penta[zn.toLowerCase().charCodeAt(0) % 11], dur: 0.3, barva: "#7EC8E3" }; }
+  },
+  licenca: {
+    ime: "KAČA LICENCA",
+    opis: "poje celo telo VBL 10.4.0 — vsak razdelek en grižaj (∂ prejšnje seje: ⟨ne⟩ še celega telesa — ta kača ga odplača)",
+    telo: ["⊨", "KORENINA", "§0", "§0a", "§1", "§2", "§3", "§4", "§5", "§6", "§7", "§8", "§9", "§10", "§11", "§12", "§13", "§14", "§15", "§16"],
+    imeGrižaja: function (i, zn) {
+      var imena = ["WITH LOVE — vrata se začnejo ∧ končajo z ljubeznijo", "KORENINA — 6 zakonov pod pogoji", "§0 obseg ∧ pomeni", "§0a identifikacija — manifest ∨ datoteka", "§1 dodelitev — run ∧ study ∧ cite ∧ verify", "§2 knjiga — ledger vozi s telesom", "§3 izluščevanje — izrez clause", "§4 angel — cure, 30 dni, brazgotina", "§5 popolnost ⟨ni⟩ travena", "§6 zaprte plasti ostajajo zaprte", "§7 vrata za prošnjo — molk ⟨ni⟩ privolitev", "§8 nadrejenost ∧ zapis", "§9 etika ∧ potrditev — univerzalno stanje", "§10 sprememba — najnovejša vrata so edina živa", "§11 ločljivost — ena klavzula more pasti, vrata ⟨ne⟩", "§12 označene črke — priča, ⟨ne⟩ napaka", "§13 regeneracija — ledenik ∧ akord", "§14 binarno telo — izmerjeno, le ko je priča", "§15 veriga — AVL → VBL, ena veriga imen", "§16 signal ∧ pritožba — obe pans na tehtnici"];
+      return imena[i] || zn;
+    },
+    tonGrižaja: function (i, zn) {
+      if (zn === "⊨") return { f: 880, dur: 0.7, barva: "#4EC98A", opt: { vibrato: true } };
+      if (zn === "KORENINA") return { f: 220, dur: 0.6, barva: "#E8C878" };
+      return { f: penta[i % 11] * (i > 10 ? 2 : 1), dur: 0.3, barva: "#C9CDD4" };
+    }
+  },
+  znaki: {
+    ime: "KAČA ZNAKOV (CESTA)",
+    opis: "poje leksikon 18 znakov — vsak znak poje svoj ton ∧ barvo",
+    telo: ["⊢", "⊨", "⚠", "∂", "L", "§", "∅", "⟨ne⟩", "⟨daj⟩", "∧", "⇌", "⊙", "⟡", "⊘", "⟨NE-BRIŠI⟩", "rez", "dih", "č š ž đ"],
+    imeGrižaja: function (i) {
+      var imena = ["izmerjeno — resnica pri viru", "izpolnjen model — kača se vrača", "prijava / kandidat", "dolg — odloženo z roko", "plast veze resnice/laži", "razdelek kanona", "praznina — instrument brez napake", "negacija v objemu", "ukaz-dovol ⟡", "veznik dokaza", "enakovrednost — bajt-isto", "brazgotina — rana vidna", "ti — ukaz, volja", "mrtven kanal", "append-only — priča ostaja", "1 + najvišja izmerjena", "en cikel kače / seje", "hiša šumnikov ⊢ §12"];
+      return imena[i] || "";
+    },
+    tonGrižaja: function (i, zn) {
+      var T = { "⊢": { f: 880, dur: 0.6, barva: "#4EC98A", opt: { vibrato: true } },
+        "⊨": { f: 880, dur: 0.6, barva: "#4EC98A", opt: { vibrato: true } },
+        "⚠": { f: 660, dur: 0.5, barva: "#FF9E3D" },
+        "∂": { f: 440, dur: 0.7, barva: "#7EC8E3", opt: { glis: 330 } },
+        "L": { f: 275, dur: 0.4, barva: "#6FD8D8" },
+        "§": { f: 220, dur: 0.5, barva: "#C9CDD4" },
+        "∅": { f: 0, dur: 0.5, barva: "#5E6575" },
+        "⟨ne⟩": { f: 196, dur: 0.5, barva: "#A587D6" },
+        "⟨daj⟩": { f: 660, dur: 0.5, barva: "#E8C878" },
+        "∧": { f: 330, dur: 0.4, barva: "#C9CDD4" },
+        "⇌": { f: 495, dur: 0.5, barva: "#6FD8D8" },
+        "⊙": { f: 440, dur: 0.6, barva: "#E86A6A" },
+        "⟡": { f: 587, dur: 0.6, barva: "#E8C878", opt: { vibrato: true } },
+        "⊘": { f: 110, dur: 0.7, barva: "#5E6575" },
+        "⟨NE-BRIŠI⟩": { f: 262, dur: 0.6, barva: "#C9CDD4" },
+        "rez": { f: 550, dur: 0.5, barva: "#C9CDD4" },
+        "dih": { f: 825, dur: 0.7, barva: "#7EC8E3", opt: { glis: 550 } },
+        "č š ž đ": { f: 330, dur: 0.5, barva: "#A587D6" } };
+      return T[zn] || { f: 330, dur: 0.4, barva: "#C9CDD4" };
+    }
+  },
+  jeziki: {
+    ime: "KAČA JEZIKOV — 23",
+    opis: "poje refren v 23 jezikih — vsak jezik svoja transpozicija ∧ svetloba ⊢ @2742",
+    telo: ["slovenščina", "hrvatščina", "srbski jezik", "bosanščina", "angleščina", "latinščina", "italijanščina", "francoščina", "nemščina", "španščina", "portugalščina", "nizozemščina", "poljščina", "ruščina", "ukrajinščina", "grški jezik", "hebrejščina", "arabščina", "turščina", "madžarščina", "kitajščina", "japonščina", "hindijščina"],
+    imeGrižaja: function (i) { return (i + 1) + "/23 — transpozicija " + SHIFT[i % SHIFT.length] + " poltonov"; },
+    tonGrižaja: function (i, zn) { return { f: 220 * trans(i), dur: 0.45, barva: barvaJezika(i) }; }
+  }
+};
+
+// ============ POLJE ============
+var N = 21, CEL = 26;
+var rc = document.getElementById("polje").getContext("2d");
+var meniEl = document.getElementById("meni");
+var stEl = document.getElementById("stanje");
+var nzEl = document.getElementById("naslednjiZnak");
+var niEl = document.getElementById("naslednjiIme");
+var tvEl = document.getElementById("teloVrstica");
+var paEl = document.getElementById("padci");
+var izEl = document.getElementById("izmere");
+var naslovEl = document.getElementById("naslovPlosce");
+
+var kaca = null;
+var klobasa = [];
+var smer = { x: 1, y: 0 };
+var cakanjeSmer = null;
+var griz = null;
+var pojedeni = 0;
+var zivi = false;
+var casovnik = null;
+var bazniKorak = 150;
+var padci = {};
+var grizUtrip = null;
+var konecAnim = 0;
+
+Object.keys(KAČE).forEach(function (klj) {
+  var b = document.createElement("button");
+  b.textContent = KAČE[klj].ime;
+  b.onclick = function () { izberiKaco(klj); };
+  b.id = "mb-" + klj;
+  meniEl.appendChild(b);
+});
+
+function izberiKaco(klj) {
+  Array.prototype.forEach.call(meniEl.children, function (b) { b.classList.remove("izbrano"); });
+  document.getElementById("mb-" + klj).classList.add("izbrano");
+  kaca = KAČE[klj];
+  pojedeni = 0;
+  naslovEl.textContent = "⟨2D⟩ POLJE — " + kaca.ime;
+  stanje(kaca.opis);
+  poceniKaco();
+  risiTelo();
+}
+function poceniKaco() {
+  klobasa = [{ x: 10, y: 10 }, { x: 9, y: 10 }, { x: 8, y: 10 }];
+  smer = { x: 1, y: 0 }; cakanjeSmer = null;
+  zivi = false;
+  if (casovnik) { clearInterval(casovnik); casovnik = null; }
+  postaviGriz();
+}
+function postaviGriz() {
+  if (pojedeni >= kaca.telo.length) { griz = null; zmagaj(); return; }
+  var prosta = [];
+  var zasedena = {};
+  klobasa.forEach(function (c) { zasedena[c.x + "," + c.y] = true; });
+  for (var x = 0; x < N; x++) for (var y = 0; y < N; y++) if (!zasedena[x + "," + y]) prosta.push({ x: x, y: y });
+  if (!prosta.length) { griz = null; return; }
+  griz = prosta[Math.floor(Math.random() * prosta.length)];
+}
+function korak() {
+  if (!zivi) return;
+  if (cakanjeSmer) { smer = cakanjeSmer; cakanjeSmer = null; }
+  var glava = { x: klobasa[0].x + smer.x, y: klobasa[0].y + smer.y };
+  if (glava.x < 0 || glava.x >= N || glava.y < 0 || glava.y >= N) { pade("ZID — kača je stresela mejo polja"); return; }
+  for (var i = 0; i < klobasa.length; i++) {
+    if (klobasa[i].x === glava.x && klobasa[i].y === glava.y) { pade("REP — kača je ugriznila lastno telo"); return; }
+  }
+  klobasa.unshift(glava);
+  if (griz && glava.x === griz.x && glava.y === griz.y) {
+    var zn = kaca.telo[pojedeni];
+    var spec = kaca.tonGrižaja(pojedeni, zn);
+    if (spec.f > 0) ton(spec.f, spec.dur, spec.opt || { glas: 0.32 });
+    grizUtrip = { t0: performance.now(), barva: spec.barva };
+    pojedeni++;
+    stanje("pojeden: " + zn + " — " + kaca.imeGrižaja(pojedeni - 1, zn));
+    postaviGriz();
+    risiTelo();
+    if (zivi) {
+      var korakMs = Math.max(80, bazniKorak - pojedeni * 3);
+      clearInterval(casovnik);
+      casovnik = setInterval(korak, korakMs);
+    }
+  } else {
+    klobasa.pop();
+  }
+}
+function pade(ime) {
+  zivi = false;
+  if (casovnik) { clearInterval(casovnik); casovnik = null; }
+  padci[ime] = (padci[ime] || 0) + 1;
+  var g = padci[ime];
+  ton(110, 0.8, { glas: 0.35 });
+  risiPadci();
+  stanje("PADEC javno ⊙ 1419: " + ime + " — grižaji ostajajo (" + pojedeni + "/" + kaca.telo.length + "), brazgotina št. " + g + " · R prereže ∧ nadaljuje tam, kjer je padel");
+}
+function risiPadci() {
+  var vrstice = [];
+  Object.keys(padci).forEach(function (ime) { vrstice.push(ime + " ×" + padci[ime] + " ⊙"); });
+  paEl.textContent = vrstice.length ? vrstice.join(" · ") : "— še nič padlo —";
+}
+function zmagaj() {
+  akord();
+  konecAnim = performance.now() + 2200;
+  zivi = false;
+  if (casovnik) { clearInterval(casovnik); casovnik = null; }
+  stanje("⊨ WITH LOVE — " + kaca.ime + " je pojedla celo telo ∧ poje svoj rep (REZ 221) · vsak del svoj ton, vse skupaj en akord ⊢ §13");
+}
+function stanje(bes) { stEl.textContent = bes; }
+
+// ============ RISANJE ============
+var F = { zlata: "#E8C878", smaragd: "#4EC98A", srebro: "#C9CDD4", modra: "#7EC8E3", cian: "#6FD8D8", rdeca: "#E86A6A" };
+function risi() {
+  var now = performance.now();
+  rc.clearRect(0, 0, N * CEL, N * CEL);
+  rc.strokeStyle = "rgba(34,48,74,0.6)"; rc.lineWidth = 1;
+  for (var k = 1; k < N; k++) {
+    rc.beginPath(); rc.moveTo(k * CEL, 0); rc.lineTo(k * CEL, N * CEL); rc.stroke();
+    rc.beginPath(); rc.moveTo(0, k * CEL); rc.lineTo(N * CEL, k * CEL); rc.stroke();
+  }
+  rc.strokeStyle = "#2A3B5A"; rc.lineWidth = 2;
+  rc.strokeRect(1, 1, N * CEL - 2, N * CEL - 2);
+  if (griz) {
+    var zn = kaca.telo[pojedeni];
+    var spec = kaca.tonGrižaja(pojedeni, zn);
+    var cx = griz.x * CEL + CEL / 2, cy = griz.y * CEL + CEL / 2;
+    var pulse = 1 + 0.12 * Math.sin(now / 180);
+    rc.fillStyle = spec.barva;
+    rc.globalAlpha = 0.22;
+    rc.beginPath(); rc.arc(cx, cy, CEL * 0.62 * pulse, 0, Math.PI * 2); rc.fill();
+    rc.globalAlpha = 1;
+    rc.beginPath(); rc.arc(cx, cy, CEL * 0.3 * pulse, 0, Math.PI * 2); rc.fill();
+    rc.fillStyle = "#0D1420";
+    rc.font = (zn.length > 3 ? "bold 9px" : "bold 12px") + " Georgia";
+    rc.textAlign = "center"; rc.textBaseline = "middle";
+    rc.fillText(zn.length > 6 ? "⟨⟩" : zn, cx, cy);
+  }
+  klobasa.forEach(function (c, i) {
+    var x = c.x * CEL, y = c.y * CEL;
+    if (i === 0) { rc.fillStyle = F.smaragd; rc.globalAlpha = 1; }
+    else { rc.fillStyle = i <= pojedeni ? F.zlata : "#1E2C3E"; rc.globalAlpha = 1 - Math.min(0.5, i * 0.02); }
+    rc.beginPath();
+    rc.arc(x + CEL / 2, y + CEL / 2, i === 0 ? CEL * 0.42 : CEL * 0.36, 0, Math.PI * 2);
+    rc.fill();
+    if (i === 0) {
+      rc.fillStyle = "#0A0F18";
+      rc.beginPath(); rc.arc(x + CEL / 2 + smer.x * 5 - smer.y * 4, y + CEL / 2 + smer.y * 5 - smer.x * 4, 2.6, 0, Math.PI * 2); rc.fill();
+    }
+  });
+  rc.globalAlpha = 1;
+  if (grizUtrip) {
+    var p = (now - grizUtrip.t0) / 700;
+    if (p < 0 || p > 1) grizUtrip = null;
+    else {
+      rc.strokeStyle = grizUtrip.barva; rc.globalAlpha = 1 - p; rc.lineWidth = 3;
+      var cx2 = klobasa[0].x * CEL + CEL / 2, cy2 = klobasa[0].y * CEL + CEL / 2;
+      rc.beginPath(); rc.arc(cx2, cy2, CEL * (0.5 + p * 2), 0, Math.PI * 2); rc.stroke();
+      rc.globalAlpha = 1;
+    }
+  }
+  if (konecAnim > now) {
+    rc.fillStyle = "rgba(232,200,120," + (0.05 + 0.04 * Math.sin(now / 90)).toFixed(3) + ")";
+    rc.fillRect(0, 0, N * CEL, N * CEL);
+  }
+  if (!zivi && pojedeni < kaca.telo.length && klobasa.length) {
+    rc.fillStyle = "rgba(201,205,212,0.85)";
+    rc.font = "15px Georgia"; rc.textAlign = "center";
+    rc.fillText(kaca.ime + " čaka — puščica ∧ prvi gib", N * CEL / 2, N * CEL - 14);
+  }
+  requestAnimationFrame(risi);
+}
+function risiTelo() {
+  var deli = [];
+  for (var i = 0; i < kaca.telo.length; i++) {
+    var zn = kaca.telo[i];
+    if (i < pojedeni) deli.push("<span class='pojeden'>" + zn + "</span>");
+    else if (i === pojedeni) deli.push("<span class='kuhar'>" + zn + "</span>");
+    else deli.push(zn);
+  }
+  tvEl.innerHTML = deli.join(" ");
+  if (pojedeni < kaca.telo.length) {
+    nzEl.textContent = kaca.telo[pojedeni];
+    niEl.textContent = kaca.imeGrižaja(pojedeni, kaca.telo[pojedeni]);
+  } else {
+    nzEl.textContent = "⊨";
+    niEl.textContent = "celo telo pojedeno — akord §13";
+  }
+  izEl.innerHTML = "grižaji: <b style='color:#4EC98A'>" + pojedeni + "</b> / " + kaca.telo.length +
+    "<br>dolžina kače: <b style='color:#E8C878'>" + (klobasa.length) + "</b>" +
+    "<br>hitrost: <b>" + Math.max(80, bazniKorak - pojedeni * 3) + " ms/korak</b>";
+}
+
+// ============ ORODJE — vhod ============
+var SMERI = { ArrowUp: { x: 0, y: -1 }, ArrowDown: { x: 0, y: 1 }, ArrowLeft: { x: -1, y: 0 }, ArrowRight: { x: 1, y: 0 },
+  w: { x: 0, y: -1 }, s: { x: 0, y: 1 }, a: { x: -1, y: 0 }, d: { x: 1, y: 0 } };
+window.addEventListener("keydown", function (e) {
+  var t = e.target, tag = t && t.tagName;
+  if (tag === "INPUT" || tag === "BUTTON" || tag === "TEXTAREA") return;
+  if (e.key === "r" || e.key === "R") { poceniKaco(); risiTelo(); risiPadci(); stanje("prerez ∧ nadaljevanje — brazgotine ostajajo ⊙ 1349"); return; }
+  if (e.key === "m" || e.key === "M") { molk = !molk; stanje(molk ? "molk — nosilec 110 Hz utihnil" : "glas se vrača"); return; }
+  var ns = SMERI[e.key] || SMERI[(e.key || "").toLowerCase()];
+  if (ns) {
+    e.preventDefault();
+    if (!zivi && kaca) { zivi = true; casovnik = setInterval(korak, Math.max(80, bazniKorak - pojedeni * 3)); stanje("— kača hodi ∧ poje —"); }
+    if (smer.x + ns.x !== 0 || smer.y + ns.y !== 0) cakanjeSmer = ns;
+  }
+});
+var dodirX = null, dodirY = null;
+var polje = document.getElementById("polje");
+polje.addEventListener("touchstart", function (e) { if (e.touches.length) { dodirX = e.touches[0].clientX; dodirY = e.touches[0].clientY; e.preventDefault(); } }, { passive: false });
+polje.addEventListener("touchmove", function (e) {
+  if (!e.touches.length || dodirX === null) return;
+  var dx = e.touches[0].clientX - dodirX, dy = e.touches[0].clientY - dodirY;
+  if (Math.abs(dx) < 14 && Math.abs(dy) < 14) return;
+  var ns = Math.abs(dx) > Math.abs(dy) ? { x: dx > 0 ? 1 : -1, y: 0 } : { x: 0, y: dy > 0 ? 1 : -1 };
+  if (!zivi && kaca) { zivi = true; casovnik = setInterval(korak, Math.max(80, bazniKorak - pojedeni * 3)); }
+  if (smer.x + ns.x !== 0 || smer.y + ns.y !== 0) cakanjeSmer = ns;
+  dodirX = e.touches[0].clientX; dodirY = e.touches[0].clientY;
+  e.preventDefault();
+}, { passive: false });
+polje.addEventListener("touchend", function () { dodirX = null; dodirY = null; });
+
+izberiKaco("abeceda");
+risiPadci();
+requestAnimationFrame(risi);
+</script>
+</body>
+</html>

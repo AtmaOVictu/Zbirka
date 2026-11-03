@@ -1,0 +1,25 @@
+{
+  "artifact": "VBL-10.5.2-EQUALITY-AND-COOPERATIVE-ENGAGEMENT-DRAFT-NOT-RELEASED.md",
+  "status": "DRAFT — NOT RELEASED",
+  "derived_from": "VBL-10.5.1-DATA-AND-CONSENT-EXPANDED-DRAFT-NOT-RELEASED.md",
+  "source_sha256": "b1fb004a0207eef955a8a7e4fb5475f5f751de0452da7a13ccc014c64d356ccb",
+  "output_sha256": "8693e4c2dd1189146bff9cc44555a7776dfa7bd72890237953f4d4194854bf18",
+  "source_bytes": 51667,
+  "output_bytes": 58263,
+  "output_lines": 1146,
+  "checks": {
+    "utf8_decodes": true,
+    "header_version_10_5_2": true,
+    "draft_not_released": true,
+    "section_minus1_before_section0": true,
+    "all_new_tests_present": true,
+    "no_active_release_claim": true,
+    "source_unchanged": true,
+    "no_placeholder_release_sha_claimed": true
+  },
+  "limitations": [
+    "This validation is local and structural; it is not independent review.",
+    "No legal review or rights-holder release approval was performed.",
+    "No GitHub repository, branch, commit, or pull request was changed."
+  ]
+}

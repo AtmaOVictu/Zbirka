@@ -1,0 +1,82 @@
+{
+  "record_id": "YMH12-2026-10-25-001",
+  "record_type": "local_dictation_intake",
+  "status": "NEEDS_CLARIFICATION",
+  "scope": "LOCAL_ONLY",
+  "source_language": "English (dictation; exact intended meaning uncertain)",
+  "source_text_verbatim": "Access privileges. Sergeant, civil and cataloging licenses. Local note table YMH12. Hello. Cataloging. Resplay IV. authority structure. Arranging registers. Alex H is even. 18-19 1900, C 1600. This functioning not be same.",
+  "captured_on": "2026-10-25",
+  "normalized_interpretation": null,
+  "parsed_items": [
+    {
+      "raw": "Access privileges",
+      "possible_topic": "access-control / permission review",
+      "state": "UNRESOLVED",
+      "action_taken": "none"
+    },
+    {
+      "raw": "Sergeant",
+      "possible_topic": "role or title",
+      "state": "UNRESOLVED",
+      "action_taken": "no authority inferred"
+    },
+    {
+      "raw": "civil and cataloging licenses",
+      "possible_topic": "license types or cataloguing permissions",
+      "state": "UNRESOLVED",
+      "action_taken": "no grant or change made"
+    },
+    {
+      "raw": "YMH12",
+      "possible_topic": "local note/table identifier",
+      "state": "UNVERIFIED",
+      "action_taken": "preserved as a proposed record key only"
+    },
+    {
+      "raw": "Resplay IV",
+      "possible_topic": "identifier, process, or transcription artifact",
+      "state": "UNRESOLVED",
+      "action_taken": "not executed"
+    },
+    {
+      "raw": "authority structure",
+      "possible_topic": "roles, delegation, and decision rights",
+      "state": "UNRESOLVED",
+      "action_taken": "no authority matrix changed"
+    },
+    {
+      "raw": "Arranging registers",
+      "possible_topic": "register organization",
+      "state": "UNRESOLVED",
+      "action_taken": "no register reordered or modified"
+    },
+    {
+      "raw": "Alex H is even",
+      "possible_topic": "unclear statement mentioning a person-like label",
+      "state": "UNRESOLVED",
+      "action_taken": "no identity, fact, or inference recorded beyond the raw dictation"
+    },
+    {
+      "raw": "18-19 1900, C 1600",
+      "possible_topic": "numbers, times, dates, codes, or counts",
+      "state": "UNRESOLVED",
+      "action_taken": "no units, timezone, date, or meaning inferred"
+    },
+    {
+      "raw": "This functioning not be same",
+      "possible_topic": "possible distinction or expected behavior",
+      "state": "UNRESOLVED",
+      "action_taken": "no requirement inferred"
+    }
+  ],
+  "verification": {
+    "raw_text_preserved": true,
+    "identifiers_decoded": false,
+    "license_or_access_changes_made": false,
+    "registers_modified": false,
+    "external_message_sent": false,
+    "owner_consent_established": false,
+    "execution_authorized": false
+  },
+  "next_safe_step": "Obtain a specification or source reference for YMH12 and Resplay IV; identify the exact system/repository, requested access or licensing action, scope, units/timezone for numeric values, and acceptance criteria. Until then keep this intake local and non-executable."
+}

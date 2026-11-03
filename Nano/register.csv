@@ -1,0 +1,15 @@
+id,record,category,status,next_evidence
+E-001,Diktat in zahteve so prejeti v pogovoru,conversation evidence,confirmed-in-conversation,Razjasniti šumne fragmente samo z izvirnim virom
+E-002,IMH 12; ZPV; 5 BF D 633-8 D 8 2100,transcript labels,verbatim-preserved,Kanonical source or owner definition
+E-003,"Prejšnji odgovor trdi, da je komentar #753 objavljen",prior assistant claim,independently-unverified,Exact issue/comment URL or API record
+E-004,GitHub lookup for AtmaOVictu/Atmavictu #753 returned 404,connector result,observed-cause-unknown,Confirm repository URL/access
+E-005,VBL 1.0 release not verified in this workflow,release status,unconfirmed,"Public release URL, tag/commit SHA, artifact and SHA-256"
+E-006,WITH LOVE draft included in package,local artifact,created-in-package,Check downloaded file and hash manifest
+E-007,Message sent or published to everyone,external distribution,not-performed-or-not-confirmed,Direct publication or delivery evidence
+C-001,IMH 12,code,unknown,Canonical definition
+C-002,ZPV,code,unknown,Canonical expansion and source context
+C-003,5 BF D 633-8 D 8 2100,code,unknown,Source image/text and verified transcription
+E-008,Dodatni diktat: No PZ; Gres 1830; integral; 300; 300; 37; Javno N; lokalno telo IMA 12; E spoznana datum; Telo diha; Nova glava 28149-7 B-4-41 F 96,transcript additions,verbatim-preserved / meaning unknown,Source audio or author confirmation
+E-009,"Uporabnik navaja, da je pismo napisano, namenjeno Luki, vsebuje predloge in izraz VIPrsenje",user-reported letter,reported-in-conversation / not inspected or sent,Actual letter text; confirm ambiguous word VIPrsenje
+C-004,No PZ; Gres 1830; 28149-7 B-4-41 F 96; VIPrsenje,unresolved labels/term,unknown,"Original document, source audio, or author definition"
+E-010,Diktat navaja prejemnika pisma kot Luka,recipient mention,mentioned / not independently verified,Actual letter text or verified recipient line

@@ -1,0 +1,127 @@
+{
+  "master_zip": "/mnt/data/VBL-repa-distribution-2026-10-25.zip",
+  "master_zip_bytes": 15742606,
+  "master_zip_sha256": "c4240b9ac8addbca85561a8e0c109a10811ee43529b3b88daf37dabf592480ac",
+  "files_in_staging": 128,
+  "cookbook_patch": {
+    "path": "/mnt/data/VBL-cookbook-repo-patch-2026-10-25.zip",
+    "bytes": 15709145,
+    "sha256": "49a3f24eb4a82d707017b4a18843b425473a841397e6af2830913bfbfe34c61f"
+  },
+  "language_patch": {
+    "path": "/mnt/data/VBL-language-repo-patch-2026-10-25.zip",
+    "bytes": 3518,
+    "sha256": "0424637b0591eba86cee7f569520a3f97659a8a8a05fd611aea3296681a46ff5"
+  },
+  "agents_patch": {
+    "path": "/mnt/data/VBL-agents-cli-repo-patch-2026-10-25.zip",
+    "bytes": 4969,
+    "sha256": "9c4ddcaaa43b67908ea43d24106e866739842381e689432c39b6dc9237f763ca"
+  },
+  "original_v6_archive": {
+    "path": "/mnt/data/vbl_source_materialized/VBL-2.6-remediation-package-v6.zip",
+    "bytes": 15224235,
+    "sha256": "78ef2825e50a5465697a92e3e2b1f72f7d4780d72b262966667e23a448571ea8"
+  },
+  "validation": {
+    "date": "2026-10-25",
+    "package_status": "PASS",
+    "github_push_status": "NOT_PERFORMED",
+    "github_access_note": "Read-only fetch of README.md on main succeeded in all three named repositories. No remote write was performed: local git cannot resolve github.com in this environment, and the prepared local tree was not uploaded as a remote commit/PR.",
+    "remote_read_checks": [
+      {
+        "repository": "AtmaOVictu/cookbook",
+        "ref": "main",
+        "path": "README.md",
+        "blob_sha": "064ef4d5e421e1f4c0578823c295c9df7e035fdd",
+        "status": "READ_CONFIRMED"
+      },
+      {
+        "repository": "AtmaOVictu/Slovenian-Language-Technologies-Overview",
+        "ref": "main",
+        "path": "README.md",
+        "blob_sha": "5863cb7e6d1f323db3bf64dce0b2e20edac2361d",
+        "status": "READ_CONFIRMED"
+      },
+      {
+        "repository": "AtmaOVictu/agents-cli",
+        "ref": "main",
+        "path": "README.md",
+        "blob_sha": "776b4f860bda5bca60ce6c3f644ed1cc193ac087",
+        "status": "READ_CONFIRMED"
+      }
+    ],
+    "source_hashes": {
+      "VERSION.txt": {
+        "bytes": 44865,
+        "sha256": "3026adcb7d30ab577693d6fbe41a8ccf0dc1e20d248fd43ce3d838d6aed2b7aa"
+      },
+      "supplied_player_html": {
+        "bytes": 52319,
+        "sha256": "dc364b905d8337610b17e1237b06c58554a7b2d366a840e702aeb202da416fd9"
+      },
+      "v6_player_html": {
+        "bytes": 160942,
+        "sha256": "5b6799cca4a5c0226256deb143113b9282d0ebdf5821782bdca616c901d833ce"
+      },
+      "embedded_payload": {
+        "bytes": 23712,
+        "lines": 356,
+        "sha256": "178282386f64467e35aa5746b977a4459d399169d86efc6ddde300bcd0ec167d",
+        "old_and_v6_identical": true
+      },
+      "v6_remediation_archive": {
+        "bytes": 15224235,
+        "sha256": "78ef2825e50a5465697a92e3e2b1f72f7d4780d72b262966667e23a448571ea8",
+        "members": 25,
+        "crc": "PASS",
+        "upstream_checksums_passed": 27
+      }
+    },
+    "javascript_syntax_status": "PASS",
+    "validation_commands": [
+      {
+        "command": "/opt/pyvenv/bin/python /mnt/data/VBL-repa-distribution-2026-10-25/verify_vbl_distribution.py",
+        "returncode": 0,
+        "stdout": "{\n  \"status\": \"PASS\",\n  \"checks\": 124,\n  \"failures\": [],\n  \"limits\": [\n    \"Local checksum/payload checks only; does not verify remote Git status, authorship, legal effect, or browser/audio end-to-end behavior.\"\n  ]\n}\n",
+        "stderr": ""
+      },
+      {
+        "command": "/opt/pyvenv/bin/python /mnt/data/VBL-repa-distribution-2026-10-25/repos/cookbook/vbl/implementation/verify_artifacts.py",
+        "returncode": 0,
+        "stdout": "{\n  \"status\": \"PASS\",\n  \"checks\": 69,\n  \"failures\": [],\n  \"scope_note\": \"Pass means only the listed local byte/format checks passed; it does not establish provenance, legal validity, or browser end-to-end behavior.\"\n}\n",
+        "stderr": ""
+      },
+      {
+        "command": "/opt/pyvenv/bin/python -m unittest discover -s /mnt/data/VBL-repa-distribution-2026-10-25/repos/cookbook/vbl/tests -v",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "test_2_6_export_segment_is_exact_prefix_not_declared_canonical (test_vbl_artifacts.TestVBLArtifacts.test_2_6_export_segment_is_exact_prefix_not_declared_canonical) ... ok\ntest_historical_jsonl_files_are_parseable (test_vbl_artifacts.TestVBLArtifacts.test_historical_jsonl_files_are_parseable) ... ok\ntest_supplied_sources_strict_utf8_roundtrip (test_vbl_artifacts.TestVBLArtifacts.test_supplied_sources_strict_utf8_roundtrip) ... ok\ntest_two_html_payloads_are_identical_and_hash_matched (test_vbl_artifacts.TestVBLArtifacts.test_two_html_payloads_are_identical_and_hash_matched) ... ok\ntest_upstream_archive_member_checksums (test_vbl_artifacts.TestVBLArtifacts.test_upstream_archive_member_checksums) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.004s\n\nOK\n"
+      },
+      {
+        "command": "/opt/pyvenv/bin/python -m unittest discover -s /mnt/data/VBL-repa-distribution-2026-10-25/repos/Slovenian-Language-Technologies-Overview/VBL/tests -v",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "test_expected_codepoints (test_utf8_transport.TestUtf8Transport.test_expected_codepoints) ... ok\ntest_fixture_has_sample_letters_without_replacement_character (test_utf8_transport.TestUtf8Transport.test_fixture_has_sample_letters_without_replacement_character) ... ok\ntest_strict_utf8_round_trip (test_utf8_transport.TestUtf8Transport.test_strict_utf8_round_trip) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n"
+      },
+      {
+        "command": "/opt/pyvenv/bin/python -m unittest discover -s /mnt/data/VBL-repa-distribution-2026-10-25/repos/agents-cli/skills/vbl-verification-before-assertion/tests -v",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "test_hash_utf8_roundtrip_pass (test_verify_artifact.TestVerifyArtifactCLI.test_hash_utf8_roundtrip_pass) ... ok\ntest_missing_expected_hash_is_unverified (test_verify_artifact.TestVerifyArtifactCLI.test_missing_expected_hash_is_unverified) ... ok\ntest_wrong_digest_fails (test_verify_artifact.TestVerifyArtifactCLI.test_wrong_digest_fails) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 2.850s\n\nOK\n"
+      },
+      {
+        "command": "/opt/pyvenv/bin/python /mnt/data/VBL-repa-distribution-2026-10-25/repos/Slovenian-Language-Technologies-Overview/VBL/scripts/verify_fixture.py",
+        "returncode": 0,
+        "stdout": "{\n  \"status\": \"PASS\",\n  \"fixture_bytes\": 56,\n  \"fixture_sha256\": \"71d8dc6f275b83dcf77cede6ee31036891e7d2da3a8707cecfcbd61e7ccd68a3\",\n  \"sample_codepoints\": [\n    \"U+010C\",\n    \"U+0160\",\n    \"U+017D\",\n    \"U+0110\",\n    \"U+010D\",\n    \"U+0161\",\n    \"U+017E\",\n    \"U+0111\"\n  ],\n  \"strict_utf8_round_trip\": true,\n  \"fixture_contains_replacement_character\": false\n}\n",
+        "stderr": ""
+      }
+    ],
+    "limits": [
+      "No full browser/audio E2E was run; status remains NOT_VERIFIED.",
+      "No legal analysis or independent author/provenance validation was performed.",
+      "Current VERSION.txt remains a mixed export; extracted segment is NONCANONICAL.",
+      "VBL 2.6 and VBL 10.3.0 are kept separate; no bridge is asserted."
+    ]
+  }
+}

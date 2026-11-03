@@ -1,0 +1,15 @@
+{
+  "status": "PASS_LOCAL_PACKAGE_INTEGRITY",
+  "archive": "VBL-evidence-audit-r3-2026-10-25.zip",
+  "archive_sha256": "36338957b25e15225749084505f1b7ca56680f18e3fd47e24dda9dfab1a59b4a",
+  "archive_size_bytes": 8272,
+  "zip_crc": "PASS",
+  "manifest_entries": 6,
+  "manifest_checks": "PASS",
+  "register_records": 9,
+  "github_comment_verified": false,
+  "external_writes_made": 0,
+  "people_contacted": 0,
+  "current_blocker": "GitHub CLI gh is not installed in the current runtime; no authenticated API verification has occurred.",
+  "scope_note": "This validates the local handover package, not the historical claim about GitHub."
+}

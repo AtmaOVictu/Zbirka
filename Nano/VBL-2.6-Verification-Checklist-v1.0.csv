@@ -1,0 +1,9 @@
+id,control,status,evidence_or_action,limitation
+VBL-001,Source identity and byte preservation,PASS_LOCAL,Measured source bytes/lines/SHA-256; compare with the recorded package metadata.,Does not prove authorship or canonical publication.
+VBL-002,Version-boundary consistency,PASS_LOCAL_PROPOSAL,Framing label 10.1.0; licence header remains Version 2.6; protocol is 1.0.0; branch name is only proposed.,Author approval required before release.
+VBL-003,Declared transformation only,PASS_LOCAL,The derivative is allowed to alter only the first line 10.0.0 → 10.1.0; the remainder must be byte-identical.,Does not establish correctness of the framing label.
+VBL-004,Terms/scope/legal review,UNVERIFIED,"Human review needed for the actual grant, scope, termination, cure, warranty and rights.",No legal opinion performed.
+VBL-005,Unicode integrity,PASS_LOCAL,Strict UTF-8 decode/encode and code-point checks for requested marked characters and VBL symbols.,Browser/font/audio rendering not tested.
+VBL-006,Registers and correction history,PASS_PRESENCE_ONLY,Registers and schemas exist in the package snapshot; register files are empty.,Content completeness and real-world coverage are unverified.
+VBL-007,Independent verification,NOT_PERFORMED,A separate reviewer must provide identity/scope/conflict statement/results.,This assistant is not independent of preparing the artifacts.
+VBL-008,Remote branch/commit/PR,NOT_CREATED,A proposed branch label is included in the evidence record only.,Do not report remote work as completed.

@@ -1,0 +1,11 @@
+{
+  "zip": "VBL-evidence-audit-2026-10-25.zip",
+  "size_bytes": 2743,
+  "sha256": "f21d5c18cad2e364b1b1f61a22e30f206f1c31c5d2fd34e1af04d82ef271ddd2",
+  "zip_crc": "PASS",
+  "files": [
+    "VBL-evidence-audit-2026-10-25/",
+    "VBL-evidence-audit-2026-10-25/README-SL.md",
+    "VBL-evidence-audit-2026-10-25/status.json"
+  ]
+}

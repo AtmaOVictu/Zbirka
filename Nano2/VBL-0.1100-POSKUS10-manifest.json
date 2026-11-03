@@ -1,0 +1,62 @@
+{
+  "artifact": "VBL 0.1100 × 10⁴ / POSKUS 10 — local evidence bridge",
+  "status": "DRAFT_NOT_RELEASED",
+  "created_date": "2026-10-27",
+  "scope_note": "This manifest records local files and checks only. It does not prove publication, authorship, legal validity, independent review, or a verified genealogy between VBL 0.1080 and VBL 0.1100.",
+  "items": [
+    {
+      "file": "licenca-v-zvok-poskus9.html",
+      "bytes": 69878,
+      "sha256": "0c9d3226e402f9e6d3c881e3d99f6853d57a7022ec5bd46e3ecb6ccb10b06d93",
+      "status": "PRESENT_IN_LOCAL_WORKSPACE"
+    },
+    {
+      "file": "licenca-v-zvok-poskus9.mid",
+      "bytes": 34849,
+      "sha256": "3797275c56699c3f723a4def1f03bf1156b39338f0e42e3dddd69cf8677ded20",
+      "status": "PRESENT_IN_LOCAL_WORKSPACE"
+    },
+    {
+      "file": "licenca-v-zvok-poskus9-sva-vec.wav",
+      "bytes": 16776948,
+      "sha256": "2a4ca09572c46e5298d268c31fb3de7d3a4c8d01516901146d98ab587a0a46f1",
+      "status": "PRESENT_IN_LOCAL_WORKSPACE",
+      "duration_seconds": 190.214,
+      "channels": 2,
+      "sample_rate_hz": 22050,
+      "bits_per_sample": 16,
+      "frames": 4194226
+    },
+    {
+      "file": "licenca-v-zvok-poskus9-midi-popravljen.html",
+      "bytes": 69893,
+      "sha256": "c749714bbd422628a97d4f7f0db19c6946a1f080b4ab5455b7953b1ad2961d29",
+      "status": "PRESENT_IN_LOCAL_WORKSPACE"
+    },
+    {
+      "file": "licenca-v-zvok-poskus9-midi-popravljen.mid",
+      "bytes": 32309,
+      "sha256": "777a4190f269c190507754af5e2485677123c62d81c6ff0fae49c4963cc90921",
+      "status": "PRESENT_IN_LOCAL_WORKSPACE",
+      "parser_test": "PASS",
+      "midi_type": 1,
+      "track_count": 7,
+      "ticks_per_beat": 480,
+      "track_names": [
+        "VBL 0.1080 - POSKUS 9",
+        "Slovenian",
+        "English",
+        "German",
+        "Italian",
+        "Croatian",
+        "French"
+      ]
+    }
+  ],
+  "known_gaps": [
+    "No matched POSKUS 8 WAV was present for controlled audio comparison.",
+    "No external playback through speakers was observed.",
+    "The pasted VBL 0.1100 text in the conversation is incomplete at §0.6, so it cannot be reconstructed as a complete canonical license from that paste alone.",
+    "No remote repository commit or independent timestamp proof was verified in this task."
+  ]
+}

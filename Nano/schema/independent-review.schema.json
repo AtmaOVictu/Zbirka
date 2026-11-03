@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/vbl/independent-review.schema.json",
+  "title": "VBL independent release review attestation",
+  "description": "Human attestation; automated checks only compare declared identity strings and hashes.",
+  "type": "object",
+  "required": ["schema_version", "reviewer_id", "executor_id", "decision", "reviewed_at", "scope", "conflict_statement", "findings", "manifest_sha256", "license_sha256", "evidence_uri"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "reviewer_id": {"type": "string", "minLength": 1},
+    "executor_id": {"type": "string", "minLength": 1},
+    "decision": {"enum": ["APPROVED", "CHANGES_REQUESTED", "REJECTED", "NOT_PERFORMED"]},
+    "reviewed_at": {"type": ["string", "null"], "format": "date-time"},
+    "scope": {"type": "string", "minLength": 1},
+    "conflict_statement": {"type": "string", "minLength": 1},
+    "findings": {"type": "array", "items": {"type": "string"}},
+    "manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "license_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "evidence_uri": {"type": "string", "minLength": 1},
+    "signature": {"type": ["string", "null"]}
+  },
+  "additionalProperties": false
+}

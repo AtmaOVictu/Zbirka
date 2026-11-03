@@ -1,0 +1,25 @@
+VBL ATTRIBUTION CORRECTION PACKAGE — TEST RESULTS
+Date: 2026-10-30
+Python: 3.13.5
+
+Syntax check: `python -m py_compile apply_corrections.py test_apply_corrections.py` — PASS
+Patch check: `git apply --check ATTRIBUTION-CORRECTION.patch` on synthetic checkout — PASS
+Patch application: `git apply ATTRIBUTION-CORRECTION.patch` on synthetic checkout — PASS
+Regression suite: `python -m unittest -v test_apply_corrections.py` — PASS (8/8)
+
+test_apply_is_append_only_updates_manifest_and_readmes (test_apply_corrections.AttributionCorrectionTests.test_apply_is_append_only_updates_manifest_and_readmes) ... ok
+test_dry_run_reports_plan_without_writing (test_apply_corrections.AttributionCorrectionTests.test_dry_run_reports_plan_without_writing) ... ok
+test_refuses_actual_license_bytes_changed_even_if_manifest_still_matches_base (test_apply_corrections.AttributionCorrectionTests.test_refuses_actual_license_bytes_changed_even_if_manifest_still_matches_base) ... ok
+test_refuses_actual_padcev_bytes_changed_even_if_manifest_still_matches_base (test_apply_corrections.AttributionCorrectionTests.test_refuses_actual_padcev_bytes_changed_even_if_manifest_still_matches_base) ... ok
+test_refuses_changed_manifest_even_if_version_and_items_are_kept (test_apply_corrections.AttributionCorrectionTests.test_refuses_changed_manifest_even_if_version_and_items_are_kept) ... ok
+test_refuses_changed_register (test_apply_corrections.AttributionCorrectionTests.test_refuses_changed_register) ... ok
+test_refuses_missing_readme_anchor (test_apply_corrections.AttributionCorrectionTests.test_refuses_missing_readme_anchor) ... ok
+test_rolls_back_if_a_replace_fails_midway (test_apply_corrections.AttributionCorrectionTests.test_rolls_back_if_a_replace_fails_midway) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.022s
+
+OK
+
+Scope: local helper fixtures only; this is not repository CI, a production test, independent review, legal review, or remote GitHub validation.
+Remote GitHub branch/PR creation was rejected with HTTP 403; main remains unchanged.

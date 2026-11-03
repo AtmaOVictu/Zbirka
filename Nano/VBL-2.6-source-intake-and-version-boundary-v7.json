@@ -1,0 +1,57 @@
+{
+  "record_type": "SOURCE_INTAKE_AND_VERSION_BOUNDARY",
+  "record_status": "LOCAL_EVIDENCE_RECORD_NOT_RELEASE_AUTHORITY",
+  "created_date": "2026-10-25",
+  "source": {
+    "path_in_prior_distribution": "repos/cookbook/vbl/source-snapshots/user-supplied/VERSION.txt",
+    "local_copy": "source/VERSION-original-10.0.0-export.txt",
+    "bytes": 44865,
+    "lines": 786,
+    "sha256": "3026adcb7d30ab577693d6fbe41a8ccf0dc1e20d248fd43ce3d838d6aed2b7aa",
+    "encoding": "UTF-8, strict decode passed",
+    "first_line": "10.0.0",
+    "embedded_license_header": "VBL — VERIFICATION BEFORE ASSERTION LICENSE; Version 2.6 · October 23, 2026",
+    "status": "OBSERVED_EXPORT; CANONICAL_PUBLICATION_LINEAGE_UNVERIFIED"
+  },
+  "derived_excerpt": {
+    "local_copy": "source/VBL-2.6-export-segment-NONCANONICAL.md",
+    "lines_from_original": [
+      1,
+      261
+    ],
+    "bytes": 16212,
+    "sha256": "e510160d9697dd6c0e13af880cb4704961a00c17d2aad4493007b435e6e8e3a3",
+    "status": "DERIVED_NONCANONICAL",
+    "warning": "Extraction boundary is a convenience, not proof of an official release boundary."
+  },
+  "proposed_framing_derivative": {
+    "local_copy": "proposed/VBL-2.6-frame-10.1.0-DRAFT-NOT-CANONICAL.md",
+    "framing_label": "10.1.0",
+    "license_version": "2.6",
+    "bytes": 44865,
+    "sha256": "832d8ea06ca9f7d2bab62f0b1ea24477aa3d31a251a8256b6334ae2e432254b5",
+    "transformation": "Only the first framing line is changed from 10.0.0 to 10.1.0; all later bytes remain identical.",
+    "status": "PROPOSAL_ONLY_NOT_CANONICAL_NOT_RELEASED",
+    "author_or_rights_holder_approval": "NOT_RECORDED"
+  },
+  "version_boundaries": {
+    "framing_label": "10.1.0 (proposed outer framing label, not the license version)",
+    "license_version": "2.6 (preserved embedded header)",
+    "verification_protocol_version": "1.0.0 (separate procedural document)",
+    "audit_register_generation": "v3 is a proposed local/remote workstream label only; no remote branch was created.",
+    "related_VBL_10_x_drafts": "Remain separate; no replacement, merge, or lineage relation is inferred."
+  },
+  "status_checks": {
+    "source_hash_matches_known_package_metadata": "PASS_LOCAL",
+    "source_is_official_canonical_release": "UNVERIFIED",
+    "frame_label_derivative_byte_diff_is_limited_to_first_line": "PASS_LOCAL",
+    "independent_review": "NOT_PERFORMED",
+    "legal_review": "NOT_PERFORMED",
+    "remote_branch_commit_or_pull_request": "NOT_CREATED"
+  },
+  "limits": [
+    "A local SHA-256 proves identity to the measured bytes only, not authorship, publication, truth, or legal effect.",
+    "A version label at line 1 is treated as a framing label only because that is the requested proposal; this interpretation requires author approval before release.",
+    "The original export contains duplicated/export/navigation material beyond the extracted excerpt. Neither the original nor the derivative is designated the canonical license."
+  ]
+}

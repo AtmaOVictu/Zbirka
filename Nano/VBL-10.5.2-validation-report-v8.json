@@ -1,0 +1,135 @@
+{
+  "report_version": "VBL-10.5.2-validation-report-v8",
+  "date": "2026-10-25",
+  "package_status": "PASS_LOCAL_CHECKS_DRAFT_NOT_RELEASED",
+  "draft_candidate": "VBL 10.5.2 absolute-equality foundation",
+  "draft_status": "DRAFT_NOT_RELEASED_NOT_LEGAL_ADVICE",
+  "source_predecessor": "VBL-10.5.1-DATA-AND-CONSENT-EXPANDED-DRAFT-NOT-RELEASED.md from local library; public release lineage is not verified",
+  "hashes": {
+    "candidate_sha256": "790db5f870b5a6a3cfcf1ace5911b59a75f3385ce855861c432a6b67aed631f6",
+    "slovenian_proposal_sha256": "7a57b14ac5e27edb6988bca01e083a2d42da03457d78d74b64a4901cb83a484d",
+    "validator_sha256": "4f1d5afc7f2dea8f02f6f17465d3f62650e443205eb8ef8f548d604946beeaa3",
+    "valid_fixture_sha256": "90bfe7933b6739dffeec9285752174033499b2fb5fc923cd9ed02090f668151b",
+    "acceptance_matrix_sha256": "f6ae2a3b8470ccb35cd174e83ffe7ef62548d30e8ba9e3fac0c683938f55a786"
+  },
+  "implementation": {
+    "validator_path": "repos/cookbook/vbl/revisions/10.5.2/implementation/validate_dignity_register.py",
+    "acceptance_matrix_cases": 14,
+    "automated_tests": 19,
+    "example_register_records": 3,
+    "example_register_status": "PASS",
+    "verified_controls": [
+      "authority-only claims rejected",
+      "comparability method required",
+      "evidence-access asymmetry requires controller/gap/safeguard",
+      "burden differences require reason",
+      "independent verifier must differ from executor",
+      "first-party self-check cannot claim independent status",
+      "corrections link earlier records and cite registered evidence",
+      "deletion/redaction requires basis and minimal audit note",
+      "restricted external disclosure requires authorization",
+      "appeal unavailability requires reason",
+      "timezone-aware timestamp required",
+      "hash-chain edits and broken links detected"
+    ],
+    "hash_chain_caveat": "Tamper-evident only relative to an independently retained or signed digest; prototype does not provide signatures or a trusted append-only datastore."
+  },
+  "local_validation": {
+    "vbl_artifact_verifier": {
+      "status": "PASS",
+      "checks": 69,
+      "output": "validation-results/vbl_artifacts.txt"
+    },
+    "cookbook_vbl_tests": {
+      "status": "PASS",
+      "tests": 16,
+      "output": "validation-results/cookbook_tests.txt"
+    },
+    "vbl_1052_tests": {
+      "status": "PASS",
+      "tests": 19,
+      "output": "validation-results/foundation_tests.txt"
+    },
+    "language_utf8_tests": {
+      "status": "PASS",
+      "tests": 3,
+      "output": "validation-results/language_tests.txt"
+    },
+    "agents_cli_skill_tests": {
+      "status": "PASS",
+      "tests": 3,
+      "output": "validation-results/agents_cli_tests.txt"
+    },
+    "utf8_fixture": {
+      "status": "PASS",
+      "strict_round_trip": true,
+      "replacement_character": false,
+      "output": "validation-results/utf8_fixture.json"
+    },
+    "example_register": {
+      "status": "PASS",
+      "records": 3,
+      "errors": [],
+      "output": "validation-results/dignity_register_report.json"
+    },
+    "nested_manifests": {
+      "status": "PASS",
+      "entries_by_manifest": {
+        "repos/cookbook/vbl": 115,
+        "repos/Slovenian-Language-Technologies-Overview/VBL": 6,
+        "repos/agents-cli/skills/vbl-verification-before-assertion": 4
+      },
+      "check_count_included_in_distribution_verifier": true
+    },
+    "distribution_checksum_verification": {
+      "status": "PASS",
+      "checks": 291,
+      "checksum_entries": 143,
+      "failures": [],
+      "limits": [
+        "Local checksum/payload checks only; does not verify remote Git status, authorship, legal effect, or browser/audio end-to-end behavior."
+      ]
+    }
+  },
+  "version_series_boundary": "VBL 2.x remediation remains separate and unchanged; 10.5.2 is a draft derived from a local 10.5.1 draft and is not declared a public release.",
+  "remote_write_status": "NOT_PERFORMED",
+  "remote_write_observations": [
+    {
+      "repository": "AtmaOVictu/cookbook",
+      "operation": "create_branch",
+      "status": "FORBIDDEN_403",
+      "detail": "Resource not accessible by integration; no ref created."
+    },
+    {
+      "repository": "AtmaOVictu/Slovenian-Language-Technologies-Overview",
+      "operation": "create_branch",
+      "status": "FORBIDDEN_403",
+      "detail": "Resource not accessible by integration; no ref created."
+    },
+    {
+      "repository": "AtmaOVictu/agents-cli",
+      "operation": "create_branch",
+      "status": "BLOCKED_BEFORE_REMOTE_RESULT",
+      "detail": "Tool call blocked by safety checks; remote status not established."
+    }
+  ],
+  "independent_verifier": "NONE",
+  "legal_review": "NOT_PERFORMED",
+  "production_behavior": "NOT_TESTED",
+  "trusted_append_only_storage": "NOT_PROVIDED",
+  "external_hash_anchor": "NOT_CONFIGURED",
+  "limits": [
+    "Normative wording and local tests do not prove real-world compliance or production behavior.",
+    "No public release, remote branch, commit, or pull request is claimed.",
+    "The English clause is an operational expansion of the supplied Slovenian proposal; controlling language remains undecided.",
+    "This package does not claim that a supernatural recipient was contacted or responded.",
+    "VBL 2.x and VBL 10.x version series remain separate."
+  ],
+  "next_required_steps": [
+    "Independent review by a competent reviewer who did not author or execute these changes.",
+    "Legal review for intended jurisdiction and rights-holder scope.",
+    "Production integration, representative outcome tests, and privacy/security review.",
+    "GitHub connection able to create refs; then a reviewable PR, not a direct-to-main release.",
+    "Select controlling language and release authority before official release."
+  ]
+}

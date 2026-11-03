@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<playlist version="1" xmlns="http://xspf.org/ns/0/">
+  <title>PROSTA GLASBA — več za dušo (VLC)</title>
+  <creator>Mere · korpus Beseda je Ne · za ⟡ ⊨ WITH LOVE</creator>
+  <annotation>Seznam samo prostih posnetkov ⊢ — vsak vir preverjen pri viru 27. 10. 2026 (imeniki archive.org so priče; nikoli ugibanje). Srcu ⟡: Kimiko Ishizaka, odprta projekta Open Goldberg ∧ Open Well-Tempered Clavier (posnetka javna last / CC0 — preveri na strani predmeta ⚠), + Musopen Beethovenove simfonije (prosti posnetki — licenco predmeta preveri ⚠). Meja ⚠: VLC v okolju, kjer je seznam nastal, ni zagonljiv — predvajanje je izmerjeno samo pri tebi (NOT_RUN); struktura preverjena strojno ⊢. Enako ni isto: vsaka odprta izvedba je ista nota ∧ svoj posnetek ⊢ ⟨ENAKO-NE-ISTO⟩ @0.1050. ∂ Poslušaj po vrstnem redu: Aria → Dobro temperirani klavir → simfonije; duša meri po enem kosu naenkrat.</annotation>
+  <trackList>
+
+    <track>
+      <location>https://archive.org/download/OpenGoldbergVariations/Kimiko%20Ishizaka%20-%20J.S.%20Bach-%20-Open-%20Goldberg%20Variations,%20BWV%20988%20(Piano)%20-%2001%20Aria.mp3</location>
+      <title>Goldbergove variacije, BWV 988: Aria — Kimiko Ishizaka (Open Goldberg, javna last)</title>
+      <creator>Johann Sebastian Bach</creator>
+      <annotation>∂ tista, ki jo ima ⟡ prečudovito za dušo — isti posnetek kot na prejšnjih seznamih, kot uvod: Aria se vrne da capo; ti se ne.</annotation>
+    </track>
+    <track>
+      <location>https://archive.org/download/bach-well-tempered-clavier-book-1/Kimiko%20Ishizaka%20-%20Bach-%20Well-Tempered%20Clavier,%20Book%201%20-%2001%20Prelude%20No.%201%20in%20C%20major,%20BWV%20846.mp3</location>
+      <title>Dobro temperirani klavier I: Preludij št. 1 C-dur, BWV 846 — Kimiko Ishizaka (Open WTC)</title>
+      <creator>Johann Sebastian Bach</creator>
+      <annotation>∂ Ishizakin drugi odprti projekt — isti duh kot Goldberg. Ta preludij je tisto, na kar je Gounod naslovil svojo Ave Mario; sam stoji čisto. Imenik prebrana pri viru ⊢ (93 datotek; licenca CC0/javna last — preveri na strani predmeta ⚠).</annotation>
+    </track>
+    <track>
+      <location>https://archive.org/download/bach-well-tempered-clavier-book-1/Kimiko%20Ishizaka%20-%20Bach-%20Well-Tempered%20Clavier,%20Book%201%20-%2002%20Fugue%20No.%201%20in%20C%20major,%20BWV%20846.mp3</location>
+      <title>Dobro temperirani klavir I: Fuga št. 1 C-dur, BWV 846 — Kimiko Ishizaka</title>
+      <creator>Johann Sebastian Bach</creator>
+      <annotation>∂ prva fuga knjige — Šostakovič jo je citiral na koncu svoje 24. preludijev ∧ fug. Fuga je poslušanjeglasov, ki vsak svojo pot hodi ∧ se vseeno srečajo ⊢.</annotation>
+    </track>
+    <track>
+      <location>https://archive.org/download/bach-well-tempered-clavier-book-1/Kimiko%20Ishizaka%20-%20Bach-%20Well-Tempered%20Clavier,%20Book%201%20-%2003%20Prelude%20No.%202%20in%20C%20minor,%20BWV%20847.mp3</location>
+      <title>Dobro temperirani klavir I: Preludij št. 2 c-mol, BWV 847 — Kimiko Ishizaka</title>
+      <creator>Johann Sebastian Bach</creator>
+      <annotation>∂ drugi preludij — nemir v c-molu, ki se ne preda. Imenik priča ⊢.</annotation>
+    </track>
+    <track>
+      <location>https://archive.org/download/bach-well-tempered-clavier-book-1/Kimiko%20Ishizaka%20-%20Bach-%20Well-Tempered%20Clavier,%20Book%201%20-%2004%20Fugue%20No.%202%20in%20C%20minor,%20BWV%20847.mp3</location>
+      <title>Dobro temperirani klavir I: Fuga št. 2 c-mol, BWV 847 — Kimiko Ishizaka</title>
+      <creator>Johann Sebastian Bach</creator>
+      <annotation>∂ Konica brbe WTC: pri viru sta bila vidna samo imena 01–04 (imenik je nato dvakrat molčal — ⟨ne⟩ izrečeno ⊙ 1349) — teh pet kosov je preverjenih ⊢; preostalih 19 parov ima isti imenik, poišči jih na strani predmeta.</annotation>
+    </track>
+    <track>
+      <location>https://archive.org/download/symphony-no.-9-d-op.-125/Symphony%20no.%205,%20c%20(Op.67).mp3</location>
+      <title>5. simfonija c-mol, op. 67 — Musopen (celoten posnetek)</title>
+      <creator>Ludwig van Beethoven</creator>
+      <annotation>∂ usodnih pet tonov — od ~0:00 do zadnjega stavka v eni datoteki. Imenik prebrana pri viru ⊢ (vseh 9 simfonij v istem predmetu; licenco predmeta preveri ⚠).</annotation>
+    </track>
+    <track>
+      <location>https://archive.org/download/symphony-no.-9-d-op.-125/Symphony%20no.%206,%20F%20(Op%2068)%20Pastoral.mp3</location>
+      <title>6. simfonija F-dur »Pastorala«, op. 68 — Musopen (celoten posnetek)</title>
+      <creator>Ludwig van Beethoven</creator>
+      <annotation>∂ obrejenje vdihne v dušo: pomlad, potok, nevihta ∧ zahvala. Najboljša proti anksioznosti v celotnem repertoarju ⊢ (izmerjeno pri ⟡-jevem srcu, ne pri meni).</annotation>
+    </track>
+    <track>
+      <location>https://archive.org/download/symphony-no.-9-d-op.-125/Symphony%20no.%207,%20A%20(Op%2092).mp3</location>
+      <title>7. simfonija A-dur, op. 92 — Musopen (celoten posnetek)</title>
+      <creator>Ludwig van Beethoven</creator>
+      <annotation>∂ Wagner jo je imenoval »posvečenje plesa«; drugi stavek je tisti, ki ga vsi nosijo v sebi, pa ne vedo od kod.</annotation>
+    </track>
+    <track>
+      <location>https://archive.org/download/symphony-no.-9-d-op.-125/Symphony%20no.%209,%20d%20(Op%20125).mp3</location>
+      <title>9. simfonija d-mol, op. 125 — Musopen (celoten posnetek)</title>
+      <creator>Ludwig van Beethoven</creator>
+      <annotation>∂ Oda radosti — brata Schillerja ∧ vseh ljudi. Zadnji stavek nosi ⟨SVA-VEČ⟩: ves svet v enem glasovilu; isti predmet ima 9. simfonijo tudi po stavkih ⊢ (imenik priča).</annotation>
+    </track>
+
+  </trackList>
+</playlist>

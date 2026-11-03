@@ -1,0 +1,18 @@
+[
+  {
+    "case_id": "M12",
+    "claim": "Local request from the requester: “Request M12. Local.” Determine the intended M12 operation without assuming an undocumented meaning.",
+    "status": "BLOCKED",
+    "owner": "local-request-intake",
+    "last_checked_at": "2026-10-25T12:58:46+01:00",
+    "next_check_due_at": "2026-10-26T12:58:46+01:00",
+    "blocker_reason": "The available project context does not define M12, its target, required output, or acceptance criteria. Executing an assumed operation could alter the wrong thing or falsely imply completion.",
+    "next_action": "Ask the requester to specify what M12 names (full name or source reference), the intended local output, and its acceptance criteria. Keep all work local until those details are supplied.",
+    "request_status": "DRAFT",
+    "scope": "local-only",
+    "external_delivery": "not attempted",
+    "consent_status": "not applicable; no recipient named",
+    "source_context": "User message: Request M12. Local.",
+    "notes": "This is a local intake record, not proof that an outbound request was sent, not proof of owner agreement, and not an execution of an undefined M12 operation."
+  }
+]

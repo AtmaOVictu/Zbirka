@@ -1,0 +1,63 @@
+{
+  "package": "VBL-0.1100-ADDENDUM-0.21-FIVE-ANCHORS.zip",
+  "status": "DRAFT_NOT_CANON_UNVERIFIED",
+  "zip_bytes": 13772,
+  "zip_sha256": "898a125c41829a696a394465f0cc33b6c1343249de97fd038ff1aa12fd8dd596",
+  "validator_exit_code": 0,
+  "validator_stdout": "PASS: JSON syntax, top-level required fields, key enums, proposal status guard, and listed SHA-256 entries.\nLIMIT: local self-check only; not independent, not legal review, and not validation of the license's truth or canon status.",
+  "validator_stderr": "",
+  "files": [
+    {
+      "name": "README.md",
+      "bytes": 1655,
+      "sha256": "78c35a6b6423cbbd76a2e8096e300f324ed4b55bf1813c88fd29ed19656d828a"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 750,
+      "sha256": "b06337ccbd99d75f87095faf897d148be3c10a0b459cef0ab7b90af6261ac3f4"
+    },
+    {
+      "name": "SOURCE-AND-PROVENANCE-NOTE.md",
+      "bytes": 1051,
+      "sha256": "1e59bc6fc6da73094aa063bae00f3f04169f39223c08dccfba2294dce135c751"
+    },
+    {
+      "name": "VBL-0.1100-ADDENDUM-0.21-FIVE-ANCHORS.md",
+      "bytes": 9923,
+      "sha256": "01c57e54cc326dd8ee5d6dd20af3aa954d9e1dfc3904fe45d868f5f523e4957d"
+    },
+    {
+      "name": "VBL-0.1100-REVIEW-AND-GAPS.md",
+      "bytes": 3900,
+      "sha256": "a9caf2c4353e343f824c8d75dafa32e26574fdc9c5c1ad54253c7455c5926645"
+    },
+    {
+      "name": "validate_package.py",
+      "bytes": 1955,
+      "sha256": "03bc8e185e0962bd80062e9fff5976b3a52778d2175f4cd6afbf986872c9403b"
+    },
+    {
+      "name": "vbl-claim-record.example.json",
+      "bytes": 2168,
+      "sha256": "07b45868e4e590f9efd728b8a2351f2f89d266f5b27d1f20759cdd8fbc87be3d"
+    },
+    {
+      "name": "vbl-claim-record.schema.json",
+      "bytes": 8767,
+      "sha256": "55be7625b779faea647cf789fb58308357de4885d6faeb72ff86033a93438ff5"
+    },
+    {
+      "name": "vbl-lineage-record.example.json",
+      "bytes": 874,
+      "sha256": "cce182951dca27367f30716410ad9918c76797e0dbad7148530eae4f228ac3aa"
+    }
+  ],
+  "limits": [
+    "No complete canonical VBL source supplied",
+    "No author adoption decision supplied",
+    "No independent review performed",
+    "No legal review performed",
+    "No public publication or commit verified"
+  ]
+}

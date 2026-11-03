@@ -1,0 +1,19 @@
+{
+  "record_type": "VBL_VERIFICATION_RECORD",
+  "record_version": "1",
+  "claim": "",
+  "objects_compared": [],
+  "relation": "",
+  "scope": "",
+  "observed_at_local": null,
+  "observed_at_utc_conversion": null,
+  "clock_source": "NOT_RECORDED",
+  "clock_status": "UNVERIFIED",
+  "evidence": [],
+  "method": "",
+  "result": "NOT_RUN",
+  "independent_review": "PENDING",
+  "limitations": [],
+  "canonicality": "UNVERIFIED",
+  "legal_status": "UNVERIFIED"
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0.0",
+  "reviewer_id": "PENDING_INDEPENDENT_REVIEWER",
+  "executor_id": "REPLACE_WITH_EXECUTOR_ID",
+  "decision": "NOT_PERFORMED",
+  "reviewed_at": null,
+  "scope": "PENDING: define artifacts, methods, limitations, and independent checks performed.",
+  "conflict_statement": "PENDING: disclose authorship, financial, employment, and other relevant conflicts.",
+  "findings": [],
+  "manifest_sha256": "REPLACE_WITH_64_CHARACTER_SHA256",
+  "license_sha256": "REPLACE_WITH_64_CHARACTER_SHA256",
+  "evidence_uri": "PENDING: stable public or independently retained evidence reference.",
+  "signature": null
+}

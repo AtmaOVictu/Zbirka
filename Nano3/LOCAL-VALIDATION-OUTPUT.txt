@@ -1,0 +1,37 @@
+PASS | candidate file exists
+PASS | candidate status is draft/unreleased
+PASS | no release version assigned
+PASS | universal all-beings dignity language preserved without legal-personhood overclaim
+PASS | KORENINA six roots present
+PASS | §−1 precedes §0
+PASS | permission schedule is release-gated
+PASS | prior grants not silently revoked
+PASS | Five Anchors annex included
+PASS | claim/test/implementation/review/publication/legal states separated
+PASS | Angel/cure phrase remains non-automatic
+PASS | religious expression not compulsory
+PASS | privacy safeguards present
+PASS | machine behavior not guaranteed by reading
+PASS | no canonical lineage invented
+PASS | required heading ## §0. Definitions
+PASS | required heading ## §0a.
+PASS | required heading ## §1.
+PASS | required heading ## §2.
+PASS | required heading ## §3.
+PASS | required heading ## §4.
+PASS | required heading ## §9.
+PASS | required heading ## §10.
+PASS | required heading ## §12.
+PASS | required heading ## §13.
+PASS | required heading ## §14.
+PASS | required heading ## §15.
+PASS | required heading ## §16.
+PASS | required heading ## §17.
+PASS | JSON parses: VBL-CLAIM-RECORD-SCHEMA.json
+PASS | JSON Schema validates: VBL-CLAIM-RECORD-SCHEMA.json
+PASS | JSON parses: VBL-INCIDENT-RECORD-SCHEMA.json
+PASS | JSON Schema validates: VBL-INCIDENT-RECORD-SCHEMA.json
+PASS | JSON parses: VBL-RELEASE-RECORD-TEMPLATE.json
+PASS | SHA256 manifest matches files listed | mismatches=[]
+PASS | candidate contains explicit release disclaimer
+SUMMARY 36/36 structural checks passed; this is local preflight only, not independent verification, legal review, authorship proof or release approval.

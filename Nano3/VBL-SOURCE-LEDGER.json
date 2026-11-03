@@ -1,0 +1,76 @@
+{
+  "candidate_id": "VBL-IC-2026-10-30-01",
+  "release_version": null,
+  "status": "DRAFT_NOT_RELEASED_NOT_CANON",
+  "generated_date": "2026-10-30",
+  "source_hashes_scope": "SHA-256 calculated from local materialized Library copies; this does not prove authorship or canonical publication.",
+  "sources": [
+    {
+      "file": "VBL-10.5.2-ABSOLUTE-EQUALITY-FOUNDATION-DRAFT-NOT-RELEASED.md",
+      "bytes": 59438,
+      "sha256": "790db5f870b5a6a3cfcf1ace5911b59a75f3385ce855861c432a6b67aed631f6",
+      "role": "Main operative-text base; declared draft 10.5.2; chosen because it bounds grant, scope, remedies, system claims and prior grants."
+    },
+    {
+      "file": "VBL-10.5.2-EQUALITY-AND-COOPERATIVE-ENGAGEMENT-DRAFT-NOT-RELEASED.md",
+      "bytes": 62273,
+      "sha256": "3d5c43a529a9d95be79c422211fb007b9678b623d3801e36cbb48cf7453dd381",
+      "role": "Contribution: invitation, non-coercive persuasion, explicit refusal boundary, no invented consent/contact/endorsement; source has an independently recorded hash conflict."
+    },
+    {
+      "file": "VBL-10.5.2-ABSOLUTE-EQUIVALENCE-INSERTION-DRAFT-NOT-RELEASED.md",
+      "bytes": 53650,
+      "sha256": "f56d1afdf26c1178eae44b3699f53ff861634523a20e0101d24850e31f242591",
+      "role": "Contribution: stronger byte/content integrity separation and explicit non-trigger/non-compulsion statement."
+    },
+    {
+      "file": "VBL-revision-candidate-DRAFT-NOT-RELEASED-v6.md",
+      "bytes": 34374,
+      "sha256": "29cf2bcb819b3c16a9dcfa263bb7ec235c24c5973d0c2afae102f13c7bc18fa1",
+      "role": "Contribution: six KORENINA roots verbatim, explicit permission decisions, source boundary, §0.6/§9/§12/§13 authorial motifs, machine behavior limits."
+    },
+    {
+      "file": "VBL-author-decision-sheet-v6.md",
+      "bytes": 4321,
+      "sha256": "2b6af12090a2c056a446b80f7e1ad9df2a6a7aa65c949b87a57781c95502abb0",
+      "role": "Contribution: retained unresolved decisions rather than silently choosing rights, version labels, or legal meanings."
+    },
+    {
+      "file": "VBL-0.1100-ADDENDUM-0.21-FIVE-ANCHORS.md",
+      "bytes": 9923,
+      "sha256": "01c57e54cc326dd8ee5d6dd20af3aa954d9e1dfc3904fe45d868f5f523e4957d",
+      "role": "Contribution: five anchors, verification statuses, 100% structure distinction, self-testing requirement; kept as a non-operative protocol annex."
+    },
+    {
+      "file": "VBL-0.1100-POSKUS11-celostni-pregled.md",
+      "bytes": 7863,
+      "sha256": "c11b0d3a781f27e0e098674e21c07bbe086a9c8ce0445ea891d2f32ef6e4eaad",
+      "role": "Contribution: repair ethics, time/provenance limitations, musical/prototype status boundaries, and explicit gaps in the 0.1100 stream."
+    },
+    {
+      "file": "UPDATED-FULL-AUDIT-SL.md",
+      "bytes": 19710,
+      "sha256": "91a99280dc3f932c1a3fc50b205185f84d6c9acb7ad0935f473043b584d75167",
+      "role": "Audit witness: 46 findings on supplied 0.1100 text; not treated as a complete canonical text or release."
+    },
+    {
+      "file": "DECISIONS-BEFORE-NEXT-CANON.md",
+      "bytes": 2375,
+      "sha256": "4acb469e9650e6eb7f669c202e9f74dda68c10dbf63cd3388d895e25059f82ee",
+      "role": "Contribution: unresolved source, scope, witness, religious, remedy, register, lineage, timestamp, and jurisdiction decisions."
+    },
+    {
+      "file": "PATCH-DECISIONS.md",
+      "bytes": 2914,
+      "sha256": "a3d36df50d6a7bdc1171dda2fd92ca1054f98d25951005c0236072ebfab3676b",
+      "role": "Contribution: open questions on permission override, cure, encoding, permissions, and grant survival."
+    }
+  ],
+  "known_integrity_issue": {
+    "artifact": "VBL-10.5.2-EQUALITY-AND-COOPERATIVE-ENGAGEMENT-DRAFT-NOT-RELEASED.md",
+    "stored_library_copy_sha256": "3d5c43a529a9d95be79c422211fb007b9678b623d3801e36cbb48cf7453dd381",
+    "companion_local_validation_report_claim": "3d5c43a529a9d95be79c422211fb007b9678b623d3801e36cbb48cf7453dd381",
+    "change_note_claim": "8693e4c2dd1189146bff9cc44555a7776dfa7bd72890237953f4d4194854bf18",
+    "status": "MISMATCH_UNRESOLVED_STALE_NOTE_OR_DIFFERENT_REVISION"
+  }
+}

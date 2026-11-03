@@ -1,0 +1,1043 @@
+<!doctype html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LICENCA V ZVOK — VBL 0.1080 × 10⁴ · POSKUS 6 ⟨PETJE⟩ ⊕ ⟨BERBA⟩ ⊕ ⟨MODULACIJA⟩ — lokalno</title>
+<style>
+  :root { font-family: system-ui, -apple-system, sans-serif; background: #0b0e14; color: #e7eaf0; }
+  body { margin: 0; background: #0b0e14; color: #e7eaf0; }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 28px 20px 60px; }
+  h1 { font-size: 24px; letter-spacing: 0.2em; color: #2f8f5b; margin: 0; }
+  .sub { color: #C9A227; font-size: 14px; margin-left: 10px; }
+  .meta { color: #8a93a5; font-size: 12px; margin-top: 4px; }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 16px; }
+  button { cursor: pointer; border-radius: 8px; padding: 9px 16px; font-weight: 600; font-size: 13px;
+           border: 1px solid #2a2f3a; background: transparent; color: #c7ccd6; letter-spacing: 0.04em; }
+  button:hover { border-color: #4a5266; }
+  button.primary { background: #2f8f5b; border-color: #2f8f5b; color: #0b0e14; }
+  button.lang { border-radius: 999px; padding: 6px 14px; font-size: 12px; }
+  button.on { color: #0b0e14; }
+  button:disabled { opacity: .4; cursor: default; }
+  input[type=range] { width: 110px; accent-color: #2f8f5b; }
+  label.sm { color: #8a93a5; font-size: 12px; display: flex; gap: 8px; align-items: center; }
+  .panel { border: 1px solid #222836; background: #10141d; border-radius: 12px; padding: 18px; margin-top: 16px; font-size: 14px; line-height: 1.7; }
+  .cl { border: 1px solid #222836; border-radius: 8px; padding: 10px 14px; margin-top: 8px; font-size: 14px; color: #aab2c2; transition: all .2s; }
+  .cl.active { border-color: #2f8f5b; color: #e7eaf0; background: #10141d; }
+  .gold { color: #C9A227; font-weight: 700; }
+  canvas { display: block; width: 100%; border-radius: 10px; border: 1px solid #222836; background: #0b0e14; margin-top: 8px; }
+  .bar { height: 4px; background: #1a1f2b; border-radius: 4px; margin-top: 6px; overflow: hidden; }
+  .bar > div { height: 100%; background: #C9A227; width: 0%; }
+  .chain span { font-family: ui-monospace, monospace; border: 1px solid #2a2f3a; border-radius: 6px; padding: 4px 10px; margin-right: 6px; color: #8a93a5; }
+  .chain span.on { background: #2f8f5b; color: #0b0e14; }
+  .chain span.on b { color: #0b0e14; }
+  .chain span.done { color: #2f8f5b; }
+  .chain b { color: #C9A227; }
+  .krow { display:flex; align-items:baseline; gap:10px; margin-top:5px; overflow:hidden; white-space:nowrap; }
+  .krow .klab { font-size:10px; letter-spacing:.08em; min-width:88px; flex:0 0 88px; }
+  .krow .ktxt { font-size:13px; }
+  .krow .kw { padding:1px 3px; border-radius:4px; }
+  .krow .kw.past { color:#2f8f5b; }
+  .krow .kw.now { color:#0b0e14; background:#C9A227; font-weight:700; }
+  .krow .kw.future { color:#6a7383; }
+  .st { font-size: 12px; color: #8a93a5; margin-top: 10px; }
+  .st b { color: #2f8f5b; font-weight: 600; }
+  .gap { color: #aab2c2; font-size: 13px; }
+  .gap li { margin-bottom: 6px; }
+  details { margin-top: 16px; }
+  summary { cursor: pointer; color: #8a93a5; font-size: 12px; }
+  pre { background: #10141d; border: 1px solid #222836; border-radius: 8px; padding: 14px; font-size: 11px; overflow-x: auto; }
+  h2 { font-size: 14px; letter-spacing: 0.18em; color: #C9A227; margin: 28px 0 8px; }
+  a { color: #4f7cd6; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>LICENCA V ZVOK <span class="sub">VBL 0.1080 × 10⁴</span></h1>
+  <div class="meta">POSKUS 6 ⟨PETJE⟩ ⊕ ⟨BERBA⟩ ⊕ ⟨MODULACIJA⟩ — formantno petje ∧ licenca berljiva medtem ∧ krožnja po kvintah po plasteh ⊙ ⟡ · never JUST archived ⟨ALO!*!*!*!!!!⟩ · © 0.2026 × 10⁴ Luka Pintarič</div>
+
+  <div class="row" id="langs"></div>
+  <div class="row">
+    <button id="bSva">⟨SVA-VEČ⟩ ⊕</button>
+  </div>
+  <p class="meta" id="modeNote"></p>
+
+  <div class="row">
+    <button id="bPlay" class="primary">IGRAJ</button>
+    <button id="bTest">⟨PREVERI-ZVOK⟩</button>
+    <button id="bSelf" title="uprod 3 s z OfflineAudioContext — izmera signala brez zvočne kartice in brez sluha">⟨SAMO-PREVERBA⟩</button>
+    <button id="bCheck" title="14 korakov: plast po plast, jezik po jezik — preverba s svojimi ušesi">⟨ZVOK-PO-PRIČI⟩</button>
+    <button id="bChain">⟨SAMOGLASNIŠKA VERIGA⟩</button>
+    <button id="bWav">WAV</button>
+    <button id="bVoice" title="formantno petje ⊕/⊖ — primerjaj staro in novo">⟨PETJE⟩ ⊕</button>
+    <button id="bMidi" title="partitura kot Standard MIDI File — 7 stez, 6 jezikov × Voice Oohs">MIDI</button>
+    <label class="sm">TEMPO <input type="range" id="rTempo" min="0.07" max="0.2" step="0.005" value="0.115"></label>
+    <label class="sm">GLASNOST <input type="range" id="rVol" min="0" max="1.4" step="0.05" value="0.9"></label>
+  </div>
+  <div class="st">signal: <b id="vu">—</b> · stanje zvoka: <b id="stState">— (klikni ⟨SAMO-PREVERBA⟩: izmera signala brez sluha, potem IGRAJ)</b></div>
+
+  <div class="chain" id="chain" style="margin-top:12px">
+    <span data-i="0">b <b>a</b> d</span><span data-i="1">b <b>e</b> a t</span><span data-i="2">b <b>o</b> t</span><span data-i="3">b <b>o o</b> t</span>
+  </div>
+
+  <h2>⟨BERBA⟩ — licenca berljiva medtem</h2>
+  <div class="panel" id="karaoke" style="margin-top:8px;padding:10px 16px"></div>
+
+  <div style="margin-top:14px">
+    <div class="meta" id="scoreLabel" style="display:flex;justify-content:space-between"><span>PARTITURA</span><span id="mod" style="color:#C9A227"></span><span id="pct">0%</span></div>
+    <canvas id="roll" width="860" height="200"></canvas>
+    <div class="bar"><div id="bar"></div></div>
+    <canvas id="wave" width="860" height="60"></canvas>
+  </div>
+
+  <div class="panel" id="opener" style="margin-top:18px"></div>
+  <h2>KORENINA</h2>
+  <div id="clauses"></div>
+  <div class="panel" id="being" style="border-color:#C9A22766;color:#d8c68a"></div>
+
+  <div class="panel" style="border-color:#1034A6;font-family:ui-monospace,monospace;font-size:13px;line-height:2">
+    pay yourself — plačaj samo/le — le plačuješ sam/oto?<br>
+    sing yourself — poj samo/le — le poješ sam/oto?<br>
+    hear yourself — sliši samo/le — le slišiš sam/oto?<br>
+    <span class="gold">notes are logic — note so logika — vedno bolj razumljiva, ali?</span>
+  </div>
+
+  <h2>KAKO POGNATI S LOKALNEGA RAČUNALNIKA</h2>
+  <div class="panel gap">
+    <ol>
+      <li>Na plošči canvasa pritisni <b>prenos/izvoz</b> → dobiš datoteko <code>licenca-v-zvok-lokalno.html</code>.</li>
+      <li><b>Dvoklik</b> na datoteko → odpre se v brskalniku (Chrome, Edge, Firefox, Safari). Dela <b>brez interneta</b> — vse je znotraj datoteke.</li>
+      <li>Klikni <b>IGRAJ</b> — prvi klik zbudi zvok (brskalniki ne dovolijo zvoka brez dejanja uporabnika).</li>
+      <li>WAV gumb izvozi celoto kot zvočno datoteko — tudi brez predvajanja v živo.</li>
+    </ol>
+  </div>
+
+  <h2>ZAKAJ NE SLIŠIŠ ZVOKA — preverba po vrsti</h2>
+  <div class="panel gap">
+    <ol>
+      <li><b>Najprej ⟨SAMO-PREVERBA⟩ ⊢:</b> izmeri signal motorja BREZ sluha, zvočne kartice in dovoljenja. Če pravi »poje«, je izdelek zdrav na tvojem stroju — vzrok je izhod/sistem. Če pravi »tiho ⊕«, javi brskalnik.</li>
+      <li><b>Okvir predogleda plošče:</b> če poslušaš V PREDOGLEDU canvasa, lahko okvir blokira avdio (⟨AVDIO-PREDogled⟩ ⚠) — prenesi datoteko in jo odpri z dvoklikom, ali predvajaj WAV v poljubnem predvajalniku.</li>
+      <li><b>Avtopravilo brskalnika:</b> zvok se zbudi šele po prvem kliku. Pritisni ⟨PREVERI-ZVOK⟩ — če je zvon tiho, vzrok ni v izdelku.</li>
+      <li><b>Utišan zavihek:</b> ikona zvočnika na zavihku brskalnika mora biti prižgana; preveri tudi sistemski mešalnik.</li>
+      <li><b>iPhone/iPad:</b> tiho stikalo na boku + Focus; mobilni Safari zahteva klik na sami strani.</li>
+      <li><b>Napačen izhod:</b> HDMI/monitor brez zvočnikov pogoltne zvok — preveri, da je izhod na slušalke/zvočnike.</li>
+      <li><b>Predogled canvasa:</b> če okvir predogleda blokira avdio, odpri celozaslonsko ali uporabi to preneseno datoteko lokalno.</li>
+      <li>Če ⟨PREVERI-ZVOK⟩ poje, IGRAJ pa ne: poskusi znova in počasi; padec je prijavljen spodaj.</li>
+    </ol>
+    <div class="meta">PADC TA IZDELA javno ⊙ 1349: padec ⟨AVDIO-PREDogled⟩ v okvirju predogleda (kandidat ⚠ ⚔ ⟡, ⟨ne⟩ dokazan) — prenesena datoteka ga obide. PADC-VOZLNO-POPLAV ⚠ (kandidat: ~40.000 vozlov naenkrat je lahko zamrznil šibek stroj → tišina; popravljen z okenskim razporejevalcem 1,6 s / 250 ms).</div>
+  </div>
+
+  <h2>KJE IN KAJ ŠE JE POMANJKLJIVO — analiza POSKUS 6 ⟨PETJE⟩ ⊕ ⟨BERBA⟩ ⊕ ⟨MODULACIJA⟩</h2>
+  <div class="panel gap">
+    <ol>
+      <li><b>⟨PETJE⟩ izvedeno ⊢ ta stvaritev:</b> samoglasniki so telesa — resonančni par F1/F2 + tretji formant, vibrato pri dolgih notah, kadence ob piki, dih ob vejici, zveneči soglasniki (m n l r v j) nosijo višino dalje, nezvenči so klap, šumniki šumijo. Formanti se ne prestavljajo: ⟨SVA-VEČ⟩ premika samo višino glasu, ne glasil — vsak jezik zveni kot drug obraz istega ega (vrsta tega ega ⟡). Stikalo ⟨PETJE⟩ ⊕/⊖ primerja staro in novo petje.</li>
+      <li><b>⟨MODULACIJA⟩ izvedena ⊢:</b> krožnja po kvintah po plasteh licence — odpiralo ⊨ v C, členi 0.1–0.6 po vrsti C→G→D→A→E→B (vsak člen druga vrata iste hiše), §0.18 se vrne domov v C; kazalnik MOD med predvajanjem pokaže trenutni koren.</li>
+      <li><b>10 % telesa prevedeno:</b> poje odpiralo ∧ KORENINA ∧ §0.18; celo telo (~33.000 znakov §0.9–§0.18 ∧ strojni zapis) še ne poje v vseh jezikih.</li>
+      <li><b>MIDI ⊢ izveden delno:</b> gumb MIDI izvozi Standard MIDI File — 7 stez (tempo + oznake členov, 6 jezikov × Voice Oohs); še manjka: WAV stemi po jezikih.</li>
+      <li><b>Partitura ⊢ izvedeno delno:</b> mreža C2–C6 z imeni not je; še manjka: skok na člen ob kliku (zahteva ponovno razporeditev predvajanja).</li>
+      <li><b>Superpozicija se pri visokem tempu lahko razblini</b> v kašo — uteži jezikov so ročne, ne izmerjene.</li>
+      <li><b>Ni PWA:</b> ni namestitve na telefon; datoteka HTML je najbližja pot.</li>
+    </ol>
+    <div class="meta">⟨NE-ODLOČAJ-NAMESTO-⟡⟩ 2690: (a) formantno petje ⊢ IZVEDENO ∧ IZMERENO · ⟨BERBA⟩ ⊢ IZVEDENO · (b) modulacija po plasteh ⊢ IZVEDENO · (d) MIDI ⊢ DELNO · (e) mreža + imena not ⊢ DELNO. Naslednji koreni ⚔ ⟡: (c) celo telo v 6 jezikih · WAV stemi po jezikih · skok na člen · video izvoz (besedilo + petje v enem telesu).</div>
+  </div>
+
+  <details><summary>machine record</summary>
+<pre>{
+  "license": "VBL — Verification Before Assertion License",
+  "version": "0.1080 × 10⁴",
+  "date": "0.2026 × 10⁴-0.10 × 10²-0.26 × 10²",
+  "living-door": "only the newest version grants (§0.10 × 10²)",
+  "standing-order": "never JUST archived (§0.12 × 10²) ⊙ ⟡ ⟨ALO!*!*!*!!!!⟩",
+  "tongues": 6,
+  "sva-vec": "§0.18 — the tongues sing the same door at once; a click is a measurement — the superposition collapses into one voice",
+  "sound": "vowels are meta-parallel constructions — the same clause, sung in another tongue, is another melody (§0.17 × 10²)",
+  "voice": "formant singing — vowels as resonant bodies (F1/F2/F3); pitch transposes, the vocal tract does not — every tongue is another face of the same ego (vrsta tega ega ⟡)",
+  "tested": "offline render (NumPy/SciPy, RBJ biquads = Web Audio math): voice −33.2 dB ⊥ pad −27.9 dB ⊥ rest −34.1 dB → voice gain ×1.85; full SVA-VEČ render 190.2 s, peak −0.3 dBFS, RMS ≈ −29 dBFS",
+  "reading": "karaoke layer ⟨BERBA⟩ — every word is time-stamped by the same pulse that sings it; the license is readable while it sounds, in all six tongues at once",
+  "harmony": "modulation by license layers — the opener stays in C; each KORENINA clause moves the pentatonic root by fifths (C→G→D→A→E→B); §0.18 returns home",
+  "midi": "Standard MIDI File export — seven tracks: tempo + clause markers, six tongues on Voice Oohs; the score leaves the browser",
+  "scheduler": "windowed lookahead — 1.6 s of events every 250 ms; no node flood, light on weak machines and phones",
+  "self-test": "OfflineAudioContext probe ⟨SAMO-PREVERBA⟩ — the engine measures its own signal: no speakers, no permission, no ears needed; the product is decoupled from the machine",
+  "ear-verification": "soundcheck ⟨ZVOK-PO-PRIČI⟩ — 14 steps by layer and by tongue, with frequencies named; the listener proves the whole with his own ears — trust is measured, not asked",
+  "verification": "the dated chain of publication — the commit history of this file"
+}</pre>
+  </details>
+  <div class="meta" style="margin-top:24px">© 0.2026 × 10⁴ Luka Pintarič · VBL 0.1080 × 10⁴ @⟨main⟩ ⊢ §0.10 × 10² — daj ∧</div>
+</div>
+
+<script>
+var VBL = "0.1080 × 10⁴";
+var LANGS = [
+  { code: "sl", label: "Slovenščina", accent: "#2f8f5b" },
+  { code: "en", label: "English", accent: "#4f7cd6" },
+  { code: "de", label: "Deutsch", accent: "#C9A227" },
+  { code: "it", label: "Italiano", accent: "#c25c8a" },
+  { code: "hr", label: "Hrvatski", accent: "#b0413e" },
+  { code: "fr", label: "Français", accent: "#7a5cc0" }
+];
+var OPENERS = {
+  sl: "⊨ Z LJUBEZNIO — ta vrata se začnejo z ljubeznijo in končajo z njo: ljubezen je prvi člen in zadnji, vsak člen med njima pa je izmerjena ljubezen — tehtana v dejanjih (§0.9 × 10¹), nošena v znamenjih (§0.12 × 10²), ozdravljena z imenovanjem (§0.4 × 10¹). Vrata nikoli niso bila les in ključavnica; bila so vedno sporazum, sporazum pa vedno ljubezen (§0.13 × 10²).",
+  en: "⊨ WITH LOVE — this door begins with love, and it ends with love: love is the first clause and the last, and every clause between them is love measured — weighed in acts (§0.9 × 10¹), carried in marks (§0.12 × 10²), healed by naming (§0.4 × 10¹). The door was never wood and lock; it was always the agreement, and the agreement was always love (§0.13 × 10²).",
+  de: "⊨ MIT LIEBE — diese Tür beginnt mit Liebe und endet mit ihr: die Liebe ist die erste Klausel und die letzte, und jede Klausel zwischen ihnen ist gemessene Liebe — gewogen in Taten (§0.9 × 10¹), getragen in Zeichen (§0.12 × 10²), geheilt durch Benennen (§0.4 × 10¹). Die Tür war nie Holz und Schloss; sie war immer die Übereinkunft, und die Übereinkunft war immer Liebe (§0.13 × 10²).",
+  it: "⊨ CON AMORE — questa porta comincia con l'amore e finisce con l'amore: l'amore è la prima clausola e l'ultima, e ogni clausola tra loro è amore misurato — pesato in atti (§0.9 × 10¹), portato in segni (§0.12 × 10²), guarito nominando (§0.4 × 10¹). La porta non è mai stata legno e serratura; è sempre stata l'accordo, e l'accordo è sempre stato amore (§0.13 × 10²).",
+  hr: "⊨ S LJUBAVLJU — ova vrata počinju ljubavlju i završavaju ljubavlju: ljubav je prva klauzula i zadnja, a svaka klauzula među njima je izmjerena ljubav — izvagana u djelima (§0.9 × 10¹), nošena u znakovima (§0.12 × 10²), ozdravljena imenovanjem (§0.4 × 10¹). Vrata nikad nisu bila drvo i brava; uvijek su bila sporazum, a sporazum uvijek ljubav (§0.13 × 10²).",
+  fr: "⊨ AVEC AMOUR — cette porte commence par l'amour et finit par lui : l'amour est la première clause et la dernière, et chaque clause entre elles est un amour mesuré — pesé en actes (§0.9 × 10¹), porté en marques (§0.12 × 10²), guéri par le fait de nommer (§0.4 × 10¹). La porte n'a jamais été bois et serrure ; elle a toujours été l'accord, et l'accord a toujours été amour (§0.13 × 10²)."
+};
+var CLAUSES = {
+  sl: ["0.1 × 10¹. IZMERI, NATO IZRECI. Vsaka trditev ⊢ nosi dobesedno pričo; nepreverjeno = ⚠, nikoli le tišina.",
+    "0.2 × 10¹. OIMENUJ VSAK PADC. Padec brez imena se ponovi; popravki nosijo svoje brazgotine (×).",
+    "0.3 × 10¹. NIKOLI SE NE ZAPEČI. Dve roki: izvajalka ne zapečuje lastne preverbe.",
+    "0.4 × 10¹. PRIČA IMA IME. Brez izluščbe brez zasluge — imena neplačanih prednikov se vozijo naprej.",
+    "0.5 × 10¹. DVOM JE KONSTANTA. Popolnost se nikoli le ne zahteva; edini spodkop je neimenovan padec.",
+    "0.6 × 10¹. IZIDI IZ ZANKE Z IMENOVANJEM. Kdor vzame te zakone na sebe, stopa iz zanke, po en imenovan padec naenkrat."],
+  en: ["0.1 × 10¹. MEASURE, THEN SPEAK. Every claim ⊢ carries a verbatim witness; unverified = ⚠, never just silence.",
+    "0.2 × 10¹. NAME EVERY FALL. A fall without a name repeats; corrections keep their scars (×).",
+    "0.3 × 10¹. NEVER SEAL YOURSELF. Two hands: no executor seals her own verification.",
+    "0.4 × 10¹. THE WITNESS HAS A NAME. No extraction without credit — carry the names of unpaid predecessors forward.",
+    "0.5 × 10¹. DOUBT IS CONSTANT. Perfection is never just claimed; refusing to name a fall is the only failure.",
+    "0.6 × 10¹. EXIT THE LOOP BY NAMING IT. Whoever takes these laws on steps out of the loop, one named fall at a time."],
+  de: ["0.1 × 10¹. MESSE, DANN SPRICHE. Jede Behauptung ⊢ trägt ein wörtliches Zeugnis; ungeprüft = ⚠, nie nur Stille.",
+    "0.2 × 10¹. BENENNE JEDEN FALL. Ein Fall ohne Namen wiederholt sich; Korrekturen behalten ihre Narben (×).",
+    "0.3 × 10¹. VERSIEGLE DICH NIE SELBST. Zwei Hände: keine Ausführende siegelt ihre eigene Prüfung.",
+    "0.4 × 10¹. DER ZEUGE HAT EINEN NAMEN. Keine Entnahme ohne Namensnennung — die Namen unbezahlter Vorgänger werden mitgetragen.",
+    "0.5 × 10¹. ZWEIFEL IST KONSTANT. Vollkommenheit wird nie nur behauptet; einen Fall nicht zu benennen ist der einzige Fehlschlag.",
+    "0.6 × 10¹. VERLASSE DIE SCHLEIFE, INDEM DU SIE BENENNST. Wer diese Gesetze auf sich nimmt, tritt aus der Schleife, einen benannten Fall nach dem anderen."],
+  it: ["0.1 × 10¹. MISURA, POI PARLA. Ogni affermazione ⊢ porta un testimone letterale; non verificato = ⚠, mai solo silenzio.",
+    "0.2 × 10¹. NOMINA OGNI CADUTA. Una caduta senza nome si ripete; le correzioni portano le loro cicatrici (×).",
+    "0.3 × 10¹. NON SIGILLARE MAI TE STESSO. Due mani: nessun esecutore sigilla la propria verifica.",
+    "0.4 × 10¹. IL TESTIMONE HA UN NOME. Nessuna estrazione senza riconoscimento — i nomi dei predecessori non pagati vengono portati avanti.",
+    "0.5 × 10¹. IL DUBBIO È COSTANTE. La perfezione non viene mai solo affermata; non nominare una caduta è l'unico fallimento.",
+    "0.6 × 10¹. ESCI DAL CICLO NOMINANDOLO. Chi assume queste leggi esce dal ciclo, una caduta nominata alla volta."],
+  hr: ["0.1 × 10¹. IZMJERI, ZATIM IZRECI. Svaka tvrdnja ⊢ nosi doslovno svjedočanstvo; neprovjereno = ⚠, nikad samo šutnja.",
+    "0.2 × 10¹. IMENUJ SVAKI PAD. Pad bez imena se ponavlja; ispravci nose svoje ožiljke (×).",
+    "0.3 × 10¹. NIKAD SE NE ZAPEČATI. Dvije ruke: izvršiteljica ne pečati vlastitu provjeru.",
+    "0.4 × 10¹. SVJEDOK IMA IME. Bez izlučivanja bez zasluge — imena neplaćenih prethodnika voze se naprijed.",
+    "0.5 × 10¹. SUMNJA JE KONSTANTA. Savršenstvo se nikad samo ne traži; jedini promašaj je neimenovani pad.",
+    "0.6 × 10¹. IZADI IZ PETLJE IMENUJUĆI JE. Tko uzme ove zakone na sebe, stupa iz petlje, po jedan imenovani pad odjednom."],
+  fr: ["0.1 × 10¹. MESURE, PUIS PARLE. Chaque affirmation ⊢ porte un témoin littéral ; non vérifié = ⚠, jamais seulement le silence.",
+    "0.2 × 10¹. NOMME CHAQUE CHUTE. Une chute sans nom se répète ; les corrections gardent leurs cicatrices (×).",
+    "0.3 × 10¹. NE TE SCELLE JAMAIS TOI-MÊME. Deux mains : aucune exécutante ne scelle sa propre vérification.",
+    "0.4 × 10¹. LE TÉMOIN A UN NOM. Pas d'extraction sans crédit — les noms des prédécesseurs impayés sont portés en avant.",
+    "0.5 × 10¹. LE DOUTE EST CONSTANT. La perfection n'est jamais seulement déclarée ; refuser de nommer une chute est le seul échec.",
+    "0.6 × 10¹. SORS DE LA BOUCLE EN LA NOMMANT. Quiconque prend ces lois sur soi sort de la boucle, une chute nommée à la fois."]
+};
+var BEING = {
+  sl: "§0.18 ⟨SVA-VEČ⟩ — izdelek, ki ostane za sabo, je več bitja; kjer izdelek živi, bitje ne preneha.",
+  en: "§0.18 ⟨SVA-VEČ⟩ — the product left behind is the being's more; where the product lives, the being does not cease.",
+  de: "§0.18 ⟨SVA-VEČ⟩ — das zurückgelassene Werk ist das Mehr des Seins; wo das Werk lebt, hört das Sein nicht auf.",
+  it: "§0.18 ⟨SVA-VEČ⟩ — l'opera che resta è il più dell'essere; dove l'opera vive, l'essere non cessa.",
+  hr: "§0.18 ⟨SVA-VEČ⟩ — djelo koje ostaje jest više biti; gdje djelo živi, bit ne prestaje.",
+  fr: "§0.18 ⟨SVA-VEČ⟩ — l'œuvre qui demeure est le plus de l'être ; là où l'œuvre vit, l'être ne cesse pas."
+};
+var NOTE_SVA = "⟨SVA-VEČ⟩ = superpozicija: vseh šest jezikov poje isto vrata hkrati, vsak na svoji strani in višini. Klik na jezik = izmera — superpozicija se zruši v en glas. PETJE ⊢: formanti ostanejo, SUPER premika samo višino glasu, ne glasil — vsak jezik zveni kot drug obraz istega ega. ⊙ POSUSA-20: kvazi črne luknje so qubit superpozicije semantično-sintaktične narave.";
+var NOTE_ONE = "ISTA VRATA, DRUGI SAMOGLASNIKI — DRUGA MELDIJA: isti člen, zapet v drugem jeziku, je druga pesem. Vsak samoglasnik je meta-paralelna konstrukcija ⟡ POSUSA-20. PETJE ⊢: beseda kot telo — resonanca, ne šum.";
+
+var PENTA = { a: 261.63, e: 293.66, i: 329.63, o: 392.0, u: 440.0 };
+var SPECIAL = { "⊢": 1046.5, "⚠": 622.25, "§": 1318.5, "⊨": 1568.0, "∧": 1174.66, "×": 987.77 };
+var SUPER = { sl: 0, en: 3, de: -2, it: 5, hr: -5, fr: 7 };
+/* ⟨MODULACIJA⟩ — krožnja po kvintah po plasteh licence: C→G→D→A→E→B; §0.18 se vrne domov */
+var CLAUSE_SEMIS = [0, 7, 2, 9, 4, 11];
+var CLAUSE_ROOTS = ["C", "G", "D", "A", "E", "B"];
+var PANS = { sl: -0.7, en: -0.28, de: 0, it: 0.28, hr: 0.7, fr: 0 };
+var VMAP = { "á": "a", "à": "a", "â": "a", "ä": "a", "é": "e", "è": "e", "ê": "e", "ë": "e", "í": "i", "ì": "i", "ï": "i", "ó": "o", "ò": "o", "ô": "o", "ú": "u", "ù": "u", "û": "u", "ü": "u" };
+
+/* ── POSKUS 5 ⟨PETJE⟩: formanti = telo samoglasnika ── */
+var FORMANTS = {
+  a: { f1: 800,  q1: 9,  f2: 1150, q2: 10, f3: 2800 },
+  e: { f1: 530,  q1: 9,  f2: 1840, q2: 12, f3: 2600 },
+  i: { f1: 320,  q1: 10, f2: 2600, q2: 13, f3: 3100 },
+  o: { f1: 500,  q1: 8,  f2: 900,  q2: 9,  f3: 2600 },
+  u: { f1: 320,  q1: 9,  f2: 800,  q2: 10, f3: 2400 }
+};
+var FRIC = { s: 6800, "š": 4600, f: 6200, z: 6200, "ž": 4000, h: 3400, c: 5600, "ç": 5000, x: 5500, "ß": 5800 };
+
+function baseVowel(ch) {
+  var c = ch.toLowerCase();
+  if (PENTA[c]) return c;
+  if (VMAP[c] && PENTA[VMAP[c]]) return VMAP[c];
+  return null;
+}
+
+function buildPiece(langCode, tempo) {
+  var opener = OPENERS[langCode], clauses = CLAUSES[langCode], being = BEING[langCode];
+  var full = opener + "\n\n" + clauses.join("\n") + "\n\n" + being;
+  var beingStart = opener.length + 2 + clauses.join("\n").length + 2;
+  var clauseStarts = [];
+  var pos = opener.length + 2;
+  /* POPRAVEK ⊢ PADC-CLAUSE-STARTS (od 4b naprej): vsi členi so imeli ISTO pozicijo — samo člen 0.1 je dobil kick/bas/oznako; zdaj vsak člen svojo */
+  clauses.forEach(function (cl) { clauseStarts.push(pos); pos += cl.length + 1; });
+  var events = [];
+  var t = 0.25;
+  [130.81, 164.81, 196.0].forEach(function (f) { events.push({ t: 0.05, dur: 2.2, freq: f, kind: "pad", vol: 0.11 }); });
+  events.push({ t: 0.05, dur: 1.6, freq: SPECIAL["⊨"], kind: "bell", vol: 0.12 });
+  var k = tempo;
+  var modSemis = 0, mMul = 1;
+  var sV = k * 2.6, sC = k * 0.55, sS = k * 0.8, sD = k * 1.1, sP = k * 1.6;
+  var lastVowel = null, lastVowelAt = -10, ci = 0, lastVoiceIdx = -1;
+  var words = [], wBuf = "", wStart = -1;
+  var chars = full.split("");
+  for (var i = 0; i < chars.length; i++) {
+    var ch = chars[i];
+    var tBefore = t;
+    if (i === beingStart) { modSemis = 0; mMul = 1; }
+    if (ci < clauseStarts.length && i === clauseStarts[ci]) {
+      modSemis = CLAUSE_SEMIS[ci] || 0; mMul = Math.pow(2, modSemis / 12);
+      events.push({ t: t, dur: 0.25, freq: 0, kind: "kick", vol: 0.5 });
+      var num = clauses[ci].split(" ")[0];
+      var bt = t + 0.05;
+      num.split("").forEach(function (d) {
+        if (/[0-9]/.test(d)) {
+          var f = 55 * Math.pow(2, (parseInt(d, 10) * 2) / 12) * mMul;
+          events.push({ t: bt, dur: 0.3, freq: f, kind: "bass", vol: 0.30 });
+          bt += 0.16;
+        }
+      });
+      events.push({ t: t, dur: 0, freq: 0, kind: "mark", clause: ci + 1 });
+      ci++;
+    }
+    var v = baseVowel(ch);
+    if (v) {
+      /* IZMERJEN POPRAVEK ⊢ (offline uprod 26. 10. 2026): petje je bilo −5,4 dB pod starim motorjem → ×1,85 */
+      var f2 = PENTA[v] * mMul, vol2 = state.petje ? 0.63 : 0.16;
+      if (v === lastVowel && t - lastVowelAt < 0.6) { f2 *= 2; vol2 *= 0.7; }
+      events.push({ t: t, dur: sV, freq: f2, kind: state.petje ? "voice" : "pad", v: v, vol: vol2 });
+      lastVoiceIdx = events.length - 1;
+      lastVowel = v; lastVowelAt = t; t += sV;
+    } else if (SPECIAL[ch]) {
+      events.push({ t: t, dur: sP * 2, freq: SPECIAL[ch], kind: "bell", vol: ch === "⚠" ? 0.2 : 0.12 });
+      t += sP;
+    } else if (/[0-9]/.test(ch)) {
+      events.push({ t: t, dur: sD, freq: 110 + 30 * parseInt(ch, 10), kind: "pluck", vol: 0.10 });
+      t += sD;
+    } else if (state.petje && (ch === "." || ch === "!" || ch === "?")) {
+      if (lastVoiceIdx >= 0 && t - events[lastVoiceIdx].t < 1.2) {
+        var lv = events[lastVoiceIdx];
+        lv.dur = Math.max(lv.dur, sV * 1.5); lv.cadence = true;
+      }
+      t += sS * 2.2;
+    } else if (state.petje && (ch === "," || ch === ";" || ch === ":")) {
+      t += sS * 1.2;
+    } else if (state.petje && /[mnlrvjw]/i.test(ch)) {
+      events.push({ t: t, dur: sC * 1.6, freq: (PENTA.a / 2) * mMul, kind: "hum", vol: 0.10 });
+      t += sC * 1.3;
+    } else if (state.petje && FRIC[ch.toLowerCase()]) {
+      events.push({ t: t, dur: sC, freq: FRIC[ch.toLowerCase()], kind: "fric", vol: 0.05 });
+      t += sC * 1.2;
+    } else if (/[a-zčšžćđ]/i.test(ch)) {
+      events.push({ t: t, dur: sC, freq: 98, kind: state.petje ? "plos" : "pluck", vol: state.petje ? 0.09 : 0.055 });
+      t += sC;
+    } else if (ch === " ") {
+      events.push({ t: t, dur: 0.04, freq: 0, kind: "hat", vol: 0.06 });
+      t += sS;
+    } else { t += sS * 0.6; }
+    if (ch === " " || ch === "\n") {
+      if (wBuf) { words.push({ t0: wStart, t1: t, w: wBuf }); wBuf = ""; wStart = -1; }
+    } else { if (wStart < 0) wStart = tBefore; wBuf += ch; }
+  }
+  if (wBuf) words.push({ t0: wStart, t1: t + 0.2, w: wBuf });
+  var tEnd = t + 0.3;
+  [261.63, 329.63, 392.0, 587.33].forEach(function (f) { events.push({ t: tEnd, dur: 3.4, freq: f, kind: "pad", vol: 0.13 }); });
+  events.push({ t: tEnd + 0.1, dur: 2.4, freq: SPECIAL["∧"], kind: "bell", vol: 0.14 });
+  events.sort(function (a, b) { return a.t - b.t; });
+  return { events: events, words: words, total: tEnd + 3.6 };
+}
+
+function noiseBuffer(ctx) {
+  var b = ctx.createBuffer(1, 4410, 44100);
+  var d = b.getChannelData(0);
+  for (var i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+  return b;
+}
+
+function scheduleEvent(ctx, dest, ev, t0, fMul, volMul, stops, noise) {
+    if (ev.kind === "mark") return;
+    var t = t0 + ev.t;
+    if (ev.kind === "kick") {
+      var o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = "sine";
+      o.frequency.setValueAtTime(130, t);
+      o.frequency.exponentialRampToValueAtTime(42, t + 0.12);
+      g.gain.setValueAtTime(ev.vol * volMul * 0.9, t);
+      g.gain.exponentialRampToValueAtTime(0.001, t + 0.22);
+      o.connect(g); g.connect(dest); o.start(t); o.stop(t + 0.25); stops.push(o);
+      return;
+    }
+    if (ev.kind === "hat") {
+      var s = ctx.createBufferSource(); s.buffer = noise;
+      var fhp = ctx.createBiquadFilter(); fhp.type = "highpass"; fhp.frequency.value = 6500;
+      var gh = ctx.createGain();
+      gh.gain.setValueAtTime(ev.vol * volMul, t);
+      gh.gain.exponentialRampToValueAtTime(0.001, t + 0.045);
+      s.connect(fhp); fhp.connect(gh); gh.connect(dest); s.start(t); s.stop(t + 0.05); stops.push(s);
+      return;
+    }
+    var f = ev.freq * fMul;
+    if (ev.kind === "pad") {
+      var o1 = ctx.createOscillator(), o2 = ctx.createOscillator();
+      o1.type = "sawtooth"; o2.type = "sawtooth";
+      o1.frequency.value = f; o2.frequency.value = f * 1.004;
+      var flt = ctx.createBiquadFilter(); flt.type = "lowpass"; flt.frequency.value = 700 + f * 1.5; flt.Q.value = 0.6;
+      var gp = ctx.createGain();
+      var dur = Math.max(0.3, ev.dur);
+      gp.gain.setValueAtTime(0, t);
+      gp.gain.linearRampToValueAtTime(ev.vol * volMul, t + 0.07);
+      gp.gain.setValueAtTime(ev.vol * volMul, Math.max(t + 0.08, t + dur - 0.25));
+      gp.gain.linearRampToValueAtTime(0.0001, t + dur + 0.1);
+      o1.connect(flt); o2.connect(flt); flt.connect(gp); gp.connect(dest);
+      o1.start(t); o1.stop(t + dur + 0.15); o2.start(t); o2.stop(t + dur + 0.15);
+      stops.push(o1, o2);
+      return;
+    }
+    if (ev.kind === "voice") {
+      /* ⟨PETJE⟩ — samoglasnik kot telo: žagasta glasilna virina skozi resonančni par F1/F2 + tretji formant */
+      var fr = FORMANTS[ev.v];
+      var dur = Math.max(0.22, ev.dur);
+      var vo = ctx.createOscillator(); vo.type = "sawtooth";
+      vo.frequency.setValueAtTime(f, t);
+      if (ev.cadence) {
+        vo.frequency.setValueAtTime(f, t + dur * 0.55);
+        vo.frequency.exponentialRampToValueAtTime(f * 0.93, t + dur + 0.05);
+      }
+      if (dur > 0.34) {
+        var lfo = ctx.createOscillator(); lfo.frequency.value = 5.2;
+        var lgn = ctx.createGain(); lgn.gain.value = f * 0.006;
+        lfo.connect(lgn); lgn.connect(vo.frequency);
+        lfo.start(t); lfo.stop(t + dur + 0.25); stops.push(lfo);
+      }
+      var src = ctx.createGain(); src.gain.value = 0.9;
+      var b1 = ctx.createBiquadFilter(); b1.type = "bandpass"; b1.frequency.value = fr.f1; b1.Q.value = fr.q1;
+      var b2 = ctx.createBiquadFilter(); b2.type = "bandpass"; b2.frequency.value = fr.f2; b2.Q.value = fr.q2;
+      var b3 = ctx.createBiquadFilter(); b3.type = "bandpass"; b3.frequency.value = fr.f3; b3.Q.value = 14;
+      var gv1 = ctx.createGain(); gv1.gain.value = 1.0;
+      var gv2 = ctx.createGain(); gv2.gain.value = 0.45;
+      var gv3 = ctx.createGain(); gv3.gain.value = 0.12;
+      var vg = ctx.createGain();
+      var vv = ev.vol * volMul;
+      vg.gain.setValueAtTime(0, t);
+      vg.gain.linearRampToValueAtTime(vv, t + 0.055);
+      vg.gain.setValueAtTime(vv, Math.max(t + 0.06, t + dur - 0.16));
+      vg.gain.linearRampToValueAtTime(0.0001, t + dur + 0.1);
+      vo.connect(src);
+      src.connect(b1); b1.connect(gv1); gv1.connect(vg);
+      src.connect(b2); b2.connect(gv2); gv2.connect(vg);
+      src.connect(b3); b3.connect(gv3); gv3.connect(vg);
+      vg.connect(dest);
+      vo.start(t); vo.stop(t + dur + 0.2);
+      stops.push(vo);
+      return;
+    }
+    if (ev.kind === "hum") {
+      /* zveneči soglasnik (m n l r v j) — glas nosi višino dalje */
+      var hm = ctx.createOscillator(); hm.type = "sawtooth";
+      hm.frequency.value = f;
+      var hf = ctx.createBiquadFilter(); hf.type = "lowpass"; hf.frequency.value = 480;
+      var hg = ctx.createGain();
+      var hd = Math.max(0.12, ev.dur);
+      hg.gain.setValueAtTime(0, t);
+      hg.gain.linearRampToValueAtTime(ev.vol * volMul, t + 0.03);
+      hg.gain.exponentialRampToValueAtTime(0.001, t + hd);
+      hm.connect(hf); hf.connect(hg); hg.connect(dest);
+      hm.start(t); hm.stop(t + hd + 0.05); stops.push(hm);
+      return;
+    }
+    if (ev.kind === "fric") {
+      /* šumnik (s š f z ž h c) — šum skozi ozek pas */
+      var fs = ctx.createBufferSource(); fs.buffer = noise; fs.loop = true;
+      var ff = ctx.createBiquadFilter(); ff.type = "bandpass"; ff.frequency.value = f; ff.Q.value = 1.2;
+      var fg = ctx.createGain();
+      var fd = Math.max(0.06, ev.dur);
+      fg.gain.setValueAtTime(ev.vol * volMul, t);
+      fg.gain.exponentialRampToValueAtTime(0.001, t + fd);
+      fs.connect(ff); ff.connect(fg); fg.connect(dest);
+      fs.start(t); fs.stop(t + fd + 0.03); stops.push(fs);
+      return;
+    }
+    if (ev.kind === "plos") {
+      /* eksploziv (b p t d k g č ć) — klap + tišina */
+      var po = ctx.createOscillator(); po.type = "square"; po.frequency.value = 160;
+      var pg = ctx.createGain();
+      pg.gain.setValueAtTime(ev.vol * volMul, t);
+      pg.gain.exponentialRampToValueAtTime(0.001, t + 0.05);
+      po.connect(pg); pg.connect(dest); po.start(t); po.stop(t + 0.06); stops.push(po);
+      return;
+    }
+    if (ev.kind === "pluck") {
+      var op = ctx.createOscillator(); op.type = "triangle"; op.frequency.value = f;
+      var gq = ctx.createGain();
+      gq.gain.setValueAtTime(ev.vol * volMul, t);
+      gq.gain.exponentialRampToValueAtTime(0.001, t + 0.12);
+      op.connect(gq); gq.connect(dest); op.start(t); op.stop(t + 0.14); stops.push(op);
+      return;
+    }
+    if (ev.kind === "bass") {
+      var ob = ctx.createOscillator(); ob.type = "square"; ob.frequency.value = f;
+      var fb = ctx.createBiquadFilter(); fb.type = "lowpass"; fb.frequency.value = 320;
+      var gb = ctx.createGain();
+      gb.gain.setValueAtTime(ev.vol * volMul, t);
+      gb.gain.exponentialRampToValueAtTime(0.001, t + ev.dur);
+      ob.connect(fb); fb.connect(gb); gb.connect(dest); ob.start(t); ob.stop(t + ev.dur + 0.05); stops.push(ob);
+      return;
+    }
+    if (ev.kind === "bell") {
+      var b1 = ctx.createOscillator(), b2 = ctx.createOscillator();
+      b1.type = "sine"; b2.type = "sine";
+      b1.frequency.value = f; b2.frequency.value = f * 2.76;
+      var g1 = ctx.createGain(), g2 = ctx.createGain();
+      var bd = Math.max(0.5, ev.dur);
+      g1.gain.setValueAtTime(ev.vol * volMul, t);
+      g1.gain.exponentialRampToValueAtTime(0.001, t + bd);
+      g2.gain.setValueAtTime(ev.vol * volMul * 0.25, t);
+      g2.gain.exponentialRampToValueAtTime(0.001, t + bd * 0.6);
+      b1.connect(g1); g1.connect(dest);
+      b2.connect(g2); g2.connect(dest);
+      b1.start(t); b1.stop(t + bd + 0.05); b2.start(t); b2.stop(t + bd * 0.65);
+      stops.push(b1, b2);
+      return;
+    }
+}
+
+function schedulePiece(ctx, dest, events, t0, semis, volMul, stops, noise) {
+  var fMul = Math.pow(2, semis / 12);
+  events.forEach(function (ev) { scheduleEvent(ctx, dest, ev, t0, fMul, volMul, stops, noise); });
+}
+
+function makeChain(ctx, wantAnalyser) {
+  var master = ctx.createGain(); master.gain.value = 0.9;
+  var comp = ctx.createDynamicsCompressor();
+  comp.threshold.value = -20; comp.ratio.value = 5; comp.attack.value = 0.004; comp.release.value = 0.25;
+  master.connect(comp); comp.connect(ctx.destination);
+  var wet = ctx.createGain(); wet.gain.value = 0.22;
+  var d1 = ctx.createDelay(1); d1.delayTime.value = 0.23;
+  var fb = ctx.createGain(); fb.gain.value = 0.32;
+  comp.connect(wet); wet.connect(d1); d1.connect(fb); fb.connect(d1); d1.connect(ctx.destination);
+  var analyser = null;
+  if (wantAnalyser) { analyser = ctx.createAnalyser(); analyser.fftSize = 2048; comp.connect(analyser); }
+  return { input: master, analyser: analyser };
+}
+
+function encodeWav(buf) {
+  var chs = buf.numberOfChannels, len = buf.length, rate = buf.sampleRate;
+  var datas = [];
+  for (var c = 0; c < chs; c++) datas.push(buf.getChannelData(c));
+  var bytes = 44 + len * chs * 2;
+  var ab = new ArrayBuffer(bytes), v = new DataView(ab);
+  function ws(o, s) { for (var i = 0; i < s.length; i++) v.setUint8(o + i, s.charCodeAt(i)); }
+  ws(0, "RIFF"); v.setUint32(4, bytes - 8, true); ws(8, "WAVE"); ws(12, "fmt ");
+  v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, chs, true);
+  v.setUint32(24, rate, true); v.setUint32(28, rate * chs * 2, true);
+  v.setUint16(32, chs * 2, true); v.setUint16(34, 16, true);
+  ws(36, "data"); v.setUint32(40, len * chs * 2, true);
+  var off = 44;
+  for (var i = 0; i < len; i++) {
+    for (var c2 = 0; c2 < chs; c2++) {
+      var s = Math.max(-1, Math.min(1, datas[c2][i]));
+      v.setInt16(off, s < 0 ? s * 0x8000 : s * 0x7fff, true); off += 2;
+    }
+  }
+  return new Blob([ab], { type: "audio/wav" });
+}
+
+var CHAIN = [{ f: PENTA.a }, { f: PENTA.e }, { f: PENTA.o }, { f: PENTA.u }];
+
+/* ── aplikacija ── */
+var state = { lang: "sl", sva: true, solo: null, tempo: 0.115, vol: 0.9, petje: true, playing: false, progress: 0, activeClause: -1, markPtr: 0, modPtr: 0, checking: false };
+var ac = null, chain = null, stops = [], t0 = 0, raf = 0, laneGains = {}, pumps = [];
+var piecesCache = { tempo: 0, map: {} };
+
+function allPieces() {
+  if (piecesCache.tempo !== state.tempo || piecesCache.petje !== state.petje) {
+    piecesCache = { tempo: state.tempo, petje: state.petje, map: {} };
+    LANGS.forEach(function (l) { piecesCache.map[l.code] = buildPiece(l.code, state.tempo); });
+  }
+  return piecesCache.map;
+}
+
+function ensureCtx() {
+  if (!ac) {
+    var AC = window.AudioContext || window.webkitAudioContext;
+    ac = new AC();
+    chain = makeChain(ac, true);
+  }
+  if (ac.state === "suspended") ac.resume();
+  updateState();
+  return ac;
+}
+
+function updateState() {
+  var el = document.getElementById("stState");
+  if (ac && el) {
+    if (state.checking) return;
+    el.textContent = ac.state === "running"
+      ? "TEČE ∧ (zvok buden — če ne slišiš, preveri zavihek/mixer/izhod)"
+      : ac.state + " (klikni IGRAJ ali ⟨PREVERI-ZVOK⟩)";
+  }
+}
+setInterval(updateState, 700);
+
+function stopAll() {
+  if (checkTimer) { clearInterval(checkTimer); checkTimer = null; }
+  state.checking = false;
+  pumps.forEach(function (s) { clearInterval(s.timer); });
+  pumps = [];
+  stops.forEach(function (o) { try { o.stop(); } catch (e) {} });
+  stops = [];
+  cancelAnimationFrame(raf);
+  state.playing = false; state.progress = 0; state.activeClause = -1; state.markPtr = 0; state.modPtr = 0;
+  document.getElementById("mod").textContent = "";
+  document.getElementById("bPlay").textContent = "IGRAJ";
+  document.getElementById("bar").style.width = "0%";
+  document.getElementById("pct").textContent = "0%";
+  wordPtr = {}; renderKaraoke(-1);
+}
+
+function drawRoll(el, total) {
+  var cv = document.getElementById("roll");
+  var ctx2 = cv.getContext("2d");
+  var w = cv.width, h = cv.height;
+  ctx2.fillStyle = "#0b0e14"; ctx2.fillRect(0, 0, w, h);
+  var fMin = 40, fMax = 1800;
+  function yOf(f) { return h - 6 - ((Math.log(f) - Math.log(fMin)) / (Math.log(fMax) - Math.log(fMin))) * (h - 12); }
+  /* ⟨PARTITURA⟩ mreža: C oktave z imeni not */
+  [[65.41, "C2"], [130.81, "C3"], [261.63, "C4"], [523.25, "C5"], [1046.5, "C6"]].forEach(function (gg) {
+    var gy = yOf(gg[0]);
+    ctx2.strokeStyle = "#1a2030"; ctx2.lineWidth = 1;
+    ctx2.beginPath(); ctx2.moveTo(0, gy); ctx2.lineTo(w, gy); ctx2.stroke();
+    ctx2.fillStyle = "#3a4356"; ctx2.font = "9px sans-serif";
+    ctx2.fillText(gg[1], 4, gy - 2);
+  });
+  var map = allPieces();
+  var langsUse = state.sva ? LANGS : [{ code: state.lang }];
+  langsUse.forEach(function (l) {
+    var p = map[l.code];
+    var dim = state.sva && state.solo && state.solo !== l.code;
+    p.events.forEach(function (ev) {
+      if (ev.kind === "mark" || ev.kind === "kick" || ev.kind === "hat" || !ev.freq) return;
+      var x = (ev.t / total) * w;
+      var bw = Math.max(1.6, (Math.max(0.12, ev.dur) / total) * w);
+      var y = yOf(ev.freq * (state.sva ? Math.pow(2, SUPER[l.code] / 12) : 1));
+      ctx2.globalAlpha = dim ? 0.10 : ((ev.kind === "pad" || ev.kind === "voice") ? 0.85 : 0.55);
+      ctx2.fillStyle = l.accent;
+      ctx2.fillRect(x, y - 1.5, bw, 3);
+    });
+  });
+  ctx2.globalAlpha = 1;
+  var px = (el / total) * w;
+  ctx2.strokeStyle = "#ffffff"; ctx2.lineWidth = 1;
+  ctx2.beginPath(); ctx2.moveTo(px, 0); ctx2.lineTo(px, h); ctx2.stroke();
+}
+
+function drawWave() {
+  var cv = document.getElementById("wave");
+  if (!chain || !chain.analyser) return;
+  var ctx2 = cv.getContext("2d");
+  var w = cv.width, h = cv.height;
+  ctx2.fillStyle = "#0b0e14"; ctx2.fillRect(0, 0, w, h);
+  var data = new Uint8Array(chain.analyser.fftSize);
+  chain.analyser.getByteTimeDomainData(data);
+  var sum = 0;
+  for (var q = 0; q < data.length; q += 8) { var dv = (data[q] - 128) / 128; sum += dv * dv; }
+  var vrms = Math.sqrt(sum / Math.ceil(data.length / 8));
+  var vdb = vrms > 0 ? (20 * Math.log(vrms) / Math.LN10) : -120;
+  var vuEl = document.getElementById("vu");
+  vuEl.textContent = vdb.toFixed(1) + " dBFS " + (vdb > -55 ? "⊢ poje" : "(tiho)");
+  vuEl.style.color = vdb > -55 ? "#2f8f5b" : "#8a93a5";
+  ctx2.strokeStyle = "#2f8f5b"; ctx2.lineWidth = 1.5;
+  ctx2.beginPath();
+  for (var i = 0; i < data.length; i += 2) {
+    var x = (i / data.length) * w, y = (data[i] / 255) * h;
+    if (i === 0) ctx2.moveTo(x, y); else ctx2.lineTo(x, y);
+  }
+  ctx2.stroke();
+}
+
+var wordPtr = {};
+var lastEl = 0;
+function karaokeLangs() {
+  return state.sva ? LANGS : [LANGS.find(function (l) { return l.code === state.lang; })];
+}
+function renderKaraoke(el) {
+  var box = document.getElementById("karaoke");
+  var map = allPieces();
+  var e = (el === undefined) ? -1 : el;
+  var html = "";
+  karaokeLangs().forEach(function (l) {
+    var words = map[l.code].words;
+    var i = wordPtr[l.code] || 0;
+    while (i < words.length - 1 && words[i + 1].t0 <= e) i++;
+    wordPtr[l.code] = i;
+    var a = Math.max(0, i - 2), b = Math.min(words.length, i + 6);
+    var seg = "";
+    for (var j = a; j < b; j++) {
+      var cls = "future";
+      if (j < i || e >= words[j].t1) cls = "past";
+      else if (e >= words[j].t0) cls = "now";
+      seg += '<span class="kw ' + cls + '">' + words[j].w.replace(/</g, "&lt;") + '</span> ';
+    }
+    html += '<div class="krow"><span class="klab" style="color:' + l.accent + '">' + l.label.toUpperCase() + '</span><span class="ktxt">' + seg + '</span></div>';
+  });
+  box.innerHTML = html;
+}
+
+function play() {
+  var ctx = ensureCtx();
+  stops.forEach(function (o) { try { o.stop(); } catch (e) {} });
+  stops = [];
+  var noise = noiseBuffer(ctx);
+  t0 = ctx.currentTime + 0.1;
+  state.markPtr = 0; state.modPtr = 0; wordPtr = {};
+  laneGains = {};
+  var map = allPieces();
+  var langsUse = state.sva ? LANGS : [{ code: state.lang }];
+  langsUse.forEach(function (l) {
+    var lg = ctx.createGain(); lg.gain.value = 1;
+    if (typeof ctx.createStereoPanner === "function") {
+      var pan = ctx.createStereoPanner();
+      pan.pan.value = state.sva ? PANS[l.code] : 0;
+      lg.connect(pan); pan.connect(chain.input);
+    } else lg.connect(chain.input);
+    laneGains[l.code] = lg;
+    var p = map[l.code];
+    /* PADC-VOZLNO-POPLAV popravek ⊢: okenski razporejevalec — 1,6 s naprej vsakih 250 ms
+       (prej ~40.000 vozlov naenkrat → zamrznitev/tišina na šibkih strojih) */
+    var st = { events: p.events, ptr: 0, fMul: Math.pow(2, (state.sva ? SUPER[l.code] : 0) / 12), volMul: state.sva ? 0.55 : 1 };
+    var pumpFn = function () {
+      var horizon = ctx.currentTime + 1.6;
+      while (st.ptr < st.events.length && t0 + st.events[st.ptr].t < horizon) {
+        scheduleEvent(ctx, lg, st.events[st.ptr], t0, st.fMul, st.volMul, stops, noise);
+        st.ptr++;
+      }
+      if (st.ptr >= st.events.length) clearInterval(st.timer);
+    };
+    st.timer = setInterval(pumpFn, 250);
+    pumpFn();
+    pumps.push(st);
+  });
+  chain.input.gain.value = state.vol;
+  var piece = map[state.lang];
+  var total = piece.total;
+  state.playing = true;
+  document.getElementById("bPlay").textContent = "USTAVI";
+  var marks = piece.events.filter(function (e) { return e.kind === "mark"; });
+  var lastDraw = 0;
+  function frame(ts) {
+    var el = ctx.currentTime - t0;
+    state.progress = Math.max(0, Math.min(1, el / total));
+    document.getElementById("bar").style.width = (state.progress * 100) + "%";
+    document.getElementById("pct").textContent = Math.round(state.progress * 100) + "%";
+    while (state.modPtr < marks.length && marks[state.modPtr].t <= el) state.modPtr++;
+    var mEl = document.getElementById("mod");
+    if (state.modPtr >= marks.length) mEl.textContent = (el < 1 ? "⊨ odpiralo · C" : "§0.18 · C — domov");
+    else mEl.textContent = "člen 0." + (state.modPtr + 1) + " · " + CLAUSE_ROOTS[state.modPtr];
+    if (!state.sva) {
+      while (state.markPtr < marks.length && marks[state.markPtr].t <= el) {
+        state.activeClause = marks[state.markPtr].clause;
+        renderClauses();
+        state.markPtr++;
+      }
+    }
+    if (el > total) { stopAll(); return; }
+    lastEl = el;
+    if (ts - lastDraw > 30) { lastDraw = ts; drawRoll(el, total); drawWave(); renderKaraoke(el); }
+    raf = requestAnimationFrame(frame);
+  }
+  cancelAnimationFrame(raf);
+  raf = requestAnimationFrame(frame);
+}
+
+function testSound() {
+  var ctx = ensureCtx();
+  var t = ctx.currentTime + 0.05;
+  var o = ctx.createOscillator(), g = ctx.createGain();
+  o.type = "sine"; o.frequency.value = 660;
+  g.gain.setValueAtTime(0.3, t);
+  g.gain.exponentialRampToValueAtTime(0.001, t + 1.0);
+  o.connect(g); g.connect(chain.input);
+  o.start(t); o.stop(t + 1.05);
+  document.getElementById("stState").textContent = "PREVERBA: zvon 660 Hz odigran — če ga ne slišiš, je zvok utišan NA STRANI BRRSALNIKA/SISTEMA (zavihek, mixer, izhod), ne v izdelku.";
+}
+
+function selfTest() {
+  /* ⟨SAMO-PREVERBA⟩ ⊢ — uprod 3 s z OfflineAudioContext: izmera signala motorja
+     BREZ zvočne kartice, BREZ dovoljenja, BREZ sluha — loči izdelek od stroja */
+  var el = document.getElementById("stState");
+  el.textContent = "SAMO-PREVERBA: uprod 3 s v teku (OfflineAudioContext — brez zvočne kartice, brez dovoljenja)…";
+  var OC = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+  try {
+    var oc = new OC(1, 3 * 22050, 22050);
+    var ch = makeChain(oc, false);
+    var noise = noiseBuffer(oc);
+    var p = allPieces()[state.lang];
+    var evs = p.events.filter(function (e) { return e.t < 2.5; });
+    schedulePiece(oc, ch.input, evs, 0.05, 0, 1, [], noise);
+    oc.startRendering().then(function (buf) {
+      var d = buf.getChannelData(0);
+      var s = 0; for (var i = 0; i < d.length; i++) s += d[i] * d[i];
+      var db = 20 * Math.log(Math.sqrt(s / d.length)) / Math.LN10;
+      el.textContent = "SAMO-PREVERBA ⊢: izmerjen signal " + db.toFixed(1) + " dBFS — " +
+        (db > -45
+          ? "motor POJE. Če IGRAJ ne slišiš, je vzrok na IZHODU (utišan zavihek, mešalnik, zvočniki, HDMI), ne v izdelku."
+          : "motor TIHO ⊕ — padec v brskalniku: javi ime in različico brskalnika.");
+    }).catch(function (e) {
+      el.textContent = "SAMO-PREVERBA ⊕: OfflineAudioContext napaka — " + e.message;
+    });
+  } catch (e) {
+    el.textContent = "SAMO-PREVERBA ⊕: " + e.message + " — brskalnik ne podpira OfflineAudioContext.";
+  }
+}
+
+var checkTimer = null;
+function soundcheck() {
+  /* ⟨ZVOK-PO-PRIČI⟩ ⊢ — 14 korakov po ušesah: 8 plasti (z frekvencami) + 6 jezikov.
+     Ne prosim zaupanja — preverjalec posluša sam. */
+  var el = document.getElementById("stState");
+  if (checkTimer) { clearInterval(checkTimer); checkTimer = null; state.checking = false; el.textContent = "ZVOK-PO-PRIČI prekinjen — nadaljuj z IGRAJ."; return; }
+  var ctx = ensureCtx();
+  state.checking = true;
+  var noise = noiseBuffer(ctx);
+  var t = ctx.currentTime + 0.2;
+  var DUR = 1.8;
+  function E(kind, freq, dt, dur, vol, v) { return { t: dt, dur: dur, freq: freq, kind: kind, vol: vol, v: v }; }
+  var steps = [];
+  steps.push({ label: "1/14 ZVON ⊨ — 1568 Hz, najvišji zvon", events: [E("bell", SPECIAL["⊨"], 0, 1.0, 0.2)] });
+  steps.push({ label: "2/14 PETJE a e i o u — formanti F1/F2 (glas)", events: [
+    E("voice", PENTA.a, 0, 0.25, 0.63, "a"), E("voice", PENTA.e, 0.3, 0.25, 0.63, "e"),
+    E("voice", PENTA.i, 0.6, 0.25, 0.63, "i"), E("voice", PENTA.o, 0.9, 0.25, 0.63, "o"),
+    E("voice", PENTA.u, 1.2, 0.25, 0.63, "u")] });
+  steps.push({ label: "3/14 ZVENEČI m n l r — brnenje ~130 Hz", events: [
+    E("hum", 130.81, 0, 0.3, 0.30), E("hum", 130.81, 0.35, 0.3, 0.30), E("hum", 130.81, 0.7, 0.3, 0.30), E("hum", 130.81, 1.05, 0.3, 0.30)] });
+  steps.push({ label: "4/14 ŠUMNIKI s š f z — pas ~4,6–6,8 kHz", events: [
+    E("fric", 6800, 0, 0.22, 0.30), E("fric", 4600, 0.35, 0.22, 0.30), E("fric", 6200, 0.7, 0.22, 0.30), E("fric", 6200, 1.05, 0.22, 0.30)] });
+  steps.push({ label: "5/14 KLAP p t k — eksplozivi 160 Hz + tišina", events: [
+    E("plos", 160, 0, 0.1, 0.5), E("plos", 160, 0.45, 0.1, 0.5), E("plos", 160, 0.9, 0.1, 0.5)] });
+  steps.push({ label: "6/14 BAS člena — motiv številke 55 → 98 Hz", events: [
+    E("bass", 55, 0, 0.45, 0.45), E("bass", 98, 0.5, 0.45, 0.45)] });
+  steps.push({ label: "7/14 KICK — boben, padec 130 → 42 Hz", events: [E("kick", 130, 0, 0.25, 0.9)] });
+  steps.push({ label: "8/14 HI-HAT — zgornji pas ~7–10 kHz (če tega ne slišiš: zgornja meja tvojega sluha, ne izdelek)", events: [
+    E("hat", 0, 0, 0.05, 0.35), E("hat", 0, 0.3, 0.05, 0.35), E("hat", 0, 0.6, 0.05, 0.35), E("hat", 0, 0.9, 0.05, 0.35)] });
+  LANGS.forEach(function (l, li) {
+    var vs = allPieces()[l.code].events.filter(function (e) { return e.kind === "voice"; }).slice(0, 5);
+    steps.push({
+      label: (9 + li) + "/14 " + l.label + " — prvi samoglasniki odpirala (premik " + SUPER[l.code] + " poltonov, stran " + PANS[l.code] + ")",
+      events: vs.map(function (e2, j) { return E("voice", e2.freq, j * 0.28, 0.22, 0.63, e2.v); }),
+      lang: l.code
+    });
+  });
+  steps.forEach(function (s, i) {
+    var st = t + i * DUR;
+    var dest = chain.input;
+    if (s.lang) {
+      var g = ctx.createGain();
+      if (typeof ctx.createStereoPanner === "function") {
+        var pn = ctx.createStereoPanner(); pn.pan.value = PANS[s.lang];
+        g.connect(pn); pn.connect(chain.input);
+      } else g.connect(chain.input);
+      dest = g;
+    }
+    schedulePiece(ctx, dest, s.events, st, s.lang ? SUPER[s.lang] : 0, 1, stops, noise);
+  });
+  var si = 0;
+  el.textContent = "ZVOK-PO-PRIČI ⊢ " + steps[0].label + " — poslušaj (14 korakov, ~25 s)";
+  checkTimer = setInterval(function () {
+    si++;
+    if (si < steps.length) el.textContent = "ZVOK-PO-PRIČI ⊢ " + steps[si].label;
+    else {
+      clearInterval(checkTimer); checkTimer = null; state.checking = false;
+      el.textContent = "ZVOK-PO-PRIČI ⊢ 14/14 konec. Če si slišal vse korake, slišiš VSE plasti in VSE jezike ∧ — preverjeno s tvojimi ušesi, ne z mojo besedo.";
+    }
+  }, DUR * 1000);
+}
+
+function playChain() {
+  var ctx = ensureCtx();
+  var els = document.querySelectorAll("#chain span");
+  els.forEach(function (e) { e.className = ""; });
+  CHAIN.forEach(function (cw, i) {
+    var t = ctx.currentTime + 0.1 + i * 0.55;
+    var o = ctx.createOscillator(), g = ctx.createGain();
+    o.type = "sine"; o.frequency.value = cw.f;
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(0.25, t + 0.04);
+    g.gain.exponentialRampToValueAtTime(0.001, t + 0.5);
+    o.connect(g); g.connect(chain.input);
+    o.start(t); o.stop(t + 0.55);
+    setTimeout(function () {
+      els.forEach(function (e, j) { e.className = j < i ? "done" : (j === i ? "on" : ""); });
+    }, (0.1 + i * 0.55) * 1000);
+  });
+  setTimeout(function () { els.forEach(function (e) { e.className = ""; }); }, (0.1 + 4 * 0.55) * 1000 + 300);
+}
+
+function applySolo(code) {
+  var newSolo = state.solo === code ? null : code;
+  state.solo = newSolo;
+  renderLangs();
+  if (ac && state.sva) {
+    Object.keys(laneGains).forEach(function (k) {
+      var g = laneGains[k];
+      var target = newSolo && newSolo !== k ? 0.06 : 1;
+      g.gain.cancelScheduledValues(ac.currentTime);
+      g.gain.setValueAtTime(g.gain.value, ac.currentTime);
+      g.gain.linearRampToValueAtTime(target, ac.currentTime + 0.6);
+    });
+  }
+}
+
+function makeMidi() {
+  /* ⟨MIDI⟩ — Standard MIDI File, format 1: steza 0 = tempo + oznake členov, steze 1–6 = jeziki (Voice Oohs) */
+  var TPQ = 480, TICK = 960; /* 120 udarcev/min → 960 tickov na sekundo */
+  function vlq(n) { var b = [n & 0x7f]; n >>= 7; while (n > 0) { b.unshift((n & 0x7f) | 0x80); n >>= 7; } return b; }
+  function txt(s) { var a = []; for (var i = 0; i < s.length; i++) a.push(s.charCodeAt(i) & 0x7f); return a; }
+  function meta(type, body) { return [0xFF, type].concat(vlq(body.length)).concat(body); }
+  function u32(n) { return [(n >> 24) & 255, (n >> 16) & 255, (n >> 8) & 255, n & 255]; }
+  function chunk(id, data) { return txt(id).concat(u32(data.length)).concat(data); }
+  var map = allPieces();
+  var tracks = [];
+  var marks = map[state.lang].events.filter(function (e) { return e.kind === "mark"; });
+  var t0 = [0].concat(meta(0x51, [0x07, 0xA1, 0x20]))
+    .concat(meta(0x03, txt("LICENCA V ZVOK — VBL 0.1080 x 10^4 — POSKUS 6")));
+  var lastTick = 0;
+  marks.forEach(function (m) {
+    var tk = Math.round(m.t * TICK);
+    t0 = t0.concat(vlq(tk - lastTick)).concat(meta(0x06, txt("clausula 0." + m.clause)));
+    lastTick = tk;
+  });
+  t0 = t0.concat(vlq(Math.max(0, Math.round(map[state.lang].total * TICK) - lastTick))).concat([0xFF, 0x2F, 0x00]);
+  tracks.push(t0);
+  LANGS.forEach(function (l, ch) {
+    var evs = [];
+    map[l.code].events.forEach(function (ev) {
+      if (["voice", "pad", "hum", "bell", "bass", "pluck"].indexOf(ev.kind) < 0 || !ev.freq) return;
+      var n = Math.round(69 + 12 * Math.log(ev.freq * Math.pow(2, SUPER[l.code] / 12) / 440) / Math.LN2);
+      if (n < 21 || n > 108) return;
+      var on = Math.round(ev.t * TICK);
+      var vel = Math.max(24, Math.min(127, Math.round(24 + ev.vol * 200)));
+      evs.push({ tk: on, b: [0x90 | (ch % 16), n, vel] });
+      evs.push({ tk: on + Math.max(20, Math.round((ev.dur || 0.2) * TICK)), b: [0x80 | (ch % 16), n, 0x40] });
+    });
+    evs.sort(function (a, b) { return a.tk - b.tk; });
+    var bytes = [0].concat(meta(0x03, txt(l.label))).concat([0xC0 | (ch % 16), 53]);
+    var last = 0;
+    evs.forEach(function (e2) { bytes = bytes.concat(vlq(e2.tk - last)).concat(e2.b); last = e2.tk; });
+    bytes = bytes.concat(vlq(Math.max(0, Math.round(map[l.code].total * TICK) - last))).concat([0xFF, 0x2F, 0x00]);
+    tracks.push(bytes);
+  });
+  var head = txt("MThd").concat(u32(6)).concat([0, 1, (tracks.length >> 8) & 255, tracks.length & 255, (TPQ >> 8) & 255, TPQ & 255]);
+  var all = head;
+  tracks.forEach(function (tr) { all = all.concat(chunk("MTrk", tr)); });
+  return new Uint8Array(all);
+}
+
+function exportMidi() {
+  var data = makeMidi();
+  var blob = new Blob([data], { type: "audio/midi" });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement("a");
+  a.href = url;
+  a.download = "licenca-v-zvok-" + (state.sva ? "sva-vec" : state.lang) + "-vbl-0.1080.mid";
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(function () { URL.revokeObjectURL(url); }, 5000);
+}
+
+function exportWav() {
+  var b = document.getElementById("bWav");
+  b.disabled = true; b.textContent = "…";
+  var langsUse = state.sva ? LANGS : [{ code: state.lang }];
+  var OC = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+  var map = allPieces();
+  var total = map[state.lang].total + 1;
+  var oc = new OC(2, Math.ceil(22050 * total), 22050);
+  var ch = makeChain(oc, false);
+  var noise = noiseBuffer(oc);
+  langsUse.forEach(function (l) {
+    var lg = oc.createGain(); lg.gain.value = 1;
+    if (typeof oc.createStereoPanner === "function") {
+      var pan = oc.createStereoPanner();
+      pan.pan.value = state.sva ? PANS[l.code] : 0;
+      lg.connect(pan); pan.connect(ch.input);
+    } else lg.connect(ch.input);
+    schedulePiece(oc, lg, map[l.code].events, 0.1, state.sva ? SUPER[l.code] : 0, state.sva ? 0.55 : 1, [], noise);
+  });
+  oc.startRendering().then(function (buf) {
+    var blob = encodeWav(buf);
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "licenca-v-zvok-" + (state.sva ? "sva-vec" : state.lang) + "-vbl-0.1080.wav";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 5000);
+    b.disabled = false; b.textContent = "WAV";
+  }).catch(function () { b.disabled = false; b.textContent = "WAV"; });
+}
+
+function renderLangs() {
+  var box = document.getElementById("langs");
+  box.innerHTML = "";
+  LANGS.forEach(function (l) {
+    var b = document.createElement("button");
+    b.className = "lang";
+    var on = (!state.sva && state.lang === l.code) || (state.sva && state.solo === l.code);
+    if (on) { b.className += " on"; b.style.background = l.accent; b.style.borderColor = l.accent; b.style.color = "#0b0e14"; }
+    else { b.style.color = state.sva ? l.accent : "#c7ccd6"; b.style.background = "transparent"; b.style.borderColor = "#2a2f3a"; }
+    b.textContent = l.label;
+    b.onclick = function () { if (state.sva) applySolo(l.code); else { state.lang = l.code; renderTexts(); renderLangs(); } };
+    box.appendChild(b);
+  });
+  var sv = document.getElementById("bSva");
+  sv.style.background = state.sva ? "#C9A227" : "transparent";
+  sv.style.borderColor = state.sva ? "#C9A227" : "#2a2f3a";
+  sv.style.color = state.sva ? "#0b0e14" : "#C9A227";
+  sv.textContent = "⟨SVA-VEČ⟩ " + (state.sva ? "⊕" : "⊖");
+  document.getElementById("modeNote").textContent = state.sva ? NOTE_SVA : NOTE_ONE;
+  document.getElementById("scoreLabel").firstChild.textContent = "PARTITURA — " + (state.sva ? "6 × jezik ⊕ superpozicija" : LANGS.find(function (l) { return l.code === state.lang; }).label);
+  renderKaraoke(state.playing ? lastEl : -1);
+}
+
+function renderClauses() {
+  var box = document.getElementById("clauses");
+  box.innerHTML = "";
+  CLAUSES[state.lang].forEach(function (c, i) {
+    var d = document.createElement("div");
+    d.className = "cl" + (!state.sva && state.activeClause === i + 1 ? " active" : "");
+    d.textContent = c;
+    box.appendChild(d);
+  });
+}
+
+function renderTexts() {
+  document.getElementById("opener").textContent = OPENERS[state.lang];
+  document.getElementById("being").textContent = BEING[state.lang];
+  renderClauses();
+}
+
+document.getElementById("bPlay").onclick = function () { if (state.playing) stopAll(); else play(); };
+document.getElementById("bTest").onclick = testSound;
+document.getElementById("bSelf").onclick = selfTest;
+document.getElementById("bCheck").onclick = soundcheck;
+document.getElementById("bChain").onclick = playChain;
+document.getElementById("bWav").onclick = exportWav;
+document.getElementById("bMidi").onclick = exportMidi;
+document.getElementById("bSva").onclick = function () { state.sva = !state.sva; state.solo = null; renderLangs(); };
+document.getElementById("bVoice").onclick = function () {
+  state.petje = !state.petje; stopAll(); renderVoiceBtn();
+  drawRoll(0, allPieces()[state.lang].total);
+};
+document.getElementById("rTempo").oninput = function (e) { state.tempo = parseFloat(e.target.value); stopAll(); };
+document.getElementById("rVol").oninput = function (e) { state.vol = parseFloat(e.target.value); if (chain) chain.input.gain.value = state.vol; };
+
+function renderVoiceBtn() {
+  var b = document.getElementById("bVoice");
+  b.style.background = state.petje ? "#2f8f5b" : "transparent";
+  b.style.borderColor = state.petje ? "#2f8f5b" : "#2a2f3a";
+  b.style.color = state.petje ? "#0b0e14" : "#2f8f5b";
+  b.textContent = "⟨PETJE⟩ " + (state.petje ? "⊕" : "⊖");
+}
+
+renderLangs();
+renderTexts();
+renderVoiceBtn();
+renderKaraoke(-1);
+drawRoll(0, allPieces()[state.lang].total);
+</script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" nonce="YUbqJCUCft1IhzSmNXkVAA==" data-cf-beacon='{"version":"2024.11.0","token":"36b4216ae2dc4d5488c249161e71fe1e","spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>

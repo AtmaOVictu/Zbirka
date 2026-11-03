@@ -1,0 +1,16 @@
+{
+  "package": "VBL-evidence-audit-r2-2026-10-25.zip",
+  "status": "PASS_LOCAL_PACKAGE_INTEGRITY",
+  "zip_crc": "PASS",
+  "manifest_hashes": "PASS",
+  "shell_syntax": "PASS",
+  "evidence_register_rows": 9,
+  "files_inside_zip": 6,
+  "zip_size_bytes": 6807,
+  "sha256": "edd5f6c669e8d9b491f91172ed305ff6c43f7af3bce000c55d81dd58cbd557b2",
+  "limitations": [
+    "GitHub comment remains unconfirmed",
+    "No external messages or repository writes were made",
+    "The verification script was syntax-checked but not run against the target repository; it requires local GitHub CLI credentials"
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "record_type": "vbl_incident_claim_register",
+  "version_display": "VBL incident integration 2026-10-27",
+  "basis": "user-pasted transcript; not raw terminal capture",
+  "canonical_license_status": "UNVERIFIED",
+  "local_repository_access_from_this_environment": "UNAVAILABLE",
+  "claims": [
+    {
+      "id": "CLAIM-01",
+      "claim": "PowerShell printed ParserError at the character ×",
+      "status": "OBSERVED_IN_TRANSCRIPT",
+      "scope": "transcript text only"
+    },
+    {
+      "id": "CLAIM-02",
+      "claim": "PowerShell printed Missing expression after unary operator '-' for a Markdown bullet",
+      "status": "OBSERVED_IN_TRANSCRIPT",
+      "scope": "transcript text only"
+    },
+    {
+      "id": "CLAIM-03",
+      "claim": "The local repository currently has no changes",
+      "status": "REPORTED_IN_TRANSCRIPT",
+      "scope": "not independently checked here"
+    },
+    {
+      "id": "CLAIM-04",
+      "claim": "A raw capture of 136986 bytes has SHA-256 2666067031575E26B6E387E0AF019338BBF66ACC07D4711A2820545BCEFF520C",
+      "status": "REPORTED_IN_TRANSCRIPT",
+      "scope": "digest not recomputed here"
+    },
+    {
+      "id": "CLAIM-05",
+      "claim": "A raw capture of 139025 bytes has SHA-256 EF11F0CFDE3455B004E06EB4E8E6451FDC1791F06F65D077C7BA563BCDF16D24",
+      "status": "REPORTED_IN_TRANSCRIPT",
+      "scope": "digest not recomputed here"
+    },
+    {
+      "id": "CLAIM-06",
+      "claim": "VBL-SHARED-03-AUDIT-ADDENDUM-01.zip has SHA-256 278ff739b0b5c0d73c37ba512b6becc4975d24b716ac52cb0465bb8d7f007d36",
+      "status": "REPORTED_IN_TRANSCRIPT",
+      "scope": "archive not available for verification here"
+    },
+    {
+      "id": "CLAIM-07",
+      "claim": "The material headed A. HISTORY OF THE SOFTWARE is part of VBL",
+      "status": "UNVERIFIED",
+      "scope": "do not merge into canon absent source identification"
+    }
+  ],
+  "status_definitions": {
+    "PASS": "The named test passed for the exact inputs and stated scope.",
+    "FAIL": "The named test failed for the exact inputs and stated scope.",
+    "UNVERIFIED": "The claim is not yet supported by adequate evidence.",
+    "NOT_RUN": "The stated test has not been executed.",
+    "REPORTED_IN_TRANSCRIPT": "The claim appears in pasted text but was not independently checked."
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "manifest_type": "VBL-EXTENDED-PACKAGE-MANIFEST",
+  "manifest_version": "1",
+  "package": "VBL-SHARED-03-EXTENDED-01",
+  "release_status": "DRAFT_NOT_CANON_INDEPENDENT_REVIEW_NOT_RUN",
+  "digest_algorithm": "SHA-256",
+  "created_at_utc": "2026-10-27T10:40:49Z",
+  "clock_source": "Codex clock tool",
+  "clock_accuracy": "UNVERIFIED_INDEPENDENTLY",
+  "scope": "All regular files in this directory except this manifest; nested base ZIP is hashed as bytes.",
+  "files": [
+    {
+      "path": "base/VBL-SHARED-03-AUDIT-ADDENDUM-01.zip",
+      "size_bytes": 19133,
+      "sha256": "278ff739b0b5c0d73c37ba512b6becc4975d24b716ac52cb0465bb8d7f007d36"
+    },
+    {
+      "path": "base/VBL-SHARED-03-AUDIT-ADDENDUM-01.zip.sha256.txt",
+      "size_bytes": 102,
+      "sha256": "e733296899e4e2b2557c144936b6ba0f5ee045fa994e92efeb7f0971dbbcb0e6"
+    },
+    {
+      "path": "evidence/VBL-WORKTREE-OBSERVATION-01.json",
+      "size_bytes": 1675,
+      "sha256": "cfff623ba67aec86d2a64b3fcb188860199e14310da288eaee423f2e774c7cf5"
+    },
+    {
+      "path": "proposals/PROPOSALS-HARMONIZATION.md",
+      "size_bytes": 3068,
+      "sha256": "b5fce6d0aabc858d50fcd70b0d136af5048179b761eae622949fa87d1b36fd2f"
+    },
+    {
+      "path": "README-SL.md",
+      "size_bytes": 2270,
+      "sha256": "d46b1b43bf527073fce09b4f6ad306fcb5459f25acbd6f74828dfec15be90caa"
+    },
+    {
+      "path": "scripts/Get-VblLocalEvidence.ps1",
+      "size_bytes": 4451,
+      "sha256": "5444ff218b75cf740c3d5262f7a02eb8042b87ebc2b067407ed49b4890d469ce"
+    },
+    {
+      "path": "scripts/Open-VBLTranscript.ps1",
+      "size_bytes": 2008,
+      "sha256": "517f274587240db6a8916b0bbbaeb6e5845efdaa1d5ee8af98862e5358a464d9"
+    },
+    {
+      "path": "templates/POWERSHELL-VBL-CLOCK-READOUT.md",
+      "size_bytes": 888,
+      "sha256": "97aa1ac16ecb8dc3e4e8e5ad8eae097daa93cb87cb27bba8309d5b71b8d75025"
+    },
+    {
+      "path": "templates/VBL-verification-record.template.json",
+      "size_bytes": 455,
+      "sha256": "ab6cf99d9aa6a9d45033a88a2f67b98902c1c8fe431ed264677fe241ca8d5805"
+    }
+  ]
+}

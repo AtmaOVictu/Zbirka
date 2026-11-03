@@ -1,0 +1,40 @@
+{
+  "record_type": "artifact_validation_receipt",
+  "record_id": "VBL-ADDENDUM-TEMPORAL-REPAIR-2026-10-28-01-RECEIPT",
+  "measured_at": "2026-10-28T03:56:00+01:00",
+  "clock_source": "Time widget response at 2026-10-28T03:56:00+01:00, queried before receipt and checksum validation; clock accuracy not independently audited.",
+  "artifact": {
+    "filename": "VBL-v5-DODATEK-temporalnost-in-rehabilitacija-2026-10-28-sl.md",
+    "bytes": 17153,
+    "lines": 242,
+    "sha256": "fd80d54c2932e1b5582ac88148cfc277a06d15339ab51167f09664d5984cb6d8",
+    "utf8_decode_encode_roundtrip": "PASS",
+    "json_examples_parsed": 3,
+    "json_examples_parse": "PASS"
+  },
+  "source_review": {
+    "accessible_related_documents": [
+      "SHARED-PERCEPTION.md — draft 1.0, noncanonical",
+      "VBL-2.6-Verification-Protocol-1.0.0-DRAFT-NOT-RELEASED.md",
+      "VBL-2.6 remediation package v5 artifacts"
+    ],
+    "exact_local_protocol_v5_file": "NOT_ACCESSIBLE_IN_THIS_ENVIRONMENT",
+    "user_reported_new_attachment_hash": "NOT_RECOMPUTED; raw source bytes not available in this environment"
+  },
+  "implementation_checks": {
+    "protocol_tests_against_local_implementation": "NOT_RUN",
+    "remote_repository_changes": "NOT_PERFORMED",
+    "independent_review": "NOT_PERFORMED",
+    "canonical_amendment": "NOT_APPLIED"
+  },
+  "claim_statuses": {
+    "user_reported_canvas_loss": "USER_REPORTED_UNVERIFIED_HERE",
+    "user_reported_duplicate_seals": "USER_REPORTED_UNVERIFIED_HERE",
+    "user_reported_remote_merge_and_ci": "USER_REPORTED_UNVERIFIED_HERE"
+  },
+  "limitations": [
+    "This receipt proves only measured properties of this local draft file.",
+    "The artifact's hash does not prove authorship, authorization, completeness of source material, legal effect, or independent verification.",
+    "The time value records the time tool response and does not independently prove clock accuracy or the time of any external event."
+  ]
+}

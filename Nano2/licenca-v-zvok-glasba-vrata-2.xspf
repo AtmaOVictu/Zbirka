@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<playlist version="1" xmlns="http://xspf.org/ns/0/">
+  <title>GLASBA-VRATA 2 — najboljša predvajalna verzija (VLC)</title>
+  <creator>Mere · korpus Beseda je Ne · za ⟡ ⊨ WITH LOVE</creator>
+  <annotation>Seznam 18 del po štirih vratih: BITI · LJUBEZEN · SMRT · ZAČUDENJE. 8 posnetkov ima prost vir, preverjen pri viru 27. 10. 2026 (imeniki archive.org so priče; nikoli ugibanje): te VLC predvaja takoj. 10 del ⚠ brez prostega vira (avtorske pravice) — na seznamu z iskalnimi nizi. Meje ⚠: (a) VLC v okolju, kjer je seznam nastal, ni zagonljiv — predvajanje je izmerjeno samo pri tebi (NOT_RUN), struktura je preverjena strojno ⊢; (b) licence posnetkov predmetov preveri na strani predmeta pred prenosom — obstojek datoteke je priča, licenca predmeta ⚠; (c) VLC lahko v nekaterih različicah skrije sledi brez lokacije — zato je m3u8 (samo 8 predvajljivih) zraven. Enako ni isto: prost posnetek in naročen posnetek istega dela sta isti noti in nista isti posnetek ⊢ ⟨ENAKO-NE-ISTO⟩ @0.1050. ∂ poslušaj eno vrata naenkrat, ne vseh osem naenkrat — poslušanje je merjenje, ne nabiranje.</annotation>
+  <trackList>
+
+    <track>
+      <location>https://archive.org/download/OpenGoldbergVariations/Kimiko%20Ishizaka%20-%20J.S.%20Bach-%20-Open-%20Goldberg%20Variations,%20BWV%20988%20(Piano)%20-%2001%20Aria.mp3</location>
+      <title>Goldbergove variacije, BWV 988: Aria — prost posnetek (Kimiko Ishizaka)</title>
+      <creator>Johann Sebastian Bach</creator>
+      <annotation>∂ vrata: BITI · status ⊢ imenik archive.org/OpenGoldbergVariations prebrana pri viru. Naročena izvedba Gould 1981 ⚠ ni prost vir — Ishizaka je ista nota, ni isti posnetek: enako ≠ isto. Aria se vrne da capo; ti se ne.</annotation>
+    </track>
+    <track>
+      <title>Spiegel im Spiegel</title>
+      <creator>Arvo Pärt</creator>
+      <annotation>∂ vrata: BITI · ⚠ prost vir ni najden — poišči na svojem predvajalniku. Iskalni niz: »Arvo Pärt Spiegel im Spiegel«.</annotation>
+    </track>
+    <track>
+      <title>The Köln Concert</title>
+      <creator>Keith Jarrett</creator>
+      <annotation>∂ vrata: BITI · ⚠ prost vir ni najden (avtorske pravice) — poišči na svojem predvajalniku. Iskalni niz: »Keith Jarrett Köln Concert 1975 part 1«.</annotation>
+    </track>
+    <track>
+      <title>The Unanswered Question</title>
+      <creator>Charles Ives</creator>
+      <annotation>∂ vrata: BITI · ⚠ prost vir ni najden — poišči na svojem predvajalniku. Iskalni niz: »Ives The Unanswered Question«.</annotation>
+    </track>
+
+    <track>
+      <title>Matthäus-Passion: Erbarme dich</title>
+      <creator>Johann Sebastian Bach</creator>
+      <annotation>∂ vrata: LJUBEZEN · ⚠ prost vir ni najden — poišči na svojem predvajalniku. Iskalni niz: »Bach Matthäus-Passion Erbarme dich«.</annotation>
+    </track>
+    <track>
+      <title>A Love Supreme</title>
+      <creator>John Coltrane</creator>
+      <annotation>∂ vrata: LJUBEZEN · ⚠ prost vir ni najden — poišči na svojem predvajalniku. Iskalni niz: »Coltrane A Love Supreme full album«.</annotation>
+    </track>
+    <track>
+      <location>https://archive.org/download/78_tristan-and-isolde-liebestod-part-1-isoldes-love-death-act-3_san-francisco_gbia0212961a/Tristan%20and%20Isolde%20-%20Li%20-%20San%20Francisco%20Symphony%20Orchestra.mp3</location>
+      <title>Tristan und Isolde: Liebestod — zgodovinski posnetek (78 rpm, San Francisco Symphony)</title>
+      <creator>Richard Wagner</creator>
+      <annotation>∂ vrata: LJUBEZEN · status ⊢ datoteka priča v imeniku (archive.org, prebrana 27. 10. 2026). ⚠ Zgodovinski prenos z gramofonske plošče, označen Part 1 — licenco in celoto preveri na strani predmeta; sodobni posneteki (npr. Flagstad) niso prost vir. Iskalni niz za celoto: »Wagner Liebestod Isolde«.</annotation>
+    </track>
+    <track>
+      <location>https://archive.org/download/sergei-rachmaninoff-ussr-academic-russian-choir-a.-sveshnikov-vespers/06%20Rejoice,%20O%20Virgin.mp3</location>
+      <title>Vsenočno bdjenje: Bogoroditse Devo (»Rejoice, O Virgin«, st. 6) — posnetek ZSSR akademski ruski zbor, Svešnikov</title>
+      <creator>Sergej Rachmaninoff</creator>
+      <annotation>∂ vrata: LJUBEZEN · status ⊢ datoteka priča v imeniku (archive.org, prebrana 27. 10. 2026). ⚠ Licenca posnetka preveri na strani predmeta (zgodovinska sovjetska plošča). Kratek stavek, ki nosi celo bdjenje.</annotation>
+    </track>
+
+    <track>
+      <title>Gudački kvintet C-dur, D. 956: II. Adagio</title>
+      <creator>Franz Schubert</creator>
+      <annotation>∂ vrata: SMRT · ⚠ prost vir ni najden — kandidata pri viru nista imela zvočnih datotek (imenika sta priči) — poišči na svojem predvajalniku. Iskalni niz: »Schubert String Quintet D 956 Adagio«.</annotation>
+    </track>
+    <track>
+      <location>https://archive.org/download/EinDeutschesRequiemOp.45/EinDeutschesRequiemOp.45-I.SeligSindDieDaLeidTragen.mp3</location>
+      <title>Ein deutsches Requiem, op. 45: I. Selig sind, die da Leid tragen — prost posnetek (vseh 7 stavkov v istem imeniku)</title>
+      <creator>Johannes Brahms</creator>
+      <annotation>∂ vrata: SMRT · status ⊢ imenik archive.org/EinDeutschesRequiemOp.45 prebrana pri viru — vsi stavki I–VII na voljo (najljubši: IV. Wie lieblich sind deine Wohnungen). ⚠ Licenco predmeta preveri na strani predmeta. Requiem, ki ne imenuje smrti po imenu — tolažba za žive.</annotation>
+    </track>
+    <track>
+      <location>https://archive.org/download/faure_requiem/7%20-%20In%20Paradisum.mp3</location>
+      <title>Requiem, op. 48: VII. In paradisum — prost posnetek</title>
+      <creator>Gabriel Fauré</creator>
+      <annotation>∂ vrata: SMRT · status ⊢ imenik archive.org/faure_requiem prebrana pri viru (vseh 7 stavkov na voljo). ⚠ Licenco predmeta preveri na strani predmeta. Vrata v raj so zmerno glasni stavek; najboljša izvedba je tista, ki jo imaš sam.</annotation>
+    </track>
+    <track>
+      <location>https://archive.org/download/the-art-of-the-fugue/01-Contrapunctus%20I.mp3</location>
+      <title>Umetnost fuge, BWV 1080: Kontrapunkt I — prost posnetek (cikel I–IX v istem imeniku)</title>
+      <creator>Johann Sebastian Bach</creator>
+      <annotation>∂ vrata: SMRT · status ⊢ imenik archive.org/the-art-of-the-fugue prebrana pri viru. ⚠ Kontrapunkt XIV — tisti, ki se prelomi na B-A-C-H sredi imena — pri viru NI (imenik vsebuje I–IX). Iskalni niz za XIV: »Bach Art of Fugue Contrapunctus 14 unfinished BACH«.</annotation>
+    </track>
+    <track>
+      <location>https://archive.org/download/string-quartet-no.-15-a-op-132/String%20Quartet%20No.%2015,%20a%20(Op%20132).mp3</location>
+      <title>Gudački kvartet št. 15 a-mol, op. 132 — prost posnetek (celoten; Heiliger Dankgesang = 3. stavek)</title>
+      <creator>Ludwig van Beethoven</creator>
+      <annotation>∂ vrata: SMRT · status ⊢ imenik archive.org/string-quartet-no.-15-a-op-132 prebrana pri viru (62,7 MB, ena datoteka). Napravi približno 40 % v kvartet in prideš v Heiliger Dankgesang — hvala po preboleli bolezni. ⚠ Licenco predmeta preveri na strani predmeta.</annotation>
+    </track>
+
+    <track>
+      <location>https://archive.org/download/GregorioAllegriMiserere/Gregorio%20Allegri%20-%20Miserere.mp3</location>
+      <title>Miserere mei, Deus — prost posnetek (celoten)</title>
+      <creator>Gregorio Allegri</creator>
+      <annotation>∂ vrata: ZAČUDENJE · status ⊢ imenik archive.org/GregorioAllegriMiserere prebrana pri viru (16,5 MB). ⚠ Licenco posnetka preveri na strani predmeta. Visoki C v zadnji kitici je začudenje samo.</annotation>
+    </track>
+    <track>
+      <title>Spem in alium</title>
+      <creator>Thomas Tallis</creator>
+      <annotation>∂ vrata: ZAČUDENJE · ⚠ prost vir ni najden (imenik kandidata brez zvočnih datotek — priča) — poišči na svojem predvajalniku. Iskalni niz: »Tallis Spem in alium 40 voices«. Štirideset glasov v oboku.</annotation>
+    </track>
+    <track>
+      <title>2. simfonija (Vstajenje)</title>
+      <creator>Gustav Mahler</creator>
+      <annotation>∂ vrata: ZAČUDENJE · ⚠ prost vir ni najden — poišči na svojem predvajalniku. Iskalni niz: »Mahler Symphony 2 finale«.</annotation>
+    </track>
+    <track>
+      <title>3. simfonija (Pesem žalostnih pesmi), 2. stavek</title>
+      <creator>Henryk Górecki</creator>
+      <annotation>∂ vrata: ZAČUDENJE · ⚠ prost vir ni najden — poišči na svojem predvajalniku. Iskalni niz: »Górecki Symphony 3 second movement«.</annotation>
+    </track>
+    <track>
+      <title>Quatuor pour la fin du temps</title>
+      <creator>Olivier Messiaen</creator>
+      <annotation>∂ vrata: ZAČUDENJE · ⚠ prost vir ni najden — poišči na svojem predvajalniku. Iskalni niz: »Messiaen Quartet for the End of Time«. Napisan v taborišču; konec časa je začudenje, ki ne beži.</annotation>
+    </track>
+
+  </trackList>
+</playlist>
