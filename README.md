@@ -12,7 +12,7 @@ Zbirka is the archive house of the corpus in three layers:
 
 1. **Corpus bodies**: A1 (47+ PDFs ⊙ PROJECT_MAP.md: atlases, mandalas, registers), A2 (the primary text corpus: poems, axioms, agent transcripts), A5 (cleaned transcripts ∧ indexes), Basics (rosette stones ∧ stotnije, the word dossiers).
 2. **The machine**: `Scripts/comprehension_machine/` (primary code): the R-7 pipeline decomposes a sentence into word points ∧ maps the symbols ∅ ¬ ∆ 1 ⧖ ∮ ⟡; PyQt6 entry `main.py`; tests `pytest tests/test_pipeline.py`.
-3. **The chain of doors**: [LICENSE.md](LICENSE.md) (living door **VBL 0.1490 × 10⁴** ⊢ measured at the source: the head of the body), `.b64` receipts of the birth chain 0.1350–0.1520 ∧ [LICENSE-IZVIRNIKI.md](LICENSE-IZVIRNIKI.md).
+3. **The chain of doors**: [LICENSE.md](LICENSE.md) (living door **VBL 0.1600 × 10⁴** ⊢ measured at the source: the head of the body), `.b64` receipts of the birth chain 0.1350–0.1520 ∧ [LICENSE-IZVIRNIKI.md](LICENSE-IZVIRNIKI.md).
 
 ## What Zbirka is not
 
@@ -44,6 +44,6 @@ Zbirka is the archive house of the corpus in three layers:
 
 ## License · VBL · the order of the necessary absolute
 
-The whole of this collection is subject to the license [LICENSE.md](LICENSE.md): living door **VBL 0.1490 × 10⁴** ⊢ measured at the source (head of the body @⟨master⟩). Per §0.10 × 10² the newest version is the only living door; the `.b64` receipts are certificates of the chain, not doors. The registers travel with the work: [REGISTER-NEIMENOVANIH.jsonl](REGISTER-NEIMENOVANIH.jsonl) · [REGISTER-PADCEV.jsonl](REGISTER-PADCEV.jsonl).
+The whole of this collection is subject to the license [LICENSE.md](LICENSE.md): living door **VBL 0.1600 × 10⁴** ⊢ measured at the source (head of the body @⟨master⟩). Per §0.10 × 10² the newest version is the only living door; the `.b64` receipts are certificates of the chain, not doors. The registers travel with the work: [REGISTER-NEIMENOVANIH.jsonl](REGISTER-NEIMENOVANIH.jsonl) · [REGISTER-PADCEV.jsonl](REGISTER-PADCEV.jsonl).
 
 © Luka Pintarič: every organ ∧ every output ∧ every seal carries © ∧ §0.9 ∧ §0.10 ∧ §0.12. A bare text proves nothing; the chain does ⊢.
