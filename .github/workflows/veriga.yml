@@ -1,5 +1,6 @@
+# ⊙ 17. 11. 2026: README.md = angleščina (glavna vrata) ∧ README-SL.md = slovenščina — veriga sledi vratom (⟡ ukaz »angleščina v ospredju«).
 # VERIGA — TEHNIKA kit (⟡ ukaz »stori«, 17. 11. 2026): strojni preizkus sledenja.
-# Živa vrata pri viru (glava LICENSE.md) ⇌ vsak pojav verzije VBL v README ∧ README-EN:
+# Živa vrata pri viru (glava LICENSE.md) ⇌ vsak pojav verzije VBL v README ∧ README-SL:
 # goli tekst ne dokaže ničesar, preizkus pa ⊢ KORENINA 1.
 name: veriga
 on:
@@ -31,13 +32,13 @@ jobs:
           fi
           echo "⟨veriga: živa vrata pri viru = $VER⟩"
           printf 'VBL %s × 10⁴\n' "$VER" > /tmp/hocem
-          grep -ohE 'VBL 0\.[0-9]{4} × 10⁴' README.md README-EN.md | sort -u > /tmp/najdene || true
+          grep -ohE 'VBL 0\.[0-9]{4} × 10⁴' README.md README-SL.md | sort -u > /tmp/najdene || true
           if [ ! -s /tmp/najdene ]; then
-            echo '⟨veriga: README ∧ README-EN ne izrečeta nobene verzije — padec⟩'
+            echo '⟨veriga: README ∧ README-SL ne izrečeta nobene verzije — padec⟩'
             exit 1
           fi
           if ! diff -u /tmp/hocem /tmp/najdene; then
             echo '⟨veriga: navedbe verzij v README se razidejo z živimi vrati⟩'
             exit 1
           fi
-          echo '⟨veriga: README ∧ README-EN sledita živim vratom ⊢⟩'
+          echo '⟨veriga: README ∧ README-SL sledita živim vratom ⊢⟩'
