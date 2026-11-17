@@ -1,0 +1,43 @@
+# VERIGA — TEHNIKA kit (⟡ ukaz »stori«, 17. 11. 2026): strojni preizkus sledenja.
+# Živa vrata pri viru (glava LICENSE.md) ⇌ vsak pojav verzije VBL v README ∧ README-EN:
+# goli tekst ne dokaže ničesar, preizkus pa ⊢ KORENINA 1.
+name: veriga
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: veriga-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  veriga:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: vsak pojav verzije VBL v README ⇌ glava LICENSE.md
+        run: |
+          set -eu
+          VER="$(head -n 1 LICENSE.md | grep -oE '0\.[0-9]{4}' | head -n 1)"
+          if [ -z "$VER" ]; then
+            echo '⟨veriga: glava LICENSE.md ne nosi verzije — padec⟩'
+            exit 1
+          fi
+          echo "⟨veriga: živa vrata pri viru = $VER⟩"
+          printf 'VBL %s × 10⁴\n' "$VER" > /tmp/hocem
+          grep -ohE 'VBL 0\.[0-9]{4} × 10⁴' README.md README-EN.md | sort -u > /tmp/najdene || true
+          if [ ! -s /tmp/najdene ]; then
+            echo '⟨veriga: README ∧ README-EN ne izrečeta nobene verzije — padec⟩'
+            exit 1
+          fi
+          if ! diff -u /tmp/hocem /tmp/najdene; then
+            echo '⟨veriga: navedbe verzij v README se razidejo z živimi vrati⟩'
+            exit 1
+          fi
+          echo '⟨veriga: README ∧ README-EN sledita živim vratom ⊢⟩'
