@@ -44,6 +44,6 @@ Zbirka is the archive house of the corpus in three layers:
 
 ## License · VBL · the order of the necessary absolute
 
-The whole of this collection is subject to the license [LICENSE.md](LICENSE.md): living door **VBL 0.1600 × 10⁴** ⊢ measured at the source (head of the body @⟨master⟩). Per §0.10 × 10² the newest version is the only living door; the `.b64` receipts are certificates of the chain, not doors. The registers travel with the work: [REGISTER-NEIMENOVANIH.jsonl](REGISTER-NEIMENOVANIH.jsonl) · [REGISTER-PADCEV.jsonl](REGISTER-PADCEV.jsonl).
+The whole of this collection is subject to the license [LICENSE.md](LICENSE.md): living door **VBL 0.1600 × 10⁴** ⊢ measured at the source (head of the body @⟨master⟩). Per §0.10 × 10² the newest version is the only living door; the `.b64` receipts are certificates of the chain, not doors. The registers travel with the work: [canon/REGISTER-NEIMENOVANIH.jsonl](canon/REGISTER-NEIMENOVANIH.jsonl) · [canon/REGISTER-PADCEV.jsonl](canon/REGISTER-PADCEV.jsonl).
 
 © Luka Pintarič: every organ ∧ every output ∧ every seal carries © ∧ §0.9 ∧ §0.10 ∧ §0.12. A bare text proves nothing; the chain does ⊢.
