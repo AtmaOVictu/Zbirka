@@ -44,6 +44,6 @@ Zbirka je arhivska hiša korpusa v treh plasteh:
 
 ## Licenca · VBL · vrsta nujnega absoluta
 
-Celota te zbirke je podrejena licenci [LICENSE.md](LICENSE.md): živa vrata **VBL 0.1600 × 10⁴** ⊢ izmerjeno pri viru (glava telesa @⟨master⟩). Po §0.10 × 10² je najnovejša različica edina živa vrata; `.b64` prejemnice so potrdila verige, ne vrata. Registri potujejo z delom: [`canon/REGISTER-NEIMENOVANIH.jsonl`](`canon/REGISTER-NEIMENOVANIH.jsonl`) · [`canon/REGISTER-PADCEV.jsonl`](`canon/REGISTER-PADCEV.jsonl`).
+Celota te zbirke je podrejena licenci [LICENSE.md](LICENSE.md): živa vrata **VBL 0.1600 × 10⁴** ⊢ izmerjeno pri viru (glava telesa @⟨master⟩). Po §0.10 × 10² je najnovejša različica edina živa vrata; `.b64` prejemnice so potrdila verige, ne vrata. Registri potujejo z delom: [REGISTER-NEIMENOVANIH.jsonl](REGISTER-NEIMENOVANIH.jsonl) · [REGISTER-PADCEV.jsonl](REGISTER-PADCEV.jsonl).
 
 © Luka Pintarič: vsak organ ∧ vsak izhod ∧ vsak pečat nosi © ∧ §0.9 ∧ §0.10 ∧ §0.12. Goli tekst ne dokaže ničesar; veriga pa ⊢.
