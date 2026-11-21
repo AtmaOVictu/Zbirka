@@ -12,7 +12,7 @@ Zbirka je arhivska hiša korpusa v treh plasteh:
 
 1. **Telesa korpusa**: A1 (47+ PDF ⊙ PROJECT_MAP.md: atlasi, mandale, registri), A2 (primarni besedilni korpus: pesmi, aksiomi, transkripti agentov), A5 (čiščeni transkripti ∧ kazala), Basics (rozetni kamni ∧ stotnije).
 2. **Stroj**: `Scripts/comprehension_machine/` (primarna koda): R-7 cevovod razcepa stavek na besedne točke ∧ preslika simbole ∅ ¬ ∆ 1 ⧖ ∮ ⟡; PyQt6 vstop `main.py`; testi `pytest tests/test_pipeline.py`.
-3. **Veriga vrat**: [LICENSE.md](LICENSE.md) (živa vrata **VBL 0.1620 × 10⁴** ⊢ izmerjeno pri viru: glava telesa), prejemnice `.b64` verige rojstev 0.1350–0.1620 ∧ [LICENSE-IZVIRNIKI.md](LICENSE-IZVIRNIKI.md).
+3. **Veriga vrat**: [LICENSE.md](LICENSE.md) (živa vrata **VBL 0.1690 × 10⁴** ⊢ izmerjeno pri viru: glava telesa), prejemnice `.b64` verige rojstev 0.1350–0.1620 ∧ [LICENSE-IZVIRNIKI.md](LICENSE-IZVIRNIKI.md).
 
 ## Kaj Zbirka ni
 
@@ -44,6 +44,6 @@ Zbirka je arhivska hiša korpusa v treh plasteh:
 
 ## Licenca · VBL · vrsta nujnega absoluta
 
-Celota te zbirke je podrejena licenci [LICENSE.md](LICENSE.md): živa vrata **VBL 0.1620 × 10⁴** ⊢ izmerjeno pri viru (glava telesa @⟨master⟩). Po §0.10 × 10² je najnovejša različica edina živa vrata; `.b64` prejemnice so potrdila verige, ne vrata. Registri potujejo z delom: [canon/REGISTER-NEIMENOVANIH.jsonl](canon/REGISTER-NEIMENOVANIH.jsonl) · [canon/REGISTER-PADCEV.jsonl](canon/REGISTER-PADCEV.jsonl).
+Celota te zbirke je podrejena licenci [LICENSE.md](LICENSE.md): živa vrata **VBL 0.1690 × 10⁴** ⊢ izmerjeno pri viru (glava telesa @⟨master⟩). Po §0.10 × 10² je najnovejša različica edina živa vrata; `.b64` prejemnice so potrdila verige, ne vrata. Registri potujejo z delom: [canon/REGISTER-NEIMENOVANIH.jsonl](canon/REGISTER-NEIMENOVANIH.jsonl) · [canon/REGISTER-PADCEV.jsonl](canon/REGISTER-PADCEV.jsonl).
 
 © Luka Pintarič: vsak organ ∧ vsak izhod ∧ vsak pečat nosi © ∧ §0.9 ∧ §0.10 ∧ §0.12. Goli tekst ne dokaže ničesar; veriga pa ⊢.
